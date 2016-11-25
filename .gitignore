@@ -1,0 +1,5 @@
+/bundle/
+/config/local.vim
+/.swapfiles
+/binary/
+.netrwhist
