@@ -17,6 +17,8 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'tomasr/molokai'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 call plug#end()
 
@@ -24,6 +26,8 @@ set guifont=Inziu\ Iosevka\ SC:h14
 colorscheme gruvbox
 
 "" UI
+colorscheme molokai
+let g:molokai_original = 1
 if !exists("g:vimrc_loaded")
     if has("gui_running")
         au GUIEnter * simalt ~x " 窗口启动时自动最大化
@@ -105,15 +109,15 @@ set foldlevel=200  " disable auto folding
 "nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 "vnoremap <space> zf
 
-au FileType cpp nnoremap <F5> <Esc>:w<CR>:!bash -c "clang++ -Wall -std=c++14 % -o /tmp/a.out && /tmp/a.out"<CR>
-au FileType cpp inoremap <F5> <Esc>:w<CR>:!bash -c "clang++ -Wall -std=c++14 % -o /tmp/a.out && /tmp/a.out"<CR>
+au FileType cpp nnoremap <F5>:w<CR>:!bash -c "clang++ -Wall -std=c++14 % -o /tmp/a.out && /tmp/a.out"<CR>
+au FileType python nnoremap <F5> :w<CR>:!python %<CR>
 inoremap <silent> <F3> <Esc>:Autoformat<CR>:w<CR>i
 nnoremap <silent> <F3> <Esc>:Autoformat<CR>:w<CR>
 
 
-set smartcase
 set ignorecase
-set nohlsearch
+set smartcase
+set hlsearch
 set incsearch
 set autochdir
 
@@ -124,7 +128,7 @@ nmap k gk
 
 nmap T :tabnew<cr>
 
-nmap <silent><Esc> :nohl<CR>
+nmap <silent><Esc> :nohlsearch<CR>
 
 imap <silent> <C-BS> <Esc>dbi
 imap <silent> <C-Del> <Esc>dwi
@@ -167,7 +171,8 @@ source ~/.vim/config/rainbow_brackets.vim
 source ~/.vim/config/syntastic.vim
 source ~/.vim/config/tagbar.vim
 source ~/.vim/config/ycm.vim
-
+source ~/.vim/config/vim-cpp-enhanced-highlight.vim
+ 
 source ~/.vim/config/leader.vim
 
 if filereadable(expand("~/.vim/config/local.vim"))
