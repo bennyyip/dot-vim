@@ -6,8 +6,13 @@ call plug#begin('~/.vim/bundle') " vim-plug 初始化
 " Plugin List
 
 Plug 'Chiel92/vim-autoformat'
+Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe', {'do': 'CXX=clang++ CC=clang python install.py --clang-completer'}
+Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
+Plug 'easymotion/vim-easymotion'
+Plug 'honza/vim-snippets'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'jrosiek/vim-mark'
 Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
@@ -18,7 +23,14 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tomasr/molokai'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+
+" Language
+Plug 'ap/vim-css-color'
+Plug 'mattn/emmet-vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tikhomirov/vim-glsl'
 
 call plug#end()
 
@@ -109,10 +121,6 @@ set foldlevel=200  " disable auto folding
 "nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 "vnoremap <space> zf
 
-au FileType cpp nnoremap <F5>:w<CR>:!bash -c "clang++ -Wall -std=c++14 % -o /tmp/a.out && /tmp/a.out"<CR>
-au FileType python nnoremap <F5> :w<CR>:!python %<CR>
-inoremap <silent> <F3> <Esc>:Autoformat<CR>:w<CR>i
-nnoremap <silent> <F3> <Esc>:Autoformat<CR>:w<CR>
 
 
 set ignorecase
@@ -133,7 +141,7 @@ nmap <silent><Esc> :nohlsearch<CR>
 imap <silent> <C-BS> <Esc>dbi
 imap <silent> <C-Del> <Esc>dwi
 
-let mapleader = "\<Space>"
+let mapleader = "\<Space>" 
 
 au FileType c,cpp,h,java,css,js,nginx,scala,go inoremap  <buffer>  {<CR> {<CR>}<Esc>O
 
@@ -164,15 +172,18 @@ function ScriptHeader()
     normal ''
 endfunction
 
+source ~/.vim/config/CamelCaseMotion.vim
 source ~/.vim/config/airline.vim
+source ~/.vim/config/easymotion.vim
 source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/nerdtree.vim
 source ~/.vim/config/rainbow_brackets.vim
 source ~/.vim/config/syntastic.vim
 source ~/.vim/config/tagbar.vim
+source ~/.vim/config/ultisnips.vim
+source ~/.vim/config/vim-cpp-enhanced-highlight.vim 
 source ~/.vim/config/ycm.vim
-source ~/.vim/config/vim-cpp-enhanced-highlight.vim
- 
+
 source ~/.vim/config/leader.vim
 
 if filereadable(expand("~/.vim/config/local.vim"))
