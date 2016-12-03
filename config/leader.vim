@@ -8,6 +8,8 @@ nnoremap <leader>fs :w<CR>
 nnoremap <leader>qQ :q!<CR>
 nnoremap <leader>qq :q<CR>
 
+nnoremap <leader>oy :<C-u>Dic<CR>
+
 let s:switch_buffer_flag=1
 
 fu! g:SwitchBuffer()

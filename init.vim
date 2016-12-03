@@ -5,9 +5,11 @@ call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
 " Plugin List
 
-" Enhancement
+" Enhancement 
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'PProvost/vim-ps1'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe', {'do': 'CXX=clang++ CC=clang python install.py --clang-completer'}
 Plug 'bkad/CamelCaseMotion'
@@ -18,14 +20,14 @@ Plug 'jrosiek/vim-mark'
 Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-dispatch'
-Plug 'PProvost/vim-ps1'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
+Plug 'vimers/vim-youdao'
 
 " Language
 Plug 'ap/vim-css-color'
@@ -127,8 +129,8 @@ set foldcolumn=0 "设置折叠区域的宽度
 set foldlevelstart=200
 set foldlevel=200  " disable auto folding
 " 用空格键来开关折叠
-"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-"vnoremap <space> zf
+nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+vnoremap <space><space> zf
 
 
 
@@ -194,6 +196,7 @@ source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/ycm.vim
 source ~/.vim/config/python.vim
 source ~/.vim/config/gitgutter.vim
+source ~/.vim/config/vim-bookmark.vim
 
 source ~/.vim/config/leader.vim
 
