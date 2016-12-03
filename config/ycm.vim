@@ -22,6 +22,9 @@ let g:ycm_cache_omnifunc = 1
 " 语法关键字补全              
 let g:ycm_seed_identifiers_with_syntax=1  
 " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;  
-let g:ycm_key_invoke_completion = '<M-;>'  
+"let g:ycm_key_invoke_completion = '<M-;>'  
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+
+" error list
+let g:ycm_always_populate_location_list = 1
