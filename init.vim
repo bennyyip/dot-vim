@@ -6,20 +6,21 @@ call plug#begin('~/.vim/bundle') " vim-plug 初始化
 " Plugin List
 
 " Enhancement 
+"Plug 'jrosiek/vim-mark'
+"Plug 'kien/ctrlp.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'PProvost/vim-ps1'
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/neomru.vim'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe', {'do': 'CXX=clang++ CC=clang python install.py --clang-completer'}
+Plug 'Yggdroot/indentLine'
 Plug 'bkad/CamelCaseMotion'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'jlanzarotta/bufexplorer'
-"Plug 'jrosiek/vim-mark'
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/neomru.vim'
-"Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'rking/ag.vim'
@@ -187,19 +188,20 @@ endfunction
 
 source ~/.vim/config/CamelCaseMotion.vim
 source ~/.vim/config/airline.vim
+source ~/.vim/config/denite.vim
 source ~/.vim/config/easymotion.vim
+source ~/.vim/config/gitgutter.vim
+source ~/.vim/config/indentLine.vim
 source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/nerdtree.vim
+source ~/.vim/config/python.vim
 source ~/.vim/config/rainbow_brackets.vim
 source ~/.vim/config/syntastic.vim
 source ~/.vim/config/tagbar.vim
 source ~/.vim/config/ultisnips.vim
+source ~/.vim/config/vim-bookmark.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/ycm.vim
-source ~/.vim/config/python.vim
-source ~/.vim/config/gitgutter.vim
-source ~/.vim/config/vim-bookmark.vim
-source ~/.vim/config/denite.vim
 
 source ~/.vim/config/leader.vim
 
