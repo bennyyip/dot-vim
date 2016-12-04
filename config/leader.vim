@@ -19,6 +19,6 @@ fu! g:SwitchBuffer()
     let s:switch_buffer_flag=1
   endif
 endfunction
-  
+
 
 
