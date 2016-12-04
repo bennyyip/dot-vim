@@ -1,12 +1,10 @@
 "nnoremap <silent> <leader><tab> :cal SwitchBuffer()<CR>
-nnoremap <leader><tab> :CtrlPMRUFiles<CR>
 nnoremap <leader>feR <Esc>:so ~/.vim/init.vim<CR>
 nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
-nnoremap <leader>ff :CtrlP<CR>
-nnoremap <leader>fr :CtrlPMRUFiles<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>qQ :q!<CR>
 nnoremap <leader>qq :q<CR>
+nnoremap <silent> <leader><tab> :<C-u>b#<CR>
 
 nnoremap <leader>oy :<C-u>Dic<CR>
 

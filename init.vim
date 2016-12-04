@@ -16,8 +16,10 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'jrosiek/vim-mark'
-Plug 'kien/ctrlp.vim'
+"Plug 'jrosiek/vim-mark'
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/neomru.vim'
+"Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'rking/ag.vim'
@@ -197,6 +199,7 @@ source ~/.vim/config/ycm.vim
 source ~/.vim/config/python.vim
 source ~/.vim/config/gitgutter.vim
 source ~/.vim/config/vim-bookmark.vim
+source ~/.vim/config/denite.vim
 
 source ~/.vim/config/leader.vim
 
