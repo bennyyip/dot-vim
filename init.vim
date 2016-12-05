@@ -1,17 +1,19 @@
 set nocompatible
 filetype off
 
+
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
 " Plugin List
-
-" Enhancement 
+"
+" Enhancement
 "Plug 'jrosiek/vim-mark'
 "Plug 'kien/ctrlp.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'PProvost/vim-ps1'
+Plug 'Shougo/unite.vim'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'SirVer/ultisnips'
@@ -76,7 +78,7 @@ filetype on
 filetype plugin on
 filetype indent on
 
-set list lcs=tab:\|\
+"set list lcs=tab:\|\
 
 if has("autocmd")  " go back to where you exited
   autocmd BufReadPost *
@@ -109,6 +111,8 @@ set nobackup
 set nowritebackup
 set directory=~/.vim/.swapfiles
 
+" 设置 alt 键不映射到菜单栏
+set winaltkeys=no
 
 if has('nvim')
   set termguicolors
@@ -135,25 +139,12 @@ set foldlevel=200  " disable auto folding
 nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <space><space> zf
 
-
-
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
 set autochdir
 
-vmap j gj
-vmap k gk
-nmap j gj
-nmap k gk
-
-nmap T :tabnew<cr>
-
-nmap <silent><Esc> :nohlsearch<CR>
-
-imap <silent> <C-BS> <Esc>dbi
-imap <silent> <C-Del> <Esc>dwi
 
 let mapleader = "\<Space>"
 
@@ -203,7 +194,7 @@ source ~/.vim/config/vim-bookmark.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/ycm.vim
 
-source ~/.vim/config/leader.vim
+source ~/.vim/config/keymapping.vim
 
 if filereadable(expand("~/.vim/config/local.vim"))
   source ~/.vim/config/local.vim
