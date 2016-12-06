@@ -61,3 +61,8 @@ imap <C-v> <C-r>+
 vmap <C-c> "+y
 vnoremap <BS> d
 vnoremap <C-C> "+y
+
+" Plugins
+
+"Valloric/MatchTagAlways
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
