@@ -1,10 +1,12 @@
-" File
+" File 
 nnoremap <leader>feR <Esc>:so ~/.vim/init.vim<CR>
 nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+
+
 
 " Quit
 nnoremap <leader>qQ :x<CR>
@@ -14,6 +16,7 @@ nnoremap <leader>qq :q<CR>
 nnoremap <silent> <leader><tab> :<C-u>b#<CR>
 nnoremap <C-left> :bn<CR>
 nnoremap <C-right> :bp<CR>
+nnoremap <leader>bb :<C-u>Denite buffer<CR>
 
 nnoremap <leader>oy :<C-u>Dic<CR>
 
