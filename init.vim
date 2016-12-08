@@ -4,28 +4,31 @@ filetype off
 
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
-" Plugin List
 "
 " Enhancement
+" Plugin List
+"Plug 'Shougo/unite.vim'
+"Plug 'bkad/CamelCaseMotion'
 "Plug 'jrosiek/vim-mark'
 "Plug 'kien/ctrlp.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'PProvost/vim-ps1'
-Plug 'Shougo/unite.vim'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', {'do': 'CXX=clang++ CC=clang python install.py --clang-completer'}
+" Diabled until the bug of F-keys fixed
+"Plug 'SirVer/ultisnips'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Yggdroot/indentLine'
-Plug 'bkad/CamelCaseMotion'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/rainbow_parentheses.vim'
+"Install ctags first
+"https://github.com/universal-ctags/ctags
 Plug 'majutsushi/tagbar'
+"Install the_silver_searcher(A.K.A Ag) first
+"https://github.com/ggreer/the_silver_searcher
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -36,6 +39,8 @@ Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
 
 " Language
+" YCM need to be compiled
+Plug 'Valloric/YouCompleteMe', {'do': 'CXX=clang++ CC=clang python install.py --clang-completer'}
 Plug 'ap/vim-css-color'
 Plug 'hdima/python-syntax'
 Plug 'mattn/emmet-vim'
@@ -68,7 +73,6 @@ if !exists("g:vimrc_loaded")
     set guifont=Inziu\ Iosevka\ SC:h14
     colorscheme gruvbox
     set langmenu=en_US
-    "set linespace=0
   endif " has
 endif " exists(...)
 
@@ -178,7 +182,7 @@ function ScriptHeader()
   normal ''
 endfunction
 
-source ~/.vim/config/CamelCaseMotion.vim
+"source ~/.vim/config/CamelCaseMotion.vim
 source ~/.vim/config/airline.vim
 source ~/.vim/config/denite.vim
 source ~/.vim/config/easymotion.vim
@@ -190,7 +194,7 @@ source ~/.vim/config/python.vim
 source ~/.vim/config/rainbow_brackets.vim
 source ~/.vim/config/syntastic.vim
 source ~/.vim/config/tagbar.vim
-source ~/.vim/config/ultisnips.vim
+"source ~/.vim/config/ultisnips.vim
 source ~/.vim/config/vim-bookmark.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/ycm.vim
@@ -200,3 +204,4 @@ source ~/.vim/config/keymapping.vim
 if filereadable(expand("~/.vim/config/local.vim"))
   source ~/.vim/config/local.vim
 endif
+
