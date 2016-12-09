@@ -19,12 +19,13 @@ Open vim and run:
 ```
 
 # Additional Works
-All dependencies should in environment varible `PATH` excepts YCM
+All executables should be placed in environment varible `PATH` excepts YCM
 - compile [YCM](https://github.com/Valloric/YouCompleteMe)
 - install [Ag](https://github.com/ggreer/the_silver_searcher)
 - install [ctags](https://github.com/universal-ctags/ctags)
 - install [clang-format](http://llvm.org/) for C/C++ formatting
 - install [Python3](https://www.continuum.io/downloads) (recommend anaconda if you use Windows)
+- install font [Inziu Iosevka](https://be5invis.github.io/Iosevka/inziu)
 - and other binary dependencies
 
 # Thank
