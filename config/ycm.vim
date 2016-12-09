@@ -6,8 +6,8 @@ nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "let g:ycm_key_invoke_completion = '<M-;>'
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-let g:ycm_key_list_select_completion = ['<C-n>', '<C-j>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<C-k>']
+let g:ycm_key_list_select_completion = ['<C-n>', '<C-j>', '<Tab>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<C-k>', '<S-TAB>']
 
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
@@ -39,4 +39,3 @@ let g:ycm_filetype_blacklist = {
       \ 'fzf': 1,
       \ 'ctrlp' : 1
       \}
-
