@@ -1,7 +1,6 @@
 set nocompatible
 filetype off
 
-
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
 "
