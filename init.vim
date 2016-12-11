@@ -15,8 +15,11 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'PProvost/vim-ps1'
+"Install the_silver_searcher(A.K.A Ag) first
+"https://github.com/ggreer/the_silver_searcher
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neoyank.vim'
 " Diabled until the bug of F-keys fixed
 "Plug 'SirVer/ultisnips'
 Plug 'Valloric/MatchTagAlways'
@@ -27,9 +30,6 @@ Plug 'kien/rainbow_parentheses.vim'
 "Install ctags first
 "https://github.com/universal-ctags/ctags
 Plug 'majutsushi/tagbar'
-"Install the_silver_searcher(A.K.A Ag) first
-"https://github.com/ggreer/the_silver_searcher
-Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -37,6 +37,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
+
+" use denite instead
+"Plug 'rking/ag.vim'
 
 " Language
 " YCM need to be compiled
