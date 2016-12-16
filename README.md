@@ -3,6 +3,8 @@ This configuration is only tested on Windows.
 ```bash
 cd ~
 git clone https://github.com/bennyyip/dot-vim.git .vim
+cd ~/.vim
+mkdir ~/.swapfiles
 ```
 
 Replace `~/.vimrc` with following lines if you are using windows:
