@@ -58,15 +58,13 @@ Plug 'tomasr/molokai'
 
 call plug#end()
 
-set guifont=Inziu\ Iosevka\ SC:h14
-colorscheme gruvbox
-
 "" UI
 colorscheme molokai
 let g:molokai_original = 1
 if !exists("g:vimrc_loaded")
   if has("gui_running")
     au GUIEnter * simalt ~x " 窗口启动时自动最大化
+    " au GUIEnter * set lines=768 columns=1366 " 窗口启动时自动最大化 
     set cmdheight=1
     set guioptions-=T "隐藏工具栏
     set guioptions-=L
@@ -151,7 +149,6 @@ set smartcase
 set hlsearch
 set incsearch
 set autochdir
-
 
 let mapleader = "\<Space>"
 
