@@ -1,26 +1,20 @@
-set nocompatible
-filetype off
-
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
 "
 " Enhancement
 " Plugin List
-"Plug 'Shougo/unite.vim'
-"Plug 'bkad/CamelCaseMotion'
-"Plug 'jrosiek/vim-mark'
-"Plug 'kien/ctrlp.vim'
-Plug 'Chiel92/vim-autoformat'
+"Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'PProvost/vim-ps1'
+Plug 'maralla/completor.vim'
 "Install the_silver_searcher(A.K.A Ag) first
 "https://github.com/ggreer/the_silver_searcher
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
 " Diabled until the bug of F-keys fixed
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Yggdroot/indentLine'
 Plug 'easymotion/vim-easymotion'
@@ -37,19 +31,14 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
 
-" use denite instead
-"Plug 'rking/ag.vim'
-
 " Language
-" YCM need to be compiled
-Plug 'Valloric/YouCompleteMe', {'do': 'CXX=clang++ CC=clang python install.py --clang-completer'}
 Plug 'ap/vim-css-color'
 Plug 'hdima/python-syntax'
 Plug 'mattn/emmet-vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tikhomirov/vim-glsl'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-gitgutter'
+Plug 'fatih/vim-go'
+Plug 'ekalinin/Dockerfile.vim'
 
 " Apperance
 Plug 'bling/vim-airline'
@@ -59,19 +48,19 @@ Plug 'tomasr/molokai'
 call plug#end()
 
 "" UI
-colorscheme molokai
+colorscheme gruvbox
+set bg=dark
 let g:molokai_original = 1
 if !exists("g:vimrc_loaded")
   if has("gui_running")
-    au GUIEnter * simalt ~x " 窗口启动时自动最大化
-    " au GUIEnter * set lines=768 columns=1366 " 窗口启动时自动最大化 
+    "au GUIEnter * simalt ~x " 窗口启动时自动最大化
+    au GUIEnter * set lines=768 columns=1366 " 窗口启动时自动最大化 
     set cmdheight=1
     set guioptions-=T "隐藏工具栏
     set guioptions-=L
     set guioptions-=r
     set guioptions-=m
-    set guifont=Inziu\ Iosevka\ SC:h14
-    colorscheme gruvbox
+    set guifont=Iosevka
     set langmenu=en_US
   endif " has
 endif " exists(...)
@@ -82,6 +71,10 @@ syntax on
 filetype on
 filetype plugin on
 filetype indent on
+
+
+" turn off bell
+set visualbell
 
 "set list lcs=tab:\|\
 
@@ -181,11 +174,9 @@ function ScriptHeader()
   normal ''
 endfunction
 
-"source ~/.vim/config/CamelCaseMotion.vim
 source ~/.vim/config/airline.vim
 source ~/.vim/config/denite.vim
 source ~/.vim/config/easymotion.vim
-source ~/.vim/config/gitgutter.vim
 source ~/.vim/config/indentLine.vim
 source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/nerdtree.vim
@@ -193,10 +184,10 @@ source ~/.vim/config/python.vim
 source ~/.vim/config/rainbow_brackets.vim
 source ~/.vim/config/syntastic.vim
 source ~/.vim/config/tagbar.vim
-"source ~/.vim/config/ultisnips.vim
+source ~/.vim/config/ultisnips.vim
 source ~/.vim/config/vim-bookmark.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
-source ~/.vim/config/ycm.vim
+source ~/.vim/config/completor.vim
 
 source ~/.vim/config/keymapping.vim
 
