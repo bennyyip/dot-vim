@@ -188,6 +188,7 @@ source ~/.vim/config/ultisnips.vim
 source ~/.vim/config/vim-bookmark.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/completor.vim
+source ~/.vim/config/fcitx.vim
 
 source ~/.vim/config/keymapping.vim
 
