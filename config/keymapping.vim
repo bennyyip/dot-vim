@@ -4,9 +4,7 @@ nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-
-
+nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR> 
 
 " Quit
 nnoremap <leader>qQ :x<CR>
@@ -69,3 +67,6 @@ vnoremap <C-C> "+y
 
 "Valloric/MatchTagAlways
 nnoremap <leader>% :MtaJumpToOtherTag<cr>
+
+"Goyo
+nnoremap <silent> <leader>z :Goyo<cr>
