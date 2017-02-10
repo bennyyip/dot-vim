@@ -1,11 +1,10 @@
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
-"
-" Enhancement
 " Plugin List
+" Enhancement
 "Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'MattesGroeger/vim-ookmarks'
 Plug 'PProvost/vim-ps1'
 Plug 'maralla/completor.vim'
 "Install the_silver_searcher(A.K.A Ag) first
@@ -30,6 +29,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
+Plug 'takac/vim-hardtime'
+Plug 'junegunn/goyo.vim'
 
 " Language
 Plug 'ap/vim-css-color'
@@ -39,6 +40,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tikhomirov/vim-glsl'
 Plug 'fatih/vim-go'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'Rykka/riv.vim'
+Plug 'amix/vim-zenroom2'
 
 " Apperance
 Plug 'bling/vim-airline'
@@ -96,7 +99,7 @@ endif
 set autoindent
 set modeline
 set cursorline
-set cursorcolumn
+"set cursorcolumn
 
 set shiftwidth=2
 set tabstop=2
@@ -185,7 +188,7 @@ source ~/.vim/config/rainbow_brackets.vim
 source ~/.vim/config/syntastic.vim
 source ~/.vim/config/tagbar.vim
 source ~/.vim/config/ultisnips.vim
-source ~/.vim/config/vim-bookmark.vim
+"source ~/.vim/config/vim-bookmark.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/completor.vim
 source ~/.vim/config/fcitx.vim
