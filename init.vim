@@ -22,7 +22,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors', { 'on': 'NERDTreetoggle'}
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
@@ -64,7 +64,7 @@ if !exists("g:vimrc_loaded")
     set guioptions-=L
     set guioptions-=r
     set guioptions-=m
-    set guifont=Iosevka
+    set guifont=Inziu\ Iosevka\ CL
     set langmenu=en_US
   endif " has
 endif " exists(...)
