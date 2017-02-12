@@ -54,6 +54,9 @@ inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
 
+" 中文字數統計
+nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
+" 全部字符統計：g<C-g>
 
 " copy and paste
 cmap <C-V>    <C-R>+

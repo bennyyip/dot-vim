@@ -1,11 +1,15 @@
-" Use Ag for file_rec 
+" Ripgrep for file_rec
 call denite#custom#var('file_rec', 'command',
-      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+	\ ['rg', '--files'])
 
-" Use Ag for grep
-call denite#custom#var('grep', 'Command', ['Ag'])
-call denite#custom#var('grep', 'Recursive_opts', [])
-call denite#custom#var('grep', 'Default_opts', ['--follow', '--no-group', '--no-color'])
+" Ripgrep command on grep source
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts',
+    \ ['--vimgrep', '--no-heading'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
 
 " Change default prompt
 call denite#custom#option('default', 'prompt', '>')
