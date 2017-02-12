@@ -36,7 +36,7 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 nmap T :tabnew<cr> 
 
-nmap <silent><Esc> :nohlsearch<CR>
+"nmap <silent><Esc> :nohlsearch<CR>
 
 inoremap <silent> <C-BS> <C-w>
 cnoremap <C-a> <home>
