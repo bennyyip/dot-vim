@@ -12,11 +12,9 @@ Plug 'maralla/completor.vim'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
-" Diabled until the bug of F-keys fixed
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Yggdroot/indentLine'
-"Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'kien/rainbow_parentheses.vim'
 "Install ctags first
@@ -24,7 +22,6 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-"Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
@@ -178,16 +175,13 @@ endfunction
 
 source ~/.vim/config/airline.vim
 source ~/.vim/config/denite.vim
-"source ~/.vim/config/easymotion.vim
 source ~/.vim/config/indentLine.vim
 source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/nerdtree.vim
 source ~/.vim/config/python.vim
 source ~/.vim/config/rainbow_brackets.vim
-source ~/.vim/config/syntastic.vim
 source ~/.vim/config/tagbar.vim
 source ~/.vim/config/ultisnips.vim
-"source ~/.vim/config/vim-bookmark.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/completor.vim
 source ~/.vim/config/fcitx.vim
