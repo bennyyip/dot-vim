@@ -30,7 +30,9 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
 Plug 'takac/vim-hardtime'
-Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim' 
+Plug 'terryma/vim-smooth-scroll'
+Plug 'junegunn/limelight.vim'
 
 " Language
 Plug 'ap/vim-css-color'
@@ -192,6 +194,7 @@ source ~/.vim/config/ultisnips.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/completor.vim
 source ~/.vim/config/fcitx.vim
+source ~/.vim/config/goyo.vim
 
 source ~/.vim/config/keymapping.vim
 
