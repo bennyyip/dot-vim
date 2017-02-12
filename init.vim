@@ -16,7 +16,7 @@ Plug 'Shougo/neoyank.vim'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/MatchTagAlways'
 Plug 'Yggdroot/indentLine'
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'kien/rainbow_parentheses.vim'
 "Install ctags first
@@ -24,7 +24,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
@@ -32,7 +32,9 @@ Plug 'vimers/vim-youdao'
 Plug 'takac/vim-hardtime'
 Plug 'junegunn/goyo.vim' 
 Plug 'terryma/vim-smooth-scroll'
-Plug 'junegunn/limelight.vim'
+Plug 'junegunn/limelight.vim' 
+Plug 'haya14busa/incsearch.vim'
+Plug 'justinmk/vim-sneak'
 
 " Language
 Plug 'ap/vim-css-color'
@@ -77,6 +79,7 @@ filetype on
 filetype plugin on
 filetype indent on
 
+set autochdir
 
 " turn off bell
 set visualbell
@@ -142,12 +145,6 @@ set foldlevel=200  " disable auto folding
 nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <space><space> zf
 
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-set autochdir
-
 let mapleader = "\<Space>"
 
 au FileType c,cpp,h,java,css,js,nginx,scala,go inoremap  <buffer>  {<CR> {<CR>}<Esc>O
@@ -181,7 +178,7 @@ endfunction
 
 source ~/.vim/config/airline.vim
 source ~/.vim/config/denite.vim
-source ~/.vim/config/easymotion.vim
+"source ~/.vim/config/easymotion.vim
 source ~/.vim/config/indentLine.vim
 source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/nerdtree.vim
@@ -195,6 +192,7 @@ source ~/.vim/config/vim-cpp-enhanced-highlight.vim
 source ~/.vim/config/completor.vim
 source ~/.vim/config/fcitx.vim
 source ~/.vim/config/goyo.vim
+source ~/.vim/config/incsearch.vim
 
 source ~/.vim/config/keymapping.vim
 
