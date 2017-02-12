@@ -39,7 +39,7 @@ Plug 'hdima/python-syntax'
 Plug 'mattn/emmet-vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tikhomirov/vim-glsl'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'Rykka/riv.vim'
 Plug 'amix/vim-zenroom2'
