@@ -5,6 +5,7 @@ nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR> 
+nnoremap <leader>oe :cope<CR>
 
 " Quit
 nnoremap <leader>qQ :x<CR>
