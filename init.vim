@@ -25,27 +25,30 @@ Plug 'terryma/vim-multiple-cursors', { 'on': 'NERDTreetoggle'}
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
 Plug 'takac/vim-hardtime'
-Plug 'junegunn/goyo.vim' 
+Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'terryma/vim-smooth-scroll'
 Plug 'junegunn/limelight.vim' 
 Plug 'haya14busa/incsearch.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-fugitive'
 
 
 " Language
-Plug 'Rykka/riv.vim'
-Plug 'Valloric/MatchTagAlways'
-Plug 'amix/vim-zenroom2'
+Plug 'Rykka/riv.vim', { 'for': 'rst' }
+Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
+Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'ap/vim-css-color'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'hdima/python-syntax'
-Plug 'mattn/emmet-vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+Plug 'hdima/python-syntax', { 'for': 'python'} 
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'tikhomirov/vim-glsl'
 
 " Apperance
-Plug 'bling/vim-airline'
+"Plug 'vim-airline/vim-airline' 
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 
@@ -55,19 +58,20 @@ call plug#end()
 colorscheme gruvbox
 set bg=dark
 let g:molokai_original = 1
-if !exists("g:vimrc_loaded")
-  if has("gui_running")
-    "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
-    au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
-    set cmdheight=1
-    set guioptions-=T "隱藏工具欄
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=m
-    set guifont=Inziu\ Iosevka\ CL
-    set langmenu=en_US
-  endif " has
-endif " exists(...)
+
+"if !exists("g:vimrc_loaded") 
+"  if has("gui_running")
+"    au GUIEnter * simalt ~x " 窗口啓動時自動最大化
+"    au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
+"    set cmdheight=1
+"    set guioptions-=T "隱藏工具欄
+"    set guioptions-=L
+"    set guioptions-=r
+"    set guioptions-=m
+"    set guifont=Inziu\ Iosevka\ CL
+"    set langmenu=en_US
+"  endif " has
+"endif " exists(...)
 
 set so=10
 set number
@@ -77,11 +81,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
-if has('persistent_undo')
-    call system('mkdir /tmp/.vim-undodir/')
-    let &undodir = '/tmp/.vim-undodir'
-    set undofile
-endif
+call system('mkdir /tmp/.vim-undodir/')
+let &undodir = '/tmp/.vim-undodir'
+set undofile
 
 set autochdir
 
@@ -94,12 +96,11 @@ set formatoptions+=j " Delete comment char when joining lines
 
 "set list lcs=tab:\|\
 
-if has("autocmd")  " go back to where you exited
-  autocmd BufReadPost *
-        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-        \   exe "normal g'\"" |
-        \ endif
-endif
+" go back to where you exited
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal g'\"" |
+      \ endif
 
 set completeopt=longest,menu " preview
 
@@ -127,12 +128,6 @@ set directory=~/.vim/.swapfiles
 
 " 設置 alt 鍵不映射到菜單欄
 set winaltkeys=no
-
-if has('nvim')
-  set termguicolors
-  set ttimeout
-  set ttimeoutlen=0
-endif
 
 "在insert模式下能用刪除鍵進行刪除
 set backspace=indent,eol,start
@@ -184,8 +179,14 @@ function ScriptHeader()
   normal ''
 endfunction
 
-source ~/.vim/config/airline.vim
+"source ~/.vim/config/airline.vim
+source ~/.vim/config/lightline.vim
+source ~/.vim/config/completor.vim
 source ~/.vim/config/denite.vim
+source ~/.vim/config/fcitx.vim
+source ~/.vim/config/go.vim
+source ~/.vim/config/goyo.vim
+source ~/.vim/config/incsearch.vim
 source ~/.vim/config/indentLine.vim
 source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/nerdtree.vim
@@ -194,11 +195,6 @@ source ~/.vim/config/rainbow_brackets.vim
 source ~/.vim/config/tagbar.vim
 source ~/.vim/config/ultisnips.vim
 source ~/.vim/config/vim-cpp-enhanced-highlight.vim
-source ~/.vim/config/completor.vim
-source ~/.vim/config/fcitx.vim
-source ~/.vim/config/goyo.vim
-source ~/.vim/config/incsearch.vim
-
 source ~/.vim/config/keymapping.vim
 
 if filereadable(expand("~/.vim/config/local.vim"))
