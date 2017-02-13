@@ -57,10 +57,10 @@ set bg=dark
 let g:molokai_original = 1
 if !exists("g:vimrc_loaded")
   if has("gui_running")
-    "au GUIEnter * simalt ~x " 窗口启动时自动最大化
-    au GUIEnter * set lines=768 columns=1366 " 窗口启动时自动最大化 
+    "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
+    au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
     set cmdheight=1
-    set guioptions-=T "隐藏工具栏
+    set guioptions-=T "隱藏工具欄
     set guioptions-=L
     set guioptions-=r
     set guioptions-=m
@@ -87,6 +87,10 @@ set autochdir
 
 " turn off bell
 set visualbell
+
+set wildmenu
+set autoread 
+set formatoptions+=j " Delete comment char when joining lines
 
 "set list lcs=tab:\|\
 
@@ -121,7 +125,7 @@ set nobackup
 set nowritebackup
 set directory=~/.vim/.swapfiles
 
-" 设置 alt 键不映射到菜单栏
+" 設置 alt 鍵不映射到菜單欄
 set winaltkeys=no
 
 if has('nvim')
@@ -130,22 +134,22 @@ if has('nvim')
   set ttimeoutlen=0
 endif
 
-"在insert模式下能用删除键进行删除
+"在insert模式下能用刪除鍵進行刪除
 set backspace=indent,eol,start
 
 set fenc=utf-8
 set fencs=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
 set enc=utf-8
 
-"按缩进或手动折叠
+"按縮進或手動摺疊
 augroup vimrc
   au BufReadPre * setlocal foldmethod=indent
   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
 augroup END
-set foldcolumn=0 "设置折叠区域的宽度
+set foldcolumn=0 "設置摺疊區域的寬度
 set foldlevelstart=200
 set foldlevel=200  " disable auto folding
-" 用空格键来开关折叠
+" 用空格鍵來開關摺疊
 nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <space><space> zf
 
