@@ -36,3 +36,4 @@ nnoremap <silent> <leader>ut :<C-u>Denite filetype<CR>
 nnoremap <silent> <leader>uw :<C-u>DeniteCursorWord grep<CR><CR>
 nnoremap <silent> <leader>uy :<C-u>Denite neoyank<CR>
 
+
