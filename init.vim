@@ -7,23 +7,21 @@ Plug 'KabbAmine/vCoolor.vim'
 "Plug 'MattesGroeger/vim-ookmarks'
 Plug 'PProvost/vim-ps1'
 Plug 'maralla/completor.vim'
-"Install the_silver_searcher(A.K.A Ag) first
-"https://github.com/ggreer/the_silver_searcher
+"depends on Ripgrep
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
 Plug 'SirVer/ultisnips'
-Plug 'Valloric/MatchTagAlways'
 Plug 'Yggdroot/indentLine'
 Plug 'honza/vim-snippets'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'skywind3000/asyncrun.vim'
 "Install ctags first
 "https://github.com/universal-ctags/ctags
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors', { 'on': 'NERDTreetoggle'}
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
 Plug 'takac/vim-hardtime'
@@ -33,16 +31,18 @@ Plug 'junegunn/limelight.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'justinmk/vim-sneak'
 
+
 " Language
+Plug 'Rykka/riv.vim'
+Plug 'Valloric/MatchTagAlways'
+Plug 'amix/vim-zenroom2'
 Plug 'ap/vim-css-color'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'hdima/python-syntax'
 Plug 'mattn/emmet-vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tikhomirov/vim-glsl'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'Rykka/riv.vim'
-Plug 'amix/vim-zenroom2'
 
 " Apperance
 Plug 'bling/vim-airline'
