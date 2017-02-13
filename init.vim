@@ -71,10 +71,17 @@ endif " exists(...)
 
 set so=10
 set number
+set rnu " 相對行號
 syntax on
 filetype on
 filetype plugin on
 filetype indent on
+
+if has('persistent_undo')
+    call system('mkdir /tmp/.vim-undodir/')
+    let &undodir = '/tmp/.vim-undodir'
+    set undofile
+endif
 
 set autochdir
 
