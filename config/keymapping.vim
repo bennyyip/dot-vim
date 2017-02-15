@@ -1,15 +1,15 @@
 " File 
 nnoremap <leader>feR <Esc>:so ~/.vim/init.vim<CR>
 nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
-nnoremap <leader>fs :w<CR>
+nnoremap <leader>w :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR> 
 nnoremap <leader>oe :cope<CR>
 
 " Quit
-nnoremap <leader>qQ :x<CR>
-nnoremap <leader>qq :q<CR>
+nnoremap <leader>Q :q!<CR>
+nnoremap <leader>q :q<CR>
 
 " Buffer
 nnoremap <silent> <leader><tab> :<C-u>b#<CR>
