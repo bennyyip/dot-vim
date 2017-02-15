@@ -1,10 +1,9 @@
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
 " Plugin List
+
 " Enhancement
-"Plug 'Chiel92/vim-autoformat'
 Plug 'KabbAmine/vCoolor.vim'
-"Plug 'MattesGroeger/vim-ookmarks'
 Plug 'PProvost/vim-ps1'
 Plug 'maralla/completor.vim'
 "depends on Ripgrep
@@ -16,7 +15,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'honza/vim-snippets'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'skywind3000/asyncrun.vim'
-"Install ctags first
+"Depends on ctags
 "https://github.com/universal-ctags/ctags
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
@@ -179,7 +178,6 @@ function ScriptHeader()
   normal ''
 endfunction
 
-"source ~/.vim/config/airline.vim
 source ~/.vim/config/lightline.vim
 source ~/.vim/config/completor.vim
 source ~/.vim/config/denite.vim
