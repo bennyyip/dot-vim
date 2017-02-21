@@ -1,3 +1,6 @@
+" Goodbye Ex mode
+nnoremap Q gq
+ 
 " File 
 nnoremap <leader>feR <Esc>:so ~/.vim/init.vim<CR>
 nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
@@ -73,8 +76,13 @@ vmap <C-c> "+y
 vnoremap <BS> d
 vnoremap <C-C> "+y
 
+" resolve vcs conflict (depends on tpope/vim-unimpaired)
+map <leader>dg1 ]nd]n[ndd[ndd
+map <leader>dg2 d]ndd]ndd
+
 " Plugins
 
 "Valloric/MatchTagAlways
 nnoremap <leader>% :MtaJumpToOtherTag<cr>
+
 
