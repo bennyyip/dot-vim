@@ -22,6 +22,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors', { 'on': 'NERDTreetoggle'}
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vimers/vim-youdao'
 Plug 'takac/vim-hardtime'
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'txt'] }
@@ -42,7 +43,8 @@ Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'hdima/python-syntax', { 'for': 'python'} 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'tikhomirov/vim-glsl'
+Plug 'tikhomirov/vim-glsl' 
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 " Apperance
 "Plug 'vim-airline/vim-airline' 
@@ -85,6 +87,8 @@ let &undodir = '/tmp/.vim-undodir'
 set undofile
 
 set autochdir
+
+set nrformats-=octal
 
 " turn off bell
 set visualbell
