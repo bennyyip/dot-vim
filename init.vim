@@ -3,6 +3,7 @@ call plug#begin('~/.vim/bundle') " vim-plug 初始化
 " Plugin List
 
 " Enhancement
+Plug 'cohama/lexima.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'PProvost/vim-ps1'
 Plug 'maralla/completor.vim'
@@ -56,7 +57,6 @@ call plug#end()
 "" UI
 colorscheme gruvbox
 set bg=dark
-let g:molokai_original = 1
 
 "if !exists("g:vimrc_loaded") 
 "  if has("gui_running")
@@ -85,6 +85,7 @@ let &undodir = '/tmp/.vim-undodir'
 set undofile
 
 set autochdir
+set path+=**
 
 set nrformats-=octal
 
@@ -150,8 +151,6 @@ nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <space><space> zf
 
 let mapleader = "\<Space>"
-
-au FileType c,cpp,h,java,css,js,nginx,scala,go inoremap  <buffer>  {<CR> {<CR>}<Esc>O
 
 "au BufNewFile *.py call ScriptHeader()
 au BufNewFile *.sh call ScriptHeader()
