@@ -1,4 +1,5 @@
 nmap nt :NERDTreeToggle<cr>
+nmap nT :NERDTreeFind<cr>
 " nmap nT :NERDTreeTabsToggle<cr>
 let NERDTreeShowBookmarks=0
 let NERDTreeMouseMode=2

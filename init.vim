@@ -47,8 +47,6 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 " Apperance
-"Plug 'vim-airline/vim-airline' 
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
@@ -183,20 +181,15 @@ function ScriptHeader()
 endfunction
 
 source ~/.vim/config/lightline.vim
-source ~/.vim/config/completor.vim
 source ~/.vim/config/denite.vim
 source ~/.vim/config/fcitx.vim
-source ~/.vim/config/go.vim
-source ~/.vim/config/goyo.vim
-source ~/.vim/config/incsearch.vim
-source ~/.vim/config/indentLine.vim
-source ~/.vim/config/nerdcommenter.vim
 source ~/.vim/config/nerdtree.vim
+
+source ~/.vim/config/go.vim
+source ~/.vim/config/cpp.vim
 source ~/.vim/config/python.vim
-source ~/.vim/config/rainbow_brackets.vim
-source ~/.vim/config/tagbar.vim
-source ~/.vim/config/ultisnips.vim
-source ~/.vim/config/vim-cpp-enhanced-highlight.vim
+
+source ~/.vim/config/misc.vim
 source ~/.vim/config/keymapping.vim
 
 if filereadable(expand("~/.vim/config/local.vim"))
