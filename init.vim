@@ -20,8 +20,8 @@ Plug 'skywind3000/asyncrun.vim'
 "https://github.com/universal-ctags/ctags
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'terryma/vim-multiple-cursors', { 'on': 'NERDTreetoggle'}
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreetoggle'}
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimers/vim-youdao'
