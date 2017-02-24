@@ -73,10 +73,11 @@ function! LightlineMode()
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? 'Tagbar' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'denite' ? 'denite' :
+        \ &ft == 'denite' ? 'Denite' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+        \ lightline#mode()[0]
+        "\ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'
