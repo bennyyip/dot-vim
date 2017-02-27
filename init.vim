@@ -2,53 +2,53 @@ call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
 " Plugin List
 
+
 " Enhancement
-Plug 'cohama/lexima.vim'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'PProvost/vim-ps1'
-Plug 'maralla/completor.vim'
-Plug 'maralla/completor-neosnippet'
-"depends on Ripgrep
+" Depends on Ripgrep
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-Plug 'Shougo/neoyank.vim'
-Plug 'Shougo/neosnippet.vim' 
 Plug 'Shougo/neosnippet-snippets' 
-"Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet.vim' 
+Plug 'Shougo/neoyank.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'cohama/lexima.vim'
+Plug 'haya14busa/incsearch.vim'
+Plug 'honza/vim-snippets'
+Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'txt'] }
+Plug 'junegunn/limelight.vim' 
+Plug 'justinmk/vim-sneak'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'skywind3000/asyncrun.vim'
-"Depends on ctags
-"https://github.com/universal-ctags/ctags
+" Depends on ctags
+" https://github.com/universal-ctags/ctags
 Plug 'majutsushi/tagbar'
+Plug 'maralla/completor-neosnippet'
+Plug 'maralla/completor.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreetoggle'}
+Plug 'skywind3000/asyncrun.vim'
+Plug 'takac/vim-hardtime'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimers/vim-youdao'
-Plug 'takac/vim-hardtime'
-Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'txt'] }
-Plug 'terryma/vim-smooth-scroll'
-Plug 'junegunn/limelight.vim' 
-Plug 'haya14busa/incsearch.vim'
-Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-fugitive'
 
 " Language
+Plug 'PProvost/vim-ps1'
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'ap/vim-css-color'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'hdima/python-syntax', { 'for': 'python'} 
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'tikhomirov/vim-glsl' 
-Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'rhysd/vim-clang-format'
+Plug 'tikhomirov/vim-glsl' 
 
 " Apperance
 Plug 'itchyny/lightline.vim'
@@ -159,7 +159,7 @@ let mapleader = "\<Space>"
 au BufNewFile *.sh call ScriptHeader()
 au FileType vue syntax sync minlines=500
 
-function ScriptHeader()
+function! ScriptHeader()
   if &filetype == 'python'
     let header = "#!/usr/bin/env python2"
     let coding = "# -*- coding:utf-8 -*-"
