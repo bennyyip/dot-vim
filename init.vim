@@ -7,13 +7,16 @@ Plug 'cohama/lexima.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'PProvost/vim-ps1'
 Plug 'maralla/completor.vim'
+Plug 'maralla/completor-neosnippet'
 "depends on Ripgrep
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
-Plug 'SirVer/ultisnips'
-Plug 'Yggdroot/indentLine'
+Plug 'Shougo/neosnippet.vim' 
+Plug 'Shougo/neosnippet-snippets' 
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Yggdroot/indentLine'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'skywind3000/asyncrun.vim'
 "Depends on ctags
@@ -33,7 +36,6 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-fugitive'
 
-
 " Language
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
@@ -46,6 +48,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'tikhomirov/vim-glsl' 
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'rhysd/vim-clang-format'
 
 " Apperance
 Plug 'itchyny/lightline.vim'
@@ -58,19 +61,19 @@ call plug#end()
 colorscheme gruvbox
 set bg=dark
 
-"if !exists("g:vimrc_loaded") 
-"  if has("gui_running")
-"    au GUIEnter * simalt ~x " 窗口啓動時自動最大化
-"    au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
-"    set cmdheight=1
-"    set guioptions-=T "隱藏工具欄
-"    set guioptions-=L
-"    set guioptions-=r
-"    set guioptions-=m
-"    set guifont=Inziu\ Iosevka\ CL
-"    set langmenu=en_US
-"  endif " has
-"endif " exists(...)
+if !exists("g:vimrc_loaded") 
+  if has("gui_running")
+    "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
+    "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
+    set cmdheight=1
+    set guioptions-=T "隱藏工具欄
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=m
+    set guifont=Inziu\ Iosevka\ CL
+    set langmenu=en_US
+  endif " has
+endif " exists(...)
 
 set so=10
 set number
