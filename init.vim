@@ -54,6 +54,7 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
