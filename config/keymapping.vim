@@ -1,14 +1,18 @@
 " Goodbye Ex mode
 nnoremap Q gq
  
+" Reload .vimrc
+nnoremap <leader>vr <Esc>:so ~/.vim/init.vim<CR>
+
 " File 
-nnoremap <leader>feR <Esc>:so ~/.vim/init.vim<CR>
 nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
-nnoremap <leader>w :w<CR>
+nnoremap <leader>fs :w<CR>
+nnoremap <leader>w :w<CR> 
 nnoremap <leader>fq :x<CR>
+
+" Copy path
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR> 
-nnoremap <leader>oe :cope<CR>
 
 " Quit
 nnoremap <leader>Q :q!<CR>
@@ -19,7 +23,10 @@ nnoremap <silent> <leader><tab> :<C-u>b#<CR>
 nnoremap <C-left> :bn<CR>
 nnoremap <C-right> :bp<CR>
 nnoremap <leader>bb :<C-u>Denite buffer<CR>
+" Quickfix
+nnoremap <leader>oe :copen<CR>
 
+" Youdao
 nnoremap <leader>oy :<C-u>Dic<CR>
 
 " Windows
