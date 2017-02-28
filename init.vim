@@ -63,16 +63,19 @@ colorscheme gruvbox
 set bg=dark
 
 if !exists("g:vimrc_loaded") 
-  if has("gui_running")
-    "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
-    "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
+  if has("gui_running") 
+   "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
     set cmdheight=1
     set guioptions-=T "隱藏工具欄
     set guioptions-=L
     set guioptions-=r
     set guioptions-=m
-    set guifont=Inziu\ Iosevka\ CL
+    set guifont=Inziu\ Iosevka\ CL:h14
     set langmenu=en_US
+    if has('win32') || has('win64')
+      au GUIEnter * simalt ~x " 窗口啓動時自動最大化
+    endif
+
   endif " has
 endif " exists(...)
 
