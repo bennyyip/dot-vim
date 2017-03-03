@@ -5,7 +5,7 @@ nnoremap Q gq
 nnoremap <leader>vr <Esc>:so $MYVIMRC<CR>
 
 " File 
-nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
+nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>w :w<CR> 
 nnoremap <leader>fq :x<CR>
