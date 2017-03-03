@@ -25,7 +25,7 @@ Plug 'majutsushi/tagbar'
 Plug 'maralla/completor-neosnippet'
 Plug 'maralla/completor.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreetoggle'}
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'takac/vim-hardtime'
 Plug 'terryma/vim-multiple-cursors'
@@ -49,6 +49,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'rhysd/vim-clang-format'
 Plug 'tikhomirov/vim-glsl' 
+Plug 'othree/html5.vim', {'for': 'html'}
 
 " Apperance
 Plug 'itchyny/lightline.vim'
