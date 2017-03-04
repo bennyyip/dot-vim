@@ -18,6 +18,8 @@ Plug 'honza/vim-snippets'
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'junegunn/limelight.vim' 
 Plug 'justinmk/vim-sneak'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
 Plug 'kien/rainbow_parentheses.vim'
 " Depends on ctags
 " https://github.com/universal-ctags/ctags
@@ -25,7 +27,7 @@ Plug 'majutsushi/tagbar'
 Plug 'maralla/completor-neosnippet'
 Plug 'maralla/completor.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
+Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTreeFind' ] }
 Plug 'skywind3000/asyncrun.vim'
 Plug 'takac/vim-hardtime'
 Plug 'terryma/vim-multiple-cursors'
