@@ -82,6 +82,7 @@ imap <C-v> <C-r>+
 vmap <C-c> "+y
 vnoremap <BS> d
 vnoremap <C-C> "+y
+set pastetoggle=<F11>
 
 " resolve vcs conflict (depends on tpope/vim-unimpaired)
 map <leader>dg1 ]nd]n[ndd[ndd
