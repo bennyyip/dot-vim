@@ -1,6 +1,6 @@
 " Ripgrep for file_rec
 call denite#custom#var('file_rec', 'command',
-	\ ['rg', '--files', '.'])
+	\ ['rg', '--files', ''])
 
 " Ripgrep command on grep source
 call denite#custom#var('grep', 'command', ['rg'])
