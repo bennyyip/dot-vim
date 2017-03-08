@@ -9,6 +9,7 @@ nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>w :w<CR> 
 nnoremap <leader>fq :x<CR>
+nnoremap <leader>ST :<C-u>w !sudo tee %<CR> 
 
 " Copy path
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
