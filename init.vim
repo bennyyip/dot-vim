@@ -8,15 +8,15 @@ Plug 'KabbAmine/vCoolor.vim'
 " Depends on Ripgrep
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-Plug 'Shougo/neosnippet-snippets' 
-Plug 'Shougo/neosnippet.vim' 
+"Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neoyank.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'cohama/lexima.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'txt'] }
-Plug 'junegunn/limelight.vim' 
+Plug 'junegunn/limelight.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
@@ -29,7 +29,7 @@ Plug 'maralla/completor.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': [ 'NERDTreeToggle', 'NERDTreeFind' ] }
 Plug 'skywind3000/asyncrun.vim'
-Plug 'takac/vim-hardtime'
+"Plug 'takac/vim-hardtime'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-fugitive'
@@ -46,12 +46,13 @@ Plug 'ap/vim-css-color'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'hdima/python-syntax', { 'for': 'python'} 
+Plug 'hdima/python-syntax', { 'for': 'python'}
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'rhysd/vim-clang-format'
-Plug 'tikhomirov/vim-glsl' 
+Plug 'tikhomirov/vim-glsl'
 Plug 'othree/html5.vim', {'for': 'html'}
+Plug 'lervag/vimtex', {'for': 'tex'}
 
 " Apperance
 Plug 'itchyny/lightline.vim'
@@ -65,18 +66,20 @@ call plug#end()
 colorscheme gruvbox
 set bg=dark
 
-if !exists("g:vimrc_loaded") 
-  if has("gui_running") 
-   "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化 
+if !exists("g:vimrc_loaded")
+  if has("gui_running")
+   "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
     set cmdheight=1
     set guioptions-=T "隱藏工具欄
     set guioptions-=L
     set guioptions-=r
     set guioptions-=m
-    set guifont=Inziu\ Iosevka\ CL:h14
     set langmenu=en_US
     if has('win32') || has('win64')
       au GUIEnter * simalt ~x " 窗口啓動時自動最大化
+      set guifont=Inziu\ Iosevka\ CL:h14
+    else
+      set guifont=Inziu\ Iosevka\ CL\ 14
     endif
 
   endif " has
@@ -103,7 +106,7 @@ set nrformats-=octal
 set visualbell
 
 set wildmenu
-set autoread 
+set autoread
 set formatoptions+=j " Delete comment char when joining lines
 
 "set list lcs=tab:\|\
@@ -162,11 +165,11 @@ vnoremap <space><space> zf
 
 let mapleader = "\<Space>"
 
-"au BufNewFile *.py call ScriptHeader()
-au BufNewFile *.sh call ScriptHeader()
+"au BufNewFile *.py call s:ScriptHeader()
+au BufNewFile *.sh call s:ScriptHeader()
 au FileType vue syntax sync minlines=500
 
-function! ScriptHeader()
+function! s:ScriptHeader()
   if &filetype == 'python'
     let header = "#!/usr/bin/env python2"
     let coding = "# -*- coding:utf-8 -*-"
@@ -197,6 +200,7 @@ source ~/.vim/config/nerdtree.vim
 source ~/.vim/config/go.vim
 source ~/.vim/config/cpp.vim
 source ~/.vim/config/python.vim
+source ~/.vim/config/latex.vim
 
 source ~/.vim/config/misc.vim
 source ~/.vim/config/keymapping.vim

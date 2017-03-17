@@ -20,3 +20,5 @@ autocmd FileType c,cpp,objc nnoremap <buffer><Leader>W :<C-u>ClangFormat<CR>:w<C
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
+
+command! GenClangComplete AsyncRun make clean && make CC='~/.vim/bin/cc_args.py gcc'
