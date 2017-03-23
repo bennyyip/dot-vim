@@ -54,7 +54,6 @@ Plug 'rhysd/vim-clang-format'
 Plug 'tikhomirov/vim-glsl'
 Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'lervag/vimtex', {'for': 'tex'}
-Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
 " Apperance
 Plug 'itchyny/lightline.vim'
