@@ -2,15 +2,16 @@ call plug#begin('~/.vim/bundle') " vim-plug 初始化
 
 " Plugin List
 
-
 " Enhancement
+
 Plug 'KabbAmine/vCoolor.vim'
 " Depends on Ripgrep
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
-"Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neoyank.vim'
+Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'cohama/lexima.vim'
 Plug 'haya14busa/incsearch.vim'
@@ -53,6 +54,7 @@ Plug 'rhysd/vim-clang-format'
 Plug 'tikhomirov/vim-glsl'
 Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
 " Apperance
 Plug 'itchyny/lightline.vim'
@@ -68,7 +70,7 @@ set bg=dark
 
 if !exists("g:vimrc_loaded")
   if has("gui_running")
-   "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
+    "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
     set cmdheight=1
     set guioptions-=T "隱藏工具欄
     set guioptions-=L
@@ -201,6 +203,8 @@ source ~/.vim/config/go.vim
 source ~/.vim/config/cpp.vim
 source ~/.vim/config/python.vim
 source ~/.vim/config/latex.vim
+source ~/.vim/config/rust.vim
+
 
 source ~/.vim/config/misc.vim
 source ~/.vim/config/keymapping.vim

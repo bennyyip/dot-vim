@@ -1,14 +1,15 @@
 ""Yggdroot/indentLine
 let g:indentLine_noConcealCursor=""
 
-let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
-let g:completor_clang_binary = '/usr/bin/clang'
-let g:completor_python_binary = '/usr/bin/python'
-
 ""maralla/completor.vim
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
+let g:completor_clang_binary = '/usr/bin/clang'
+let g:completor_python_binary = '/usr/bin/python'
+
+
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -32,27 +33,27 @@ nmap tb :TagbarToggle<cr>
 
 "" majutsushi/tagbar
 let g:tagbar_type_tex = {
-  \ 'ctagstype' : 'latex',
-  \ 'kinds'  : [
-  \ 's:sections',
-  \ 'g:graphics:1',
-  \ 'l:labels:1',
-  \ 'r:refs:1',
-  \ 'p:pagerefs:1'
-  \ ],
-  \ 'sort'  : 0
-  \ }
+      \ 'ctagstype' : 'latex',
+      \ 'kinds'  : [
+      \ 's:sections',
+      \ 'g:graphics:1',
+      \ 'l:labels:1',
+      \ 'r:refs:1',
+      \ 'p:pagerefs:1'
+      \ ],
+      \ 'sort'  : 0
+      \ }
 
 let g:tagbar_type_nc = {
-  \ 'ctagstype' : 'nesc',
-  \ 'kinds'  : [
-  \ 'd:definition',
-  \ 'f:function',
-  \ 'c:command',
-  \ 'a:task',
-  \ 'e:event'
-  \ ],
-  \ }
+      \ 'ctagstype' : 'nesc',
+      \ 'kinds'  : [
+      \ 'd:definition',
+      \ 'f:function',
+      \ 'c:command',
+      \ 'a:task',
+      \ 'e:event'
+      \ ],
+      \ }
 
 
 ""junegunn/goyo.vim
@@ -70,15 +71,15 @@ let g:limelight_conceal_guifg = '#777777'
 
 ""kien/rainbow_parentheses.vim
 let g:rbpt_colorpairs = [
-  \ [158, '#00ceb3'],
-  \ [081, '#00a3ff'],
-  \ [214, '#ff8d00'],
-  \ [123, '#3fffc9'],
-  \ [045, '#29b9ec'],
-  \ [190, '#bfec29'],
-  \ [208, '#ffad00'],
-  \ [117, '#48bde0'],
-  \ ]
+      \ [158, '#00ceb3'],
+      \ [081, '#00a3ff'],
+      \ [214, '#ff8d00'],
+      \ [123, '#3fffc9'],
+      \ [045, '#29b9ec'],
+      \ [190, '#bfec29'],
+      \ [208, '#ffad00'],
+      \ [117, '#48bde0'],
+      \ ]
 
 let g:rbpt_max = 8
 let g:rbpt_loadcmd_toggle = 0
@@ -103,23 +104,24 @@ imap <C-k>  <Plug>(neosnippet_expand_or_jump)
 " \ neosnippet#expandable_or_jumpable() ?
 " \  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+"if has('conceal')
+"  set conceallevel=2 concealcursor=niv
+"endif
 
-let g:neosnippet#disable_runtime_snippets = {
-  \  '_' : 1,
-  \ }
-let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets, ~/.vim/my-snippets'
+"let g:neosnippet#disable_runtime_snippets = {
+"      \  '_' : 1,
+"      \ }
+"let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets, ~/.vim/my-snippets'
+let g:neosnippet#snippets_directory = '~/.vim/my-snippets'
 
 " Unwanted spaces
 
 function! TrimSpaces()
   if !&binary && &filetype != 'diff' && &filetype != 'markdown'
-  %s/\s\+$//e
+    %s/\s\+$//e
   endif
 endfunction
 
@@ -127,3 +129,6 @@ command! TrimSpaces call TrimSpaces()
 
 "au * ShowSpaces
 au BufWritePre * TrimSpaces
+au FileAppendPre * TrimSpaces
+au FileWritePre * TrimSpaces
+au FilterWritePre * TrimSpaces
