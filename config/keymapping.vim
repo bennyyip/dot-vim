@@ -1,19 +1,19 @@
 " Goodbye Ex mode
 nnoremap Q gq
- 
+
 " Reload .vimrc
 nnoremap <leader>vr <Esc>:so $MYVIMRC<CR>
 
-" File 
+" File
 nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
 nnoremap <leader>fs :w<CR>
-nnoremap <leader>w :w<CR> 
 nnoremap <leader>fq :x<CR>
-nnoremap <leader>ST :<C-u>w !sudo tee %<CR> 
+nnoremap <leader>fE :<C-u>w !sudo tee %<CR>
+nnoremap <leader>w :w<CR>
 
 " Copy path
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR> 
+nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 
 " Quit
 nnoremap <leader>Q :q!<CR>
@@ -46,7 +46,7 @@ nmap k gk
 "noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 "noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
-nmap T :tabnew<cr> 
+nmap T :tabnew<cr>
 
 "nmap <silent><Esc> :nohlsearch<CR>
 
@@ -66,7 +66,7 @@ nnoremap <M-k> :resize -5<cr>
 nnoremap <M-h> :vertical resize -5<cr>
 nnoremap <M-l> :vertical resize +5<cr>
 
-" 插入模式移动光标 alt + 方向键 
+" 插入模式移动光标 alt + 方向键
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
