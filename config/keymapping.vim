@@ -1,6 +1,9 @@
 " Goodbye Ex mode
 nnoremap Q gq
 
+" unix2dos
+nmap d<CR> :%s/\r//ge<CR>
+
 " Reload .vimrc
 nnoremap <leader>vr <Esc>:so $MYVIMRC<CR>
 
