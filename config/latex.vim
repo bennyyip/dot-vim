@@ -6,3 +6,4 @@ au filetype tex xmap aE <plug>(vimtex-ae)
 au filetype tex omap iE <plug>(vimtex-ie)
 au filetype tex xmap iE <plug>(vimtex-ie)
 
+autocmd FileType tex let b:lexima_disabled = 1
