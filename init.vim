@@ -39,6 +39,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vimers/vim-youdao'
 
 " Language
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'PProvost/vim-ps1'
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
