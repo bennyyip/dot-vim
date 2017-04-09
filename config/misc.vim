@@ -8,6 +8,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
 let g:completor_clang_binary = '/usr/bin/clang'
 let g:completor_python_binary = '/usr/bin/python'
+let g:completor_racer_binary = '/usr/bin/racer'
 
 
 map /  <Plug>(incsearch-forward)
@@ -112,11 +113,10 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 "  set conceallevel=2 concealcursor=niv
 "endif
 
-"let g:neosnippet#disable_runtime_snippets = {
-"      \  '_' : 1,
-"      \ }
-"let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets, ~/.vim/my-snippets'
-let g:neosnippet#snippets_directory = '~/.vim/my-snippets'
+let g:neosnippet#disable_runtime_snippets = {
+      \  '_' : 1,
+      \ }
+let g:neosnippet#snippets_directory = '~/.vim/snippets'
 
 " Unwanted spaces
 

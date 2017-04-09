@@ -24,7 +24,7 @@ Plug 'kana/vim-textobj-entire'
 Plug 'kien/rainbow_parentheses.vim'
 " Depends on ctags
 " https://github.com/universal-ctags/ctags
-Plug 'majutsushi/tagbar'
+Plug 'bennyyip/tagbar'
 Plug 'maralla/completor-neosnippet'
 Plug 'maralla/completor.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -44,7 +44,8 @@ Plug 'PProvost/vim-ps1'
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
-Plug 'ap/vim-css-color'
+"Plug 'ap/vim-css-color'
+Plug 'lilydjwg/colorizer'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
@@ -55,6 +56,8 @@ Plug 'rhysd/vim-clang-format'
 Plug 'tikhomirov/vim-glsl'
 Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'Shiracamus/vim-syntax-x86-objdump-d'
+Plug 'racer-rust/vim-racer', {'for': 'rust'}
 
 " Apperance
 Plug 'itchyny/lightline.vim'
@@ -81,7 +84,7 @@ if !exists("g:vimrc_loaded")
       au GUIEnter * simalt ~x " 窗口啓動時自動最大化
       set guifont=Inziu\ Iosevka\ CL:h14
     else
-      set guifont=Inziu\ Iosevka\ CL\ 14
+      set guifont=Monospace\ 14
     endif
 
   endif " has
@@ -120,6 +123,7 @@ autocmd BufReadPost *
       \ endif
 
 set completeopt=longest,menu " preview
+set hidden
 
 if has('mouse')
   set mouse=a
@@ -204,7 +208,6 @@ source ~/.vim/config/cpp.vim
 source ~/.vim/config/python.vim
 source ~/.vim/config/latex.vim
 source ~/.vim/config/rust.vim
-
 
 source ~/.vim/config/misc.vim
 source ~/.vim/config/keymapping.vim
