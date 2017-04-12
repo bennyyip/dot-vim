@@ -1,7 +1,7 @@
 ""Yggdroot/indentLine
 let g:indentLine_noConcealCursor=""
 
-""maralla/completor.vim
+"maralla/completor.vim
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
@@ -15,12 +15,13 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-""haya14busa/incsearch.vim
+"haya14busa/incsearch.vim
 set ignorecase
 set smartcase
 
 " :h g:incsearch#auto_nohlsearch
 set hlsearch
+"nmap <silent><esc> :<c-u> nohl<CR>
 "let g:incsearch#auto_nohlsearch = 1
 "map n  <Plug>(incsearch-nohl-n)
 "map N  <Plug>(incsearch-nohl-N)

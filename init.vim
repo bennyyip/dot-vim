@@ -38,13 +38,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimers/vim-youdao'
 
-" Language
+"" Language
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'PProvost/vim-ps1'
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
-"Plug 'ap/vim-css-color'
 Plug 'lilydjwg/colorizer'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'ekalinin/Dockerfile.vim'
