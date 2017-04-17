@@ -1,4 +1,7 @@
-""Yggdroot/indentLine
+"C/C++
+command! GenClangComplete AsyncRun make clean && make CC='~/.vim/bin/cc_args.py gcc'
+
+"Yggdroot/indentLine
 let g:indentLine_noConcealCursor=""
 
 "maralla/completor.vim
@@ -134,3 +137,4 @@ au BufWritePre * TrimSpaces
 au FileAppendPre * TrimSpaces
 au FileWritePre * TrimSpaces
 au FilterWritePre * TrimSpaces
+
