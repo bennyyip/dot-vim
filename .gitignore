@@ -3,3 +3,4 @@
 /.swapfiles
 /binary/
 .netrwhist
+/autoload/plug.vim*
