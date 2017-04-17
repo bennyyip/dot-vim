@@ -1,4 +1,4 @@
-" Plugin List [[[1
+" plugin List [[[1
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 " Enhancement [[[2
 Plug 'KabbAmine/vCoolor.vim'
