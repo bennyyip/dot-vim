@@ -219,12 +219,6 @@ nmap <M-j> gj
 nmap <M-k> gk
 vmap <M-j> gj
 nmap <M-k> gk
-" Goodbye Ex mode [[[2
-nnoremap Q gq
-" unix2dos [[[2
-nmap d<CR> :%s/\r//ge<CR>
-" Quickfix [[[2
-nnoremap <leader>oe :copen<CR>
 " Tweak [[[2
 nmap T :tabnew<cr>
 nmap ' <C-W>
@@ -234,6 +228,12 @@ nmap :: :!<space>
 inoremap <silent> <C-BS> <C-w>
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
+" Goodbye Ex mode
+nnoremap Q gq
+" unix2dos
+nmap d<CR> :%s/\r//ge<CR>
+" Quickfix
+nnoremap <leader>oe :copen<CR>
 "     上下移动一行文字[[[2
 nmap <C-j> mz:m+<cr>`z
 nmap <C-k> mz:m-2<cr>`z
@@ -285,7 +285,9 @@ endfunction
 " auto trim spaces [[[2
 function! TrimSpaces()
   if !&binary && &filetype != 'diff' && &filetype != 'markdown'
+    normal mxHmy
     %s/\s\+$//e
+    normal `yzt`x
   endif
 endfunction
 
@@ -375,13 +377,13 @@ function! LightlineMode() "[[[3
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
         \ lightline#mode()[0]
-        "\ winwidth(0) > 60 ? lightline#mode() : ''
+  "\ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 "tagbar [[[3
 let g:tagbar_status_func = 'TagbarStatusFunc'
 
 function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
+  let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
 "denite [[[3
@@ -389,11 +391,11 @@ let g:denite_force_overwrite_statusline = 0
 "denite [[[2
 " Ripgrep for file_rec
 call denite#custom#var('file_rec', 'command',
-	\ ['rg', '--files', ''])
+      \ ['rg', '--files', ''])
 " Ripgrep command on grep source
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts',
-    \ ['--vimgrep', '--no-heading'])
+      \ ['--vimgrep', '--no-heading'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
 call denite#custom#var('grep', 'separator', ['--'])
@@ -420,19 +422,19 @@ nnoremap <silent> <leader>uy :<C-u>Denite neoyank<CR>
 "fcitx [[[2
 let g:input_toggle = 0
 function! Fcitx2en()
-   let s:input_status = system("fcitx-remote")
-   if s:input_status == 2
-      let g:input_toggle = 1
-      let l:a = system("fcitx-remote -c")
-   endif
+  let s:input_status = system("fcitx-remote")
+  if s:input_status == 2
+    let g:input_toggle = 1
+    let l:a = system("fcitx-remote -c")
+  endif
 endfunction
 
 function! Fcitx2zh()
-   let s:input_status = system("fcitx-remote")
-   if s:input_status != 2 && g:input_toggle == 1
-      let l:a = system("fcitx-remote -o")
-      let g:input_toggle = 0
-   endif
+  let s:input_status = system("fcitx-remote")
+  if s:input_status != 2 && g:input_toggle == 1
+    let l:a = system("fcitx-remote -o")
+    let g:input_toggle = 0
+  endif
 endfunction
 
 set ttimeoutlen=150
@@ -580,10 +582,10 @@ au Syntax c,cpp,go,h,java,python,javascript,scala,coffee,scss,rust  RainbowParen
 " C/C++ [[[3
 " rhysd/vim-clang-format
 let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
-            \ "AllowShortIfStatementsOnASingleLine" : "true",
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11" }
+      \ "AccessModifierOffset" : -4,
+      \ "AllowShortIfStatementsOnASingleLine" : "true",
+      \ "AlwaysBreakTemplateDeclarations" : "true",
+      \ "Standard" : "C++11" }
 " octol/vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
