@@ -1,4 +1,4 @@
 if has('win32') || has('win64')
     set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
-    source ~/.vim/init.vim
+    source ~/.vim/vimrc
 endif
