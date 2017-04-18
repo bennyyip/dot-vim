@@ -82,6 +82,10 @@ set undofile
 set autochdir
 set path+=**
 
+set ignorecase
+set smartcase
+set hlsearch
+
 set nrformats-=octal
 
 " turn off bell
@@ -163,53 +167,70 @@ endif " exists(...)
 "map[[[1
 " leader [[[2
 let mapleader = "\<Space>"
-" 用空格鍵來開關摺疊 [[[2
-nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-vnoremap <space><space> zf
-"   g[jk] [[[2
-nmap <M-j> gj
-nmap <M-k> gk
-vmap <M-j> gj
-" Goodbye Ex mode [[[2
-nnoremap Q gq
-" unix2dos [[[2
-nmap d<CR> :%s/\r//ge<CR>
-" Reload .vimrc [[[2
+" Reload .vimrc [[[3
 nnoremap <leader>vr <Esc>:so $MYVIMRC<CR>
-" File [[[2
+" Buffer [[[3
+nnoremap <silent> <leader><tab> :<C-u>b#<CR>
+nnoremap <leader>bb :<C-u>Denite buffer<CR>
+nnoremap <C-left> :bn<CR>
+nnoremap <C-right> :bp<CR>
+" File [[[3
 nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fE :<C-u>w !sudo tee %<CR>
 nnoremap <leader>w :w<CR>
-" Copy path [[[2
+nnoremap <silent> <leader>ff :<C-u>Denite file_rec -no-statusline<CR>
+nnoremap <silent> <leader>fr :<C-u>Denite file_mru<CR>
+" Copy path
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-" Quit [[[2
-nnoremap <leader>Q :q!<CR>
-nnoremap <leader>q :q<CR>
-" Buffer [[[2
-nnoremap <silent> <leader><tab> :<C-u>b#<CR>
-nnoremap <C-left> :bn<CR>
-nnoremap <C-right> :bp<CR>
-nnoremap <leader>bb :<C-u>Denite buffer<CR>
-" Quickfix [[[2
-nnoremap <leader>oe :copen<CR>
-" Youdao [[[2
+" Youdao [[[3
 nnoremap <leader>oy :<C-u>Dic<CR>
-" Windows [[[2
+" 用空格鍵來開關摺疊 [[[3
+nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+vnoremap <space><space> zf
+" 中文字數統計 [[[3
+nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
+" 全部字符統計：g<C-g>
+" Windows [[[3
 nnoremap <leader>ex :!start explorer %:p:h<CR>
 nnoremap <leader>ps :!start powershell<CR>
-
+" resolve vcs conflict (depends on tpope/vim-unimpaired) [[[3
+map <leader>dg1 ]nd]n[ndd[ndd
+map <leader>dg2 d]ndd]ndd
+" Valloric/MatchTagAlways [[[3
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
+" Quit [[[3
+nnoremap <leader>Q :q!<CR>
+nnoremap <leader>q :q<CR>
+"     t 开头 [[[2
+nmap t= mxHmygg=G`yzt`x
+nmap ta ggVG
+"     less style 清除高亮
+nmap <silent> <M-u> :nohls<CR>
+nmap tj Jx
+nnoremap tl ^vg_
+nmap <silent> to :call append('.', '')<CR>j
+nmap <silent> tO :call append(line('.')-1, '')<CR>k
+nmap tp "+P
+"   g[jk] [[[2
+nmap <M-j> gj
+nmap <M-k> gk
+vmap <M-j> gj
+nmap <M-k> gk
+" Goodbye Ex mode [[[2
+nnoremap Q gq
+" unix2dos [[[2
+nmap d<CR> :%s/\r//ge<CR>
+" Quickfix [[[2
+nnoremap <leader>oe :copen<CR>
 " Tweak [[[2
-
 nmap T :tabnew<cr>
-
 nmap ' <C-W>
 nmap Y y$
 nmap :; :AsyncRun<space>
 nmap :: :!<space>
-
 inoremap <silent> <C-BS> <C-w>
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
@@ -218,47 +239,24 @@ nmap <C-j> mz:m+<cr>`z
 nmap <C-k> mz:m-2<cr>`z
 vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
-" 正常模式下 alt+j,k,h,l 调整分割窗口大小 [[[2
-nnoremap <M-j> :resize +5<cr>
-nnoremap <M-k> :resize -5<cr>
-nnoremap <M-h> :vertical resize -5<cr>
-nnoremap <M-l> :vertical resize +5<cr>
+"" 正常模式下 alt+j,k,h,l 调整分割窗口大小 [[[2
+"nnoremap <M-j> :resize +5<cr>
+"nnoremap <M-k> :resize -5<cr>
+"nnoremap <M-h> :vertical resize -5<cr>
+"nnoremap <M-l> :vertical resize +5<cr>
 " 插入模式移动光标 alt + 方向键 [[[2
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
-" 中文字數統計 [[[2
-nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
-" 全部字符統計：g<C-g>
-
-" copy and paste [[[2
-cmap <C-V>    <C-R>+
-imap <C-V>    <C-r>+
-imap <C-v> <C-r>+
-vmap <C-c> "+y
-vnoremap <BS> d
-vnoremap <C-C> "+y
-" resolve vcs conflict (depends on tpope/vim-unimpaired) [[[2
 set pastetoggle=<F11>
-map <leader>dg1 ]nd]n[ndd[ndd
-map <leader>dg2 d]ndd]ndd
-" Plugins
-
-"Valloric/MatchTagAlways
-nnoremap <leader>% :MtaJumpToOtherTag<cr>
-
-
-"]]]
 "autocmd [[[1
-" go back to where you exited
+" go back to where you exited [[[2
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
       \   exe "normal g'\"" |
       \ endif
-
-
-
+" script healper [[[2
 au BufNewFile *.py call s:ScriptHeader()
 au BufNewFile *.sh call s:ScriptHeader()
 au FileType vue syntax sync minlines=500
@@ -283,52 +281,23 @@ function! s:ScriptHeader()
   endif
   normal ''
 endfunction
+
+" auto trim spaces [[[2
+function! TrimSpaces()
+  if !&binary && &filetype != 'diff' && &filetype != 'markdown'
+    %s/\s\+$//e
+  endif
+endfunction
+
+command! TrimSpaces call TrimSpaces()
+
+"au * ShowSpaces
+au BufWritePre * TrimSpaces
+au FileAppendPre * TrimSpaces
+au FileWritePre * TrimSpaces
+au FilterWritePre * TrimSpaces
+
 " noplaintext [[[2
-" Prevent various Vim features from keeping the contents of pass(1) password
-" files (or any other purely temporary files) in plaintext on the system.
-"
-" Either append this to the end of your .vimrc, or install it as a plugin with
-" a plugin manager like Tim Pope's Pathogen.
-"
-" Author: Tom Ryder <tom@sanctum.geek.nz>
-"
-
-" Don't backup files in temp directories or shm
-if exists('&backupskip')
-    set backupskip+=/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*
-endif
-
-" Don't keep swap files in temp directories or shm
-if has('autocmd')
-    augroup swapskip
-        autocmd!
-        silent! autocmd BufNewFile,BufReadPre
-            \ /tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*
-            \ setlocal noswapfile
-    augroup END
-endif
-
-" Don't keep undo files in temp directories or shm
-if has('persistent_undo') && has('autocmd')
-    augroup undoskip
-        autocmd!
-        silent! autocmd BufWritePre
-            \ /tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*
-            \ setlocal noundofile
-    augroup END
-endif
-
-" Don't keep viminfo for files in temp directories or shm
-if has('viminfo')
-    if has('autocmd')
-        augroup viminfoskip
-            autocmd!
-            silent! autocmd BufNewFile,BufReadPre
-                \ /tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*
-                \ setlocal viminfo=
-        augroup END
-    endif
-endif
 "]]]
 "plugin config [[[1
 "lightline [[[2
@@ -418,10 +387,10 @@ endfunction
 "denite [[[3
 let g:denite_force_overwrite_statusline = 0
 "denite [[[2
-" Ripgrep for file_rec "[[[3
+" Ripgrep for file_rec
 call denite#custom#var('file_rec', 'command',
 	\ ['rg', '--files', ''])
-" Ripgrep command on grep source "[[[3
+" Ripgrep command on grep source
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts',
     \ ['--vimgrep', '--no-heading'])
@@ -429,18 +398,16 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
-" Change default prompt "[[[3
+" Change default prompt
 call denite#custom#option('default', 'prompt', '>')
-" Change ignore_globs "[[[3
+" Change ignore_globs
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '.git/', '.ropeproject/', '__pycache__/',
       \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-" Sort behavior "[[[3
+" Sort behavior
 call denite#custom#source(
       \ 'file_rec', 'sorters', ['sorter_sublime'])
-" Key mapping(u for unite, predecessor of denite)"[[[3
-nnoremap <silent> <leader>ff :<C-u>Denite file_rec -no-statusline<CR>
-nnoremap <silent> <leader>fr :<C-u>Denite file_mru<CR>
+" Key mapping(u for unite, predecessor of denite)
 nnoremap <silent> <leader>u+ :<C-u>Denite -resume -immediately  -select=+1<CR>
 nnoremap <silent> <leader>u- :<C-u>Denite -resume -immediately  -select=-1<CR>
 nnoremap <silent> <leader>ub :<C-u>Denite buffer<CR>
@@ -505,7 +472,133 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-"extra [[[1 TODO merge extra config
-source ~/.vim/config/misc.vim
-" vim:fdm=marker:fmr=[[[,]]]
+"Yggdroot/indentLine [[[2
+let g:indentLine_noConcealCursor=""
 
+"maralla/completor.vim [[[2
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
+let g:completor_clang_binary = '/usr/bin/clang'
+let g:completor_python_binary = '/usr/bin/python'
+let g:completor_racer_binary = '/usr/bin/racer'
+" neosnippet [[[2
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>  <Plug>(neosnippet_expand_or_jump)
+smap <C-k>  <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>  <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+let g:neosnippet#disable_runtime_snippets = {
+      \  '_' : 1,
+      \ }
+let g:neosnippet#snippets_directory = '~/.vim/snippets'
+" haya13busa/incsearch.vim [[[2
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+" :h g:incsearch#auto_nohlsearch
+"let g:incsearch#auto_nohlsearch = 1
+
+
+" majutsushi/tagbar [[[2
+let g:tagbar_type_tex = {
+      \ 'ctagstype' : 'latex',
+      \ 'kinds'  : [
+      \ 's:sections',
+      \ 'g:graphics:1',
+      \ 'l:labels:1',
+      \ 'r:refs:1',
+      \ 'p:pagerefs:1'
+      \ ],
+      \ 'sort'  : 0
+      \ }
+
+let g:tagbar_type_nc = {
+      \ 'ctagstype' : 'nesc',
+      \ 'kinds'  : [
+      \ 'd:definition',
+      \ 'f:function',
+      \ 'c:command',
+      \ 'a:task',
+      \ 'e:event'
+      \ ],
+      \ }
+
+let g:tagbar_width = 30
+nmap tb :TagbarToggle<cr>
+
+"junegunn/goyo.vim [[[2
+nnoremap <silent> <leader>z :Goyo<cr>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+"junegunn/limelight.vim [[[2
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+"kien/rainbow_parentheses.vim [[[2
+let g:rbpt_colorpairs = [
+      \ [158, '#00ceb3'],
+      \ [081, '#00a3ff'],
+      \ [214, '#ff8d00'],
+      \ [123, '#3fffc9'],
+      \ [045, '#29b9ec'],
+      \ [190, '#bfec29'],
+      \ [208, '#ffad00'],
+      \ [117, '#48bde0'],
+      \ ]
+
+let g:rbpt_max = 8
+let g:rbpt_loadcmd_toggle = 0
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax c,cpp,go,h,java,python,javascript,scala,coffee,rust RainbowParenthesesLoadSquare
+au Syntax c,cpp,go,h,java,python,javascript,scala,coffee,scss,rust  RainbowParenthesesLoadBraces
+
+" languages [[[2
+" C/C++ [[[3
+" rhysd/vim-clang-format
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11" }
+" octol/vim-cpp-enhanced-highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 0
+"slow
+let g:cpp_experimental_template_highlight = 1
+
+command! GenClangComplete AsyncRun make clean && make CC='~/.vim/bin/cc_args.py gcc'
+" go [[[3
+let g:go_bin_path = expand("~/go/bin/")
+" rust [[[3
+let g:racer_cmd='racer'
+" tex [[[3
+let g:tex_conceal=0
+" python [[[3
+let python_highlight_all = 1
+let g:jedi#completions_enabled = 0
+"end [[[1
+" vim:fdm=marker:fmr=[[[,]]]
