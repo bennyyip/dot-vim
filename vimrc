@@ -175,7 +175,7 @@ nnoremap <leader>bb :<C-u>Denite buffer<CR>
 nnoremap <C-left> :bn<CR>
 nnoremap <C-right> :bp<CR>
 " File [[[3
-nnoremap <leader>fed <Esc>:e ~/.vim/init.vim<CR>
+nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fE :<C-u>w !sudo tee %<CR>
