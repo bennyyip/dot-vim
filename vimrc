@@ -1,6 +1,7 @@
 " plugin List [[[1
 call plug#begin('~/.vim/bundle') " vim-plug 初始化
 " Enhancement [[[2
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
 " Depends on Ripgrep
 Plug 'Shougo/denite.nvim'
@@ -31,9 +32,10 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
+Plug 'lilydjwg/fcitx.vim'
 "]]]
 " Language [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -155,9 +157,9 @@ if !exists("g:vimrc_loaded")
     set langmenu=en_US
     if has('win32') || has('win64')
       au GUIEnter * simalt ~x " 窗口啓動時自動最大化
-      set guifont=Inziu\ Iosevka\ CL:h14
+      set guifont=Inziu\ Iosevka\ CL:h16
     else
-      set guifont=Monospace\ 14
+      set guifont=Monospace\ 16
     endif
 
   endif " has
@@ -419,35 +421,16 @@ nnoremap <silent> <leader>ur :<C-u>Denite -resume<CR>
 nnoremap <silent> <leader>ut :<C-u>Denite filetype<CR>
 nnoremap <silent> <leader>uw :<C-u>DeniteCursorWord grep<CR><CR>
 nnoremap <silent> <leader>uy :<C-u>Denite neoyank<CR>
-"fcitx [[[2
-let g:input_toggle = 0
-function! Fcitx2en()
-  let s:input_status = system("fcitx-remote")
-  if s:input_status == 2
-    let g:input_toggle = 1
-    let l:a = system("fcitx-remote -c")
-  endif
-endfunction
-
-function! Fcitx2zh()
-  let s:input_status = system("fcitx-remote")
-  if s:input_status != 2 && g:input_toggle == 1
-    let l:a = system("fcitx-remote -o")
-    let g:input_toggle = 0
-  endif
-endfunction
-
-set ttimeoutlen=150
-"退出插入模式
-autocmd InsertLeave * call Fcitx2en()
-"进入插入模式
-autocmd InsertEnter * call Fcitx2zh()
 "nerdtree [[[2
 map nt :NERDTreeToggle<cr>
 nmap nT :NERDTreeFind<cr>
 " nmap nT :NERDTreeTabsToggle<cr>
 let NERDTreeShowBookmarks=0
 let NERDTreeMouseMode=2
+
+" swap o and go
+let g:NERDTreeMapActivateNode = 'go'
+let g:NERDTreeMapPreview = 'o'
 
 " let g:nerdtree_tabs_focus_on_files=1
 " let g:nerdtree_tabs_open_on_gui_startup=0
