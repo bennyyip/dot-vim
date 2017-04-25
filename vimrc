@@ -157,7 +157,7 @@ if !exists("g:vimrc_loaded")
     set langmenu=en_US
     if has('win32') || has('win64')
       au GUIEnter * simalt ~x " 窗口啓動時自動最大化
-      set guifont=Inziu\ Iosevka\ CL:h16
+      set guifont=Inziu\ Iosevka\ CL:h14
     else
       set guifont=Monospace\ 16
     endif
@@ -165,6 +165,10 @@ if !exists("g:vimrc_loaded")
   endif " has
 endif " exists(...)
 "]]]
+" Windows [[[1
+if has('win32') || has('win64')
+  set pythonthreedll=python36.dll
+endif
 "]]]
 "map[[[1
 " leader [[[2
