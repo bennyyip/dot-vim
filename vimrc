@@ -341,7 +341,7 @@ function! LightlineReadonly() "[[[3
   return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? "\ue0a2" : ''
 endfunction
 function! LightlineFilename() "[[[3
-  let fname = expand('%:t')
+  let fname = expand('%:~')
   return fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
@@ -530,8 +530,8 @@ nmap tb :TagbarToggle<cr>
 
 "junegunn/goyo.vim [[[2
 nnoremap <silent> <leader>z :Goyo<cr>
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+"autocmd! User GoyoEnter Limelight
+"autocmd! User GoyoLeave Limelight!
 
 "junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
