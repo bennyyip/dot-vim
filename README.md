@@ -24,4 +24,4 @@ install needed binary and font:
 - inziu-iosevka 
 
 # Thank
-Thank bigeagle for his [bigeagle/neovim-config](https://github.com/bigeagle/neovim-config) and his blog [我的 Vim  配置](https://bigeagle.me/2015/05/vim-config/)
+Thank bigeagle for his [bigeagle/neovim-config](https://github.com/bigeagle/neovim-config) and his blog [我的 Vim  配置](https://bigeagle.me/2015/05/vim-config/) 
