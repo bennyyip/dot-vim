@@ -36,6 +36,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
 Plug 'lilydjwg/fcitx.vim'
+Plug 'benmills/vimux'
 "]]]
 " Language [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -207,6 +208,21 @@ map <leader>dg1 ]nd]n[ndd[ndd
 map <leader>dg2 d]ndd]ndd
 " Valloric/MatchTagAlways [[[3
 nnoremap <leader>% :MtaJumpToOtherTag<cr>
+" benmills/vimux [[[3
+"let g:VimuxOrientation = "h"
+map <leader>vp :VimuxPromptCommand<CR>
+map <leader>vl :VimuxRunLastCommand<CR>
+map <leader>vi :VimuxInspectRunner<CR>
+map <leader>vz :VimuxZoomRunner<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
+map <Leader>vx :VimuxInterruptRunner<CR>
+function! VimuxSlime()
+  call VimuxSendText(@v)
+  call VimuxSendKeys("Enter")
+endfunction
+
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 " Quit [[[3
 nnoremap <leader>Q :q!<CR>
 nnoremap <leader>q :q<CR>
