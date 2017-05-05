@@ -82,7 +82,6 @@ set rnu " 相對行號
 
 set undofile
 
-set autochdir
 set path+=**
 
 set ignorecase
@@ -175,7 +174,7 @@ endif
 " leader [[[2
 let mapleader = "\<Space>"
 " Reload .vimrc [[[3
-nnoremap <leader>vr <Esc>:so $MYVIMRC<CR>
+nnoremap <leader>vr :so $MYVIMRC<CR>
 " Buffer [[[3
 nnoremap <silent> <leader><tab> :<C-u>b#<CR>
 nnoremap <leader>bb :<C-u>Denite buffer<CR>
@@ -187,8 +186,6 @@ nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fE :<C-u>w !sudo tee %<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <silent> <leader>ff :<C-u>Denite file_rec -no-statusline<CR>
-nnoremap <silent> <leader>fr :<C-u>Denite file_mru<CR>
 " Copy path
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
@@ -241,7 +238,18 @@ nmap <M-j> gj
 nmap <M-k> gk
 vmap <M-j> gj
 nmap <M-k> gk
-" Tweak [[[2
+"     上下移动一行文字[[[2
+nmap <C-j> mz:m+<cr>`z
+nmap <C-k> mz:m-2<cr>`z
+vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" 插入模式移动光标 alt + 方向键 [[[2
+inoremap <M-j> <Down>
+inoremap <M-k> <Up>
+inoremap <M-h> <left>
+inoremap <M-l> <Right>
+set pastetoggle=<F11>
+" 其它 [[[2
 nmap T :tabnew<cr>
 nmap ' <C-W>
 nmap Y y$
@@ -256,22 +264,7 @@ nnoremap Q gq
 nmap d<CR> :%s/\r//ge<CR>
 " Quickfix
 nnoremap <leader>oe :copen<CR>
-"     上下移动一行文字[[[2
-nmap <C-j> mz:m+<cr>`z
-nmap <C-k> mz:m-2<cr>`z
-vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
-"" 正常模式下 alt+j,k,h,l 调整分割窗口大小 [[[2
-"nnoremap <M-j> :resize +5<cr>
-"nnoremap <M-k> :resize -5<cr>
-"nnoremap <M-h> :vertical resize -5<cr>
-"nnoremap <M-l> :vertical resize +5<cr>
-" 插入模式移动光标 alt + 方向键 [[[2
-inoremap <M-j> <Down>
-inoremap <M-k> <Up>
-inoremap <M-h> <left>
-inoremap <M-l> <Right>
-set pastetoggle=<F11>
+nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 "autocmd [[[1
 " go back to where you exited [[[2
 autocmd BufReadPost *
@@ -408,9 +401,11 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
-"denite [[[3
-let g:denite_force_overwrite_statusline = 0
 "denite [[[2
+hi link deniteMatchedChar IncSearch
+hi link deniteMatchedRange IncSearch
+
+"let g:denite_force_overwrite_statusline = 1
 " Ripgrep for file_rec
 call denite#custom#var('file_rec', 'command',
       \ ['rg', '--files', ''])
@@ -431,16 +426,39 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
 " Sort behavior
 call denite#custom#source(
       \ 'file_rec', 'sorters', ['sorter_sublime'])
+
+function! s:denite_file_rec_with_path()
+  let path = input('path: ', '', 'dir')
+  if path != ''
+    exec "Denite file_rec -path=" . path
+  endif
+endfunction
+
+function! s:denite_file_with_path()
+  let path = input('path: ', '', 'dir')
+  if path != ''
+    exec "Denite file -path=" . path
+  endif
+endfunction
+
 " Key mapping(u for unite, predecessor of denite)
-nnoremap <silent> <leader>u+ :<C-u>Denite -resume -immediately  -select=+1<CR>
-nnoremap <silent> <leader>u- :<C-u>Denite -resume -immediately  -select=-1<CR>
-nnoremap <silent> <leader>ub :<C-u>Denite buffer<CR>
-nnoremap <silent> <leader>ug :<C-u>Denite grep<CR>
-nnoremap <silent> <leader>uj :<C-u>Denite line<CR>
-nnoremap <silent> <leader>ur :<C-u>Denite -resume<CR>
-nnoremap <silent> <leader>ut :<C-u>Denite filetype<CR>
-nnoremap <silent> <leader>uw :<C-u>DeniteCursorWord grep<CR><CR>
-nnoremap <silent> <leader>uy :<C-u>Denite neoyank<CR>
+nmap <silent> <leader>u+ :Denite -resume -immediately  -select=+1<CR>
+nmap <silent> <leader>u- :Denite -resume -immediately  -select=-1<CR>
+nmap <silent> <leader>uR :Denite -resume<CR>
+nmap <silent> <leader>ub :Denite -no-statusline buffer<CR>
+nmap <silent> <leader>ug :Denite -no-statusline grep<CR>
+nmap <silent> <leader>uw :DeniteCursorWord -no-statusline grep<CR><CR>
+nmap <silent> <leader>uj :Denite -no-statusline line<CR>
+nmap <silent> <leader>ut :Denite -no-statusline filetype<CR>
+nmap <silent> <leader>uy :Denite -no-statusline neoyank<CR>
+nmap <silent> <leader>u: :Denite -no-statusline command_history<CR>
+nmap <silent> <leader>ur :Denite -no-statusline register<CR>
+nmap <silent> <leader>fF :Denite -no-statusline file<CR>
+nmap <silent> <leader>ff :Denite -no-statusline file_rec<CR>
+nmap <silent> <leader>FF :call <SID>denite_file_with_path()<CR>
+nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
+nmap <silent> <leader>fr :Denite file_mru<CR>
+
 "nerdtree [[[2
 map nt :NERDTreeToggle<cr>
 nmap nT :NERDTreeFind<cr>
@@ -519,8 +537,6 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 " :h g:incsearch#auto_nohlsearch
 "let g:incsearch#auto_nohlsearch = 1
-
-
 " majutsushi/tagbar [[[2
 let g:tagbar_type_tex = {
       \ 'ctagstype' : 'latex',
