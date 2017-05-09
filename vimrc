@@ -176,7 +176,7 @@ if !exists("g:vimrc_loaded")
   endif " has
 endif " exists(...)
 "]]]
-" Windows [[[1
+" Windows [[[2
 if has('win32') || has('win64')
   set pythonthreedll=python36.dll
 endif
