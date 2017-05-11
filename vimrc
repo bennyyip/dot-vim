@@ -9,6 +9,7 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neoyank.vim'
+Plug 'bennyyip/denite-github-stars'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'cohama/lexima.vim'
@@ -426,6 +427,7 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
 " Sort behavior
 call denite#custom#source(
       \ 'file_rec', 'sorters', ['sorter_sublime'])
+let dgs#username='bennyyip'
 
 function! s:denite_file_rec_with_path()
   let path = input('path: ', '', 'dir')
@@ -451,13 +453,14 @@ nmap <silent> <leader>uw :DeniteCursorWord -no-statusline grep<CR><CR>
 nmap <silent> <leader>uj :Denite -no-statusline line<CR>
 nmap <silent> <leader>ut :Denite -no-statusline filetype<CR>
 nmap <silent> <leader>uy :Denite -no-statusline neoyank<CR>
-nmap <silent> <leader>u: :Denite -no-statusline command_history<CR>
+nmap <silent> <leader>u; :Denite -no-statusline command_history<CR>
 nmap <silent> <leader>ur :Denite -no-statusline register<CR>
 nmap <silent> <leader>fF :Denite -no-statusline file<CR>
 nmap <silent> <leader>ff :Denite -no-statusline file_rec<CR>
 nmap <silent> <leader>FF :call <SID>denite_file_with_path()<CR>
 nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
 nmap <silent> <leader>fr :Denite file_mru<CR>
+nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 
 "nerdtree [[[2
 map nt :NERDTreeToggle<cr>
