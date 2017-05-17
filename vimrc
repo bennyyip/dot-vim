@@ -9,7 +9,9 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neoyank.vim'
+Plug 'Jagua/vim-denite-ghq'
 Plug 'bennyyip/denite-github-stars'
+"Plug 'MattesGroeger/vim-bookmarks'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'cohama/lexima.vim'
@@ -24,8 +26,16 @@ Plug 'kien/rainbow_parentheses.vim'
 " Depends on ctags
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar'
-Plug 'maralla/completor-neosnippet'
-Plug 'maralla/completor.vim'
+if has("nvim")
+  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/echodoc.vim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-jedi'
+  Plug 'rust-lang/rust.vim'
+else
+  Plug 'maralla/completor-neosnippet'
+  Plug 'maralla/completor.vim'
+endif
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'skywind3000/asyncrun.vim'
@@ -92,7 +102,7 @@ set hlsearch
 set nrformats-=octal
 
 " turn off bell
-set visualbell
+set vb t_vb=
 
 set wildmenu
 set autoread
@@ -133,6 +143,14 @@ set fencs=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
 set enc=utf-8
 set completeopt=longest,menu " preview
 set hidden
+
+"按縮進或手動摺疊
+"augroup vimrc
+"  au BufReadPre * setlocal foldmethod=indent
+"  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+"augroup END
+"set foldcolumn=0 "設置摺疊區域的寬度
+"set foldlevelstart=200
 
 "按縮進或手動摺疊
 "augroup vimrc
@@ -500,15 +518,29 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 "Yggdroot/indentLine [[[2
 let g:indentLine_noConcealCursor=""
-
+"LanguageClient [[[2
+if has("nvim")
+  let g:LanguageClient_serverCommands = {
+        \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+        \ }
+  " Automatically start language servers.
+  let g:LanguageClient_autoStart = 1
+endif
 "maralla/completor.vim [[[2
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
-let g:completor_clang_binary = '/usr/bin/clang'
-let g:completor_python_binary = '/usr/bin/python'
-let g:completor_racer_binary = '/usr/bin/racer'
+if !has("nvim")
+  let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
+  let g:completor_clang_binary = '/usr/bin/clang'
+  let g:completor_python_binary = '/usr/bin/python'
+  let g:completor_racer_binary = '/usr/bin/racer'
+endif
+"Shougo/deoplete.nvim [[[2
+if has("nvim")
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_smart_case = 1
+endif
 " neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>  <Plug>(neosnippet_expand_or_jump)
@@ -579,32 +611,6 @@ let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-
-"kien/rainbow_parentheses.vim [[[2
-let g:rbpt_colorpairs = [
-      \ [158, '#00ceb3'],
-      \ [081, '#00a3ff'],
-      \ [214, '#ff8d00'],
-      \ [123, '#3fffc9'],
-      \ [045, '#29b9ec'],
-      \ [190, '#bfec29'],
-      \ [208, '#ffad00'],
-      \ [117, '#48bde0'],
-      \ ]
-
-let g:rbpt_max = 8
-let g:rbpt_loadcmd_toggle = 0
-
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax c,cpp,go,h,java,python,javascript,scala,coffee,rust RainbowParenthesesLoadSquare
-au Syntax c,cpp,go,h,java,python,javascript,scala,coffee,scss,rust  RainbowParenthesesLoadBraces
-
-" languages [[[2
-" C/C++ [[[3
-" rhysd/vim-clang-format
-let g:clang_format#style_options = {
-      \ "AccessModifierOffset" : -4,
       \ "AllowShortIfStatementsOnASingleLine" : "true",
       \ "AlwaysBreakTemplateDeclarations" : "true",
       \ "Standard" : "C++11" }
