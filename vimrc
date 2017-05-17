@@ -22,7 +22,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 " Depends on ctags
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar'
@@ -151,15 +151,7 @@ set hidden
 "augroup END
 "set foldcolumn=0 "設置摺疊區域的寬度
 "set foldlevelstart=200
-
-"按縮進或手動摺疊
-"augroup vimrc
-"  au BufReadPre * setlocal foldmethod=indent
-"  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-"augroup END
-"set foldcolumn=0 "設置摺疊區域的寬度
-"set foldlevelstart=200
-"set foldlevel=200  " disable auto folding
+set foldlevel=200  " disable auto folding
 " ]]]
 " apperance [[[2
 colorscheme gruvbox
@@ -621,14 +613,29 @@ let g:cpp_experimental_simple_template_highlight = 0
 let g:cpp_experimental_template_highlight = 1
 
 command! GenClangComplete AsyncRun make clean && make CC='~/.vim/bin/cc_args.py gcc'
-" go [[[3
-let g:go_bin_path = expand("~/go/bin/")
-" rust [[[3
-let g:racer_cmd='racer'
-" tex [[[3
-let g:tex_conceal=0
-" python [[[3
-let python_highlight_all = 1
-let g:jedi#completions_enabled = 0
+"luochen1990/rainbow [[2
+let g:rainbow_active=1
+let g:rainbow_conf = {
+      \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+      \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \	'operators': '_,_',
+      \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+      \	'separately': {
+      \		'*': {},
+      \		'tex': {
+      \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+      \		},
+      \		'lisp': {
+      \			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+      \		},
+      \		'vim': {
+      \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+      \		},
+      \		'html': {
+      \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+      \		},
+      \		'css': 0,
+      \	}
+      \}
 "end [[[1
 " vim:fdm=marker:fmr=[[[,]]]
