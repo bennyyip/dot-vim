@@ -132,6 +132,8 @@ set nobackup
 set nowritebackup
 set directory=~/.vim/.swapfiles
 
+set switchbuf=useopen,usetab,newtab
+
 " 設置 alt 鍵不映射到菜單欄
 set winaltkeys=no
 
@@ -176,7 +178,101 @@ if !exists("g:vimrc_loaded")
   endif " has
 endif " exists(...)
 "]]]
-" Windows [[[2
+"tab [[[2
+" http://www.skywind.me/blog/archives/1690
+" make tabline in terminal mode
+function! Vim_NeatTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T'
+    " the label is made by MyTabLabel()
+    let s .= ' %{Vim_NeatTabLabel(' . (i + 1) . ')} '
+  endfor
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s .= '%=%#TabLine#%999XX'
+  endif
+  return s
+endfunc
+" get a single tab name
+function! Vim_NeatBuffer(bufnr, fullname)
+  let l:name = bufname(a:bufnr)
+  if getbufvar(a:bufnr, '&modifiable')
+    if l:name == ''
+      return '[No Name]'
+    else
+      if a:fullname
+        return fnamemodify(l:name, ':p')
+      else
+        return fnamemodify(l:name, ':t')
+      endif
+    endif
+  else
+    let l:buftype = getbufvar(a:bufnr, '&buftype')
+    if l:buftype == 'quickfix'
+      return '[Quickfix]'
+    elseif l:name != ''
+      if a:fullname
+        return '-'.fnamemodify(l:name, ':p')
+      else
+        return '-'.fnamemodify(l:name, ':t')
+      endif
+    else
+    endif
+    return '[No Name]'
+  endif
+endfunc
+" get a single tab label
+function! Vim_NeatTabLabel(n)
+  let l:buflist = tabpagebuflist(a:n)
+  let l:winnr = tabpagewinnr(a:n)
+  let l:bufnr = l:buflist[l:winnr - 1]
+  return Vim_NeatBuffer(l:bufnr, 0)
+endfunc
+" get a single tab label in gui
+function! Vim_NeatGuiTabLabel()
+  let l:num = v:lnum
+  let l:buflist = tabpagebuflist(l:num)
+  let l:winnr = tabpagewinnr(l:num)
+  let l:bufnr = l:buflist[l:winnr - 1]
+  return Vim_NeatBuffer(l:bufnr, 0)
+endfunc
+" setup new tabline, just like %M%t in macvim
+set tabline=%!Vim_NeatTabLine()
+set guitablabel=%{Vim_NeatGuiTabLabel()}"
+" get a label tips
+function! Vim_NeatGuiTabTip()
+  let tip = ''
+  let bufnrlist = tabpagebuflist(v:lnum)
+  for bufnr in bufnrlist
+    " separate buffer entries
+    if tip != ''
+      let tip .= " \n"
+    endif
+    " Add name of buffer
+    let name = Vim_NeatBuffer(bufnr, 1)
+    let tip .= name
+    " add modified/modifiable flags
+    if getbufvar(bufnr, "&modified")
+      let tip .= ' [+]'
+    endif
+    if getbufvar(bufnr, "&modifiable")==0
+      let tip .= ' [-]'
+    endif
+  endfor
+  return tip
+endfunc
+set guitabtooltip=%{Vim_NeatGuiTabTip()}
+"Windows [[[2
 if has('win32') || has('win64')
   set pythonthreedll=python36.dll
 endif
@@ -260,6 +356,29 @@ inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
 set pastetoggle=<F11>
+" tab [[[2
+noremap <silent><c-tab> :tabprev<CR>
+inoremap <silent><c-tab> <ESC>:tabprev<CR>
+noremap <silent><m-1> :tabn 1<cr>
+noremap <silent><m-2> :tabn 2<cr>
+noremap <silent><m-3> :tabn 3<cr>
+noremap <silent><m-4> :tabn 4<cr>
+noremap <silent><m-5> :tabn 5<cr>
+noremap <silent><m-6> :tabn 6<cr>
+noremap <silent><m-7> :tabn 7<cr>
+noremap <silent><m-8> :tabn 8<cr>
+noremap <silent><m-9> :tabn 9<cr>
+noremap <silent><m-0> :tabn 10<cr>
+inoremap <silent><m-1> <ESC>:tabn 1<cr>
+inoremap <silent><m-2> <ESC>:tabn 2<cr>
+inoremap <silent><m-3> <ESC>:tabn 3<cr>
+inoremap <silent><m-4> <ESC>:tabn 4<cr>
+inoremap <silent><m-5> <ESC>:tabn 5<cr>
+inoremap <silent><m-6> <ESC>:tabn 6<cr>
+inoremap <silent><m-7> <ESC>:tabn 7<cr>
+inoremap <silent><m-8> <ESC>:tabn 8<cr>
+inoremap <silent><m-9> <ESC>:tabn 9<cr>
+inoremap <silent><m-0> <ESC>:tabn 10<cr>
 " 其它 [[[2
 nmap T :tabnew<cr>
 nmap ' <C-W>
