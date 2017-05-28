@@ -328,8 +328,8 @@ endfunction
 " If text is selected, save it in the v buffer and send that buffer it to tmux
 vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 " Quit [[[3
-nnoremap <leader>Q :q!<CR>
-nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :bd!<CR>
+nnoremap <leader>q :bd<CR>
 "     t 开头 [[[2
 nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
