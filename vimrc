@@ -13,7 +13,7 @@ Plug 'Jagua/vim-denite-ghq'
 Plug 'bennyyip/denite-github-stars'
 "Plug 'MattesGroeger/vim-bookmarks'
 Plug 'w0rp/ale'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'cohama/lexima.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
@@ -35,6 +35,7 @@ if has("nvim")
 else
   Plug 'maralla/completor-neosnippet'
   Plug 'maralla/completor.vim'
+  Plug 'racer-rust/vim-racer', {'for': 'rust'}
 endif
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -67,7 +68,6 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
-Plug 'racer-rust/vim-racer', {'for': 'rust'}
 "]]]
 " Apperance [[[2
 Plug 'itchyny/lightline.vim'
@@ -386,8 +386,8 @@ nmap Y y$
 nmap :; :AsyncRun<space>
 nmap :: :!<space>
 inoremap <silent> <C-BS> <C-w>
-cnoremap <C-a> <home>
-cnoremap <C-e> <end>
+"cnoremap <C-a> <home>
+"cnoremap <C-e> <end>
 " Goodbye Ex mode
 nnoremap Q gq
 " unix2dos
@@ -452,7 +452,7 @@ set laststatus=2
 
 "g:lightline[[[3
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'Dracula',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
@@ -628,7 +628,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 "Yggdroot/indentLine [[[2
-let g:indentLine_noConcealCursor=""
+"let g:indentLine_noConcealCursor=""
 "LanguageClient [[[2
 if has("nvim")
   let g:LanguageClient_serverCommands = {
