@@ -535,8 +535,25 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 "denite [[[2
-hi link deniteMatchedChar IncSearch
-hi link deniteMatchedRange IncSearch
+let s:denite_options = {
+      \ 'default' : {
+      \ 'winheight' : 15,
+      \ 'mode' : 'insert',
+      \ 'quit' : 'true',
+      \ 'highlight_matched_char' : 'MoreMsg',
+      \ 'highlight_matched_range' : 'MoreMsg',
+      \ 'direction': 'rightbelow',
+      \ 'prompt' : '>',
+\ }}
+function! s:profile(opts) abort
+  for fname in keys(a:opts)
+    for dopt in keys(a:opts[fname])
+      call denite#custom#option(fname, dopt, a:opts[fname][dopt])
+    endfor
+  endfor
+endfunction
+
+call s:profile(s:denite_options)
 
 "let g:denite_force_overwrite_statusline = 1
 " Ripgrep for file_rec
@@ -550,8 +567,6 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
-" Change default prompt
-call denite#custom#option('default', 'prompt', '>')
 " Change ignore_globs
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '.git/', '.ropeproject/', '__pycache__/',
