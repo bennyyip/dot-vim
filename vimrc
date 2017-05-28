@@ -163,15 +163,16 @@ if !exists("g:vimrc_loaded")
   if has("gui_running")
     "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
     set cmdheight=1
-    set go-=egmrLtT
     set langmenu=en_US
     if has('win32') || has('win64')
+      set go-=egmrLtT
       "https://github.com/derekmcloughlin/gvimfullscreen_win32
       au GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
       au GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
       "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
       set guifont=Inziu\ Iosevka\ CL:h14
     else
+      set go-=aegimrLtT
       set guifont=Monospace\ 16
     endif
 
