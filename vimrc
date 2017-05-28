@@ -17,8 +17,8 @@ Plug 'w0rp/ale'
 Plug 'cohama/lexima.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
-Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'txt'] }
-Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
+Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
@@ -43,9 +43,7 @@ endif
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'skywind3000/asyncrun.vim'
-"Plug 'takac/vim-hardtime'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
@@ -384,13 +382,13 @@ inoremap <silent><m-9> <ESC>:tabn 9<cr>
 inoremap <silent><m-0> <ESC>:tabn 10<cr>
 " 其它 [[[2
 nmap T :tabnew<cr>
-nmap ' <C-W>
+nnoremap ' <C-W>
+nnoremap <silent><C-w> :tabclose<cr>
 nmap Y y$
 nmap :; :AsyncRun<space>
 nmap :: :!<space>
 inoremap <silent> <C-BS> <C-w>
-"cnoremap <C-a> <home>
-"cnoremap <C-e> <end>
+inoremap <silent> <C-v> <C-r>+
 " Goodbye Ex mode
 nnoremap Q gq
 " unix2dos
@@ -450,7 +448,7 @@ au FilterWritePre * TrimSpaces
 " noplaintext [[[2
 "]]]
 "plugin config [[[1
-"lightline [[[2
+" itchyny/lightline.vim [[[2
 set laststatus=2
 
 "g:lightline[[[3
@@ -534,7 +532,7 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
-"denite [[[2
+" Shougo/denite.nvim [[[2
 let s:denite_options = {
       \ 'default' : {
       \ 'winheight' : 15,
@@ -544,7 +542,7 @@ let s:denite_options = {
       \ 'highlight_matched_range' : 'MoreMsg',
       \ 'direction': 'rightbelow',
       \ 'prompt' : '>',
-\ }}
+      \ }}
 function! s:profile(opts) abort
   for fname in keys(a:opts)
     for dopt in keys(a:opts[fname])
@@ -609,7 +607,7 @@ nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
 nmap <silent> <leader>fr :Denite file_mru<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 
-"nerdtree [[[2
+" scrooloose/nerdcommenter [[[2
 map nt :NERDTreeToggle<cr>
 nmap nT :NERDTreeFind<cr>
 " nmap nT :NERDTreeTabsToggle<cr>
@@ -670,7 +668,7 @@ if has("nvim")
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_smart_case = 1
 endif
-" neosnippet [[[2
+" Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>  <Plug>(neosnippet_expand_or_jump)
 smap <C-k>  <Plug>(neosnippet_expand_or_jump)
@@ -732,28 +730,27 @@ nmap tb :TagbarToggle<cr>
 nnoremap <silent> <leader>z :Goyo<cr>
 "autocmd! User GoyoEnter Limelight
 "autocmd! User GoyoLeave Limelight!
-" gruvbox [[[2
+" morhetz/gruvbox [[[2
 hi VertSplit guibg=#282828 guifg=#181A1F
 hi EndOfBuffer guibg=#282828 guifg=#282828
-" startify [[[2
-
+" mhinz/vim-startify [[[2
 let g:startify_custom_header = [
-\"            ________ ++     ________  ",
-\"           /VVVVVVVV\++++  /VVVVVVVV\\",
-\"           \VVVVVVVV/++++++\VVVVVVVV/ ",
-\"            |VVVVVV|++++++++/VVVVV/'  ",
-\"            |VVVVVV|++++++/VVVVV/'    ",
-\"           +|VVVVVV|++++/VVVVV/'+     ",
-\"         +++|VVVVVV|++/VVVVV/'+++++   ",
-\"       +++++|VVVVVV|/VVV___++++++++++ ",
-\"         +++|VVVVVVVVVV/##/ +_+_+_+_  ",
-\"           +|VVVVVVVVV___ +/#_#,#_#,\\",
-\"            |VVVVVVV//##/+/#/+/#/'/#/ ",
-\"            |VVVVV/'+/#/+/#/+/#/ /#/  ",
-\"            |VVV/'++/#/+/#/ /#/ /#/   ",
-\"            'V/'  /##//##//##//###/   ",
-\"                     ++               ",
-\]
+      \"            ________ ++     ________  ",
+      \"           /VVVVVVVV\++++  /VVVVVVVV\\",
+      \"           \VVVVVVVV/++++++\VVVVVVVV/ ",
+      \"            |VVVVVV|++++++++/VVVVV/'  ",
+      \"            |VVVVVV|++++++/VVVVV/'    ",
+      \"           +|VVVVVV|++++/VVVVV/'+     ",
+      \"         +++|VVVVVV|++/VVVVV/'+++++   ",
+      \"       +++++|VVVVVV|/VVV___++++++++++ ",
+      \"         +++|VVVVVVVVVV/##/ +_+_+_+_  ",
+      \"           +|VVVVVVVVV___ +/#_#,#_#,\\",
+      \"            |VVVVVVV//##/+/#/+/#/'/#/ ",
+      \"            |VVVVV/'+/#/+/#/+/#/ /#/  ",
+      \"            |VVV/'++/#/+/#/ /#/ /#/   ",
+      \"            'V/'  /##//##//##//###/   ",
+      \"                     ++               ",
+      \]
 
 "junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
@@ -762,17 +759,14 @@ let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-      \ "AllowShortIfStatementsOnASingleLine" : "true",
-      \ "AlwaysBreakTemplateDeclarations" : "true",
-      \ "Standard" : "C++11" }
-" octol/vim-cpp-enhanced-highlight
+" octol/vim-cpp-enhanced-highlight [[[2
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
 "slow
 let g:cpp_experimental_template_highlight = 1
 
 command! GenClangComplete AsyncRun make clean && make CC='~/.vim/bin/cc_args.py gcc'
-"luochen1990/rainbow [[2
+"luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
       \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
