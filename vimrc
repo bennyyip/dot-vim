@@ -37,6 +37,9 @@ else
   Plug 'maralla/completor.vim'
   Plug 'racer-rust/vim-racer', {'for': 'rust'}
 endif
+if has('win32') || has('win64')
+  Plug 'rust-lang/rust.vim'
+endif
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'skywind3000/asyncrun.vim'
@@ -72,7 +75,6 @@ Plug 'Shiracamus/vim-syntax-x86-objdump-d'
 " Apperance [[[2
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
-Plug 'tomasr/molokai'
 Plug 'mhinz/vim-startify'
 "]]]
 call plug#end()
@@ -453,7 +455,7 @@ set laststatus=2
 
 "g:lightline[[[3
 let g:lightline = {
-      \ 'colorscheme': 'Dracula',
+      \ 'colorscheme': 'gruvbox',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
@@ -715,6 +717,28 @@ nmap tb :TagbarToggle<cr>
 nnoremap <silent> <leader>z :Goyo<cr>
 "autocmd! User GoyoEnter Limelight
 "autocmd! User GoyoLeave Limelight!
+" gruvbox [[[2
+hi VertSplit guibg=#282828 guifg=#181A1F
+hi EndOfBuffer guibg=#282828 guifg=#282828
+" startify [[[2
+
+let g:startify_custom_header = [
+\"            ________ ++     ________  ",
+\"           /VVVVVVVV\++++  /VVVVVVVV\\",
+\"           \VVVVVVVV/++++++\VVVVVVVV/ ",
+\"            |VVVVVV|++++++++/VVVVV/'  ",
+\"            |VVVVVV|++++++/VVVVV/'    ",
+\"           +|VVVVVV|++++/VVVVV/'+     ",
+\"         +++|VVVVVV|++/VVVVV/'+++++   ",
+\"       +++++|VVVVVV|/VVV___++++++++++ ",
+\"         +++|VVVVVVVVVV/##/ +_+_+_+_  ",
+\"           +|VVVVVVVVV___ +/#_#,#_#,\\",
+\"            |VVVVVVV//##/+/#/+/#/'/#/ ",
+\"            |VVVVV/'+/#/+/#/+/#/ /#/  ",
+\"            |VVV/'++/#/+/#/ /#/ /#/   ",
+\"            'V/'  /##//##//##//###/   ",
+\"                     ++               ",
+\]
 
 "junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
