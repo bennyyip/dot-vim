@@ -38,6 +38,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-user'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -48,7 +49,7 @@ Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Jagua/vim-denite-ghq'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'cohama/lexima.vim'
+" Plug 'cohama/lexima.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
@@ -363,73 +364,68 @@ if s:is_win
   set pythonthreedll=python36.dll
 endif
 " map[[[1
-" leader [[[2
-"  Reload .vimrc [[[3
+nmap t= mxHmygg=G`yzt`x
+nmap ta ggVG
+nmap <silent> <M-u> :nohls<CR>
+nmap tj Jx
+nmap <silent> to :call append('.', '')<CR>j
+nmap <silent> tO :call append(line('.')-1, '')<CR>k
+nmap tp "+P
+nmap T :tabnew<cr>
+nnoremap tl ^vg_
+nnoremap ' <C-w>
+nnoremap <silent><C-w> :tabclose<cr>
+
+nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
+nmap Y y$
+nmap :; :AsyncRun<space>
+nmap :: :!<space>
+" qq to record, Q to replay
+nnoremap Q @q
+" unix2dos
+nmap d<CR> :%s/\r//ge<CR>
+inoremap <silent> <C-BS> <C-w>
+inoremap <silent> <C-v> <C-r>+
+" Quickfix
+nnoremap <leader>oe :copen<CR>
+" 防止水平滑动的时候失去选择
+xnoremap <  <gv
+xnoremap >  >gv
+inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
+
 nnoremap <leader>vr :so $MYVIMRC<CR>
-"  Buffer [[[3
 nnoremap <silent> <leader><tab> :<C-u>b#<CR>
 nnoremap <leader>bb :<C-u>Denite buffer<CR>
-nnoremap <C-left> :bn<CR>
-nnoremap <C-right> :bp<CR>
-"  File [[[3
+" resolve vcs conflict (depends on tpope/vim-unimpaired)
+map <leader>dg1 ]nd]n[ndd[ndd
+map <leader>dg2 d]ndd]ndd
+" 中文字數統計 "全部字符統計：g<C-g>
+nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
+nnoremap <leader>oy :<C-u>Dic<CR>
+" file [[[2
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fE :<C-u>w !sudo tee %<CR>
 nnoremap <leader>w :w<CR>
-" Copy path
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-"  Youdao [[[3
-nnoremap <leader>oy :<C-u>Dic<CR>
-"  用空格鍵來開關摺疊 [[[3
+" fold [[[2
 nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <silent><space><space> zf
 nmap z] zo]z
 nmap z[ zo[z
-"  中文字數統計 [[[3
-nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
-" 全部字符統計：g<C-g>
 "  Windows [[[3
 nnoremap <leader>ex :!start explorer %:p:h<CR>
 nnoremap <leader>ps :!start powershell<CR>
-"  resolve vcs conflict (depends on tpope/vim-unimpaired) [[[3
-map <leader>dg1 ]nd]n[ndd[ndd
-map <leader>dg2 d]ndd]ndd
 " quick edit macro [[[2
 " ["register]<leader>m
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
-" benmills/vimux [[[3
-if !s:is_win
-  "let g:VimuxOrientation = "h"
-  map <leader>vp :VimuxPromptCommand<CR>
-  map <leader>vl :VimuxRunLastCommand<CR>
-  map <leader>vi :VimuxInspectRunner<CR>
-  map <leader>vz :VimuxZoomRunner<CR>
-  map <Leader>vq :VimuxCloseRunner<CR>
-  map <Leader>vx :VimuxInterruptRunner<CR>
-  function! VimuxSlime()
-    call VimuxSendText(@v)
-    call VimuxSendKeys("Enter")
-  endfunction
-
-  " If text is selected, save it in the v buffer and send that buffer it to tmux
-  vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
-endif
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
+inoremap <C-Q> <esc>:Sayonara<cr>
 let g:sayonara_confirm_quit = 1
-" begin with t  [[[2
-nmap t= mxHmygg=G`yzt`x
-nmap ta ggVG
-" less style nohl [[[2
-nmap <silent> <M-u> :nohls<CR>
-nmap tj Jx
-nnoremap tl ^vg_
-nmap <silent> to :call append('.', '')<CR>j
-nmap <silent> tO :call append(line('.')-1, '')<CR>k
-nmap tp "+P
 " move [[[2
 nmap <M-j> gj
 nmap <M-k> gk
@@ -462,25 +458,73 @@ inoremap <silent><M-7> <ESC>:tabn 7<cr>
 inoremap <silent><M-8> <ESC>:tabn 8<cr>
 inoremap <silent><M-9> <ESC>:tabn 9<cr>
 inoremap <silent><M-0> <ESC>:tabn 10<cr>
-" other [[[2
-nmap T :tabnew<cr>
-nnoremap ' <C-w>
-nnoremap <silent><C-w> :tabclose<cr>
-nmap Y y$
-nmap :; :AsyncRun<space>
-nmap :: :!<space>
-inoremap <silent> <C-BS> <C-w>
-inoremap <silent> <C-v> <C-r>+
-" Goodbye Ex mode
-nnoremap Q gq
-" unix2dos
-nmap d<CR> :%s/\r//ge<CR>
-" Quickfix
-nnoremap <leader>oe :copen<CR>
-nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
-" 防止水平滑动的时候失去选择
-xnoremap <  <gv
-xnoremap >  >gv
+" functions and commands [[[1
+" :Root | Change directory to the root of the Git repository [[[2
+function! s:root()
+  let root = systemlist('git rev-parse --show-toplevel')[0]
+  if v:shell_error
+    echo 'Not in git repo'
+  else
+    execute 'lcd' root
+    echo 'Changed directory to: '.root
+  endif
+endfunction
+command! Root call s:root()
+" :Shuffle | Shuffle selected lines [[[2
+function! s:shuffle() range
+  ruby << RB
+  first, last = %w[a:firstline a:lastline].map { |e| VIM::evaluate(e).to_i }
+  (first..last).map { |l| $curbuf[l] }.shuffle.each_with_index do |line, i|
+  $curbuf[first + i] = line
+end
+RB
+endfunction
+command! -range Shuffle <line1>,<line2>call s:shuffle()
+" :duck | Search DuckDuckGo.com
+function! s:duck()
+endfunction
+function! s:duck(pat)
+  let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
+  let q = substitute(q, '[[:punct:] ]',
+        \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
+  call netrw#BrowseX("https://www.duckduckgo.com/?q=".q, netrw#CheckIfRemote())
+endfunction
+
+nnoremap <leader>? :call <SID>duck(expand("<cWORD>"))<cr>
+xnoremap <leader>? "gy:call <SID>duck(@g)<cr>gv
+" :A [[[2
+function! s:a(cmd)
+  let name = expand('%:r')
+  let ext = tolower(expand('%:e'))
+  let sources = ['c', 'cc', 'cpp', 'cxx']
+  let headers = ['h', 'hh', 'hpp', 'hxx']
+  for pair in [[sources, headers], [headers, sources]]
+    let [set1, set2] = pair
+    if index(set1, ext) >= 0
+      for h in set2
+        let aname = name.'.'.h
+        for a in [aname, toupper(aname)]
+          if filereadable(a)
+            execute a:cmd a
+            return
+          end
+        endfor
+      endfor
+    endif
+  endfor
+endfunction
+command! A call s:a('e')
+command! AV call s:a('botright vertical split')
+" EX | chmod +x [[[2
+command! EX if !empty(expand('%'))
+      \|   write
+      \|   call system('chmod +x '.expand('%'))
+      \|   silent e
+      \| else
+        \|   echohl WarningMsg
+        \|   echo 'Save the file first'
+        \|   echohl None
+        \| endif
 " autocmd [[[1
 " go back to where you exited [[[2
 autocmd BufReadPost *
@@ -596,7 +640,6 @@ nmap <silent> <leader>FF :call <SID>denite_file_with_path()<CR>
 nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
 nmap <silent> <leader>fr :Denite file_mru<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
-
 " Yggdroot/indentLine [[[2
 "let g:indentLine_noConcealCursor=""
 " LanguageClient [[[2
@@ -748,15 +791,32 @@ let g:rainbow_conf = {
       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
       \}
-" end [[[1
-" Plugin: vim-dirvish {{{2
+" benmills/vimux [[[2
+if !s:is_win
+  "let g:VimuxOrientation = "h"
+  map <leader>vp :VimuxPromptCommand<CR>
+  map <leader>vl :VimuxRunLastCommand<CR>
+  map <leader>vi :VimuxInspectRunner<CR>
+  map <leader>vz :VimuxZoomRunner<CR>
+  map <Leader>vq :VimuxCloseRunner<CR>
+  map <Leader>vx :VimuxInterruptRunner<CR>
+  function! VimuxSlime()
+    call VimuxSendText(@v)
+    call VimuxSendKeys("Enter")
+  endfunction
+
+  " If text is selected, save it in the v buffer and send that buffer it to tmux
+  vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+endif
+" Plugin: vim-dirvish [[[2
 autocmd FileType dirvish nmap <buffer> <c-o> -
 nnoremap <f1> :vsplit +Dirvish<cr><c-w>H<c-w>40<bar>
-" Plugin: netrw {{{2
+" Plugin: netrw [[[2
 " let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
 let g:netrw_bufsettings  = 'relativenumber'
 let g:netrw_keepdir      = 0
 let g:netrw_liststyle    = 1
 let g:netrw_sort_options = 'i'
+" end [[[1
 " vim:fdm=marker:fmr=[[[,]]]
