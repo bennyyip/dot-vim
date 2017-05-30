@@ -1,6 +1,11 @@
-" plugin List [[[1
-call plug#begin('~/.vim/bundle') " vim-plug 初始化
-" Enhancement [[[2
+let s:is_win = has('win32')
+let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
+"plugin List [[[1
+call plug#begin('$v/bundle') " vim-plug 初始化
+let g:plug_shallow = 0
+let g:plug_window  = 'enew'
+let g:plug_pwindow = 'vertical rightbelow new'
+"Enhancement [[[2
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
 " Depends on Ripgrep
@@ -23,6 +28,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'luochen1990/rainbow'
+Plug 'itchyny/vim-cursorword'
 " Depends on ctags
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar'
@@ -37,7 +43,7 @@ else
   Plug 'maralla/completor.vim'
   Plug 'racer-rust/vim-racer', {'for': 'rust'}
 endif
-if has('win32') || has('win64')
+if s:is_win
   Plug 'rust-lang/rust.vim'
 endif
 Plug 'scrooloose/nerdcommenter'
@@ -50,12 +56,13 @@ Plug 'tpope/vim-surround'
 Plug 'vimers/vim-youdao'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'benmills/vimux'
+Plug 'roxma/vim-paste-easy'
 "]]]
-" Language [[[2
+"Language [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'PProvost/vim-ps1'
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
-Plug 'Valloric/MatchTagAlways', { 'for': 'html' }
+Plug 'Valloric/MatchTagAlways'
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'lilydjwg/colorizer'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
@@ -70,30 +77,59 @@ Plug 'othree/html5.vim', {'for': 'html'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
 "]]]
-" Apperance [[[2
+"Apperance [[[2
 Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-startify'
+Plug 'morhetz/gruvbox'
 "]]]
 call plug#end()
+packadd! matchit
 "]]]
-" set [[[1
-" general settings [[[2
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
+"set [[[1
+"general settings [[[2
+set nocompatible
+filetype plugin indent on  " Load plugins according to detected filetype.
+syntax on                  " Enable syntax highlighting.
 
-call system('mkdir /tmp/.vim-undodir/')
-let &undodir = '/tmp/.vim-undodir'
+set autoindent
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+set shiftround
 
-set so=10
-set number
-set rnu " 相對行號
+set backspace=indent,eol,start
+set hidden
+set laststatus=2         " Always show statusline.
+set display=lastline  " Show as much as possible of the last line.
 
-set undofile
+set ttyfast                " Faster redrawing.
+set lazyredraw             " Only redraw when necessary.
 
-set path+=**
+set cursorline             " Find the current line quickly.
+set wrapscan               " Searches wrap around end-of-file.
+set report=0         " Always report changed lines.
+set synmaxcol=200       " Only highlight the first 200 columns.
+set history=1000
+
+set list                   " Show non-printable characters.
+if has('multi_byte') && &encoding ==# 'utf-8'
+  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+else
+  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
+endif
+
+set fenc=utf-8
+set fencs=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set enc=utf-8
+
+set scrolloff=10      " 光标底下至少10行
+set number            " line number
+set relativenumber    " relative line number
+set modeline
+set showmatch
+set matchtime=0
+set foldlevel=200  " disable auto folding
 
 set ignorecase
 set smartcase
@@ -102,13 +138,25 @@ set hlsearch
 set nrformats-=octal
 
 " turn off bell
-set vb t_vb=
+set noerrorbells
+set novisualbell
+set t_vb=
 
+" wild stuff
+set suffixes     +=.a,.1,.class
+set wildignore   +=*.o,*.so,*.zip,*.png
 set wildmenu
+set wildmode      =list:longest,full
+set wildoptions   =tagfile
+set path+=**
+set complete-=i   " disable scanning included files
+set complete-=t   " disable searching tags
+set completeopt=longest,menu "preview
+
 set autoread
 set formatoptions+=j " Delete comment char when joining lines
 
-"set list lcs=tab:\|\
+set switchbuf=useopen,usetab,newtab
 
 if has('mouse')
   set mouse=a
@@ -116,55 +164,120 @@ if has('mouse')
   set nomousehide
 endif
 
-set autoindent
-set modeline
-set cursorline
-"set cursorcolumn
-
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set expandtab
-
-set showmatch
-set matchtime=0
-set nobackup
-set nowritebackup
-set directory=~/.vim/.swapfiles
-
-set switchbuf=useopen,usetab,newtab
-
-" 設置 alt 鍵不映射到菜單欄
-set winaltkeys=no
-
-"在insert模式下能用刪除鍵進行刪除
-set backspace=indent,eol,start
-
-set fenc=utf-8
-set fencs=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
-set enc=utf-8
-set completeopt=longest,menu " preview
-set hidden
-
-"按縮進或手動摺疊
-"augroup vimrc
-"  au BufReadPre * setlocal foldmethod=indent
-"  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-"augroup END
-"set foldcolumn=0 "設置摺疊區域的寬度
-"set foldlevelstart=200
-set foldlevel=200  " disable auto folding
+set backup
+set backupdir   =$v/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+set directory   =$v/files/swap/
+set updatecount =100
+set undofile
+set undodir     =$v/files/undo/
+set viminfo     ='100,n$v/files/info/viminfo
+if exists('*mkdir') && !isdirectory($v.'/files')
+  call mkdir($v.'/files')
+  call mkdir($v.'/files/swap')
+  call mkdir($v.'/files/info')
+  call mkdir($v.'/files/undo')
+  call mkdir($v.'/files/backup')
+endif
 " ]]]
-" apperance [[[2
+"apperance [[[2
+"itchyny/lightline.vim [[[3
+"g:lightline[[[4
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'mode_map': { 'c': 'NORMAL' },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'asyncrun', 'fileformat', 'fileencoding', 'filetype'] ]
+      \ },
+      \ 'component_function': {
+      \   'modified': 'LightlineModified',
+      \   'readonly': 'LightlineReadonly',
+      \   'fugitive': 'LightlineFugitive',
+      \   'filename': 'LightlineFilename',
+      \   'fileformat': 'LightlineFileformat',
+      \   'filetype': 'LightlineFiletype',
+      \   'fileencoding': 'LightlineFileencoding',
+      \   'mode': 'LightlineMode',
+      \ },
+      \ 'component' : {
+      \   'asyncrun': '%{g:asyncrun_status}'
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+      \ }
+
+function! LightlineModified() "[[[4
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+function! LightlineReadonly() "[[[4
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? "\ue0a2" : ''
+endfunction
+function! LightlineFilename() "[[[4
+  let fname = expand('%:~')
+  return fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'denite' ? denite#get_status_sources() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+function! LightlineFugitive() "[[[4
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let branch = fugitive#head()
+      return branch !=# '' ? "\ue0a0 ".branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+function! LightlineFileformat() "[[[4
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+function! LightlineFiletype() "[[[4
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+function! LightlineFileencoding() "[[[4
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+function! LightlineMode() "[[[4
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'denite' ? 'Denite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ lightline#mode()[0]
+  "\ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+"tagbar [[[4
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+"morhetz/gruvbox [[[3
 colorscheme gruvbox
 set bg=dark
-
+hi VertSplit guibg=#282828 guifg=#181A1F
+let g:gruvbox_improved_strings=1
+let g:gruvbox_improved_warnings=1
+"hi EndOfBuffer guibg=#282828 guifg=#282828
+"other [[[3
 if !exists("g:vimrc_loaded")
   if has("gui_running")
     "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
     set cmdheight=1
     set langmenu=en_US
-    if has('win32') || has('win64')
+    if s:is_win
       set go-=egmrLtT
       "https://github.com/derekmcloughlin/gvimfullscreen_win32
       au GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
@@ -274,12 +387,12 @@ function! Vim_NeatGuiTabTip()
 endfunc
 set guitabtooltip=%{Vim_NeatGuiTabTip()}
 "Windows [[[2
-if has('win32') || has('win64')
+if s:is_win
   set pythonthreedll=python36.dll
 endif
 "]]]
 "map[[[1
-" leader [[[2
+"leader [[[2
 let mapleader = "\<Space>"
 " Reload .vimrc [[[3
 nnoremap <leader>vr :so $MYVIMRC<CR>
@@ -300,8 +413,8 @@ nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 " Youdao [[[3
 nnoremap <leader>oy :<C-u>Dic<CR>
 " 用空格鍵來開關摺疊 [[[3
-nnoremap <space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-vnoremap <space><space> zf
+nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+vnoremap <silent><space><space> zf
 " 中文字數統計 [[[3
 nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
 " 全部字符統計：g<C-g>
@@ -311,8 +424,9 @@ nnoremap <leader>ps :!start powershell<CR>
 " resolve vcs conflict (depends on tpope/vim-unimpaired) [[[3
 map <leader>dg1 ]nd]n[ndd[ndd
 map <leader>dg2 d]ndd]ndd
-" Valloric/MatchTagAlways [[[3
-nnoremap <leader>% :MtaJumpToOtherTag<cr>
+"快速编辑自定义宏 [[[2
+" ["register]<leader>m
+nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 " benmills/vimux [[[3
 "let g:VimuxOrientation = "h"
 map <leader>vp :VimuxPromptCommand<CR>
@@ -331,7 +445,7 @@ vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 " Quit [[[3
 nnoremap <leader>Q :bd!<CR>
 nnoremap <leader>q :bd<CR>
-"     t 开头 [[[2
+"t 开头 [[[2
 nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 "     less style 清除高亮
@@ -341,23 +455,17 @@ nnoremap tl ^vg_
 nmap <silent> to :call append('.', '')<CR>j
 nmap <silent> tO :call append(line('.')-1, '')<CR>k
 nmap tp "+P
-"   g[jk] [[[2
+"g[jk] [[[2
 nmap <M-j> gj
 nmap <M-k> gk
 vmap <M-j> gj
 nmap <M-k> gk
-"     上下移动一行文字[[[2
-nmap <C-j> mz:m+<cr>`z
-nmap <C-k> mz:m-2<cr>`z
-vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
-" 插入模式移动光标 alt + 方向键 [[[2
+"插入模式移动光标 alt + 方向键 [[[2
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
-set pastetoggle=<F11>
-" tab [[[2
+"tab [[[2
 noremap <silent><c-tab> :tabprev<CR>
 inoremap <silent><c-tab> <ESC>:tabprev<CR>
 noremap <silent><m-1> :tabn 1<cr>
@@ -380,7 +488,7 @@ inoremap <silent><m-7> <ESC>:tabn 7<cr>
 inoremap <silent><m-8> <ESC>:tabn 8<cr>
 inoremap <silent><m-9> <ESC>:tabn 9<cr>
 inoremap <silent><m-0> <ESC>:tabn 10<cr>
-" 其它 [[[2
+"其它 [[[2
 nmap T :tabnew<cr>
 nnoremap ' <C-W>
 nnoremap <silent><C-w> :tabclose<cr>
@@ -396,13 +504,16 @@ nmap d<CR> :%s/\r//ge<CR>
 " Quickfix
 nnoremap <leader>oe :copen<CR>
 nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
+" 防止水平滑动的时候失去选择
+xnoremap <  <gv
+xnoremap >  >gv
 "autocmd [[[1
-" go back to where you exited [[[2
+"go back to where you exited [[[2
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
       \   exe "normal g'\"" |
       \ endif
-" script healper [[[2
+"script healper [[[2
 au BufNewFile *.py call s:ScriptHeader()
 au BufNewFile *.sh call s:ScriptHeader()
 au FileType vue syntax sync minlines=500
@@ -428,7 +539,7 @@ function! s:ScriptHeader()
   normal ''
 endfunction
 
-" auto trim spaces [[[2
+"auto trim spaces [[[2
 function! TrimSpaces()
   if !&binary && &filetype != 'diff' && &filetype != 'markdown'
     normal mxHmy
@@ -444,95 +555,9 @@ au BufWritePre * TrimSpaces
 au FileAppendPre * TrimSpaces
 au FileWritePre * TrimSpaces
 au FilterWritePre * TrimSpaces
-
-" noplaintext [[[2
 "]]]
 "plugin config [[[1
-" itchyny/lightline.vim [[[2
-set laststatus=2
-
-"g:lightline[[[3
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'mode_map': { 'c': 'NORMAL' },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'asyncrun', 'fileformat', 'fileencoding', 'filetype'] ]
-      \ },
-      \ 'component_function': {
-      \   'modified': 'LightlineModified',
-      \   'readonly': 'LightlineReadonly',
-      \   'fugitive': 'LightlineFugitive',
-      \   'filename': 'LightlineFilename',
-      \   'fileformat': 'LightlineFileformat',
-      \   'filetype': 'LightlineFiletype',
-      \   'fileencoding': 'LightlineFileencoding',
-      \   'mode': 'LightlineMode',
-      \ },
-      \ 'component' : {
-      \   'asyncrun': '%{g:asyncrun_status}'
-      \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-      \ }
-
-function! LightlineModified() "[[[3
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-function! LightlineReadonly() "[[[3
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? "\ue0a2" : ''
-endfunction
-function! LightlineFilename() "[[[3
-  let fname = expand('%:~')
-  return fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'denite' ? denite#get_status_sources() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-function! LightlineFugitive() "[[[3
-  try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ''  " edit here for cool mark
-      let branch = fugitive#head()
-      return branch !=# '' ? "\ue0a0 ".branch : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
-function! LightlineFileformat() "[[[3
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-function! LightlineFiletype() "[[[3
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-function! LightlineFileencoding() "[[[3
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-function! LightlineMode() "[[[3
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'denite' ? 'Denite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ lightline#mode()[0]
-  "\ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-"tagbar [[[3
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
-" Shougo/denite.nvim [[[2
+"Shougo/denite.nvim [[[2
 let s:denite_options = {
       \ 'default' : {
       \ 'winheight' : 15,
@@ -556,7 +581,8 @@ call s:profile(s:denite_options)
 "let g:denite_force_overwrite_statusline = 1
 " Ripgrep for file_rec
 call denite#custom#var('file_rec', 'command',
-      \ ['rg', '--files', ''])
+      \ ['rg', '--files', '.'])
+
 " Ripgrep command on grep source
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts',
@@ -565,6 +591,7 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
+
 " Change ignore_globs
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '.git/', '.ropeproject/', '__pycache__/',
@@ -607,7 +634,7 @@ nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
 nmap <silent> <leader>fr :Denite file_mru<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 
-" scrooloose/nerdcommenter [[[2
+"scrooloose/nerdcommenter [[[2
 map nt :NERDTreeToggle<cr>
 nmap nT :NERDTreeFind<cr>
 " nmap nT :NERDTreeTabsToggle<cr>
@@ -686,7 +713,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 let g:neosnippet#disable_runtime_snippets = {
       \  '_' : 1,
       \ }
-let g:neosnippet#snippets_directory = '~/.vim/snippets'
+let g:neosnippet#snippets_directory = '$v/snippets'
 " haya13busa/incsearch.vim [[[2
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -697,8 +724,6 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
-" :h g:incsearch#auto_nohlsearch
-"let g:incsearch#auto_nohlsearch = 1
 " majutsushi/tagbar [[[2
 let g:tagbar_type_tex = {
       \ 'ctagstype' : 'latex',
@@ -730,9 +755,6 @@ nmap tb :TagbarToggle<cr>
 nnoremap <silent> <leader>z :Goyo<cr>
 "autocmd! User GoyoEnter Limelight
 "autocmd! User GoyoLeave Limelight!
-" morhetz/gruvbox [[[2
-hi VertSplit guibg=#282828 guifg=#181A1F
-hi EndOfBuffer guibg=#282828 guifg=#282828
 " mhinz/vim-startify [[[2
 let g:startify_custom_header = [
       \"            ________ ++     ________  ",
@@ -765,30 +787,30 @@ let g:cpp_experimental_simple_template_highlight = 0
 "slow
 let g:cpp_experimental_template_highlight = 1
 
-command! GenClangComplete AsyncRun make clean && make CC='~/.vim/bin/cc_args.py gcc'
+command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
 "luochen1990/rainbow [[[2
-let g:rainbow_active=1
+let g:rainbow_active=0
 let g:rainbow_conf = {
-      \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-      \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-      \	'operators': '_,_',
-      \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-      \	'separately': {
-      \		'*': {},
-      \		'tex': {
-      \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-      \		},
-      \		'lisp': {
-      \			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-      \		},
-      \		'vim': {
-      \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-      \		},
-      \		'html': {
-      \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-      \		},
-      \		'css': 0,
-      \	}
+      \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+      \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \ 'operators': '_,_',
+      \ 'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+      \ 'separately': {
+      \  '*': {},
+      \  'tex': {
+      \   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+      \  },
+      \  'lisp': {
+      \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+      \  },
+      \  'vim': {
+      \   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+      \  },
+      \  'html': {
+      \   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+      \  },
+      \  'css': 0,
+      \ }
       \}
 "end [[[1
 " vim:fdm=marker:fmr=[[[,]]]
