@@ -124,7 +124,7 @@ if !has('nvim')
     runtime macros/matchit.vim
   endif
 endif
-"  indent settings [[[3
+" indent settings [[[3
 set autoindent
 set cinoptions    =>2,l1,p0,)50,*50,t0
 set expandtab
@@ -133,7 +133,7 @@ set softtabstop   =2
 set shiftwidth    =2
 set shiftround
 set tabstop=2
-"  display settings [[[3
+" display settings [[[3
 set display       =lastline
 set laststatus    =2
 set list
@@ -169,11 +169,11 @@ else
     autocmd InsertLeave * set listchars+=trail:.
   augroup END
 endif
-"  turn off bell [[[3
+" turn off bell [[[3
 set noerrorbells
 set novisualbell
 set t_vb=
-"  better navigation [[[3
+" better navigation [[[3
 set cursorline
 set foldmethod    =marker
 set foldopen     +=jump
@@ -191,7 +191,7 @@ if has('mouse')
   set mouse=a
   set mousehide
 endif
-"  wild stuff [[[3
+" wild stuff [[[3
 set suffixes     +=.a,.1,.class
 set wildignore   +=*.o,*.so,*.zip,*.png
 set wildmenu
@@ -224,6 +224,9 @@ set titlestring =VIM:\ %f
 set switchbuf=useopen,usetab,newtab
 set ttyfast
 set lazyredraw
+"LF
+set fileformat=unix
+set fileformats=unix,dos
 " backup/swap/info/undo settings [[[3
 set backup
 set backupskip   =
