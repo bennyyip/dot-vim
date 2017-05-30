@@ -83,13 +83,22 @@ Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 "]]]
 call plug#end()
-packadd! matchit
 "]]]
 "set [[[1
 "general settings [[[2
-set nocompatible
-filetype plugin indent on  " Load plugins according to detected filetype.
-syntax on                  " Enable syntax highlighting.
+
+let mapleader = "\<Space>"
+
+if !has('nvim')
+  set nocompatible
+  filetype plugin indent on
+  syntax   on
+  if v:version >= 800
+    packadd! matchit
+  else
+    runtime macros/matchit.vim
+  endif
+endif
 
 set autoindent
 set shiftwidth=2
@@ -165,20 +174,25 @@ if has('mouse')
 endif
 
 set backup
-set backupdir   =$v/files/backup/
-set backupext   =-vimbackup
-set backupskip  =
-set directory   =$v/files/swap/
-set updatecount =100
+set backupskip   =
+set updatecount  =100
 set undofile
-set undodir     =$v/files/undo/
-set viminfo     ='100,n$v/files/info/viminfo
-if exists('*mkdir') && !isdirectory($v.'/files')
-  call mkdir($v.'/files')
-  call mkdir($v.'/files/swap')
-  call mkdir($v.'/files/info')
-  call mkdir($v.'/files/undo')
-  call mkdir($v.'/files/backup')
+if has("nvim")
+  set backupdir  -=.
+  set shada       ='100
+else
+  set backupdir   =$v/files/backup/
+  set backupext   =-vimbackup
+  set directory   =$v/files/swap/
+  set undodir     =$v/files/undo/
+  set viminfo     ='100,n$v/files/info/viminfo
+  if exists('*mkdir') && !isdirectory($v.'/files')
+    call mkdir($v.'/files')
+    call mkdir($v.'/files/swap')
+    call mkdir($v.'/files/info')
+    call mkdir($v.'/files/undo')
+    call mkdir($v.'/files/backup')
+  endif
 endif
 " ]]]
 "apperance [[[2
@@ -393,7 +407,6 @@ endif
 "]]]
 "map[[[1
 "leader [[[2
-let mapleader = "\<Space>"
 " Reload .vimrc [[[3
 nnoremap <leader>vr :so $MYVIMRC<CR>
 " Buffer [[[3
