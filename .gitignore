@@ -1,6 +1,6 @@
 /bundle/
 /config/local.vim
-/.swapfiles
+/files
 /binary/
 .netrwhist
 /autoload/plug.vim*
