@@ -57,6 +57,7 @@ Plug 'vimers/vim-youdao'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'benmills/vimux'
 Plug 'roxma/vim-paste-easy'
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 " Language [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'PProvost/vim-ps1'
@@ -317,8 +318,8 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 " morhetz/gruvbox [[[3
-colorscheme gruvbox
 set bg=dark
+colorscheme gruvbox
 hi VertSplit guibg=#282828 guifg=#181A1F
 let g:gruvbox_improved_strings=1
 let g:gruvbox_improved_warnings=1
@@ -403,12 +404,13 @@ endfunction
 " If text is selected, save it in the v buffer and send that buffer it to tmux
 vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 " Quit [[[3
-nnoremap <leader>Q :bd!<CR>
-nnoremap <leader>q :bd<CR>
+nnoremap <silent><leader>Q :Sayonara!<CR>
+nnoremap <silent><leader>q :Sayonara<CR>
+let g:sayonara_confirm_quit = 1
 " begin with t  [[[2
 nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
-"     less style 清除高亮
+" less style nohl [[[2
 nmap <silent> <M-u> :nohls<CR>
 nmap tj Jx
 nnoremap tl ^vg_
