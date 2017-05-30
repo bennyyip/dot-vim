@@ -12,3 +12,5 @@ vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
 
+autocmd BufLeave *.{c,cpp} mark C
+autocmd BufLeave *.h       mark H
