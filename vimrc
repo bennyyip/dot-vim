@@ -704,23 +704,29 @@ nnoremap <silent> <leader>z :Goyo<cr>
 "autocmd! User GoyoEnter Limelight
 "autocmd! User GoyoLeave Limelight!
 " mhinz/vim-startify [[[2
-let g:startify_custom_header = [
-      \"            ________ ++     ________  ",
-      \"           /VVVVVVVV\++++  /VVVVVVVV\\",
-      \"           \VVVVVVVV/++++++\VVVVVVVV/ ",
-      \"            |VVVVVV|++++++++/VVVVV/'  ",
-      \"            |VVVVVV|++++++/VVVVV/'    ",
-      \"           +|VVVVVV|++++/VVVVV/'+     ",
-      \"         +++|VVVVVV|++/VVVVV/'+++++   ",
-      \"       +++++|VVVVVV|/VVV___++++++++++ ",
-      \"         +++|VVVVVVVVVV/##/ +_+_+_+_  ",
-      \"           +|VVVVVVVVV___ +/#_#,#_#,\\",
-      \"            |VVVVVVV//##/+/#/+/#/'/#/ ",
-      \"            |VVVVV/'+/#/+/#/+/#/ /#/  ",
-      \"            |VVV/'++/#/+/#/ /#/ /#/   ",
-      \"            'V/'  /##//##//##//###/   ",
-      \"                     ++               ",
+
+
+let g:ascii = [
+      \"             ________ ++     ________             ",
+      \"            /VVVVVVVV\++++  /VVVVVVVV\\           ",
+      \"            \VVVVVVVV/++++++\VVVVVVVV/            ",
+      \"             |VVVVVV|++++++++/VVVVV/'             ",
+      \"             |VVVVVV|++++++/VVVVV/'               ",
+      \"            +|VVVVVV|++++/VVVVV/'+                ",
+      \"          +++|VVVVVV|++/VVVVV/'+++++              ",
+      \"        +++++|VVVVVV|/VVV___++++++++++            ",
+      \"          +++|VVVVVVVVVV/##/ +_+_+_+_             ",
+      \"            +|VVVVVVVVV___ +/#_#,#_#,\\           ",
+      \"             |VVVVVVV//##/+/#/+/#/'/#/            ",
+      \"             |VVVVV/'+/#/+/#/+/#/ /#/             ",
+      \"             |VVV/'++/#/+/#/ /#/ /#/              ",
+      \"             'V/'  /##//##//##//###/              ",
+      \"                      ++                          ",
+      \"                                                  ",
+      \"                                                  ",
       \]
+      let g:startify_custom_header =
+          \ map(g:ascii + ben#quote(), '"   ".v:val')
 let g:startify_skiplist = [
       \ 'COMMIT_EDITMSG',
       \ 'bundle/.*/doc',

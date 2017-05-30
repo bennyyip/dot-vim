@@ -127,3 +127,23 @@ function! s:Vim_NeatTabLabel(n)
   return s:Vim_NeatBuffer(l:bufnr, 0)
 endfunc
 
+" Function: #quote {{{1
+function! s:get_random_offset(max) abort
+  return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
+endfunction
+function! ben#quote() abort
+  let quote = s:quotes[s:get_random_offset(len(s:quotes))]
+  let lines = []
+  for l in quote
+    let offset = 50 - strwidth(l)
+    let lines += [repeat(' ', offset).l ]
+  endfor
+  return lines
+endfunction
+
+let s:quotes = [
+      \ ["「世界上有什麼不會失去的東西嗎？」","「我相信有，妳也最好相信。」"],
+      \ ["「獨步天下，吾心自潔，無欲無求，如林中之象」"],
+      \ ["「生死去來，棚頭傀儡，一線斷時，落落磊磊。」"],
+      \ ["「懷舊是戀尸癖的早期症狀。」"],
+      \]
