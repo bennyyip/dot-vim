@@ -5,33 +5,7 @@ call plug#begin('$v/bundle') " vim-plug 初始化
 let g:plug_shallow = 0
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
-" Enhancement [[[2
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'KabbAmine/vCoolor.vim'
-" Depends on Ripgrep
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/neomru.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neoyank.vim'
-Plug 'Jagua/vim-denite-ghq'
-Plug 'bennyyip/denite-github-stars'
-"Plug 'MattesGroeger/vim-bookmarks'
-Plug 'w0rp/ale'
-"Plug 'Yggdroot/indentLine'
-Plug 'cohama/lexima.vim'
-Plug 'haya14busa/incsearch.vim'
-Plug 'honza/vim-snippets'
-Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
-Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
-Plug 'justinmk/vim-sneak'
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-entire'
-Plug 'luochen1990/rainbow'
-Plug 'itchyny/vim-cursorword'
-" Depends on ctags
-" https://github.com/universal-ctags/ctags
-Plug 'bennyyip/tagbar'
+
 if has("nvim")
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/echodoc.vim'
@@ -45,42 +19,79 @@ else
 endif
 if s:is_win
   Plug 'rust-lang/rust.vim'
+else
+  Plug 'benmills/vimux'
+  Plug 'wellle/tmux-complete.vim'
 endif
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+" Enhancement [[[2
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
+Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
+Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
+Plug 'junegunn/vim-peekaboo'
+Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-sneak'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-user'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vimers/vim-youdao'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'Jagua/vim-denite-ghq'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'cohama/lexima.vim'
+Plug 'haya14busa/incsearch.vim'
+Plug 'honza/vim-snippets'
+Plug 'itchyny/vim-cursorword'
+Plug 'lilydjwg/fcitx.vim'
+Plug 'luochen1990/rainbow'
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'
-Plug 'vimers/vim-youdao'
-Plug 'lilydjwg/fcitx.vim'
-Plug 'benmills/vimux'
-Plug 'roxma/vim-paste-easy'
-Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-" Language [[[2
+Plug 'w0rp/ale'
+" Lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+
 Plug 'PProvost/vim-ps1'
-Plug 'Rykka/riv.vim', { 'for': 'rst' }
-Plug 'Valloric/MatchTagAlways'
-Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
-Plug 'lilydjwg/colorizer'
-Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'ekalinin/Dockerfile.vim'
+
+Plug 'Rykka/riv.vim', { 'for': 'rst' }
+Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
+Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'hdima/python-syntax', { 'for': 'python'}
+
+Plug 'lilydjwg/colorizer'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'rhysd/vim-clang-format'
-Plug 'tikhomirov/vim-glsl'
+Plug 'Valloric/MatchTagAlways'
 Plug 'othree/html5.vim', {'for': 'html'}
-Plug 'lervag/vimtex', {'for': 'tex'}
+
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'tikhomirov/vim-glsl'
+Plug 'rhysd/vim-clang-format'
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
-" Apperance [[[2
+" Look [[[2
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
+" ben [[[2
+" https://github.com/universal-ctags/ctags
+Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
+Plug 'bennyyip/denite-github-stars'
 call plug#end()
+
 " set [[[1
 " general settings [[[2
 " init [[[3
@@ -389,20 +400,22 @@ map <leader>dg2 d]ndd]ndd
 " ["register]<leader>m
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 " benmills/vimux [[[3
-"let g:VimuxOrientation = "h"
-map <leader>vp :VimuxPromptCommand<CR>
-map <leader>vl :VimuxRunLastCommand<CR>
-map <leader>vi :VimuxInspectRunner<CR>
-map <leader>vz :VimuxZoomRunner<CR>
-map <Leader>vq :VimuxCloseRunner<CR>
-map <Leader>vx :VimuxInterruptRunner<CR>
-function! VimuxSlime()
-  call VimuxSendText(@v)
-  call VimuxSendKeys("Enter")
-endfunction
+if !s:is_win
+  "let g:VimuxOrientation = "h"
+  map <leader>vp :VimuxPromptCommand<CR>
+  map <leader>vl :VimuxRunLastCommand<CR>
+  map <leader>vi :VimuxInspectRunner<CR>
+  map <leader>vz :VimuxZoomRunner<CR>
+  map <Leader>vq :VimuxCloseRunner<CR>
+  map <Leader>vx :VimuxInterruptRunner<CR>
+  function! VimuxSlime()
+    call VimuxSendText(@v)
+    call VimuxSendKeys("Enter")
+  endfunction
 
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+  " If text is selected, save it in the v buffer and send that buffer it to tmux
+  vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+endif
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
@@ -584,42 +597,6 @@ nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
 nmap <silent> <leader>fr :Denite file_mru<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 
-" scrooloose/nerdcommenter [[[2
-map nt :NERDTreeToggle<cr>
-nmap nT :NERDTreeFind<cr>
-" nmap nT :NERDTreeTabsToggle<cr>
-let NERDTreeShowBookmarks=0
-let NERDTreeMouseMode=2
-
-" swap o and go
-let g:NERDTreeMapActivateNode = 'go'
-let g:NERDTreeMapPreview = 'o'
-
-" let g:nerdtree_tabs_focus_on_files=1
-" let g:nerdtree_tabs_open_on_gui_startup=0
-
-let NERDTreeWinSize=25
-let NERDTreeIgnore = ['\.pyc$','\.exe$']
-let NERDTreeMinimalUI=0
-let NERDTreeDirArrows=1
-
-"let g:newrw_ftp_cmd = 'lftp'
-let g:netrw_altv          = 1
-let g:netrw_fastbrowse    = 2
-let g:netrw_keepdir       = 1
-let g:netrw_liststyle     = 3
-let g:netrw_retmap        = 1
-let g:netrw_silent        = 1
-let g:netrw_special_syntax= 1
-let g:netrw_browse_split = 3
-let g:netrw_banner = 0
-
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-"> How can I open NERDTree automatically when vim starts up on opening a directory?
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " Yggdroot/indentLine [[[2
 "let g:indentLine_noConcealCursor=""
 " LanguageClient [[[2
@@ -727,8 +704,8 @@ let g:ascii = [
       \"                                                  ",
       \"                                                  ",
       \]
-      let g:startify_custom_header =
-          \ map(g:ascii + ben#quote(), '"   ".v:val')
+let g:startify_custom_header =
+      \ map(g:ascii + ben#quote(), '"   ".v:val')
 let g:startify_skiplist = [
       \ 'COMMIT_EDITMSG',
       \ 'bundle/.*/doc',
@@ -766,28 +743,20 @@ let g:cpp_experimental_template_highlight = 1
 
 command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
 " luochen1990/rainbow [[[2
-let g:rainbow_active=0
+let g:rainbow_active=1
 let g:rainbow_conf = {
-      \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-      \ 'operators': '_,_',
-      \ 'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-      \ 'separately': {
-      \  '*': {},
-      \  'tex': {
-      \   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-      \  },
-      \  'lisp': {
-      \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-      \  },
-      \  'vim': {
-      \   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-      \  },
-      \  'html': {
-      \   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-      \  },
-      \  'css': 0,
-      \ }
       \}
 " end [[[1
+" Plugin: vim-dirvish {{{2
+autocmd FileType dirvish nmap <buffer> <c-o> -
+nnoremap <f1> :vsplit +Dirvish<cr><c-w>H<c-w>40<bar>
+" Plugin: netrw {{{2
+" let g:loaded_netrwPlugin = 1
+let g:netrw_banner       = 0
+let g:netrw_bufsettings  = 'relativenumber'
+let g:netrw_keepdir      = 0
+let g:netrw_liststyle    = 1
+let g:netrw_sort_options = 'i'
 " vim:fdm=marker:fmr=[[[,]]]
