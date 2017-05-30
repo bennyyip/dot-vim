@@ -483,18 +483,23 @@ end
 RB
 endfunction
 command! -range Shuffle <line1>,<line2>call s:shuffle()
-" :duck | Search DuckDuckGo.com
+" :duck | Search DuckDuckGo.com [[[2
 function! s:duck()
 endfunction
+
 function! s:duck(pat)
-  let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
-  let q = substitute(q, '[[:punct:] ]',
-        \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
-  call netrw#BrowseX("https://www.duckduckgo.com/?q=".q, netrw#CheckIfRemote())
+  let q = substitute(a:pat, '["\n]', ' ', 'g')
+  " let q = substitute(q, '[[:punct:] ]',
+  "       \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
+  let q =' "https:\\/\\/www.duckduckgo.com\\/?q='.q.'"'
+  let o = (s:is_win ? 'explorer' : 'xdg-open') . q
+  echo o
+  execute 'AsyncRun' o
 endfunction
 
-nnoremap <leader>? :call <SID>duck(expand("<cWORD>"))<cr>
-xnoremap <leader>? "gy:call <SID>duck(@g)<cr>gv
+command! -nargs=1 Duck call <SID>duck(<q-args>)
+nnoremap <silent><leader>? :call <SID>duck(expand("<cWORD>"))<cr>
+xnoremap <silent><leader>? "gy:call <SID>duck(@g)<cr>gv
 " :A [[[2
 function! s:a(cmd)
   let name = expand('%:r')
