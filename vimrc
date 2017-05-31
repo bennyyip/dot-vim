@@ -360,7 +360,6 @@ if !exists("g:vimrc_loaded")
   endif " has
 endif " exists(...)
 let g:vimrc_loaded=1
-" tab [[[2
 " setup new tabline, just like %M%t in macvim
 set tabline=%!ben#Vim_NeatTabLine()
 " Windows [[[2
@@ -390,6 +389,7 @@ nmap :: :!<space>
 nnoremap Q @q
 " unix2dos
 nmap d<CR> :%s/\r//ge<CR>
+
 inoremap <silent> <C-BS> <C-w>
 inoremap <silent> <C-v> <C-r>+
 " Quickfix
@@ -401,13 +401,12 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 
 nnoremap <leader>vr :so $MYVIMRC<CR>
 nnoremap <silent> <leader><tab> :<C-u>b#<CR>
-nnoremap <leader>bb :<C-u>Denite buffer<CR>
 " resolve vcs conflict (depends on tpope/vim-unimpaired)
 map <leader>dg1 ]nd]n[ndd[ndd
 map <leader>dg2 d]ndd]ndd
 " 中文字數統計 "全部字符統計：g<C-g>
 nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
-nnoremap <leader>oy :<C-u>Dic<CR>
+nnoremap <leader>oy :Dic<CR>
 " file [[[2
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>fs :w<CR>
@@ -431,7 +430,7 @@ nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
 inoremap <C-Q> <esc>:Sayonara<cr>
-let g:sayonara_confirm_quit = 1
+let g:sayonara_confirm_quit = 0
 " move [[[2
 nmap <M-j> gj
 nmap <M-k> gk
@@ -793,9 +792,6 @@ if !s:is_win
   " If text is selected, save it in the v buffer and send that buffer it to tmux
   vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 endif
-" Plugin: vim-dirvish [[[2
-autocmd FileType dirvish nmap <buffer> <c-o> -
-nnoremap <f1> :vsplit +Dirvish<cr><c-w>H<c-w>40<bar>
 " Plugin: netrw [[[2
 " let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
@@ -805,5 +801,32 @@ let g:netrw_liststyle    = 1
 let g:netrw_sort_options = 'i'
 " Plugin: roxma/vim-paste-easy [[[2
 let g:paste_easy_message=0
+" Plugin: justinmk/vim-dirvish [[[2
+nnoremap <f1> :vsplit +Dirvish<cr><c-w>H<c-w>35<bar>
+augroup my_dirvish_events
+  autocmd!
+  " Map t to "open in new tab".
+  autocmd FileType dirvish
+        \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+        \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
+
+  " Enable :Gstatus and friends.
+  autocmd FileType dirvish call fugitive#detect(@%)
+
+  " Map `gr` to reload the Dirvish buffer.
+  autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
+
+  " Map `gh` to hide dot-prefixed files.
+  " To "toggle" this, just press `R` to reload.
+  " autocmd FileType dirvish nnoremap <silent><buffer>
+  "       \ gh :silent keeppatterns g@\v[/\\]\.[^\\/]+[\\/]?$@d<CR>
+
+  " Auto hide dotfiles, press "u" to show
+  autocmd FileType dirvish silent keeppatterns g@\v[/\\]\.[^\\/]+[\\/]?$@d
+
+  autocmd FileType dirvish nmap <buffer> <c-o> -
+  " double "space" to preview
+  autocmd FileType dirvish nmap <silent><buffer> <space><space> p<C-w>p
+augroup END
 " end [[[1
 " vim:fdm=marker:fmr=[[[,]]]
