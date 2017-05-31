@@ -405,6 +405,9 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 
 ino {<CR> {<CR>}<ESC>O
 
+" quick buffer open
+nnoremap gb :ls<cr>:e #
+
 nnoremap <leader>vr :so $MYVIMRC<CR>
 nnoremap <silent> <leader><tab> :<C-u>b#<CR>
 " resolve vcs conflict (depends on tpope/vim-unimpaired)
@@ -417,8 +420,8 @@ nnoremap <leader>oy :Dic<CR>
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
-nnoremap <leader>fE :<C-u>w !sudo tee %<CR>
 nnoremap <leader>w :w<CR>
+cmap w!! w !sudo tee % >/dev/null
 nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 " fold [[[2
@@ -436,6 +439,9 @@ nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
 inoremap <C-Q> <esc>:Sayonara<cr>
+command! -bang Q q<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
 let g:sayonara_confirm_quit = 0
 " move [[[2
 nmap <M-j> gj
