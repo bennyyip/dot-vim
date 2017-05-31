@@ -1,4 +1,5 @@
 let s:is_win = has('win32')
+let s:is_nvim = has('nvim')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " plugin List [[[1
 call plug#begin('$v/bundle') " vim-plug 初始化
@@ -6,7 +7,7 @@ let g:plug_shallow = 0
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
 
-if has("nvim")
+if s:is_nvim
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/echodoc.vim'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -23,28 +24,6 @@ else
   Plug 'benmills/vimux'
   Plug 'wellle/tmux-complete.vim'
 endif
-" Enhancement [[[2
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/neomru.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neoyank.vim'
-Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
-Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
-Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
-Plug 'junegunn/vim-peekaboo'
-Plug 'justinmk/vim-dirvish'
-Plug 'justinmk/vim-sneak'
-Plug 'kana/vim-textobj-entire'
-Plug 'kana/vim-textobj-user'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Jagua/vim-denite-ghq'
@@ -87,12 +66,37 @@ Plug 'Shiracamus/vim-syntax-x86-objdump-d'
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
+" tpope [[[2
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-capslock'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+" Shougo [[[2
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neoyank.vim'
+" junegunn [[[2
+Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
+Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
+Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
+Plug 'junegunn/vim-peekaboo'
+Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-sneak'
+call plug#end()
 " ben [[[2
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
 Plug 'bennyyip/denite-github-stars'
-call plug#end()
-
 " set [[[1
 " general settings [[[2
 " init [[[3
@@ -114,7 +118,7 @@ let g:loaded_tarPlugin        = 1
 let g:loaded_vimballPlugin    = 1
 let g:loaded_zipPlugin = 1
 
-if !has('nvim')
+if !s:is_nvim
   set nocompatible
   filetype plugin indent on
   syntax   on
@@ -232,7 +236,7 @@ set backup
 set backupskip   =
 set updatecount  =100
 set undofile
-if has("nvim")
+if s:is_nvim
   set backupdir  -=.
   set shada       ='100
 else
@@ -250,7 +254,7 @@ else
   endif
 endif
 " apperance [[[2
-" itchyny/lightline.vim [[[3
+" Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -277,7 +281,6 @@ let g:lightline = {
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
       \ }
-
 function! LightlineModified() "[[[4
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -332,13 +335,11 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
-" morhetz/gruvbox [[[3
+" Plugin: morhetz/gruvbox [[[3
 set bg=dark
 colorscheme gruvbox
 hi VertSplit guibg=#282828 guifg=#181A1F
-let g:gruvbox_improved_strings=1
-let g:gruvbox_improved_warnings=1
-"hi EndOfBuffer guibg=#282828 guifg=#282828
+""hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
 if !exists("g:vimrc_loaded")
   if has("gui_running")
@@ -356,9 +357,9 @@ if !exists("g:vimrc_loaded")
       set go-=aegimrLtT
       set guifont=Monospace\ 16
     endif
-
   endif " has
 endif " exists(...)
+let g:vimrc_loaded=1
 " tab [[[2
 " setup new tabline, just like %M%t in macvim
 set tabline=%!ben#Vim_NeatTabLine()
@@ -367,8 +368,11 @@ if s:is_win
   set pythonthreedll=python36.dll
 endif
 " map[[[1
+nmap dae ggdG
+nmap cae ggcG
+nmap vae ggvG
+nmap yae mxHmyggyG`yzt`x
 nmap t= mxHmygg=G`yzt`x
-nmap ta ggVG
 nmap <silent> <M-u> :nohls<CR>
 nmap tj Jx
 nmap <silent> to :call append('.', '')<CR>j
@@ -377,7 +381,6 @@ nmap tp "+P
 nmap T :tabnew<cr>
 nnoremap tl ^vg_
 nnoremap ' <C-w>
-nnoremap <silent><C-w> :tabclose<cr>
 
 nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 nmap Y y$
@@ -419,7 +422,7 @@ vnoremap <silent><space><space> zf
 nmap z] zo]z
 nmap z[ zo[z
 "  Windows [[[3
-nnoremap <leader>ex :!start explorer %:p:h<CR>
+nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
 nnoremap <leader>ps :!start powershell<CR>
 " quick edit macro [[[2
 " ["register]<leader>m
@@ -539,32 +542,6 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
       \   exe "normal g'\"" |
       \ endif
-" script healper [[[2
-au BufNewFile *.py call s:ScriptHeader()
-au BufNewFile *.sh call s:ScriptHeader()
-au FileType vue syntax sync minlines=500
-
-function! s:ScriptHeader()
-  if &filetype == 'python'
-    let header = "#!/usr/bin/env python3"
-    let coding = "# -*- coding:utf-8 -*-"
-    let cfg = "# vim: ts=4 sw=4 sts=4 expandtab"
-  elseif &filetype == 'sh'
-    let header = "#!/bin/bash"
-  endif
-  let line = getline(1)
-  if line == header
-    return
-  endif
-  normal m'
-  call append(0,header)
-  if &filetype == 'python'
-    call append(1, coding)
-    call append(3, cfg)
-  endif
-  normal ''
-endfunction
-
 " auto trim spaces [[[2
 "au * ShowSpaces
 au BufWritePre * TrimSpaces
@@ -572,7 +549,7 @@ au FileAppendPre * TrimSpaces
 au FileWritePre * TrimSpaces
 au FilterWritePre * TrimSpaces
 " plugin config [[[1
-" Shougo/denite.nvim [[[2
+" Plugin: Shougo/denite.nvim [[[2
 let s:denite_options = {
       \ 'default' : {
       \ 'winheight' : 15,
@@ -648,32 +625,32 @@ nmap <silent> <leader>FF :call <SID>denite_file_with_path()<CR>
 nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
 nmap <silent> <leader>fr :Denite file_mru<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
-" Yggdroot/indentLine [[[2
+" Plugin: Yggdroot/indentLine [[[2
 "let g:indentLine_noConcealCursor=""
-" LanguageClient [[[2
-if has("nvim")
+" Plugin: LanguageClient [[[2
+if s:is_nvim
   let g:LanguageClient_serverCommands = {
         \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
         \ }
   " Automatically start language servers.
   let g:LanguageClient_autoStart = 1
 endif
-" maralla/completor.vim [[[2
+" Plugin: maralla/completor.vim [[[2
 inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
 inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-if !has("nvim")
+if !s:is_nvim
   let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
   let g:completor_clang_binary = '/usr/bin/clang'
   let g:completor_python_binary = '/usr/bin/python'
   let g:completor_racer_binary = '/usr/bin/racer'
 endif
-" Shougo/deoplete.nvim [[[2
-if has("nvim")
+" Plugin: Shougo/deoplete.nvim [[[2
+if s:is_nvim
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_smart_case = 1
 endif
-" Shougo/neosnippet [[[2
+" Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>  <Plug>(neosnippet_expand_or_jump)
 smap <C-k>  <Plug>(neosnippet_expand_or_jump)
@@ -692,7 +669,7 @@ let g:neosnippet#disable_runtime_snippets = {
       \  '_' : 1,
       \ }
 let g:neosnippet#snippets_directory = '$v/snippets'
-" haya13busa/incsearch.vim [[[2
+" Plugin: haya13busa/incsearch.vim [[[2
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -702,7 +679,7 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
-" majutsushi/tagbar [[[2
+" Plugin: majutsushi/tagbar [[[2
 let g:tagbar_type_tex = {
       \ 'ctagstype' : 'latex',
       \ 'kinds'  : [
@@ -729,11 +706,11 @@ let g:tagbar_type_nc = {
 let g:tagbar_width = 30
 nmap tb :TagbarToggle<cr>
 
-" junegunn/goyo.vim [[[2
+" Plugin: junegunn/goyo.vim [[[2
 nnoremap <silent> <leader>z :Goyo<cr>
 "autocmd! User GoyoEnter Limelight
 "autocmd! User GoyoLeave Limelight!
-" mhinz/vim-startify [[[2
+" Plugin: mhinz/vim-startify [[[2
 
 
 let g:ascii = [
@@ -779,27 +756,27 @@ let g:startify_session_autoload       = 0
 let g:startify_session_persistence    = 0
 let g:startify_update_oldfiles        = 1
 let g:startify_use_env                = 1
-" junegunn/limelight.vim [[[2
+" Plugin: junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-" octol/vim-cpp-enhanced-highlight [[[2
+" Plugin: octol/vim-cpp-enhanced-highlight [[[2
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
 "slow
 let g:cpp_experimental_template_highlight = 1
 
 command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
-" luochen1990/rainbow [[[2
+" Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
       \}
-" benmills/vimux [[[2
+" Plugin: benmills/vimux [[[2
 if !s:is_win
   "let g:VimuxOrientation = "h"
   map <leader>vp :VimuxPromptCommand<CR>
@@ -826,5 +803,7 @@ let g:netrw_bufsettings  = 'relativenumber'
 let g:netrw_keepdir      = 0
 let g:netrw_liststyle    = 1
 let g:netrw_sort_options = 'i'
+" Plugin: roxma/vim-paste-easy [[[2
+let g:paste_easy_message=0
 " end [[[1
 " vim:fdm=marker:fmr=[[[,]]]
