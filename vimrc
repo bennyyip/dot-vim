@@ -36,7 +36,7 @@ Plug 'itchyny/vim-cursorword'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-" Plug 'roxma/vim-paste-easy'
+Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
@@ -214,6 +214,16 @@ set breakindentopt=min:40
 
 set cpoptions     =aABcfFqsZ " -e
 set formatoptions =tcrqnj
+" Change cursor style dependent on mode
+if empty($TMUX)
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+else
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+endif
 " misc [[[3
 set wrapscan               " Searches wrap around end-of-file.
 set report=0               " Always report changed lines.
@@ -399,6 +409,8 @@ nnoremap <leader>oe :copen<CR>
 xnoremap <  <gv
 xnoremap >  >gv
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
+
+ino {<CR> {<CR>}<ESC>O
 
 nnoremap <leader>vr :so $MYVIMRC<CR>
 nnoremap <silent> <leader><tab> :<C-u>b#<CR>
@@ -799,7 +811,8 @@ let g:netrw_sort_options = 'i'
 " Plugin: roxma/vim-paste-easy [[[2
 let g:paste_easy_message=0
 " Plugin: justinmk/vim-dirvish [[[2
-nnoremap <f1> :vsplit +Dirvish<cr><c-w>H<c-w>35<bar>
+nnoremap <silent><leader>ft :vsplit +Dirvish<cr><c-w>H<c-w>35<bar>
+nnoremap <silent><leader>fT :vsplit <cr>:Dirvish %<cr><c-w>H<c-w>35<bar>
 augroup my_dirvish_events
   autocmd!
   " Map t to "open in new tab".
@@ -827,4 +840,3 @@ augroup my_dirvish_events
 augroup END
 " end [[[1
 " vim:fdm=marker:fmr=[[[,]]]
-
