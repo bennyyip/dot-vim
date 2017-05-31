@@ -13,6 +13,7 @@ if s:is_nvim
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'zchee/deoplete-jedi'
   Plug 'rust-lang/rust.vim'
+  Plug 'metakirby5/codi.vim'
 else
   Plug 'maralla/completor-neosnippet'
   Plug 'maralla/completor.vim'
@@ -35,11 +36,10 @@ Plug 'itchyny/vim-cursorword'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'roxma/vim-paste-easy'
+" Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
-Plug 'metakirby5/codi.vim'
 " Lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
