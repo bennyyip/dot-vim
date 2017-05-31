@@ -39,6 +39,7 @@ Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
+Plug 'metakirby5/codi.vim'
 " Lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
@@ -637,13 +638,9 @@ endif
 " Plugin: maralla/completor.vim [[[2
 inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
 inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-if !s:is_nvim
-  let g:completor_gocode_binary = '/home/ben/go/bin/gocode'
-  let g:completor_clang_binary = '/usr/bin/clang'
-  let g:completor_python_binary = '/usr/bin/python'
-  let g:completor_racer_binary = '/usr/bin/racer'
-endif
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 " Plugin: Shougo/deoplete.nvim [[[2
 if s:is_nvim
   let g:deoplete#enable_at_startup = 1
@@ -830,3 +827,4 @@ augroup my_dirvish_events
 augroup END
 " end [[[1
 " vim:fdm=marker:fmr=[[[,]]]
+
