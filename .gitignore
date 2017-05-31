@@ -1,7 +1,13 @@
-/bundle/
-/config/local.vim
-/files
-/binary/
 .netrwhist
 /autoload/plug.vim*
+/binary/
+/bundle/
+/config/local.vim
+/files/backup/*
+/files/info/*
+/files/swap/*
+/files/undo/*
+!/files/backup/.gitkeep
+!/files/info/.gitkeep
 !/files/swap/.gitkeep
+!/files/undo/.gitkeep

@@ -256,13 +256,6 @@ else
   set directory   =$v/files/swap/
   set undodir     =$v/files/undo/
   set viminfo     ='100,n$v/files/info/viminfo
-  if exists('*mkdir') && !isdirectory($v.'/files')
-    call mkdir($v.'/files')
-    call mkdir($v.'/files/swap')
-    call mkdir($v.'/files/info')
-    call mkdir($v.'/files/undo')
-    call mkdir($v.'/files/backup')
-  endif
 endif
 " apperance [[[2
 " Plugin: itchyny/lightline.vim [[[3
