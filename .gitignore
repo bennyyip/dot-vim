@@ -4,3 +4,4 @@
 /binary/
 .netrwhist
 /autoload/plug.vim*
+!/files/swap/.gitkeep
