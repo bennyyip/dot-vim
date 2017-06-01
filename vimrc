@@ -1,12 +1,12 @@
 let s:is_win = has('win32')
 let s:is_nvim = has('nvim')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
-" plugin List [[[1
-call plug#begin('$v/bundle') " vim-plug 初始化
-let g:plug_shallow = 0
+" Plug [[[1
+" plug#begin [[[2
+call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
-
+" misc [[[2
 if s:is_nvim
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/echodoc.vim'
@@ -25,11 +25,11 @@ else
   Plug 'benmills/vimux'
   Plug 'wellle/tmux-complete.vim'
 endif
+
 Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Jagua/vim-denite-ghq'
 Plug 'KabbAmine/vCoolor.vim'
-" Plug 'cohama/lexima.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
@@ -40,7 +40,7 @@ Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
-" Lang [[[2
+" lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 Plug 'PProvost/vim-ps1'
@@ -63,7 +63,7 @@ Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'tikhomirov/vim-glsl'
 Plug 'rhysd/vim-clang-format'
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
-" Look [[[2
+" look [[[2
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
@@ -94,11 +94,13 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 call plug#end()
-" ben [[[2
+" bennnyyip [[[2
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
 Plug 'bennyyip/denite-github-stars'
-" set [[[1
+" plug#end [[[2
+call plug#end()
+" Setting [[[1
 " general settings [[[2
 " init [[[3
 let mapleader = "\<Space>"
@@ -156,7 +158,15 @@ set fenc=utf-8
 set fencs=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
 set enc=utf-8
 
-if has('multi_byte') && &encoding ==# 'utf-8'
+if s:is_win
+  let &listchars = 'tab:▸ ,extends:>,precedes:<,nbsp:.'
+  let &showbreak = '-> '
+  highlight VertSplit ctermfg=242
+  augroup vimrc
+    autocmd InsertEnter * set listchars-=trail:⣿
+    autocmd InsertLeave * set listchars+=trail:⣿
+  augroup END
+elseif has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
   let &fillchars = 'diff: '  " ▚
   let &showbreak = '↪ '
@@ -370,71 +380,54 @@ set tabline=%!ben#Vim_NeatTabLine()
 if s:is_win
   set pythonthreedll=python36.dll
 endif
-" map[[[1
+" Key Mapping [[[1
+" misc [[[2
+" begins with t [[[3
+nmap t= mxHmygg=G`yzt`x
+nmap tj Jx
+nmap tp "+P
+nnoremap tl ^vg_
+nmap T :tabnew<cr>
+" file text object [[[3
 nmap dae ggdG
 nmap cae ggcG
 nmap vae ggvG
 nmap yae mxHmyggyG`yzt`x
-nmap t= mxHmygg=G`yzt`x
-nmap <silent> <M-u> :nohls<CR>
-nmap tj Jx
-nmap <silent> to :call append('.', '')<CR>j
-nmap <silent> tO :call append(line('.')-1, '')<CR>k
-nmap tp "+P
-nmap T :tabnew<cr>
-nnoremap tl ^vg_
+" quick <C-w> [[[3
 nnoremap ' <C-w>
-
-nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
-nmap Y y$
+" less style nohl [[[3
+nmap <silent> <M-u> :nohls<CR>
+" run external command [[[3
 nmap :; :AsyncRun<space>
 nmap :: :!<space>
-" qq to record, Q to replay
-nnoremap Q @q
-" unix2dos
-nmap d<CR> :%s/\r//ge<CR>
-
+nmap <silent> <leader>u; :Denite -no-statusline command_history<CR>
+" edit [[[3
 inoremap <silent> <C-BS> <C-w>
+inoremap {<CR> {<CR>}<ESC>O
+" yank [[[3
 inoremap <silent> <C-v> <C-r>+
-" Quickfix
+xnoremap <silent> <C-c> "+y
+nmap Y y$
+nmap <silent> <leader>uy :Denite -no-statusline neoyank<CR>
+" reload vimrc [[[3
+nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
+nnoremap <leader>vr :so $MYVIMRC<CR>
+" Quickfix [[[3
 nnoremap <leader>oe :copen<CR>
-" 防止水平滑动的时候失去选择
+" keep selection when indent line in visual mode [[[3
 xnoremap <  <gv
 xnoremap >  >gv
+" script helper [[[3
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
-
-ino {<CR> {<CR>}<ESC>O
-
-" quick buffer open
-nnoremap gb :ls<cr>:e #
-
-nnoremap <leader>vr :so $MYVIMRC<CR>
-nnoremap <silent> <leader><tab> :<C-u>b#<CR>
-" resolve vcs conflict (depends on tpope/vim-unimpaired)
+" resolve vcs conflict (depends on tpope/vim-unimpaired) [[[3
 map <leader>dg1 ]nd]n[ndd[ndd
 map <leader>dg2 d]ndd]ndd
-" 中文字數統計 "全部字符統計：g<C-g>
+" count Chinese char [[[3
 nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
-nnoremap <leader>oy :Dic<CR>
-" file [[[2
-nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
-nnoremap <leader>fs :w<CR>
-nnoremap <leader>fq :x<CR>
-nnoremap <leader>w :w<CR>
-cmap w!! w !sudo tee % >/dev/null
-nnoremap <leader>fn :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-" fold [[[2
-nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-vnoremap <silent><space><space> zf
-nmap z] zo]z
-nmap z[ zo[z
-"  Windows [[[3
-nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
-nnoremap <leader>ps :!start powershell<CR>
-" quick edit macro [[[2
-" ["register]<leader>m
+"count all char：g<C-g>
+" quick edit macro  | ["register]<leader>m [[[3
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+nnoremap Q @q
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
@@ -443,15 +436,23 @@ command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
 let g:sayonara_confirm_quit = 0
-" move [[[2
-nmap <M-j> gj
-nmap <M-k> gk
-vmap <M-j> gj
-nmap <M-k> gk
-inoremap <M-j> <Down>
-inoremap <M-k> <Up>
-inoremap <M-h> <left>
-inoremap <M-l> <Right>
+" file [[[2
+nnoremap <leader>fs :w<CR>
+nnoremap <leader>fq :x<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
+nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "buffer folder path copied"<CR>
+nmap <silent> <leader>fF :Denite -no-statusline file<CR>
+nmap <silent> <leader>ff :Denite -no-statusline file_rec<CR>
+nmap <silent> <leader>FF :call <SID>denite_file_with_path()<CR>
+nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
+nmap <silent> <leader>fr :Denite file_mru<CR>
+nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
+cmap w!! w !sudo tee % >/dev/null
+" buffer [[[2
+nnoremap <silent> <leader><tab> :<C-u>b#<CR>
+nnoremap gb :ls<cr>:e #
+nmap <silent> <leader>ub :Denite -no-statusline buffer<CR>
 " tab [[[2
 noremap <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
@@ -475,7 +476,24 @@ inoremap <silent><M-7> <ESC>:tabn 7<cr>
 inoremap <silent><M-8> <ESC>:tabn 8<cr>
 inoremap <silent><M-9> <ESC>:tabn 9<cr>
 inoremap <silent><M-0> <ESC>:tabn 10<cr>
-" functions and commands [[[1
+" fold [[[2
+nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+vnoremap <silent><space><space> zf
+nmap z] zo]z
+nmap z[ zo[z
+"  Windows [[[3
+nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
+nnoremap <leader>ps :!start powershell<CR>
+" move [[[2
+nmap <M-j> gj
+nmap <M-k> gk
+vmap <M-j> gj
+nmap <M-k> gk
+inoremap <M-j> <Down>
+inoremap <M-k> <Up>
+inoremap <M-h> <left>
+inoremap <M-l> <Right>
+" Function and Command [[[1
 " :Root | Change directory to the root of the Git repository [[[2
 function! s:root()
   let root = systemlist('git rev-parse --show-toplevel')[0]
@@ -547,7 +565,9 @@ command! EX if !empty(expand('%'))
         \|   echo 'Save the file first'
         \|   echohl None
         \| endif
-" autocmd [[[1
+" Generate .clang_complete base on makefile
+command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
+" Autocmd [[[1
 " go back to where you exited [[[2
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -559,7 +579,7 @@ au BufWritePre * TrimSpaces
 au FileAppendPre * TrimSpaces
 au FileWritePre * TrimSpaces
 au FilterWritePre * TrimSpaces
-" plugin config [[[1
+" Plugin Config [[[1
 " Plugin: Shougo/denite.nvim [[[2
 let s:denite_options = {
       \ 'default' : {
@@ -621,42 +641,12 @@ endfunction
 " Key mapping(u for unite, predecessor of denite)
 nmap <silent> <leader>u+ :Denite -resume -immediately  -select=+1<CR>
 nmap <silent> <leader>u- :Denite -resume -immediately  -select=-1<CR>
-nmap <silent> <leader>uR :Denite -resume<CR>
-nmap <silent> <leader>ub :Denite -no-statusline buffer<CR>
+nmap <silent> <leader>ur :Denite -resume<CR>
 nmap <silent> <leader>ug :Denite -no-statusline grep<CR>
 nmap <silent> <leader>uw :DeniteCursorWord -no-statusline grep<CR><CR>
 nmap <silent> <leader>uj :Denite -no-statusline line<CR>
 nmap <silent> <leader>ut :Denite -no-statusline filetype<CR>
-nmap <silent> <leader>uy :Denite -no-statusline neoyank<CR>
-nmap <silent> <leader>u; :Denite -no-statusline command_history<CR>
-nmap <silent> <leader>ur :Denite -no-statusline register<CR>
-nmap <silent> <leader>fF :Denite -no-statusline file<CR>
-nmap <silent> <leader>ff :Denite -no-statusline file_rec<CR>
-nmap <silent> <leader>FF :call <SID>denite_file_with_path()<CR>
-nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
-nmap <silent> <leader>fr :Denite file_mru<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
-" Plugin: Yggdroot/indentLine [[[2
-"let g:indentLine_noConcealCursor=""
-" Plugin: LanguageClient [[[2
-if s:is_nvim
-  let g:LanguageClient_serverCommands = {
-        \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-        \ }
-  " Automatically start language servers.
-  let g:LanguageClient_autoStart = 1
-endif
-" Plugin: maralla/completor.vim [[[2
-inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
-inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-" Plugin: Shougo/deoplete.nvim [[[2
-if s:is_nvim
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
-endif
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>  <Plug>(neosnippet_expand_or_jump)
@@ -712,14 +702,11 @@ let g:tagbar_type_nc = {
 
 let g:tagbar_width = 30
 nmap tb :TagbarToggle<cr>
-
 " Plugin: junegunn/goyo.vim [[[2
 nnoremap <silent> <leader>z :Goyo<cr>
 "autocmd! User GoyoEnter Limelight
 "autocmd! User GoyoLeave Limelight!
 " Plugin: mhinz/vim-startify [[[2
-
-
 let g:ascii = [
       \"             ________ ++     ________             ",
       \"            /VVVVVVVV\++++  /VVVVVVVV\\           ",
@@ -775,14 +762,6 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
 "slow
 let g:cpp_experimental_template_highlight = 1
-
-command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
-" Plugin: luochen1990/rainbow [[[2
-let g:rainbow_active=1
-let g:rainbow_conf = {
-      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
-      \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-      \}
 " Plugin: benmills/vimux [[[2
 if !s:is_win
   "let g:VimuxOrientation = "h"
@@ -807,8 +786,6 @@ let g:netrw_bufsettings  = 'relativenumber'
 let g:netrw_keepdir      = 0
 let g:netrw_liststyle    = 1
 let g:netrw_sort_options = 'i'
-" Plugin: roxma/vim-paste-easy [[[2
-let g:paste_easy_message=0
 " Plugin: justinmk/vim-dirvish [[[2
 nnoremap <silent><leader>ft :vsplit +Dirvish<cr><c-w>H<c-w>35<bar>
 nnoremap <silent><leader>fT :vsplit <cr>:Dirvish %<cr><c-w>H<c-w>35<bar>
@@ -837,5 +814,31 @@ augroup my_dirvish_events
   " double "space" to preview
   autocmd FileType dirvish nmap <silent><buffer> <space><space> p<C-w>p
 augroup END
-" end [[[1
+" Plugin: vimers/vim-youdao [[[2
+nnoremap <leader>oy :Dic<CR>
+" Plugin: roxma/vim-paste-easy [[[2
+let g:paste_easy_message=0
+" Plugin: luochen1990/rainbow [[[2
+let g:rainbow_active=1
+let g:rainbow_conf = {
+      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
+      \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \}
+" Plugin: maralla/completor.vim [[[2
+inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
+inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
+" Plugin: LanguageClient [[[2
+if s:is_nvim
+  let g:LanguageClient_serverCommands = {
+        \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+        \ }
+  " Automatically start language servers.
+  let g:LanguageClient_autoStart = 1
+endif
+" Plugin: Shougo/deoplete.nvim [[[2
+if s:is_nvim
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_smart_case = 1
+endif
+" Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
