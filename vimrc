@@ -403,7 +403,7 @@ nmap :: :!<space>
 nmap <silent> <leader>u; :Denite -no-statusline command_history<CR>
 " edit [[[3
 inoremap <silent> <C-BS> <C-w>
-inoremap {<CR> {<CR>}<ESC>O
+inoremap {<CR> {}<left><CR><ESC>O
 " yank [[[3
 inoremap <silent> <C-v> <C-r>+
 xnoremap <silent> <C-c> "+y
