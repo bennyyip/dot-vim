@@ -40,6 +40,8 @@ Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
+Plug 'vim-scripts/Mark'
+Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
@@ -426,7 +428,7 @@ map <leader>dg2 d]ndd]ndd
 nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
 "count all char：g<C-g>
 " quick edit macro  | ["register]<leader>m [[[3
-nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
@@ -840,5 +842,7 @@ if s:is_nvim
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_smart_case = 1
 endif
+" Plugin: marksbrowser [[[2
+nmap <silent><leader>um :MarksBrowser<CR><CR>
 " Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
