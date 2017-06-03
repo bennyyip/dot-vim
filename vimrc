@@ -33,7 +33,7 @@ Plug 'KabbAmine/vCoolor.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
-Plug 'lilydjwg/fcitx.vim'
+Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'roxma/vim-paste-easy'
@@ -44,6 +44,7 @@ Plug 'vim-scripts/Mark'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'bennyyip/vim-yapf', { 'for': 'python' }
 
 Plug 'PProvost/vim-ps1'
 Plug 'ekalinin/Dockerfile.vim'
@@ -63,7 +64,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'tikhomirov/vim-glsl'
-Plug 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
 " look [[[2
 Plug 'itchyny/lightline.vim'
@@ -843,6 +844,6 @@ if s:is_nvim
   let g:deoplete#enable_smart_case = 1
 endif
 " Plugin: marksbrowser [[[2
-nmap <silent><leader>um :MarksBrowser<CR><CR>
+nmap <silent><leader>um :MarksBrowser<CR><esc>
 " Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
