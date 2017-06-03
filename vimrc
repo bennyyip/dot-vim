@@ -42,6 +42,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
 Plug 'vim-scripts/Mark'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
+Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-sneak'
+Plug 'vim-voom/VOoM', { 'on': 'Voom' }
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'bennyyip/vim-yapf', { 'for': 'python' }
@@ -88,14 +91,17 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neoyank.vim'
+if s:is_win
+  Plug 'Shougo/vimproc.vim'
+else
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+endif
 " junegunn [[[2
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 Plug 'junegunn/vim-peekaboo'
-Plug 'justinmk/vim-dirvish'
-Plug 'justinmk/vim-sneak'
 call plug#end()
 " bennnyyip [[[2
 " https://github.com/universal-ctags/ctags
@@ -401,8 +407,8 @@ nnoremap ' <C-w>
 " less style nohl [[[3
 nmap <silent> <M-u> :nohls<CR>
 " run external command [[[3
-nmap :; :AsyncRun<space>
-nmap :: :!<space>
+nmap <leader>; :AsyncRun<space>
+nmap <leader>: :VimProcBang<space>
 nmap <silent> <leader>u; :Denite -no-statusline command_history<CR>
 " edit [[[3
 inoremap <silent> <C-BS> <C-w>
@@ -426,11 +432,13 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 map <leader>dg1 ]nd]n[ndd[ndd
 map <leader>dg2 d]ndd]ndd
 " count Chinese char [[[3
-nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
+" nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
 "count all char：g<C-g>
 " quick edit macro  | ["register]<leader>m [[[3
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
+" quick substitute [[[2
+vmap qq "zy:%s`<C-R>z``g<left><left>
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
@@ -830,6 +838,16 @@ let g:rainbow_conf = {
 " Plugin: maralla/completor.vim [[[2
 inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
 inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
+let g:completor_tex_omni_trigger = '\\\\(:?'
+        \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+        \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+        \ . '|hyperref\s*\[[^]]*'
+        \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+        \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+        \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+        \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+        \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+\ .')$'
 " Plugin: LanguageClient [[[2
 if s:is_nvim
   let g:LanguageClient_serverCommands = {
