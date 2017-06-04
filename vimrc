@@ -144,30 +144,30 @@ if !s:is_nvim
 endif
 " indent settings [[[3
 set autoindent
-set cinoptions    =>2,l1,p0,)50,*50,t0
+set cinoptions  => 2,l1,p0,)50,*50,t0
 set expandtab
 set smarttab
-set softtabstop   =2
-set shiftwidth    =2
+set softtabstop  = 2
+set shiftwidth   = 2
 set shiftround
-set tabstop=2
+set tabstop      = 2
 " display settings [[[3
-set display       =lastline
-set laststatus    =2
+set display     = lastline
+set laststatus  = 2
 set list
 set modeline
-set modelines     =1
+set modelines   = 1
 set nostartofline
-set numberwidth   =1
-set shortmess     =aoOTI
+set numberwidth = 1
+set shortmess   = aoOTI
 set showcmd
 set showmatch
-set matchtime=0
+set matchtime   = 0
 set showmode
 
-set fenc=utf-8
-set fencs=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
-set enc=utf-8
+set fenc  = utf-8
+set fencs = utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set enc   = utf-8
 
 if s:is_win
   let &listchars = 'tab:▸ ,extends:>,precedes:<,nbsp:.'
