@@ -35,7 +35,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
-Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
+" Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'roxma/vim-paste-easy'
