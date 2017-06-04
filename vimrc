@@ -18,6 +18,7 @@ else
   Plug 'maralla/completor-neosnippet'
   Plug 'maralla/completor.vim'
   Plug 'racer-rust/vim-racer', {'for': 'rust'}
+  let g:racer_experimental_completer = 1
 endif
 if s:is_win
   Plug 'rust-lang/rust.vim'
@@ -55,7 +56,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'lervag/vimtex', {'for': 'tex'}
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+" Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'hdima/python-syntax', { 'for': 'python'}
 
 Plug 'lilydjwg/colorizer'
@@ -113,6 +114,7 @@ call plug#end()
 " general settings [[[2
 " init [[[3
 let mapleader = "\<Space>"
+let localleader = "\\"
 let g:vimsyn_folding = 'f'
 let g:is_bash        = 1
 let g:lisp_rainbow   = 1
@@ -439,6 +441,10 @@ nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(
 nnoremap Q @q
 " quick substitute [[[2
 vmap qq "zy:%s`<C-R>z``g<left><left>
+" get output from python [[[2
+imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
+
+
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
@@ -839,15 +845,15 @@ let g:rainbow_conf = {
 inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
 inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
 let g:completor_tex_omni_trigger = '\\\\(:?'
-        \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-        \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-        \ . '|hyperref\s*\[[^]]*'
-        \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-        \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-        \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-        \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-        \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-\ .')$'
+      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ .')$'
 " Plugin: LanguageClient [[[2
 if s:is_nvim
   let g:LanguageClient_serverCommands = {
@@ -863,5 +869,7 @@ if s:is_nvim
 endif
 " Plugin: marksbrowser [[[2
 nmap <silent><leader>um :MarksBrowser<CR><esc>
+" Plugin: w0rp/ale [[[2
+let g:ale_tex_lacheck_executable="shutup" "shutup is a program that do nothing, mute lacheck
 " Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
