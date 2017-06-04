@@ -874,7 +874,13 @@ endif
 nmap <silent><leader>um :MarksBrowser<CR><esc>
 " Plugin: w0rp/ale [[[2
 let g:ale_tex_lacheck_executable="shutup" "shutup is a program that do nothing, mute lacheck
-" Plugin: vim-easy-align {{{2
+" Plugin: vim-easy-align [[[2
 xmap <cr> <plug>(LiveEasyAlign)
+" Plugin justinmk/vim-sneak [[[2
+let g:sneak#label = 1
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 " Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
