@@ -32,6 +32,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Jagua/vim-denite-ghq'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
 Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
@@ -144,30 +145,30 @@ if !s:is_nvim
 endif
 " indent settings [[[3
 set autoindent
-set cinoptions  => 2,l1,p0,)50,*50,t0
+set cinoptions    =>2,l1,p0,)50,*50,t0
 set expandtab
 set smarttab
-set softtabstop  = 2
-set shiftwidth   = 2
+set softtabstop   =2
+set shiftwidth    =2
 set shiftround
-set tabstop      = 2
+set tabstop       =2
 " display settings [[[3
-set display     = lastline
-set laststatus  = 2
+set display       =lastline
+set laststatus    =2
 set list
 set modeline
-set modelines   = 1
+set modelines     =1
 set nostartofline
-set numberwidth = 1
-set shortmess   = aoOTI
+set numberwidth   =1
+set shortmess     =aoOTI
 set showcmd
 set showmatch
-set matchtime   = 0
+set matchtime     =0
 set showmode
 
-set fenc  = utf-8
-set fencs = utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
-set enc   = utf-8
+set fenc  =utf-8
+set fencs =utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set enc   =utf-8
 
 if s:is_win
   let &listchars = 'tab:▸ ,extends:>,precedes:<,nbsp:.'
@@ -260,9 +261,14 @@ set titlestring =VIM:\ %f
 set switchbuf=useopen,usetab,newtab
 set ttyfast
 set lazyredraw
+
 "LF
 set fileformat=unix
 set fileformats=unix,dos
+
+" this makes sure that shell scripts are highlighted
+" as bash scripts and not sh scripts
+let g:is_posix = 1
 " backup/swap/info/undo settings [[[3
 set backup
 set backupskip   =
@@ -500,8 +506,6 @@ nmap z[ zo[z
 nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
 nnoremap <leader>ps         :!start powershell<CR>
 " move [[[2
-nnoremap <M-j> gj
-nnoremap <M-k> gk
 vnoremap <M-j> gj
 nnoremap <M-k> gk
 inoremap <M-j> <Down>
@@ -590,9 +594,9 @@ autocmd BufReadPost *
       \ endif
 " auto trim spaces [[[2
 "au * ShowSpaces
-au BufWritePre    * TrimSpaces
-au FileAppendPre  * TrimSpaces
-au FileWritePre   * TrimSpaces
+au BufWritePre * TrimSpaces
+au FileAppendPre * TrimSpaces
+au FileWritePre * TrimSpaces
 au FilterWritePre * TrimSpaces
 " Plugin Config [[[1
 " Plugin: Shougo/denite.nvim [[[2
@@ -664,9 +668,9 @@ nmap <silent> <leader>ut :Denite -no-statusline filetype<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+imap <C-k>  <Plug>(neosnippet_expand_or_jump)
+smap <C-k>  <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>  <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -682,15 +686,16 @@ let g:neosnippet#disable_runtime_snippets = {
       \ }
 let g:neosnippet#snippets_directory = '$v/snippets'
 " Plugin: haya13busa/incsearch.vim [[[2
+let g:incsearch#auto_nohlsearch = 1
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+map n  <Plug>(incsearch-nohl-n)zzzv
+map N  <Plug>(incsearch-nohl-N)zzzv
+map *  <Plug>(incsearch-nohl)<Plug>(asterisk-z*)zzzv
+map g* <Plug>(incsearch-nohl)<Plug>(asterisk-gz*)zzzv
+map #  <Plug>(incsearch-nohl)<Plug>(asterisk-z#)zzzv
+map g# <Plug>(incsearch-nohl)<Plug>(asterisk-gz#)zzzv
 " Plugin: majutsushi/tagbar [[[2
 let g:tagbar_type_tex = {
       \ 'ctagstype' : 'latex',
@@ -836,7 +841,7 @@ let g:paste_easy_message=0
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
-      \ 'guifgs':   ['#458588', '#d79921', '#d3869b', '#fb4934'],
+      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
       \}
 " Plugin: maralla/completor.vim [[[2
