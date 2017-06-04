@@ -760,16 +760,23 @@ let g:startify_bookmarks = [
 let g:startify_transformations = [
       \ ['.*vimrc$', 'vimrc'],
       \ ]
+let g:startify_list_order = [
+      \ ['   MRU:'],
+      \ 'files',
+      \ ['   Sessions:'],
+      \ 'sessions',
+      \ ]
 nnoremap <leader>st :Startify<cr>
 let g:startify_change_to_dir          = 0
-let g:startify_change_to_vcs_root     = 0
+let g:startify_change_to_vcs_root     = 1
 let g:startify_enable_special         = 0
-let g:startify_files_number           = 8
-let g:startify_fortune_use_unicode    = 1
+let g:startify_files_number           = 7
+let g:startify_session_dir = $v.'/files/session'
 let g:startify_session_autoload       = 0
 let g:startify_session_persistence    = 0
 let g:startify_update_oldfiles        = 1
 let g:startify_use_env                = 1
+highlight StartifyHeader guifg='#fabd2f' ctermfg=214
 " Plugin: junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
@@ -881,6 +888,6 @@ let g:sneak#label = 1
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
-map T <Plug>Sneak_T
+" map T <Plug>Sneak_T
 " Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
