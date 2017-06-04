@@ -7,7 +7,9 @@
 /files/info/*
 /files/swap/*
 /files/undo/*
+/files/session/*
 !/files/backup/.gitkeep
 !/files/info/.gitkeep
 !/files/swap/.gitkeep
 !/files/undo/.gitkeep
+!/files/session/.gitkeep
