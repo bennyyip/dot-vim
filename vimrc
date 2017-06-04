@@ -113,8 +113,8 @@ call plug#end()
 " Setting [[[1
 " general settings [[[2
 " init [[[3
-let mapleader = "\<Space>"
-let localleader = "\\"
+let mapleader        = "\<Space>"
+let localleader      = "\\"
 let g:vimsyn_folding = 'f'
 let g:is_bash        = 1
 let g:lisp_rainbow   = 1
@@ -130,7 +130,7 @@ let g:loaded_rrhelper         = 1
 let g:loaded_spellfile_plugin = 1
 let g:loaded_tarPlugin        = 1
 let g:loaded_vimballPlugin    = 1
-let g:loaded_zipPlugin = 1
+let g:loaded_zipPlugin        = 1
 
 if !s:is_nvim
   set nocompatible
@@ -285,25 +285,25 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
+      \   'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'asyncrun', 'fileformat', 'fileencoding', 'filetype'] ]
       \ },
       \ 'component_function': {
-      \   'modified': 'LightlineModified',
-      \   'readonly': 'LightlineReadonly',
-      \   'fugitive': 'LightlineFugitive',
-      \   'filename': 'LightlineFilename',
-      \   'fileformat': 'LightlineFileformat',
-      \   'filetype': 'LightlineFiletype',
+      \   'modified':     'LightlineModified',
+      \   'readonly':     'LightlineReadonly',
+      \   'fugitive':     'LightlineFugitive',
+      \   'filename':     'LightlineFilename',
+      \   'fileformat':   'LightlineFileformat',
+      \   'filetype':     'LightlineFiletype',
       \   'fileencoding': 'LightlineFileencoding',
-      \   'mode': 'LightlineMode',
+      \   'mode':         'LightlineMode',
       \ },
       \ 'component' : {
       \   'asyncrun': '%{g:asyncrun_status}'
       \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'separator':    { 'left': "\ue0b0", 'right': "\ue0b2" },
       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
       \ }
 function! LightlineModified() "[[[4
@@ -394,11 +394,11 @@ endif
 " Key Mapping [[[1
 " misc [[[2
 " begins with t [[[3
-nmap t= mxHmygg=G`yzt`x
-nmap tj Jx
-nmap tp "+P
+nmap     t= mxHmygg=G`yzt`x
+nmap     tj Jx
+nmap     tp "+P
 nnoremap tl ^vg_
-nmap T :tabnew<cr>
+nmap     T :tabnew<cr>
 " file text object [[[3
 nmap dae ggdG
 nmap cae ggcG
@@ -411,18 +411,18 @@ nmap <silent> <M-u> :nohls<CR>
 " run external command [[[3
 nmap <leader>; :AsyncRun<space>
 nmap <leader>: :VimProcBang<space>
-nmap <silent> <leader>u; :Denite -no-statusline command_history<CR>
+nmap <silent>  <leader>u; :Denite -no-statusline command_history<CR>
 " edit [[[3
-inoremap <silent> <C-BS> <C-w>
-inoremap {<CR> {}<left><CR><ESC>O
+inoremap <silent><C-BS> <C-w>
+inoremap {<CR>          {}<left><CR><ESC>O
 " yank [[[3
-inoremap <silent> <C-v> <C-r>+
-xnoremap <silent> <C-c> "+y
-nmap Y y$
-nmap <silent> <leader>uy :Denite -no-statusline neoyank<CR>
+inoremap <silent><C-v>      <C-r>+
+xnoremap <silent><C-c>      "+y
+nmap     Y                  y$
+nmap     <silent><leader>uy :Denite -no-statusline neoyank<CR>
 " reload vimrc [[[3
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
-nnoremap <leader>vr :so $MYVIMRC<CR>
+nnoremap <leader>vr  :so $MYVIMRC<CR>
 " Quickfix [[[3
 nnoremap <leader>oe :copen<CR>
 " keep selection when indent line in visual mode [[[3
@@ -443,8 +443,6 @@ nnoremap Q @q
 vmap qq "zy:%s`<C-R>z``g<left><left>
 " get output from python [[[2
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
-
-
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
@@ -454,45 +452,45 @@ command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
 let g:sayonara_confirm_quit = 0
 " file [[[2
-nnoremap <leader>fs :w<CR>
+nnoremap <leader>fs :w<CR>"[[[
 nnoremap <leader>fq :x<CR>
-nnoremap <leader>w :w<CR>
+nnoremap <leader>w  :w<CR>
 nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "buffer folder path copied"<CR>
-nmap <silent> <leader>fF :Denite -no-statusline file<CR>
-nmap <silent> <leader>ff :Denite -no-statusline file_rec<CR>
-nmap <silent> <leader>FF :call <SID>denite_file_with_path()<CR>
-nmap <silent> <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
-nmap <silent> <leader>fr :Denite file_mru<CR>
-nmap cd :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
-cmap w!! w !sudo tee % >/dev/null
+nmap     <silent>   <leader>fF :Denite -no-statusline file<CR>
+nmap     <silent>   <leader>ff :Denite -no-statusline file_rec<CR>
+nmap     <silent>   <leader>FF :call <SID>denite_file_with_path()<CR>
+nmap     <silent>   <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
+nmap     <silent>   <leader>fr :Denite file_mru<CR>
+nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
+cmap     w!!        w !sudo tee % >/dev/null"]]]
 " buffer [[[2
-nnoremap <silent> <leader><tab> :<C-u>b#<CR>
-nnoremap gb :ls<cr>:e #
-nmap <silent> <leader>ub :Denite -no-statusline buffer<CR>
+nnoremap <silent><leader><tab> :<C-u>b#<CR>
+nmap     <silent><leader>ub    :Denite -no-statusline buffer<CR>
+nnoremap gb                    :ls<cr>:e #
 " tab [[[2
-noremap <silent><C-tab> :tabprev<CR>
+noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
-noremap <silent><M-1> :tabn 1<cr>
-noremap <silent><M-2> :tabn 2<cr>
-noremap <silent><M-3> :tabn 3<cr>
-noremap <silent><M-4> :tabn 4<cr>
-noremap <silent><M-5> :tabn 5<cr>
-noremap <silent><M-6> :tabn 6<cr>
-noremap <silent><M-7> :tabn 7<cr>
-noremap <silent><M-8> :tabn 8<cr>
-noremap <silent><M-9> :tabn 9<cr>
-noremap <silent><M-0> :tabn 10<cr>
-inoremap <silent><M-1> <ESC>:tabn 1<cr>
-inoremap <silent><M-2> <ESC>:tabn 2<cr>
-inoremap <silent><M-3> <ESC>:tabn 3<cr>
-inoremap <silent><M-4> <ESC>:tabn 4<cr>
-inoremap <silent><M-5> <ESC>:tabn 5<cr>
-inoremap <silent><M-6> <ESC>:tabn 6<cr>
-inoremap <silent><M-7> <ESC>:tabn 7<cr>
-inoremap <silent><M-8> <ESC>:tabn 8<cr>
-inoremap <silent><M-9> <ESC>:tabn 9<cr>
-inoremap <silent><M-0> <ESC>:tabn 10<cr>
+noremap  <silent><M-1>   :tabn 1<cr>
+noremap  <silent><M-2>   :tabn 2<cr>
+noremap  <silent><M-3>   :tabn 3<cr>
+noremap  <silent><M-4>   :tabn 4<cr>
+noremap  <silent><M-5>   :tabn 5<cr>
+noremap  <silent><M-6>   :tabn 6<cr>
+noremap  <silent><M-7>   :tabn 7<cr>
+noremap  <silent><M-8>   :tabn 8<cr>
+noremap  <silent><M-9>   :tabn 9<cr>
+noremap  <silent><M-0>   :tabn 10<cr>
+inoremap <silent><M-1>   <ESC>:tabn 1<cr>
+inoremap <silent><M-2>   <ESC>:tabn 2<cr>
+inoremap <silent><M-3>   <ESC>:tabn 3<cr>
+inoremap <silent><M-4>   <ESC>:tabn 4<cr>
+inoremap <silent><M-5>   <ESC>:tabn 5<cr>
+inoremap <silent><M-6>   <ESC>:tabn 6<cr>
+inoremap <silent><M-7>   <ESC>:tabn 7<cr>
+inoremap <silent><M-8>   <ESC>:tabn 8<cr>
+inoremap <silent><M-9>   <ESC>:tabn 9<cr>
+inoremap <silent><M-0>   <ESC>:tabn 10<cr>
 " fold [[[2
 nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <silent><space><space> zf
@@ -500,12 +498,12 @@ nmap z] zo]z
 nmap z[ zo[z
 "  Windows [[[3
 nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
-nnoremap <leader>ps :!start powershell<CR>
+nnoremap <leader>ps         :!start powershell<CR>
 " move [[[2
-nmap <M-j> gj
-nmap <M-k> gk
-vmap <M-j> gj
-nmap <M-k> gk
+nnoremap <M-j> gj
+nnoremap <M-k> gk
+vnoremap <M-j> gj
+nnoremap <M-k> gk
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
@@ -592,9 +590,9 @@ autocmd BufReadPost *
       \ endif
 " auto trim spaces [[[2
 "au * ShowSpaces
-au BufWritePre * TrimSpaces
-au FileAppendPre * TrimSpaces
-au FileWritePre * TrimSpaces
+au BufWritePre    * TrimSpaces
+au FileAppendPre  * TrimSpaces
+au FileWritePre   * TrimSpaces
 au FilterWritePre * TrimSpaces
 " Plugin Config [[[1
 " Plugin: Shougo/denite.nvim [[[2
@@ -666,9 +664,9 @@ nmap <silent> <leader>ut :Denite -no-statusline filetype<CR>
 nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>  <Plug>(neosnippet_expand_or_jump)
-smap <C-k>  <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>  <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -838,7 +836,7 @@ let g:paste_easy_message=0
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
-      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
+      \ 'guifgs':   ['#458588', '#d79921', '#d3869b', '#fb4934'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
       \}
 " Plugin: maralla/completor.vim [[[2
@@ -871,5 +869,7 @@ endif
 nmap <silent><leader>um :MarksBrowser<CR><esc>
 " Plugin: w0rp/ale [[[2
 let g:ale_tex_lacheck_executable="shutup" "shutup is a program that do nothing, mute lacheck
+" Plugin: vim-easy-align {{{2
+xmap <cr> <plug>(LiveEasyAlign)
 " Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
