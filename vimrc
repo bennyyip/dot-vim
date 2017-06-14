@@ -458,7 +458,7 @@ command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
 let g:sayonara_confirm_quit = 0
 " file [[[2
-nnoremap <leader>fs :w<CR>"[[[
+nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>w  :w<CR>
 nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
@@ -469,7 +469,7 @@ nmap     <silent>   <leader>FF :call <SID>denite_file_with_path()<CR>
 nmap     <silent>   <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
 nmap     <silent>   <leader>fr :Denite file_mru<CR>
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
-cmap     w!!        w !sudo tee % >/dev/null"]]]
+cmap     w!!        w !sudo tee % >/dev/null
 " buffer [[[2
 nnoremap <silent><leader><tab> :<C-u>b#<CR>
 nmap     <silent><leader>ub    :Denite -no-statusline buffer<CR>
