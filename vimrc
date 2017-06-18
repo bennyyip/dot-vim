@@ -63,6 +63,7 @@ Plug 'hdima/python-syntax', { 'for': 'python'}
 Plug 'lilydjwg/colorizer'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
 Plug 'Valloric/MatchTagAlways'
+Plug 'Valloric/ListToggle'
 Plug 'othree/html5.vim', {'for': 'html'}
 
 Plug 'cespare/vim-toml', { 'for': 'toml' }
@@ -392,10 +393,12 @@ if !exists("g:vimrc_loaded")
 endif " exists(...)
 let g:vimrc_loaded=1
 " setup new tabline, just like %M%t in macvim
-set tabline=%!ben#Vim_NeatTabLine()
+" set tabline=%!ben#Vim_NeatTabLine()
 " Windows [[[2
 if s:is_win
   set pythonthreedll=python36.dll
+  let g:netrw_cygwin = 0
+  let g:netrw_silent = 1
 endif
 " Key Mapping [[[1
 " misc [[[2
@@ -408,7 +411,7 @@ nmap     T :tabnew<cr>
 " file text object [[[3
 nmap dae ggdG
 nmap cae ggcG
-nmap vae ggvG
+nmap vae ggVG
 nmap yae mxHmyggyG`yzt`x
 " quick <C-w> [[[3
 nnoremap ' <C-w>
@@ -429,8 +432,6 @@ nmap     <silent><leader>uy :Denite -no-statusline neoyank<CR>
 " reload vimrc [[[3
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>vr  :so $MYVIMRC<CR>
-" Quickfix [[[3
-nnoremap <leader>oe :copen<CR>
 " keep selection when indent line in visual mode [[[3
 xnoremap <  <gv
 xnoremap >  >gv
@@ -889,5 +890,8 @@ map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 " map T <Plug>Sneak_T
+" Plugin Valloric/ListToggle [[[2
+let g:lt_location_list_toggle_map = '<leader>ol'
+let g:lt_quickfix_list_toggle_map = '<leader>l'
 " Modeline [[[1
 " vim:fdm=marker:fmr=[[[,]]]
