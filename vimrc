@@ -594,6 +594,8 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
       \   exe "normal g'\"" |
       \ endif
+" save on focus lost [[[2
+au FocusLost * :wa
 " auto trim spaces [[[2
 "au * ShowSpaces
 au BufWritePre * TrimSpaces
