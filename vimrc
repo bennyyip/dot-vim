@@ -27,6 +27,7 @@ else
   Plug 'wellle/tmux-complete.vim'
 endif
 
+Plug 'mtth/scratch.vim'
 Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Jagua/vim-denite-ghq'
@@ -585,7 +586,7 @@ command! EX if !empty(expand('%'))
         \|   echo 'Save the file first'
         \|   echohl None
         \| endif
-" Generate .clang_complete base on makefile
+" Generate .clang_complete base on makefile [[[2
 command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
 " Autocmd [[[1
 " go back to where you exited [[[2
