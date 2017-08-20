@@ -26,7 +26,11 @@ else
   Plug 'benmills/vimux'
   Plug 'wellle/tmux-complete.vim'
 endif
+" GAME
+Plug 'johngrib/vim-game-code-break'
+Plug 'johngrib/vim-game-snake'
 
+Plug 'mattn/webapi-vim' " for :RustPlay
 Plug 'mtth/scratch.vim'
 Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -87,6 +91,7 @@ Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 " Shougo [[[2
@@ -107,7 +112,7 @@ Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 Plug 'junegunn/vim-peekaboo'
 call plug#end()
-" bennnyyip [[[2
+" bennyyip [[[2
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
 Plug 'bennyyip/denite-github-stars'
@@ -148,12 +153,12 @@ endif
 " indent settings [[[3
 set autoindent
 set cinoptions    =>2,l1,p0,)50,*50,t0
-set expandtab
-set smarttab
-set softtabstop   =2
-set shiftwidth    =2
-set shiftround
-set tabstop       =2
+" set expandtab
+" set smarttab
+" set softtabstop   =2
+" set shiftwidth    =2
+" set shiftround
+" set tabstop       =2
 " display settings [[[3
 set display       =lastline
 set laststatus    =2
@@ -229,7 +234,7 @@ set wildoptions   =tagfile
 set path+=**
 set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
-set completeopt=longest,menu "preview
+" set completeopt=longest,menu "preview
 " breaking [[[3
 set wrap
 set nolinebreak
@@ -479,6 +484,16 @@ nnoremap gb                    :ls<cr>:e #
 " tab [[[2
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
+imap  <silent><M-1>   <Esc>:tabn 1<cr>i
+imap  <silent><M-2>   <Esc>:tabn 2<cr>i
+imap  <silent><M-3>   <Esc>:tabn 3<cr>i
+imap  <silent><M-4>   <Esc>:tabn 4<cr>i
+imap  <silent><M-5>   <Esc>:tabn 5<cr>i
+imap  <silent><M-6>   <Esc>:tabn 6<cr>i
+imap  <silent><M-7>   <Esc>:tabn 7<cr>i
+imap  <silent><M-8>   <Esc>:tabn 8<cr>i
+imap  <silent><M-9>   <Esc>:tabn 9<cr>i
+imap  <silent><M-0>   <Esc>:tabn 10<cr>i
 noremap  <silent><M-1>   :tabn 1<cr>
 noremap  <silent><M-2>   :tabn 2<cr>
 noremap  <silent><M-3>   :tabn 3<cr>
