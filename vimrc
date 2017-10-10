@@ -26,6 +26,10 @@ else
   Plug 'benmills/vimux'
   Plug 'wellle/tmux-complete.vim'
 endif
+
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
+
 " GAME
 Plug 'johngrib/vim-game-code-break'
 Plug 'johngrib/vim-game-snake'
@@ -40,12 +44,11 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
-" Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
+Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
 Plug 'vim-scripts/Mark'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
@@ -58,6 +61,8 @@ Plug 'bennyyip/vim-yapf', { 'for': 'python' }
 
 Plug 'PProvost/vim-ps1'
 Plug 'ekalinin/Dockerfile.vim'
+
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
@@ -121,6 +126,7 @@ call plug#end()
 " Setting [[[1
 " general settings [[[2
 " init [[[3
+language en_US.utf8
 let mapleader        = "\<Space>"
 let localleader      = "\\"
 let g:vimsyn_folding = 'f'
@@ -453,7 +459,7 @@ map <leader>dg2 d]ndd]ndd
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
 " quick substitute [[[2
-vmap qq "zy:%s`<C-R>z``g<left><left>
+vmap qs "zy:%s`<C-R>z``g<left><left>
 " get output from python [[[2
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 " Quit [[[3
@@ -467,7 +473,6 @@ let g:sayonara_confirm_quit = 0
 " file [[[2
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
-nnoremap <leader>w  :w<CR>
 nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "buffer folder path copied"<CR>
 nmap     <silent>   <leader>fF :Denite -no-statusline file<CR>
@@ -481,6 +486,8 @@ cmap     w!!        w !sudo tee % >/dev/null
 nnoremap <silent><leader><tab> :<C-u>b#<CR>
 nmap     <silent><leader>ub    :Denite -no-statusline buffer<CR>
 nnoremap gb                    :ls<cr>:e #
+nmap <right> :next<CR>
+nmap <left> :previous<CR>
 " tab [[[2
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
@@ -690,7 +697,7 @@ nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 imap <C-k>  <Plug>(neosnippet_expand_or_jump)
 smap <C-k>  <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>  <Plug>(neosnippet_expand_target)
-
+let g:neosnippet#enable_snipmate_compatibility=1
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 "imap <expr><TAB>
@@ -704,6 +711,7 @@ let g:neosnippet#disable_runtime_snippets = {
       \  '_' : 1,
       \ }
 let g:neosnippet#snippets_directory = '$v/snippets'
+
 " Plugin: haya13busa/incsearch.vim [[[2
 let g:incsearch#auto_nohlsearch = 1
 map /  <Plug>(incsearch-forward)
@@ -911,5 +919,9 @@ map t <Plug>Sneak_t
 " Plugin Valloric/ListToggle [[[2
 let g:lt_location_list_toggle_map = '<leader>ol'
 let g:lt_quickfix_list_toggle_map = '<leader>l'
-" Modeline [[[1
+" Plugin vimwiki/vimwiki [[[2
+let g:vimwiki_list = [{'template_deafult': 'default' }]
+
+" ending [[[1
+runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
