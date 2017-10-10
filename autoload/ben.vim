@@ -58,7 +58,7 @@ function! ben#tab_yeah(k, o)
 endfunction
 
 function! ben#TrimSpaces()
-  if !&binary && &filetype != 'diff' && &filetype != 'markdown'
+  if !&binary && &filetype != 'diff' && &filetype != 'markdown' && &filetype != 'vimwiki'
     normal mxHmy
     %s/\s\+$//e
     normal `yzt`x
