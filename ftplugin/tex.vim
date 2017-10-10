@@ -9,3 +9,5 @@ xmap iE <plug>(vimtex-ie)
 autocmd FileType tex let b:lexima_disabled = 1
 setlocal colorcolumn=100
 setlocal textwidth=100
+
+let g:sleuth_automatic = 0
