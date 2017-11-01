@@ -6,6 +6,7 @@ call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
 " misc [[[2
+Plug 'hotoo/pangu.vim'
 Plug 'maralla/completor-neosnippet'
 Plug 'maralla/completor.vim'
 Plug 'racer-rust/vim-racer', {'for': 'rust'}
