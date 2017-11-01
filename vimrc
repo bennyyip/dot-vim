@@ -47,7 +47,6 @@ Plug 'itchyny/vim-cursorword'
 Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'roxma/vim-paste-easy'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 Plug 'vim-scripts/Mark'
@@ -116,7 +115,6 @@ Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 Plug 'junegunn/vim-peekaboo'
-call plug#end()
 " bennyyip [[[2
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
@@ -436,7 +434,7 @@ nmap <silent>  <leader>u; :Denite -no-statusline command_history<CR>
 " edit [[[3
 inoremap <silent><C-BS> <C-w>
 inoremap {<CR>          {}<left><CR><ESC>O
-inoremap (<CR>          ()<left><CR><ESC>O 
+inoremap (<CR>          ()<left><CR><ESC>O
 " yank [[[3
 inoremap <silent><C-v>      <C-r>+
 xnoremap <silent><C-c>      "+y
@@ -489,8 +487,7 @@ nmap     <silent><leader>ub    :Denite -no-statusline buffer<CR>
 nnoremap gb                    :ls<cr>:e #
 nmap <right> :next<CR>
 nmap <left> :previous<CR>
-" tab [[[2
-noremap  <silent><C-tab> :tabprev<CR>
+" tab [[[2 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 imap  <silent><M-1>   <Esc>:tabn 1<cr>i
 imap  <silent><M-2>   <Esc>:tabn 2<cr>i
@@ -531,12 +528,15 @@ nmap z[ zo[z
 nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
 nnoremap <leader>ps         :!start powershell<CR>
 " move [[[2
-vnoremap <M-j> gj
+nnoremap <M-j> gj
 nnoremap <M-k> gk
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
+" remap H and L
+nnoremap H ^
+nnoremap L g_
 " Function and Command [[[1
 " :Root | Change directory to the root of the Git repository [[[2
 function! s:root()
