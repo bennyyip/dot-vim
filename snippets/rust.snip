@@ -28,6 +28,14 @@ options     head
         ${0:TARGET}
     }
 
+snippet     bench
+options     head
+    #[bench]
+    fn ${1:#:test_function_name}(b: &mut Bencher) {
+        ${0:TARGET}
+    }
+
+
 snippet     pubnew
 abbr        pub fn new() {}
 options     head
