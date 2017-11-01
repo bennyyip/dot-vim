@@ -40,7 +40,7 @@ Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Jagua/vim-denite-ghq'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
@@ -217,7 +217,7 @@ set foldmethod    =marker
 set foldopen     +=jump
 set foldtext      =ben#foldy()
 "set foldlevel=200  " disable auto folding
-"set incsearch "plug
+set incsearch
 set hlsearch
 set ignorecase
 set smartcase
@@ -713,17 +713,13 @@ let g:neosnippet#disable_runtime_snippets = {
       \ }
 let g:neosnippet#snippets_directory = '$v/snippets'
 
-" Plugin: haya13busa/incsearch.vim [[[2
-let g:incsearch#auto_nohlsearch = 1
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map n  <Plug>(incsearch-nohl-n)zzzv
-map N  <Plug>(incsearch-nohl-N)zzzv
-map *  <Plug>(incsearch-nohl)<Plug>(asterisk-z*)zzzv
-map g* <Plug>(incsearch-nohl)<Plug>(asterisk-gz*)zzzv
-map #  <Plug>(incsearch-nohl)<Plug>(asterisk-z#)zzzv
-map g# <Plug>(incsearch-nohl)<Plug>(asterisk-gz#)zzzv
+" Plugin: is.vim [[[2
+map n  <Plug>(is-n)zzzv
+map N  <Plug>(is-N)zzzv
+map *  <Plug>(asterisk-z*)<Plug>(is-nohl-2) zzzv
+map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-2)zzzv
+map #  <Plug>(asterisk-z#)<Plug>(is-nohl-2) zzzv
+map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-2)zzzv
 " Plugin: majutsushi/tagbar [[[2
 let g:tagbar_type_tex = {
       \ 'ctagstype' : 'latex',
