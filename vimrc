@@ -16,6 +16,7 @@ if s:is_win
 else
   Plug 'benmills/vimux'
   Plug 'wellle/tmux-complete.vim'
+  Plug 'christoomey/vim-tmux-navigator'
 endif
 
 Plug 'vimwiki/vimwiki'
@@ -803,6 +804,8 @@ if !s:is_win
   " If text is selected, save it in the v buffer and send that buffer it to tmux
   vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 endif
+"Plugin: christoomey/vim-tmux-navigator [[[2
+
 " Plugin: netrw [[[2
 " let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
