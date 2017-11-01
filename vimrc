@@ -1,5 +1,4 @@
 let s:is_win = has('win32')
-let s:is_nvim = has('nvim')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
 " plug#begin [[[2
@@ -7,19 +6,10 @@ call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
 " misc [[[2
-if s:is_nvim
-  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/echodoc.vim'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-jedi'
-  Plug 'rust-lang/rust.vim'
-  Plug 'metakirby5/codi.vim'
-else
-  Plug 'maralla/completor-neosnippet'
-  Plug 'maralla/completor.vim'
-  Plug 'racer-rust/vim-racer', {'for': 'rust'}
-  let g:racer_experimental_completer = 1
-endif
+Plug 'maralla/completor-neosnippet'
+Plug 'maralla/completor.vim'
+Plug 'racer-rust/vim-racer', {'for': 'rust'}
+let g:racer_experimental_completer = 1
 if s:is_win
   Plug 'rust-lang/rust.vim'
 else
@@ -29,10 +19,6 @@ endif
 
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
-
-" GAME
-Plug 'johngrib/vim-game-code-break'
-Plug 'johngrib/vim-game-snake'
 
 Plug 'mattn/webapi-vim' " for :RustPlay
 Plug 'mtth/scratch.vim'
@@ -144,16 +130,7 @@ let g:loaded_tarPlugin        = 1
 let g:loaded_vimballPlugin    = 1
 let g:loaded_zipPlugin        = 1
 
-if !s:is_nvim
-  set nocompatible
-  filetype plugin indent on
-  syntax   on
-  if v:version >= 800
-    packadd! matchit
-  else
-    runtime macros/matchit.vim
-  endif
-endif
+runtime macros/matchit.vim
 " indent settings [[[3
 set autoindent
 set cinoptions    =>2,l1,p0,)50,*50,t0
@@ -285,16 +262,11 @@ set backup
 set backupskip   =
 set updatecount  =100
 set undofile
-if s:is_nvim
-  set backupdir  -=.
-  set shada       ='100
-else
-  set backupdir   =$v/files/backup/
-  set backupext   =-vimbackup
-  set directory   =$v/files/swap/
-  set undodir     =$v/files/undo/
-  set viminfo     ='100,n$v/files/info/viminfo
-endif
+set backupdir   =$v/files/backup/
+set backupext   =-vimbackup
+set directory   =$v/files/swap/
+set undodir     =$v/files/undo/
+set viminfo     ='100,n$v/files/info/viminfo
 " apperance [[[2
 " Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
@@ -888,19 +860,6 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
       \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
       \ .')$'
-" Plugin: LanguageClient [[[2
-if s:is_nvim
-  let g:LanguageClient_serverCommands = {
-        \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-        \ }
-  " Automatically start language servers.
-  let g:LanguageClient_autoStart = 1
-endif
-" Plugin: Shougo/deoplete.nvim [[[2
-if s:is_nvim
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
-endif
 " Plugin: marksbrowser [[[2
 nmap <silent><leader>um :MarksBrowser<CR><esc>
 " Plugin: w0rp/ale [[[2
