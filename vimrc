@@ -459,8 +459,6 @@ cmap     w!!        w !sudo tee % >/dev/null
 nnoremap <silent><leader><tab> :<C-u>b#<CR>
 nmap     <silent><leader>ub    :Denite -no-statusline buffer<CR>
 nnoremap gb                    :ls<cr>:e #
-nmap <right> :next<CR>
-nmap <left> :previous<CR>
 " tab [[[2 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 imap  <silent><M-1>   <Esc>:tabn 1<cr>i
@@ -508,9 +506,6 @@ inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
-" remap H and L
-nnoremap H ^
-nnoremap L g_
 " Function and Command [[[1
 " :Root | Change directory to the root of the Git repository [[[2
 function! s:root()
@@ -594,7 +589,6 @@ autocmd BufReadPost *
 " save on focus lost [[[2
 au FocusLost * :wa
 " auto trim spaces [[[2
-"au * ShowSpaces
 au BufWritePre * TrimSpaces
 au FileAppendPre * TrimSpaces
 au FileWritePre * TrimSpaces
@@ -804,8 +798,8 @@ if !s:is_win
   " If text is selected, save it in the v buffer and send that buffer it to tmux
   vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 endif
-"Plugin: christoomey/vim-tmux-navigator [[[2
-
+" Plugin: christoomey/vim-tmux-navigator [[[2
+ let g:tmux_navigator_save_on_switch = 2
 " Plugin: netrw [[[2
 " let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
@@ -843,8 +837,6 @@ augroup my_dirvish_events
 augroup END
 " Plugin: vimers/vim-youdao [[[2
 nnoremap <leader>oy :Dic<CR>
-" Plugin: roxma/vim-paste-easy [[[2
-let g:paste_easy_message=0
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
