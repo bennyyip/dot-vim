@@ -15,7 +15,6 @@ if s:is_win
   Plug 'rust-lang/rust.vim'
 else
   Plug 'benmills/vimux'
-  Plug 'wellle/tmux-complete.vim'
   Plug 'christoomey/vim-tmux-navigator'
 endif
 
@@ -26,7 +25,6 @@ Plug 'mattn/webapi-vim' " for :RustPlay
 Plug 'mtth/scratch.vim'
 Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Jagua/vim-denite-ghq'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
@@ -42,6 +40,9 @@ Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
+
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'dyng/ctrlsf.vim'
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'bennyyip/vim-yapf', { 'for': 'python' }
@@ -87,16 +88,8 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 " Shougo [[[2
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neoyank.vim'
-if s:is_win
-  Plug 'Shougo/vimproc.vim'
-else
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-endif
 " junegunn [[[2
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
@@ -106,7 +99,6 @@ Plug 'junegunn/vim-peekaboo'
 " bennyyip [[[2
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
-Plug 'bennyyip/denite-github-stars'
 " plug#end [[[2
 call plug#end()
 " Setting [[[1
@@ -404,7 +396,6 @@ nmap <silent> <M-u> :nohls<CR>
 " run external command [[[3
 nmap <leader>; :AsyncRun<space>
 nmap <leader>: :VimProcBang<space>
-nmap <silent>  <leader>u; :Denite -no-statusline command_history<CR>
 " edit [[[3
 inoremap <silent><C-BS> <C-w>
 inoremap {<CR>          {}<left><CR><ESC>O
@@ -413,7 +404,6 @@ inoremap (<CR>          ()<left><CR><ESC>O
 inoremap <silent><C-v>      <C-r>+
 xnoremap <silent><C-c>      "+y
 nmap     Y                  y$
-nmap     <silent><leader>uy :Denite -no-statusline neoyank<CR>
 " reload vimrc [[[3
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>vr  :so $MYVIMRC<CR>
@@ -448,17 +438,10 @@ nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "buffer folder path copied"<CR>
-nmap     <silent>   <leader>fF :Denite -no-statusline file<CR>
-nmap     <silent>   <leader>ff :Denite -no-statusline file_rec<CR>
-nmap     <silent>   <leader>FF :call <SID>denite_file_with_path()<CR>
-nmap     <silent>   <leader>Ff :call <SID>denite_file_rec_with_path()<CR>
-nmap     <silent>   <leader>fr :Denite file_mru<CR>
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 cmap     w!!        w !sudo tee % >/dev/null
 " buffer [[[2
 nnoremap <silent><leader><tab> :<C-u>b#<CR>
-nmap     <silent><leader>ub    :Denite -no-statusline buffer<CR>
-nnoremap gb                    :ls<cr>:e #
 " tab [[[2 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 imap  <silent><M-1>   <Esc>:tabn 1<cr>i
@@ -568,6 +551,19 @@ function! s:a(cmd)
 endfunction
 command! A call s:a('e')
 command! AV call s:a('botright vertical split')
+nmap <leader>a :A<CR>
+
+function! s:gen_def()
+  normal 0yf;
+  call s:a('e')
+  normal Go
+  normal p;cl {
+  normal o}
+  normal O
+  normal cc
+endfunction
+command! GenDef call s:gen_def()
+nmap <leader>df :GenDef<CR>
 " EX | chmod +x [[[2
 command! EX if !empty(expand('%'))
       \|   write
@@ -594,73 +590,6 @@ au FileAppendPre * TrimSpaces
 au FileWritePre * TrimSpaces
 au FilterWritePre * TrimSpaces
 " Plugin Config [[[1
-" Plugin: Shougo/denite.nvim [[[2
-let s:denite_options = {
-      \ 'default' : {
-      \ 'winheight' : 15,
-      \ 'mode' : 'insert',
-      \ 'quit' : 'true',
-      \ 'highlight_matched_char' : 'MoreMsg',
-      \ 'highlight_matched_range' : 'MoreMsg',
-      \ 'direction': 'rightbelow',
-      \ 'prompt' : '>',
-      \ }}
-function! s:profile(opts) abort
-  for fname in keys(a:opts)
-    for dopt in keys(a:opts[fname])
-      call denite#custom#option(fname, dopt, a:opts[fname][dopt])
-    endfor
-  endfor
-endfunction
-
-call s:profile(s:denite_options)
-
-"let g:denite_force_overwrite_statusline = 1
-" Ripgrep for file_rec
-call denite#custom#var('file_rec', 'command',
-      \ ['rg', '--files', '.'])
-
-" Ripgrep command on grep source
-call denite#custom#var('grep', 'command', ['rg'])
-call denite#custom#var('grep', 'default_opts',
-      \ ['--vimgrep', '--no-heading','-i'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-
-" Change ignore_globs
-call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-      \ [ '.git/', '.ropeproject/', '__pycache__/',
-      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-" Sort behavior
-call denite#custom#source(
-      \ 'file_rec', 'sorters', ['sorter_sublime'])
-let dgs#username='bennyyip'
-
-function! s:denite_file_rec_with_path()
-  let path = input('path: ', '', 'dir')
-  if path != ''
-    exec "Denite file_rec -path=" . path
-  endif
-endfunction
-
-function! s:denite_file_with_path()
-  let path = input('path: ', '', 'dir')
-  if path != ''
-    exec "Denite file -path=" . path
-  endif
-endfunction
-
-" Key mapping(u for unite, predecessor of denite)
-nmap <silent> <leader>u+ :Denite -resume -immediately  -select=+1<CR>
-nmap <silent> <leader>u- :Denite -resume -immediately  -select=-1<CR>
-nmap <silent> <leader>ur :Denite -resume<CR>
-nmap <silent> <leader>ug :Denite -no-statusline grep<CR>
-nmap <silent> <leader>uw :DeniteCursorWord -no-statusline grep<CR><CR>
-nmap <silent> <leader>uj :Denite -no-statusline line<CR>
-nmap <silent> <leader>ut :Denite -no-statusline filetype<CR>
-nmap <silent> <leader>og :Denite -no-statusline github_stars<CR>
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>  <Plug>(neosnippet_expand_or_jump)
@@ -799,7 +728,7 @@ if !s:is_win
   vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
 endif
 " Plugin: christoomey/vim-tmux-navigator [[[2
- let g:tmux_navigator_save_on_switch = 2
+let g:tmux_navigator_save_on_switch = 2
 " Plugin: netrw [[[2
 " let g:loaded_netrwPlugin = 1
 let g:netrw_banner       = 0
@@ -873,7 +802,21 @@ let g:lt_location_list_toggle_map = '<leader>ol'
 let g:lt_quickfix_list_toggle_map = '<leader>l'
 " Plugin vimwiki/vimwiki [[[2
 let g:vimwiki_list = [{'template_deafult': 'default' }]
-
+" Plugin Yggdroot/LeaderF [[[2
+let g:Lf_ShortcutF='<leader>ff'
+let g:Lf_ShortcutB='gb'
+nnoremap <leader>fr :LeaderfMru<CR>
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+" Plugin dyng/ctrlsf.vim [[[2
+let g:ctrlsf_default_root = 'project+fw'
+let g:ctrlsf_mapping = {
+      \ "next": "n",
+      \ "prev": "N",
+      \ "vsplit": "x"
+      \ }
+com! -n=* -comp=customlist,ctrlsf#comp#Completion Rg call ctrlsf#Search(<q-args>)
+command! Rgt CtrlSFToggle
+command! Rgu CtrlSFUpdate
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
