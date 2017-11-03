@@ -75,6 +75,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 " tpope [[[2
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-capslock'
 Plug 'tpope/vim-commentary'
@@ -123,17 +124,9 @@ let g:loaded_spellfile_plugin = 1
 let g:loaded_tarPlugin        = 1
 let g:loaded_vimballPlugin    = 1
 let g:loaded_zipPlugin        = 1
-
-runtime macros/matchit.vim
 " indent settings [[[3
 set autoindent
 set cinoptions    =>2,l1,p0,)50,*50,t0
-" set expandtab
-" set smarttab
-" set softtabstop   =2
-" set shiftwidth    =2
-" set shiftround
-" set tabstop       =2
 " display settings [[[3
 set display       =lastline
 set laststatus    =2
@@ -805,8 +798,10 @@ let g:vimwiki_list = [{'template_deafult': 'default' }]
 " Plugin Yggdroot/LeaderF [[[2
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
+
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 nnoremap <leader>fr :LeaderfMru<CR>
-let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_StlColorscheme = 'gruvbox'
 " Plugin dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project+fw'
 let g:ctrlsf_mapping = {
