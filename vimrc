@@ -5,44 +5,45 @@ let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
-" misc [[[2
-Plug 'hotoo/pangu.vim'
-Plug 'maralla/completor-neosnippet'
-Plug 'maralla/completor.vim'
+" general [[[2
 Plug 'racer-rust/vim-racer', {'for': 'rust'}
 let g:racer_experimental_completer = 1
+
 if s:is_win
   Plug 'rust-lang/rust.vim'
 else
   Plug 'benmills/vimux'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'lilydjwg/fcitx.vim'
 endif
 
-Plug 'vimwiki/vimwiki'
-Plug 'mattn/calendar-vim'
-
-Plug 'mattn/webapi-vim' " for :RustPlay
-Plug 'mtth/scratch.vim'
-Plug 'vimers/vim-youdao'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'dyng/ctrlsf.vim'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
+Plug 'hotoo/pangu.vim'
 Plug 'itchyny/vim-cursorword'
-Plug 'lilydjwg/fcitx.vim'  " FIXME: fcitx plugin is the slowest plugin
-Plug 'luochen1990/rainbow'
-Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'skywind3000/asyncrun.vim'
-Plug 'w0rp/ale'
-Plug 'vim-scripts/Mark'
-Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
+Plug 'luochen1990/rainbow'
+Plug 'maralla/completor-neosnippet'
+Plug 'maralla/completor.vim'
+Plug 'mattn/calendar-vim'
+Plug 'mattn/webapi-vim' " for :RustPlay
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Plug 'mtth/scratch.vim'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
+Plug 'vim-scripts/Mark'
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
-
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'dyng/ctrlsf.vim'
+Plug 'vimers/vim-youdao'
+Plug 'vimwiki/vimwiki'
+Plug 'w0rp/ale'
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'bennyyip/vim-yapf', { 'for': 'python' }
@@ -55,7 +56,6 @@ Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'lervag/vimtex', {'for': 'tex'}
-" Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'hdima/python-syntax', { 'for': 'python'}
 
 Plug 'lilydjwg/colorizer'
@@ -88,9 +88,6 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-" Shougo [[[2
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
 " junegunn [[[2
 Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
@@ -105,7 +102,6 @@ call plug#end()
 " Setting [[[1
 " general settings [[[2
 " init [[[3
-language en_US.utf8
 let mapleader        = "\<Space>"
 let localleader      = "\\"
 let g:vimsyn_folding = 'f'
@@ -388,7 +384,6 @@ nnoremap ' <C-w>
 nmap <silent> <M-u> :nohls<CR>
 " run external command [[[3
 nmap <leader>; :AsyncRun<space>
-nmap <leader>: :VimProcBang<space>
 " edit [[[3
 inoremap <silent><C-BS> <C-w>
 inoremap {<CR>          {}<left><CR><ESC>O
@@ -397,7 +392,7 @@ inoremap (<CR>          ()<left><CR><ESC>O
 inoremap <silent><C-v>      <C-r>+
 xnoremap <silent><C-c>      "+y
 nmap     Y                  y$
-" reload vimrc [[[3
+" vimrc [[[3
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>vr  :so $MYVIMRC<CR>
 " keep selection when indent line in visual mode [[[3
@@ -405,18 +400,12 @@ xnoremap <  <gv
 xnoremap >  >gv
 " script helper [[[3
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
-" resolve vcs conflict (depends on tpope/vim-unimpaired) [[[3
-map <leader>dg1 ]nd]n[ndd[ndd
-map <leader>dg2 d]ndd]ndd
-" count Chinese char [[[3
-" nnoremap <leader>wc :%s/[\u4E00-\u9FCC]//gn<CR>
-"count all char：g<C-g>
 " quick edit macro  | ["register]<leader>m [[[3
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
-" quick substitute [[[2
+" quick substitute [[[3
 vmap qs "zy:%s`<C-R>z``g<left><left>
-" get output from python [[[2
+" get output from python [[[3
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
@@ -425,17 +414,29 @@ inoremap <C-Q> <esc>:Sayonara<cr>
 command! -bang Q q<bang>
 command! -bang QA qa<bang>
 command! -bang Qa qa<bang>
-let g:sayonara_confirm_quit = 0
-" file [[[2
+let g:sayonara_confirm_quit = 1
+" fold [[[3
+nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+vnoremap <silent><space><space> zf
+nmap z] zo]z
+nmap z[ zo[z
+" Windows [[[3
+if s:is_win
+  nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
+  nnoremap <leader>ps         :!start powershell<CR>
+endif
+" file, buffer, tab[[[2
+
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "buffer folder path copied"<CR>
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 cmap     w!!        w !sudo tee % >/dev/null
-" buffer [[[2
+
 nnoremap <silent><leader><tab> :<C-u>b#<CR>
-" tab [[[2 noremap  <silent><C-tab> :tabprev<CR>
+"tab [[[3
+noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 imap  <silent><M-1>   <Esc>:tabn 1<cr>i
 imap  <silent><M-2>   <Esc>:tabn 2<cr>i
@@ -467,14 +468,6 @@ inoremap <silent><M-7>   <ESC>:tabn 7<cr>
 inoremap <silent><M-8>   <ESC>:tabn 8<cr>
 inoremap <silent><M-9>   <ESC>:tabn 9<cr>
 inoremap <silent><M-0>   <ESC>:tabn 10<cr>
-" fold [[[2
-nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-vnoremap <silent><space><space> zf
-nmap z] zo]z
-nmap z[ zo[z
-"  Windows [[[3
-nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
-nnoremap <leader>ps         :!start powershell<CR>
 " move [[[2
 nnoremap <M-j> gj
 nnoremap <M-k> gk
@@ -751,7 +744,7 @@ augroup my_dirvish_events
   "       \ gh :silent keeppatterns g@\v[/\\]\.[^\\/]+[\\/]?$@d<CR>
 
   " Auto hide dotfiles, press "u" to show
-  autocmd FileType dirvish silent keeppatterns g@\v[/\\]\.[^\\/]+[\\/]?$@d
+  autocmd FileType dirvish silent keeppatterns g@\v[/\\]\.[^\\/]+[\\/]?$@d_
 
   autocmd FileType dirvish nmap <buffer> <c-o> -
   " double "space" to preview
@@ -789,7 +782,6 @@ let g:sneak#label = 1
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
 " Plugin Valloric/ListToggle [[[2
 let g:lt_location_list_toggle_map = '<leader>ol'
 let g:lt_quickfix_list_toggle_map = '<leader>l'
