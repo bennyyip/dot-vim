@@ -21,7 +21,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+" fork for colorscheme
+Plug 'bennyyip/LeaderF', { 'do': './install.sh' }
 Plug 'dyng/ctrlsf.vim'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
@@ -804,6 +805,11 @@ let g:ctrlsf_mapping = {
 com! -n=* -comp=customlist,ctrlsf#comp#Completion Rg call ctrlsf#Search(<q-args>)
 command! Rgt CtrlSFToggle
 command! Rgu CtrlSFUpdate
+" Plugin mtth/scratch.vim [[[2
+let g:scratch_no_mappings = 1
+nmap gs <plug>(scratch-insert-reuse)
+xmap gs <plug>(scratch-selection-reuse)
+xmap gS <plug>(scratch-selection-clear)
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
