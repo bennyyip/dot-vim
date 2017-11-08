@@ -1,4 +1,5 @@
 let s:is_win = has('win32')
+let s:has_ydcv = executable("ydcv")
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
 " plug#begin [[[2
@@ -15,6 +16,12 @@ else
   Plug 'benmills/vimux'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'lilydjwg/fcitx.vim'
+endif
+
+if s:has_ydcv
+  Plug 'bennyyip/ydcv.vim'
+else
+  Plug 'vimers/vim-youdao'
 endif
 
 Plug 'AndrewRadev/splitjoin.vim'
@@ -42,7 +49,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-scripts/Mark'
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
-Plug 'vimers/vim-youdao'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 " lang [[[2
@@ -751,8 +757,15 @@ augroup my_dirvish_events
   " double "space" to preview
   autocmd FileType dirvish nmap <silent><buffer> <space><space> p<C-w>p
 augroup END
-" Plugin: vimers/vim-youdao [[[2
-nnoremap <leader>oy :Dic<CR>
+" Plugin: bennyyip/ydcv.vim [[[2
+if s:has_ydcv
+  nnoremap <leader>oy :<c-u>Ydcv<CR>
+  xnoremap <leader>oy :<c-u>Ydcv<CR>
+else
+  nnoremap <leader>oy :<c-u>Dic<CR>
+  xnoremap <leader>oy :<c-u>Dic<CR>
+endif
+
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
