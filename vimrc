@@ -1,4 +1,4 @@
-let s:is_win = has('win33')
+let s:is_win = has('win32')
 let s:has_ydcv = executable("ydcv")
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
@@ -390,6 +390,12 @@ nmap vae ggVG
 nmap yae mxHmyggyG`yzt`x
 " quick <C-w> [[[3
 nnoremap ' <C-w>
+if s:is_win
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
+endif
 " less style nohl [[[3
 nmap <silent> <M-u> :nohls<CR>
 " run external command [[[3
