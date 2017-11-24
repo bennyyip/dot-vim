@@ -1,4 +1,4 @@
-let s:is_win = has('win32')
+let s:is_win = has('win33')
 let s:has_ydcv = executable("ydcv")
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
@@ -24,12 +24,14 @@ else
   Plug 'vimers/vim-youdao'
 endif
 
+Plug 'vim-scripts/Mark'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 " fork for colorscheme
-Plug 'bennyyip/LeaderF', { 'do': './install.sh' }
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'Yggdroot/LeaderF-marks'
 Plug 'dyng/ctrlsf.vim'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
@@ -47,13 +49,11 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'mtth/scratch.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
-Plug 'vim-scripts/Mark'
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'bennyyip/vim-yapf', { 'for': 'python' }
 
 Plug 'PProvost/vim-ps1'
 Plug 'ekalinin/Dockerfile.vim'
@@ -61,6 +61,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
+Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'hdima/python-syntax', { 'for': 'python'}
@@ -96,7 +97,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 " junegunn [[[2
-Plug 'junegunn/goyo.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
@@ -104,6 +104,9 @@ Plug 'junegunn/vim-peekaboo'
 " bennyyip [[[2
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
+Plug 'bennyyip/LeaderF-github-stars'
+Plug 'bennyyip/LeaderF-ghq'
+Plug 'bennyyip/vim-yapf', { 'for': 'python' }
 " plug#end [[[2
 call plug#end()
 " Setting [[[1
@@ -636,10 +639,6 @@ let g:tagbar_type_nc = {
 
 let g:tagbar_width = 30
 nmap tb :TagbarToggle<cr>
-" Plugin: junegunn/goyo.vim [[[2
-nnoremap <silent> <leader>z :Goyo<cr>
-"autocmd! User GoyoEnter Limelight
-"autocmd! User GoyoLeave Limelight!
 " Plugin: mhinz/vim-startify [[[2
 let g:ascii = [
       \"             ________ ++     ________             ",
@@ -785,8 +784,6 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
       \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
       \ .')$'
-" Plugin: marksbrowser [[[2
-nmap <silent><leader>um :MarksBrowser<CR><esc>
 " Plugin: w0rp/ale [[[2
 let g:ale_tex_lacheck_executable="shutup" "shutup is a program that do nothing, mute lacheck
 " Plugin: vim-easy-align [[[2
@@ -804,9 +801,11 @@ let g:vimwiki_list = [{'template_deafult': 'default' }]
 " Plugin Yggdroot/LeaderF [[[2
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
-
+let g:Lf_MruMaxFiles=500
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 nnoremap <leader>fr :LeaderfMru<CR>
+nnoremap <leader>gs :LeaderfStars<CR>
+nnoremap <leader>gr :LeaderfGhq<CR>
 let g:Lf_StlColorscheme = 'gruvbox'
 " Plugin dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project+fw'
