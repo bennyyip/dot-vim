@@ -16,12 +16,9 @@ snippet err
 	fprintf(stderr, "${1:error}\n");${2}
 # For Loop
 snippet for
-	for(${1:i}=${2:0}; $1<${2:count}; $1${3:++}){
-	  ${4}
-snippet For
-	for(${1:i}=${2:0}; $1<${2:count}; $1${3:++}){
-	  ${4}
-	}${5}
+	for(${1:size_t} ${2:i}=${3:0}; $2<${4:count}; $2${5:++}){
+	  ${6}
+	}${7}
 snippet if
 	if(${1:/* condition */}){
 	  ${2:/* code */}
@@ -32,17 +29,17 @@ snippet #if
 	#endif
 # #include <...>
 snippet inc
-	#include<${1:`&ft=='c'?'unistd':'iostream'`}`&ft=='c'?'.h':''`>${2}
+	#include <${1:`&ft=='c'?'unistd':'iostream'`}`&ft=='c'?'.h':''`>${2}
 # #include "..."
 snippet Inc
-	#include"${1:`Filename("$1.h")`}"${2}
+	#include "${1:`Filename("$1.h")`}"${2}
 # #ifndef ... #define ... #endif
 snippet Def
 	#ifndef $1
 	#define ${1:SYMBOL} ${2:value}
 	#endif${3}
 snippet def
-	#define 
+	#define
 snippet ifdef
 	#ifdef ${1:FOO}
 	  ${2:#define }
@@ -95,3 +92,6 @@ snippet pr
 # fprintf (again, this isn't as nice as TextMate's version, but it works)
 snippet fpr
 	fprintf(${1:stderr}, "${2:%s}\n"${3});${4}
+
+snippet all
+	${1:v}.begin(), $1.end()
