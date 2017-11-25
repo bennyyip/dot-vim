@@ -833,7 +833,7 @@ xmap gs <plug>(scratch-selection-reuse)
 xmap gS <plug>(scratch-selection-clear)
 " Plugin CountJump [[[2
 call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/') " js regex
-call CountJump#TextObject#MakeWithCountSearch('', '|', 'ai', 'v', '\\\@<!|', '\\\@<!|') " Rust closure
+call CountJump#TextObject#MakeWithCountSearch('', 'c', 'ai', 'v', '\\\@<!|', '\\\@<!|') " Rust closure
 call CountJump#TextObject#MakeWithCountSearch('', ':', 'ai', 'v', '\\\@<!:', '\\\@<!:')
 " ending [[[1
 runtime local.vim
