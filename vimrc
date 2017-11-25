@@ -24,7 +24,10 @@ else
   Plug 'vimers/vim-youdao'
 endif
 
+Plug 'inkarkat/vim-ingo-library'
 Plug 'vim-scripts/Mark'
+Plug 'vim-scripts/CountJump'
+
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -828,6 +831,10 @@ let g:scratch_no_mappings = 1
 nmap gs <plug>(scratch-insert-reuse)
 xmap gs <plug>(scratch-selection-reuse)
 xmap gS <plug>(scratch-selection-clear)
+" Plugin CountJump [[[2
+call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/') " js regex
+call CountJump#TextObject#MakeWithCountSearch('', '|', 'ai', 'v', '\\\@<!|', '\\\@<!|') " Rust closure
+call CountJump#TextObject#MakeWithCountSearch('', ':', 'ai', 'v', '\\\@<!:', '\\\@<!:')
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
