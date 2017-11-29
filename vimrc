@@ -264,7 +264,7 @@ set directory   =$v/files/swap/
 set undodir     =$v/files/undo/
 set viminfo     ='100,n$v/files/info/viminfo
 " apperance [[[2
-" Plugin: itchyny/lightline.vim [[[3
+" Plugin: itchyny/lightline.vim [[[2
 " g:lightline[[[4
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
