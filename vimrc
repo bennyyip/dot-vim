@@ -1,4 +1,5 @@
 let s:is_win = has('win32')
+let s:is_tty = !match(&term, 'linux')
 let s:has_ydcv = executable("ydcv")
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
@@ -154,32 +155,34 @@ set fenc  =utf-8
 set fencs =utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
 set enc   =utf-8
 
-if s:is_win
-  let &listchars = 'tab:▸ ,extends:>,precedes:<,nbsp:.'
-  let &showbreak = '-> '
-  highlight VertSplit ctermfg=242
-  augroup vimrc
-    autocmd InsertEnter * set listchars-=trail:⣿
-    autocmd InsertLeave * set listchars+=trail:⣿
-  augroup END
-elseif has('multi_byte') && &encoding ==# 'utf-8'
-  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
-  let &fillchars = 'diff: '  " ▚
-  let &showbreak = '↪ '
-  highlight VertSplit ctermfg=242
-  augroup vimrc
-    autocmd InsertEnter * set listchars-=trail:⣿
-    autocmd InsertLeave * set listchars+=trail:⣿
-  augroup END
-else
-  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
-  "let &fillchars = 'stlnc:#'
-  let &showbreak = '-> '
-  augroup vimrc
-    autocmd InsertEnter * set listchars-=trail:.
-    autocmd InsertLeave * set listchars+=trail:.
-  augroup END
-endif
+if !s:is_tty
+  if s:is_win
+    let &listchars = 'tab:▸ ,extends:>,precedes:<,nbsp:.'
+    let &showbreak = '-> '
+    highlight VertSplit ctermfg=242
+    augroup vimrc
+      autocmd InsertEnter * set listchars-=trail:⣿
+      autocmd InsertLeave * set listchars+=trail:⣿
+    augroup END
+  elseif has('multi_byte') && &encoding ==# 'utf-8'
+    let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+    let &fillchars = 'diff: '  " ▚
+    let &showbreak = '↪ '
+    highlight VertSplit ctermfg=242
+    augroup vimrc
+      autocmd InsertEnter * set listchars-=trail:⣿
+      autocmd InsertLeave * set listchars+=trail:⣿
+    augroup END
+  else
+    let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
+    "let &fillchars = 'stlnc:#'
+    let &showbreak = '-> '
+    augroup vimrc
+      autocmd InsertEnter * set listchars-=trail:.
+      autocmd InsertLeave * set listchars+=trail:.
+    augroup END
+  endif
+endif " s:is_ty
 " turn off bell [[[3
 set noerrorbells
 set novisualbell
@@ -267,7 +270,6 @@ set viminfo     ='100,n$v/files/info/viminfo
 " Plugin: itchyny/lightline.vim [[[2
 " g:lightline[[[4
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
@@ -288,14 +290,17 @@ let g:lightline = {
       \ 'component' : {
       \   'asyncrun': '%{g:asyncrun_status}'
       \ },
-      \ 'separator':    { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
       \ }
+if !s:is_tty
+  let g:lightline.colorscheme = 'gruvbox'
+  let g:lightline.separator =  { 'left': "\ue0b0", 'right': "\ue0b2" }
+  let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
+endif
 function! LightlineModified() "[[[4
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 function! LightlineReadonly() "[[[4
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? "\ue0a2" : ''
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? (s:is_tty ? "RO" : "\ue0a2") : ''
 endfunction
 function! LightlineFilename() "[[[4
   let fname = expand('%:~')
@@ -313,7 +318,7 @@ function! LightlineFugitive() "[[[4
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
       let mark = ''  " edit here for cool mark
       let branch = fugitive#head()
-      return branch !=# '' ? "\ue0a0 ".branch : ''
+        return branch !=# '' ? (s:is_tty ? "" : "\ue0a0 ").branch : ''
     endif
   catch
   endtry
@@ -349,7 +354,7 @@ endfunction
 set bg=dark
 colorscheme gruvbox
 hi VertSplit guibg=#282828 guifg=#181A1F
-""hi EndOfBuffer guibg=#282828 guifg=#282828
+"hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
 if !exists("g:vimrc_loaded")
   if has("gui_running")

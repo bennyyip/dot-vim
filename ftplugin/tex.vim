@@ -10,7 +10,5 @@ autocmd FileType tex let b:lexima_disabled = 1
 setlocal colorcolumn=100
 setlocal textwidth=100
 
-ia -> \rightarrow
-ia => \Rightarrow
 
 let g:sleuth_automatic = 0
