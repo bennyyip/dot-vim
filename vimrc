@@ -409,7 +409,6 @@ nmap <silent> <M-u> :nohls<CR>
 " run external command [[[3
 nmap <leader>; :AsyncRun<space>
 " edit [[[3
-inoremap <silent><C-BS> <C-w>
 inoremap {<CR>          {}<left><CR><ESC>O
 inoremap (<CR>          ()<left><CR><ESC>O
 " yank [[[3
