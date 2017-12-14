@@ -71,7 +71,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'hdima/python-syntax', { 'for': 'python'}
 
 Plug 'lilydjwg/colorizer'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript'] }
+Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
 Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/ListToggle'
 Plug 'othree/html5.vim', {'for': 'html'}
@@ -449,7 +449,7 @@ if s:is_win
   nnoremap <leader>ps         :!start powershell<CR>
 endif
 " file, buffer, tab[[[2
-
+nnoremap gf :e <cfile><CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
 nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
@@ -458,7 +458,7 @@ nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 cmap     w!!        w !sudo tee % >/dev/null
 
 nnoremap <silent><leader><tab> :<C-u>b#<CR>
-"tab [[[3
+" tab [[[3
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 imap  <silent><M-1>   <Esc>:tabn 1<cr>i
