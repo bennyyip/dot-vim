@@ -1,6 +1,6 @@
 let s:is_win = has('win32')
+let s:is_nvim = has('nvim')
 let s:is_tty = !match(&term, 'linux')
-let s:has_ydcv = executable("ydcv")
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
 " plug#begin [[[2
@@ -8,9 +8,6 @@ call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
 " general [[[2
-Plug 'racer-rust/vim-racer', {'for': 'rust'}
-let g:racer_experimental_completer = 1
-
 if s:is_win
   Plug 'rust-lang/rust.vim'
 else
@@ -19,11 +16,16 @@ else
   Plug 'lilydjwg/fcitx.vim'
 endif
 
-if s:has_ydcv
-  Plug 'bennyyip/ydcv.vim'
-else
-  Plug 'vimers/vim-youdao'
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/ncm-clang'
+Plug 'roxma/nvim-cm-racer'
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': './install.sh'
+    \ }
 
 Plug 'inkarkat/vim-ingo-library'
 Plug 'vim-scripts/Mark'
@@ -33,7 +35,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
-" fork for colorscheme
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'Yggdroot/LeaderF-marks'
 Plug 'dyng/ctrlsf.vim'
@@ -45,8 +46,6 @@ Plug 'itchyny/vim-cursorword'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'luochen1990/rainbow'
-Plug 'maralla/completor-neosnippet'
-Plug 'maralla/completor.vim'
 Plug 'mattn/calendar-vim'
 Plug 'mattn/webapi-vim' " for :RustPlay
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
@@ -66,6 +65,7 @@ Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
+Plug 'iamcco/dict.vim'
 Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'hdima/python-syntax', { 'for': 'python'}
@@ -265,7 +265,11 @@ set backupdir   =$v/files/backup/
 set backupext   =-vimbackup
 set directory   =$v/files/swap/
 set undodir     =$v/files/undo/
-set viminfo     ='100,n$v/files/info/viminfo
+if s:is_nvim
+  set shada       ='100
+else
+  set viminfo     ='100,n$v/files/info/viminfo
+endif
 " apperance [[[2
 " Plugin: itchyny/lightline.vim [[[2
 " g:lightline[[[4
@@ -318,7 +322,7 @@ function! LightlineFugitive() "[[[4
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
       let mark = ''  " edit here for cool mark
       let branch = fugitive#head()
-        return branch !=# '' ? (s:is_tty ? "" : "\ue0a0 ").branch : ''
+      return branch !=# '' ? (s:is_tty ? "" : "\ue0a0 ").branch : ''
     endif
   catch
   endtry
@@ -618,7 +622,6 @@ let g:neosnippet#disable_runtime_snippets = {
       \  '_' : 1,
       \ }
 let g:neosnippet#snippets_directory = '$v/snippets'
-
 " Plugin: is.vim [[[2
 map n  <Plug>(is-n)zzzv
 map N  <Plug>(is-N)zzzv
@@ -769,14 +772,11 @@ augroup my_dirvish_events
   " double "space" to preview
   autocmd FileType dirvish nmap <silent><buffer> <space><space> p<C-w>p
 augroup END
-" Plugin: bennyyip/ydcv.vim [[[2
-if s:has_ydcv
-  nnoremap <leader>oy :<c-u>Ydcv<CR>
-  xnoremap <leader>oy :<c-u>Ydcv<CR>
-else
-  nnoremap <leader>oy :<c-u>Dic<CR>
-  xnoremap <leader>oy :<c-u>Dic<CR>
-endif
+" Plugin: bennyyip/dict.vim [[[2
+nmap <silent> <Leader>oy <Plug>DictSearch
+xmap <silent> <Leader>oy <Plug>DictVSearch
+nmap <silent> <Leader>oY <Plug>DictWSearch
+xmap <silent> <Leader>oY <Plug>DictWVSearch
 
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
