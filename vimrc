@@ -1,6 +1,6 @@
 let s:is_win = has('win32')
 let s:is_nvim = has('nvim')
-let s:is_tty = !match(&term, 'linux')
+let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
 " plug#begin [[[2
@@ -360,6 +360,10 @@ colorscheme gruvbox
 hi VertSplit guibg=#282828 guifg=#181A1F
 "hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
+if exists('g:Gui')
+    GuiFont! Inziu Iosevka CL:h16
+    let g:GuiWindowFullScreen=1
+endif
 if !exists("g:vimrc_loaded")
   if has("gui_running")
     "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
@@ -383,7 +387,12 @@ let g:vimrc_loaded=1
 " set tabline=%!ben#Vim_NeatTabLine()
 " Windows [[[2
 if s:is_win
-  set pythonthreedll=python36.dll
+  if !s:is_nvim
+    set pythonthreedll=python36.dll
+  else
+    set shell=powershell
+    set shellcmdflag=-command
+  endif
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
 endif

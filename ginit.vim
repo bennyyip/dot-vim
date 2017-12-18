@@ -1,1 +1,6 @@
-GuiFont Monospace:h16
+if has('win32')
+    GuiFont! Inziu Iosevka CL:h12
+    call GuiWindowMaximized(1)
+else
+    GuiFont! Monospace:h14
+endif
