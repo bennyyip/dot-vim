@@ -474,16 +474,6 @@ nnoremap <silent><leader><tab> :<C-u>b#<CR>
 " tab [[[3
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
-imap  <silent><M-1>   <Esc>:tabn 1<cr>i
-imap  <silent><M-2>   <Esc>:tabn 2<cr>i
-imap  <silent><M-3>   <Esc>:tabn 3<cr>i
-imap  <silent><M-4>   <Esc>:tabn 4<cr>i
-imap  <silent><M-5>   <Esc>:tabn 5<cr>i
-imap  <silent><M-6>   <Esc>:tabn 6<cr>i
-imap  <silent><M-7>   <Esc>:tabn 7<cr>i
-imap  <silent><M-8>   <Esc>:tabn 8<cr>i
-imap  <silent><M-9>   <Esc>:tabn 9<cr>i
-imap  <silent><M-0>   <Esc>:tabn 10<cr>i
 noremap  <silent><M-1>   :tabn 1<cr>
 noremap  <silent><M-2>   :tabn 2<cr>
 noremap  <silent><M-3>   :tabn 3<cr>
@@ -504,6 +494,15 @@ inoremap <silent><M-7>   <ESC>:tabn 7<cr>
 inoremap <silent><M-8>   <ESC>:tabn 8<cr>
 inoremap <silent><M-9>   <ESC>:tabn 9<cr>
 inoremap <silent><M-0>   <ESC>:tabn 10<cr>
+tnoremap <silent><M-1>   <C-\><C-N><ESC>:tabn 1<cr>
+tnoremap <silent><M-2>   <C-\><C-N><ESC>:tabn 2<cr>
+tnoremap <silent><M-3>   <C-\><C-N><ESC>:tabn 3<cr>
+tnoremap <silent><M-4>   <C-\><C-N><ESC>:tabn 4<cr>
+tnoremap <silent><M-5>   <C-\><C-N><ESC>:tabn 5<cr>
+tnoremap <silent><M-6>   <C-\><C-N><ESC>:tabn 6<cr>
+tnoremap <silent><M-7>   <C-\><C-N><ESC>:tabn 7<cr>
+tnoremap <silent><M-8>   <C-\><C-N><ESC>:tabn 8<cr>
+tnoremap <silent><M-9>   <C-\><C-N><ESC>:tabn 9<cr>
 " move [[[2
 nnoremap <M-j> gj
 nnoremap <M-k> gk
