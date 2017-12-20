@@ -493,6 +493,7 @@ inoremap <silent><M-7>   <ESC>:tabn 7<cr>
 inoremap <silent><M-8>   <ESC>:tabn 8<cr>
 inoremap <silent><M-9>   <ESC>:tabn 9<cr>
 inoremap <silent><M-0>   <ESC>:tabn 10<cr>
+if s:is_nvim
 tnoremap <silent><M-1>   <C-\><C-N><ESC>:tabn 1<cr>
 tnoremap <silent><M-2>   <C-\><C-N><ESC>:tabn 2<cr>
 tnoremap <silent><M-3>   <C-\><C-N><ESC>:tabn 3<cr>
@@ -502,6 +503,7 @@ tnoremap <silent><M-6>   <C-\><C-N><ESC>:tabn 6<cr>
 tnoremap <silent><M-7>   <C-\><C-N><ESC>:tabn 7<cr>
 tnoremap <silent><M-8>   <C-\><C-N><ESC>:tabn 8<cr>
 tnoremap <silent><M-9>   <C-\><C-N><ESC>:tabn 9<cr>
+endif
 " move [[[2
 nnoremap <M-j> gj
 nnoremap <M-k> gk
