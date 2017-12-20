@@ -16,16 +16,15 @@ else
   Plug 'lilydjwg/fcitx.vim'
 endif
 
-Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/ncm-clang'
-Plug 'roxma/nvim-cm-racer'
-if !has('nvim')
-    Plug 'roxma/vim-hug-neovim-rpc'
+if s:is_nvim
+  Plug 'roxma/nvim-completion-manager'
+  Plug 'roxma/ncm-clang'
+  Plug 'roxma/nvim-cm-racer'
+  Plug 'roxma/vim-hug-neovim-rpc'
+else
+  Plug 'maralla/completor.vim'
 endif
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': './install.sh'
-    \ }
+
 
 Plug 'inkarkat/vim-ingo-library'
 Plug 'vim-scripts/Mark'
@@ -37,7 +36,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'Yggdroot/LeaderF-marks'
-Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim', { 'on': 'CtrlSF' }
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
@@ -384,7 +383,7 @@ if !exists("g:vimrc_loaded")
 endif " exists(...)
 let g:vimrc_loaded=1
 " setup new tabline, just like %M%t in macvim
-" set tabline=%!ben#Vim_NeatTabLine()
+set tabline=%!ben#Vim_NeatTabLine()
 " Windows [[[2
 if s:is_win
   if !s:is_nvim
@@ -785,7 +784,6 @@ nmap <silent> <Leader>oy <Plug>DictSearch
 xmap <silent> <Leader>oy <Plug>DictVSearch
 nmap <silent> <Leader>oY <Plug>DictWSearch
 xmap <silent> <Leader>oY <Plug>DictWVSearch
-
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
