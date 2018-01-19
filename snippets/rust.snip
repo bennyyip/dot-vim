@@ -54,6 +54,9 @@ abbr        bitflags!
         ${0:TARGET}
     }
 
+snippet db
+    println!("{:?}", ${0:TARGET});
+
 snippet     pln
 abbr        println!
     println!("${1:\{\}}", ${0:TARGET});

@@ -8,6 +8,9 @@
 " ============================================================================
 
 " NOTE: THIS COLOR ONLY WORKS WHEN USING GRUVBOX
+if g:colors_name != "gruvbox"
+  finish
+endif
 
 function! s:getTermColor(group)
   let termColor = synIDattr(hlID(a:group), "fg", "cterm")
