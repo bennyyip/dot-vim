@@ -25,10 +25,8 @@ else
   Plug 'maralla/completor.vim'
 endif
 
-
 Plug 'inkarkat/vim-ingo-library'
 Plug 'vim-scripts/Mark'
-Plug 'vim-scripts/CountJump'
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'KabbAmine/vCoolor.vim'
@@ -54,6 +52,12 @@ Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
+
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-indent'
+Plug 'adriaanzon/vim-textobj-matchit'
+
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
@@ -61,6 +65,7 @@ Plug 'PProvost/vim-ps1'
 Plug 'ekalinin/Dockerfile.vim'
 
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+Plug 'elixir-editors/vim-elixir'
 
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
@@ -80,6 +85,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'tikhomirov/vim-glsl'
 Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
 " look [[[2
 Plug 'itchyny/lightline.vim'
@@ -403,11 +409,6 @@ nmap     tj Jx
 nmap     tp "+P
 nnoremap tl ^vg_
 nmap     T :tabnew<cr>
-" file text object [[[3
-nmap dae ggdG
-nmap cae ggcG
-nmap vae ggVG
-nmap yae mxHmyggyG`yzt`x
 " quick <C-w> [[[3
 nnoremap ' <C-w>
 if s:is_win
@@ -795,6 +796,7 @@ let g:rainbow_conf = {
 " Plugin: maralla/completor.vim [[[2
 inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
 inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
+let g:completor_racer_binary = '/bin/racer'
 let g:completor_tex_omni_trigger = '\\\\(:?'
       \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
       \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
@@ -835,6 +837,7 @@ let g:ctrlsf_mapping = {
       \ "prev": "N",
       \ "vsplit": "x"
       \ }
+nnoremap <C-S-f> :CtrlSF<space>
 com! -n=* -comp=customlist,ctrlsf#comp#Completion Rg call ctrlsf#Search(<q-args>)
 command! Rgt CtrlSFToggle
 command! Rgu CtrlSFUpdate
@@ -843,10 +846,39 @@ let g:scratch_no_mappings = 1
 nmap gs <plug>(scratch-insert-reuse)
 xmap gs <plug>(scratch-selection-reuse)
 xmap gS <plug>(scratch-selection-clear)
-" Plugin CountJump [[[2
-call CountJump#TextObject#MakeWithCountSearch('', '/', 'ai', 'v', '\\\@<!/', '\\\@<!/') " js regex
-call CountJump#TextObject#MakeWithCountSearch('', 'c', 'ai', 'v', '\\\@<!|', '\\\@<!|') " Rust closure
-call CountJump#TextObject#MakeWithCountSearch('', ':', 'ai', 'v', '\\\@<!:', '\\\@<!:')
+" Plugin kana/vim-textobj-user [[[2
+call textobj#user#plugin('rust', {
+      \         'closure': {
+      \         '*sfile*': expand('<sfile>:p'),
+      \         'select-a': 'ac',  '*select-a-function*': 's:select_a',
+      \         'select-i': 'ic',  '*select-i-function*': 's:select_i'
+      \   },
+      \ })
+
+function! s:select_a()
+  normal! F|
+
+  let end_pos = getpos('.')
+
+  normal! f|
+
+  let start_pos = getpos('.')
+  return ['v', start_pos, end_pos]
+endfunction
+
+
+function! s:select_i()
+  normal! T|
+
+  let end_pos = getpos('.')
+
+  normal! t|
+
+  let start_pos = getpos('.')
+
+  return ['v', start_pos, end_pos]
+endfunction
+
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
