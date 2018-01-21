@@ -67,7 +67,10 @@ Plug 'PProvost/vim-ps1'
 Plug 'ekalinin/Dockerfile.vim'
 
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+
 Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format', { 'for': 'elixir' }
+Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
@@ -664,6 +667,39 @@ let g:tagbar_type_nc = {
       \ ],
       \ }
 
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'deffile' : $v.'/ftplugin/.ctags-elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records',
+        \ 't:tests'
+    \ ]
+\ }
+
+let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits',
+        \'i:impls,trait implementations',
+    \]
+\}
+
 let g:tagbar_width = 30
 nmap tb :TagbarToggle<cr>
 " Plugin: mhinz/vim-startify [[[2
@@ -812,17 +848,17 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
 let g:ale_tex_lacheck_executable="shutup" "shutup is a program that do nothing, mute lacheck
 " Plugin: vim-easy-align [[[2
 xmap <cr> <plug>(LiveEasyAlign)
-" Plugin justinmk/vim-sneak [[[2
+" Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
-" Plugin Valloric/ListToggle [[[2
+" Plugin: Valloric/ListToggle [[[2
 let g:lt_location_list_toggle_map = '<leader>ol'
 let g:lt_quickfix_list_toggle_map = '<leader>l'
-" Plugin vimwiki/vimwiki [[[2
+" Plugin:vimwiki/vimwiki [[[2
 let g:vimwiki_list = [{'template_deafult': 'default' }]
-" Plugin Yggdroot/LeaderF [[[2
+" Plugin:Yggdroot/LeaderF [[[2
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
@@ -831,7 +867,7 @@ nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
 let g:Lf_StlColorscheme = 'gruvbox'
-" Plugin dyng/ctrlsf.vim [[[2
+" Plugin:dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project+fw'
 let g:ctrlsf_mapping = {
       \ "next": "n",
@@ -842,12 +878,12 @@ nnoremap <C-S-f> :CtrlSF<space>
 com! -n=* -comp=customlist,ctrlsf#comp#Completion Rg call ctrlsf#Search(<q-args>)
 command! Rgt CtrlSFToggle
 command! Rgu CtrlSFUpdate
-" Plugin mtth/scratch.vim [[[2
+" Plugin:mtth/scratch.vim [[[2
 let g:scratch_no_mappings = 1
 nmap gs <plug>(scratch-insert-reuse)
 xmap gs <plug>(scratch-selection-reuse)
 xmap gS <plug>(scratch-selection-clear)
-" Plugin kana/vim-textobj-user [[[2
+" Plugin:kana/vim-textobj-user [[[2
 call textobj#user#plugin('rust', {
       \         'closure': {
       \         '*sfile*': expand('<sfile>:p'),
@@ -880,39 +916,6 @@ function! s:select_i()
   return ['v', start_pos, end_pos]
 endfunction
 
-" Plugin tagbar [[[2
-let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'deffile' : $v.'/ftplugin/.ctags-elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records',
-        \ 't:tests'
-    \ ]
-\ }
-
-let g:tagbar_type_rust = {
-    \ 'ctagstype' : 'rust',
-    \ 'kinds' : [
-        \'T:types,type definitions',
-        \'f:functions,function definitions',
-        \'g:enum,enumeration names',
-        \'s:structure names',
-        \'m:modules,module names',
-        \'c:consts,static constants',
-        \'t:traits',
-        \'i:impls,trait implementations',
-    \]
-\}
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
