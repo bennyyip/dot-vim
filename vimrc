@@ -58,6 +58,8 @@ Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-indent'
 Plug 'adriaanzon/vim-textobj-matchit'
 
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+
 " lang [[[2
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
@@ -112,7 +114,6 @@ Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 Plug 'junegunn/vim-peekaboo'
 " bennyyip [[[2
 " https://github.com/universal-ctags/ctags
-Plug 'bennyyip/tagbar', { 'on': 'TagbarToggle' }
 Plug 'bennyyip/LeaderF-github-stars'
 Plug 'bennyyip/LeaderF-ghq'
 Plug 'bennyyip/vim-yapf', { 'for': 'python' }
@@ -879,6 +880,39 @@ function! s:select_i()
   return ['v', start_pos, end_pos]
 endfunction
 
+" Plugin tagbar [[[2
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'deffile' : $v.'/ftplugin/.ctags-elixir',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 'functions:functions',
+        \ 'c:callbacks',
+        \ 'd:delegates',
+        \ 'e:exceptions',
+        \ 'i:implementations',
+        \ 'a:macros',
+        \ 'o:operators',
+        \ 'm:modules',
+        \ 'p:protocols',
+        \ 'r:records',
+        \ 't:tests'
+    \ ]
+\ }
+
+let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits',
+        \'i:impls,trait implementations',
+    \]
+\}
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
