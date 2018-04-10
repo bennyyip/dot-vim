@@ -11,7 +11,8 @@ set cpo&vim
 " ---------------------------------------------------------------------
 " Functions:
 function Escalt_console()
-  for i in range(48, 57) + range(65, 90) + range(97, 122)
+  " for i in range(48, 57) + range(65, 90) + range(97, 122)
+  for i in range(48, 57) "I only need numbers
     exe "set <M-".nr2char(i).">=\<Esc>".nr2char(i)
   endfor
   " 10, 22, 34, 62, 124 can't be set
