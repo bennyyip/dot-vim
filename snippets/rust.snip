@@ -168,3 +168,26 @@ abbr        Result<A, B>
 snippet debug
 options head
         debug!("${1} = {:?}", $1);
+
+snippet modtest
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        ${1}
+    }
+
+
+snippet main2
+options head
+	fn main2() -> Result<(),Error> {
+	  ${1}
+
+	  Ok(())
+	}
+
+	fn main() {
+	  if let Err(e) = main2() {
+	    eprintln!("Error: {:?}", e);
+            ::std::process::exit(1);
+	  }
+	}
