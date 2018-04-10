@@ -1,1 +1,1 @@
-nmap <leader>cf :MixFormat<CR>
+nmap <leader>cf :w<CR>:MixFormat<CR>
