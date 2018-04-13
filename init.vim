@@ -1,1 +1,1 @@
-/home/ben/.vim/vimrc
+vimrc
