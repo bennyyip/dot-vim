@@ -1,3 +1,9 @@
+let s:opam_prefix_dir = system("opam config var prefix")
+let s:opam_prefix_dir = substitute(s:opam_prefix_dir, '[\r\n]*$', '', '')
+let s:opam_share_dir = s:opam_prefix_dir . '/share'
+let s:opam_bin_dir = s:opam_prefix_dir . '/bin'
+let $PATH .= ':' . s:opam_bin_dir
+
 let s:is_win = has('win32')
 let s:is_nvim = has('nvim')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
@@ -29,7 +35,7 @@ Plug 'inkarkat/vim-ingo-library'
 Plug 'vim-scripts/Mark'
 
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'KabbAmine/vCoolor.vim'
+" Plug 'KabbAmine/vCoolor.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -60,7 +66,13 @@ Plug 'adriaanzon/vim-textobj-matchit'
 
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
+" Plug 'lilydjwg/vim-foldsearch'
+
 " lang [[[2
+Plug '~/.opam/system/share/ocp-ident/vim'
+Plug '~/.opam/system/share/ocp-index/vim'
+Plug '~/.opam/system/share/merlin/vim'
+
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 Plug 'PProvost/vim-ps1'
@@ -92,10 +104,13 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
+
+
 " look [[[2
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 " tpope [[[2
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
@@ -122,6 +137,8 @@ Plug 'bennyyip/LeaderF-ghq'
 Plug 'bennyyip/vim-yapf', { 'for': 'python' }
 " plug#end [[[2
 call plug#end()
+
+
 " Setting [[[1
 " general settings [[[2
 " init [[[3
@@ -387,7 +404,7 @@ if !exists("g:vimrc_loaded")
       set guifont=Inziu\ Iosevka\ CL:h14
     else
       set go-=aegimrLtT
-      set guifont=Monospace\ 16
+      set guifont=Monospace\ 12
     endif
   endif " has
 endif " exists(...)
