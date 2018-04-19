@@ -12,7 +12,6 @@ nmap <Leader>C :ClangFormatAutoToggle<CR>
 autocmd BufLeave *.{c,cpp} mark C
 autocmd BufLeave *.h       mark H
 
-map <c-l> <Plug>CompletorCppJumpToPlaceholder
 imap <c-l> <Plug>CompletorCppJumpToPlaceholder
 
 ALEDisable
