@@ -1,4 +1,4 @@
-let s:opam_prefix_dir = system("opam config var prefix")
+let s:opam_prefix_dir = system('opam config var prefix')
 let s:opam_prefix_dir = substitute(s:opam_prefix_dir, '[\r\n]*$', '', '')
 let s:opam_share_dir = s:opam_prefix_dir . '/share'
 let s:opam_bin_dir = s:opam_prefix_dir . '/bin'
@@ -26,16 +26,14 @@ if s:is_nvim
   Plug 'roxma/nvim-completion-manager'
   Plug 'roxma/ncm-clang'
   Plug 'roxma/nvim-cm-racer'
-  Plug 'roxma/vim-hug-neovim-rpc'
 else
   Plug 'maralla/completor.vim'
 endif
 
+Plug 'Valloric/ListToggle'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'vim-scripts/Mark'
-
 Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'KabbAmine/vCoolor.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -50,13 +48,11 @@ Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'luochen1990/rainbow'
 Plug 'mattn/calendar-vim'
-Plug 'mattn/webapi-vim' " for :RustPlay
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'mtth/scratch.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
-Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 
 Plug 'kana/vim-textobj-user'
@@ -65,8 +61,6 @@ Plug 'kana/vim-textobj-indent'
 Plug 'adriaanzon/vim-textobj-matchit'
 
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-
-" Plug 'lilydjwg/vim-foldsearch'
 
 " lang [[[2
 Plug '~/.opam/system/share/ocp-ident/vim'
@@ -87,14 +81,13 @@ Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
 Plug 'iamcco/dict.vim'
-Plug 'amix/vim-zenroom2', { 'for': [ 'markdown', 'rst', 'txt'] }
 Plug 'lervag/vimtex', {'for': 'tex'}
+
 Plug 'hdima/python-syntax', { 'for': 'python'}
 
 Plug 'lilydjwg/colorizer'
 Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
 Plug 'Valloric/MatchTagAlways'
-Plug 'Valloric/ListToggle'
 Plug 'othree/html5.vim', {'for': 'html'}
 
 Plug 'cespare/vim-toml', { 'for': 'toml' }
@@ -105,12 +98,10 @@ Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
 
-
 " look [[[2
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
 " tpope [[[2
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-abolish'
@@ -129,7 +120,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
-Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo'
 " bennyyip [[[2
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/LeaderF-github-stars'
@@ -138,12 +129,11 @@ Plug 'bennyyip/vim-yapf', { 'for': 'python' }
 " plug#end [[[2
 call plug#end()
 
-
 " Setting [[[1
 " general settings [[[2
 " init [[[3
-let mapleader        = "\<Space>"
-let localleader      = "\\"
+let g:mapleader        = "\<Space>"
+let g:localleader      = "\\"
 let g:vimsyn_folding = 'f'
 let g:is_bash        = 1
 let g:lisp_rainbow   = 1
@@ -177,9 +167,11 @@ set showmatch
 set matchtime     =0
 set showmode
 
-set fenc  =utf-8
-set fencs =utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
-set enc   =utf-8
+set fileencoding  =utf-8
+set fileencodings =utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set encoding   =utf-8
+scriptencoding utf-8
+
 
 if !s:is_tty
   if s:is_win
@@ -327,28 +319,28 @@ if !s:is_tty
   let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
 endif
 function! LightlineModified() "[[[4
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+  return &filetype =~# 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 function! LightlineReadonly() "[[[4
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? (s:is_tty ? "RO" : "\ue0a2") : ''
+  return &filetype !~? 'help\|vimfiler\|gundo' && &readonly ? (s:is_tty ? 'RO' : '\ue0a2') : ''
 endfunction
 function! LightlineFilename() "[[[4
-  let fname = expand('%:~')
-  return fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'denite' ? denite#get_status_sources() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+  let l:fname = expand('%:~')
+  return l:fname ==# '__Tagbar__' ? g:lightline.l:fname :
+        \ l:fname =~# '__Gundo\|NERD_tree' ? '' :
+        \ &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+        \ &filetype ==# 'denite' ? denite#get_status_sources() :
+        \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+        \ ('' !=# LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' !=# l:fname ? l:fname : '[No Name]') .
+        \ ('' !=# LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 function! LightlineFugitive() "[[[4
   try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ''  " edit here for cool mark
-      let branch = fugitive#head()
-      return branch !=# '' ? (s:is_tty ? "" : "\ue0a0 ").branch : ''
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &filetype !~? 'vimfiler' && exists('*fugitive#head')
+      let l:mark = ''  " edit here for cool mark
+      let l:branch = fugitive#head()
+      return l:branch !=# '' ? (s:is_tty ? '' : "\ue0a0 ").l:branch : ''
     endif
   catch
   endtry
@@ -361,15 +353,15 @@ function! LightlineFiletype() "[[[4
   return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
 function! LightlineFileencoding() "[[[4
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+  return winwidth(0) > 70 ? (&fileencoding !=# '' ? &fileencoding : &encoding) : ''
 endfunction
 function! LightlineMode() "[[[4
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'denite' ? 'Denite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
+  let l:fname = expand('%:t')
+  return l:fname ==# '__Tagbar__' ? 'Tagbar' :
+        \ l:fname =~# 'NERD_tree' ? 'NERDTree' :
+        \ &filetype ==# 'denite' ? 'Denite' :
+        \ &filetype ==# 'vimfiler' ? 'VimFiler' :
+        \ &filetype ==# 'vimshell' ? 'VimShell' :
         \ lightline#mode()[0]
   "\ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
@@ -381,7 +373,7 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 " Plugin: morhetz/gruvbox [[[3
-set bg=dark
+set background=dark
 colorscheme gruvbox
 hi VertSplit guibg=#282828 guifg=#181A1F
 "hi EndOfBuffer guibg=#282828 guifg=#282828
@@ -390,20 +382,20 @@ if exists('g:Gui')
     GuiFont! Inziu Iosevka CL:h16
     let g:GuiWindowFullScreen=1
 endif
-if !exists("g:vimrc_loaded")
-  if has("gui_running")
+if !exists('g:vimrc_loaded')
+  if has('gui_running')
     "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
     set cmdheight=1
     set langmenu=en_US
     if s:is_win
-      set go-=egmrLtT
+      set guioptions-=egmrLtT
       "https://github.com/derekmcloughlin/gvimfullscreen_win32
-      au GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
-      au GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
+      autocmd GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
+      autocmd GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
       "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
       set guifont=Inziu\ Iosevka\ CL:h14
     else
-      set go-=aegimrLtT
+      set guioptions-=aegimrLtT
       set guifont=Monospace\ 12
     endif
   endif " has
@@ -536,12 +528,12 @@ inoremap <M-l> <Right>
 " Function and Command [[[1
 " :Root | Change directory to the root of the Git repository [[[2
 function! s:root()
-  let root = systemlist('git rev-parse --show-toplevel')[0]
+  let l:root = systemlist('git rev-parse --show-toplevel')[0]
   if v:shell_error
     echo 'Not in git repo'
   else
-    execute 'lcd' root
-    echo 'Changed directory to: '.root
+    execute 'lcd' l:root
+    echo 'Changed directory to: '.l:root
   endif
 endfunction
 command! Root call s:root()
@@ -559,33 +551,20 @@ command! -range Shuffle <line1>,<line2>call s:shuffle()
 function! s:duck()
 endfunction
 
-function! s:duck(pat)
-  let q = substitute(a:pat, '["\n]', ' ', 'g')
-  " let q = substitute(q, '[[:punct:] ]',
-  "       \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
-  let q =' "https:\\/\\/www.duckduckgo.com\\/?q='.q.'"'
-  let o = (s:is_win ? 'explorer' : 'xdg-open') . q
-  echo o
-  execute 'AsyncRun' o
-endfunction
-
-command! -nargs=1 Duck call <SID>duck(<q-args>)
-nnoremap <silent><leader>? :call <SID>duck(expand("<cWORD>"))<cr>
-xnoremap <silent><leader>? "gy:call <SID>duck(@g)<cr>gv
 " :A [[[2
 function! s:a(cmd)
-  let name = expand('%:r')
-  let ext = tolower(expand('%:e'))
-  let sources = ['c', 'cc', 'cpp', 'cxx']
-  let headers = ['h', 'hh', 'hpp', 'hxx']
-  for pair in [[sources, headers], [headers, sources]]
-    let [set1, set2] = pair
-    if index(set1, ext) >= 0
-      for h in set2
-        let aname = name.'.'.h
-        for a in [aname, toupper(aname)]
-          if filereadable(a)
-            execute a:cmd a
+  let l:name = expand('%:r')
+  let l:ext = tolower(expand('%:e'))
+  let l:sources = ['c', 'cc', 'cpp', 'cxx']
+  let l:headers = ['h', 'hh', 'hpp', 'hxx']
+  for l:pair in [[l:sources, l:headers], [l:headers, l:sources]]
+    let [l:set1, l:set2] = l:pair
+    if index(l:set1, l:ext) >= 0
+      for l:h in l:set2
+        let l:aname = l:name.'.'.l:h
+        for l:a in [l:aname, toupper(l:aname)]
+          if filereadable(l:a)
+            execute a:cmd l:a
             return
           end
         endfor
@@ -793,7 +772,7 @@ if !s:is_win
   map <Leader>vx :VimuxInterruptRunner<CR>
   function! VimuxSlime()
     call VimuxSendText(@v)
-    call VimuxSendKeys("Enter")
+    call VimuxSendKeys('Enter')
   endfunction
 
   " If text is selected, save it in the v buffer and send that buffer it to tmux
@@ -844,8 +823,13 @@ xmap <silent> <Leader>oY <Plug>DictWVSearch
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
-      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
-      \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+        \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
+        \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+        \ 'separately': {
+        \        'ocaml': {
+        \            'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
+        \        }
+        \ }
       \}
 " Plugin: maralla/completor.vim [[[2
 inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
@@ -862,14 +846,14 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
       \ .')$'
 " Plugin: w0rp/ale [[[2
-let g:ale_tex_lacheck_executable="shutup" "shutup is a program that do nothing, mute lacheck
+let g:ale_tex_lacheck_executable='shutup' "shutup is a program that do nothing, mute lacheck
 " Plugin: vim-easy-align [[[2
 xmap <cr> <plug>(LiveEasyAlign)
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap t <Plug>Sneak_t
 " Plugin: Valloric/ListToggle [[[2
 let g:lt_location_list_toggle_map = '<leader>ol'
 let g:lt_quickfix_list_toggle_map = '<leader>l'
@@ -887,9 +871,9 @@ let g:Lf_StlColorscheme = 'gruvbox'
 " Plugin:dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project+fw'
 let g:ctrlsf_mapping = {
-      \ "next": "n",
-      \ "prev": "N",
-      \ "vsplit": "x"
+      \ 'next': 'n',
+      \ 'prev': 'N',
+      \ 'vsplit': 'x'
       \ }
 nnoremap <C-S-f> :CtrlSF<space>
 com! -n=* -comp=customlist,ctrlsf#comp#Completion Rg call ctrlsf#Search(<q-args>)
@@ -912,25 +896,25 @@ call textobj#user#plugin('rust', {
 function! s:select_a()
   normal! F|
 
-  let end_pos = getpos('.')
+  let l:end_pos = getpos('.')
 
   normal! f|
 
-  let start_pos = getpos('.')
-  return ['v', start_pos, end_pos]
+  let l:start_pos = getpos('.')
+  return ['v', l:start_pos, l:end_pos]
 endfunction
 
 
 function! s:select_i()
   normal! T|
 
-  let end_pos = getpos('.')
+  let l:end_pos = getpos('.')
 
   normal! t|
 
-  let start_pos = getpos('.')
+  let l:start_pos = getpos('.')
 
-  return ['v', start_pos, end_pos]
+  return ['v', l:start_pos, l:end_pos]
 endfunction
 
 " ending [[[1
