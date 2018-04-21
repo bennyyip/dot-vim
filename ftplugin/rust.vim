@@ -12,6 +12,8 @@ else
   nmap <leader>gd <Plug>(rust-doc)
 endif
 
+let b:surround_{char2nr('|')} = '| \r '
+
 if strlen(findfile("Cargo.toml", ".;"))
 	compiler cargo
 else

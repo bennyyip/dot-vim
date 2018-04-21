@@ -8,10 +8,10 @@
 " ============================================================================
 
 " NOTE: THIS COLOR ONLY WORKS WHEN USING GRUVBOX
-if g:colors_name != "gruvbox"
+if g:colors_name != "gruvbox" || exists("g:loaded_leaderf_gruvbox")
   finish
 endif
-
+let g:loaded_leaderf_gruvbox=1
 function! s:getTermColor(group)
   let termColor = synIDattr(hlID(a:group), "fg", "cterm")
   return  termColor
