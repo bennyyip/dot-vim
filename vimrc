@@ -30,7 +30,6 @@ else
   Plug 'maralla/completor.vim'
 endif
 
-Plug 'Valloric/ListToggle'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'vim-scripts/Mark'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -44,12 +43,12 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
 Plug 'hotoo/pangu.vim'
 Plug 'itchyny/vim-cursorword'
-Plug 'justinmk/vim-dirvish'
+" Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'luochen1990/rainbow'
 Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'mtth/scratch.vim'
+" Plug 'mtth/scratch.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
@@ -249,6 +248,8 @@ else
   let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 endif
 " misc [[[3
+set autoread
+set autowrite              " Automatically save before commands like :next and :make
 set wrapscan               " Searches wrap around end-of-file.
 set report=0               " Always report changed lines.
 set synmaxcol=200          " Only highlight the first 200 columns.
@@ -256,7 +257,6 @@ set history=1000
 set backspace=indent,eol,start
 set hidden
 set nrformats-=octal
-set autoread
 set splitbelow
 set splitright
 set titlestring =VIM:\ %f
@@ -378,8 +378,8 @@ hi VertSplit guibg=#282828 guifg=#181A1F
 "hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
 if exists('g:Gui')
-    GuiFont! Inziu Iosevka CL:h16
-    let g:GuiWindowFullScreen=1
+  GuiFont! Inziu Iosevka CL:h16
+  let g:GuiWindowFullScreen=1
 endif
 if !exists('g:vimrc_loaded')
   if has('gui_running')
@@ -389,8 +389,10 @@ if !exists('g:vimrc_loaded')
     if s:is_win
       set guioptions-=egmrLtT
       "https://github.com/derekmcloughlin/gvimfullscreen_win32
+      augroup vimrc
       autocmd GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
       autocmd GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
+      augroup END
       "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
       set guifont=Inziu\ Iosevka\ CL:h14
     else
@@ -413,13 +415,22 @@ if s:is_win
 endif
 " Key Mapping [[[1
 " misc [[[2
-" begins with t [[[3
+inoremap <M-o>      <C-O>o
+inoremap <M-O>      <C-O>O
+
 nmap     t= mxHmygg=G`yzt`x
 nmap     tj Jx
 nmap     tp "+P
 nnoremap tl ^vg_
 nmap     T :tabnew<cr>
-" quick <C-w> [[[3
+
+nmap <silent> <F6> :if &previewwindow<Bar>pclose<Bar>elseif exists(':Gstatus')<Bar>exe 'botright Gstatus'<Bar>else<Bar>ls<Bar>endif<CR>
+nmap <silent> <F7> :if exists(':Lcd')<Bar>exe 'Lcd'<Bar>elseif exists(':Cd')<Bar>exe 'Cd'<Bar>else<Bar>lcd %:h<Bar>endif<CR>
+map <F8>    :Make<CR>
+
+inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
+
+" quick <C-w>
 nnoremap ' <C-w>
 if s:is_win
   nnoremap <C-h> <C-w>h
@@ -427,43 +438,43 @@ if s:is_win
   nnoremap <C-k> <C-w>k
   nnoremap <C-l> <C-w>l
 endif
-" less style nohl [[[3
+" less style nohl
 nmap <silent> <M-u> :nohls<CR>
-" run external command [[[3
+" run external command
 nmap <leader>; :AsyncRun<space>
-" edit [[[3
+" edit
 inoremap {<CR>          {}<left><CR><ESC>O
 inoremap (<CR>          ()<left><CR><ESC>O
-" yank [[[3
+" yank
 inoremap <silent><C-v>      <C-r>+
 xnoremap <silent><C-c>      "+y
 nmap     Y                  y$
-" vimrc [[[3
+" vimrc
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
-nnoremap <leader>vr  :so $MYVIMRC<CR>
-" keep selection when indent line in visual mode [[[3
+nnoremap <leader>v  :so $MYVIMRC<CR>
+" keep selection when indent line in visual mode
 xnoremap <  <gv
 xnoremap >  >gv
-" script helper [[[3
+" script helper
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
-" quick edit macro  | ["register]<leader>m [[[3
+" quick edit macro  | ["register]<leader>m
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
-" quick substitute [[[3
+" quick substitute
 vnoremap qs "zy:%s`<C-R>z``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
-" get output from python [[[3
+" get output from python
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
-" Quit [[[3
+" Quit
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
 let g:sayonara_confirm_quit = 1
-" fold [[[3
+" fold
 nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 vnoremap <silent><space><space> zf
 nmap z] zo]z
 nmap z[ zo[z
-" Windows [[[3
+" Windows
 if s:is_win
   nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
   nnoremap <leader>ps         :!start powershell<CR>
@@ -502,15 +513,15 @@ inoremap <silent><M-8>   <ESC>:tabn 8<cr>
 inoremap <silent><M-9>   <ESC>:tabn 9<cr>
 inoremap <silent><M-0>   <ESC>:tabn 10<cr>
 if s:is_nvim
-tnoremap <silent><M-1>   <C-\><C-N><ESC>:tabn 1<cr>
-tnoremap <silent><M-2>   <C-\><C-N><ESC>:tabn 2<cr>
-tnoremap <silent><M-3>   <C-\><C-N><ESC>:tabn 3<cr>
-tnoremap <silent><M-4>   <C-\><C-N><ESC>:tabn 4<cr>
-tnoremap <silent><M-5>   <C-\><C-N><ESC>:tabn 5<cr>
-tnoremap <silent><M-6>   <C-\><C-N><ESC>:tabn 6<cr>
-tnoremap <silent><M-7>   <C-\><C-N><ESC>:tabn 7<cr>
-tnoremap <silent><M-8>   <C-\><C-N><ESC>:tabn 8<cr>
-tnoremap <silent><M-9>   <C-\><C-N><ESC>:tabn 9<cr>
+  tnoremap <silent><M-1>   <C-\><C-N><ESC>:tabn 1<cr>
+  tnoremap <silent><M-2>   <C-\><C-N><ESC>:tabn 2<cr>
+  tnoremap <silent><M-3>   <C-\><C-N><ESC>:tabn 3<cr>
+  tnoremap <silent><M-4>   <C-\><C-N><ESC>:tabn 4<cr>
+  tnoremap <silent><M-5>   <C-\><C-N><ESC>:tabn 5<cr>
+  tnoremap <silent><M-6>   <C-\><C-N><ESC>:tabn 6<cr>
+  tnoremap <silent><M-7>   <C-\><C-N><ESC>:tabn 7<cr>
+  tnoremap <silent><M-8>   <C-\><C-N><ESC>:tabn 8<cr>
+  tnoremap <silent><M-9>   <C-\><C-N><ESC>:tabn 9<cr>
 endif
 " move [[[2
 nnoremap <M-j> gj
@@ -541,10 +552,18 @@ end
 RB
 endfunction
 command! -range Shuffle <line1>,<line2>call s:shuffle()
-" :duck | Search DuckDuckGo.com [[[2
-function! s:duck()
+" OpenUrl [[[2
+function! OpenURL(url)
+  if has("win32")
+    exe "!start cmd /cstart /b ".a:url.""
+  else
+    exe "AsyncRun firefox \"".a:url."\""
+  endif
 endfunction
-
+command! -nargs=1 OpenURL :call OpenURL(<q-args>)
+nnoremap <leader>fu :OpenURL <cfile><CR>
+nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
+nnoremap gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><CR>
 " :A [[[2
 function! s:a(cmd)
   let l:name = expand('%:r')
@@ -581,8 +600,8 @@ function! s:gen_def()
 endfunction
 command! GenDef call s:gen_def()
 nmap <leader>df :GenDef<CR>
-" EX | chmod +x [[[2
-command! EX if !empty(expand('%'))
+" PX: plus x| chmod +x [[[2
+command! PX if !empty(expand('%'))
       \|   write
       \|   call system('chmod +x '.expand('%'))
       \|   silent e
@@ -593,14 +612,18 @@ command! EX if !empty(expand('%'))
         \| endif
 " Generate .clang_complete base on makefile [[[2
 command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
+" RFC [[[2
+command! -bar -count=0 RFC     :e http://www.ietf.org/rfc/rfc<count>.txt|setl ro noma
 " Autocmd [[[1
-" go back to where you exited [[[2
-autocmd BufReadPost *
-      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-      \   exe "normal g'\"" |
-      \ endif
-" save on focus lost [[[2
-au FocusLost * :wa
+augroup vimrc
+  " go back to where you exited
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+        \   exe "normal g'\"" |
+        \ endif
+  " save on focus lost
+  autocmd FocusLost * :silent! wa
+augroup END
 " Plugin Config [[[1
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -768,41 +791,17 @@ if !s:is_win
 endif
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
-" Plugin: netrw [[[2
-" let g:loaded_netrwPlugin = 1
+" Plugin: tpope/vim-fugitive [[[2
+augroup vimrc
+  autocmd FileType gitcommit wincmd J
+augroup end
+" Plugin: tpope/vim-vinegar [[[2
 let g:netrw_banner       = 0
 let g:netrw_bufsettings  = 'relativenumber'
 let g:netrw_keepdir      = 0
 let g:netrw_liststyle    = 1
 let g:netrw_sort_options = 'i'
-" Plugin: justinmk/vim-dirvish [[[2
-nnoremap <silent><leader>ft :vsplit +Dirvish<cr><c-w>H<c-w>35<bar>
-nnoremap <silent><leader>fT :vsplit <cr>:Dirvish %<cr><c-w>H<c-w>35<bar>
-augroup my_dirvish_events
-  autocmd!
-  " Map t to "open in new tab".
-  autocmd FileType dirvish
-        \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-        \ |xnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
-
-  " Enable :Gstatus and friends.
-  autocmd FileType dirvish call fugitive#detect(@%)
-
-  " Map `gr` to reload the Dirvish buffer.
-  autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
-
-  " Map `gh` to hide dot-prefixed files.
-  " To "toggle" this, just press `R` to reload.
-  " autocmd FileType dirvish nnoremap <silent><buffer>
-  "       \ gh :silent keeppatterns g@\v[/\\]\.[^\\/]+[\\/]?$@d<CR>
-
-  " Auto hide dotfiles, press "u" to show
-  autocmd FileType dirvish silent keeppatterns g@\v[/\\]\.[^\\/]+[\\/]?$@d_
-
-  autocmd FileType dirvish nmap <buffer> <c-o> -
-  " double "space" to preview
-  autocmd FileType dirvish nmap <silent><buffer> <space><space> p<C-w>p
-augroup END
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 " Plugin: bennyyip/dict.vim [[[2
 nmap <silent> <Leader>oy <Plug>DictSearch
 xmap <silent> <Leader>oy <Plug>DictVSearch
@@ -875,12 +874,7 @@ let g:sneak#label = 1
 nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
 nmap t <Plug>Sneak_t
-" Plugin: Valloric/ListToggle [[[2
-let g:lt_location_list_toggle_map = '<leader>ol'
-let g:lt_quickfix_list_toggle_map = '<leader>l'
-" Plugin:vimwiki/vimwiki [[[2
-let g:vimwiki_list = [{'template_deafult': 'default' }]
-" Plugin:Yggdroot/LeaderF [[[2
+" Plugin: Yggdroot/LeaderF [[[2
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
@@ -889,7 +883,7 @@ nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
 let g:Lf_StlColorscheme = 'gruvbox'
-" Plugin:dyng/ctrlsf.vim [[[2
+" Plugin: dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_mapping = {
       \ 'next': 'n',
@@ -902,12 +896,7 @@ nmap     <leader>sn <Plug>CtrlSFCwordPath
 nmap     <leader>sp <Plug>CtrlSFPwordPath
 nnoremap <leader>so :CtrlSFOpen<CR>
 nnoremap <leader>st :CtrlSFToggle<CR>
-" Plugin:mtth/scratch.vim [[[2
-let g:scratch_no_mappings = 1
-nmap gs <plug>(scratch-insert-reuse)
-xmap gs <plug>(scratch-selection-reuse)
-xmap gS <plug>(scratch-selection-clear)
-" Plugin:kana/vim-textobj-user [[[2
+" Plugin: kana/vim-textobj-user [[[2
 call textobj#user#plugin('rust', {
       \         'closure': {
       \         '*sfile*': expand('<sfile>:p'),
@@ -941,6 +930,11 @@ function! s:select_i()
 endfunction
 " Plugin: skywind3000/asyncrun.vim [[[2
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+noremap <leader>l :call asyncrun#quickfix_toggle(8)<cr>
+augroup vimrc
+  " open quickfix when something adds to it
+  autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
+augroup END
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
