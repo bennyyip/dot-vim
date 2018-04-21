@@ -94,7 +94,6 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'tikhomirov/vim-glsl'
-Plug 'rhysd/vim-clang-format', { 'for': [ 'c', 'cpp' ] }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'Shiracamus/vim-syntax-x86-objdump-d'
 
@@ -125,7 +124,6 @@ Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 " https://github.com/universal-ctags/ctags
 Plug 'bennyyip/LeaderF-github-stars'
 Plug 'bennyyip/LeaderF-ghq'
-Plug 'bennyyip/vim-yapf', { 'for': 'python' }
 " plug#end [[[2
 call plug#end()
 
@@ -322,7 +320,7 @@ function! LightlineModified() "[[[4
   return &filetype =~# 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 function! LightlineReadonly() "[[[4
-  return &filetype !~? 'help\|vimfiler\|gundo' && &readonly ? (s:is_tty ? 'RO' : '\ue0a2') : ''
+  return &filetype !~? 'help\|vimfiler\|gundo' && &readonly ? (s:is_tty ? 'RO' : "\ue0a2") : ''
 endfunction
 function! LightlineFilename() "[[[4
   let l:fname = expand('%:~')
@@ -401,8 +399,6 @@ if !exists('g:vimrc_loaded')
   endif " has
 endif " exists(...)
 let g:vimrc_loaded=1
-" setup new tabline, just like %M%t in macvim
-set tabline=%!ben#Vim_NeatTabLine()
 " Windows [[[2
 if s:is_win
   if !s:is_nvim
@@ -555,8 +551,8 @@ endfunction
 function! s:a(cmd)
   let l:name = expand('%:r')
   let l:ext = tolower(expand('%:e'))
-  let l:sources = ['c', 'cc', 'cpp', 'cxx']
-  let l:headers = ['h', 'hh', 'hpp', 'hxx']
+  let l:sources = ['c', 'cc', 'cpp', 'cxx', 'mli']
+  let l:headers = ['h', 'hh', 'hpp', 'hxx', 'ml']
   for l:pair in [[l:sources, l:headers], [l:headers, l:sources]]
     let [l:set1, l:set2] = l:pair
     if index(l:set1, l:ext) >= 0
@@ -577,13 +573,13 @@ command! AV call s:a('botright vertical split')
 nmap <leader>a :A<CR>
 
 function! s:gen_def()
-  normal 0yf;
+  normal! 0yf;
   call s:a('e')
-  normal Go
-  normal p;cl {
-  normal o}
-  normal O
-  normal cc
+  normal! Go
+  normal! p;cl {
+  normal! o}
+  normal! O
+  normal! cc
 endfunction
 command! GenDef call s:gen_def()
 nmap <leader>df :GenDef<CR>
@@ -607,11 +603,6 @@ autocmd BufReadPost *
       \ endif
 " save on focus lost [[[2
 au FocusLost * :wa
-" auto trim spaces [[[2
-au BufWritePre * TrimSpaces
-au FileAppendPre * TrimSpaces
-au FileWritePre * TrimSpaces
-au FilterWritePre * TrimSpaces
 " Plugin Config [[[1
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -847,6 +838,39 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ .')$'
 " Plugin: w0rp/ale [[[2
 let g:ale_tex_lacheck_executable='shutup' "shutup is a program that do nothing, mute lacheck
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_fix_on_save = 0
+let g:ale_fixers = {
+\   'vimscript': [
+\       'trim_whitespace',
+\       'remove_trailing_lines',
+\   ],
+\   'rust': [
+\       'trim_whitespace',
+\       'remove_trailing_lines',
+\       'rustfmt',
+\   ],
+\   'c': [
+\       'trim_whitespace',
+\       'remove_trailing_lines',
+\       'clang-format',
+\   ],
+\   'cpp': [
+\       'trim_whitespace',
+\       'remove_trailing_lines',
+\       'clang-format',
+\   ],
+\   'python': [
+\       'trim_whitespace',
+\       'remove_trailing_lines',
+\       'yapf',
+\       'add_blank_lines_for_python_control_statements',
+\   ],
+\}
+nmap <silent> <leader>cn <Plug>(ale_previous_wrap)
+nmap <silent> <leader>cp <Plug>(ale_next_wrap)
+nmap <silent> <leader>cf <Plug>(ale_fix)
 " Plugin: vim-easy-align [[[2
 xmap <cr> <plug>(LiveEasyAlign)
 " Plugin: justinmk/vim-sneak [[[2
@@ -916,7 +940,8 @@ function! s:select_i()
 
   return ['v', l:start_pos, l:end_pos]
 endfunction
-
+" Plugin: skywind3000/asyncrun.vim [[[2
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
