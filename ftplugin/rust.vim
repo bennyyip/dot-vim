@@ -11,3 +11,9 @@ else
   nmap gx <Plug>(rust-def-vertical)
   nmap <leader>gd <Plug>(rust-doc)
 endif
+
+if strlen(findfile("Cargo.toml", ".;"))
+	compiler cargo
+else
+	compiler rustc
+endif
