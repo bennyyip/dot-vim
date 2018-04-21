@@ -38,7 +38,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'Yggdroot/LeaderF-marks'
-Plug 'dyng/ctrlsf.vim', { 'on': 'CtrlSF' }
+Plug 'dyng/ctrlsf.vim'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
@@ -61,7 +61,6 @@ Plug 'kana/vim-textobj-indent'
 Plug 'adriaanzon/vim-textobj-matchit'
 
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-
 " lang [[[2
 Plug '~/.opam/system/share/ocp-ident/vim'
 Plug '~/.opam/system/share/ocp-index/vim'
@@ -264,6 +263,8 @@ set titlestring =VIM:\ %f
 set switchbuf=useopen,usetab,newtab
 set ttyfast
 set lazyredraw
+set timeoutlen=500
+set ttimeoutlen=10
 
 "LF
 set fileformat=unix
@@ -449,16 +450,13 @@ inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
 " quick substitute [[[3
-vmap qs "zy:%s`<C-R>z``g<left><left>
+vnoremap qs "zy:%s`<C-R>z``g<left><left>
+nnoremap qs :%s`<C-R><C-W>``g<left><left>
 " get output from python [[[3
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 " Quit [[[3
 nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
-inoremap <C-Q> <esc>:Sayonara<cr>
-command! -bang Q q<bang>
-command! -bang QA qa<bang>
-command! -bang Qa qa<bang>
 let g:sayonara_confirm_quit = 1
 " fold [[[3
 nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -729,7 +727,6 @@ let g:startify_list_order = [
       \ ['   Sessions:'],
       \ 'sessions',
       \ ]
-nnoremap <leader>st :Startify<cr>
 let g:startify_change_to_dir          = 0
 let g:startify_change_to_vcs_root     = 1
 let g:startify_enable_special         = 0
@@ -842,7 +839,7 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
-\   'vimscript': [
+\   'vim': [
 \       'trim_whitespace',
 \       'remove_trailing_lines',
 \   ],
@@ -893,16 +890,18 @@ nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
 let g:Lf_StlColorscheme = 'gruvbox'
 " Plugin:dyng/ctrlsf.vim [[[2
-let g:ctrlsf_default_root = 'project+fw'
+let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_mapping = {
       \ 'next': 'n',
       \ 'prev': 'N',
       \ 'vsplit': 'x'
       \ }
-nnoremap <C-S-f> :CtrlSF<space>
-com! -n=* -comp=customlist,ctrlsf#comp#Completion Rg call ctrlsf#Search(<q-args>)
-command! Rgt CtrlSFToggle
-command! Rgu CtrlSFUpdate
+nmap     <leader>sf <Plug>CtrlSFPrompt
+vmap     <leader>sf <Plug>CtrlSFVwordPath
+nmap     <leader>sn <Plug>CtrlSFCwordPath
+nmap     <leader>sp <Plug>CtrlSFPwordPath
+nnoremap <leader>so :CtrlSFOpen<CR>
+nnoremap <leader>st :CtrlSFToggle<CR>
 " Plugin:mtth/scratch.vim [[[2
 let g:scratch_no_mappings = 1
 nmap gs <plug>(scratch-insert-reuse)
