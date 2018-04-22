@@ -38,7 +38,8 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'Yggdroot/LeaderF-marks'
 Plug 'dyng/ctrlsf.vim'
-Plug 'jremmen/vim-ripgrep', { 'on': 'Rg' }
+Plug 'yegappan/grep'
+Plug 'yegappan/greplace'
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
