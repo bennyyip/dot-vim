@@ -1,3 +1,4 @@
+setlocal commentstring=//\ %s
 if &filetype ==# "cpp"
   nnoremap <leader>R :w<CR>:AsyncRun clang++ -std=c++14 % -o /tmp/%< && /tmp/%< <CR>
 else
