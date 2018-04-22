@@ -45,12 +45,10 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
 Plug 'hotoo/pangu.vim'
 Plug 'itchyny/vim-cursorword'
-" Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'luochen1990/rainbow'
 Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-" Plug 'mtth/scratch.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
@@ -472,8 +470,6 @@ nnoremap <silent><leader>Q :Sayonara!<CR>
 nnoremap <silent><leader>q :Sayonara<CR>
 let g:sayonara_confirm_quit = 1
 " fold
-nnoremap <silent><space><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-vnoremap <silent><space><space> zf
 nmap z] zo]z
 nmap z[ zo[z
 " Windows
@@ -809,7 +805,7 @@ let g:netrw_keepdir      = 0
 let g:netrw_liststyle    = 1
 let g:netrw_sort_options = 'i'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-" Plugin: bennyyip/dict.vim [[[2
+" Plugin: iamcco/dict.vim [[[2
 nmap <silent> <Leader>oy <Plug>DictSearch
 xmap <silent> <Leader>oy <Plug>DictVSearch
 nmap <silent> <Leader>oY <Plug>DictWSearch
