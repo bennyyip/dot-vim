@@ -38,6 +38,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'Yggdroot/LeaderF-marks'
 Plug 'dyng/ctrlsf.vim'
+Plug 'jremmen/vim-ripgrep', { 'on': 'Rg' }
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'honza/vim-snippets'
@@ -288,7 +289,7 @@ else
   set viminfo     ='100,n$v/files/info/viminfo
 endif
 " apperance [[[2
-" Plugin: itchyny/lightline.vim [[[2
+" Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
@@ -488,7 +489,7 @@ nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 cmap     w!!        w !sudo tee % >/dev/null
 
-nnoremap <silent><leader><tab> :<C-u>b#<CR>
+nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 " tab [[[3
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
@@ -554,14 +555,14 @@ endfunction
 command! -range Shuffle <line1>,<line2>call s:shuffle()
 " OpenUrl [[[2
 function! OpenURL(url)
-  if has("win32")
+  if s:is_win
     exe "!start cmd /cstart /b ".a:url.""
   else
-    exe "AsyncRun firefox \"".a:url."\""
+    exe "AsyncRun firefox \"".a:url."\"&"
   endif
 endfunction
 command! -nargs=1 OpenURL :call OpenURL(<q-args>)
-nnoremap <leader>fu :OpenURL <cfile><CR>
+nnoremap gx :OpenURL <cfile><CR>
 nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
 nnoremap gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><CR>
 " :A [[[2
@@ -796,6 +797,11 @@ augroup vimrc
   autocmd FileType gitcommit wincmd J
 augroup end
 " Plugin: tpope/vim-vinegar [[[2
+" let g:loaded_netrw       = 1
+" let g:loaded_netrwPlugin = 1
+augroup vimrc
+autocmd FileType netrw setl bufhidden=delete
+augroup END
 let g:netrw_banner       = 0
 let g:netrw_bufsettings  = 'relativenumber'
 let g:netrw_keepdir      = 0
@@ -834,8 +840,8 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ .')$'
 " Plugin: w0rp/ale [[[2
 let g:ale_tex_lacheck_executable='shutup' "shutup is a program that do nothing, mute lacheck
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'vim': [
@@ -864,21 +870,21 @@ let g:ale_fixers = {
 \       'add_blank_lines_for_python_control_statements',
 \   ],
 \}
-nmap <silent> <leader>cn <Plug>(ale_previous_wrap)
-nmap <silent> <leader>cp <Plug>(ale_next_wrap)
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <leader>cf <Plug>(ale_fix)
 " Plugin: vim-easy-align [[[2
 xmap <cr> <plug>(LiveEasyAlign)
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-nmap t <Plug>Sneak_t
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
 " Plugin: Yggdroot/LeaderF [[[2
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
-let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': '' }
 nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
@@ -890,6 +896,10 @@ let g:ctrlsf_mapping = {
       \ 'prev': 'N',
       \ 'vsplit': 'x'
       \ }
+let g:ctrlsf_extra_backend_args = {
+    \ 'rg': '--hidden'
+    \ }
+
 nmap     <leader>sf <Plug>CtrlSFPrompt
 vmap     <leader>sf <Plug>CtrlSFVwordPath
 nmap     <leader>sn <Plug>CtrlSFCwordPath
@@ -929,7 +939,7 @@ function! s:select_i()
   return ['v', l:start_pos, l:end_pos]
 endfunction
 " Plugin: skywind3000/asyncrun.vim [[[2
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -program=make -auto=make @ <args>
 noremap <leader>l :call asyncrun#quickfix_toggle(8)<cr>
 augroup vimrc
   " open quickfix when something adds to it
