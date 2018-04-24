@@ -1,5 +1,5 @@
-nnoremap <Leader>R :w<CR>:AsyncRun cargo run <CR>
-nnoremap <Leader>T :w<CR>:AsyncRun cargo test <CR>
+nnoremap <F5> :Make run<CR>
+nnoremap <F6> :Make test<CR>
 
 if has('nvim')
   " nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
