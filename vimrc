@@ -30,14 +30,13 @@ else
   Plug 'maralla/completor.vim'
 endif
 
-Plug 'inkarkat/vim-ingo-library'
-Plug 'vim-scripts/Mark'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'Yggdroot/LeaderF-marks'
 Plug 'dyng/ctrlsf.vim'
+
 Plug 'yegappan/grep'
 Plug 'yegappan/greplace'
 Plug 'haya14busa/is.vim'
@@ -47,7 +46,6 @@ Plug 'hotoo/pangu.vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'justinmk/vim-sneak'
 Plug 'luochen1990/rainbow'
-Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
@@ -57,9 +55,12 @@ Plug 'w0rp/ale'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
 Plug 'adriaanzon/vim-textobj-matchit'
+Plug 'sgur/vim-textobj-parameter'
 
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'ludovicchabant/vim-gutentags'
 " lang [[[2
 Plug '~/.opam/system/share/ocp-ident/vim'
 Plug '~/.opam/system/share/ocp-index/vim'
@@ -93,8 +94,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'tikhomirov/vim-glsl'
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'Shiracamus/vim-syntax-x86-objdump-d'
-
+Plug 'Shiracamus/vim-syntax-x86-objdump-d' 
 " look [[[2
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
@@ -425,7 +425,6 @@ nnoremap tl ^vg_
 nmap     T :tabnew<cr>
 
 nmap <silent> <F6> :if &previewwindow<Bar>pclose<Bar>elseif exists(':Gstatus')<Bar>exe 'botright Gstatus'<Bar>else<Bar>ls<Bar>endif<CR>
-nmap <silent> <F7> :if exists(':Lcd')<Bar>exe 'Lcd'<Bar>elseif exists(':Cd')<Bar>exe 'Cd'<Bar>else<Bar>lcd %:h<Bar>endif<CR>
 map <F8>    :Make<CR>
 
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
@@ -484,7 +483,6 @@ nnoremap <leader>fq :x<CR>
 nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
 nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "buffer folder path copied"<CR>
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
-cmap     w!!        w !sudo tee % >/dev/null
 
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 " tab [[[3
@@ -531,7 +529,7 @@ inoremap <M-l> <Right>
 " Function and Command [[[1
 " :Root | Change directory to the root of the Git repository [[[2
 function! s:root()
-  let l:root = systemlist('git rev-parse --show-toplevel')[0]
+  let l:root = systemlist('git -C '. expand('%:p:h') .' rev-parse --show-toplevel')[0]
   if v:shell_error
     echo 'Not in git repo'
   else
@@ -539,7 +537,7 @@ function! s:root()
     echo 'Changed directory to: '.l:root
   endif
 endfunction
-command! Root call s:root()
+command! R call s:root()
 " :Shuffle | Shuffle selected lines [[[2
 function! s:shuffle() range
   ruby << RB
@@ -643,12 +641,14 @@ let g:neosnippet#disable_runtime_snippets = {
       \ }
 let g:neosnippet#snippets_directory = '$v/snippets'
 " Plugin: is.vim [[[2
-map n  <Plug>(is-n)zzzv
-map N  <Plug>(is-N)zzzv
-map *  <Plug>(asterisk-z*)<Plug>(is-nohl-2) zzzv
-map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-2)zzzv
-map #  <Plug>(asterisk-z#)<Plug>(is-nohl-2) zzzv
-map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-2)zzzv
+let g:is#do_default_mappings=1
+let g:is#auto_nohlsearch=0
+map n  nzzzv
+map N  Nzzzv
+map *  <Plug>(asterisk-z*)zzzv
+map g* <Plug>(asterisk-gz*)zzzv
+map #  <Plug>(asterisk-z#)zzzv
+map g# <Plug>(asterisk-gz#)zzzv
 " Plugin: majutsushi/tagbar [[[2
 let g:tagbar_type_tex = {
       \ 'ctagstype' : 'latex',
@@ -708,6 +708,28 @@ let g:tagbar_type_rust = {
 
 let g:tagbar_width = 30
 nmap tb :TagbarToggle<cr>
+" Plugin: ludovicchabant/vim-gutentags [[[2
+set tags=./.tags;,.tags
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_exclude = ['target']
+
+" 检测 ~/.cache/tags 不存在就新建
+if !isdirectory(s:vim_tags)
+    silent! call mkdir(s:vim_tags, 'p')
+endif
 " Plugin: mhinz/vim-startify [[[2
 let g:ascii = [
       \"             ________ ++     ________             ",
@@ -867,9 +889,18 @@ let g:ale_fixers = {
 \       'add_blank_lines_for_python_control_statements',
 \   ],
 \}
-nmap <silent> <leader>j <Plug>(ale_next_wrap)
-nmap <silent> <leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <leader>cf <Plug>(ale_fix)
+let g:ale_pattern_options = {
+\   '.*\.h': {'ale_enabled': 0},
+\   '.*\.c': {'ale_enabled': 0},
+\   '.*\.cc': {'ale_enabled': 0},
+\   '.*\.cpp': {'ale_enabled': 0},
+\}
+
+" override ]s [s
+nmap <silent> ]s <Plug>(ale_next_wrap)
+nmap <silent> [s <Plug>(ale_previous_wrap)
+nmap <silent> <leader>= <Plug>(ale_fix)
+nmap <silent> <leader>+ <Plug>(ale_enable_buffer)
 " Plugin: vim-easy-align [[[2
 xmap <cr> <plug>(LiveEasyAlign)
 " Plugin: justinmk/vim-sneak [[[2
@@ -881,7 +912,7 @@ map t <Plug>Sneak_t
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
-let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': '' }
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
@@ -936,7 +967,7 @@ function! s:select_i()
   return ['v', l:start_pos, l:end_pos]
 endfunction
 " Plugin: skywind3000/asyncrun.vim [[[2
-command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -program=make -auto=make @ <args>
+command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 noremap <leader>l :call asyncrun#quickfix_toggle(8)<cr>
 augroup vimrc
   " open quickfix when something adds to it
