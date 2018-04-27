@@ -180,7 +180,7 @@ if !s:is_tty
   elseif has('multi_byte') && &encoding ==# 'utf-8'
     let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
     let &fillchars = 'diff: '  " ▚
-    let &showbreak = '↪ '
+    let &showbreak = '↳ '
     highlight VertSplit ctermfg=242
     augroup vimrc
       autocmd InsertEnter * set listchars-=trail:⣿
