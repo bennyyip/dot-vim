@@ -74,7 +74,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 
 Plug 'elixir-editors/vim-elixir'
-Plug 'mhinz/vim-mix-format', { 'for': 'elixir' }
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
 
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
@@ -887,6 +886,11 @@ let g:ale_fixers = {
 \       'remove_trailing_lines',
 \       'yapf',
 \       'add_blank_lines_for_python_control_statements',
+\   ],
+\   'elixir': [
+\       'trim_whitespace',
+\       'remove_trailing_lines',
+\       'mix_format'
 \   ],
 \}
 let g:ale_pattern_options = {
