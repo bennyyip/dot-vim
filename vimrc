@@ -826,6 +826,8 @@ let g:netrw_keepdir      = 0
 let g:netrw_liststyle    = 1
 let g:netrw_sort_options = 'i'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_timefmt = '%H:%M %y-%m-%d'
+let g:netrw_sizestyle = 'H'
 " Plugin: iamcco/dict.vim [[[2
 nmap <silent> <Leader>oy <Plug>DictSearch
 xmap <silent> <Leader>oy <Plug>DictVSearch
