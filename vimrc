@@ -61,6 +61,9 @@ Plug 'sgur/vim-textobj-parameter'
 
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'nhooyr/neoman.vim'
+Plug 'airblade/vim-rooter', { 'on': 'Rooter' }
+
 " lang [[[2
 Plug '~/.opam/system/share/ocp-ident/vim'
 Plug '~/.opam/system/share/ocp-index/vim'
@@ -979,6 +982,12 @@ augroup vimrc
   " open quickfix when something adds to it
   autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
 augroup END
+" Plugin: airblade/vim-rooter
+let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_manual_only = 1
+let g:rooter_use_lcd = 1
+let g:rooter_patterns = ['Cargo.toml', 'mix.exs', 'Makefile', '.git/', '.svn/']
+nmap <silent> <leader>r :Rooter<CR>
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
