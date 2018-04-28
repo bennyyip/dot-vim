@@ -14,95 +14,55 @@ call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
 " general [[[2
-if s:is_win
-  Plug 'rust-lang/rust.vim'
-else
-  Plug 'benmills/vimux'
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'lilydjwg/fcitx.vim'
-endif
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
+Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
+Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 
-if s:is_nvim
-  Plug 'roxma/nvim-completion-manager'
-  Plug 'roxma/ncm-clang'
-  Plug 'roxma/nvim-cm-racer'
-else
-  Plug 'maralla/completor.vim'
-endif
-
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'Yggdroot/LeaderF-marks'
-Plug 'dyng/ctrlsf.vim'
+Plug 'honza/vim-snippets'
 
+Plug 'ludovicchabant/vim-gutentags' " https://github.com/universal-ctags/ctags
+
+Plug 'dyng/ctrlsf.vim'
+Plug 'romainl/vim-qf'
 Plug 'yegappan/grep'
 Plug 'yegappan/greplace'
+
 Plug 'haya14busa/is.vim'
 Plug 'haya14busa/vim-asterisk'
-Plug 'honza/vim-snippets'
-Plug 'hotoo/pangu.vim'
-Plug 'itchyny/vim-cursorword'
 Plug 'justinmk/vim-sneak'
-Plug 'luochen1990/rainbow'
+
+Plug 'hotoo/pangu.vim'
+Plug 'iamcco/dict.vim'
+
+Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'airblade/vim-rooter', { 'on': 'Rooter' }
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'skywind3000/asyncrun.vim'
+Plug 'nhooyr/neoman.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
+" leaderf [[[3
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'Yggdroot/LeaderF-marks'
+Plug 'bennyyip/LeaderF-github-stars'
+Plug 'bennyyip/LeaderF-ghq'
+" vim 8 [[[3
+Plug 'maralla/completor.vim'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
-
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-entire'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-syntax'
-Plug 'adriaanzon/vim-textobj-matchit'
-Plug 'sgur/vim-textobj-parameter'
-
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'nhooyr/neoman.vim'
-Plug 'airblade/vim-rooter', { 'on': 'Rooter' }
-
-" lang [[[2
-Plug '~/.opam/system/share/ocp-ident/vim'
-Plug '~/.opam/system/share/ocp-index/vim'
-Plug '~/.opam/system/share/merlin/vim'
-
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-
-Plug 'PProvost/vim-ps1'
-Plug 'ekalinin/Dockerfile.vim'
-
-Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-
-Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-
-Plug 'Rykka/riv.vim', { 'for': 'rst' }
-Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
-Plug 'iamcco/dict.vim'
-Plug 'lervag/vimtex', {'for': 'tex'}
-
-Plug 'hdima/python-syntax', { 'for': 'python'}
-
-Plug 'lilydjwg/colorizer'
-Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
-Plug 'Valloric/MatchTagAlways'
-Plug 'othree/html5.vim', {'for': 'html'}
-
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'tikhomirov/vim-glsl'
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'Shiracamus/vim-syntax-x86-objdump-d' 
-" look [[[2
+" *nix stuff [[[ 3
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'lilydjwg/fcitx.vim'
+" look [[[3
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
-" tpope [[[2
-Plug 'tpope/vim-sensible'
+Plug 'luochen1990/rainbow'
+Plug 'itchyny/vim-cursorword'
+" tpope [[[3
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-capslock'
 Plug 'tpope/vim-commentary'
@@ -112,18 +72,45 @@ Plug 'tpope/vim-jdaddy'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-" junegunn [[[2
-Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
-Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
-" Plug 'junegunn/vim-peekaboo'
-" bennyyip [[[2
-" https://github.com/universal-ctags/ctags
-Plug 'bennyyip/LeaderF-github-stars'
-Plug 'bennyyip/LeaderF-ghq'
+" textobj [[[3
+Plug 'adriaanzon/vim-textobj-matchit'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+" lang [[[2
+Plug 'PProvost/vim-ps1'
+Plug 'Shiracamus/vim-syntax-x86-objdump-d'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'tikhomirov/vim-glsl'
+" ocaml [[[3
+Plug '~/.opam/system/share/merlin/vim', { 'for': 'ocaml' }
+Plug '~/.opam/system/share/ocp-ident/vim', { 'for': 'ocaml' }
+Plug '~/.opam/system/share/ocp-index/vim', { 'for': 'ocaml' }
+" python [[[3
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'hdima/python-syntax', { 'for': 'python'}
+" elixir [[[3
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
+" markup [[[3
+Plug 'Rykka/riv.vim', { 'for': 'rst' }
+Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
+Plug 'lervag/vimtex', {'for': 'tex'}
+" web [[[3
+Plug 'Valloric/MatchTagAlways'
+Plug 'lilydjwg/colorizer'
+Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
+Plug 'othree/html5.vim', {'for': 'html'}
 " plug#end [[[2
 call plug#end()
 
@@ -529,17 +516,6 @@ inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
 " Function and Command [[[1
-" :Root | Change directory to the root of the Git repository [[[2
-function! s:root()
-  let l:root = systemlist('git -C '. expand('%:p:h') .' rev-parse --show-toplevel')[0]
-  if v:shell_error
-    echo 'Not in git repo'
-  else
-    execute 'lcd' l:root
-    echo 'Changed directory to: '.l:root
-  endif
-endfunction
-command! R call s:root()
 " :Shuffle | Shuffle selected lines [[[2
 function! s:shuffle() range
   ruby << RB
@@ -651,65 +627,6 @@ map *  <Plug>(asterisk-z*)zzzv
 map g* <Plug>(asterisk-gz*)zzzv
 map #  <Plug>(asterisk-z#)zzzv
 map g# <Plug>(asterisk-gz#)zzzv
-" Plugin: majutsushi/tagbar [[[2
-let g:tagbar_type_tex = {
-      \ 'ctagstype' : 'latex',
-      \ 'kinds'  : [
-      \ 's:sections',
-      \ 'g:graphics:1',
-      \ 'l:labels:1',
-      \ 'r:refs:1',
-      \ 'p:pagerefs:1'
-      \ ],
-      \ 'sort'  : 0
-      \ }
-
-let g:tagbar_type_nc = {
-      \ 'ctagstype' : 'nesc',
-      \ 'kinds'  : [
-      \ 'd:definition',
-      \ 'f:function',
-      \ 'c:command',
-      \ 'a:task',
-      \ 'e:event'
-      \ ],
-      \ }
-
-let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'deffile' : $v.'/ftplugin/.ctags-elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records',
-        \ 't:tests'
-    \ ]
-\ }
-
-let g:tagbar_type_rust = {
-    \ 'ctagstype' : 'rust',
-    \ 'kinds' : [
-        \'T:types,type definitions',
-        \'f:functions,function definitions',
-        \'g:enum,enumeration names',
-        \'s:structure names',
-        \'m:modules,module names',
-        \'c:consts,static constants',
-        \'t:traits',
-        \'i:impls,trait implementations',
-    \]
-\}
-
-let g:tagbar_width = 30
-nmap tb :TagbarToggle<cr>
 " Plugin: ludovicchabant/vim-gutentags [[[2
 set tags=./.tags;,.tags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -977,17 +894,19 @@ function! s:select_i()
 endfunction
 " Plugin: skywind3000/asyncrun.vim [[[2
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
-noremap <leader>l :call asyncrun#quickfix_toggle(8)<cr>
 augroup vimrc
   " open quickfix when something adds to it
   autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
 augroup END
-" Plugin: airblade/vim-rooter
+" Plugin: airblade/vim-rooter [[[2
 let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_manual_only = 1
 let g:rooter_use_lcd = 1
 let g:rooter_patterns = ['Cargo.toml', 'mix.exs', 'Makefile', '.git/', '.svn/']
 nmap <silent> <leader>r :Rooter<CR>
+" Plugin: romainl/vim-qf [[[2
+let g:qf_mapping_ack_style = 1
+nmap <leader>l <Plug>(qf_qf_toggle_stay)
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
