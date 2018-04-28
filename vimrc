@@ -252,7 +252,7 @@ set switchbuf=useopen,usetab,newtab
 set ttyfast
 set lazyredraw
 set timeoutlen=500
-set ttimeoutlen=10
+set ttimeoutlen=50
 
 "LF
 set fileformat=unix
@@ -394,9 +394,6 @@ if s:is_win
 endif
 " Key Mapping [[[1
 " misc [[[2
-inoremap <M-o>      <C-O>o
-inoremap <M-O>      <C-O>O
-
 nmap     t= mxHmygg=G`yzt`x
 nmap     tj Jx
 nmap     tp "+P
@@ -416,8 +413,8 @@ if s:is_win
   nnoremap <C-k> <C-w>k
   nnoremap <C-l> <C-w>l
 endif
-" less style nohl
-nmap <silent> <M-u> :nohls<CR>
+" nohl
+nmap <silent> <backspace> :nohl<CR>
 " run external command
 nmap <leader>; :AsyncRun<space>
 " edit
@@ -467,38 +464,15 @@ nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 " tab [[[3
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
-noremap  <silent><M-1>   :tabn 1<cr>
-noremap  <silent><M-2>   :tabn 2<cr>
-noremap  <silent><M-3>   :tabn 3<cr>
-noremap  <silent><M-4>   :tabn 4<cr>
-noremap  <silent><M-5>   :tabn 5<cr>
-noremap  <silent><M-6>   :tabn 6<cr>
-noremap  <silent><M-7>   :tabn 7<cr>
-noremap  <silent><M-8>   :tabn 8<cr>
-noremap  <silent><M-9>   :tabn 9<cr>
-noremap  <silent><M-0>   :tabn 10<cr>
-inoremap <silent><M-1>   <ESC>:tabn 1<cr>
-inoremap <silent><M-2>   <ESC>:tabn 2<cr>
-inoremap <silent><M-3>   <ESC>:tabn 3<cr>
-inoremap <silent><M-4>   <ESC>:tabn 4<cr>
-inoremap <silent><M-5>   <ESC>:tabn 5<cr>
-inoremap <silent><M-6>   <ESC>:tabn 6<cr>
-inoremap <silent><M-7>   <ESC>:tabn 7<cr>
-inoremap <silent><M-8>   <ESC>:tabn 8<cr>
-inoremap <silent><M-9>   <ESC>:tabn 9<cr>
-inoremap <silent><M-0>   <ESC>:tabn 10<cr>
-if s:is_nvim
-  tnoremap <silent><M-1>   <C-\><C-N><ESC>:tabn 1<cr>
-  tnoremap <silent><M-2>   <C-\><C-N><ESC>:tabn 2<cr>
-  tnoremap <silent><M-3>   <C-\><C-N><ESC>:tabn 3<cr>
-  tnoremap <silent><M-4>   <C-\><C-N><ESC>:tabn 4<cr>
-  tnoremap <silent><M-5>   <C-\><C-N><ESC>:tabn 5<cr>
-  tnoremap <silent><M-6>   <C-\><C-N><ESC>:tabn 6<cr>
-  tnoremap <silent><M-7>   <C-\><C-N><ESC>:tabn 7<cr>
-  tnoremap <silent><M-8>   <C-\><C-N><ESC>:tabn 8<cr>
-  tnoremap <silent><M-9>   <C-\><C-N><ESC>:tabn 9<cr>
-endif
+function! Map_switch_tab()
+for l:i in range(9)
+  exe "nnoremap <leader>".l:i." :tabn ".l:i."<cr>"
+endfor
+endfunction
+call Map_switch_tab()
 " move [[[2
+inoremap <M-o>      <C-O>o
+inoremap <M-O>      <C-O>O
 nnoremap <M-j> gj
 nnoremap <M-k> gk
 inoremap <M-j> <Down>
