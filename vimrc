@@ -5,7 +5,6 @@ let s:opam_bin_dir = s:opam_prefix_dir . '/bin'
 let $PATH .= ':' . s:opam_bin_dir
 
 let s:is_win = has('win32')
-let s:is_nvim = has('nvim')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
@@ -271,11 +270,7 @@ set backupdir   =$v/files/backup/
 set backupext   =-vimbackup
 set directory   =$v/files/swap/
 set undodir     =$v/files/undo/
-if s:is_nvim
-  set shada       ='100
-else
-  set viminfo     ='100,n$v/files/info/viminfo
-endif
+set viminfo     ='100,n$v/files/info/viminfo
 " apperance [[[2
 " Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
@@ -393,12 +388,7 @@ endif " exists(...)
 let g:vimrc_loaded=1
 " Windows [[[2
 if s:is_win
-  if !s:is_nvim
-    set pythonthreedll=python36.dll
-  else
-    set shell=powershell
-    set shellcmdflag=-command
-  endif
+  set pythonthreedll=python36.dll
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
 endif
@@ -465,7 +455,7 @@ if s:is_win
   nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
   nnoremap <leader>ps         :!start powershell<CR>
 endif
-" file, buffer, tab[[[2
+" file, buffer, tab [[[2
 nnoremap gf :e <cfile><CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fq :x<CR>
