@@ -6,4 +6,4 @@ else
 endif
 nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <CR>
 
-imap <c-l> <Plug>CompletorCppJumpToPlaceholder 
+imap <c-l> <Plug>CompletorCppJumpToPlaceholder

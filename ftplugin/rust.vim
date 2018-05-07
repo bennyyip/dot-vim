@@ -9,7 +9,7 @@ nmap <leader>gd <Plug>(rust-doc)
 let b:surround_{char2nr('|')} = '| \r '
 
 if strlen(findfile("Cargo.toml", ".;"))
-	compiler cargo
+  compiler cargo
 else
-	compiler rustc
+  compiler rustc
 endif

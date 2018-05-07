@@ -12,6 +12,10 @@ let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
+" ocaml [[[3
+Plug '~/.opam/system/share/merlin/vim'
+Plug '~/.opam/system/share/ocp-ident/vim'
+Plug '~/.opam/system/share/ocp-index/vim'
 " general [[[2
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
@@ -91,10 +95,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'tikhomirov/vim-glsl'
-" ocaml [[[3
-Plug '~/.opam/system/share/merlin/vim', { 'for': 'ocaml' }
-Plug '~/.opam/system/share/ocp-ident/vim', { 'for': 'ocaml' }
-Plug '~/.opam/system/share/ocp-index/vim', { 'for': 'ocaml' }
 " python [[[3
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hdima/python-syntax', { 'for': 'python'}
@@ -348,13 +348,6 @@ function! LightlineMode() "[[[4
         \ lightline#mode()[0]
   "\ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-" tagbar [[[4
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
 " Plugin: morhetz/gruvbox [[[3
 set background=dark
 colorscheme gruvbox
@@ -569,15 +562,6 @@ imap <C-k>  <Plug>(neosnippet_expand_or_jump)
 smap <C-k>  <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>  <Plug>(neosnippet_expand_target)
 let g:neosnippet#enable_snipmate_compatibility=1
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 let g:neosnippet#disable_runtime_snippets = {
       \  '_' : 1,
       \ }
@@ -803,10 +787,20 @@ let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
+let g:Lf_StlColorscheme = 'gruvbox'
+let g:Lf_HideHelp = 1
+let g:Lf_ShowRelativePath = 1
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+	\ }
 nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
-let g:Lf_StlColorscheme = 'gruvbox'
 " Plugin: dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_mapping = {
