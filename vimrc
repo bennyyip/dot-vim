@@ -6,6 +6,7 @@ let $PATH .= ':' . s:opam_bin_dir
 
 let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
+let s:is_gvim = has('gui_running')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
 " plug#begin [[[2
@@ -56,8 +57,10 @@ Plug 'maralla/completor.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 " *nix stuff [[[ 3
+if !s:is_gvim
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
+endif
 Plug 'lilydjwg/fcitx.vim'
 " look [[[3
 Plug 'itchyny/lightline.vim'
@@ -359,7 +362,7 @@ if exists('g:Gui')
   let g:GuiWindowFullScreen=1
 endif
 if !exists('g:vimrc_loaded')
-  if has('gui_running')
+  if s:is_gvim
     "au GUIEnter * set lines=768 columns=1366 " 窗口啓動時自動最大化
     set cmdheight=1
     set langmenu=en_US
@@ -400,11 +403,11 @@ inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M
 
 " quick <C-w>
 nnoremap ' <C-w>
-if s:is_win
-  nnoremap <C-h> <C-w>h
-  nnoremap <C-j> <C-w>j
-  nnoremap <C-k> <C-w>k
-  nnoremap <C-l> <C-w>l
+if s:is_win || s:is_gvim
+  nnoremap <silent><C-h> <C-w>h
+  nnoremap <silent><C-j> <C-w>j
+  nnoremap <silent><C-k> <C-w>k
+  nnoremap <silent><C-l> <C-w>l
 endif
 " nohl
 nmap <silent> <backspace> :nohl<CR>
@@ -865,6 +868,9 @@ nmap <silent> <leader>r :Rooter<CR>
 " Plugin: romainl/vim-qf [[[2
 let g:qf_mapping_ack_style = 1
 nmap <leader>l <Plug>(qf_qf_toggle_stay)
+" Plugin: lilydjwg/colorizer [[[2
+let g:colorizer_nomap = 1
+let g:colorizer_startup = 0
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
