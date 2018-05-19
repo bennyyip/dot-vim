@@ -7,6 +7,7 @@ let $PATH .= ':' . s:opam_bin_dir
 let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
+let s:has_async = has('job') && has('timers') && has('lambda')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
 " plug#begin [[[2
@@ -26,7 +27,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'honza/vim-snippets'
 
-Plug 'ludovicchabant/vim-gutentags' " https://github.com/universal-ctags/ctags
 
 Plug 'dyng/ctrlsf.vim'
 Plug 'romainl/vim-qf'
@@ -48,12 +48,17 @@ Plug 'nhooyr/neoman.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
 " leaderf [[[3
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'Yggdroot/LeaderF-marks'
-Plug 'bennyyip/LeaderF-github-stars'
-Plug 'bennyyip/LeaderF-ghq'
+if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
+  Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+  Plug 'Yggdroot/LeaderF-marks'
+  Plug 'bennyyip/LeaderF-github-stars'
+  Plug 'bennyyip/LeaderF-ghq'
+endif
 " vim 8 [[[3
-Plug 'maralla/completor.vim'
+if s:has_async
+  Plug 'maralla/completor.vim'
+  Plug 'ludovicchabant/vim-gutentags' " https://github.com/universal-ctags/ctags
+endif
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 " *nix stuff [[[ 3
