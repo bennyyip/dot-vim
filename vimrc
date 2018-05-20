@@ -404,6 +404,9 @@ map <F8>    :Make<CR>
 
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
 
+" slect what I just pasted
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 " quick <C-w>
 nnoremap ' <C-w>
 if s:is_win || s:is_gvim
