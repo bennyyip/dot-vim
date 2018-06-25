@@ -1,1 +1,1 @@
-nmap <localleader>= :w<CR>:MixFormat<CR>
+nmap <buffer><localleader>= :w<CR>:MixFormat<CR>
