@@ -1,5 +1,5 @@
-nnoremap <F5> :Make run<CR>
-nnoremap <F4> :Make test<CR>
+nnoremap <buffer><F5> :Make run<CR>
+nnoremap <buffer><F4> :Make test<CR>
 
 nmap gd <Plug>(rust-def)
 nmap gs <Plug>(rust-def-split)

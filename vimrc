@@ -27,7 +27,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'honza/vim-snippets'
 
-
 Plug 'dyng/ctrlsf.vim'
 Plug 'romainl/vim-qf'
 Plug 'yegappan/grep'
