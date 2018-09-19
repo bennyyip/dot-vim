@@ -25,6 +25,7 @@ Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/junkfile.vim'
 Plug 'honza/vim-snippets'
 
 Plug 'dyng/ctrlsf.vim'
@@ -32,7 +33,7 @@ Plug 'romainl/vim-qf'
 Plug 'yegappan/grep'
 Plug 'yegappan/greplace'
 
-Plug 'haya14busa/is.vim'
+Plug 'bennyyip/is.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'justinmk/vim-sneak'
 
@@ -110,9 +111,8 @@ Plug 'Firef0x/PKGBUILD.vim'
 " python [[[3
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hdima/python-syntax', { 'for': 'python'}
-" elixir [[[3
-Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
+" typescript [[[3
+Plug 'leafgarland/typescript-vim' 
 " markup [[[3
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
@@ -216,7 +216,7 @@ set sidescroll    =5
 set number            " line number
 set relativenumber    " relative line number
 if has('mouse')
-  set mouse=a
+  set mouse=n
   set mousehide
 endif
 " wild stuff [[[3
@@ -373,6 +373,14 @@ function! LightlineMode() "[[[4
 endfunction
 "hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
+if has("termguicolors")
+    " fix bug for vim
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+
+    " enable true color
+    set termguicolors
+endif
 if exists('g:Gui')
   GuiFont! Inziu Iosevka CL:h16
   let g:GuiWindowFullScreen=1
@@ -390,10 +398,10 @@ if !exists('g:vimrc_loaded')
       autocmd GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
       augroup END
       "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
-      set guifont=Inziu\ Iosevka\ CL:h14
+      set guifont=Inziu\ Iosevka\ CL:h12
     else
       set guioptions-=aegimrLtT
-      set guifont=Monospace\ 12
+      set guifont=Monospace\ 8
     endif
   endif " has
 endif " exists(...)
@@ -762,36 +770,28 @@ let g:ale_tex_lacheck_executable='shutup' "shutup is a program that do nothing, 
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
+let s:general_ale_fixer = [
+\       'trim_whitespace',
+\       'remove_trailing_lines',
+\   ]
 let g:ale_fixers = {
-\   'vim': [
-\       'trim_whitespace',
-\       'remove_trailing_lines',
-\   ],
-\   'rust': [
-\       'trim_whitespace',
-\       'remove_trailing_lines',
+\   'sh': s:general_ale_fixer,
+\   'vim': s:general_ale_fixer,
+\   'rust': s:general_ale_fixer + [
 \       'rustfmt',
 \   ],
-\   'c': [
-\       'trim_whitespace',
-\       'remove_trailing_lines',
+\   'c': s:general_ale_fixer + [
 \       'clang-format',
 \   ],
-\   'cpp': [
-\       'trim_whitespace',
-\       'remove_trailing_lines',
+\   'cpp': s:general_ale_fixer + [
 \       'clang-format',
 \   ],
-\   'python': [
-\       'trim_whitespace',
-\       'remove_trailing_lines',
+\   'python': s:general_ale_fixer + [
 \       'yapf',
-\       'add_blank_lines_for_python_control_statements',
 \   ],
-\   'elixir': [
-\       'trim_whitespace',
-\       'remove_trailing_lines',
-\       'mix_format'
+\   'typescript': s:general_ale_fixer + [
+\       'eslint',
+\       'prettier',
 \   ],
 \}
 let g:ale_pattern_options = {
