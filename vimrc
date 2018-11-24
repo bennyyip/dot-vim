@@ -46,6 +46,8 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'nhooyr/neoman.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
+
+Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -61,7 +63,7 @@ endif
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 " *nix stuff [[[ 3
-if !s:is_gvim
+if !s:is_win
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 endif
@@ -103,6 +105,8 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'tikhomirov/vim-glsl'
+Plug 'rust-lang/rust.vim'
+Plug 'Firef0x/PKGBUILD.vim'
 " python [[[3
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hdima/python-syntax', { 'for': 'python'}
@@ -263,6 +267,9 @@ set ttimeoutlen=50
 "LF
 set fileformat=unix
 set fileformats=unix,dos
+
+" use old regex engine for better performance
+set regexpengine=1
 
 " this makes sure that shell scripts are highlighted
 " as bash scripts and not sh scripts
@@ -896,6 +903,8 @@ nmap <leader>l <Plug>(qf_qf_toggle_stay)
 " Plugin: lilydjwg/colorizer [[[2
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
+" simnalamburt/vim-mundo [[[2
+nnoremap <leader>u :MundoToggle<CR>
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
