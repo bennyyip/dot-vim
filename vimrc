@@ -70,6 +70,7 @@ Plug 'lilydjwg/fcitx.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
+Plug 'vim-scripts/lilypink'
 Plug 'luochen1990/rainbow'
 Plug 'itchyny/vim-cursorword'
 " tpope [[[3
@@ -277,6 +278,11 @@ set directory   =$v/files/swap/
 set undodir     =$v/files/undo/
 set viminfo     ='100,n$v/files/info/viminfo
 " apperance [[[2
+" colorscheme [[[3
+set background=dark
+colorscheme gruvbox
+hi VertSplit guibg=#282828 guifg=#181A1F
+let s:colorscheme = get(g:, 'colors_name', 'default')
 " Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
 let g:lightline = {
@@ -302,10 +308,15 @@ let g:lightline = {
       \ },
       \ }
 if !s:is_tty
-  let g:lightline.colorscheme = 'gruvbox'
+  if s:colorscheme == 'gruvbox'
+    let g:lightline.colorscheme = 'gruvbox'
+  else
+    let g:lightline.colorscheme = 'one'
+  endif
   let g:lightline.separator =  { 'left': "\ue0b0", 'right': "\ue0b2" }
   let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
 endif
+
 function! LightlineModified() "[[[4
   return &filetype =~# 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -353,10 +364,6 @@ function! LightlineMode() "[[[4
         \ lightline#mode()[0]
   "\ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-" Plugin: morhetz/gruvbox [[[3
-set background=dark
-colorscheme gruvbox
-hi VertSplit guibg=#282828 guifg=#181A1F
 "hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
 if exists('g:Gui')
@@ -383,6 +390,15 @@ if !exists('g:vimrc_loaded')
     endif
   endif " has
 endif " exists(...)
+" true color
+if has("termguicolors")
+    " fix bug for vim
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+    " enable true color
+    set termguicolors
+endif
 let g:vimrc_loaded=1
 " Windows [[[2
 if s:is_win
@@ -795,7 +811,11 @@ let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
-let g:Lf_StlColorscheme = 'gruvbox'
+if s:colorscheme == 'gruvbox'
+  let g:Lf_StlColorscheme = 'gruvbox'
+else
+  let g:Lf_StlColorscheme = 'one'
+endif
 let g:Lf_HideHelp = 1
 let g:Lf_ShowRelativePath = 1
 let g:Lf_NormalMap = {
