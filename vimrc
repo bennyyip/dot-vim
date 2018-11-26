@@ -836,6 +836,7 @@ let g:Lf_NormalMap = {
 nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
+nnoremap <leader>gt :LeaderfBufTag<CR>
 " Plugin: dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_mapping = {
@@ -908,3 +909,4 @@ nnoremap <leader>u :MundoToggle<CR>
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
+"
