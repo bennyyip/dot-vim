@@ -22,41 +22,6 @@ function! ben#foldy()
   return left . fill . right . repeat(' ', 100)
 endfunction
 
-"
-" Make <tab> a little bit more useful. Stolen from @junegunn.
-"
-function! s:can_complete(func, prefix)
-  if empty(a:func) || call(a:func, [1, '']) < 0
-    return 0
-  endif
-  let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
-  return !empty(type(result) == type([]) ? result : result.words)
-endfunction
-
-function! ben#tab_yeah(k, o)
-  if pumvisible()
-    return a:k
-  endif
-
-  let line = getline('.')
-  let col = col('.') - 2
-  if empty(line) || line[col] !~ '\k\|[/~.]' || line[col + 1] =~ '\k'
-    return a:o
-  endif
-
-  let prefix = expand(matchstr(line[0:col], '\S*$'))
-  if prefix =~ '^[~/.]'
-    return "\<c-x>\<c-f>"
-  endif
-  if s:can_complete(&omnifunc, prefix)
-    return "\<c-x>\<c-o>"
-  endif
-  if s:can_complete(&completefunc, prefix)
-    return "\<c-x>\<c-u>"
-  endif
-  return a:k
-endfunction
-
 " Function: #quote {{{1
 function! s:get_random_offset(max) abort
   return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
@@ -78,4 +43,4 @@ let s:quotes = [
       \ ["「懷舊是戀尸癖的早期症狀。」"],
       \ ["「你我猶如隔鏡視物所見無非虛幻迷濛」"],
       \ ["Brute force never fails, unless you're not using enought of it."]
-      \]
+      \] 
