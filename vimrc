@@ -752,8 +752,6 @@ let g:rainbow_conf = {
         \ }
       \}
 " Plugin: maralla/completor.vim [[[2
-inoremap <expr> <tab>    ben#tab_yeah("\<c-n>", "\<tab>")
-inoremap <expr> <s-tab> ben#tab_yeah("\<c-p>", "\<s-tab>")
 let g:completor_racer_binary = '/bin/racer'
 let g:completor_tex_omni_trigger = '\\\\(:?'
       \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
@@ -765,6 +763,24 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
       \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
       \ .')$'
+
+function! Tab_Or_Complete() abort
+  " If completor is already open the `tab` cycles through suggested completions.
+  if pumvisible()
+    return "\<C-N>"
+  " If completor is not open and we are in the middle of typing a word then
+  " `tab` opens completor menu.
+  elseif col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-R>=completor#do('complete')\<CR>"
+  else
+    " If we aren't typing a word and we press `tab` simply do the normal `tab`
+    " action.
+    return "\<Tab>"
+  endif
+endfunction
+let g:completor_auto_trigger = 1
+inoremap <expr> <Tab> Tab_Or_Complete()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Plugin: w0rp/ale [[[2
 let g:ale_tex_lacheck_executable='shutup' "shutup is a program that do nothing, mute lacheck
 " let g:ale_set_loclist = 0
@@ -909,4 +925,3 @@ nnoremap <leader>u :MundoToggle<CR>
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
-"
