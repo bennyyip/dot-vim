@@ -4,6 +4,7 @@ let s:opam_share_dir = s:opam_prefix_dir . '/share'
 let s:opam_bin_dir = s:opam_prefix_dir . '/bin'
 let $PATH .= ':' . s:opam_bin_dir
 
+let g:is_ssh = ($SSH_CONNECTION != "")
 let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
@@ -87,7 +88,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 " textobj [[[3
@@ -112,7 +113,7 @@ Plug 'Firef0x/PKGBUILD.vim'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'hdima/python-syntax', { 'for': 'python'}
 " typescript [[[3
-Plug 'leafgarland/typescript-vim' 
+Plug 'leafgarland/typescript-vim'
 " markup [[[3
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
@@ -149,6 +150,9 @@ let g:loaded_zipPlugin        = 1
 " indent settings [[[3
 set autoindent
 set cinoptions    =>2,l1,p0,)50,*50,t0
+" tab stop
+set sts=4 sw=4
+set expandtab smarttab
 " display settings [[[3
 set display       =lastline
 set laststatus    =2
@@ -373,7 +377,7 @@ function! LightlineMode() "[[[4
 endfunction
 "hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
-if has("termguicolors")
+if !g:is_ssh && has("termguicolors")
     " fix bug for vim
     set t_8f=[38;2;%lu;%lu;%lum
     set t_8b=[48;2;%lu;%lu;%lum
@@ -405,15 +409,6 @@ if !exists('g:vimrc_loaded')
     endif
   endif " has
 endif " exists(...)
-" true color
-if has("termguicolors")
-    " fix bug for vim
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-    " enable true color
-    set termguicolors
-endif
 let g:vimrc_loaded=1
 " Windows [[[2
 if s:is_win
@@ -484,6 +479,9 @@ if s:is_win
   nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
   nnoremap <leader>ps         :!start powershell<CR>
 endif
+
+nnoremap <localleader>j :set ft=javascript<CR>
+nnoremap <localleader>h :set ft=html<CR>
 " file, buffer, tab [[[2
 nnoremap gf :e <cfile><CR>
 nnoremap <leader>fs :w<CR>
