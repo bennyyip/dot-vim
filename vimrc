@@ -48,8 +48,13 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'nhooyr/neoman.vim'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'vim-voom/VOoM', { 'on': 'Voom' }
-
 Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+
+Plug 'tommcdo/vim-exchange'
+Plug 'tommcdo/vim-ninja-feet'
+Plug 'tommcdo/vim-fugitive-blame-ext'
+Plug 'tommcdo/vim-fubitive'
+
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -66,8 +71,8 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 " *nix stuff [[[ 3
 if !s:is_win
-Plug 'benmills/vimux'
-Plug 'christoomey/vim-tmux-navigator'
+  Plug 'benmills/vimux'
+  Plug 'christoomey/vim-tmux-navigator'
 endif
 Plug 'lilydjwg/fcitx.vim'
 " look [[[3
@@ -125,7 +130,6 @@ Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
 Plug 'othree/html5.vim', {'for': 'html'}
 " plug#end [[[2
 call plug#end()
-
 " Setting [[[1
 " general settings [[[2
 " init [[[3
@@ -373,17 +377,17 @@ function! LightlineMode() "[[[4
         \ &filetype ==# 'vimfiler' ? 'VimFiler' :
         \ &filetype ==# 'vimshell' ? 'VimShell' :
         \ lightline#mode()[0]
-  "\ winwidth(0) > 60 ? lightline#mode() : ''
+        "\ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 "hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
 if !g:is_ssh && has("termguicolors")
-    " fix bug for vim
-    set t_8f=[38;2;%lu;%lu;%lum
-    set t_8b=[48;2;%lu;%lu;%lum
+  " fix bug for vim
+  set t_8f=[38;2;%lu;%lu;%lum
+  set t_8b=[48;2;%lu;%lu;%lum
 
-    " enable true color
-    set termguicolors
+  " enable true color
+  set termguicolors
 endif
 if exists('g:Gui')
   GuiFont! Inziu Iosevka CL:h16
@@ -398,8 +402,8 @@ if !exists('g:vimrc_loaded')
       set guioptions-=egmrLtT
       "https://github.com/derekmcloughlin/gvimfullscreen_win32
       augroup vimrc
-      autocmd GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
-      autocmd GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
+        autocmd GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
+        autocmd GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
       augroup END
       "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
       set guifont=Inziu\ Iosevka\ CL:h12
@@ -495,9 +499,9 @@ nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 function! Map_switch_tab()
-for l:i in range(9)
-  exe "nnoremap <leader>".l:i." :tabn ".l:i."<cr>"
-endfor
+  for l:i in range(9)
+    exe "nnoremap <leader>".l:i." :tabn ".l:i."<cr>"
+  endfor
 endfunction
 call Map_switch_tab()
 " move [[[2
@@ -632,7 +636,7 @@ let g:gutentags_ctags_exclude = ['target']
 
 " 检测 ~/.cache/tags 不存在就新建
 if !isdirectory(s:vim_tags)
-    silent! call mkdir(s:vim_tags, 'p')
+  silent! call mkdir(s:vim_tags, 'p')
 endif
 " Plugin: mhinz/vim-startify [[[2
 let g:ascii = [
@@ -723,7 +727,7 @@ augroup end
 " let g:loaded_netrw       = 1
 " let g:loaded_netrwPlugin = 1
 augroup vimrc
-autocmd FileType netrw setl bufhidden=delete
+  autocmd FileType netrw setl bufhidden=delete
 augroup END
 let g:netrw_banner       = 0
 let g:netrw_bufsettings  = 'relativenumber'
@@ -741,13 +745,13 @@ xmap <silent> <Leader>oY <Plug>DictWVSearch
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
-        \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
-        \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-        \ 'separately': {
-        \        'ocaml': {
-        \            'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
-        \        }
-        \ }
+      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
+      \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \ 'separately': {
+      \        'ocaml': {
+      \            'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
+      \        }
+      \ }
       \}
 " Plugin: maralla/completor.vim [[[2
 let g:completor_racer_binary = '/bin/racer'
@@ -766,8 +770,8 @@ function! Tab_Or_Complete() abort
   " If completor is already open the `tab` cycles through suggested completions.
   if pumvisible()
     return "\<C-N>"
-  " If completor is not open and we are in the middle of typing a word then
-  " `tab` opens completor menu.
+    " If completor is not open and we are in the middle of typing a word then
+    " `tab` opens completor menu.
   elseif col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
     return "\<C-R>=completor#do('complete')\<CR>"
   else
@@ -780,41 +784,43 @@ let g:completor_auto_trigger = 1
 inoremap <expr> <Tab> Tab_Or_Complete()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Plugin: w0rp/ale [[[2
-let g:ale_tex_lacheck_executable='shutup' "shutup is a program that do nothing, mute lacheck
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
 let s:general_ale_fixer = [
-\       'trim_whitespace',
-\       'remove_trailing_lines',
-\   ]
+      \       'trim_whitespace',
+      \       'remove_trailing_lines',
+      \   ]
 let g:ale_fixers = {
-\   'sh': s:general_ale_fixer,
-\   'vim': s:general_ale_fixer,
-\   'rust': s:general_ale_fixer + [
-\       'rustfmt',
-\   ],
-\   'c': s:general_ale_fixer + [
-\       'clang-format',
-\   ],
-\   'cpp': s:general_ale_fixer + [
-\       'clang-format',
-\   ],
-\   'python': s:general_ale_fixer + [
-\       'yapf',
-\   ],
-\   'typescript': s:general_ale_fixer + [
-\       'eslint',
-\       'prettier',
-\   ],
-\}
+      \   'vim': s:general_ale_fixer,
+      \   'rust': s:general_ale_fixer + [
+      \       'rustfmt',
+      \   ],
+      \   'c': s:general_ale_fixer + [
+      \       'clang-format',
+      \   ],
+      \   'cpp': s:general_ale_fixer + [
+      \       'clang-format',
+      \   ],
+      \   'python': s:general_ale_fixer + [
+      \       'yapf',
+      \   ],
+      \   'typescript': s:general_ale_fixer + [
+      \       'eslint',
+      \       'prettier',
+      \   ],
+      \   'sh': s:general_ale_fixer + [
+      \       'shfmt'
+      \   ],
+      \}
 let g:ale_pattern_options = {
-\   '.*\.h': {'ale_enabled': 0},
-\   '.*\.c': {'ale_enabled': 0},
-\   '.*\.cc': {'ale_enabled': 0},
-\   '.*\.cpp': {'ale_enabled': 0},
-\}
-
+      \   '.*\.h': {'ale_enabled': 0},
+      \   '.*\.c': {'ale_enabled': 0},
+      \   '.*\.cc': {'ale_enabled': 0},
+      \   '.*\.cpp': {'ale_enabled': 0},
+      \   '.*\.tex': {'ale_enabled': 0},
+      \}
+let g:ale_sh_shfmt_options = '-i 2'
 " override ]s [s
 nmap <silent> ]s <Plug>(ale_next_wrap)
 nmap <silent> [s <Plug>(ale_previous_wrap)
@@ -828,6 +834,7 @@ map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 " Plugin: Yggdroot/LeaderF [[[2
+let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
@@ -839,14 +846,15 @@ else
 endif
 let g:Lf_HideHelp = 1
 let g:Lf_ShowRelativePath = 1
+let g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>']}
 let g:Lf_NormalMap = {
-	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-	\ }
+      \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+      \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+      \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+      \ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+      \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+      \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+      \ }
 nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
@@ -859,8 +867,8 @@ let g:ctrlsf_mapping = {
       \ 'vsplit': 'x'
       \ }
 let g:ctrlsf_extra_backend_args = {
-    \ 'rg': '--hidden'
-    \ }
+      \ 'rg': '--hidden'
+      \ }
 
 nmap     <leader>sf <Plug>CtrlSFPrompt
 vmap     <leader>sf <Plug>CtrlSFVwordPath
