@@ -35,6 +35,7 @@ Plug 'yegappan/grep'
 Plug 'yegappan/greplace'
 
 Plug 'bennyyip/is.vim'
+Plug 'markonm/traces.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'justinmk/vim-sneak'
 
