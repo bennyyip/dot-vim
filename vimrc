@@ -96,6 +96,8 @@ Plug 'tpope/vim-sensible'
 " Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-apathy'
+Plug 'tpope/vim-speeddating'
 " textobj [[[3
 Plug 'adriaanzon/vim-textobj-matchit'
 Plug 'kana/vim-textobj-entire'
@@ -487,11 +489,9 @@ endif
 nnoremap <localleader>j :set ft=javascript<CR>
 nnoremap <localleader>h :set ft=html<CR>
 " file, buffer, tab [[[2
-nnoremap gf :e <cfile><CR>
 nnoremap <leader>fs :w<CR>
-nnoremap <leader>fq :x<CR>
-nnoremap <leader>fy :let @*=substitute(expand("%"), "/", "\\", "g")<CR>:echo "buffer path copied"<CR>
-nnoremap <leader>fp :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>:echo "buffer folder path copied"<CR>
+nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
+nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
