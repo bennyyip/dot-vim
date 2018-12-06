@@ -72,7 +72,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 " *nix stuff [[[ 3
 if !s:is_win
-  Plug 'benmills/vimux'
   Plug 'christoomey/vim-tmux-navigator'
 endif
 Plug 'lilydjwg/fcitx.vim'
@@ -650,23 +649,6 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 0
 "slow
 let g:cpp_experimental_template_highlight = 1
-" Plugin: benmills/vimux [[[2
-if !s:is_win
-  "let g:VimuxOrientation = "h"
-  map <leader>vp :VimuxPromptCommand<CR>
-  map <leader>vl :VimuxRunLastCommand<CR>
-  map <leader>vi :VimuxInspectRunner<CR>
-  map <leader>vz :VimuxZoomRunner<CR>
-  map <Leader>vq :VimuxCloseRunner<CR>
-  map <Leader>vx :VimuxInterruptRunner<CR>
-  function! VimuxSlime()
-    call VimuxSendText(@v)
-    call VimuxSendKeys('Enter')
-  endfunction
-
-  " If text is selected, save it in the v buffer and send that buffer it to tmux
-  vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
-endif
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
 " Plugin: tpope/vim-fugitive [[[2
@@ -812,38 +794,6 @@ nmap     <leader>sn <Plug>CtrlSFCwordPath
 nmap     <leader>sp <Plug>CtrlSFPwordPath
 nnoremap <leader>so :CtrlSFOpen<CR>
 nnoremap <leader>st :CtrlSFToggle<CR>
-" Plugin: kana/vim-textobj-user [[[2
-call textobj#user#plugin('rust', {
-      \         'closure': {
-      \         '*sfile*': expand('<sfile>:p'),
-      \         'select-a': 'ac',  '*select-a-function*': 's:select_a',
-      \         'select-i': 'ic',  '*select-i-function*': 's:select_i'
-      \   },
-      \ })
-
-function! s:select_a()
-  normal! F|
-
-  let l:end_pos = getpos('.')
-
-  normal! f|
-
-  let l:start_pos = getpos('.')
-  return ['v', l:start_pos, l:end_pos]
-endfunction
-
-
-function! s:select_i()
-  normal! T|
-
-  let l:end_pos = getpos('.')
-
-  normal! t|
-
-  let l:start_pos = getpos('.')
-
-  return ['v', l:start_pos, l:end_pos]
-endfunction
 " Plugin: skywind3000/asyncrun.vim [[[2
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 augroup vimrc
