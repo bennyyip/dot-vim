@@ -1,9 +1,3 @@
-let s:opam_prefix_dir = system('opam config var prefix')
-let s:opam_prefix_dir = substitute(s:opam_prefix_dir, '[\r\n]*$', '', '')
-let s:opam_share_dir = s:opam_prefix_dir . '/share'
-let s:opam_bin_dir = s:opam_prefix_dir . '/bin'
-let $PATH .= ':' . s:opam_bin_dir
-
 let g:is_ssh = ($SSH_CONNECTION != "")
 let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
@@ -15,10 +9,6 @@ let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 call plug#begin('$v/bundle')
 let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
-" ocaml [[[3
-Plug '~/.opam/system/share/merlin/vim'
-Plug '~/.opam/system/share/ocp-ident/vim'
-Plug '~/.opam/system/share/ocp-index/vim'
 " general [[[2
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
@@ -183,6 +173,7 @@ scriptencoding utf-8
 
 if !s:is_tty
   if s:is_win
+    set renderoptions=type:directx
     let &listchars = 'tab:▸ ,extends:>,precedes:<,nbsp:.'
     let &showbreak = '-> '
     highlight VertSplit ctermfg=242
@@ -420,7 +411,8 @@ endif " exists(...)
 let g:vimrc_loaded=1
 " Windows [[[2
 if s:is_win
-  set pythonthreedll=python36.dll
+  let &pythonthreedll = 'C:\Program Files\Python37\python37.dll'
+  silent! python3 pass
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
 endif
