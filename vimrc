@@ -843,8 +843,12 @@ let g:linediff_buffer_type = 'scratch'
 " Plugin:  vim-scripts/YankRing.vim [[[2
 let g:yankring_map_dot = 0
 let g:yankring_min_element_length = 2
-nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+function! YRRunAfterMaps()
+  nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+endfunction
 nnoremap <leader>y :YRShow<CR>
 " ending [[[1
-source $HOME/local.vim
+if filereadable($HOME. '/local.vim')
+  source $HOME/local.vim
+endif
 " vim:fdm=marker:fmr=[[[,]]]
