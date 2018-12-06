@@ -60,19 +60,30 @@ snippet usage
 snippet enc
 	# vim:fileencoding=utf-8
 snippet fpf
-        from __future__ import print_function
+	from __future__ import print_function
 snippet fdiv
-        from __future__ import division
+	from __future__ import division
 snippet fai
-        from __future__ import absolute_import
+	from __future__ import absolute_import
 snippet aa
-        *args, **kwargs)
+	*args, **kwargs)
 snippet yf
-        yield from 
+	yield from 
 snippet mGP
-        methods=['GET', 'POST']
+	methods=['GET', 'POST']
 snippet mP
-        methods=['POST']
+	methods=['POST']
 
 snippet utf
 	# -*- coding: utf-8 -*-
+snippet repl
+	except Exception as e:
+	    traceback.print_exc(file=sys.stderr)
+	    _, value, tb = sys.exc_info()
+	    traceback.print_exc()
+	    last_frame = lambda tb=tb: last_frame(tb.tb_next) if tb.tb_next else tb
+	    frame = last_frame().tb_frame
+	    ns = dict(frame.f_globals)
+	    ns.update(frame.f_locals)
+	    import code
+	    code.interact(local=ns)
