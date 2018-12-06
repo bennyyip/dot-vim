@@ -56,6 +56,8 @@ Plug 'tommcdo/vim-ninja-feet'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'tommcdo/vim-fubitive'
 
+Plug 'vim-scripts/YankRing.vim'
+
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -454,9 +456,9 @@ nmap <leader>; :AsyncRun<space>
 inoremap {<CR>          {}<left><CR><ESC>O
 inoremap (<CR>          ()<left><CR><ESC>O
 " yank
+cnoremap <C-v> <C-R>+
 inoremap <silent><C-v>      <C-r>+
 xnoremap <silent><C-c>      "+y
-nmap     Y                  y$
 " vimrc
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>v  :so $MYVIMRC<CR>
@@ -812,8 +814,17 @@ nmap <leader>l <Plug>(qf_qf_toggle_stay)
 " Plugin: lilydjwg/colorizer [[[2
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
-" simnalamburt/vim-mundo [[[2
+" Plugin: simnalamburt/vim-mundo [[[2
 nnoremap <leader>u :MundoToggle<CR>
+" Plugin: AndrewRadev/linediff.vim [[[2
+vnoremap zd :Linediff<CR>
+autocmd User LinediffBufferReady nnoremap <buffer> <leader>q :LinediffReset<cr>
+let g:linediff_buffer_type = 'scratch'
+" Plugin:  vim-scripts/YankRing.vim [[[2
+let g:yankring_map_dot = 0
+let g:yankring_min_element_length = 2
+nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+nnoremap <leader>y :YRShow<CR>
 " ending [[[1
 runtime local.vim
 " vim:fdm=marker:fmr=[[[,]]]
