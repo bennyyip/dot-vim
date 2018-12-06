@@ -410,7 +410,7 @@ if !exists('g:vimrc_loaded')
         autocmd GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
       augroup END
       "au GUIEnter * simalt ~x " 窗口啓動時自動最大化
-      set guifont=Inziu\ Iosevka\ CL:h12
+      set guifont=Sarasa\ Term\ CL:h14
     else
       set guioptions-=aegimrLtT
       set guifont=Monospace\ 8
@@ -822,6 +822,9 @@ augroup vimrc
   " open quickfix when something adds to it
   autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
 augroup END
+if s:is_win
+  let g:asyncrun_encs = 'gbk'
+endif
 " Plugin: airblade/vim-rooter [[[2
 let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_manual_only = 1
