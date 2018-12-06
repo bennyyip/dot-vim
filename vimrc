@@ -499,12 +499,7 @@ nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 " tab [[[3
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
-function! Map_switch_tab()
-  for l:i in range(9)
-    exe "nnoremap <leader>".l:i." :tabn ".l:i."<cr>"
-  endfor
-endfunction
-call Map_switch_tab()
+call ben#map_switch_tab()
 " move [[[2
 inoremap <M-o>      <C-O>o
 inoremap <M-O>      <C-O>O
@@ -514,64 +509,20 @@ inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
-" Function and Command [[[1
+" Command [[[1
 " :Shuffle | Shuffle selected lines [[[2
-function! s:shuffle() range
-  ruby << RB
-  first, last = %w[a:firstline a:lastline].map { |e| VIM::evaluate(e).to_i }
-  (first..last).map { |l| $curbuf[l] }.shuffle.each_with_index do |line, i|
-  $curbuf[first + i] = line
-end
-RB
-endfunction
-command! -range Shuffle <line1>,<line2>call s:shuffle()
+command! -range Shuffle <line1>,<line2>call ben#shuffle()
 " OpenUrl [[[2
-function! OpenURL(url)
-  if s:is_win
-    exe "!start cmd /cstart /b ".a:url.""
-  else
-    exe "AsyncRun firefox \"".a:url."\"&"
-  endif
-endfunction
-command! -nargs=1 OpenURL :call OpenURL(<q-args>)
+command! -nargs=1 OpenURL :call ben#open_url(<q-args>)
 nnoremap gx :OpenURL <cfile><CR>
 nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
 nnoremap gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><CR>
 " :A [[[2
-function! s:a(cmd)
-  let l:name = expand('%:r')
-  let l:ext = tolower(expand('%:e'))
-  let l:sources = ['c', 'cc', 'cpp', 'cxx', 'mli']
-  let l:headers = ['h', 'hh', 'hpp', 'hxx', 'ml']
-  for l:pair in [[l:sources, l:headers], [l:headers, l:sources]]
-    let [l:set1, l:set2] = l:pair
-    if index(l:set1, l:ext) >= 0
-      for l:h in l:set2
-        let l:aname = l:name.'.'.l:h
-        for l:a in [l:aname, toupper(l:aname)]
-          if filereadable(l:a)
-            execute a:cmd l:a
-            return
-          end
-        endfor
-      endfor
-    endif
-  endfor
-endfunction
-command! A call s:a('e')
-command! AV call s:a('botright vertical split')
-nmap <leader>a :A<CR>
-
-function! s:gen_def()
-  normal! 0yf;
-  call s:a('e')
-  normal! Go
-  normal! p;cl {
-  normal! o}
-  normal! O
-  normal! cc
-endfunction
-command! GenDef call s:gen_def()
+command! A call ben#a('e')
+command! AV call ben#a('botright vertical split')
+nmap <leader>a :A<CR> 
+" GenDef [[[2
+command! GenDef call ben#gen_def()
 nmap <leader>df :GenDef<CR>
 " PX: plus x| chmod +x [[[2
 command! PX if !empty(expand('%'))
@@ -583,8 +534,6 @@ command! PX if !empty(expand('%'))
         \|   echo 'Save the file first'
         \|   echohl None
         \| endif
-" Generate .clang_complete base on makefile [[[2
-command! GenClangComplete AsyncRun make clean && make CC='$v/bin/cc_args.py gcc'
 " RFC [[[2
 command! -bar -count=0 RFC     :e http://www.ietf.org/rfc/rfc<count>.txt|setl ro noma
 " Autocmd [[[1
@@ -767,22 +716,8 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
       \ .')$'
 
-function! Tab_Or_Complete() abort
-  " If completor is already open the `tab` cycles through suggested completions.
-  if pumvisible()
-    return "\<C-N>"
-    " If completor is not open and we are in the middle of typing a word then
-    " `tab` opens completor menu.
-  elseif col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-    return "\<C-R>=completor#do('complete')\<CR>"
-  else
-    " If we aren't typing a word and we press `tab` simply do the normal `tab`
-    " action.
-    return "\<Tab>"
-  endif
-endfunction
 let g:completor_auto_trigger = 1
-inoremap <expr> <Tab> Tab_Or_Complete()
+inoremap <expr> <Tab> ben#tab_or_complete()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Plugin: w0rp/ale [[[2
 " let g:ale_set_loclist = 0
