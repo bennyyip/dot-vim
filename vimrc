@@ -462,9 +462,11 @@ xnoremap <silent><C-c>      "+y
 " vimrc
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>v  :so $MYVIMRC<CR>
+" run current line
+nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 " keep selection when indent line in visual mode
-xnoremap <  <gv
-xnoremap >  >gv
+xnoremap <expr> > v:count ? ">" : ">gv"
+xnoremap <expr> < v:count ? "<" : "<gv"
 " script helper
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
 " quick edit macro  | ["register]<leader>m
@@ -497,6 +499,14 @@ nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
+
+" correct spell
+cab Q q
+cab Qa qa
+cab W w
+cab Wq wq
+cab Wa wa
+cab X x
 " tab [[[3
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
@@ -506,10 +516,16 @@ inoremap <M-o>      <C-O>o
 inoremap <M-O>      <C-O>O
 nnoremap <M-j> gj
 nnoremap <M-k> gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+inoremap <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
+inoremap <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
+noremap H ^
+noremap L $
 " Command [[[1
 " :Shuffle | Shuffle selected lines [[[2
 command! -range Shuffle <line1>,<line2>call ben#shuffle()
@@ -521,7 +537,7 @@ nnoremap gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><
 " :A [[[2
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
-nmap <leader>a :A<CR> 
+nmap <leader>a :A<CR>
 " GenDef [[[2
 command! GenDef call ben#gen_def()
 nmap <leader>df :GenDef<CR>
@@ -654,6 +670,9 @@ let g:cpp_experimental_template_highlight = 1
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
 " Plugin: tpope/vim-fugitive [[[2
+nnoremap <silent> <leader>gg  :Gstatus<CR>
+nnoremap <silent> <leader>gb  :Gblame<CR>
+nnoremap <silent> <leader>gd  :Gdiff<CR>
 augroup vimrc
   autocmd FileType gitcommit wincmd J
 augroup end
@@ -779,6 +798,7 @@ nnoremap <leader>fr :LeaderfMru<CR>
 nnoremap <leader>gs :LeaderfStars<CR>
 nnoremap <leader>gr :LeaderfGhq<CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
+nnoremap <leader>b :LeaderfBuffer<CR>
 " Plugin: dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_mapping = {
