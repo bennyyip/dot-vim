@@ -846,5 +846,5 @@ let g:yankring_min_element_length = 2
 nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
 nnoremap <leader>y :YRShow<CR>
 " ending [[[1
-runtime local.vim
+source $HOME/local.vim
 " vim:fdm=marker:fmr=[[[,]]]
