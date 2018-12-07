@@ -1,3 +1,4 @@
+let s:is_win = has('win32')
 " Function: #foldy {{{1
 function! ben#foldy()
   let linelen = &tw ? &tw : 80
@@ -80,7 +81,6 @@ function! ben#open_url(url)
     exe "AsyncRun firefox \"".a:url."\"&"
   endif
 endfunction
-
 " Function: #shuffle {{{1
 function! ben#shuffle() range
   ruby << RB
