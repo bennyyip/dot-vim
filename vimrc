@@ -42,11 +42,13 @@ Plug 'vim-voom/VOoM', { 'on': 'Voom' }
 Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
 
 Plug 'tommcdo/vim-exchange'
-Plug 'tommcdo/vim-ninja-feet'
+" Plug 'tommcdo/vim-ninja-feet'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'tommcdo/vim-fubitive'
 
 Plug 'vim-scripts/YankRing.vim'
+
+Plug 'andymass/vim-matchup'
 
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
@@ -118,7 +120,6 @@ Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
 Plug 'lervag/vimtex', {'for': 'tex'}
 " web [[[3
-Plug 'Valloric/MatchTagAlways'
 Plug 'lilydjwg/colorizer'
 Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
 Plug 'othree/html5.vim', {'for': 'html'}
@@ -835,13 +836,17 @@ nnoremap <leader>u :MundoToggle<CR>
 vnoremap zd :Linediff<CR>
 autocmd User LinediffBufferReady nnoremap <buffer> <leader>q :LinediffReset<cr>
 let g:linediff_buffer_type = 'scratch'
-" Plugin:  vim-scripts/YankRing.vim [[[2
+" Plugin: vim-scripts/YankRing.vim [[[2
 let g:yankring_map_dot = 0
 let g:yankring_min_element_length = 2
 function! YRRunAfterMaps()
   nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
 endfunction
 nnoremap <leader>y :YRShow<CR>
+" Plugin andymass/vim-matchup [[[2
+let g:loaded_matchit = 1
+let g:matchup_transmute_enabled = 1
+let g:matchup_override_vimtex = 1
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
