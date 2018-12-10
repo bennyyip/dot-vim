@@ -23,7 +23,6 @@ function! ben#foldy()
 
   return left . fill . right . repeat(' ', 100)
 endfunction
-
 " Function: #gen_def {{{1
 function! ben#gen_def()
   normal! 0yf;
@@ -34,7 +33,6 @@ function! ben#gen_def()
   normal! O
   normal! cc
 endfunction
-
 " Function: #tab_or_complete {{{1
 function! ben#tab_or_complete() abort
   " If completor is already open the `tab` cycles through suggested completions.
@@ -50,7 +48,6 @@ function! ben#tab_or_complete() abort
     return "\<Tab>"
   endif
 endfunction
-
 " Function: #a {{{1
 function! ben#a(cmd)
   let l:name = expand('%:r')
@@ -72,7 +69,6 @@ function! ben#a(cmd)
     endif
   endfor
 endfunction
-
 " Function: #open_url {{{1
 function! ben#open_url(url)
   if s:is_win
@@ -90,14 +86,12 @@ function! ben#shuffle() range
 end
 RB
 endfunction
-
 " Function: #map_switch_tab {{{1
 function! ben#map_switch_tab()
   for l:i in range(9)
     exe "nnoremap <leader>".l:i." :tabn ".l:i."<cr>"
   endfor
 endfunction
-
 " Function: #quote {{{1
 function! s:get_random_offset(max) abort
   return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max

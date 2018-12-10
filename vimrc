@@ -74,6 +74,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/lilypink'
+Plug 'hachy/eva01.vim'
 Plug 'luochen1990/rainbow'
 Plug 'itchyny/vim-cursorword'
 " tpope [[[3
@@ -405,7 +406,7 @@ if !exists('g:vimrc_loaded')
       set guifont=Sarasa\ Term\ CL:h14
     else
       set guioptions-=aegimrLtT
-      set guifont=Monospace\ 8
+      set guifont=Monospace\ 14
     endif
   endif " has
 endif " exists(...)
@@ -911,7 +912,7 @@ let g:rainbow_conf = {
       \ }
       \}
 " Plugin: maralla/completor.vim [[[2
-let g:completor_racer_binary = '/bin/racer'
+let g:completor_racer_binary = '/usr/bin/racer'
 let g:completor_tex_omni_trigger = '\\\\(:?'
       \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
       \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
