@@ -120,6 +120,13 @@ Plug 'othree/html5.vim', {'for': 'html'}
 call plug#end()
 " Setting [[[1
 " general settings [[[2
+" clear augroup on reload [[[3
+if exists('#virmc')
+augroup virmc
+  autocmd!
+augroup END
+augroup! virmc
+endif
 " init [[[3
 let g:mapleader        = "\<Space>"
 let g:localleader      = "\\"
