@@ -11,7 +11,6 @@ let g:plug_window  = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
 " general [[[2
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'junegunn/limelight.vim', { 'for': [ 'markdown', 'rst', 'text'] }
 Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
 
 Plug 'Shougo/neosnippet-snippets'
@@ -42,7 +41,6 @@ Plug 'vim-voom/VOoM', { 'on': 'Voom' }
 Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
 
 Plug 'tommcdo/vim-exchange'
-" Plug 'tommcdo/vim-ninja-feet'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'tommcdo/vim-fubitive'
 
@@ -88,7 +86,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
-" Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-apathy'
@@ -106,7 +103,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'Firef0x/PKGBUILD.vim'
 " python [[[3
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'hdima/python-syntax', { 'for': 'python'}
+Plug 'vim-python/python-syntax', { 'for': 'python'}
 " typescript [[[3
 Plug 'leafgarland/typescript-vim'
 " markup [[[3
