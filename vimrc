@@ -1020,8 +1020,8 @@ nnoremap <leader>st :CtrlSFToggle<CR>
 " Plugin: skywind3000/asyncrun.vim [[[2
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 augroup vimrc
-  " open quickfix when something adds to it
-  autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
+  " open quickfix when task is done
+  autocmd User AsyncRunStop call asyncrun#quickfix_toggle(8, 1)
 augroup END
 if s:is_win
   let g:asyncrun_encs = 'gbk'
