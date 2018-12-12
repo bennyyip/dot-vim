@@ -1,2 +1,2 @@
-setlocal tabstop=8 shiftwidth=8 sts=0
+setlocal tabstop=8 shiftwidth=8 softtabstop=0
 
