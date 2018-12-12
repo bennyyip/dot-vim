@@ -121,10 +121,10 @@ call plug#end()
 " general settings [[[2
 " clear augroup on reload [[[3
 if exists('#virmc')
-augroup virmc
-  autocmd!
-augroup END
-augroup! virmc
+  augroup virmc
+    autocmd!
+  augroup END
+  augroup! virmc
 endif
 " init [[[3
 let g:mapleader        = "\<Space>"
