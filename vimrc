@@ -469,9 +469,7 @@ nnoremap qs :%s`<C-R><C-W>``g<left><left>
 " get output from python
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 " Quit
-nnoremap <silent><leader>Q :Sayonara!<CR>
-nnoremap <silent><leader>q :Sayonara<CR>
-let g:sayonara_confirm_quit = 1
+nnoremap <silent>gs :Sayonara<CR>
 " fold
 nmap z] zo]z
 nmap z[ zo[z
@@ -1035,7 +1033,8 @@ let g:rooter_patterns = ['Cargo.toml', 'mix.exs', 'Makefile', '.git/', '.svn/']
 nmap <silent> <leader>r :Rooter<CR>
 " Plugin: romainl/vim-qf [[[2
 let g:qf_mapping_ack_style = 1
-nmap <leader>l <Plug>(qf_qf_toggle_stay)
+nmap <leader>q <Plug>(qf_qf_toggle_stay)
+nmap <leader>l <Plug>(qf_loc_toggle_stay)
 " Plugin: lilydjwg/colorizer [[[2
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
