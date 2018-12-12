@@ -148,7 +148,7 @@ let g:loaded_zipPlugin        = 1
 set autoindent
 set cinoptions    =>2,l1,p0,)50,*50,t0
 " tab stop
-set sts=4 sw=4
+set softtabstop=4 shiftwidth=4
 set expandtab smarttab
 " display settings [[[3
 set display       =lastline
