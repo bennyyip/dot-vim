@@ -1049,6 +1049,8 @@ let g:yankring_map_dot = 0
 let g:yankring_min_element_length = 2
 function! YRRunAfterMaps()
   nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+  omap <expr> H YRMapsExpression("<SID>", "^", "1")
+  omap <expr> L YRMapsExpression("<SID>", "$", "1")
 endfunction
 nnoremap <leader>y :YRShow<CR>
 " Plugin andymass/vim-matchup [[[2
