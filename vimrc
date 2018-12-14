@@ -467,6 +467,8 @@ nnoremap Q @q
 " quick substitute
 vnoremap qs "zy:%s`<C-R>z``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
+vnoremap qS "zy:%S`<C-R>z``g<left><left>
+nnoremap qS :%S`<C-R><C-W>``g<left><left>
 " get output from python
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 " Quit
@@ -1043,7 +1045,7 @@ let g:colorizer_startup = 0
 nnoremap <leader>u :MundoToggle<CR>
 " Plugin: AndrewRadev/linediff.vim [[[2
 vnoremap zd :Linediff<CR>
-autocmd User LinediffBufferReady nnoremap <buffer> <leader>q :LinediffReset<cr>
+autocmd User LinediffBufferReady nnoremap <buffer> gs :LinediffReset<cr>
 let g:linediff_buffer_type = 'scratch'
 " Plugin: vim-scripts/YankRing.vim [[[2
 let g:yankring_map_dot = 0
