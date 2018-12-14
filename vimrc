@@ -421,7 +421,6 @@ endif
 nmap     t= mxHmygg=G`yzt`x
 nmap     tj Jx
 nmap     tp "+P
-nnoremap tl ^vg_
 nmap     T :tabnew<cr>
 
 nmap <silent> <F6> :if &previewwindow<Bar>pclose<Bar>elseif exists(':Gstatus')<Bar>exe 'botright Gstatus'<Bar>else<Bar>ls<Bar>endif<CR>
@@ -429,8 +428,6 @@ map <F8>    :Make<CR>
 
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
 
-" slect what I just pasted
-nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " quick <C-w>
 nnoremap ' <C-w>
@@ -484,14 +481,12 @@ endif
 
 nnoremap <localleader>j :set ft=javascript<CR>
 nnoremap <localleader>h :set ft=html<CR>
-" file, buffer, tab [[[2
-nnoremap <leader>fs :w<CR>
-nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
-nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
-nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 
-nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 
+" diff
+nnoremap <silent><leader>di :windo diffthis<CR>
+nnoremap <silent><leader>du :windo diffupdate<CR>
+nnoremap <silent><leader>do :windo diffoff<CR>
 " correct spell
 cab Q q
 cab Qa qa
@@ -499,7 +494,13 @@ cab W w
 cab Wq wq
 cab Wa wa
 cab X x
-" tab [[[3
+" file, buffer, tab [[[2
+nnoremap <leader>fs :w<CR>
+nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
+nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
+nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
+
+nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 call ben#map_switch_tab()
@@ -1052,6 +1053,8 @@ let g:yankring_map_dot = 0
 let g:yankring_min_element_length = 2
 function! YRRunAfterMaps()
   nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+  " slect what I just pasted
+  nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
   omap <expr> H YRMapsExpression("<SID>", "^", "1")
   omap <expr> L YRMapsExpression("<SID>", "$", "1")
 endfunction
