@@ -1,5 +1,5 @@
 let s:is_win = has('win32')
-" Function: #foldy {{{1
+" Function: #foldy ('foldtext') {{{1
 function! ben#foldy()
   let linelen = &tw ? &tw : 80
   let marker  = strpart(&fmr, 0, stridx(&fmr, ',')) . '\d*'
@@ -23,7 +23,7 @@ function! ben#foldy()
 
   return left . fill . right . repeat(' ', 100)
 endfunction
-" Function: #tab_or_complete {{{1
+" Function: #tab_or_complete (use <tab> to invoke and select complete) {{{1
 function! ben#tab_or_complete() abort
   " If completor is already open the `tab` cycles through suggested completions.
   if pumvisible()
@@ -38,7 +38,7 @@ function! ben#tab_or_complete() abort
     return "\<Tab>"
   endif
 endfunction
-" Function: #a {{{1
+" Function: #a (switch between .cc and .h) {{{1
 function! ben#a(cmd)
   let l:name = expand('%:r')
   let l:ext = tolower(expand('%:e'))
@@ -67,7 +67,7 @@ function! ben#open_url(url)
     exe "AsyncRun firefox \"".a:url."\"&"
   endif
 endfunction
-" Function: #shuffle {{{1
+" Function: #shuffle (shuffle lines) {{{1
 function! ben#shuffle() range
   ruby << RB
   first, last = %w[a:firstline a:lastline].map { |e| VIM::evaluate(e).to_i }
@@ -76,7 +76,7 @@ function! ben#shuffle() range
 end
 RB
 endfunction
-" Function: #open_explore
+" Function: #open_explore (0: current buffer, 1: vnew, 2: tabnew) {{{1
 function! ben#open_explore(where)
     let l:path = expand("%:p:h")
     if l:path == ''
@@ -92,7 +92,7 @@ function! ben#open_explore(where)
         exec 'Explore '.fnameescape(l:path)
     endif
   endfunction
-" Function: #quote {{{1
+" Function: #quote (random quote on splash screen) {{{1
 function! s:get_random_offset(max) abort
   return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
 endfunction

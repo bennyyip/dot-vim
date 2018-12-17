@@ -800,10 +800,14 @@ let g:is#do_default_mappings=1
 let g:is#auto_nohlsearch=0
 map n  nzzzv
 map N  Nzzzv
-map *  <Plug>(asterisk-z*)zzzv
-map g* <Plug>(asterisk-gz*)zzzv
-map #  <Plug>(asterisk-z#)zzzv
-map g# <Plug>(asterisk-gz#)zzzv
+map *  <Plug>(asterisk-*)zzzv
+map g* <Plug>(asterisk-g*)zzzv
+map #  <Plug>(asterisk-#)zzzv
+map g# <Plug>(asterisk-g#)zzzv
+map z*  <Plug>(asterisk-z*)zzzv
+map gz* <Plug>(asterisk-gz*)zzzv
+map z#  <Plug>(asterisk-z#)zzzv
+map gz# <Plug>(asterisk-gz#)zzzv
 " Plugin: ludovicchabant/vim-gutentags [[[2
 set tags=./.tags;,.tags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
