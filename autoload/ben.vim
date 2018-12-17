@@ -23,16 +23,6 @@ function! ben#foldy()
 
   return left . fill . right . repeat(' ', 100)
 endfunction
-" Function: #gen_def {{{1
-function! ben#gen_def()
-  normal! 0yf;
-  call s:a('e')
-  normal! Go
-  normal! p;cl {
-  normal! o}
-  normal! O
-  normal! cc
-endfunction
 " Function: #tab_or_complete {{{1
 function! ben#tab_or_complete() abort
   " If completor is already open the `tab` cycles through suggested completions.
