@@ -500,10 +500,30 @@ nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
 nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
 nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
 
+if s:is_gvim
+    noremap <silent><M-o> :<C-u>call ben#open_explore(2)<CR>
+else
+    noremap <silent><ESC>]{o}0~ :<C-u>call ben#open_explore(2)<CR>
+endif
+
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
-call ben#map_switch_tab()
+function! s:map_switch_tab()
+  for l:i in range(1, 9)
+    exe "nnoremap <silent><leader>".l:i." :tabn ".l:i."<cr>"
+    if s:is_gvim
+        exe "nnoremap <silent><M-".l:i."> :tabn ".l:i."<cr>"
+    else
+      " Use customized key code for alt mappings to avoid breaking macros like
+      " `<ESC>j`, see:
+      " https://github.com/bennyyip/dotfiles/blob/master/config/.config/alacritty/alacritty.yml
+      " https://zhuanlan.zhihu.com/p/20902166
+        exe "nnoremap <silent><ESC>]{0}".l:i."~ :tabn ".l:i."<cr>"
+    endif
+  endfor
+endfunction
+call s:map_switch_tab()
 " move [[[2
 inoremap <M-o>      <C-O>o
 inoremap <M-O>      <C-O>O
