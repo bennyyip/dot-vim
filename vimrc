@@ -762,9 +762,6 @@ nnoremap gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
 nmap <leader>a :A<CR>
-" GenDef [[[2
-command! GenDef call ben#gen_def()
-nmap <leader>df :GenDef<CR>
 " PX: plus x| chmod +x [[[2
 command! PX if !empty(expand('%'))
       \|   write
