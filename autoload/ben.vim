@@ -86,12 +86,22 @@ function! ben#shuffle() range
 end
 RB
 endfunction
-" Function: #map_switch_tab {{{1
-function! ben#map_switch_tab()
-  for l:i in range(9)
-    exe "nnoremap <leader>".l:i." :tabn ".l:i."<cr>"
-  endfor
-endfunction
+" Function: #open_explore
+function! ben#open_explore(where)
+    let l:path = expand("%:p:h")
+    if l:path == ''
+        let l:path = getcwd()
+    endif
+    if a:where == 0
+        exec 'Explore '.fnameescape(l:path)
+    elseif a:where == 1
+        exec 'vnew'
+        exec 'Explore '.fnameescape(l:path)
+    else
+        exec 'tabnew'
+        exec 'Explore '.fnameescape(l:path)
+    endif
+  endfunction
 " Function: #quote {{{1
 function! s:get_random_offset(max) abort
   return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
