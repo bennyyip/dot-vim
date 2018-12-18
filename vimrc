@@ -47,6 +47,8 @@ Plug 'tommcdo/vim-fubitive'
 Plug 'vim-scripts/YankRing.vim'
 
 Plug 'andymass/vim-matchup'
+
+Plug 'vimoutliner/vimoutliner'
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -455,7 +457,7 @@ inoremap <silent><C-v>      <C-r>+
 xnoremap <silent><C-c>      "+y
 " vimrc
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
-nnoremap <leader>v  :so $MYVIMRC<CR>
+nnoremap <leader>fee  :so $MYVIMRC<CR>
 " run current line
 nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 " keep selection when indent line in visual mode
