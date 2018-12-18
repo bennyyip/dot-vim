@@ -118,5 +118,14 @@ let s:quotes = [
       \ ["「你我猶如隔鏡視物所見無非虛幻迷濛」"],
       \ ["Brute force never fails, unless you're not using enought of it."]
       \]
+" Function: #votl {{{1
+function! ben#votl()
+  let filename = expand("~/votl/". strftime('%Y/%m/%d'). '.otl')
+  let votl_dir = fnamemodify(filename, ':h')
+  if !isdirectory(votl_dir)
+    call mkdir(votl_dir, 'p')
+  endif
+  execute 'edit' fnameescape(filename)
+endfunction
 " Modeline {{{1
 " vim:fdm=marker
