@@ -92,6 +92,10 @@ function! ben#open_explore(where)
         exec 'Explore '.fnameescape(l:path)
     endif
   endfunction
+" Function: #has_plugin (require junegunn/plug) {{{1
+function! ben#has_plugin(plugin)
+  return index(g:plugs_order, a:plugin) != -1
+endfunction
 " Function: #quote (random quote on splash screen) {{{1
 function! s:get_random_offset(max) abort
   return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
@@ -114,3 +118,5 @@ let s:quotes = [
       \ ["「你我猶如隔鏡視物所見無非虛幻迷濛」"],
       \ ["Brute force never fails, unless you're not using enought of it."]
       \]
+" Modeline {{{1
+" vim:fdm=marker

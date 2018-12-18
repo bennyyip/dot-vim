@@ -47,7 +47,6 @@ Plug 'tommcdo/vim-fubitive'
 Plug 'vim-scripts/YankRing.vim'
 
 Plug 'andymass/vim-matchup'
-
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -423,7 +422,13 @@ nmap     tj Jx
 nmap     tp "+P
 nmap     T :tabnew<cr>
 
-nmap <silent> <F6> :if &previewwindow<Bar>pclose<Bar>elseif exists(':Gstatus')<Bar>exe 'botright Gstatus'<Bar>else<Bar>ls<Bar>endif<CR>
+map n  nzzzv
+map N  Nzzzv
+
+nnoremap Y   y$
+" slect what I just pasted
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 map <F8>    :Make<CR>
 
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
@@ -787,9 +792,6 @@ augroup END
 " Plugin Config [[[1
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>  <Plug>(neosnippet_expand_or_jump)
-smap <C-k>  <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>  <Plug>(neosnippet_expand_target)
 let g:neosnippet#enable_snipmate_compatibility=1
 let g:neosnippet#disable_runtime_snippets = {
       \  '_' : 1,
@@ -798,16 +800,6 @@ let g:neosnippet#snippets_directory = '$v/snippets'
 " Plugin: is.vim [[[2
 let g:is#do_default_mappings=1
 let g:is#auto_nohlsearch=0
-map n  nzzzv
-map N  Nzzzv
-map *  <Plug>(asterisk-*)zzzv
-map g* <Plug>(asterisk-g*)zzzv
-map #  <Plug>(asterisk-#)zzzv
-map g# <Plug>(asterisk-g#)zzzv
-map z*  <Plug>(asterisk-z*)zzzv
-map gz* <Plug>(asterisk-gz*)zzzv
-map z#  <Plug>(asterisk-z#)zzzv
-map gz# <Plug>(asterisk-gz#)zzzv
 " Plugin: ludovicchabant/vim-gutentags [[[2
 set tags=./.tags;,.tags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -894,13 +886,6 @@ let g:cpp_experimental_simple_template_highlight = 0
 let g:cpp_experimental_template_highlight = 1
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
-" Plugin: tpope/vim-fugitive [[[2
-nnoremap <silent> <leader>gg  :Gstatus<CR>
-nnoremap <silent> <leader>gb  :Gblame<CR>
-nnoremap <silent> <leader>gd  :Gdiff<CR>
-augroup vimrc
-  autocmd FileType gitcommit wincmd J
-augroup end
 " Plugin: tpope/vim-vinegar [[[2
 " let g:loaded_netrw       = 1
 " let g:loaded_netrwPlugin = 1
@@ -915,11 +900,6 @@ let g:netrw_sort_options = 'i'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_timefmt = '%H:%M %y-%m-%d'
 let g:netrw_sizestyle = 'H'
-" Plugin: iamcco/dict.vim [[[2
-nmap <silent> <Leader>oy <Plug>DictSearch
-xmap <silent> <Leader>oy <Plug>DictVSearch
-nmap <silent> <Leader>oY <Plug>DictWSearch
-xmap <silent> <Leader>oY <Plug>DictWVSearch
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_active=1
 let g:rainbow_conf = {
@@ -985,18 +965,8 @@ let g:ale_pattern_options = {
       \   '.*\.tex': {'ale_enabled': 0},
       \}
 let g:ale_sh_shfmt_options = '-i 2'
-" override ]s [s
-nmap <silent> ]s <Plug>(ale_next_wrap)
-nmap <silent> [s <Plug>(ale_previous_wrap)
-nmap <silent> <leader>= <Plug>(ale_fix)
-nmap <silent> <leader>+ <Plug>(ale_enable_buffer)
-" Plugin: vim-easy-align [[[2
-xmap <cr> <plug>(LiveEasyAlign)
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
 " Plugin: Yggdroot/LeaderF [[[2
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_ShortcutF='<leader>ff'
@@ -1019,11 +989,6 @@ let g:Lf_NormalMap = {
       \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
       \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
       \ }
-nnoremap <leader>fr :LeaderfMru<CR>
-nnoremap <leader>gs :LeaderfStars<CR>
-nnoremap <leader>gr :LeaderfGhq<CR>
-nnoremap <leader>gt :LeaderfBufTag<CR>
-nnoremap <leader>b :LeaderfBuffer<CR>
 " Plugin: dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_mapping = {
@@ -1034,19 +999,7 @@ let g:ctrlsf_mapping = {
 let g:ctrlsf_extra_backend_args = {
       \ 'rg': '--hidden'
       \ }
-
-nmap     <leader>sf <Plug>CtrlSFPrompt
-vmap     <leader>sf <Plug>CtrlSFVwordPath
-nmap     <leader>sn <Plug>CtrlSFCwordPath
-nmap     <leader>sp <Plug>CtrlSFPwordPath
-nnoremap <leader>so :CtrlSFOpen<CR>
-nnoremap <leader>st :CtrlSFToggle<CR>
 " Plugin: skywind3000/asyncrun.vim [[[2
-command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
-augroup vimrc
-  " open quickfix when task is done
-  autocmd User AsyncRunStop call asyncrun#quickfix_toggle(8, 1)
-augroup END
 if s:is_win
   let g:asyncrun_encs = 'gbk'
 endif
@@ -1055,31 +1008,18 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_manual_only = 1
 let g:rooter_use_lcd = 1
 let g:rooter_patterns = ['Cargo.toml', 'mix.exs', 'Makefile', '.git/', '.svn/']
-nmap <silent> <leader>r :Rooter<CR>
 " Plugin: romainl/vim-qf [[[2
 let g:qf_mapping_ack_style = 1
-nmap <leader>q <Plug>(qf_qf_toggle_stay)
-nmap <leader>l <Plug>(qf_loc_toggle_stay)
+let g:qf_auto_open_quickfix = 0
+let g:qf_auto_open_loclist = 0
 " Plugin: lilydjwg/colorizer [[[2
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
-" Plugin: simnalamburt/vim-mundo [[[2
-nnoremap <leader>u :MundoToggle<CR>
 " Plugin: AndrewRadev/linediff.vim [[[2
-vnoremap zd :Linediff<CR>
-autocmd User LinediffBufferReady nnoremap <buffer> gs :LinediffReset<cr>
 let g:linediff_buffer_type = 'scratch'
 " Plugin: vim-scripts/YankRing.vim [[[2
 let g:yankring_map_dot = 0
 let g:yankring_min_element_length = 2
-function! YRRunAfterMaps()
-  nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
-  " slect what I just pasted
-  nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-  omap <expr> H YRMapsExpression("<SID>", "^", "1")
-  omap <expr> L YRMapsExpression("<SID>", "$", "1")
-endfunction
-nnoremap <leader>y :YRShow<CR>
 " Plugin andymass/vim-matchup [[[2
 let g:loaded_matchit = 1
 let g:matchup_transmute_enabled = 1
