@@ -159,5 +159,16 @@ function! ben#syninfo()
   endif
   return info
 endfunction
+" Function: #save_change_marks #restore_change_marks {{{1
+"do not clobber '[ '] on :write
+function! ben#save_change_marks() abort
+  let s:change_marks = [getpos("'["), getpos("']")]
+endfunction
+function! ben#restore_change_marks() abort
+  call setpos("'[", s:change_marks[0])
+  call setpos("']", s:change_marks[1])
+endfunction
+
+
 " Modeline {{{1
 " vim:fdm=marker
