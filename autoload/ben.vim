@@ -127,5 +127,37 @@ function! ben#votl()
   endif
   execute 'edit' fnameescape(filename)
 endfunction
+" Function: #syninfo {{{1
+function! s:synnames()
+  let syn                 = {}
+  let [lnum, cnum]        = [line('.'), col('.')]
+  let [effective, visual] = [synID(lnum, cnum, 0), synID(lnum, cnum, 1)]
+  let syn.effective       = synIDattr(effective, 'name')
+  let syn.effective_link  = synIDattr(synIDtrans(effective), 'name')
+  let syn.visual          = synIDattr(visual, 'name')
+  let syn.visual_link     = synIDattr(synIDtrans(visual), 'name')
+  return syn
+endfunction
+
+function! ben#syninfo()
+  let syn = s:synnames()
+  let info = ''
+  if syn.visual != ''
+    let info .= printf('visual: %s', syn.visual)
+    if syn.visual != syn.visual_link
+      let info .= printf(' (as %s)', syn.visual_link)
+    endif
+  endif
+  if syn.effective != syn.visual
+    if syn.visual != ''
+      let info .= ', '
+    endif
+    let info .= printf('effective: %s', syn.effective)
+    if syn.effective != syn.effective_link
+      let info .= printf(' (as %s)', syn.effective_link)
+    endif
+  endif
+  return info
+endfunction
 " Modeline {{{1
 " vim:fdm=marker
