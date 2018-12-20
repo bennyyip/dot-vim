@@ -28,7 +28,7 @@ Plug 'markonm/traces.vim'
 Plug 'haya14busa/vim-asterisk'
 Plug 'justinmk/vim-sneak'
 
-Plug 'hotoo/pangu.vim'
+Plug 'hotoo/pangu.vim', { 'on': 'Pangu' }
 Plug 'iamcco/dict.vim'
 
 Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
@@ -52,6 +52,7 @@ Plug 'andymass/vim-matchup'
 Plug 'vimoutliner/vimoutliner'
 
 Plug 'justinmk/vim-gtfo'
+Plug 'bergercookie/vim-debugstring'
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -83,7 +84,9 @@ Plug 'itchyny/vim-cursorword'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-apathy'
 Plug 'tpope/vim-capslock'
+Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-jdaddy'
@@ -152,9 +155,9 @@ let g:loaded_zipPlugin        = 1
 " indent settings [[[3
 set autoindent
 set cinoptions    =>2,l1,p0,)50,*50,t0
-" tab stop
-set softtabstop=4 shiftwidth=4
-set expandtab smarttab
+" Don't mess with 'tabstop', with 'expandtab' it isn't used.
+" Instead set softtabstop=-1, then 'shiftwidth' is used.
+set smarttab expandtab shiftwidth=4 softtabstop=-1
 " display settings [[[3
 set display       =lastline
 set laststatus    =2
@@ -257,7 +260,7 @@ set autoread
 set autowrite              " Automatically save before commands like :next and :make
 set wrapscan               " Searches wrap around end-of-file.
 set report=0               " Always report changed lines.
-set synmaxcol=200          " Only highlight the first 200 columns.
+set synmaxcol=500          " Only highlight the first 500 columns.
 set history=1000
 set backspace=indent,eol,start
 set hidden
@@ -270,6 +273,7 @@ set ttyfast
 set lazyredraw
 set timeoutlen=500
 set ttimeoutlen=50
+set noshowmode " Hide the mode text (e.g. -- INSERT --)
 
 "LF
 set fileformat=unix
@@ -427,12 +431,32 @@ nmap     tj Jx
 nmap     tp "+P
 nmap     T :tabnew<cr>
 
+" mark position before search
+nnoremap / ms/
+
 map n  nzzzv
 map N  Nzzzv
 
 nnoremap Y   y$
+xnoremap x  "_d
+" use [p to paste before
+xnoremap P  "0p
+
+nnoremap & n:&&<CR>
+xnoremap & n:&&<CR>
+
+nnoremap <silent>  <q :call quickfixed#older()<CR>
+nnoremap <silent>  >q :call quickfixed#newer()<CR>
+
+"linewise partial staging in visual-mode.
+xnoremap <c-p> :diffput<cr>
+xnoremap <c-o> :diffget<cr>
+nnoremap yo<space> :set <C-R>=(&diffopt =~# 'iwhite') ? 'diffopt-=iwhite' : 'diffopt+=iwhite'<CR><CR>
+
 " slect what I just pasted
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+" repeat last command for each line of a visual selection
+xnoremap . :normal .<CR>
 
 map <F8>    :Make<CR>
 
@@ -448,16 +472,41 @@ if s:is_win || s:is_gvim
   nnoremap <silent><C-l> <C-w>l
 endif
 " nohl
-nmap <silent> <backspace> :nohl<CR>
+" Use <C-L> to:
+"   - redraw
+"   - clear 'hlsearch'
+"   - update the current diff (if any)
+" Use {count}<C-L> to:
+"   - reload (:edit) the current buffer
+nnoremap <silent><expr> <backspace> (v:count ? ':<C-U>:call ben#save_change_marks()\|edit\|call ben#restore_change_marks()<CR>' : '')
+      \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
+      \ . '<CR><C-L>'
+nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
+
+" nmap <silent> <backspace> :nohl<CR>
 " run external command
 nmap <leader>; :AsyncRun<space>
 " edit
-inoremap {<CR>          {}<left><CR><ESC>O
-inoremap (<CR>          ()<left><CR><ESC>O
+inoremap (<CR> (<CR>)<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {; {<CR>};<Esc>O
+inoremap {, {<CR>},<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+inoremap [; [<CR>];<Esc>O
+inoremap [, [<CR>],<Esc>O
+if s:is_gvim
+  inoremap <M-o> <C-O>o
+  inoremap <M-O> <C-O>O
+else
+  inoremap <ESC>]{o}0~ <C-O>O
+  inoremap <ESC>]{O}0~ <C-O>O
+endif
 " yank
 cnoremap <C-v> <C-R>+
 inoremap <silent><C-v>      <C-r>+
-xnoremap <silent><C-c>      "+y
+xnoremap <silent>Y      "+y
+" copy entire file contents (to gui-clipboard if available)
+nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG'.(has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
 " vimrc
 nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>fee  :so $MYVIMRC<CR>
@@ -466,11 +515,15 @@ nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 " keep selection when indent line in visual mode
 xnoremap <expr> > v:count ? ">" : ">gv"
 xnoremap <expr> < v:count ? "<" : "<gv"
+" niceblock
+xnoremap <expr> I (mode()=~#'[vV]'?'<C-v>^o^I':'I')
+xnoremap <expr> A (mode()=~#'[vV]'?'<C-v>0o$A':'A')
 " script helper
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
 " quick edit macro  | ["register]<leader>m
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
+xnoremap Q :normal @q<CR>
 " quick substitute
 vnoremap qs "zy:%s`<C-R>z``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
@@ -511,7 +564,8 @@ nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, 
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
 nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
-nmap     cd         :lcd %:p:h<CR>:echo expand('%:p:h')<CR>
+nnoremap cd :lcd %:p:h<bar>pwd<cr>
+nnoremap cu :lcd ..<bar>pwd<cr>
 
 if s:is_gvim
     noremap <silent><M-o> :<C-u>call ben#open_explore(2)<CR>

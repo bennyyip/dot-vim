@@ -42,7 +42,7 @@ function! s:history(goNewer)
   endwhile
 
   " Set the height of the quickfix window to the size of the list, max-height 10
-  execute 'resize' min([ 10, max([ 1, s:length() ]) ])
+  " execute 'resize' min([ 10, max([ 1, s:length() ]) ])
 
   " Echo a description of the new quickfix / location list.
   " And make it look like a rainbow.
