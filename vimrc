@@ -44,7 +44,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'tommcdo/vim-fubitive'
 
-Plug 'vim-scripts/YankRing.vim'
+Plug 'bennyyip/YankRing.vim'
 
 Plug 'andymass/vim-matchup'
 
