@@ -504,6 +504,9 @@ cab W w
 cab Wq wq
 cab Wa wa
 cab X x
+" syntax
+nnoremap <leader>si  :echo ben#syninfo()<cr>
+nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 " file, buffer, tab [[[2
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
