@@ -45,10 +45,13 @@ Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'tommcdo/vim-fubitive'
 
 Plug 'bennyyip/YankRing.vim'
+Plug 'machakann/vim-highlightedyank'
 
 Plug 'andymass/vim-matchup'
 
 Plug 'vimoutliner/vimoutliner'
+
+Plug 'justinmk/vim-gtfo'
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -1026,6 +1029,8 @@ let g:yankring_min_element_length = 2
 let g:loaded_matchit = 1
 let g:matchup_transmute_enabled = 1
 let g:matchup_override_vimtex = 1
+" Plugin: 'justinmk/vim-gtfo' [[[2
+let g:gtfo#terminals = { 'unix': 'alacritty --working-directory' }
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
