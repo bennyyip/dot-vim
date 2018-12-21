@@ -29,7 +29,6 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'justinmk/vim-sneak'
 
 Plug 'hotoo/pangu.vim', { 'on': 'Pangu' }
-Plug 'iamcco/dict.vim'
 
 Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
 Plug 'AndrewRadev/splitjoin.vim'
