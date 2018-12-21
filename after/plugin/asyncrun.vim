@@ -5,7 +5,8 @@ endif
 
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 
-augroup vimrc
-  " open quickfix when task is done
-  autocmd User AsyncRunStop call asyncrun#quickfix_toggle(8, 1)
+augroup asyncrun_config
+  au!
+  au User AsyncRunStop copen | wincmd p
+  au User AsyncRunPre cclose
 augroup END
