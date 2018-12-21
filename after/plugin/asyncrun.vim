@@ -14,3 +14,6 @@ augroup END
 " let g:proxy_command = 'proxychains -q'
 let s:proxy_command = get(g:, 'proxy_command', '')
 exe 'nmap <leader>oy :<C-U>AsyncRun '. s:proxy_command . ' ydcv <cword><CR>'
+
+nmap <leader>; :AsyncRun<space>
+map <F8>    :Make<CR>

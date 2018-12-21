@@ -205,7 +205,7 @@ if !s:is_tty
       autocmd InsertLeave * set listchars+=trail:.
     augroup END
   endif
-endif " s:is_ty
+endif " s:is_tty
 " turn off bell [[[3
 set noerrorbells
 set novisualbell
@@ -427,41 +427,46 @@ endif
 " misc [[[2
 nmap     t= mxHmygg=G`yzt`x
 nmap     tj Jx
-nmap     tp "+P
-nmap     T :tabnew<cr>
 
-" mark position before search
-nnoremap / ms/
-
-map n  nzzzv
-map N  Nzzzv
-
-nnoremap Y   y$
-xnoremap x  "_d
-" use [p to paste before
-xnoremap P  "0p
-
-nnoremap & n:&&<CR>
-xnoremap & n:&&<CR>
-
-nnoremap <silent>  <q :call quickfixed#older()<CR>
-nnoremap <silent>  >q :call quickfixed#newer()<CR>
-
-"linewise partial staging in visual-mode.
+nnoremap <localleader>j :set ft=javascript<CR>
+nnoremap <localleader>h :set ft=html<CR>
+" fold [[[3
+nmap z] zo]z
+nmap z[ zo[z
+" correct spell [[[3
+cab Q q
+cab Qa qa
+cab W w
+cab Wq wq
+cab Wa wa
+cab X x
+" syntax [[[3
+nnoremap <leader>si  :echo ben#syninfo()<cr>
+nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+" diff [[[3
+nnoremap <silent><leader>di :windo diffthis<CR>
+nnoremap <silent><leader>du :windo diffupdate<CR>
+nnoremap <silent><leader>do :windo diffoff<CR>
+" linewise partial staging in visual-mode.
 xnoremap <c-p> :diffput<cr>
 xnoremap <c-o> :diffget<cr>
+" toggle iwhite
 nnoremap yo<space> :set <C-R>=(&diffopt =~# 'iwhite') ? 'diffopt-=iwhite' : 'diffopt+=iwhite'<CR><CR>
-
-" slect what I just pasted
-nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-" repeat last command for each line of a visual selection
-xnoremap . :normal .<CR>
-
-map <F8>    :Make<CR>
-
-inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
-
-
+" quickfix and loclist [[[3
+nnoremap <silent>  <q :call quickfixed#older()<CR>
+nnoremap <silent>  >q :call quickfixed#newer()<CR>
+" nohl [[[3
+" Use <backspace> to:
+"   - redraw
+"   - clear 'hlsearch'
+"   - update the current diff (if any)
+" Use {count}<backspace> to:
+"   - reload (:edit) the current buffer
+nnoremap <silent><expr> <backspace> (v:count ? ':<C-U>:call ben#save_change_marks()\|edit\|call ben#restore_change_marks()<CR>' : '')
+      \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
+      \ . '<CR><C-L>'
+nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
+" window [[[2
 " quick <C-w>
 nnoremap ' <C-w>
 if s:is_win || s:is_gvim
@@ -470,22 +475,7 @@ if s:is_win || s:is_gvim
   nnoremap <silent><C-k> <C-w>k
   nnoremap <silent><C-l> <C-w>l
 endif
-" nohl
-" Use <C-L> to:
-"   - redraw
-"   - clear 'hlsearch'
-"   - update the current diff (if any)
-" Use {count}<C-L> to:
-"   - reload (:edit) the current buffer
-nnoremap <silent><expr> <backspace> (v:count ? ':<C-U>:call ben#save_change_marks()\|edit\|call ben#restore_change_marks()<CR>' : '')
-      \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
-      \ . '<CR><C-L>'
-nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
-
-" nmap <silent> <backspace> :nohl<CR>
-" run external command
-nmap <leader>; :AsyncRun<space>
-" edit
+" edit [[[2
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {; {<CR>};<Esc>O
@@ -500,10 +490,23 @@ else
   inoremap <ESC>]{o}0~ <C-O>O
   inoremap <ESC>]{O}0~ <C-O>O
 endif
-" yank
-cnoremap <C-v> <C-R>+
-inoremap <silent><C-v>      <C-r>+
-xnoremap <silent>Y      "+y
+" script helper
+inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
+" get output from python
+imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
+" time
+inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
+" yank and paste [[[2
+cnoremap <C-v>         <C-R>+
+inoremap <silent><C-v> <C-O>"+p
+xnoremap <silent>Y     "+y
+xnoremap <silent><C-c> "+y
+nnoremap Y   y$
+xnoremap x  "_d
+xnoremap P  "0p
+nmap     tp "+P
+" slect what I just pasted
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " copy entire file contents (to gui-clipboard if available)
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG'.(has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
 " vimrc
@@ -511,55 +514,33 @@ nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
 nnoremap <leader>fee  :so $MYVIMRC<CR>
 " run current line
 nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
+" visual [[[2
 " keep selection when indent line in visual mode
 xnoremap <expr> > v:count ? ">" : ">gv"
 xnoremap <expr> < v:count ? "<" : "<gv"
 " niceblock
 xnoremap <expr> I (mode()=~#'[vV]'?'<C-v>^o^I':'I')
 xnoremap <expr> A (mode()=~#'[vV]'?'<C-v>0o$A':'A')
-" script helper
-inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
+
 " quick edit macro  | ["register]<leader>m
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
 xnoremap Q :normal @q<CR>
+" repeat last command for each line of a visual selection
+xnoremap . :normal .<CR>
+" search and substitute [[[2
 " quick substitute
 vnoremap qs "zy:%s`<C-R>z``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
 vnoremap qS "zy:%S`<C-R>z``g<left><left>
 nnoremap qS :%S`<C-R><C-W>``g<left><left>
-" get output from python
-imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
-" Quit
-nnoremap <silent>gs :Sayonara<CR>
-" fold
-nmap z] zo]z
-nmap z[ zo[z
-" Windows
-if s:is_win
-  nnoremap <silent><leader>ex :execute 'AsyncRun explorer' getcwd()<CR>
-  nnoremap <leader>ps         :!start powershell<CR>
-endif
-
-nnoremap <localleader>j :set ft=javascript<CR>
-nnoremap <localleader>h :set ft=html<CR>
-
-
-" diff
-nnoremap <silent><leader>di :windo diffthis<CR>
-nnoremap <silent><leader>du :windo diffupdate<CR>
-nnoremap <silent><leader>do :windo diffoff<CR>
-" correct spell
-cab Q q
-cab Qa qa
-cab W w
-cab Wq wq
-cab Wa wa
-cab X x
-" syntax
-nnoremap <leader>si  :echo ben#syninfo()<cr>
-nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
-" file, buffer, tab [[[2
+nnoremap & n:&&<CR>
+xnoremap & n:&&<CR>
+" mark position before search
+nnoremap / ms/
+map n  nzzzv
+map N  Nzzzv
+" file, buffer [[[2
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
 nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
@@ -567,34 +548,39 @@ nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
 if s:is_gvim
-    noremap <silent><M-o> :<C-u>call ben#open_explore(2)<CR>
+  noremap <silent><M-o> :<C-u>call ben#open_explore(2)<CR>
 else
-    noremap <silent><ESC>]{o}0~ :<C-u>call ben#open_explore(2)<CR>
+  noremap <silent><ESC>]{o}0~ :<C-u>call ben#open_explore(2)<CR>
 endif
 
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
+" tab [[[2
+nmap     T :tabnew<cr>
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 function! s:map_switch_tab()
   for l:i in range(1, 9)
     exe "nnoremap <silent><leader>".l:i." :tabn ".l:i."<cr>"
     if s:is_gvim
-        exe "nnoremap <silent><M-".l:i."> :tabn ".l:i."<cr>"
+      exe "nnoremap <silent><M-".l:i."> :tabn ".l:i."<cr>"
     else
       " Use customized key code for alt mappings to avoid breaking macros like
       " `<ESC>j`, see:
       " https://github.com/bennyyip/dotfiles/blob/master/config/.config/alacritty/alacritty.yml
       " https://zhuanlan.zhihu.com/p/20902166
-        exe "nnoremap <silent><ESC>]{0}".l:i."~ :tabn ".l:i."<cr>"
+      exe "nnoremap <silent><ESC>]{0}".l:i."~ :tabn ".l:i."<cr>"
     endif
   endfor
 endfunction
 call s:map_switch_tab()
 " move [[[2
-inoremap <M-o>      <C-O>o
-inoremap <M-O>      <C-O>O
-nnoremap <M-j> gj
-nnoremap <M-k> gk
+if s:is_gvim
+  inoremap <M-o>      <C-O>o
+  inoremap <M-O>      <C-O>O
+else
+  inoremap <ESC>]{0}o~ <C-O>o
+  inoremap <ESC>]{0}O~ <C-O>O
+endif
 nnoremap <Down> gj
 nnoremap <Up> gk
 inoremap <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
@@ -819,16 +805,16 @@ onoremap <silent> a~ :<C-U>execute "normal va~"<cr>
 " Command [[[1
 " :Shuffle | Shuffle selected lines [[[2
 command! -range Shuffle <line1>,<line2>call ben#shuffle()
-" OpenUrl [[[2
+" :OpenUrl [[[2
 command! -nargs=1 OpenURL :call ben#open_url(<q-args>)
-nnoremap gx :OpenURL <cfile><CR>
-nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
-nnoremap gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><CR>
+nnoremap <silent> gx :OpenURL <cfile><CR>
+nnoremap <silent> gG :OpenURL http://www.google.com/search?hl=en&gws_rd=ssl&q=<cword><CR>
+nnoremap <silent> gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><CR>
 " :A [[[2
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
 nmap <leader>a :A<CR>
-" PX: plus x| chmod +x [[[2
+" :PX | chmod +x [[[2
 command! PX if !empty(expand('%'))
       \|   write
       \|   call system('chmod +x '.expand('%'))
@@ -884,7 +870,7 @@ if !isdirectory(s:vim_tags)
   silent! call mkdir(s:vim_tags, 'p')
 endif
 " Plugin: mhinz/vim-startify [[[2
-let g:ascii = [
+let s:ascii_art = [
       \"             ________ ++     ________             ",
       \"            /VVVVVVVV\++++  /VVVVVVVV\\           ",
       \"            \VVVVVVVV/++++++\VVVVVVVV/            ",
@@ -904,7 +890,7 @@ let g:ascii = [
       \"                                                  ",
       \]
 let g:startify_custom_header =
-      \ map(g:ascii + ben#quote(), '"   ".v:val')
+      \ map(s:ascii_art + ben#quote(), '"   ".v:val')
 let g:startify_skiplist = [
       \ 'COMMIT_EDITMSG',
       \ 'bundle/.*/doc',
@@ -1081,11 +1067,11 @@ let g:linediff_buffer_type = 'scratch'
 " Plugin: vim-scripts/YankRing.vim [[[2
 let g:yankring_map_dot = 0
 let g:yankring_min_element_length = 2
-" Plugin andymass/vim-matchup [[[2
+" Plugin: andymass/vim-matchup [[[2
 let g:loaded_matchit = 1
 let g:matchup_transmute_enabled = 1
 let g:matchup_override_vimtex = 1
-" Plugin: 'justinmk/vim-gtfo' [[[2
+" Plugin: justinmk/vim-gtfo [[[2
 let g:gtfo#terminals = { 'unix': 'alacritty --working-directory' }
 " ending [[[1
 if filereadable($HOME. '/local.vim')

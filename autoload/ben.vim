@@ -62,9 +62,9 @@ endfunction
 " Function: #open_url {{{1
 function! ben#open_url(url)
   if s:is_win
-    exe "!start cmd /cstart /b ".a:url.""
+    exe "sil !start cmd /cstart /b ".a:url.""
   else
-    exe "AsyncRun firefox \"".a:url."\"&"
+    exe "sil !firefox \"".a:url."\"&"
   endif
 endfunction
 " Function: #shuffle (shuffle lines) {{{1
@@ -168,7 +168,5 @@ function! ben#restore_change_marks() abort
   call setpos("'[", s:change_marks[0])
   call setpos("']", s:change_marks[1])
 endfunction
-
-
 " Modeline {{{1
 " vim:fdm=marker
