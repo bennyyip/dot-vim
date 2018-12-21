@@ -483,13 +483,8 @@ inoremap {, {<CR>},<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
 inoremap [; [<CR>];<Esc>O
 inoremap [, [<CR>],<Esc>O
-if s:is_gvim
-  inoremap <M-o> <C-O>o
-  inoremap <M-O> <C-O>O
-else
-  inoremap <ESC>]{o}0~ <C-O>O
-  inoremap <ESC>]{O}0~ <C-O>O
-endif
+inoremap <M-o> <C-O>o
+inoremap <M-O> <C-O>O
 " script helper
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
 " get output from python
@@ -547,12 +542,6 @@ nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
-if s:is_gvim
-  noremap <silent><M-o> :<C-u>call ben#open_explore(2)<CR>
-else
-  noremap <silent><ESC>]{o}0~ :<C-u>call ben#open_explore(2)<CR>
-endif
-
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 " tab [[[2
 nmap     T :tabnew<cr>
@@ -574,13 +563,6 @@ function! s:map_switch_tab()
 endfunction
 call s:map_switch_tab()
 " move [[[2
-if s:is_gvim
-  inoremap <M-o>      <C-O>o
-  inoremap <M-O>      <C-O>O
-else
-  inoremap <ESC>]{0}o~ <C-O>o
-  inoremap <ESC>]{0}O~ <C-O>O
-endif
 nnoremap <Down> gj
 nnoremap <Up> gk
 inoremap <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
