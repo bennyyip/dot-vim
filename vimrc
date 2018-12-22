@@ -20,7 +20,6 @@ Plug 'honza/vim-snippets'
 
 Plug 'dyng/ctrlsf.vim'
 Plug 'romainl/vim-qf'
-Plug 'yegappan/grep'
 Plug 'yegappan/greplace'
 
 Plug 'bennyyip/is.vim'
@@ -1032,6 +1031,7 @@ let g:ctrlsf_extra_backend_args = {
 if s:is_win
   let g:asyncrun_encs = 'gbk'
 endif
+let g:asyncrun_save=1
 " Plugin: airblade/vim-rooter [[[2
 let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_manual_only = 1
