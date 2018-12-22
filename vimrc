@@ -298,6 +298,7 @@ set viminfo     ='100,n$v/files/info/viminfo
 set background=dark
 colorscheme gruvbox
 hi VertSplit guibg=#282828 guifg=#181A1F
+hi EndOfBuffer guibg=#282828 guifg=#282828
 let s:colorscheme = get(g:, 'colors_name', 'default')
 " Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
@@ -334,15 +335,16 @@ if !s:is_tty
 endif
 
 function! LightlineModified() "[[[4
-  return &filetype =~# 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+  return &filetype =~# 'help\|vimfiler\|Mundo\|qf' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 function! LightlineReadonly() "[[[4
-  return &filetype !~? 'help\|vimfiler\|gundo' && &readonly ? (s:is_tty ? 'RO' : "\ue0a2") : ''
+  return &filetype !~? 'help\|vimfiler\|Mundo\|qf' && &readonly ? (s:is_tty ? 'RO' : "\ue0a2") : ''
 endfunction
 function! LightlineFilename() "[[[4
   let l:fname = expand('%:~')
   return l:fname ==# '__Tagbar__' ? g:lightline.l:fname :
-        \ l:fname =~# '__Gundo\|NERD_tree' ? '' :
+        \ l:fname =~# '__Mundo\|NERD_tree' ? '' :
+        \ &filetype ==# 'qf' ? '' :
         \ &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
         \ &filetype ==# 'denite' ? denite#get_status_sources() :
         \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
@@ -352,7 +354,7 @@ function! LightlineFilename() "[[[4
 endfunction
 function! LightlineFugitive() "[[[4
   try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &filetype !~? 'vimfiler' && exists('*fugitive#head')
+    if expand('%:t') !~? 'Tagbar\|Mundo\|NERD' && &filetype !~? 'vimfiler' && exists('*fugitive#head')
       let l:mark = ''  " edit here for cool mark
       let l:branch = fugitive#head()
       return l:branch !=# '' ? (s:is_tty ? '' : "\ue0a0 ").l:branch : ''
@@ -380,7 +382,6 @@ function! LightlineMode() "[[[4
         \ lightline#mode()[0]
         "\ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-"hi EndOfBuffer guibg=#282828 guifg=#282828
 " other [[[3
 if !g:is_ssh && has("termguicolors")
   " fix bug for vim
