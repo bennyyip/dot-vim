@@ -3,7 +3,6 @@ if !ben#has_plugin('asyncrun.vim')
   finish
 endif
 
-command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 
 augroup asyncrun_config
   au!
@@ -11,9 +10,16 @@ augroup asyncrun_config
   au User AsyncRunPre cclose
 augroup END
 
+command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
+
+command! -bang -nargs=* Rg   AsyncRun<bang>             @ rg -S --vimgrep <args>
+command! -bang -nargs=* Rgr  AsyncRun<bang> -cwd=<root> @ rg -S --vimgrep <args>
+
+
 " let g:proxy_command = 'proxychains -q'
 let s:proxy_command = get(g:, 'proxy_command', '')
-exe 'nmap <leader>oy :<C-U>AsyncRun '. s:proxy_command . ' ydcv <cword><CR>'
+exe 'nmap gY :<C-U>AsyncRun '. s:proxy_command . ' ydcv <cword><CR>'
 
-nmap <leader>; :AsyncRun<space>
-map <F8>    :Make<CR>
+noremap <leader>; :AsyncRun<space>
+noremap <leader>: :AsyncStop<CR>
+noremap <F8>      :Make<CR>
