@@ -12,8 +12,8 @@ augroup END
 
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 
-command! -bang -nargs=* Rg   AsyncRun<bang>             @ rg -S --vimgrep <args>
-command! -bang -nargs=* Rgr  AsyncRun<bang> -cwd=<root> @ rg -S --vimgrep <args>
+command! -bang -nargs=* Rg   AsyncRun<bang>                                  @ rg -S --vimgrep <args>
+command! -bang -nargs=* Rgr  AsyncRun<bang> -cwd=<root> -post=lcd\ $VIM_ROOT @ rg -S --vimgrep <args>
 
 
 " let g:proxy_command = 'proxychains -q'
