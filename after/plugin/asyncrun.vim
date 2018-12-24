@@ -23,3 +23,5 @@ exe 'nmap gY :<C-U>AsyncRun '. s:proxy_command . ' ydcv <cword><CR>'
 noremap <leader>; :AsyncRun<space>
 noremap <leader>: :AsyncStop<CR>
 noremap <F8>      :Make<CR>
+
+noremap <silent> <leader>q :<C-u>call asyncrun#quickfix_toggle(8)<CR>
