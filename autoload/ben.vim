@@ -168,5 +168,42 @@ function! ben#restore_change_marks() abort
   call setpos("'[", s:change_marks[0])
   call setpos("']", s:change_marks[1])
 endfunction
+" Function: #get_pattern_at_cursor {{{1
+function! ben#get_pattern_at_cursor(pat)
+  let col = col('.') - 1
+  let line = getline('.')
+  let ebeg = -1
+  let cont = match(line, a:pat, 0)
+  while (ebeg >= 0 || (0 <= cont) && (cont <= col))
+    let contn = matchend(line, a:pat, cont)
+    if (cont <= col) && (col < contn)
+      let ebeg = match(line, a:pat, cont)
+      let elen = contn - ebeg
+      break
+    else
+      let cont = match(line, a:pat, contn)
+    endif
+  endwhile
+  if ebeg >= 0
+    return strpart(line, ebeg, elen)
+  else
+    return ""
+  endif
+endfunction
+" Function: #trycycle {{{1
+function! ben#trycycle(dir)
+  let pat = ben#get_pattern_at_cursor('[+-]\?\d\+')
+  if pat
+    if a:dir ==? 'x'
+      return "\<C-X>"
+    else
+      return "\<C-A>"
+    end
+  else
+    let mode = mode() =~ 'n' ? 'w' : 'v'
+    let dir = a:dir ==? 'x' ? -1 : 1
+    return ":\<C-U>call Cycle('" . mode . "', " . dir . ", v:count1)\<CR>"
+  end
+endfunction
 " Modeline {{{1
 " vim:fdm=marker

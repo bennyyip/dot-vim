@@ -51,6 +51,8 @@ Plug 'vimoutliner/vimoutliner'
 
 Plug 'justinmk/vim-gtfo'
 Plug 'bergercookie/vim-debugstring'
+
+Plug 'bootleq/vim-cycle'
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -92,7 +94,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
@@ -576,7 +577,6 @@ nnoremap <silent> gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search
 " :A [[[2
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
-nmap <leader>a :A<CR>
 " :PX | chmod +x [[[2
 command! PX if !empty(expand('%'))
       \|   write
@@ -841,4 +841,36 @@ let g:gtfo#terminals = { 'unix': 'alacritty --working-directory' }
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
 endif
+" Plugin: bootleq/vim-cycle [[[2
+let g:cycle_default_groups = [
+      \ [['true', 'false']],
+      \ [['yes', 'no']],
+      \ [['and', 'or']],
+      \ [['on', 'off']],
+      \ [['>', '<']],
+      \ [['==', '!=']],
+      \ [['是', '否']],
+      \ [['有', '无']],
+      \ [["in", "out"]],
+      \ [["min", "max"]],
+      \ [["get", "post"]],
+      \ [["to", "from"]],
+      \ [["read", "write"]],
+      \ [['with', 'without']],
+      \ [["exclude", "include"]],
+      \ [["asc", "desc"]],
+      \ [["next", "prev"]],
+      \ [["encode", "decode"]],
+      \ [["left", "right"]],
+      \ [["hide", "show"]],
+      \ [['「:」', '『:』'], 'sub_pairs'],
+      \ [['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+      \ 'Friday', 'Saturday'], 'hard_case', {'name': 'Days'}],
+      \ [["enable", "disable"]],
+      \ [["add", "remove"]],
+      \ [['up', 'down']],
+      \ [['after', 'before']],
+      \ ]
+let g:cycle_no_mappings = 1
+
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim
