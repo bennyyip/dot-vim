@@ -539,17 +539,24 @@ nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 nmap     T :tabnew<cr>
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
+function! s:switch_tab(i)
+  if tabpagenr() == a:i
+    return ":tabprev\<CR>"
+  else
+    return ":tabn ".a:i."\<CR>"
+  endif
+endfunction
 function! s:map_switch_tab()
   for l:i in range(1, 9)
-    exe "nnoremap <silent><leader>".l:i." :tabn ".l:i."<cr>"
+    execute printf("nnoremap <silent><expr> <leader>%d <SID>switch_tab(%d)", l:i, l:i)
     if s:is_gvim
-      exe "nnoremap <silent><M-".l:i."> :tabn ".l:i."<cr>"
+      execute printf("nnoremap <silent><expr> <M-%d> <SID>switch_tab(%d)", l:i, l:i)
     else
       " Use customized key code for alt mappings to avoid breaking macros like
       " `<ESC>j`, see:
       " https://github.com/bennyyip/dotfiles/blob/master/config/.config/alacritty/alacritty.yml
       " https://zhuanlan.zhihu.com/p/20902166
-      exe "nnoremap <silent><ESC>]{0}".l:i."~ :tabn ".l:i."<cr>"
+      execute printf("nnoremap <silent><expr> <ESC>]{0}%d~ <SID>switch_tab(%d)", l:i, l:i)
     endif
   endfor
 endfunction
