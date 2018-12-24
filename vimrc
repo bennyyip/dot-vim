@@ -497,8 +497,8 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " copy entire file contents (to gui-clipboard if available)
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG'.(has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
 " vimrc
-nnoremap <leader>fed <Esc>:e $MYVIMRC<CR>
-nnoremap <leader>fee  :so $MYVIMRC<CR>
+nnoremap <leader>fed :e $MYVIMRC<CR>
+nnoremap <leader>fee :so $MYVIMRC<CR>
 " run current line
 nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 " visual [[[2
