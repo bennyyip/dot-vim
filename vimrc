@@ -7,7 +7,7 @@ let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plug [[[1
 " plug#begin [[[2
 call plug#begin('$v/bundle')
-let g:plug_window  = 'enew'
+let g:plug_window = 'enew'
 let g:plug_pwindow = 'vertical rightbelow new'
 " general [[[2
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
@@ -133,47 +133,47 @@ if exists('#vimrc')
   augroup! vimrc
 endif
 " init [[[3
-let g:mapleader        = "\<Space>"
-let g:localleader      = "\\"
+let g:mapleader = "\<Space>"
+let g:localleader = "\\"
 let g:vimsyn_folding = 'f'
-let g:is_bash        = 1
-let g:lisp_rainbow   = 1
+let g:is_bash = 1
+let g:lisp_rainbow = 1
 
 let g:markdown_fenced_languages = ['vim']
 
-let g:loaded_2html_plugin     = 1
-let g:loaded_getscriptPlugin  = 1
-let g:loaded_gzip             = 1
-let g:loaded_logipat          = 1
-" let g:loaded_matchparen       = 1
-let g:loaded_rrhelper         = 1
+let g:loaded_2html_plugin = 1
+let g:loaded_getscriptPlugin = 1
+let g:loaded_gzip = 1
+let g:loaded_logipat = 1
+" let g:loaded_matchparen = 1
+let g:loaded_rrhelper = 1
 let g:loaded_spellfile_plugin = 1
-let g:loaded_tarPlugin        = 1
-let g:loaded_vimballPlugin    = 1
-let g:loaded_zipPlugin        = 1
+let g:loaded_tarPlugin = 1
+let g:loaded_vimballPlugin = 1
+let g:loaded_zipPlugin = 1
 " indent settings [[[3
 set autoindent
-set cinoptions    =>2,l1,p0,)50,*50,t0
+set cinoptions=>2,l1,p0,)50,*50,t0
 " Don't mess with 'tabstop', with 'expandtab' it isn't used.
 " Instead set softtabstop=-1, then 'shiftwidth' is used.
 set smarttab expandtab shiftwidth=4 softtabstop=-1
 " display settings [[[3
-set display       =lastline
-set laststatus    =2
+set display=lastline
+set laststatus=2
 set list
 set modeline
-set modelines     =1
+set modelines=1
 set nostartofline
-set numberwidth   =1
-set shortmess     =aoOTI
+set numberwidth=1
+set shortmess=aoOTI
 set showcmd
 set showmatch
-set matchtime     =0
+set matchtime=0
 set showmode
 
-set fileencoding  =utf-8
-set fileencodings =utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
-set encoding   =utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set encoding=utf-8
 scriptencoding utf-8
 
 
@@ -212,16 +212,16 @@ set novisualbell
 set t_vb=
 " better navigation [[[3
 set cursorline
-set foldmethod    =marker
-set foldopen     +=jump
-set foldtext      =ben#foldy()
-"set foldlevel=200  " disable auto folding
+set foldmethod=marker
+set foldopen+=jump
+set foldtext=ben#foldy()
+set foldlevelstart=999
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-set scrolloff     =4
-set sidescroll    =5
+set scrolloff=4
+set sidescroll=5
 set number            " line number
 set relativenumber    " relative line number
 if has('mouse')
@@ -232,8 +232,8 @@ endif
 set suffixes     +=.a,.1,.class
 set wildignore   +=*.o,*.so,*.zip,*.png
 set wildmenu
-"set wildmode      =list:longest,full
-set wildoptions   =tagfile
+"set wildmode=list:longest,full
+set wildoptions=tagfile
 set path+=**
 set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
@@ -244,8 +244,8 @@ set nolinebreak
 set breakindent
 set breakindentopt=min:40
 
-set cpoptions     =aABcfFqsZ " -e
-set formatoptions =tcrqnj
+set cpoptions=aABcfFqsZ " -e
+set formatoptions=tcrqnj
 " Change cursor style dependent on mode
 if empty($TMUX)
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -266,7 +266,7 @@ set hidden
 set nrformats-=octal
 set splitbelow
 set splitright
-set titlestring =VIM:\ %f
+set titlestring=VIM:\ %f
 set switchbuf=useopen,usetab,newtab
 set ttyfast
 set lazyredraw
@@ -289,14 +289,14 @@ set cmdheight=1
 set langmenu=en_US
 " backup/swap/info/undo settings [[[3
 set backup
-set backupskip   =
-set updatecount  =100
+set backupskip=
+set updatecount=100
 set undofile
-set backupdir   =$v/files/backup/
-set backupext   =-vimbackup
-set directory   =$v/files/swap/
-set undodir     =$v/files/undo/
-set viminfo     ='100,n$v/files/info/viminfo
+set backupdir=$v/files/backup/
+set backupext=-vimbackup
+set directory=$v/files/swap/
+set undodir=$v/files/undo/
+set viminfo='100,n$v/files/info/viminfo
 " apperance [[[2
 " colorscheme [[[3
 set background=dark
@@ -334,7 +334,7 @@ if !s:is_tty
   else
     let g:lightline.colorscheme = 'one'
   endif
-  let g:lightline.separator =  { 'left': "\ue0b0", 'right': "\ue0b2" }
+  let g:lightline.separator = { 'left': "\ue0b0", 'right': "\ue0b2" }
   let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
 endif
 
@@ -396,7 +396,6 @@ if !g:is_ssh && has("termguicolors")
   " enable true color
   set termguicolors
 endif
-
 if s:is_win
   let &pythonthreedll = 'C:\Program Files\Python37\python37.dll'
   silent! python3 pass
@@ -602,14 +601,14 @@ augroup END
 " Plugin Config [[[1
 " Plugin: Shougo/neosnippet [[[2
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-let g:neosnippet#enable_snipmate_compatibility=1
+let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#disable_runtime_snippets = {
       \  '_' : 1,
       \ }
 let g:neosnippet#snippets_directory = '$v/snippets'
 " Plugin: is.vim [[[2
-let g:is#do_default_mappings=1
-let g:is#auto_nohlsearch=0
+let g:is#do_default_mappings = 1
+let g:is#auto_nohlsearch = 0
 " Plugin: ludovicchabant/vim-gutentags [[[2
 set tags=./.tags;,.tags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -672,15 +671,15 @@ let g:startify_list_order = [
       \ ['   Sessions:'],
       \ 'sessions',
       \ ]
-let g:startify_change_to_dir          = 0
-let g:startify_change_to_vcs_root     = 1
-let g:startify_enable_special         = 0
-let g:startify_files_number           = 7
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+let g:startify_enable_special = 0
+let g:startify_files_number = 7
 let g:startify_session_dir = $v.'/files/session'
-let g:startify_session_autoload       = 0
-let g:startify_session_persistence    = 0
-let g:startify_update_oldfiles        = 1
-let g:startify_use_env                = 1
+let g:startify_session_autoload = 0
+let g:startify_session_persistence = 0
+let g:startify_update_oldfiles = 1
+let g:startify_use_env = 1
 highlight StartifyHeader guifg='#fabd2f' ctermfg=214
 " Plugin: junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
@@ -697,21 +696,21 @@ let g:cpp_experimental_template_highlight = 1
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
 " Plugin: tpope/vim-vinegar [[[2
-" let g:loaded_netrw       = 1
+" let g:loaded_netrw = 1
 " let g:loaded_netrwPlugin = 1
 augroup vimrc
   autocmd FileType netrw setl bufhidden=delete
 augroup END
-let g:netrw_banner       = 0
-let g:netrw_bufsettings  = 'relativenumber'
-let g:netrw_keepdir      = 0
-let g:netrw_liststyle    = 1
+let g:netrw_banner = 0
+let g:netrw_bufsettings = 'relativenumber'
+let g:netrw_keepdir = 0
+let g:netrw_liststyle = 1
 let g:netrw_sort_options = 'i'
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_timefmt = '%H:%M %y-%m-%d'
 let g:netrw_sizestyle = 'H'
 " Plugin: luochen1990/rainbow [[[2
-let g:rainbow_active=1
+let g:rainbow_active = 1
 let g:rainbow_conf = {
       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
