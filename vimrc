@@ -829,6 +829,7 @@ let g:rooter_patterns = ['Cargo.toml', 'mix.exs', 'Makefile', '.git/', '.svn/']
 let g:qf_mapping_ack_style = 1
 let g:qf_auto_open_quickfix = 0
 let g:qf_auto_open_loclist = 0
+let g:qf_auto_quit = 0
 " Plugin: lilydjwg/colorizer [[[2
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
