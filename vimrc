@@ -314,6 +314,11 @@ let g:lightline = {
       \              [ 'percent' ],
       \              [ 'asyncrun', 'fileformat', 'fileencoding', 'filetype'] ]
       \ },
+      \ 'inactive': {
+      \ 'left': [ [ 'filename' ] ],
+      \ 'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ] ],
+      \ },
       \ 'component_function': {
       \   'modified':     'LightlineModified',
       \   'readonly':     'LightlineReadonly',
@@ -325,7 +330,7 @@ let g:lightline = {
       \   'mode':         'LightlineMode',
       \ },
       \ 'component' : {
-      \   'asyncrun': '%{g:asyncrun_status}'
+      \   'asyncrun': '%{g:asyncrun_status}',
       \ },
       \ }
 if !s:is_tty
@@ -345,10 +350,18 @@ function! LightlineReadonly() "[[[4
   return &filetype !~? 'help\|vimfiler\|Mundo\|qf' && &readonly ? (s:is_tty ? 'RO' : "\ue0a2") : ''
 endfunction
 function! LightlineFilename() "[[[4
+  if &filetype ==# 'qf'
+    let wininfo = filter(getwininfo(), {i,v -> v.winnr == winnr()})[0]
+    if wininfo.loclist
+      return "[Location List]"
+    else
+      return "[Quickfix List]"
+    endif
+  endif
+
   let l:fname = expand('%:~')
   return l:fname ==# '__Tagbar__' ? g:lightline.l:fname :
         \ l:fname =~# '__Mundo\|NERD_tree' ? '' :
-        \ &filetype ==# 'qf' ? '' :
         \ &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
         \ &filetype ==# 'denite' ? denite#get_status_sources() :
         \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
