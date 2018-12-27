@@ -267,7 +267,7 @@ set nrformats-=octal
 set splitbelow
 set splitright
 set titlestring=VIM:\ %f
-set switchbuf=useopen,usetab,newtab
+set switchbuf=useopen,usetab
 set ttyfast
 set lazyredraw
 set timeoutlen=500
@@ -892,5 +892,4 @@ let g:cycle_default_groups = [
       \ [['after', 'before']],
       \ ]
 let g:cycle_no_mappings = 1
-
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim
