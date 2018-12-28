@@ -586,6 +586,8 @@ inoremap <M-l> <Right>
 noremap H ^
 noremap L $
 " Command [[[1
+" :Reverse [[[2
+command! -bar -range=% Reverse <line1>,<line2>global/^/m<line1>-1<bar>nohl
 " :Shuffle | Shuffle selected lines [[[2
 command! -range Shuffle <line1>,<line2>call ben#shuffle()
 " :OpenUrl [[[2
