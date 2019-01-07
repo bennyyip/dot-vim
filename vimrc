@@ -270,9 +270,14 @@ set titlestring=VIM:\ %f
 set switchbuf=useopen,usetab
 set ttyfast
 set lazyredraw
-set timeoutlen=500
-set ttimeoutlen=50
+" set timeoutlen=500
+" set ttimeoutlen=50
 set noshowmode " Hide the mode text (e.g. -- INSERT --)
+
+" diffopt
+if has("patch-8.1.0360")
+    set diffopt+=internal,algorithm:patience
+endif
 
 "LF
 set fileformat=unix
