@@ -12,10 +12,30 @@ augroup END
 
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 
-command! -bang -nargs=* Rg    AsyncRun<bang> -strip         @ rg -S --vimgrep <args>
-command! -bang -nargs=* Rgadd AsyncRun<bang> -strip -append @ rg -S --vimgrep <args>
-command! -bang -nargs=* Rgr    AsyncRun<bang> -strip -cwd=<root> @ rg -S --vimgrep <args>
-command! -bang -nargs=* Rgradd AsyncRun<bang> -strip -append -cwd=<root> @ rg -S --vimgrep <args>
+command! -bang -nargs=* Rg     call s:rg(0, 0, <q-args>)
+command! -bang -nargs=* Rgr    call s:rg(1, 0, <q-args>)
+command! -bang -nargs=* Rgadd  call s:rg(0, 1, <q-args>)
+command! -bang -nargs=* Rgradd call s:rg(1, 1, <q-args>)
+
+function! s:rg(root, append, args, ...)
+  " avoid some plugin modify errorformat
+  let g:ben_old_efm = &efm
+  set efm=%f:%\\s%#%l:%m
+
+  let l:cmd =  "AsyncRun! -strip -post=let\\ &efm=g:ben_old_efm "
+
+  if a:root != 0
+    let l:cmd .= "-cwd=<roor> "
+    call ben#chdir(asyncrun#get_root('%'))
+  endif
+
+  if a:append != 0
+    let l:cmd .= "-append "
+  endif
+
+  let l:cmd .= "@ rg -S --vimgrep " . a:args
+  execute l:cmd
+endfunction
 
 
 " let g:proxy_command = 'proxychains -q'

@@ -205,5 +205,16 @@ function! ben#trycycle(dir)
     return ":\<C-U>call Cycle('" . mode . "', " . dir . ", v:count1)\<CR>"
   end
 endfunction
+" Function: #chdir
+function! ben#chdir(path)
+	if has('nvim')
+		let cmd = haslocaldir()? 'lcd' : (haslocaldir(-1, 0)? 'tcd' : 'cd')
+	else
+		let cmd = haslocaldir()? 'lcd' : 'cd'
+	endif
+	silent execute cmd . ' '. fnameescape(a:path)
+endfunc
+
+
 " Modeline {{{1
 " vim:fdm=marker
