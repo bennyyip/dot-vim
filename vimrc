@@ -108,6 +108,7 @@ Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'tikhomirov/vim-glsl'
 Plug 'rust-lang/rust.vim'
 Plug 'Firef0x/PKGBUILD.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " python [[[3
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'vim-python/python-syntax', { 'for': 'python'}
@@ -763,6 +764,7 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
 let g:completor_auto_trigger = 1
 inoremap <expr> <Tab> ben#tab_or_complete()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <C-space> <C-X><C-O>
 " Plugin: w0rp/ale [[[2
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
@@ -791,6 +793,9 @@ let g:ale_fixers = {
       \   ],
       \   'sh': s:general_ale_fixer + [
       \       'shfmt'
+      \   ],
+      \   'go': s:general_ale_fixer + [
+      \       'goimports',
       \   ],
       \}
 let g:ale_pattern_options = {
@@ -839,7 +844,7 @@ let g:ctrlsf_extra_backend_args = {
 if s:is_win
   let g:asyncrun_encs = 'gbk'
 endif
-let g:asyncrun_save=1
+let g:asyncrun_save = 1
 " Plugin: airblade/vim-rooter [[[2
 let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_manual_only = 1
@@ -899,4 +904,8 @@ let g:cycle_default_groups = [
       \ [['after', 'before']],
       \ ]
 let g:cycle_no_mappings = 1
+" Plugin: fatih/vim-go [[[2
+let g:go_fmt_autosave = 0
+let g:go_def_mapping_enabled=0
+
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim
