@@ -242,8 +242,9 @@ set nolinebreak
 set breakindent
 set breakindentopt=min:40
 
-set cpoptions=aABcfFqsZ " -e
-set formatoptions=tcrqnj
+set cpoptions     =aABcfFqsZ " -e
+set formatoptions =tcrqnj
+set formatoptions+=m    "允许对multi_byte字符换行（否则默认只能空格或者英文标点，详见set breakat=）
 " Change cursor style dependent on mode
 if empty($TMUX)
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -257,7 +258,7 @@ set autoread
 set autowrite              " Automatically save before commands like :next and :make
 set wrapscan               " Searches wrap around end-of-file.
 set report=0               " Always report changed lines.
-set synmaxcol=500          " Only highlight the first 500 columns.
+set synmaxcol=99999          " Only highlight the first 500 columns.
 set history=1000
 set backspace=indent,eol,start
 set hidden
@@ -512,7 +513,8 @@ imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><lef
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
 " yank and paste [[[2
 cnoremap <C-v>         <C-R>+
-inoremap <silent><C-v> <C-O>"+p
+inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
+inoremap <silent><C-z> <ESC>u
 xnoremap <silent>Y     "+y
 xnoremap <silent><C-c> "+y
 nnoremap Y   y$
@@ -556,8 +558,8 @@ map n  nzzzv
 map N  Nzzzv
 " file, buffer [[[2
 nnoremap <leader>fs :w<CR>
-nnoremap <leader>fy :let @*=expand("%")<CR>:echo "buffer filename copied"<CR>
-nnoremap <leader>fp :let @*=expand("%:p")<CR>:echo "buffer path copied"<CR>
+nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>
+nnoremap <leader>fp :let @+=expand("%:p")<CR>:echo "buffer path copied"<CR>
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
@@ -602,6 +604,25 @@ noremap L $
 " Command [[[1
 " :Reverse [[[2
 command! -bar -range=% Reverse <line1>,<line2>global/^/m<line1>-1<bar>nohl
+" ChineseCount [[[2
+function! ChineseCount() range
+	let save = @z
+	silent exec 'normal! gv"zy'
+	let text = @z
+	let @z = save
+	silent exec 'normal! gv'
+	let cc = 0
+	for char in split(text, '\zs')
+		if char2nr(char) >= 0x2000
+			let cc += 1
+		endif
+	endfor
+	echo "Count of Chinese charasters is:"
+	echo cc
+endfunc
+
+vnoremap <F7> :call ChineseCount()<cr>
+
 " :Shuffle | Shuffle selected lines [[[2
 command! -range Shuffle <line1>,<line2>call ben#shuffle()
 " :OpenUrl [[[2
