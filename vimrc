@@ -794,6 +794,9 @@ let g:ale_fixers = {
       \   'sh': s:general_ale_fixer + [
       \       'shfmt'
       \   ],
+      \   'json': s:general_ale_fixer + [
+      \       'jq',
+      \   ],
       \   'go': s:general_ale_fixer + [
       \       'goimports',
       \   ],

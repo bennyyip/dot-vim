@@ -40,7 +40,7 @@ endfunction
 
 " let g:proxy_command = 'proxychains -q'
 let s:proxy_command = get(g:, 'proxy_command', '')
-exe 'nmap gY :<C-U>AsyncRun '. s:proxy_command . ' ydcv <cword><CR>'
+exe 'nmap gY :<C-U>AsyncRun -raw=1 '. s:proxy_command . ' ydcv <cword><CR>'
 
 noremap <leader>; :AsyncRun<space>
 noremap <leader>: :AsyncStop<CR>
