@@ -45,7 +45,7 @@ Plugin 'bergercookie/vim-debugstring'
 Plugin 'bootleq/vim-cycle'
 " leaderf [[[2
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
-  Plugin 'Yggdroot/LeaderF'
+  Plugin 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
   Plugin 'Yggdroot/LeaderF-marks'
   Plugin 'bennyyip/LeaderF-github-stars'
   Plugin 'bennyyip/LeaderF-ghq'
