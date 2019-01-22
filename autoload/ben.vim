@@ -93,8 +93,18 @@ function! ben#open_explore(where)
     endif
   endfunction
 " Function: #has_plugin (require junegunn/plug) {{{1
+function! s:get_packages()
+  if exists("s:packages")
+    return s:packages
+  endif
+  let l:pat = 'pack/*/*/*'
+  let s:packages = filter(globpath(&packpath, l:pat, 0, 1), {-> isdirectory(v:val)})
+  call map(s:packages, {-> substitute(v:val, '^.*[/\\]', '', '')})
+  return s:packages
+endfunction
 function! ben#has_plugin(plugin)
-  return index(g:plugs_order, a:plugin) != -1
+  return index(s:get_packages(), a:plugin) != -1
+  " return index(g:plugs_order, a:plugin) != -1
 endfunction
 " Function: #quote (random quote on splash screen) {{{1
 function! s:get_random_offset(max) abort

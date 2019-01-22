@@ -2,128 +2,7 @@ let g:is_ssh = ($SSH_CONNECTION != "")
 let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
-let s:has_async = has('job') && has('timers') && has('lambda')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
-" Plug [[[1
-" plug#begin [[[2
-call plug#begin('$v/bundle')
-let g:plug_window = 'enew'
-let g:plug_pwindow = 'vertical rightbelow new'
-" general [[[2
-Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'junegunn/vim-easy-align',   { 'on': '<plug>(LiveEasyAlign)' }
-
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/junkfile.vim'
-Plug 'honza/vim-snippets'
-
-Plug 'dyng/ctrlsf.vim'
-Plug 'romainl/vim-qf'
-Plug 'yegappan/greplace'
-
-Plug 'bennyyip/is.vim'
-Plug 'markonm/traces.vim'
-Plug 'haya14busa/vim-asterisk'
-Plug 'justinmk/vim-sneak'
-
-Plug 'hotoo/pangu.vim', { 'on': 'Pangu' }
-
-Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'airblade/vim-rooter', { 'on': 'Rooter' }
-Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'nhooyr/neoman.vim'
-Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
-Plug 'vim-voom/VOoM', { 'on': 'Voom' }
-Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
-
-Plug 'tommcdo/vim-exchange'
-Plug 'tommcdo/vim-fugitive-blame-ext'
-Plug 'tommcdo/vim-fubitive'
-
-Plug 'bennyyip/YankRing.vim'
-Plug 'machakann/vim-highlightedyank'
-
-Plug 'andymass/vim-matchup'
-
-Plug 'vimoutliner/vimoutliner'
-
-Plug 'justinmk/vim-gtfo'
-Plug 'bergercookie/vim-debugstring'
-
-Plug 'bootleq/vim-cycle'
-" leaderf [[[3
-if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
-  Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-  Plug 'Yggdroot/LeaderF-marks'
-  Plug 'bennyyip/LeaderF-github-stars'
-  Plug 'bennyyip/LeaderF-ghq'
-endif
-" vim 8 [[[3
-if s:has_async
-  Plug 'maralla/completor.vim'
-  Plug 'ludovicchabant/vim-gutentags' " https://github.com/universal-ctags/ctags
-endif
-Plug 'skywind3000/asyncrun.vim'
-Plug 'w0rp/ale'
-" *nix stuff [[[ 3
-if !s:is_win
-  Plug 'christoomey/vim-tmux-navigator'
-endif
-Plug 'lilydjwg/fcitx.vim'
-" look [[[3
-Plug 'itchyny/lightline.vim'
-Plug 'mhinz/vim-startify'
-Plug 'morhetz/gruvbox'
-Plug 'vim-scripts/lilypink'
-Plug 'hachy/eva01.vim'
-Plug 'luochen1990/rainbow'
-Plug 'itchyny/vim-cursorword'
-" tpope [[[3
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-apathy'
-Plug 'tpope/vim-capslock'
-Plug 'tpope/vim-characterize'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-jdaddy'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-" lang [[[2
-Plug 'PProvost/vim-ps1'
-Plug 'Shiracamus/vim-syntax-x86-objdump-d'
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'tikhomirov/vim-glsl'
-Plug 'rust-lang/rust.vim'
-Plug 'Firef0x/PKGBUILD.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" python [[[3
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'vim-python/python-syntax', { 'for': 'python'}
-" typescript [[[3
-Plug 'leafgarland/typescript-vim'
-" markup [[[3
-Plug 'Rykka/riv.vim', { 'for': 'rst' }
-Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
-Plug 'lervag/vimtex', {'for': 'tex'}
-" web [[[3
-Plug 'lilydjwg/colorizer'
-Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
-Plug 'othree/html5.vim', {'for': 'html'}
-" plug#end [[[2
-call plug#end()
 " Setting [[[1
 " general settings [[[2
 " clear augroup on reload [[[3
@@ -481,6 +360,7 @@ nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_mark
 " quick <C-w>
 nnoremap ' <C-w>
 if s:is_win || s:is_gvim
+  let g:tmux_navigator_no_mappings=1
   nnoremap <silent><C-h> <C-w>h
   nnoremap <silent><C-j> <C-w>j
   nnoremap <silent><C-k> <C-w>k
@@ -708,7 +588,6 @@ let g:startify_session_autoload = 0
 let g:startify_session_persistence = 0
 let g:startify_update_oldfiles = 1
 let g:startify_use_env = 1
-highlight StartifyHeader guifg='#fabd2f' ctermfg=214
 " Plugin: junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
@@ -911,4 +790,5 @@ let g:cycle_no_mappings = 1
 let g:go_fmt_autosave = 0
 let g:go_def_mapping_enabled=0
 
+runtime minautopac.vim
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim

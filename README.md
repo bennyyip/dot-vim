@@ -3,13 +3,9 @@
 ## Arch Linux
 Add archlinuxcn to your pacman.conf
 ```bash
-cd ~
-git clone https://github.com/bennyyip/dot-vim.git .vim
-pacman -S  --needed\
-        python-wcwidth
-        ripgrep-skylake-git\ # or ripgrep for old CPU
-        universal-ctags-git\
-vim +PlugInstall
+git clone https://github.com/bennyyip/dot-vim.git ~/.vim
+git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+vim +PackUpdate
 ```
 
 ## Other OS
