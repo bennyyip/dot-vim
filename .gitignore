@@ -2,7 +2,6 @@ local.vim
 .netrwhist
 /autoload/plug.vim.old
 /binary/
-/bundle/
 /config/local.vim
 /files/backup/*
 /files/info/*
@@ -14,3 +13,5 @@ local.vim
 !/files/swap/.gitkeep
 !/files/undo/.gitkeep
 !/files/session/.gitkeep
+
+/pack
