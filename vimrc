@@ -105,7 +105,7 @@ set sidescroll=5
 set number            " line number
 set relativenumber    " relative line number
 if has('mouse')
-  set mouse=n
+  set mouse=
   set mousehide
 endif
 " wild stuff [[[3
@@ -320,6 +320,14 @@ nmap     tj Jx
 
 nnoremap <localleader>j :set ft=javascript<CR>
 nnoremap <localleader>h :set ft=html<CR>
+" toogle line number and relative line number
+function! s:number_options() abort
+  return &number && &relativenumber ? 'nonumber norelativenumber' : 'number relativenumber'
+endfunction
+nnoremap yoN :set <C-R>=<SID>number_options()<CR><CR>
+nnoremap [oN :set number relativenumber<CR>
+nnoremap ]oN :set nonumber norelativenumber<CR>
+
 " fold [[[3
 nmap z] zo]z
 nmap z[ zo[z
