@@ -751,10 +751,6 @@ let g:matchup_transmute_enabled = 1
 let g:matchup_override_vimtex = 1
 " Plugin: justinmk/vim-gtfo [[[2
 let g:gtfo#terminals = { 'unix': 'alacritty --working-directory' }
-" ending [[[1
-if filereadable($HOME. '/local.vim')
-  source $HOME/local.vim
-endif
 " Plugin: bootleq/vim-cycle [[[2
 let g:cycle_default_groups = [
       \ [['true', 'false']],
@@ -789,6 +785,9 @@ let g:cycle_no_mappings = 1
 " Plugin: fatih/vim-go [[[2
 let g:go_fmt_autosave = 0
 let g:go_def_mapping_enabled=0
-
+" ending [[[1
+if filereadable($HOME. '/local.vim')
+  source $HOME/local.vim
+endif
 runtime minautopac.vim
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim

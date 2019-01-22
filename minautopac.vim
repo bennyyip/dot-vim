@@ -25,5 +25,5 @@ runtime! OPT ftdetect/*.vim
 
 augroup MinAutoPac
     autocmd!
-    runtime! myplugins.vim
+    runtime! plugins.vim
 augroup END
