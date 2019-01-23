@@ -1,5 +1,5 @@
 " Plugin: machakann/vim-highlightedyank
-if !ben#has_plugin('vim-highlightedyank')
+if !plugpac#has_plugin('vim-highlightedyank')
   finish
 endif
 

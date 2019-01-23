@@ -1,5 +1,5 @@
 " Plugin: simnalamburt/vim-mundo
-if !ben#has_plugin('vim-mundo')
+if !plugpac#has_plugin('vim-mundo')
   finish
 endif
 

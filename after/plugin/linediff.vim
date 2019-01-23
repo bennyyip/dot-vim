@@ -1,5 +1,5 @@
 " Plugin: AndrewRadev/linediff.vim
-if !ben#has_plugin('linediff.vim')
+if !plugpac#has_plugin('linediff.vim')
   finish
 endif
 

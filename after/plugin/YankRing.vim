@@ -1,5 +1,5 @@
 " Plugin: vim-scripts/YankRing.vim
-if !ben#has_plugin('YankRing.vim')
+if !plugpac#has_plugin('YankRing.vim')
   finish
 endif
 

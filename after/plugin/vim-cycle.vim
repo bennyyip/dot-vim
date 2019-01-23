@@ -1,5 +1,5 @@
 " Plugin: bootleq/vim-cycle
-if !ben#has_plugin('vim-cycle')
+if !plugpac#has_plugin('vim-cycle')
   finish
 endif
 

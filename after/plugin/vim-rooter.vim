@@ -1,5 +1,5 @@
 " Plugin: airblade/vim-rooter
-if !ben#has_plugin('vim-rooter')
+if !plugpac#has_plugin('vim-rooter')
   finish
 endif
 

@@ -1,5 +1,5 @@
 " Plugin: mhinz/vim-sayonara
-if !ben#has_plugin('vim-sayonara')
+if !plugpac#has_plugin('vim-sayonara')
   finish
 endif
 

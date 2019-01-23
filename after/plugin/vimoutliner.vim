@@ -1,5 +1,5 @@
 " Plugin: vimoutliner/vimoutliner
-if !ben#has_plugin('vimoutliner')
+if !plugpac#has_plugin('vimoutliner')
   finish
 endif
 

@@ -1,5 +1,5 @@
 " Plugin: haya14busa/vim-asterisk
-if !ben#has_plugin('vim-asterisk')
+if !plugpac#has_plugin('vim-asterisk')
   finish
 endif
 

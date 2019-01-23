@@ -1,5 +1,5 @@
 " Plugin: justinmk/vim-sneak
-if !ben#has_plugin('vim-sneak')
+if !plugpac#has_plugin('vim-sneak')
   finish
 endif
 
