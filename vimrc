@@ -97,7 +97,7 @@ Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
 Pack 'Shiracamus/vim-syntax-x86-objdump-d'
 Pack 'cespare/vim-toml', { 'for': 'toml' }
 Pack 'derekwyatt/vim-scala', { 'for': 'scala' }
-Pack 'ekalinin/Dockerfile.vim'
+Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }
 Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }

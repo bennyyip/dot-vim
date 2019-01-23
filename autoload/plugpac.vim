@@ -1,3 +1,10 @@
+let s:TYPE = {
+      \   'string':  type(''),
+      \   'list':    type([]),
+      \   'dict':    type({}),
+      \   'funcref': type(function('call'))
+      \ }
+
 function! plugpac#begin()
   let s:lazy = { 'ft': {}, 'map': {}, 'cmd': {} }
   let s:repos = {}
@@ -13,19 +20,30 @@ function! plugpac#begin()
 endfunction
 
 function! plugpac#end()
-  for [cmd, name] in items(s:lazy.cmd)
-      execute printf("command! -nargs=* -range -bang %s packadd %s | call s:do_cmd('%s', \"<bang>\", <line1>, <line2>, <q-args>)", cmd, name, cmd)
+  for [l:name, l:cmds] in items(s:lazy.cmd)
+    for l:cmd in l:cmds
+      execute printf("command! -nargs=* -range -bang %s packadd %s | call s:do_cmd('%s', \"<bang>\", <line1>, <line2>, <q-args>)", l:cmd, l:name, l:cmd)
+    endfor
+  endfor
+
+  for [l:name, l:maps] in items(s:lazy.map)
+    for l:map in l:maps
+      for [l:mode, l:map_prefix, l:key_prefix] in
+            \ [['i', '<C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
+        execute printf(
+        \ '%snoremap <silent> %s %s:<C-U>packadd %s<bar>call <SID>do_map(%s, %s, "%s")<CR>',
+        \  l:mode, l:map, l:map_prefix, l:name, string(l:map), l:mode != 'i', l:key_prefix)
+      endfor
+    endfor
   endfor
 
   runtime! OPT ftdetect/**/*.vim
   runtime! OPT after/ftdetect/**/*.vim
 
-  for [ft, names] in items(s:lazy.ft)
-    for name in names
-      augroup PlugPac
-        execute printf('autocmd FileType %s packadd %s', ft, name)
-      augroup END
-    endfor
+  for [name, fts] in items(s:lazy.ft)
+    augroup PlugPac
+      execute printf('autocmd FileType %s packadd %s', fts, name)
+    augroup END
   endfor
 endfunction
 
@@ -41,15 +59,24 @@ function! plugpac#add(repo, ...) abort
 
   if has_key(l:opts, 'for')
     let l:ft = type(l:opts.for) == type([]) ? join(l:opts.for, ',') : l:opts.for
-    call s:assoc(s:lazy.ft, l:ft, l:name)
+    let s:lazy[l:name] = l:ft
   endif
 
   if has_key(l:opts, 'on')
-    " TODO: support list and <Plug>
-    let l:cmd=l:opts.on
-    if exists(":".l:cmd) != 2
-      let s:lazy.cmd[l:cmd] = l:name
-    endif
+    for l:cmd in s:to_a(l:opts.on)
+      if l:cmd =~? '^<Plug>.\+'
+        if empty(mapcheck(l:cmd)) && empty(mapcheck(l:cmd, 'i'))
+          call s:assoc(s:lazy.map, l:name, l:cmd)
+        endif
+      elseif cmd =~# '^[A-Z]'
+        if exists(":".l:cmd) != 2
+          call s:assoc(s:lazy.cmd, l:name, l:cmd)
+        endif
+      else
+        call s:err('Invalid `on` option: '.cmd.
+              \ '. Should start with an uppercase letter or `<Plug>`.')
+      endif
+    endfor
   endif
 
   let s:repos[a:repo] = l:opts
@@ -63,8 +90,42 @@ function! s:assoc(dict, key, val)
   let a:dict[a:key] = add(get(a:dict, a:key, []), a:val)
 endfunction
 
+function! s:to_a(v)
+  return type(a:v) == s:TYPE.list ? a:v : [a:v]
+endfunction
+
+function! s:err(msg)
+  echohl ErrorMsg
+  echom '[plugpac] '.a:msg
+  echohl None
+endfunction
+
 function! s:do_cmd(cmd, bang, start, end, args)
   exec printf('%s%s%s %s', (a:start == a:end ? '' : (a:start.','.a:end)), a:cmd, a:bang, a:args)
+endfunction
+
+function! s:do_map(map, with_prefix, prefix)
+  let extra = ''
+  while 1
+    let c = getchar(0)
+    if c == 0
+      break
+    endif
+    let l:extra .= nr2char(c)
+  endwhile
+
+  if a:with_prefix
+    let prefix = v:count ? v:count : ''
+    let prefix .= '"'.v:register.a:prefix
+    if mode(1) == 'no'
+      if v:operator == 'c'
+        let prefix = "\<esc>" . prefix
+      endif
+      let prefix .= v:operator
+    endif
+    call feedkeys(prefix, 'n')
+  endif
+  call feedkeys(substitute(a:map, '^<Plug>', "\<Plug>", '') . extra)
 endfunction
 
 function! s:setup_command()
@@ -94,4 +155,3 @@ function! s:get_plugin_list()
   call map(s:plugin_list, {-> substitute(v:val, '^.*[/\\]', '', '')})
   return s:plugin_list
 endfunction
-
