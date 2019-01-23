@@ -131,3 +131,33 @@ snippet aligned
         \begin{aligned}[t]
         ${1}
         \end{aligned}
+
+snippet fr
+        \begin{frame}[${1:fragile}]
+        \frametitle{${2}}
+        ${3}
+        \end{frame}
+
+snippet code
+    \begin{lstlisting}[basicstyle=\ttfamily,keywordstyle=\color{red}]
+    ${1}
+    \end{lstlisting}
+
+snippet ab
+        \begin{alertblock}{${2}}
+        ${3}
+        \end{alertblock}
+
+snippet 2col
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+    \begin{center}{}
+    ${1}
+    \end{center}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    \begin{center}{}
+    ${2}
+    \end{center}
+    \end{column}
+    \end{columns}
