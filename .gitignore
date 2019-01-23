@@ -1,8 +1,8 @@
+/pack/minpac
+
 local.vim
 .netrwhist
-/autoload/plug.vim.old
-/binary/
-/config/local.vim
+
 /files/backup/*
 /files/info/*
 /files/swap/*
@@ -14,4 +14,3 @@ local.vim
 !/files/undo/.gitkeep
 !/files/session/.gitkeep
 
-/pack/minpac
