@@ -1,111 +1,111 @@
-Plugin 'k-takata/minpac', {'type': 'opt'}
+Plug 'k-takata/minpac', {'type': 'opt'}
 " general [[[1
-Plugin 'junegunn/gv.vim'
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
+Plug 'junegunn/vim-easy-align'
 
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/junkfile.vim'
-Plugin 'honza/vim-snippets'
+Plug 'Shougo/neosnippet-snippets', { 'type': 'opt' }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/junkfile.vim'
+Plug 'honza/vim-snippets', { 'type': 'opt' }
 
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'romainl/vim-qf'
-Plugin 'yegappan/greplace'
+Plug 'dyng/ctrlsf.vim'
+Plug 'romainl/vim-qf'
+Plug 'yegappan/greplace'
 
-Plugin 'bennyyip/is.vim'
-Plugin 'markonm/traces.vim'
-Plugin 'haya14busa/vim-asterisk'
-Plugin 'justinmk/vim-sneak'
+Plug 'bennyyip/is.vim'
+Plug 'markonm/traces.vim'
+Plug 'haya14busa/vim-asterisk'
+Plug 'justinmk/vim-sneak'
 
-Plugin 'hotoo/pangu.vim'
+Plug 'hotoo/pangu.vim', { 'on': 'Pangu' }
 
-Plugin 'AndrewRadev/linediff.vim'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'airblade/vim-rooter'
-Plugin 'mhinz/vim-sayonara'
-Plugin 'nhooyr/neoman.vim'
-Plugin 'tweekmonster/startuptime.vim'
-Plugin 'vim-voom/VOoM'
-Plugin 'simnalamburt/vim-mundo'
+Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'airblade/vim-rooter', { 'on': 'Rooter' }
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Plug 'nhooyr/neoman.vim'
+Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
+Plug 'vim-voom/VOoM', { 'on': 'Voom' }
+Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
 
-Plugin 'tommcdo/vim-exchange'
-Plugin 'tommcdo/vim-fugitive-blame-ext'
-Plugin 'tommcdo/vim-fubitive'
+Plug 'tommcdo/vim-exchange'
+Plug 'tommcdo/vim-fugitive-blame-ext'
+Plug 'tommcdo/vim-fubitive'
 
-Plugin 'bennyyip/YankRing.vim'
-Plugin 'machakann/vim-highlightedyank'
+Plug 'bennyyip/YankRing.vim'
+Plug 'machakann/vim-highlightedyank'
 
-Plugin 'andymass/vim-matchup'
+Plug 'andymass/vim-matchup'
 
-Plugin 'vimoutliner/vimoutliner'
+Plug 'vimoutliner/vimoutliner'
 
-Plugin 'justinmk/vim-gtfo'
-Plugin 'bergercookie/vim-debugstring'
+Plug 'justinmk/vim-gtfo'
+Plug 'bergercookie/vim-debugstring'
 
-Plugin 'bootleq/vim-cycle'
+Plug 'bootleq/vim-cycle'
 " leaderf [[[2
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
-  Plugin 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
-  Plugin 'Yggdroot/LeaderF-marks'
-  Plugin 'bennyyip/LeaderF-github-stars'
-  Plugin 'bennyyip/LeaderF-ghq'
+  Plug 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
+  Plug 'Yggdroot/LeaderF-marks'
+  Plug 'bennyyip/LeaderF-github-stars'
+  Plug 'bennyyip/LeaderF-ghq'
 endif
 " vim 8 [[[2
-Plugin 'maralla/completor.vim'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'w0rp/ale'
+Plug 'maralla/completor.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
+Plug 'w0rp/ale'
 " *nix stuff [[[ 2
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'lilydjwg/fcitx.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'lilydjwg/fcitx.vim'
 " look [[[2
-Plugin 'itchyny/lightline.vim'
-Plugin 'mhinz/vim-startify'
-Plugin 'morhetz/gruvbox'
-Plugin 'vim-scripts/lilypink'
-Plugin 'hachy/eva01.vim'
-Plugin 'luochen1990/rainbow'
-Plugin 'itchyny/vim-cursorword'
+Plug 'itchyny/lightline.vim'
+Plug 'mhinz/vim-startify'
+Plug 'morhetz/gruvbox'
+Plug 'vim-scripts/lilypink', { 'type': 'opt' }
+Plug 'hachy/eva01.vim', { 'type': 'opt' }
+Plug 'luochen1990/rainbow'
+Plug 'itchyny/vim-cursorword'
 " tpope [[[2
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-apathy'
-Plugin 'tpope/vim-capslock'
-Plugin 'tpope/vim-characterize'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-jdaddy'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-vinegar'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-apathy'
+Plug 'tpope/vim-capslock'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-jdaddy'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 " language [[[1
-Plugin 'PProvost/vim-ps1', {'type': 'opt', 'for': ['ps1', 'ps1xml'] }
-Plugin 'Shiracamus/vim-syntax-x86-objdump-d'
-Plugin 'cespare/vim-toml', {'type': 'opt', 'for': 'toml' }
-Plugin 'derekwyatt/vim-scala', {'type': 'opt', 'for': 'scala' }
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'octol/vim-cpp-enhanced-highlight', {'type': 'opt', 'for': 'cpp' }
-Plugin 'racer-rust/vim-racer', {'type': 'opt', 'for': 'rust' }
-Plugin 'tikhomirov/vim-glsl', {'type': 'opt', 'for': 'glsl' }
-Plugin 'rust-lang/rust.vim', {'type': 'opt', 'for': 'rust' }
-Plugin 'Firef0x/PKGBUILD.vim', {'type': 'opt', 'for': ['PKGBUILD', 'PKGINFO'] }
-Plugin 'fatih/vim-go', {'type': 'opt', 'do': ':GoUpdateBinaries', 'for': 'go'}
+Plug 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
+Plug 'Shiracamus/vim-syntax-x86-objdump-d'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 " python [[[2
-Plugin 'davidhalter/jedi-vim', {'type': 'opt', 'for': 'python' }
-Plugin 'vim-python/python-syntax', {'type': 'opt', 'for': 'python'}
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'vim-python/python-syntax', { 'for': 'python'}
 " typescript [[[2
-Plugin 'leafgarland/typescript-vim', {'type': 'opt', 'for': 'typescript'}
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript'}
 " markup [[[2
-Plugin 'Rykka/riv.vim', {'type': 'opt', 'for': 'rst' }
-Plugin 'iamcco/markdown-preview.vim', {'type': 'opt', 'for': 'markdown', 'on': 'MarkdownPreview' }
-Plugin 'lervag/vimtex', {'type': 'opt','for': 'tex'}
+Plug 'Rykka/riv.vim', { 'for': 'rst' }
+Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+Plug 'lervag/vimtex', {'for': 'tex' }
 " web [[[2
-Plugin 'lilydjwg/colorizer'
-Plugin 'mattn/emmet-vim', {'type': 'opt', 'for': ['xml', 'html', 'css', 'javascript'] }
-Plugin 'othree/html5.vim', {'type': 'opt','for': 'html'}
+Plug 'lilydjwg/colorizer'
+Plug 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
+Plug 'othree/html5.vim', {'for': 'html' }
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim

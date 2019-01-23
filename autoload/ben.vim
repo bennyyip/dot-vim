@@ -92,7 +92,7 @@ function! ben#open_explore(where)
         exec 'Explore '.fnameescape(l:path)
     endif
   endfunction
-" Function: #has_plugin (require junegunn/plug) {{{1
+" Function: #has_plugin (for Vim8 package manager) {{{1
 function! s:get_packages()
   if exists("s:packages")
     return s:packages
@@ -104,7 +104,6 @@ function! s:get_packages()
 endfunction
 function! ben#has_plugin(plugin)
   return index(s:get_packages(), a:plugin) != -1
-  " return index(g:plugs_order, a:plugin) != -1
 endfunction
 " Function: #quote (random quote on splash screen) {{{1
 function! s:get_random_offset(max) abort
