@@ -803,6 +803,7 @@ let s:general_ale_fixer = [
       \   ]
 let g:ale_fixers = {
       \   'vim': s:general_ale_fixer,
+      \   'tex': s:general_ale_fixer,
       \   'rust': s:general_ale_fixer + [
       \       'rustfmt',
       \   ],
@@ -896,7 +897,7 @@ let g:yankring_map_dot = 0
 let g:yankring_min_element_length = 2
 " Plugin: andymass/vim-matchup [[[2
 let g:loaded_matchit = 1
-let g:matchup_transmute_enabled = 1
+let g:matchup_transmute_enabled = 0
 let g:matchup_override_vimtex = 1
 " Plugin: justinmk/vim-gtfo [[[2
 let g:gtfo#terminals = { 'unix': 'alacritty --working-directory' }
