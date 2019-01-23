@@ -1,4 +1,4 @@
-setl tabstop=4 shiftwidth=4
+setl tabstop=4 shiftwidth=4 noexpandtab
 
 if ben#has_plugin('vim-go')
   nnoremap <buffer> <silent> gd :GoDef<cr>

@@ -14,4 +14,4 @@ local.vim
 !/files/undo/.gitkeep
 !/files/session/.gitkeep
 
-/pack
+/pack/minpac

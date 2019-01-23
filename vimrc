@@ -213,9 +213,7 @@ let g:lightline = {
       \   'filetype':     'LightlineFiletype',
       \   'fileencoding': 'LightlineFileencoding',
       \   'mode':         'LightlineMode',
-      \ },
-      \ 'component' : {
-      \   'asyncrun': '%{g:asyncrun_status}',
+      \   'asyncrun':     'LightlineAsyncrun',
       \ },
       \ }
 if !s:is_tty
@@ -227,6 +225,10 @@ if !s:is_tty
   let g:lightline.separator = { 'left': "\ue0b0", 'right': "\ue0b2" }
   let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
 endif
+
+function LightlineAsyncrun()
+  return get(g:, 'asyncrun_status', '')
+endfunction
 
 function! LightlineModified() "[[[4
   return &filetype =~# 'help\|vimfiler\|Mundo\|qf' ? '' : &modified ? '+' : &modifiable ? '' : '-'
