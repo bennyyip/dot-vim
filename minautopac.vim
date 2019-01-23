@@ -5,6 +5,10 @@ else
   let s:minpac_init=0
 endif
 
+function! s:assoc(dict, key, val)
+  let a:dict[a:key] = add(get(a:dict, a:key, []), a:val)
+endfunction
+
 function! s:do_cmd(cmd, bang, start, end, args)
   exec printf('%s%s%s %s', (a:start == a:end ? '' : (a:start.','.a:end)), a:cmd, a:bang, a:args)
 endfunction
@@ -26,7 +30,9 @@ function! minautopac#add(repo, ...) abort
 
   if has_key(l:opts, 'on')
     let l:cmd=l:opts.on " TODO: support list and <Plug>
-    execute printf("command! -nargs=* -range -bang %s packadd %s | call s:do_cmd('%s', \"<bang>\", <line1>, <line2>, <q-args>)", l:cmd, l:name, l:cmd)
+    if exists(":".l:cmd) != 2
+      execute printf("command! -nargs=* -range -bang %s packadd %s | call s:do_cmd('%s', \"<bang>\", <line1>, <line2>, <q-args>)", l:cmd, l:name, l:cmd)
+    endif
   endif
 
   if s:minpac_init
@@ -37,9 +43,10 @@ endfunction
 
 command! -nargs=+ Plug call minautopac#add(<args>)
 
-command! PackUpdate packadd minpac | runtime minautopac.vim | call minpac#update('', {'do': 'call minpac#status()'})
-command! PackClean  packadd minpac | runtime minautopac.vim | call minpac#clean()
-command! PackStatus packadd minpac | runtime minautopac.vim | call minpac#status()
+command! PackInstall packadd minpac | runtime minautopac.vim | call minpac#update(keys(filter(copy(minpac#pluglist), {-> !isdirectory(v:val.dir . '/.git')})))
+command! PackUpdate  packadd minpac | runtime minautopac.vim | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean   packadd minpac | runtime minautopac.vim | call minpac#clean()
+command! PackStatus  packadd minpac | runtime minautopac.vim | call minpac#status()
 
 runtime! OPT ftdetect/*.vim
 
