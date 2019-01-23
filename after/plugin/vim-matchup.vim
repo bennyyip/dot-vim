@@ -1,5 +1,5 @@
 " Plugin: andymass/vim-matchup
-if !ben#has_plugin('vim-matchup')
+if !plugpac#has_plugin('vim-matchup')
   finish
 endif
 

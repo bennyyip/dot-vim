@@ -92,19 +92,6 @@ function! ben#open_explore(where)
         exec 'Explore '.fnameescape(l:path)
     endif
   endfunction
-" Function: #has_plugin (for Vim8 package manager) {{{1
-function! s:get_packages()
-  if exists("s:packages")
-    return s:packages
-  endif
-  let l:pat = 'pack/*/*/*'
-  let s:packages = filter(globpath(&packpath, l:pat, 0, 1), {-> isdirectory(v:val)})
-  call map(s:packages, {-> substitute(v:val, '^.*[/\\]', '', '')})
-  return s:packages
-endfunction
-function! ben#has_plugin(plugin)
-  return index(s:get_packages(), a:plugin) != -1
-endfunction
 " Function: #quote (random quote on splash screen) {{{1
 function! s:get_random_offset(max) abort
   return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max

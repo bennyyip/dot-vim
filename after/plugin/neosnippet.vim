@@ -1,5 +1,5 @@
 " Plugin: Shougo/neosnippet
-if !ben#has_plugin('neosnippet.vim')
+if !plugpac#has_plugin('neosnippet.vim')
   finish
 endif
 

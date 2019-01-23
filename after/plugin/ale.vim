@@ -1,5 +1,5 @@
 " Plugin: w0rp/ale
-if !ben#has_plugin('ale')
+if !plugpac#has_plugin('ale')
   finish
 endif
 

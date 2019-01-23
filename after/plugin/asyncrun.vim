@@ -1,5 +1,5 @@
 " Plugin: skywind3000/asyncrun.vim
-if !ben#has_plugin('asyncrun.vim')
+if !plugpac#has_plugin('asyncrun.vim')
   finish
 endif
 

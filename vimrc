@@ -3,6 +3,121 @@ let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
+" Plugins [[[1
+call plugpac#begin()
+Pack 'k-takata/minpac', {'type': 'opt'}
+" general [[[1
+Pack 'junegunn/gv.vim', { 'on': 'GV' }
+Pack 'junegunn/vim-easy-align'
+
+Pack 'Shougo/neosnippet-snippets', { 'type': 'opt' }
+Pack 'Shougo/neosnippet.vim'
+Pack 'Shougo/junkfile.vim'
+Pack 'honza/vim-snippets', { 'type': 'opt' }
+
+Pack 'dyng/ctrlsf.vim'
+Pack 'romainl/vim-qf'
+Pack 'yegappan/greplace'
+
+Pack 'bennyyip/is.vim'
+Pack 'markonm/traces.vim'
+Pack 'haya14busa/vim-asterisk'
+Pack 'justinmk/vim-sneak'
+
+Pack 'hotoo/pangu.vim', { 'on': 'Pangu' }
+
+Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
+Pack 'AndrewRadev/splitjoin.vim'
+Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
+Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Pack 'nhooyr/neoman.vim'
+Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
+Pack 'vim-voom/VOoM', { 'on': 'Voom' }
+Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+
+Pack 'tommcdo/vim-exchange'
+Pack 'tommcdo/vim-fugitive-blame-ext'
+Pack 'tommcdo/vim-fubitive'
+
+Pack 'bennyyip/YankRing.vim'
+Pack 'machakann/vim-highlightedyank'
+
+Pack 'andymass/vim-matchup'
+
+Pack 'vimoutliner/vimoutliner'
+
+Pack 'justinmk/vim-gtfo'
+Pack 'bergercookie/vim-debugstring'
+
+Pack 'bootleq/vim-cycle'
+
+Pack 'janko-m/vim-test'
+" leaderf [[[2
+if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
+  Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
+  Pack 'Yggdroot/LeaderF-marks'
+  Pack 'bennyyip/LeaderF-github-stars'
+  Pack 'bennyyip/LeaderF-ghq'
+endif
+" vim 8 [[[2
+Pack 'maralla/completor.vim'
+Pack 'ludovicchabant/vim-gutentags'
+Pack 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
+Pack 'w0rp/ale'
+" *nix stuff [[[ 2
+Pack 'christoomey/vim-tmux-navigator'
+Pack 'lilydjwg/fcitx.vim'
+" look [[[2
+Pack 'itchyny/lightline.vim'
+Pack 'mhinz/vim-startify'
+Pack 'morhetz/gruvbox'
+Pack 'vim-scripts/lilypink', { 'type': 'opt' }
+Pack 'hachy/eva01.vim', { 'type': 'opt' }
+Pack 'luochen1990/rainbow'
+Pack 'itchyny/vim-cursorword'
+" tpope [[[2
+Pack 'tpope/vim-abolish'
+Pack 'tpope/vim-apathy'
+Pack 'tpope/vim-capslock'
+Pack 'tpope/vim-characterize'
+Pack 'tpope/vim-commentary'
+Pack 'tpope/vim-endwise'
+Pack 'tpope/vim-eunuch'
+Pack 'tpope/vim-fugitive'
+Pack 'tpope/vim-jdaddy'
+Pack 'tpope/vim-repeat'
+Pack 'tpope/vim-rhubarb'
+Pack 'tpope/vim-rsi'
+Pack 'tpope/vim-sensible'
+Pack 'tpope/vim-surround'
+Pack 'tpope/vim-unimpaired'
+Pack 'tpope/vim-vinegar'
+" language [[[1
+Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
+Pack 'Shiracamus/vim-syntax-x86-objdump-d'
+Pack 'cespare/vim-toml', { 'for': 'toml' }
+Pack 'derekwyatt/vim-scala', { 'for': 'scala' }
+Pack 'ekalinin/Dockerfile.vim'
+Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Pack 'racer-rust/vim-racer', { 'for': 'rust' }
+Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
+Pack 'rust-lang/rust.vim', { 'for': 'rust' }
+Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
+Pack 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+" python [[[2
+Pack 'davidhalter/jedi-vim', { 'for': 'python' }
+Pack 'vim-python/python-syntax', { 'for': 'python'}
+" typescript [[[2
+Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
+" markup [[[2
+Pack 'Rykka/riv.vim', { 'for': 'rst' }
+Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+Pack 'lervag/vimtex', {'for': 'tex' }
+" web [[[2
+Pack 'lilydjwg/colorizer'
+Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
+Pack 'othree/html5.vim', {'for': 'html' }
+call plugpac#end()
 " Setting [[[1
 " general settings [[[2
 " clear augroup on reload [[[3
@@ -90,6 +205,9 @@ endif " s:is_tty
 set noerrorbells
 set novisualbell
 set t_vb=
+if exists('&belloff')
+  set belloff=all
+endif
 " better navigation [[[3
 set cursorline
 set foldmethod=marker
@@ -799,5 +917,4 @@ let g:go_def_mapping_enabled=0
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
 endif
-runtime minautopac.vim
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim

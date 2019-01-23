@@ -1,5 +1,5 @@
 " Plugin: tpope/vim-fugitive
-if !ben#has_plugin('vim-fugitive')
+if !plugpac#has_plugin('vim-fugitive')
   finish
 endif
 

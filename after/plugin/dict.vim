@@ -1,5 +1,5 @@
 " Plugin: iamcco/dict.vim
-if !ben#has_plugin('dict.vim')
+if !plugpac#has_plugin('dict.vim')
   finish
 endif
 
