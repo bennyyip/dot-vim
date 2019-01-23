@@ -1,3 +1,6 @@
+" Author: bennyyip (bennyyip@protonmail.com)
+" URL:    https://github.com/bennyyip/plugpac.vim
+" ---------------------------------------------------------------------
 let s:TYPE = {
       \   'string':  type(''),
       \   'list':    type([]),
