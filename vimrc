@@ -52,6 +52,9 @@ Pack 'bergercookie/vim-debugstring'
 Pack 'bootleq/vim-cycle'
 
 Pack 'janko-m/vim-test'
+
+Pack 'voldikss/vim-searchme'
+
 " leaderf [[[2
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
@@ -627,9 +630,7 @@ vnoremap <F7> :call ChineseCount()<cr>
 command! -range Shuffle <line1>,<line2>call ben#shuffle()
 " :OpenUrl [[[2
 command! -nargs=1 OpenURL :call ben#open_url(<q-args>)
-nnoremap <silent> gx :OpenURL <cfile><CR>
-nnoremap <silent> gG :OpenURL http://www.google.com/search?hl=en&gws_rd=ssl&q=<cword><CR>
-nnoremap <silent> gW :OpenURL http://en.wikipedia.org/wiki/Special:Search?search=<cword><CR>
+nnoremap <silent> gx :call ben#open_url()<CR>
 " :A [[[2
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
