@@ -4,8 +4,6 @@ nnoremap <buffer><F4> :Make test<CR>
 nmap <buffer> gd <Plug>(rust-def)
 nmap <buffer> <leader>gd <Plug>(rust-doc)
 
-let b:surround_{char2nr('|')} = '| \r '
-
 if strlen(findfile("Cargo.toml", ".;"))
   compiler cargo
 else
