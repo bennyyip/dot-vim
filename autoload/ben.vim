@@ -60,11 +60,31 @@ function! ben#a(cmd)
   endfor
 endfunction
 " Function: #open_url {{{1
-function! ben#open_url(url)
-  if s:is_win
-    exe "sil !start cmd /cstart /b ".a:url.""
+function! ben#open_url(...)
+  if a:0 == 0
+    let l:url = expand("<cfile>")
   else
-    exe "sil !firefox \"".a:url."\"&"
+    let l:url = a:1
+  endif
+
+  " Windows(including mingw)
+  if has('win32') || has('win64') || has('win32unix')
+    let cmd = 'start rundll32 url.dll,FileProtocolHandler ' . l:url
+  elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
+    let cmd = 'open ' . l:url
+  elseif executable('xdg-open')
+    let cmd = 'xdg-open ' . l:url
+  else
+    echoerr "Browser not found."
+  endif
+
+  " Async
+  if exists('*jobstart')
+    call jobstart(cmd)
+  elseif exists('*job_start')
+    call job_start(cmd)
+  else
+    call system(cmd)
   endif
 endfunction
 " Function: #shuffle (shuffle lines) {{{1
@@ -78,20 +98,20 @@ RB
 endfunction
 " Function: #open_explore (0: current buffer, 1: vnew, 2: tabnew) {{{1
 function! ben#open_explore(where)
-    let l:path = expand("%:p:h")
-    if l:path == ''
-        let l:path = getcwd()
-    endif
-    if a:where == 0
-        exec 'Explore '.fnameescape(l:path)
-    elseif a:where == 1
-        exec 'vnew'
-        exec 'Explore '.fnameescape(l:path)
-    else
-        exec 'tabnew'
-        exec 'Explore '.fnameescape(l:path)
-    endif
-  endfunction
+  let l:path = expand("%:p:h")
+  if l:path == ''
+    let l:path = getcwd()
+  endif
+  if a:where == 0
+    exec 'Explore '.fnameescape(l:path)
+  elseif a:where == 1
+    exec 'vnew'
+    exec 'Explore '.fnameescape(l:path)
+  else
+    exec 'tabnew'
+    exec 'Explore '.fnameescape(l:path)
+  endif
+endfunction
 " Function: #quote (random quote on splash screen) {{{1
 function! s:get_random_offset(max) abort
   return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
@@ -203,12 +223,12 @@ function! ben#trycycle(dir)
 endfunction
 " Function: #chdir
 function! ben#chdir(path)
-	if has('nvim')
-		let cmd = haslocaldir()? 'lcd' : (haslocaldir(-1, 0)? 'tcd' : 'cd')
-	else
-		let cmd = haslocaldir()? 'lcd' : 'cd'
-	endif
-	silent execute cmd . ' '. fnameescape(a:path)
+  if has('nvim')
+    let cmd = haslocaldir()? 'lcd' : (haslocaldir(-1, 0)? 'tcd' : 'cd')
+  else
+    let cmd = haslocaldir()? 'lcd' : 'cd'
+  endif
+  silent execute cmd . ' '. fnameescape(a:path)
 endfunc
 
 
