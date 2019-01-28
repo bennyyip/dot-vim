@@ -125,3 +125,25 @@ options     head
     }
   }
 
+snippet items
+  for ${1:k}, ${2:v} := range ${3:m} {
+    ${4:/* code */}
+  }
+
+snippet enum
+  for ${1:i}, ${2:x} := range ${3:xs} {
+    ${4:/* code */}
+  }
+
+snippet     append
+alias       ap
+  ${1:sliece} = append($1, ${0:val})
+
+snippet     map
+options     word
+  map[${1:string}]${0:int}
+
+snippet     inmap
+  if ${1:val}, ok := ${2:m}[${3:key}]; ok {
+    ${4:/* code */}
+  }
