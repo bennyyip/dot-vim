@@ -25,15 +25,20 @@ function! s:rg(root, append, args, ...)
   let l:cmd =  "AsyncRun! -strip -post=let\\ &efm=g:ben_old_efm "
 
   if a:root != 0
-    let l:cmd .= "-cwd=<roor> "
-    call ben#chdir(asyncrun#get_root('%'))
+    let l:path = asyncrun#get_root('%')
+  else
+    let l:path = expand('%:h:p')
+  endif
+
+  if l:path == ""
+    let l:path = "."
   endif
 
   if a:append != 0
     let l:cmd .= "-append "
   endif
 
-  let l:cmd .= "@ rg -S --vimgrep " . a:args
+  let l:cmd .= "@ rg -S --vimgrep " . a:args . ' ' . l:path
   execute l:cmd
 endfunction
 
