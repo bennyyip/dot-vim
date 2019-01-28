@@ -6,7 +6,7 @@ let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plugins [[[1
 call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
-" general [[[1
+" general [[[2
 Pack 'junegunn/gv.vim', { 'on': 'GV' }
 Pack 'junegunn/vim-easy-align'
 
@@ -55,22 +55,22 @@ Pack 'janko-m/vim-test'
 
 Pack 'voldikss/vim-searchme'
 
-" leaderf [[[2
+" leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
   Pack 'Yggdroot/LeaderF-marks'
   Pack 'bennyyip/LeaderF-github-stars'
   Pack 'bennyyip/LeaderF-ghq'
 endif
-" vim 8 [[[2
+" vim 8 [[[3
 Pack 'maralla/completor.vim'
 Pack 'ludovicchabant/vim-gutentags'
 Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
-" *nix stuff [[[ 2
+" *nix stuff [[[3
 Pack 'christoomey/vim-tmux-navigator'
 Pack 'lilydjwg/fcitx.vim'
-" look [[[2
+" look [[[3
 Pack 'itchyny/lightline.vim'
 Pack 'mhinz/vim-startify'
 Pack 'morhetz/gruvbox'
@@ -78,7 +78,7 @@ Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
 Pack 'luochen1990/rainbow'
 Pack 'itchyny/vim-cursorword'
-" tpope [[[2
+" tpope [[[3
 Pack 'tpope/vim-abolish'
 Pack 'tpope/vim-apathy'
 Pack 'tpope/vim-capslock'
@@ -95,7 +95,7 @@ Pack 'tpope/vim-sensible'
 Pack 'tpope/vim-surround'
 Pack 'tpope/vim-unimpaired'
 Pack 'tpope/vim-vinegar'
-" language [[[1
+" language [[[2
 Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
 Pack 'Shiracamus/vim-syntax-x86-objdump-d'
 Pack 'cespare/vim-toml', { 'for': 'toml' }
@@ -107,16 +107,16 @@ Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 Pack 'rust-lang/rust.vim', { 'for': 'rust' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
 Pack 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-" python [[[2
+" python [[[3
 Pack 'davidhalter/jedi-vim', { 'for': 'python' }
 Pack 'vim-python/python-syntax', { 'for': 'python'}
-" typescript [[[2
+" typescript [[[3
 Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
-" markup [[[2
+" markup [[[3
 Pack 'Rykka/riv.vim', { 'for': 'rst' }
 Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
 Pack 'lervag/vimtex', {'for': 'tex' }
-" web [[[2
+" web [[[3
 Pack 'lilydjwg/colorizer'
 Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
 Pack 'othree/html5.vim', {'for': 'html' }
