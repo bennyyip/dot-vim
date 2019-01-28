@@ -65,7 +65,7 @@ endif
 " vim 8 [[[2
 Pack 'maralla/completor.vim'
 Pack 'ludovicchabant/vim-gutentags'
-Pack 'skywind3000/asyncrun.vim', { 'on': 'AsyncRun' }
+Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
 " *nix stuff [[[ 2
 Pack 'christoomey/vim-tmux-navigator'
