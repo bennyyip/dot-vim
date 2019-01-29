@@ -64,7 +64,6 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
 endif
 " vim 8 [[[3
 Pack 'lifepillar/vim-mucomplete'
-Pack 'maralla/completor.vim', { 'type': 'opt' }
 Pack 'ludovicchabant/vim-gutentags'
 Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
@@ -75,7 +74,7 @@ Pack 'lilydjwg/fcitx.vim'
 Pack 'itchyny/lightline.vim'
 Pack 'mhinz/vim-startify'
 Pack 'morhetz/gruvbox', { 'type': 'opt' }
-Pack 'lifepiller/vim-gruvbox8'
+Pack 'lifepillar/vim-gruvbox8'
 Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
 Pack 'luochen1990/rainbow'
@@ -959,11 +958,11 @@ let g:python_highlight_all = 1
 let g:go_bin_path = expand("~/go/bin/")
 " Plugin: lervag/vimtex [[[2
 let g:tex_conceal=0
-
-let g:mucomplete#enable_auto_at_startup = 1
+" Plugin: lifepillar/mucomplete [[[2
+let g:mucomplete#enable_auto_at_startup = 0
+" let g:mucomplete#completion_delay = 0
 let g:mucomplete#chains = {}
-let g:mucomplete#chains.default = ['path', 'nsnp', 'keyn']
-
+let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl', 'nsnp']
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
