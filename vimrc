@@ -309,8 +309,6 @@ set viminfo='100,n$v/files/info/viminfo
 " colorscheme [[[3
 set background=dark
 colorscheme gruvbox8
-hi VertSplit guibg=#282828 guifg=#181A1F
-hi EndOfBuffer guibg=#282828 guifg=#282828
 let s:colorscheme = get(g:, 'colors_name', 'default')
 " Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
