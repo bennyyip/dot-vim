@@ -309,6 +309,15 @@ set viminfo='100,n$v/files/info/viminfo
 " colorscheme [[[3
 set background=dark
 colorscheme gruvbox8
+let g:gruvbox_plugin_hi_groups = 1
+let g:gruvbox_filetype_hi_groups = 1
+if s:is_gvim
+  let g:gruvbox_italic = 1
+  let g:gruvbox_italicize_strings = 1
+else
+  let g:gruvbox_italic = 0
+  let g:gruvbox_italicize_strings = 0
+endif
 let s:colorscheme = get(g:, 'colors_name', 'default')
 " Plugin: itchyny/lightline.vim [[[3
 " g:lightline[[[4
