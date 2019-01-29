@@ -73,7 +73,8 @@ Pack 'lilydjwg/fcitx.vim'
 " look [[[3
 Pack 'itchyny/lightline.vim'
 Pack 'mhinz/vim-startify'
-Pack 'morhetz/gruvbox'
+Pack 'morhetz/gruvbox', { 'type': 'opt' }
+Pack 'lifepiller/vim-gruvbox8'
 Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
 Pack 'luochen1990/rainbow'
@@ -307,7 +308,7 @@ set viminfo='100,n$v/files/info/viminfo
 " apperance [[[2
 " colorscheme [[[3
 set background=dark
-colorscheme gruvbox
+colorscheme gruvbox8
 hi VertSplit guibg=#282828 guifg=#181A1F
 hi EndOfBuffer guibg=#282828 guifg=#282828
 let s:colorscheme = get(g:, 'colors_name', 'default')
@@ -341,6 +342,8 @@ let g:lightline = {
 if !s:is_tty
   if s:colorscheme == 'gruvbox'
     let g:lightline.colorscheme = 'gruvbox'
+  elseif s:colorscheme == 'gruvbox8'
+    let g:lightline.colorscheme = 'gruvbox8'
   else
     let g:lightline.colorscheme = 'one'
   endif
@@ -849,6 +852,8 @@ let g:Lf_MruMaxFiles=500
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 if s:colorscheme == 'gruvbox'
   let g:Lf_StlColorscheme = 'gruvbox'
+elseif s:colorscheme == 'gruvbox8'
+  let g:Lf_StlColorscheme = 'gruvbox8'
 else
   let g:Lf_StlColorscheme = 'one'
 endif
