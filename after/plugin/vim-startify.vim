@@ -3,4 +3,5 @@ if !plugpac#has_plugin('vim-startify')
   finish
 endif
 
-highlight link StartifyHeader Type
+
+hi StartifyHeader ctermfg=214 ctermbg=NONE guifg=#fabd2f guibg=NONE guisp=NONE cterm=NONE gui=NONE
