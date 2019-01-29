@@ -63,7 +63,8 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'bennyyip/LeaderF-ghq'
 endif
 " vim 8 [[[3
-Pack 'maralla/completor.vim'
+Pack 'lifepillar/vim-mucomplete'
+Pack 'maralla/completor.vim', { 'type': 'opt' }
 Pack 'ludovicchabant/vim-gutentags'
 Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
@@ -240,6 +241,8 @@ set path+=**
 set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
 " set completeopt=longest,menu "preview
+set completeopt-=preview
+set completeopt+=longest,menuone,noselect
 " breaking [[[3
 set wrap
 set nolinebreak
@@ -800,9 +803,9 @@ let g:completor_tex_omni_trigger = '\\\\(:?'
       \ .')$'
 
 let g:completor_auto_trigger = 1
-inoremap <expr> <Tab> ben#tab_or_complete()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <C-space> <C-X><C-O>
+" inoremap <expr> <Tab> ben#tab_or_complete()
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <C-space> <C-X><C-O>
 " Plugin: w0rp/ale [[[2
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
@@ -948,13 +951,18 @@ let g:cycle_no_mappings = 1
 let g:go_fmt_autosave = 0
 let g:go_def_mapping_enabled=0
 " Plugin: davidhalter/jedi-vim [[[2
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
+let g:jedi#popup_on_dot = 0
 " Plugin: vim-python/python-syntax [[[2
 let g:python_highlight_all = 1
 " Plugin: fatih/vim-go [[[2
 let g:go_bin_path = expand("~/go/bin/")
 " Plugin: lervag/vimtex [[[2
 let g:tex_conceal=0
+
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.default = ['path', 'nsnp', 'keyn']
 
 " ending [[[1
 if filereadable($HOME. '/local.vim')
