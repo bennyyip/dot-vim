@@ -55,6 +55,7 @@ Pack 'janko-m/vim-test'
 
 Pack 'voldikss/vim-searchme'
 
+Pack 'kassio/neoterm'
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
@@ -107,7 +108,7 @@ Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 Pack 'rust-lang/rust.vim', { 'for': 'rust' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
-Pack 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Pack 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " python [[[3
 Pack 'davidhalter/jedi-vim', { 'for': 'python' }
 Pack 'vim-python/python-syntax', { 'for': 'python'}
@@ -963,6 +964,9 @@ let g:mucomplete#enable_auto_at_startup = 0
 " let g:mucomplete#completion_delay = 0
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl', 'nsnp']
+" Plugin: kassio/neoterm [[[2
+let g:neoterm_repl_python='bpython'
+let g:neoterm_automap_keys='<space>tt'
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
