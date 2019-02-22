@@ -22,6 +22,8 @@ Pack 'yegappan/greplace'
 Pack 'bennyyip/is.vim'
 Pack 'markonm/traces.vim'
 Pack 'haya14busa/vim-asterisk'
+
+Pack 'justinmk/vim-dirvish'
 Pack 'justinmk/vim-sneak'
 
 Pack 'hotoo/pangu.vim', { 'on': 'Pangu' }
@@ -96,7 +98,6 @@ Pack 'tpope/vim-rsi'
 Pack 'tpope/vim-sensible'
 Pack 'tpope/vim-surround'
 Pack 'tpope/vim-unimpaired'
-Pack 'tpope/vim-vinegar'
 " language [[[2
 Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
 Pack 'Shiracamus/vim-syntax-x86-objdump-d'
@@ -765,20 +766,9 @@ let g:cpp_experimental_simple_template_highlight = 0
 let g:cpp_experimental_template_highlight = 1
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
-" Plugin: tpope/vim-vinegar [[[2
-" let g:loaded_netrw = 1
-" let g:loaded_netrwPlugin = 1
-augroup vimrc
-  autocmd FileType netrw setl bufhidden=delete
-augroup END
-let g:netrw_banner = 0
-let g:netrw_bufsettings = 'relativenumber'
-let g:netrw_keepdir = 0
-let g:netrw_liststyle = 1
-let g:netrw_sort_options = 'i'
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_timefmt = '%H:%M %y-%m-%d'
-let g:netrw_sizestyle = 'H'
+" Plugin: justinmk/vim-dirvish [[[2
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_conf = {
       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
@@ -966,7 +956,7 @@ let g:mucomplete#chains = {}
 let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl', 'nsnp']
 " Plugin: kassio/neoterm [[[2
 let g:neoterm_repl_python='bpython'
-let g:neoterm_automap_keys='<space>tt'
+let g:neoterm_automap_keys='<leader>tt'
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
