@@ -659,7 +659,7 @@ command! PX if !empty(expand('%'))
         \|   echohl None
         \| endif
 " RFC [[[2
-command! -bar -count=0 RFC     :e http://www.rfc-editor.org/rfc/rfc<count>.txt|setl ro noma
+command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
 " Autocmd [[[1
 augroup vimrc
   " go back to where you exited

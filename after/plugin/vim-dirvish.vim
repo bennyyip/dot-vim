@@ -7,10 +7,6 @@ endif
 augroup dirvish_config
   autocmd!
 
-  command! -nargs=? -complete=dir Explore Dirvish <args>
-  command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-  command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
-
   " Map `t` to open in new tab.
   autocmd FileType dirvish
     \  nnoremap <silent><buffer> t :call dirvish#open('tabedit', 0)<CR>
