@@ -4,6 +4,10 @@ let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plugins [[[1
+let s:minpac_dir = $v . '/pack/minpac/opt/minpac'
+if !isdirectory(s:minpac_dir)
+  silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', s:minpac_dir)
+end
 call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 " general [[[2

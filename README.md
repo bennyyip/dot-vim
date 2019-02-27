@@ -4,7 +4,6 @@
 Add archlinuxcn to your pacman.conf
 ```bash
 git clone https://github.com/bennyyip/dot-vim.git ~/.vim
-git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 vim +PackUpdate
 ```
 
