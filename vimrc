@@ -777,10 +777,12 @@ let g:loaded_netrwPlugin = 1
 let g:rainbow_conf = {
       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \ 'guis': [''],
+      \ 'cterms': [''],
       \ 'separately': {
-      \        'ocaml': {
-      \            'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
-      \        }
+      \    'ocaml': {
+      \       'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
+      \    }
       \ }
       \}
 " Plugin: maralla/completor.vim [[[2
