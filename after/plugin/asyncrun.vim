@@ -38,7 +38,8 @@ function! s:rg(root, append, args, ...)
     let l:cmd .= "-append "
   endif
 
-  let l:cmd .= "@ rg -S --vimgrep " . a:args . ' ' . shellescape(l:path)
+
+  let l:cmd .= "@ rg -S --vimgrep " . fnameescape(a:args) . ' ' . shellescape(l:path)
   execute l:cmd
 endfunction
 
