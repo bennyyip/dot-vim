@@ -1,4 +1,5 @@
 # Installation
+** At least Vim 8.1 is required, newer is better. **
 
 ## Arch Linux
 Add archlinuxcn to your pacman.conf
