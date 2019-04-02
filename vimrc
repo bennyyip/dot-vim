@@ -952,7 +952,11 @@ let g:python_highlight_all = 1
 " Plugin: fatih/vim-go [[[2
 let g:go_bin_path = expand("~/go/bin/")
 " Plugin: lervag/vimtex [[[2
-let g:tex_conceal=0
+let g:tex_flavor='latex'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+" let g:tex_conceal=0
 let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
 " let g:vimtex_view_general_viewer = 'okular'
