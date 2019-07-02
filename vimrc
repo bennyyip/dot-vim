@@ -232,6 +232,7 @@ set scrolloff=4
 set sidescroll=5
 set number            " line number
 set relativenumber    " relative line number
+set signcolumn=number
 if has('mouse')
   set mouse=
   set mousehide
@@ -821,7 +822,7 @@ let g:ale_fixers = {
       \       'clang-format',
       \   ],
       \   'python': s:general_ale_fixer + [
-      \       'yapf',
+      \       'black',
       \   ],
       \   'typescript': s:general_ale_fixer + [
       \       'eslint',
