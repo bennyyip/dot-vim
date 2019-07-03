@@ -114,6 +114,7 @@ Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 Pack 'rust-lang/rust.vim', { 'for': 'rust' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
 Pack 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Pack 'chrisbra/csv.vim'
 " python [[[3
 Pack 'davidhalter/jedi-vim', { 'for': 'python' }
 Pack 'vim-python/python-syntax', { 'for': 'python'}
