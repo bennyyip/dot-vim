@@ -455,7 +455,7 @@ if s:is_win
   endif
 else
   set guioptions-=aegimrLtT
-  set guifont=Monospace\ 14
+  set guifont=Monospace\ 16
 endif
 " Key Mapping [[[1
 " misc [[[2
@@ -806,39 +806,44 @@ let g:completor_auto_trigger = 1
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
-let s:general_ale_fixer = [
-      \       'trim_whitespace',
-      \       'remove_trailing_lines',
-      \   ]
 let g:ale_fixers = {
-      \   'vim': s:general_ale_fixer,
-      \   'tex': s:general_ale_fixer,
-      \   'rust': s:general_ale_fixer + [
+      \   'vim': [],
+      \   'tex': [],
+      \   'rust': [
       \       'rustfmt',
       \   ],
-      \   'c': s:general_ale_fixer + [
+      \   'c': [
       \       'clang-format',
       \   ],
-      \   'cpp': s:general_ale_fixer + [
+      \   'cpp': [
       \       'clang-format',
       \   ],
-      \   'python': s:general_ale_fixer + [
+      \   'python': [
+      \       'yapf',
       \       'black',
       \   ],
-      \   'typescript': s:general_ale_fixer + [
+      \   'typescript': [
       \       'eslint',
       \       'prettier',
       \   ],
-      \   'sh': s:general_ale_fixer + [
+      \   'sh': [
       \       'shfmt'
       \   ],
-      \   'json': s:general_ale_fixer + [
+      \   'json': [
       \       'jq',
       \   ],
-      \   'go': s:general_ale_fixer + [
+      \   'go': [
       \       'goimports',
       \   ],
+      \   'html': [
+      \       'tidy',
+      \   ],
       \}
+let s:general_ale_fixer = [
+      \  'trim_whitespace',
+      \  'remove_trailing_lines',
+      \  ]
+call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
 let g:ale_pattern_options = {
       \   '.*\.h': {'ale_enabled': 0},
       \   '.*\.c': {'ale_enabled': 0},
