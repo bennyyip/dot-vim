@@ -44,10 +44,6 @@ function! s:rg(root, append, args, ...)
 endfunction
 
 
-" let g:proxy_command = 'proxychains -q'
-let s:proxy_command = get(g:, 'proxy_command', '')
-exe 'nmap gY :<C-U>AsyncRun -raw=1 '. s:proxy_command . ' ydcv <cword><CR>'
-
 noremap <leader>; :AsyncRun<space>
 noremap <leader>: :AsyncStop<CR>
 noremap <F8>      :Make<CR>
