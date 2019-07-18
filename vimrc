@@ -34,6 +34,7 @@ Pack 'hotoo/pangu.vim', { 'on': 'Pangu' }
 
 Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
 Pack 'AndrewRadev/splitjoin.vim'
+Pack 'AndrewRadev/sideways.vim', { 'on': ['SidewaysLeft', 'SidewaysRight'] }
 Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
 Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Pack 'nhooyr/neoman.vim'
@@ -61,6 +62,8 @@ Pack 'janko-m/vim-test'
 
 Pack 'voldikss/vim-searchme'
 Pack 'voldikss/vim-translate-me'
+
+Pack 'wellle/targets.vim'
 
 Pack 'kassio/neoterm'
 " leaderf [[[3
@@ -234,7 +237,9 @@ set scrolloff=4
 set sidescroll=5
 set number            " line number
 set relativenumber    " relative line number
-set signcolumn=number
+if has('patch1564')
+  set signcolumn=number
+endif
 if has('mouse')
   set mouse=
   set mousehide
