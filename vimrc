@@ -64,6 +64,7 @@ Pack 'voldikss/vim-searchme'
 Pack 'voldikss/vim-translate-me'
 
 Pack 'wellle/targets.vim'
+Pack 'michaeljsmith/vim-indent-object'
 
 Pack 'kassio/neoterm'
 " leaderf [[[3
@@ -71,7 +72,7 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
   Pack 'Yggdroot/LeaderF-marks'
   Pack 'bennyyip/LeaderF-github-stars'
-  Pack 'bennyyip/LeaderF-ghq'
+  Pack 'bennyyip/LeaderF-ghq' 
 endif
 " vim 8 [[[3
 Pack 'lifepillar/vim-mucomplete'
@@ -117,7 +118,7 @@ Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 Pack 'rust-lang/rust.vim', { 'for': 'rust' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
-Pack 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Pack 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
 Pack 'chrisbra/csv.vim'
 " python [[[3
 Pack 'davidhalter/jedi-vim', { 'for': 'python' }
