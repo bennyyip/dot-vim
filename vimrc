@@ -60,6 +60,7 @@ Pack 'bootleq/vim-cycle'
 Pack 'janko-m/vim-test'
 
 Pack 'voldikss/vim-searchme'
+Pack 'voldikss/vim-translate-me'
 
 Pack 'kassio/neoterm'
 " leaderf [[[3
@@ -439,7 +440,7 @@ if !g:is_ssh && has("termguicolors")
   set termguicolors
 endif
 if s:is_win
-  let &pythonthreedll = 'C:\Program Files\Python37\python37.dll'
+  let &pythonthreedll = expand('$HOME\AppData\Local\Programs\Python\Python37\python37.dll')
   silent! python3 pass
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
@@ -447,8 +448,7 @@ if s:is_win
   if s:is_gvim
     "https://github.com/derekmcloughlin/gvimfullscreen_win32
     augroup vimrc
-      autocmd GUIEnter * call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)
-      autocmd GUIEnter * nmap <leader>tf :call libcallnr("gvimfullscreen_64.dll", "ToggleFullScreen", 0)<CR>
+      autocmd GUIEnter *  simalt ~x
     augroup END
     set guioptions-=egmrLtT
     set guifont=Sarasa\ Term\ CL:h14
@@ -855,7 +855,9 @@ let g:ale_sh_shfmt_options = '-i 2'
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
 " Plugin: Yggdroot/LeaderF [[[2
-let g:Lf_DefaultExternalTool = 'rg'
+if executable('rg')
+  let g:Lf_DefaultExternalTool = 'rg'
+endif
 let g:Lf_ShortcutF='<leader>ff'
 let g:Lf_ShortcutB='gb'
 let g:Lf_MruMaxFiles=500
