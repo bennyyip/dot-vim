@@ -72,7 +72,7 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
   Pack 'Yggdroot/LeaderF-marks'
   Pack 'bennyyip/LeaderF-github-stars'
-  Pack 'bennyyip/LeaderF-ghq' 
+  Pack 'bennyyip/LeaderF-ghq'
 endif
 " vim 8 [[[3
 Pack 'lifepillar/vim-mucomplete'
@@ -779,7 +779,7 @@ let g:cpp_experimental_template_highlight = 1
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
 " Plugin: justinmk/vim-dirvish [[[2
-let g:loaded_netrw = 1
+let g:loaded_netrw = 0
 let g:loaded_netrwPlugin = 1
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_conf = {
