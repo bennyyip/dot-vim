@@ -5,4 +5,4 @@ endif
 
 let g:vtm_default_mapping = 0
 
-nmap gY <Plug>TranslateW
+nmap gY <Plug>Translate
