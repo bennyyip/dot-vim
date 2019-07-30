@@ -583,8 +583,6 @@ nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 " mark position before search
 nnoremap / ms/
-map n  nzzzv
-map N  Nzzzv
 " file, buffer [[[2
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>
