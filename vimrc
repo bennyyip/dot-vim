@@ -46,7 +46,7 @@ Pack 'tommcdo/vim-exchange'
 Pack 'tommcdo/vim-fugitive-blame-ext'
 Pack 'tommcdo/vim-fubitive'
 
-Pack 'bennyyip/YankRing.vim'
+Pack 'svermeulen/vim-yoink'
 Pack 'machakann/vim-highlightedyank'
 
 Pack 'andymass/vim-matchup'
@@ -116,9 +116,9 @@ Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }
 Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
-Pack 'rust-lang/rust.vim', { 'for': 'rust' }
+Pack 'rust-lang/rust.vim', { 'type': 'opt' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
-Pack 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
+Pack 'fatih/vim-go', { 'type': 'opt'}
 Pack 'chrisbra/csv.vim'
 " python [[[3
 Pack 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -550,7 +550,7 @@ nnoremap Y   y$
 xnoremap x  "_d
 xnoremap P  "0p
 nmap     tp "+P
-" slect what I just pasted
+" select what I just pasted
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " copy entire file contents (to gui-clipboard if available)
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG'.(has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
