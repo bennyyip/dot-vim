@@ -446,6 +446,7 @@ if !g:is_ssh && has("termguicolors")
   set termguicolors
 endif
 if s:is_win
+  set iminsert=2
   let &pythonthreedll = expand('$HOME\AppData\Local\Programs\Python\Python37\python37.dll')
   silent! python3 pass
   let g:netrw_cygwin = 0
