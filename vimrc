@@ -91,6 +91,7 @@ Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
 Pack 'luochen1990/rainbow'
 Pack 'itchyny/vim-cursorword'
+Pack 'bennyyip/vim-interestingwords'
 " tpope [[[3
 Pack 'tpope/vim-abolish'
 Pack 'tpope/vim-apathy'
@@ -1002,6 +1003,8 @@ let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl', 'nsnp
 " Plugin: kassio/neoterm [[[2
 let g:neoterm_repl_python='bpython'
 let g:neoterm_automap_keys='<leader>tt'
+" Plugin: lfv89/vim-interestingwords [[[2
+let g:interestingWordsDefaultMappings = 0
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
