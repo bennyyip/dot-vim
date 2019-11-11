@@ -526,6 +526,8 @@ if s:is_win || s:is_gvim
   nnoremap <silent><C-k> <C-w>k
   nnoremap <silent><C-l> <C-w>l
 endif
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
 " edit [[[2
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
@@ -595,6 +597,8 @@ nnoremap cu :lcd ..<bar>pwd<cr>
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 " tab [[[2
 nmap     T :tabnew<cr>
+nnoremap ]t :tabn<cr>
+nnoremap [t :tabp<cr>
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 function! s:switch_tab(i)
