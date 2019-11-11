@@ -7,3 +7,5 @@ Abolish qutoa quota
 Abolish improt import
 Abolish udpate{,s} update{}
 Abolish isntall install
+Abolish shcedule{,r} schedule{}
+Abolish shcd schd
