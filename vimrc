@@ -37,7 +37,6 @@ Pack 'AndrewRadev/splitjoin.vim'
 Pack 'AndrewRadev/sideways.vim', { 'on': ['SidewaysLeft', 'SidewaysRight'] }
 Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
 Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Pack 'nhooyr/neoman.vim'
 Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Pack 'vim-voom/VOoM', { 'on': 'Voom' }
 Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
@@ -120,7 +119,7 @@ Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 Pack 'rust-lang/rust.vim', { 'type': 'opt' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
 Pack 'fatih/vim-go', { 'type': 'opt'}
-Pack 'chrisbra/csv.vim'
+Pack 'chrisbra/csv.vim', { 'type': 'opt' }
 " python [[[3
 Pack 'davidhalter/jedi-vim', { 'for': 'python' }
 Pack 'vim-python/python-syntax', { 'for': 'python'}
@@ -1005,8 +1004,8 @@ let g:mucomplete#enable_auto_at_startup = 0
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl', 'nsnp']
 " Plugin: kassio/neoterm [[[2
-let g:neoterm_repl_python='bpython'
-let g:neoterm_automap_keys='<leader>tt'
+let g:neoterm_repl_python = 'bpython'
+let g:neoterm_automap_keys = '<leader>tt'
 " Plugin: lfv89/vim-interestingwords [[[2
 let g:interestingWordsDefaultMappings = 0
 " ending [[[1
