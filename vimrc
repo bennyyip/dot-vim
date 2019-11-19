@@ -963,6 +963,7 @@ let g:cycle_no_mappings = 1
 let g:go_fmt_autosave = 0
 let g:go_def_mapping_enabled=0
 " Plugin: davidhalter/jedi-vim [[[2
+let g:jedi#smart_auto_mappings = 1
 let g:jedi#completions_enabled = 1
 let g:jedi#popup_on_dot = 0
 " Plugin: vim-python/python-syntax [[[2
