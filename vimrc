@@ -84,6 +84,7 @@ Pack 'lilydjwg/fcitx.vim'
 " look [[[3
 Pack 'itchyny/lightline.vim'
 Pack 'mhinz/vim-startify'
+Pack 'sainnhe/gruvbox-material', { 'type': 'opt' }
 Pack 'morhetz/gruvbox', { 'type': 'opt' }
 Pack 'lifepillar/vim-gruvbox8'
 Pack 'vim-scripts/lilypink', { 'type': 'opt' }
@@ -136,6 +137,7 @@ Pack 'othree/html5.vim', {'for': 'html' }
 call plugpac#end()
 " Setting [[[1
 " general settings [[[2
+set nocompatible
 " clear augroup on reload [[[3
 if exists('#vimrc')
   augroup vimrc
@@ -326,6 +328,7 @@ set viminfo='100,n$v/files/info/viminfo
 " colorscheme [[[3
 set background=dark
 colorscheme gruvbox8
+let g:gruvbox_material_background = 'hard'
 let g:gruvbox_plugin_hi_groups = 1
 let g:gruvbox_filetype_hi_groups = 1
 if s:is_gvim
@@ -368,6 +371,8 @@ if !s:is_tty
     let g:lightline.colorscheme = 'gruvbox'
   elseif s:colorscheme == 'gruvbox8'
     let g:lightline.colorscheme = 'gruvbox8'
+  elseif s:colorscheme == 'gruvbox-material'
+    let g:lightline.colorscheme = 'gruvbox_material'
   else
     let g:lightline.colorscheme = 'one'
   endif
@@ -864,31 +869,16 @@ let g:ale_sh_shfmt_options = '-i 2'
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
 " Plugin: Yggdroot/LeaderF [[[2
-if executable('rg')
-  let g:Lf_DefaultExternalTool = 'rg'
-endif
-let g:Lf_ShortcutF='<leader>ff'
-let g:Lf_ShortcutB='gb'
-let g:Lf_MruMaxFiles=500
-let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
+let g:Lf_PopupColorscheme = 'gruvbox_material'
 if s:colorscheme == 'gruvbox'
   let g:Lf_StlColorscheme = 'gruvbox'
 elseif s:colorscheme == 'gruvbox8'
   let g:Lf_StlColorscheme = 'gruvbox8'
+elseif s:colorscheme == 'gruvbox-material'
+  let g:lightline.colorscheme = 'gruvbox_material'
 else
   let g:Lf_StlColorscheme = 'one'
 endif
-let g:Lf_HideHelp = 1
-let g:Lf_ShowRelativePath = 1
-let g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>']}
-let g:Lf_NormalMap = {
-      \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-      \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-      \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-      \ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-      \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-      \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-      \ }
 " Plugin: dyng/ctrlsf.vim [[[2
 let g:ctrlsf_default_root = 'project'
 let g:ctrlsf_mapping = {
