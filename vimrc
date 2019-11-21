@@ -376,8 +376,10 @@ if !s:is_tty
   else
     let g:lightline.colorscheme = 'one'
   endif
-  let g:lightline.separator = { 'left': "\ue0b0", 'right': "\ue0b2" }
-  let g:lightline.subseparator = { 'left': "\ue0b1", 'right': "\ue0b3" }
+  let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 endif
 
 function LightlineAsyncrun()
