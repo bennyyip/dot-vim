@@ -87,7 +87,7 @@ Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
 " *nix stuff [[[3
 Pack 'christoomey/vim-tmux-navigator'
-Pack 'lilydjwg/fcitx.vim'
+Pack 'lilydjwg/fcitx.vim', { 'type': 'opt' }
 " look [[[3
 Pack 'itchyny/lightline.vim'
 Pack 'mhinz/vim-startify'
@@ -322,9 +322,13 @@ let g:is_posix = 1
 set cmdheight=1
 set langmenu=en_US
 " backup/swap/info/undo settings [[[3
-set backup
-set backupskip=
-set backupext=-vimbackup
+" Disable backup because of coc.nvim #649
+set nobackup
+set nowritebackup
+" set backup
+" set backupskip=
+" set backupext=-vimbackup
+
 set updatecount=100
 set undofile
 if s:is_nvim
