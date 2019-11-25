@@ -50,6 +50,8 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+nmap <f2> <Plug>(coc-rename)
+
 " Remap for rename current word
 " nmap <leader>rn <Plug>(coc-rename)
 
