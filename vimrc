@@ -75,7 +75,7 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'bennyyip/LeaderF-ghq'
 endif
 " vim 8 [[[3
-Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}, 'branch': 'release'}
+Pack 'neoclide/coc.nvim', {'branch': 'release'}
 Pack 'neoclide/coc-eslint', {'do': {-> system('yarn install --frozen-lockfile')}}
 Pack 'neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}}
 Pack 'neoclide/coc-tsserver', {'do': {-> system('yarn install --frozen-lockfile')}}
@@ -133,6 +133,7 @@ Pack 'davidhalter/jedi-vim', { 'for': 'python' }
 Pack 'vim-python/python-syntax', { 'for': 'python'}
 " typescript [[[3
 Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
+Pack 'peitalin/vim-jsx-typescript'
 " markup [[[3
 Pack 'Rykka/riv.vim', { 'for': 'rst' }
 Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
