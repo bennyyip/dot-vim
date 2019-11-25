@@ -801,23 +801,6 @@ let g:rainbow_conf = {
       \    }
       \ }
       \}
-" Plugin: maralla/completor.vim [[[2
-let g:completor_racer_binary = '/usr/bin/racer'
-let g:completor_tex_omni_trigger = '\\\\(:?'
-      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-      \ . '|hyperref\s*\[[^]]*'
-      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ .')$'
-
-let g:completor_auto_trigger = 1
-" inoremap <expr> <Tab> ben#tab_or_complete()
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <C-space> <C-X><C-O>
 " Plugin: w0rp/ale [[[2
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
