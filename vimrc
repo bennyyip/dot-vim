@@ -2,6 +2,7 @@ let g:is_ssh = ($SSH_CONNECTION != "")
 let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
+let s:is_nvim = has('nvim')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 " Plugins [[[1
 let s:minpac_dir = $v . '/pack/minpac/opt/minpac'
@@ -246,7 +247,7 @@ set scrolloff=4
 set sidescroll=5
 set number            " line number
 set relativenumber    " relative line number
-if has('patch1564')
+if has('patch-8.1.1564')
   set signcolumn=number
 endif
 if has('mouse')
@@ -323,13 +324,18 @@ set langmenu=en_US
 " backup/swap/info/undo settings [[[3
 set backup
 set backupskip=
+set backupext=-vimbackup
 set updatecount=100
 set undofile
-set backupdir=$v/files/backup/
-set backupext=-vimbackup
-set directory=$v/files/swap/
-set undodir=$v/files/undo/
-set viminfo='100,n$v/files/info/viminfo
+if s:is_nvim
+  set backupdir -=.
+  set shada      ='100
+else
+  set backupdir=$v/files/backup/
+  set directory=$v/files/swap/
+  set undodir=$v/files/undo/
+  set viminfo='100,n$v/files/info/viminfo
+endif
 " apperance [[[2
 " colorscheme [[[3
 set background=dark
