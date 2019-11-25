@@ -74,7 +74,13 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'bennyyip/LeaderF-ghq'
 endif
 " vim 8 [[[3
-Pack 'lifepillar/vim-mucomplete'
+Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}, 'branch': 'release'}
+Pack 'neoclide/coc-eslint', {'do': {-> system('yarn install --frozen-lockfile')}}
+Pack 'neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}}
+Pack 'neoclide/coc-tsserver', {'do': {-> system('yarn install --frozen-lockfile')}}
+Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
+
+" Pack 'lifepillar/vim-mucomplete'
 Pack 'ludovicchabant/vim-gutentags'
 Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
@@ -178,7 +184,7 @@ set modeline
 set modelines=1
 set nostartofline
 set numberwidth=1
-set shortmess=aoOTI
+set shortmess=aoOTIc
 set showcmd
 set showmatch
 set matchtime=0
@@ -347,7 +353,7 @@ let g:lightline = {
       \   'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
-      \              [ 'asyncrun', 'fileformat', 'fileencoding', 'filetype'] ]
+      \              [ 'cocstatus', 'asyncrun', 'fileformat', 'fileencoding', 'filetype'] ]
       \ },
       \ 'inactive': {
       \ 'left': [ [ 'filename' ] ],
@@ -364,8 +370,12 @@ let g:lightline = {
       \   'fileencoding': 'LightlineFileencoding',
       \   'mode':         'LightlineMode',
       \   'asyncrun':     'LightlineAsyncrun',
+      \   'cocstatus':    'coc#status',
       \ },
       \ }
+
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
 if !s:is_tty
   if s:colorscheme == 'gruvbox'
     let g:lightline.colorscheme = 'gruvbox'
@@ -849,6 +859,10 @@ let g:ale_pattern_options = {
       \   '.*\.cc': {'ale_enabled': 0},
       \   '.*\.cpp': {'ale_enabled': 0},
       \   '.*\.tex': {'ale_enabled': 0},
+      \   '.*\.tsx': {'ale_enabled': 0},
+      \   '.*\.ts': {'ale_enabled': 0},
+      \   '.*\.jsx': {'ale_enabled': 0},
+      \   '.*\.js': {'ale_enabled': 0},
       \}
 let g:ale_sh_shfmt_options = '-i 2'
 " Plugin: justinmk/vim-sneak [[[2
@@ -974,11 +988,6 @@ let g:vimtex_compiler_latexmk = {
 
 
 autocmd BufReadPre *.tex let b:vimtex_main = 'main.tex'
-" Plugin: lifepillar/mucomplete [[[2
-let g:mucomplete#enable_auto_at_startup = 0
-" let g:mucomplete#completion_delay = 0
-let g:mucomplete#chains = {}
-let g:mucomplete#chains.default = ['path', 'omni', 'keyn', 'dict', 'uspl', 'nsnp']
 " Plugin: kassio/neoterm [[[2
 let g:neoterm_repl_python = 'bpython'
 let g:neoterm_automap_keys = '<leader>tt'
