@@ -75,11 +75,13 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'bennyyip/LeaderF-ghq'
 endif
 " vim 8 [[[3
-Pack 'neoclide/coc.nvim', {'branch': 'release'}
-Pack 'neoclide/coc-eslint', {'do': {-> system('yarn install --frozen-lockfile')}}
-Pack 'neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}}
-Pack 'neoclide/coc-tsserver', {'do': {-> system('yarn install --frozen-lockfile')}}
-Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
+if executable('yarn')
+  Pack 'neoclide/coc.nvim', {'branch': 'release'}
+  Pack 'neoclide/coc-eslint', {'do': {-> system('yarn install --frozen-lockfile')}}
+  Pack 'neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}}
+  Pack 'neoclide/coc-tsserver', {'do': {-> system('yarn install --frozen-lockfile')}}
+  Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
+endif
 
 " Pack 'lifepillar/vim-mucomplete'
 Pack 'ludovicchabant/vim-gutentags'
@@ -126,10 +128,8 @@ Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 Pack 'rust-lang/rust.vim', { 'type': 'opt' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
-Pack 'fatih/vim-go', { 'type': 'opt'}
 Pack 'chrisbra/csv.vim', { 'type': 'opt' }
 " python [[[3
-Pack 'davidhalter/jedi-vim', { 'for': 'python' }
 Pack 'vim-python/python-syntax', { 'for': 'python'}
 " typescript [[[3
 Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
@@ -250,6 +250,8 @@ set number            " line number
 set relativenumber    " relative line number
 if has('patch-8.1.1564')
   set signcolumn=number
+else
+  set signcolumn=yes
 endif
 if has('mouse')
   set mouse=
@@ -825,6 +827,7 @@ let g:rainbow_conf = {
 " Plugin: w0rp/ale [[[2
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
+let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
       \   'vim': [],
@@ -865,10 +868,6 @@ let s:general_ale_fixer = [
       \  ]
 call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
 let g:ale_pattern_options = {
-      \   '.*\.h': {'ale_enabled': 0},
-      \   '.*\.c': {'ale_enabled': 0},
-      \   '.*\.cc': {'ale_enabled': 0},
-      \   '.*\.cpp': {'ale_enabled': 0},
       \   '.*\.tex': {'ale_enabled': 0},
       \}
 let g:ale_sh_shfmt_options = '-i 2'
@@ -955,13 +954,6 @@ let g:cycle_default_groups = [
       \ [['after', 'before']],
       \ ]
 let g:cycle_no_mappings = 1
-" Plugin: fatih/vim-go [[[2
-let g:go_fmt_autosave = 0
-let g:go_def_mapping_enabled=0
-" Plugin: davidhalter/jedi-vim [[[2
-let g:jedi#smart_auto_mappings = 1
-let g:jedi#completions_enabled = 1
-let g:jedi#popup_on_dot = 0
 " Plugin: vim-python/python-syntax [[[2
 let g:python_highlight_all = 1
 " Plugin: fatih/vim-go [[[2

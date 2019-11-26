@@ -20,6 +20,24 @@
           "directory": ".ccls-cache"
         }
       }
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "go"
+      ],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
     }
-  }
+  },
+  "python.linting.pylintArgs": [
+    "--rcfile=/data/bennyye/.pylintrc"
+  ]
 }
