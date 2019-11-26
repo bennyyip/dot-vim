@@ -1,4 +1,25 @@
 {
-    "typescript.showUnused": false,
-    "diagnostic.displayByAle": true
+  "typescript.showUnused": false,
+  "diagnostic.displayByAle": true,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "cuda",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls-root",
+        "compile_commands.json"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": ".ccls-cache"
+        }
+      }
+    }
+  }
 }
