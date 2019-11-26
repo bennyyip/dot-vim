@@ -870,10 +870,6 @@ let g:ale_pattern_options = {
       \   '.*\.cc': {'ale_enabled': 0},
       \   '.*\.cpp': {'ale_enabled': 0},
       \   '.*\.tex': {'ale_enabled': 0},
-      \   '.*\.tsx': {'ale_enabled': 0},
-      \   '.*\.ts': {'ale_enabled': 0},
-      \   '.*\.jsx': {'ale_enabled': 0},
-      \   '.*\.js': {'ale_enabled': 0},
       \}
 let g:ale_sh_shfmt_options = '-i 2'
 " Plugin: justinmk/vim-sneak [[[2
