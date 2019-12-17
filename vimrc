@@ -140,7 +140,7 @@ Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
 Pack 'lervag/vimtex', {'for': 'tex' }
 " web [[[3
 Pack 'lilydjwg/colorizer'
-Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript'] }
+Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
 Pack 'othree/html5.vim', {'for': 'html' }
 call plugpac#end()
 " Setting [[[1
