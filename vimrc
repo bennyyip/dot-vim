@@ -4,6 +4,7 @@ let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
 let s:is_nvim = has('nvim')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
+let $VIMRC = $v . '/vimrc'
 " Plugins [[[1
 let s:minpac_dir = $v . '/pack/minpac/opt/minpac'
 if !isdirectory(s:minpac_dir)
