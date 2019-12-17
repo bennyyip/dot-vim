@@ -67,7 +67,8 @@ Pack 'voldikss/vim-translate-me'
 Pack 'wellle/targets.vim'
 Pack 'michaeljsmith/vim-indent-object'
 
-Pack 'kassio/neoterm'
+Pack 'tomtom/tcomment_vim'
+
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
@@ -105,7 +106,6 @@ Pack 'tpope/vim-abolish'
 Pack 'tpope/vim-apathy'
 Pack 'tpope/vim-capslock'
 Pack 'tpope/vim-characterize'
-Pack 'tpope/vim-commentary'
 Pack 'tpope/vim-endwise'
 Pack 'tpope/vim-eunuch'
 Pack 'tpope/vim-fugitive'
