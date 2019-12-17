@@ -1,6 +1,17 @@
 " Plugin: neoclide/coc.nvim
-if !plugpac#has_plugin('coc.nvim')
+if !plugpac#has_plugin('coc.nvim') || matchstr(&rtp, 'coc.nvim') == ''
   finish
+endif
+
+let g:coc_global_extensions = [
+      \ 'coc-eslint',
+      \ 'coc-json',
+      \ 'coc-python',
+      \ 'coc-tsserver',
+      \ 'coc-vimlsp',
+      \ ]
+if matchstr(&rtp, 'coc.nvim') != ''
+  call coc#add_extension()
 endif
 
 
