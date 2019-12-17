@@ -9,3 +9,4 @@ Abolish udpate{,s} update{}
 Abolish isntall install
 Abolish shcedule{,r} schedule{}
 Abolish shcd schd
+Abolish precent percent
