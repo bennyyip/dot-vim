@@ -77,14 +77,12 @@ endif
 " vim 8 [[[3
 if executable('yarn')
   Pack 'neoclide/coc.nvim', {'branch': 'release'}
-  Pack 'neoclide/coc-eslint', {'do': {-> system('yarn install --frozen-lockfile')}}
-  Pack 'neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}}
-  Pack 'neoclide/coc-tsserver', {'do': {-> system('yarn install --frozen-lockfile')}}
-  Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
+  " Pack 'neoclide/coc-eslint', {'do': {-> system('yarn install --frozen-lockfile')}}
+  " Pack 'neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}}
+  " Pack 'neoclide/coc-tsserver', {'do': {-> system('yarn install --frozen-lockfile')}}
+  " Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
 endif
 
-" Pack 'lifepillar/vim-mucomplete'
-Pack 'ludovicchabant/vim-gutentags'
 Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
 " *nix stuff [[[3
@@ -886,7 +884,7 @@ if s:colorscheme == 'gruvbox'
 elseif s:colorscheme == 'gruvbox8'
   let g:Lf_StlColorscheme = 'gruvbox8'
 elseif s:colorscheme == 'gruvbox-material'
-  let g:lightline.colorscheme = 'gruvbox_material'
+  let g:Lf_StlColorscheme = 'gruvbox_material'
 else
   let g:Lf_StlColorscheme = 'one'
 endif
