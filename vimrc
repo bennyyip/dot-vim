@@ -588,8 +588,8 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " copy entire file contents (to gui-clipboard if available)
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG'.(has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
 " vimrc
-nnoremap <leader>fed :e $MYVIMRC<CR>
-nnoremap <leader>fee :so $MYVIMRC<CR>
+nnoremap <leader>fed :e $VIMRC<CR>
+nnoremap <leader>fee :so $VIMRC<CR>
 " run current line
 nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 " visual [[[2
@@ -777,7 +777,7 @@ let g:startify_skiplist = [
       \ '/Users/mhi/local/vim/share/vim/vim74/doc',
       \ ]
 let g:startify_bookmarks = [
-      \ { 'c': $MYVIMRC },
+      \ { 'c': $VIMRC },
       \ ]
 let g:startify_transformations = [
       \ ['.*vimrc$', 'vimrc'],
