@@ -842,12 +842,15 @@ let g:ale_fixers = {
       \       'clang-format',
       \   ],
       \   'python': [
-      \       'yapf',
       \       'black',
+      \       'isort',
       \   ],
       \   'typescript': [
       \       'eslint',
       \       'prettier',
+      \   ],
+      \   'bash': [
+      \       'shfmt'
       \   ],
       \   'sh': [
       \       'shfmt'
@@ -867,10 +870,13 @@ let s:general_ale_fixer = [
       \  'remove_trailing_lines',
       \  ]
 call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
-let g:ale_pattern_options = {
-      \   '.*\.tex': {'ale_enabled': 0},
-      \}
 let g:ale_sh_shfmt_options = '-i 2'
+
+let g:ale_linters = {
+      \  'sh': ['shellcheck'],
+      \  'bash': ['shell', 'shellcheck'],
+      \  'zsh': ['shell', 'shellcheck'],
+      \   }
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
 " Plugin: Yggdroot/LeaderF [[[2
