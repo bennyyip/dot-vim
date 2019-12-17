@@ -76,15 +76,17 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'bennyyip/LeaderF-github-stars'
   Pack 'bennyyip/LeaderF-ghq'
 endif
-" vim 8 [[[3
-if executable('yarn')
-  Pack 'neoclide/coc.nvim', {'branch': 'release'}
-  " Pack 'neoclide/coc-eslint', {'do': {-> system('yarn install --frozen-lockfile')}}
-  " Pack 'neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}}
-  " Pack 'neoclide/coc-tsserver', {'do': {-> system('yarn install --frozen-lockfile')}}
-  " Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
+
+" coc [[[3
+Pack 'davidhalter/jedi-vim', { 'type': 'opt' }
+Pack 'neoclide/coc.nvim', {'branch': 'release', 'type': 'opt'}
+if executable('node')
+  packadd! coc.nvim
+else
+  packadd! jedi-vim
 endif
 
+" vim 8 [[[3
 Pack 'skywind3000/asyncrun.vim'
 Pack 'w0rp/ale'
 " *nix stuff [[[3
@@ -961,6 +963,10 @@ let g:cycle_default_groups = [
 let g:cycle_no_mappings = 1
 " Plugin: vim-python/python-syntax [[[2
 let g:python_highlight_all = 1
+" Plugin: davidhalter/jedi-vim [[[2
+let g:jedi#smart_auto_mappings = 1
+let g:jedi#completions_enabled = 1
+let g:jedi#popup_on_dot = 0
 " Plugin: fatih/vim-go [[[2
 let g:go_bin_path = expand("~/go/bin/")
 " Plugin: lervag/vimtex [[[2
