@@ -39,5 +39,13 @@
   },
   "python.linting.pylintArgs": [
     "--rcfile=/data/bennyye/.pylintrc"
-  ]
+  ],
+  "snippets.ultisnips.directories": [
+    "/home/benyip/.vim/snippets"
+  ],
+  "snippets.extends": {
+    "c": [
+      "cpp"
+    ]
+  }
 }

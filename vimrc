@@ -16,10 +16,7 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 Pack 'junegunn/gv.vim', { 'on': 'GV' }
 Pack 'junegunn/vim-easy-align'
 
-Pack 'Shougo/neosnippet-snippets', { 'type': 'opt' }
-Pack 'Shougo/neosnippet.vim'
 Pack 'Shougo/junkfile.vim'
-Pack 'honza/vim-snippets', { 'type': 'opt' }
 
 Pack 'dyng/ctrlsf.vim'
 Pack 'romainl/vim-qf'
@@ -1013,4 +1010,5 @@ let g:interestingWordsDefaultMappings = 0
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
 endif
+
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim
