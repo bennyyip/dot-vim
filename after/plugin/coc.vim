@@ -11,6 +11,7 @@ let g:coc_global_extensions = [
       \ 'coc-python',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
+      \ 'coc-snippets'
       \ ]
 if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
@@ -63,8 +64,8 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Remap for rename current word
 nmap <f2> <Plug>(coc-rename)
 
-" Remap for rename current word
-" nmap <leader>rn <Plug>(coc-rename)
 
+imap <C-k> <Plug>(coc-snippets-expand-jump)
