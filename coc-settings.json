@@ -46,6 +46,9 @@
   "snippets.extends": {
     "c": [
       "cpp"
+    ],
+    "typescript": [
+        "javascript"
     ]
   }
 }
