@@ -339,10 +339,16 @@ if s:is_nvim
   set backupdir -=.
   set shada      ='100
 else
-  set backupdir=$v/files/backup/
-  set directory=$v/files/swap/
-  set undodir=$v/files/undo/
-  set viminfo='100,n$v/files/info/viminfo
+
+  let $vimtmp = $HOME . '/.config/vimtmp/'
+  for s:tmp in ['backup', 'swap', 'undo', 'info']
+    call mkdir($vimtmp . s:tmp, 'p')
+  endfor
+
+  set backupdir=$vimtmp/backup/
+  set directory=$vimtmp/swap/
+  set undodir=$vimtmp/undo/
+  set viminfo='100,n$vimtmp/info/viminfo
 endif
 " apperance [[[2
 " colorscheme [[[3
