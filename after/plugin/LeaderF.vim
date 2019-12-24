@@ -22,16 +22,30 @@ let g:Lf_NormalMap = {
       \ }
 
 
-nnoremap <leader>ff :Leaderf file --popup<CR>
-nnoremap <leader>fr :Leaderf mru --popup<CR>
-nnoremap <leader>b  :Leaderf buffer --popup<CR>
+nnoremap <leader>ff :Leaderf file <CR>
+nnoremap <leader>fr :Leaderf mru <CR>
+nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
-nnoremap gb  :Leaderf buffer --popup<CR>
+nnoremap gb  :Leaderf buffer <CR>
 
 if plugpac#has_plugin('LeaderF-github-stars')
-  nnoremap <leader>gs :Leaderf stars --popup<CR>
+  nnoremap <leader>gs :Leaderf stars <CR>
 endif
 
 if plugpac#has_plugin('LeaderF-ghq')
-  nnoremap <leader>gr :Leaderf ghq --popup<CR>
+  nnoremap <leader>gr :Leaderf ghq <CR>
 endif
+
+" nnoremap <leader>ff :Leaderf file --popup<CR>
+" nnoremap <leader>fr :Leaderf mru --popup<CR>
+" nnoremap <leader>b  :Leaderf buffer --popup<CR>
+" nnoremap <leader>gt :LeaderfBufTag<CR>
+" nnoremap gb  :Leaderf buffer --popup<CR>
+"
+" if plugpac#has_plugin('LeaderF-github-stars')
+"   nnoremap <leader>gs :Leaderf stars --popup<CR>
+" endif
+"
+" if plugpac#has_plugin('LeaderF-ghq')
+"   nnoremap <leader>gr :Leaderf ghq --popup<CR>
+" endif
