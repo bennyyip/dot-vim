@@ -720,13 +720,6 @@ augroup vimrc
   autocmd FocusLost * :silent! wa
 augroup END
 " Plugin Config [[[1
-" Plugin: Shougo/neosnippet [[[2
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#disable_runtime_snippets = {
-      \  '_' : 1,
-      \ }
-let g:neosnippet#snippets_directory = '$v/snippets'
 " Plugin: is.vim [[[2
 let g:is#do_default_mappings = 1
 let g:is#auto_nohlsearch = 0
