@@ -113,11 +113,8 @@ function! ben#open_explore(where)
   endif
 endfunction
 " Function: #quote (random quote on splash screen) {{{1
-function! s:get_random_offset(max) abort
-  return str2nr(matchstr(reltimestr(reltime()), '\v\.@<=\d+')[1:]) % a:max
-endfunction
 function! ben#quote() abort
-  let quote = s:quotes[s:get_random_offset(len(s:quotes))]
+  let quote = s:quotes[rand() % len(s:quotes)]
   let lines = []
   for l in quote
     let offset = 50 - strwidth(l)
@@ -132,7 +129,8 @@ let s:quotes = [
       \ ["「生死去來，棚頭傀儡，一線斷時，落落磊磊。」"],
       \ ["「懷舊是戀尸癖的早期症狀。」"],
       \ ["「你我猶如隔鏡視物所見無非虛幻迷濛」"],
-      \ ["Brute force never fails, unless you're not using enough of it."]
+      \ ["Brute force never fails, unless you're not using enough of it."],
+      \ ["vi vi vi, the editor of the beast."]
       \]
 " Function: #votl {{{1
 function! ben#votl()
