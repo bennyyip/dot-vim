@@ -23,6 +23,7 @@ let g:Lf_NormalMap = {
 
 
 nnoremap <leader>ff :Leaderf file <CR>
+nnoremap <leader>fp :LeaderfFile $v<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
