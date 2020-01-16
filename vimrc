@@ -26,7 +26,8 @@ Pack 'bennyyip/is.vim'
 Pack 'markonm/traces.vim'
 Pack 'haya14busa/vim-asterisk'
 
-Pack 'justinmk/vim-dirvish'
+Pack 'cocopon/vaffle.vim'
+
 Pack 'justinmk/vim-sneak'
 
 Pack 'hotoo/pangu.vim', { 'on': 'Pangu' }
@@ -808,9 +809,6 @@ let g:cpp_experimental_simple_template_highlight = 0
 let g:cpp_experimental_template_highlight = 1
 " Plugin: christoomey/vim-tmux-navigator [[[2
 let g:tmux_navigator_save_on_switch = 2
-" Plugin: justinmk/vim-dirvish [[[2
-let g:loaded_netrw = 0
-let g:loaded_netrwPlugin = 1
 " Plugin: luochen1990/rainbow [[[2
 let g:rainbow_conf = {
       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
