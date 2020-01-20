@@ -22,8 +22,25 @@ let g:Lf_NormalMap = {
       \ }
 
 
+function! s:search_here() abort
+  let l:sv = get(g:, 'Lf_WorkingDirectoryMode', 'c')
+  let g:Lf_WorkingDirectoryMode = 'f'
+  execute 'LeaderfFile'
+  let g:Lf_WorkingDirectoryMode = l:sv
+endfunction
+
+function! s:search_project() abort
+  let l:sv = get(g:, 'Lf_WorkingDirectoryMode', 'c')
+  let g:Lf_WorkingDirectoryMode = 'A'
+  execute 'LeaderfFile'
+  let g:Lf_WorkingDirectoryMode = l:sv
+endfunction
+
+
 nnoremap <leader>ff :Leaderf file <CR>
 nnoremap <leader>fp :LeaderfFile $v<CR>
+nnoremap <leader>.  :call <SID>search_here()<CR>
+nnoremap <leader>pf  :call <SID>search_project()<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
