@@ -125,7 +125,8 @@ Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }
 Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
-Pack 'rust-lang/rust.vim', { 'type': 'opt' }
+" Pack 'rust-lang/rust.vim', { 'type': 'opt', 'for': 'rust' }
+Pack 'rust-lang/rust.vim'
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
 Pack 'chrisbra/csv.vim', { 'type': 'opt' }
 " python [[[3
@@ -404,10 +405,10 @@ if !s:is_tty
   else
     let g:lightline.colorscheme = 'one'
   endif
-  let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-  let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
-  let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-  let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  " let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  " let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  " let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  " let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 endif
 
 function LightlineAsyncrun()
