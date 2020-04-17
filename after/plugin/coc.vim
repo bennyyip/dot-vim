@@ -3,7 +3,7 @@ if !plugpac#has_plugin('coc.nvim') || matchstr(&rtp, 'coc.nvim') == ''
   finish
 endif
 
-let g:coc_extension_root = $v . '/coc/extensions'
+let g:coc_data_home = $v . '/coc/'
 
 let g:coc_global_extensions = [
       \ 'coc-eslint',
