@@ -307,9 +307,9 @@ set lazyredraw
 set noshowmode " Hide the mode text (e.g. -- INSERT --)
 
 " diffopt
-if has("patch-8.1.0360")
-    set diffopt+=internal,algorithm:patience
-endif
+let &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"
+nnoremap <silent> [w :let &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"<CR>:echo &diffopt<CR>
+nnoremap <silent> ]w :let &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience,iwhiteall,iblank"<CR>:echo &diffopt<CR>
 
 "LF
 set fileformat=unix
