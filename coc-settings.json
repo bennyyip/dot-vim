@@ -50,5 +50,8 @@
     "typescript": [
       "javascript"
     ]
+  },
+  "yaml.schemas": {
+    "https://cdn-go.cn/orange-ci/orange-ci/latest/conf-schema.json": ".orange-ci.yml"
   }
 }
