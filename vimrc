@@ -836,8 +836,8 @@ let g:ale_fixers = {
       \       'clang-format',
       \   ],
       \   'python': [
-      \       'black',
       \       'isort',
+      \       'black',
       \   ],
       \   'typescript': [
       \       'eslint',
