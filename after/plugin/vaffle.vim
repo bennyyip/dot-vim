@@ -3,7 +3,7 @@ if !plugpac#has_plugin('vaffle.vim')
   finish
 endif
 
-nmap -  :<C-u>Vaffle<CR>
+nmap -  :<C-u>Vaffle %:p<CR>
 
 function! s:customize_vaffle_mappings() abort
   " Customize key mappings here
