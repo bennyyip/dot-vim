@@ -9,9 +9,10 @@ let g:coc_global_extensions = [
       \ 'coc-eslint',
       \ 'coc-json',
       \ 'coc-python',
+      \ 'coc-snippets',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
-      \ 'coc-snippets'
+      \ 'coc-yaml',
       \ ]
 if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
