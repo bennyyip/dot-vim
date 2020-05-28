@@ -561,8 +561,6 @@ if s:is_win || s:is_gvim
   nnoremap <silent><C-k> <C-w>k
   nnoremap <silent><C-l> <C-w>l
 endif
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
 " edit [[[2
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
