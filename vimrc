@@ -474,6 +474,7 @@ Pack 'tpope/vim-sensible'
 Pack 'tpope/vim-surround'
 Pack 'tpope/vim-unimpaired'
 " language [[[2
+Pack 'fatih/vim-go'
 Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
 Pack 'Shiracamus/vim-syntax-x86-objdump-d'
 Pack 'cespare/vim-toml', { 'for': 'toml' }
