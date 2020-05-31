@@ -1,4 +1,7 @@
 {
+  "coc.source.omni.filetypes": [
+    "go"
+  ],
   "typescript.showUnused": false,
   "diagnostic.displayByAle": true,
   "languageserver": {
@@ -19,21 +22,6 @@
         "cache": {
           "directory": ".ccls-cache"
         }
-      }
-    },
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": [
-        "go.mod",
-        ".vim/",
-        ".git/",
-        ".hg/"
-      ],
-      "filetypes": [
-        "go"
-      ],
-      "initializationOptions": {
-        "usePlaceholders": true
       }
     }
   },
