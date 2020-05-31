@@ -8,6 +8,7 @@ let g:coc_data_home = $v . '/coc/'
 let g:coc_global_extensions = [
       \ 'coc-eslint',
       \ 'coc-json',
+      \ 'coc-omni',
       \ 'coc-python',
       \ 'coc-snippets',
       \ 'coc-tsserver',
