@@ -44,6 +44,7 @@ nnoremap <leader>pf  :call <SID>search_project()<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
+nnoremap <leader>fq :Leaderf ghq --popup<CR>
 nnoremap gb  :Leaderf buffer <CR>
 
 if plugpac#has_plugin('LeaderF-github-stars')
