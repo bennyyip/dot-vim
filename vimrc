@@ -827,6 +827,7 @@ let g:ale_fix_on_save = 0
 let g:ale_fixers = {
       \   'vim': [],
       \   'tex': [],
+      \   'dockerfile': [],
       \   'rust': [
       \       'rustfmt',
       \   ],
@@ -871,6 +872,8 @@ let g:ale_linters = {
       \  'sh': ['shellcheck'],
       \  'bash': ['shell', 'shellcheck'],
       \  'zsh': ['shell', 'shellcheck'],
+      \  'javascript': ['eslint'],
+      \  'typescript': ['eslint'],
       \   }
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1

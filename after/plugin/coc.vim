@@ -6,7 +6,6 @@ endif
 let g:coc_data_home = $v . '/coc/'
 
 let g:coc_global_extensions = [
-      \ 'coc-eslint',
       \ 'coc-json',
       \ 'coc-omni',
       \ 'coc-python',
@@ -19,9 +18,16 @@ if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
 endif
 
+" Make `<c-k>` used for trigger completion, completion confirm, snippet expand and jump.
+" imap <C-k> <Plug>(coc-snippets-expand-jump)
+inoremap <silent><expr> <c-k>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ coc#refresh()
+
+let g:coc_snippet_next = '<c-k>'
 
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -32,9 +38,6 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -70,4 +73,3 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <f2> <Plug>(coc-rename)
 
 
-imap <C-k> <Plug>(coc-snippets-expand-jump)
