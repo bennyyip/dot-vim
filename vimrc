@@ -480,6 +480,7 @@ Pack 'Shiracamus/vim-syntax-x86-objdump-d'
 Pack 'cespare/vim-toml', { 'for': 'toml' }
 Pack 'derekwyatt/vim-scala', { 'for': 'scala' }
 Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }
+Pack 'chr4/nginx.vim', { 'type': 'opt' }
 Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
