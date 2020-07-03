@@ -37,8 +37,12 @@
     ],
     "typescript": [
       "javascript"
+    ],
+    "typescriptreact": [
+      "javascript"
     ]
   },
+  "snippets.priority": 100,
   "yaml.schemas": {
     "https://cdn-go.cn/orange-ci/orange-ci/latest/conf-schema.json": ".orange-ci.yml"
   }
