@@ -11,6 +11,7 @@ let g:Lf_MruMaxFiles=500
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 let g:Lf_HideHelp = 1
 let g:Lf_ShowRelativePath = 1
+let g:Lf_JumpToExistingWindow = 0
 let g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>']}
 let g:Lf_NormalMap = {
       \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
