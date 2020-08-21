@@ -379,35 +379,35 @@ Pack 'Shougo/junkfile.vim', { 'type': 'lazy' }
 
 Pack 'dyng/ctrlsf.vim', { 'type': 'lazyall' }
 Pack 'romainl/vim-qf', { 'type': 'lazy' }
-Pack 'yegappan/greplace'
+Pack 'yegappan/greplace', { 'type': 'lazy' }
 
-Pack 'bennyyip/is.vim', { 'type': 'lazy' }
+Pack 'bennyyip/is.vim', { 'type': 'lazyall' }
 Pack 'markonm/traces.vim', { 'type': 'lazy' }
 Pack 'haya14busa/vim-asterisk', { 'type': 'lazyall' }
 
 Pack 'cocopon/vaffle.vim'
 
-Pack 'justinmk/vim-sneak', { 'type': 'lazy' }
+Pack 'justinmk/vim-sneak', { 'type': 'lazyall' }
 
 Pack 'hotoo/pangu.vim', { 'type': 'lazy' }
 
 Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
 Pack 'AndrewRadev/splitjoin.vim', { 'type': 'lazy' }
-Pack 'AndrewRadev/sideways.vim', { 'on': ['SidewaysLeft', 'SidewaysRight'], 'type': 'lazyall' }
-Pack 'airblade/vim-rooter', { 'on': 'Rooter', 'type': 'lazyall' }
-Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara', 'type': 'lazyall' }
+Pack 'AndrewRadev/sideways.vim', { 'on': ['SidewaysLeft', 'SidewaysRight'] }
+Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
+Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Pack 'vim-voom/VOoM', { 'on': 'Voom' }
-Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle', 'type': 'lazyall' }
+Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
 
-Pack 'tommcdo/vim-exchange', { 'type': 'lazyall' }
+Pack 'tommcdo/vim-exchange', { 'type': 'lazy' }
 Pack 'tommcdo/vim-fugitive-blame-ext', { 'type': 'lazy' }
 Pack 'tommcdo/vim-fubitive', { 'type': 'lazy' }
 
 Pack 'svermeulen/vim-yoink', { 'type': 'lazyall' }
 Pack 'machakann/vim-highlightedyank', { 'type': 'lazyall' }
 
-Pack 'andymass/vim-matchup', { 'type': 'lazyall' }
+Pack 'andymass/vim-matchup', { 'type': 'lazy' }
 
 Pack 'vimoutliner/vimoutliner', { 'type': 'lazyall' }
 
@@ -447,7 +447,7 @@ Pack 'neoclide/coc.nvim', { 'branch': 'release' }
 Pack 'skywind3000/asyncrun.vim', { 'type': 'lazyall' }
 Pack 'w0rp/ale', {'type': 'lazyall'}
 " *nix stuff [[[3
-Pack 'christoomey/vim-tmux-navigator', { 'type': 'lazy' }
+Pack 'christoomey/vim-tmux-navigator', { 'type': 'lazyall' }
 Pack 'lilydjwg/fcitx.vim', { 'type': 'lazy' }
 " look [[[3
 Pack 'itchyny/lightline.vim', { 'type': 'lazyall' }
@@ -459,7 +459,7 @@ Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
 Pack 'luochen1990/rainbow', { 'type': 'lazyall' }
 Pack 'itchyny/vim-cursorword', { 'type': 'lazy' }
-Pack 'bennyyip/vim-interestingwords', { 'type': 'lazyall' }
+Pack 'bennyyip/vim-interestingwords', { 'type': 'lazy' }
 " tpope [[[3
 Pack 'tpope/vim-abolish', { 'type': 'lazyall' }
 Pack 'tpope/vim-apathy', { 'type': 'lazy' }
@@ -486,20 +486,20 @@ Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 " Pack 'rust-lang/rust.vim', { 'type': 'opt', 'for': 'rust' }
-Pack 'rust-lang/rust.vim'
+Pack 'rust-lang/rust.vim', { 'type': 'lazy' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
 Pack 'chrisbra/csv.vim', { 'type': 'opt' }
 " python [[[3
 Pack 'vim-python/python-syntax', { 'for': 'python'}
 " typescript [[[3
 Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
-Pack 'peitalin/vim-jsx-typescript'
+Pack 'peitalin/vim-jsx-typescript', { 'type': 'lazy' }
 " markup [[[3
 Pack 'Rykka/riv.vim', { 'for': 'rst' }
 Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
 Pack 'lervag/vimtex', {'for': 'tex' }
 " web [[[3
-Pack 'lilydjwg/colorizer'
+Pack 'lilydjwg/colorizer', { 'type': 'lazy' }
 Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
 Pack 'othree/html5.vim', {'for': 'html' }
 call plugpac#end()
@@ -723,164 +723,6 @@ augroup vimrc
   autocmd FocusLost * :silent! wa
 augroup END
 " Plugin Config [[[1
-" Plugin: is.vim [[[2
-let g:is#do_default_mappings = 1
-let g:is#auto_nohlsearch = 0
-" Plugin: ludovicchabant/vim-gutentags [[[2
-set tags=./.tags;,.tags
-" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
-
-" 配置 ctags 的参数
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-let g:gutentags_ctags_exclude = ['target']
-
-" 检测 ~/.cache/tags 不存在就新建
-if !isdirectory(s:vim_tags)
-  silent! call mkdir(s:vim_tags, 'p')
-endif
-" Plugin: mhinz/vim-startify [[[2
-let s:ascii_art = [
-      \"             ________ ++     ________             ",
-      \"            /VVVVVVVV\++++  /VVVVVVVV\\           ",
-      \"            \VVVVVVVV/++++++\VVVVVVVV/            ",
-      \"             |VVVVVV|++++++++/VVVVV/'             ",
-      \"             |VVVVVV|++++++/VVVVV/'               ",
-      \"            +|VVVVVV|++++/VVVVV/'+                ",
-      \"          +++|VVVVVV|++/VVVVV/'+++++              ",
-      \"        +++++|VVVVVV|/VVV___++++++++++            ",
-      \"          +++|VVVVVVVVVV/##/ +_+_+_+_             ",
-      \"            +|VVVVVVVVV___ +/#_#,#_#,\\           ",
-      \"             |VVVVVVV//##/+/#/+/#/'/#/            ",
-      \"             |VVVVV/'+/#/+/#/+/#/ /#/             ",
-      \"             |VVV/'++/#/+/#/ /#/ /#/              ",
-      \"             'V/'  /##//##//##//###/              ",
-      \"                      ++                          ",
-      \"                                                  ",
-      \"                                                  ",
-      \]
-let g:startify_custom_header =
-      \ map(s:ascii_art + ben#quote(), '"   ".v:val')
-let g:startify_skiplist = [
-      \ 'COMMIT_EDITMSG',
-      \ 'bundle/.*/doc',
-      \ '/data/repo/neovim/runtime/doc',
-      \ '/Users/mhi/local/vim/share/vim/vim74/doc',
-      \ ]
-let g:startify_bookmarks = [
-      \ { 'c': $VIMRC },
-      \ ]
-let g:startify_transformations = [
-      \ ['.*vimrc$', 'vimrc'],
-      \ ]
-let g:startify_list_order = [
-      \ ['   MRU:'],
-      \ 'files',
-      \ ['   Sessions:'],
-      \ 'sessions',
-      \ ]
-let g:startify_change_to_dir = 0
-let g:startify_change_to_vcs_root = 1
-let g:startify_enable_special = 0
-let g:startify_files_number = 7
-let g:startify_session_dir = $v.'/files/session'
-let g:startify_session_autoload = 0
-let g:startify_session_persistence = 0
-let g:startify_update_oldfiles = 1
-let g:startify_use_env = 1
-
-" Plugin: junegunn/limelight.vim [[[2
-" Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-" Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
-" Plugin: octol/vim-cpp-enhanced-highlight [[[2
-let g:cpp_class_scope_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 0
-"slow
-let g:cpp_experimental_template_highlight = 1
-" Plugin: christoomey/vim-tmux-navigator [[[2
-let g:tmux_navigator_save_on_switch = 2
-" Plugin: luochen1990/rainbow [[[2
-let g:rainbow_conf = {
-      \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
-      \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-      \ 'separately': {
-      \    'ocaml': {
-      \       'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
-      \    }
-      \ }
-      \}
-" Plugin: w0rp/ale [[[2
-" let g:ale_set_loclist = 0
-" let g:ale_set_quickfix = 1
-let g:ale_linters_explicit = 1
-let g:ale_fix_on_save = 0
-let g:ale_fixers = {
-      \   'vim': [],
-      \   'tex': [],
-      \   'dockerfile': [],
-      \   'rust': [
-      \       'rustfmt',
-      \   ],
-      \   'c': [
-      \       'clang-format',
-      \   ],
-      \   'cpp': [
-      \       'clang-format',
-      \   ],
-      \   'python': [
-      \       'isort',
-      \       'black',
-      \   ],
-      \   'typescript': [
-      \       'eslint',
-      \       'prettier',
-      \   ],
-      \   'bash': [
-      \       'shfmt'
-      \   ],
-      \   'sh': [
-      \       'shfmt'
-      \   ],
-      \   'json': [
-      \       'jq',
-      \   ],
-      \   'go': [
-      \       'goimports',
-      \   ],
-      \   'html': [
-      \       'tidy',
-      \   ],
-      \}
-let s:general_ale_fixer = [
-      \  'trim_whitespace',
-      \  'remove_trailing_lines',
-      \  ]
-call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
-let g:ale_sh_shfmt_options = '-i 2'
-
-let g:ale_linters = {
-      \  'sh': ['shellcheck'],
-      \  'bash': ['shell', 'shellcheck'],
-      \  'zsh': ['shell', 'shellcheck'],
-      \  'javascript': ['eslint'],
-      \  'typescript': ['eslint'],
-      \  'go': ['golint'],
-      \   }
-" Plugin: justinmk/vim-sneak [[[2
-let g:sneak#label = 1
 " Plugin: Yggdroot/LeaderF [[[2
 let g:Lf_PopupColorscheme = 'gruvbox_material'
 if s:colorscheme == 'gruvbox'
@@ -892,125 +734,10 @@ elseif s:colorscheme == 'gruvbox-material'
 else
   let g:Lf_StlColorscheme = 'one'
 endif
-" Plugin: dyng/ctrlsf.vim [[[2
-let g:ctrlsf_default_root = 'project'
-let g:ctrlsf_mapping = {
-      \ 'next': 'n',
-      \ 'prev': 'N',
-      \ 'vsplit': 'x'
-      \ }
-let g:ctrlsf_extra_backend_args = {
-      \ 'rg': '--hidden'
-      \ }
 " Plugin: skywind3000/asyncrun.vim [[[2
 if s:is_win
   let g:asyncrun_encs = 'gbk'
 endif
-let g:asyncrun_save = 1
-" Plugin: airblade/vim-rooter [[[2
-let g:rooter_change_directory_for_non_project_files = 'current'
-let g:rooter_manual_only = 1
-let g:rooter_cd_cmd="lcd"
-let g:rooter_patterns = ['Cargo.toml', 'mix.exs', 'Makefile', '.git/', '.svn/']
-" Plugin: romainl/vim-qf [[[2
-let g:qf_mapping_ack_style = 1
-let g:qf_auto_open_quickfix = 0
-let g:qf_auto_open_loclist = 0
-let g:qf_auto_quit = 0
-" Plugin: lilydjwg/colorizer [[[2
-let g:colorizer_nomap = 1
-let g:colorizer_startup = 0
-" Plugin: AndrewRadev/linediff.vim [[[2
-let g:linediff_buffer_type = 'scratch'
-" Plugin: vim-scripts/YankRing.vim [[[2
-let g:yankring_map_dot = 0
-let g:yankring_min_element_length = 2
-" Plugin: andymass/vim-matchup [[[2
-let g:loaded_matchit = 1
-let g:matchup_transmute_enabled = 0
-let g:matchup_override_vimtex = 1
-" Plugin: justinmk/vim-gtfo [[[2
-let g:gtfo#terminals = { 'unix': 'alacritty --working-directory' }
-" Plugin: bootleq/vim-cycle [[[2
-let g:cycle_default_groups = [
-      \ [['true', 'false']],
-      \ [['yes', 'no']],
-      \ [['and', 'or']],
-      \ [['on', 'off']],
-      \ [['>', '<']],
-      \ [['==', '!=']],
-      \ [['是', '否']],
-      \ [['有', '无']],
-      \ [["in", "out"]],
-      \ [["min", "max"]],
-      \ [["get", "post"]],
-      \ [["to", "from"]],
-      \ [["read", "write"]],
-      \ [['with', 'without']],
-      \ [["exclude", "include"]],
-      \ [["asc", "desc"]],
-      \ [["next", "prev"]],
-      \ [["encode", "decode"]],
-      \ [["left", "right"]],
-      \ [["hide", "show"]],
-      \ [['「:」', '『:』'], 'sub_pairs'],
-      \ [['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-      \ 'Friday', 'Saturday'], 'hard_case', {'name': 'Days'}],
-      \ [["enable", "disable"]],
-      \ [["add", "remove"]],
-      \ [['up', 'down']],
-      \ [['after', 'before']],
-      \ ]
-let g:cycle_no_mappings = 1
-" Plugin: vim-python/python-syntax [[[2
-let g:python_highlight_all = 1
-" Plugin: davidhalter/jedi-vim [[[2
-let g:jedi#smart_auto_mappings = 1
-let g:jedi#completions_enabled = 1
-let g:jedi#popup_on_dot = 0
-" Plugin: fatih/vim-go [[[2
-let g:go_bin_path = expand("~/go/bin/")
-let g:go_code_completion_enabled = 1
-let g:go_list_type = "quickfix"
-let g:go_metalinter_enabled = []
-
-" Plugin: lervag/vimtex [[[2
-let g:tex_flavor='latex'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-" let g:tex_conceal=0
-let g:latex_view_general_viewer = 'zathura'
-let g:vimtex_view_method = "zathura"
-" let g:vimtex_view_general_viewer = 'okular'
-" let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-" let g:vimtex_view_general_options_latexmk = '--unique'
-
-let g:vimtex_compiler_latexmk = {
-      \ 'backend' : 'jobs',
-      \ 'background' : 1,
-      \ 'build_dir' : 'output',
-      \ 'callback' : 1,
-      \ 'continuous' : 1,
-      \ 'executable' : 'latexmk',
-      \ 'options' : [
-      \   '-verbose',
-      \   '-file-line-error',
-      \   '-synctex=1',
-      \   '-interaction=nonstopmode',
-      \ ],
-      \}
-
-
-autocmd BufReadPre *.tex let b:vimtex_main = 'main.tex'
-" Plugin: kassio/neoterm [[[2
-let g:neoterm_repl_python = 'bpython'
-let g:neoterm_automap_keys = '<leader>tt'
-" Plugin: lfv89/vim-interestingwords [[[2
-let g:interestingWordsDefaultMappings = 0
-" Plugin: Pack 'tommcdo/vim-exchange' [[[2
-let g:exchange_no_mappings = 1
-
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim

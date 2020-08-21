@@ -1,4 +1,5 @@
 " Plugin: Yggdroot/LeaderF
+
 if executable('rg')
   let g:Lf_DefaultExternalTool = 'rg'
 endif
