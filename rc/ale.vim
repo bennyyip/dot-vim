@@ -1,7 +1,4 @@
 " Plugin: w0rp/ale
-if !plugpac#has_plugin('ale')
-  finish
-endif
 
 " override ]s [s
 nmap <silent> ]s <Plug>(ale_next_wrap)

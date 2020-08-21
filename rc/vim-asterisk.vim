@@ -1,7 +1,4 @@
 " Plugin: haya14busa/vim-asterisk
-if !plugpac#has_plugin('vim-asterisk')
-  finish
-endif
 
 map *   ms<Plug>(asterisk-*)zzzv
 map g*  ms<Plug>(asterisk-g*)zzzv

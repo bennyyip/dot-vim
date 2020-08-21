@@ -367,114 +367,116 @@ let s:minpac_dir = $v . '/pack/minpac/opt/minpac'
 if !isdirectory(s:minpac_dir)
   silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', s:minpac_dir)
 end
+
+let g:plugpac_cfg_path = $v . '/rc'
 call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 " general [[[2
 Pack 'junegunn/gv.vim', { 'on': 'GV' }
-Pack 'junegunn/vim-easy-align'
+Pack 'junegunn/vim-easy-align', { 'type': 'lazyall' }
 
-Pack 'Shougo/junkfile.vim'
+Pack 'Shougo/junkfile.vim', { 'type': 'lazy' }
 
-Pack 'dyng/ctrlsf.vim'
-Pack 'romainl/vim-qf'
+Pack 'dyng/ctrlsf.vim', { 'type': 'lazyall' }
+Pack 'romainl/vim-qf', { 'type': 'lazy' }
 Pack 'yegappan/greplace'
 
-Pack 'bennyyip/is.vim'
-Pack 'markonm/traces.vim'
-Pack 'haya14busa/vim-asterisk'
+Pack 'bennyyip/is.vim', { 'type': 'lazy' }
+Pack 'markonm/traces.vim', { 'type': 'lazy' }
+Pack 'haya14busa/vim-asterisk', { 'type': 'lazyall' }
 
 Pack 'cocopon/vaffle.vim'
 
-Pack 'justinmk/vim-sneak'
+Pack 'justinmk/vim-sneak', { 'type': 'lazy' }
 
-Pack 'hotoo/pangu.vim', { 'on': 'Pangu' }
+Pack 'hotoo/pangu.vim', { 'type': 'lazy' }
 
 Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
-Pack 'AndrewRadev/splitjoin.vim'
-Pack 'AndrewRadev/sideways.vim', { 'on': ['SidewaysLeft', 'SidewaysRight'] }
-Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
-Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Pack 'AndrewRadev/splitjoin.vim', { 'type': 'lazy' }
+Pack 'AndrewRadev/sideways.vim', { 'on': ['SidewaysLeft', 'SidewaysRight'], 'type': 'lazyall' }
+Pack 'airblade/vim-rooter', { 'on': 'Rooter', 'type': 'lazyall' }
+Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara', 'type': 'lazyall' }
 Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Pack 'vim-voom/VOoM', { 'on': 'Voom' }
-Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle', 'type': 'lazyall' }
 
-Pack 'tommcdo/vim-exchange'
-Pack 'tommcdo/vim-fugitive-blame-ext'
-Pack 'tommcdo/vim-fubitive'
+Pack 'tommcdo/vim-exchange', { 'type': 'lazyall' }
+Pack 'tommcdo/vim-fugitive-blame-ext', { 'type': 'lazy' }
+Pack 'tommcdo/vim-fubitive', { 'type': 'lazy' }
 
-Pack 'svermeulen/vim-yoink'
-Pack 'machakann/vim-highlightedyank'
+Pack 'svermeulen/vim-yoink', { 'type': 'lazyall' }
+Pack 'machakann/vim-highlightedyank', { 'type': 'lazyall' }
 
-Pack 'andymass/vim-matchup'
+Pack 'andymass/vim-matchup', { 'type': 'lazyall' }
 
-Pack 'vimoutliner/vimoutliner'
+Pack 'vimoutliner/vimoutliner', { 'type': 'lazyall' }
 
-Pack 'justinmk/vim-gtfo'
-Pack 'bergercookie/vim-debugstring'
+Pack 'justinmk/vim-gtfo', { 'type': 'lazy' }
+Pack 'bergercookie/vim-debugstring', { 'type': 'lazy' }
 
-Pack 'bootleq/vim-cycle'
+Pack 'bootleq/vim-cycle', { 'type': 'lazyall' }
 
-Pack 'janko-m/vim-test'
+Pack 'janko-m/vim-test', {'type': 'lazy'}
 
-Pack 'voldikss/vim-searchme'
-Pack 'voldikss/vim-translate-me'
+Pack 'voldikss/vim-searchme', { 'type': 'lazyall' }
+Pack 'voldikss/vim-translate-me', { 'type': 'lazyall' }
 
-Pack 'wellle/targets.vim'
-Pack 'michaeljsmith/vim-indent-object'
+Pack 'wellle/targets.vim', { 'type': 'lazy' }
+Pack 'michaeljsmith/vim-indent-object', { 'type': 'lazy' }
 
-Pack 'tomtom/tcomment_vim'
+Pack 'tomtom/tcomment_vim', {'type': 'lazy'}
 
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
-  Pack 'Yggdroot/LeaderF-marks'
-  Pack 'bennyyip/LeaderF-github-stars'
-  Pack 'bennyyip/LeaderF-ghq'
+  Pack 'Yggdroot/LeaderF-marks', {'type': 'lazy'}
+  Pack 'bennyyip/LeaderF-github-stars', {'type': 'lazy'}
+  Pack 'bennyyip/LeaderF-ghq', {'type': 'lazy'}
 endif
 
 " coc [[[3
 Pack 'davidhalter/jedi-vim', { 'type': 'opt' }
-Pack 'neoclide/coc.nvim', {'branch': 'release', 'type': 'opt'}
-if executable('node')
-  packadd! coc.nvim
-else
-  packadd! jedi-vim
-endif
+Pack 'neoclide/coc.nvim', { 'branch': 'release', 'event': ['InsertEnter', 'CursorMoved'], 'type': 'lazyall' }
+" if executable('node')
+"   packadd! coc.nvim
+" else
+"   packadd! jedi-vim
+" endif
 
 " vim 8 [[[3
-Pack 'skywind3000/asyncrun.vim'
-Pack 'w0rp/ale'
+Pack 'skywind3000/asyncrun.vim', { 'type': 'lazyall' }
+Pack 'w0rp/ale', {'type': 'lazyall'}
 " *nix stuff [[[3
-Pack 'christoomey/vim-tmux-navigator'
-Pack 'lilydjwg/fcitx.vim', { 'type': 'opt' }
+Pack 'christoomey/vim-tmux-navigator', { 'type': 'lazy' }
+Pack 'lilydjwg/fcitx.vim', { 'type': 'lazy' }
 " look [[[3
-Pack 'itchyny/lightline.vim'
+Pack 'itchyny/lightline.vim', { 'type': 'lazyall' }
 Pack 'mhinz/vim-startify'
 Pack 'sainnhe/gruvbox-material', { 'type': 'opt' }
 Pack 'morhetz/gruvbox', { 'type': 'opt' }
 Pack 'lifepillar/vim-gruvbox8'
 Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
-Pack 'luochen1990/rainbow'
-Pack 'itchyny/vim-cursorword'
-Pack 'bennyyip/vim-interestingwords'
+Pack 'luochen1990/rainbow', { 'type': 'lazyall' }
+Pack 'itchyny/vim-cursorword', { 'type': 'lazy' }
+Pack 'bennyyip/vim-interestingwords', { 'type': 'lazyall' }
 " tpope [[[3
-Pack 'tpope/vim-abolish'
-Pack 'tpope/vim-apathy'
-Pack 'tpope/vim-capslock'
-Pack 'tpope/vim-characterize'
-Pack 'tpope/vim-endwise'
-Pack 'tpope/vim-eunuch'
+Pack 'tpope/vim-abolish', { 'type': 'lazyall' }
+Pack 'tpope/vim-apathy', { 'type': 'lazy' }
+Pack 'tpope/vim-capslock', { 'type': 'lazy' }
+Pack 'tpope/vim-characterize', { 'type': 'lazy' }
+Pack 'tpope/vim-endwise', { 'type': 'lazy' }
+Pack 'tpope/vim-eunuch', { 'type': 'lazy' }
 Pack 'tpope/vim-fugitive'
-Pack 'tpope/vim-jdaddy'
+Pack 'tpope/vim-jdaddy', { 'type': 'lazy' }
 Pack 'tpope/vim-repeat'
-Pack 'tpope/vim-rhubarb'
-Pack 'tpope/vim-rsi'
+Pack 'tpope/vim-rhubarb', { 'type': 'lazy' }
+Pack 'tpope/vim-rsi', { 'type': 'lazy' }
 Pack 'tpope/vim-sensible'
-Pack 'tpope/vim-surround'
-Pack 'tpope/vim-unimpaired'
+Pack 'tpope/vim-surround', { 'type': 'lazy' }
+Pack 'tpope/vim-unimpaired', { 'type': 'lazy' }
 " language [[[2
-Pack 'fatih/vim-go'
+Pack 'fatih/vim-go', { 'type': 'lazy' }
 Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
 Pack 'Shiracamus/vim-syntax-x86-objdump-d'
 Pack 'cespare/vim-toml', { 'for': 'toml' }
@@ -528,8 +530,8 @@ cab Wq wq
 cab Wa wa
 cab X x
 " syntax [[[3
-nnoremap <leader>si  :echo ben#syninfo()<cr>
-nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+" nnoremap <leader>si  :echo ben#syninfo()<cr>
+" nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 " diff [[[3
 nnoremap <silent><leader>di :windo diffthis<CR>
 nnoremap <silent><leader>du :windo diffupdate<CR>
@@ -695,7 +697,7 @@ vnoremap <F7> :call ChineseCount()<cr>
 command! -range Shuffle <line1>,<line2>call ben#shuffle()
 " :OpenUrl [[[2
 command! -nargs=1 OpenURL :call ben#open_url(<q-args>)
-nnoremap <silent> gx :call ben#open_url()<CR>
+nnoremap <silent> gX :call ben#open_url()<CR>
 " :A [[[2
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
@@ -796,6 +798,7 @@ let g:startify_session_autoload = 0
 let g:startify_session_persistence = 0
 let g:startify_update_oldfiles = 1
 let g:startify_use_env = 1
+
 " Plugin: junegunn/limelight.vim [[[2
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
@@ -907,7 +910,7 @@ let g:asyncrun_save = 1
 " Plugin: airblade/vim-rooter [[[2
 let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_manual_only = 1
-let g:rooter_use_lcd = 1
+let g:rooter_cd_cmd="lcd"
 let g:rooter_patterns = ['Cargo.toml', 'mix.exs', 'Makefile', '.git/', '.svn/']
 " Plugin: romainl/vim-qf [[[2
 let g:qf_mapping_ack_style = 1
@@ -1001,6 +1004,9 @@ let g:neoterm_repl_python = 'bpython'
 let g:neoterm_automap_keys = '<leader>tt'
 " Plugin: lfv89/vim-interestingwords [[[2
 let g:interestingWordsDefaultMappings = 0
+" Plugin: Pack 'tommcdo/vim-exchange' [[[2
+let g:exchange_no_mappings = 1
+
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim
