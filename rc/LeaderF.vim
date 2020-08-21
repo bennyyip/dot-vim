@@ -1,7 +1,4 @@
 " Plugin: Yggdroot/LeaderF
-if !plugpac#has_plugin('LeaderF')
-  finish
-endif
 if executable('rg')
   let g:Lf_DefaultExternalTool = 'rg'
 endif
@@ -46,15 +43,12 @@ nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
 nnoremap <leader>fq :Leaderf ghq --popup<CR>
+nnoremap <leader>si :Leaderf function<CR>
 nnoremap gb  :Leaderf buffer <CR>
 
-if plugpac#has_plugin('LeaderF-github-stars')
-  nnoremap <leader>gs :Leaderf stars <CR>
-endif
+nnoremap <leader>gs :Leaderf stars <CR>
 
-if plugpac#has_plugin('LeaderF-ghq')
-  nnoremap <leader>gr :Leaderf ghq <CR>
-endif
+nnoremap <leader>gr :Leaderf ghq <CR>
 
 " nnoremap <leader>ff :Leaderf file --popup<CR>
 " nnoremap <leader>fr :Leaderf mru --popup<CR>
