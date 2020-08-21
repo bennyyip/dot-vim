@@ -1,7 +1,4 @@
 " Plugin: bootleq/vim-cycle
-if !plugpac#has_plugin('vim-cycle')
-  finish
-endif
 
 nnoremap <expr> <silent> <C-X> ben#trycycle('x')
 vnoremap <expr> <silent> <C-X> ben#trycycle('x')

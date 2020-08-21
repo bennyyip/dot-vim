@@ -1,8 +1,4 @@
 " Plugin: skywind3000/asyncrun.vim
-if !plugpac#has_plugin('asyncrun.vim')
-  finish
-endif
-
 
 augroup asyncrun_config
   au!
@@ -20,7 +16,7 @@ command! -bang -nargs=* Rgradd call s:rg(1, 1, <q-args>)
 function! s:rg(root, append, args, ...)
   " avoid some plugin modify errorformat
   let g:ben_old_efm = &efm
-  set efm=%f:%\\s%#%l:%m
+  set efm=%f:%\\s%#%l:%c:%m
 
   let l:cmd =  "AsyncRun! -strip -post=let\\ &efm=g:ben_old_efm "
 

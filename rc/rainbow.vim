@@ -1,7 +1,4 @@
 " Plugin: 'luochen1990/rainbow'
-if !plugpac#has_plugin('rainbow')
-  finish
-endif
 
 " Some colorscheme invoke `syntax reset`, clears `syntax` autocmd
 augroup rainbow_config
