@@ -436,7 +436,7 @@ endif
 
 " coc [[[3
 Pack 'davidhalter/jedi-vim', { 'type': 'opt' }
-Pack 'neoclide/coc.nvim', { 'branch': 'release', 'event': ['InsertEnter', 'CursorMoved'], 'type': 'lazyall' }
+Pack 'neoclide/coc.nvim', { 'branch': 'release' }
 " if executable('node')
 "   packadd! coc.nvim
 " else
@@ -465,7 +465,6 @@ Pack 'tpope/vim-abolish', { 'type': 'lazyall' }
 Pack 'tpope/vim-apathy', { 'type': 'lazy' }
 Pack 'tpope/vim-capslock', { 'type': 'lazy' }
 Pack 'tpope/vim-characterize', { 'type': 'lazy' }
-Pack 'tpope/vim-endwise', { 'type': 'lazy' }
 Pack 'tpope/vim-eunuch', { 'type': 'lazy' }
 Pack 'tpope/vim-fugitive'
 Pack 'tpope/vim-jdaddy', { 'type': 'lazy' }
@@ -878,6 +877,7 @@ let g:ale_linters = {
       \  'zsh': ['shell', 'shellcheck'],
       \  'javascript': ['eslint'],
       \  'typescript': ['eslint'],
+      \  'go': ['golint'],
       \   }
 " Plugin: justinmk/vim-sneak [[[2
 let g:sneak#label = 1
@@ -970,6 +970,10 @@ let g:jedi#completions_enabled = 1
 let g:jedi#popup_on_dot = 0
 " Plugin: fatih/vim-go [[[2
 let g:go_bin_path = expand("~/go/bin/")
+let g:go_code_completion_enabled = 1
+let g:go_list_type = "quickfix"
+let g:go_metalinter_enabled = []
+
 " Plugin: lervag/vimtex [[[2
 let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=0
