@@ -457,7 +457,7 @@ Pack 'morhetz/gruvbox', { 'type': 'opt' }
 Pack 'lifepillar/vim-gruvbox8'
 Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
-Pack 'luochen1990/rainbow', { 'type': 'lazyall' }
+Pack 'luochen1990/rainbow'
 Pack 'itchyny/vim-cursorword', { 'type': 'lazy' }
 Pack 'bennyyip/vim-interestingwords', { 'type': 'lazy' }
 " tpope [[[3
@@ -475,7 +475,9 @@ Pack 'tpope/vim-sensible'
 Pack 'tpope/vim-surround', { 'type': 'lazy' }
 Pack 'tpope/vim-unimpaired', { 'type': 'lazy' }
 " language [[[2
-Pack 'fatih/vim-go', { 'type': 'lazy' }
+Pack 'JuliaEditorSupport/julia-vim'
+Pack 'kdheepak/JuliaFormatter.vim'
+" Pack 'fatih/vim-go', { 'type': 'lazy' }
 Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
 Pack 'Shiracamus/vim-syntax-x86-objdump-d'
 Pack 'cespare/vim-toml', { 'for': 'toml' }
@@ -675,19 +677,19 @@ noremap L $
 command! -bar -range=% Reverse <line1>,<line2>global/^/m<line1>-1<bar>nohl
 " ChineseCount [[[2
 function! ChineseCount() range
-	let save = @z
-	silent exec 'normal! gv"zy'
-	let text = @z
-	let @z = save
-	silent exec 'normal! gv'
-	let cc = 0
-	for char in split(text, '\zs')
-		if char2nr(char) >= 0x2000
-			let cc += 1
-		endif
-	endfor
-	echo "Count of Chinese charasters is:"
-	echo cc
+  let save = @z
+  silent exec 'normal! gv"zy'
+  let text = @z
+  let @z = save
+  silent exec 'normal! gv'
+  let cc = 0
+  for char in split(text, '\zs')
+    if char2nr(char) >= 0x2000
+      let cc += 1
+    endif
+  endfor
+  echo "Count of Chinese charasters is:"
+  echo cc
 endfunc
 
 vnoremap <F7> :call ChineseCount()<cr>
