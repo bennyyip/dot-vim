@@ -18,8 +18,8 @@ let g:ale_fixers = {
       \       'clang-format',
       \   ],
       \   'python': [
-      \       'isort',
       \       'black',
+      \       'isort'
       \   ],
       \   'typescript': [
       \       'eslint',
@@ -40,6 +40,12 @@ let g:ale_fixers = {
       \   'html': [
       \       'tidy',
       \   ],
+      \   'yaml': [
+      \       'prettier',
+      \   ],
+      \   'proto': [
+      \       'protolint',
+      \   ],
       \}
 let s:general_ale_fixer = [
       \  'trim_whitespace',
@@ -54,6 +60,8 @@ let g:ale_linters = {
       \  'zsh': ['shell', 'shellcheck'],
       \  'javascript': ['eslint'],
       \  'typescript': ['eslint'],
+      \  'python': ['pylint'],
+      \  'go': ['golint'],
       \   }
 
 " override ]s [s
@@ -62,3 +70,4 @@ nmap <silent> [s <Plug>(ale_previous_wrap)
 nmap <silent> <leader>= <Plug>(ale_fix)
 nmap <silent> <leader>+ <Plug>(ale_enable_buffer)
 
+let g:ale_python_pylint_options = "--load-plugins=pylint_django"
