@@ -267,8 +267,12 @@ if !s:is_tty
   else
     let g:lightline.colorscheme = 'one'
   endif
+  let g:lightline.separator = { 'left': "", 'right': "\ue0be" }
+  let g:lightline.subseparator = { 'left': "", 'right': "\ue0b9" }
   " let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
   " let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  let g:lightline.tabline_separator = { 'left': "", 'right': "\ue0be" }
+  let g:lightline.tabline_subseparator = { 'left': "", 'right': "\ue0b9" }
   " let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
   " let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 endif
@@ -740,6 +744,9 @@ endif
 if s:is_win
   let g:asyncrun_encs = 'gbk'
 endif
+
+" Plugin: dense-analysis/ale [[[2
+let g:ale_disable_lsp = 1
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim

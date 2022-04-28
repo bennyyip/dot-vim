@@ -69,22 +69,23 @@ function! ben#open_url(...)
 
   " Windows(including mingw)
   if has('win32') || has('win64') || has('win32unix')
-    let cmd = 'start rundll32 url.dll,FileProtocolHandler ' . l:url
+    let l:cmd = 'start rundll32 url.dll,FileProtocolHandler ' . l:url
   elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
-    let cmd = 'open ' . l:url
+    let l:cmd = 'open ' . l:url
   elseif executable('xdg-open')
-    let cmd = 'xdg-open ' . l:url
+    let l:cmd = 'xdg-open ' . l:url
   else
     echoerr "Browser not found."
+    return
   endif
 
   " Async
   if exists('*jobstart')
-    call jobstart(cmd)
+    call jobstart(l:cmd)
   elseif exists('*job_start')
-    call job_start(cmd)
+    call job_start(l:cmd)
   else
-    call system(cmd)
+    call system(l:cmd)
   endif
 endfunction
 " Function: #shuffle (shuffle lines) {{{1
@@ -134,7 +135,7 @@ let s:quotes = [
       \]
 " Function: #votl {{{1
 function! ben#votl()
-  let filename = expand("~/votl/". strftime('%Y/%m/%d'). '.otl')
+  let filename = expand("~/votl/". strftime('%Y/%m/%d'). '.txt')
   let votl_dir = fnamemodify(filename, ':h')
   if !isdirectory(votl_dir)
     call mkdir(votl_dir, 'p')
