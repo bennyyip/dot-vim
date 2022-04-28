@@ -1,49 +1,40 @@
 {
-  "coc.source.omni.filetypes": [
-    "go"
-  ],
   "typescript.showUnused": false,
   "diagnostic.displayByAle": true,
   "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": [
-        "c",
-        "cpp",
-        "cuda",
-        "objc",
-        "objcpp"
-      ],
+    "golang": {
+      "command": "gopls",
       "rootPatterns": [
-        ".ccls-root",
-        "compile_commands.json"
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "go"
       ],
       "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
-        }
+        "usePlaceholders": true
       }
     }
   },
-  "python.linting.pylintArgs": [
-    "--rcfile=/data/bennyye/.pylintrc"
-  ],
-  "snippets.ultisnips.directories": [
-    "/home/benyip/.vim/snippets"
-  ],
-  "snippets.extends": {
-    "c": [
-      "cpp"
+  "ccls": {
+    "command": "ccls",
+    "filetypes": [
+      "c",
+      "cpp",
+      "cuda",
+      "objc",
+      "objcpp"
     ],
-    "typescript": [
-      "javascript"
+    "rootPatterns": [
+      ".ccls-root",
+      "compile_commands.json"
     ],
-    "typescriptreact": [
-      "javascript"
-    ]
-  },
-  "snippets.priority": 100,
-  "yaml.schemas": {
-    "https://cdn-go.cn/orange-ci/orange-ci/latest/conf-schema.json": ".orange-ci.yml"
+    "initializationOptions": {
+      "cache": {
+        "directory": ".ccls-cache"
+      }
+    }
   }
 }
