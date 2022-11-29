@@ -700,9 +700,6 @@ vnoremap <F7> :call ChineseCount()<cr>
 
 " :Shuffle | Shuffle selected lines [[[2
 command! -range Shuffle <line1>,<line2>call ben#shuffle()
-" :OpenUrl [[[2
-command! -nargs=1 OpenURL :call ben#open_url(<q-args>)
-nnoremap <silent> gX :call ben#open_url()<CR>
 " :A [[[2
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')

@@ -59,35 +59,6 @@ function! ben#a(cmd)
     endif
   endfor
 endfunction
-" Function: #open_url {{{1
-function! ben#open_url(...)
-  if a:0 == 0
-    let l:url = expand("<cfile>")
-  else
-    let l:url = a:1
-  endif
-
-  " Windows(including mingw)
-  if has('win32') || has('win64') || has('win32unix')
-    let l:cmd = 'start rundll32 url.dll,FileProtocolHandler ' . l:url
-  elseif has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin'
-    let l:cmd = 'open ' . l:url
-  elseif executable('xdg-open')
-    let l:cmd = 'xdg-open ' . l:url
-  else
-    echoerr "Browser not found."
-    return
-  endif
-
-  " Async
-  if exists('*jobstart')
-    call jobstart(l:cmd)
-  elseif exists('*job_start')
-    call job_start(l:cmd)
-  else
-    call system(l:cmd)
-  endif
-endfunction
 " Function: #shuffle (shuffle lines) {{{1
 function! ben#shuffle() range
   ruby << RB
