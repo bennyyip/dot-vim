@@ -349,7 +349,7 @@ if !g:is_ssh && has("termguicolors")
 endif
 if s:is_win
   set iminsert=2
-  let &pythonthreedll = expand('$HOME\AppData\Local\Programs\Python\Python37\python37.dll')
+  let &pythonthreedll = expand('$HOME\AppData\Local\Programs\Python\Python38\python38.dll')
   silent! python3 pass
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
@@ -741,9 +741,9 @@ else
   let g:Lf_StlColorscheme = 'one'
 endif
 " Plugin: skywind3000/asyncrun.vim [[[2
-if s:is_win
-  let g:asyncrun_encs = 'gbk'
-endif
+" if s:is_win
+"   let g:asyncrun_encs = 'gbk'
+" endif
 
 " Plugin: dense-analysis/ale [[[2
 let g:ale_disable_lsp = 1
