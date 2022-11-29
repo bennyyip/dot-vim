@@ -211,6 +211,8 @@ else
   set undodir=$vimtmp/undo/
   set viminfo='100,n$vimtmp/info/viminfo
 endif
+
+set cdhome
 " apperance [[[2
 " colorscheme [[[3
 set background=dark
