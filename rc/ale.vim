@@ -21,6 +21,9 @@ let g:ale_fixers = {
       \       'black',
       \       'isort'
       \   ],
+      \   'javascript': [
+      \       'prettier',
+      \   ],
       \   'typescript': [
       \       'eslint',
       \       'prettier',

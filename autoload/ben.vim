@@ -104,12 +104,12 @@ let s:quotes = [
       \ ["Brute force never fails, unless you're not using enough of it."],
       \ ["vi vi vi, the editor of the beast."]
       \]
-" Function: #votl {{{1
-function! ben#votl()
-  let filename = expand("~/votl/". strftime('%Y/%m/%d'). '.txt')
-  let votl_dir = fnamemodify(filename, ':h')
-  if !isdirectory(votl_dir)
-    call mkdir(votl_dir, 'p')
+" Function: #daily_node {{{1
+function! ben#daily_note()
+  let filename = expand($HOME . "/Obsidian-Vault/Daily/". strftime('%Y-%m-%d'). '.md')
+  let daily_note_dir = fnamemodify(filename, ':h')
+  if !isdirectory(daily_note_dir)
+    call mkdir(daily_note_dir, 'p')
   endif
   execute 'edit' fnameescape(filename)
 endfunction
