@@ -47,7 +47,7 @@ nnoremap <leader>fq :Leaderf ghq --popup<CR>
 nnoremap <leader>si :Leaderf function<CR>
 nnoremap gb  :Leaderf buffer <CR>
 
-nnoremap <leader>gs :Leaderf stars <CR>
+" nnoremap <leader>gs :Leaderf stars <CR>
 
 nnoremap <leader>gr :Leaderf ghq <CR>
 

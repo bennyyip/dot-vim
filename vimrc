@@ -55,10 +55,9 @@ set matchtime=0
 set showmode
 
 set fileencoding=utf-8
-set fileencodings=utf-8,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set fileencodings=ucs-bom,utf-8,utf-16le,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
 set encoding=utf-8
 scriptencoding utf-8
-
 
 if !s:is_tty
   if s:is_win
@@ -351,7 +350,8 @@ if !g:is_ssh && has("termguicolors")
 endif
 if s:is_win
   set iminsert=2
-  let &pythonthreedll = expand('$HOME\AppData\Local\Programs\Python\Python38\python38.dll')
+  let &pythonthreedll = expand('C:\Program Files\Python311\python311.dll')
+  let &pythonthreehome = 'C:\Program Files\Python311'
   silent! python3 pass
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
@@ -362,12 +362,17 @@ if s:is_win
       autocmd GUIEnter *  simalt ~x
     augroup END
     set guioptions-=egmrLtT
-    set guifont=Sarasa\ Term\ CL:h14
+    set guifont=Sarasa\ Mono\ CL\ Nerd\ Font:h14
   endif
 else
   set guioptions-=aegimrLtT
   set guifont=Monospace\ 16
 endif
+
+if has("python3")
+  exe "py3file" $v . "/vimrc.py"
+endif
+
 " Plugins [[[1
 let s:minpac_dir = $v . '/pack/minpac/opt/minpac'
 if !isdirectory(s:minpac_dir)
@@ -436,7 +441,7 @@ Pack 'tomtom/tcomment_vim', {'type': 'lazy'}
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
   Pack 'Yggdroot/LeaderF-marks', {'type': 'lazy'}
-  Pack 'bennyyip/LeaderF-github-stars', {'type': 'lazy'}
+  " Pack 'bennyyip/LeaderF-github-stars', {'type': 'lazy'}
   Pack 'bennyyip/LeaderF-ghq', {'type': 'lazy'}
 endif
 
@@ -491,7 +496,6 @@ Pack 'derekwyatt/vim-scala', { 'for': 'scala' }
 Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }
 Pack 'chr4/nginx.vim', { 'type': 'opt' }
 Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Pack 'racer-rust/vim-racer', { 'for': 'rust' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 " Pack 'rust-lang/rust.vim', { 'type': 'opt', 'for': 'rust' }
 Pack 'rust-lang/rust.vim', { 'type': 'lazy' }
@@ -505,7 +509,7 @@ Pack 'peitalin/vim-jsx-typescript', { 'type': 'lazy' }
 " markup [[[3
 Pack 'Rykka/riv.vim', { 'for': 'rst' }
 Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
-Pack 'lervag/vimtex', {'for': 'tex' }
+" Pack 'lervag/vimtex', {'for': 'tex' }
 " web [[[3
 Pack 'lilydjwg/colorizer', { 'type': 'lazy' }
 Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
@@ -562,6 +566,7 @@ nnoremap <silent><expr> <backspace> (v:count ? ':<C-U>:call ben#save_change_mark
       \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
       \ . '<CR><C-L>'
 nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
+nnoremap <leader>v :call ben#daily_note()<CR>
 " window [[[2
 " quick <C-w>
 nnoremap ' <C-w>
@@ -717,6 +722,8 @@ command! PX if !empty(expand('%'))
         \| endif
 " RFC [[[2
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
+" Paste [[[2
+command -range=% Paste <line1>,<line2>py3 LilyPaste()
 " Autocmd [[[1
 augroup vimrc
   " go back to where you exited
