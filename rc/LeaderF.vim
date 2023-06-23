@@ -20,6 +20,19 @@ let g:Lf_NormalMap = {
       \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
       \ }
 
+let g:Lf_PreviewResult = {
+        \ 'File': 0,
+        \ 'Buffer': 0,
+        \ 'Mru': 0,
+        \ 'Tag': 0,
+        \ 'BufTag': 1,
+        \ 'Function': 1,
+        \ 'Line': 0,
+        \ 'Colorscheme': 0,
+        \ 'Rg': 0,
+        \ 'Gtags': 0
+        \}
+
 
 function! s:search_here() abort
   let l:sv = get(g:, 'Lf_WorkingDirectoryMode', 'c')
@@ -51,6 +64,7 @@ nnoremap gb  :Leaderf buffer <CR>
 
 nnoremap <leader>gr :Leaderf ghq <CR>
 
+
 " nnoremap <leader>ff :Leaderf file --popup<CR>
 " nnoremap <leader>fr :Leaderf mru --popup<CR>
 " nnoremap <leader>b  :Leaderf buffer --popup<CR>
@@ -64,3 +78,4 @@ nnoremap <leader>gr :Leaderf ghq <CR>
 " if plugpac#has_plugin('LeaderF-ghq')
 "   nnoremap <leader>gr :Leaderf ghq --popup<CR>
 " endif
+
