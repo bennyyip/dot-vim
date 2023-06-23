@@ -83,3 +83,5 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <f2> <Plug>(coc-rename)
 
 nnoremap <silent> <leader>cc :CocList commands<CR>
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
