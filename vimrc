@@ -1,6 +1,7 @@
 let g:is_ssh = ($SSH_CONNECTION != "")
 let s:is_win = has('win32')
-let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
+let s:is_tty = !match(&term, 'linux')
+" let s:is_tty = !match(&term, 'linux') || !match(&term, 'win32')
 let s:is_gvim = has('gui_running')
 let s:is_nvim = has('nvim')
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
@@ -259,23 +260,19 @@ let g:lightline = {
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 if !s:is_tty
-  if s:colorscheme == 'gruvbox'
-    let g:lightline.colorscheme = 'gruvbox'
-  elseif s:colorscheme == 'gruvbox8'
+  if s:colorscheme == 'gruvbox8'
     let g:lightline.colorscheme = 'gruvbox8'
-  elseif s:colorscheme == 'gruvbox-material'
-    let g:lightline.colorscheme = 'gruvbox_material'
   else
     let g:lightline.colorscheme = 'one'
   endif
-  let g:lightline.separator = { 'left': "", 'right': "\ue0be" }
-  let g:lightline.subseparator = { 'left': "", 'right': "\ue0b9" }
-  " let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-  " let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
-  let g:lightline.tabline_separator = { 'left': "", 'right': "\ue0be" }
-  let g:lightline.tabline_subseparator = { 'left': "", 'right': "\ue0b9" }
-  " let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-  " let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  " let g:lightline.separator = { 'left': "", 'right': "\ue0be" }
+  " let g:lightline.subseparator = { 'left': "", 'right': "\ue0b9" }
+  let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  " let g:lightline.tabline_separator = { 'left': "", 'right': "\ue0be" }
+  " let g:lightline.tabline_subseparator = { 'left': "", 'right': "\ue0b9" }
+  let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 endif
 
 function LightlineAsyncrun()
