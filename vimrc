@@ -362,7 +362,7 @@ if s:is_win
       autocmd GUIEnter *  simalt ~x
     augroup END
     set guioptions-=egmrLtT
-    set guifont=Sarasa\ Mono\ CL\ Nerd\ Font:h14
+    set guifont=Sarasa\ Term\ CL\ Nerd:h14
   endif
 else
   set guioptions-=aegimrLtT
