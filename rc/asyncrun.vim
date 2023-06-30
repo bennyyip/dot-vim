@@ -10,10 +10,10 @@ augroup END
 
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 
-command! -bang -nargs=* Rg     call s:rg(0, 0, <q-args>)
-command! -bang -nargs=* Rgr    call s:rg(1, 0, <q-args>)
-command! -bang -nargs=* Rgadd  call s:rg(0, 1, <q-args>)
-command! -bang -nargs=* Rgradd call s:rg(1, 1, <q-args>)
+command! -bang -nargs=* QRg     call s:rg(0, 0, <q-args>)
+command! -bang -nargs=* QRgr    call s:rg(1, 0, <q-args>)
+command! -bang -nargs=* QRgadd  call s:rg(0, 1, <q-args>)
+command! -bang -nargs=* QRgradd call s:rg(1, 1, <q-args>)
 
 function! s:rg(root, append, args, ...)
   " avoid some plugin modify errorformat

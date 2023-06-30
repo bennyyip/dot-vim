@@ -363,7 +363,7 @@ if s:is_win
   endif
 else
   set guioptions-=aegimrLtT
-  set guifont=Monospace\ 16
+  set guifont=Monospace\ 18
 endif
 
 if has("python3")
@@ -382,6 +382,8 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 " general [[[2
 Pack 'junegunn/gv.vim', { 'on': 'GV' }
 Pack 'junegunn/vim-easy-align', { 'type': 'lazyall' }
+Pack 'junegunn/fzf'
+Pack 'junegunn/fzf.vim'
 
 Pack 'Shougo/junkfile.vim', { 'type': 'lazy' }
 
