@@ -347,8 +347,8 @@ if !g:is_ssh && has("termguicolors")
 endif
 if s:is_win
   set iminsert=2
-  let &pythonthreedll = expand('C:\Program Files\Python311\python311.dll')
-  let &pythonthreehome = 'C:\Program Files\Python311'
+  let &pythonthreedll = expand('C:\Program Files\Python310\python310.dll')
+  let &pythonthreehome = 'C:\Program Files\Python310'
   silent! python3 pass
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
@@ -438,7 +438,11 @@ Pack 'tomtom/tcomment_vim', {'type': 'lazy'}
 
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
-  Pack 'Yggdroot/LeaderF', {'do': {-> system('./install.sh')}}
+  if s:is_win
+    Pack 'Yggdroot/LeaderF', {'do': {-> system('/install.bat')}}
+  else
+    Pack 'Yggdroot/LeaderF', {'do': {-> system('/install.sh')}}
+  endif
   Pack 'Yggdroot/LeaderF-marks', {'type': 'lazy'}
   " Pack 'bennyyip/LeaderF-github-stars', {'type': 'lazy'}
   Pack 'bennyyip/LeaderF-ghq', {'type': 'lazy'}
