@@ -199,8 +199,7 @@ function! ben#chdir(path)
     let cmd = haslocaldir()? 'lcd' : 'cd'
   endif
   silent execute cmd . ' '. fnameescape(a:path)
-endfunc
-
+endfunction
 
 " Modeline {{{1
 " vim:fdm=marker

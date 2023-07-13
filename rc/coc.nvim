@@ -86,3 +86,4 @@ nmap <f2> <Plug>(coc-rename)
 nnoremap <silent> <leader>cc :CocList commands<CR>
 
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+command! -nargs=0 CocFormat :call CocAction('runCommand', 'editor.action.formatDocument')
