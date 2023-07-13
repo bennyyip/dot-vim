@@ -54,8 +54,9 @@ let s:general_ale_fixer = [
       \  'trim_whitespace',
       \  'remove_trailing_lines',
       \  ]
-call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
+" call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
 let g:ale_sh_shfmt_options = '-i 2'
+let g:ale_json_jq_options = '--sort-keys'
 
 let g:ale_linters = {
       \  'sh': ['shellcheck'],
