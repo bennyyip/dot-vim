@@ -9,6 +9,7 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ 'coc-yaml',
       \ 'coc-pyright',
+      \ 'coc-spell-checker',
       \ ]
 if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
@@ -92,6 +93,9 @@ endif
 " Requires 'textDocument/selectionRange' support of language server
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
+
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 nnoremap <silent> <leader>cc :CocList commands<CR>
 
