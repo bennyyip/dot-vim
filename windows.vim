@@ -1,5 +1,6 @@
 let s:is_gvim = has('gui_running')
 
+set renderoptions=type:directx
 set iminsert=2
 let &pythonthreedll = expand(substitute(exepath('python.exe'), 'python.exe', 'python3[0-9][0-9].dll', ''))
 let &pythonthreehome = substitute(exepath('python.exe'), 'python.exe', '', '')
