@@ -4,6 +4,7 @@
 !pack/minpac/start/vim-gruvbox8
 !pack/minpac/opt/vim-surround
 !pack/minpac/opt/vim-unimpaired
+!pack/minpac/opt/minpac
 
 local.vim
 .netrwhist
