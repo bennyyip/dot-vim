@@ -17,5 +17,3 @@ nmap     <leader>sn <Plug>CtrlSFCwordPath
 nmap     <leader>sp <Plug>CtrlSFPwordPath
 nnoremap <leader>so :CtrlSFOpen<CR>
 nnoremap <leader>st :CtrlSFToggle<CR>
-
-

@@ -21,17 +21,17 @@ let g:Lf_NormalMap = {
       \ }
 
 let g:Lf_PreviewResult = {
-        \ 'File': 0,
-        \ 'Buffer': 0,
-        \ 'Mru': 0,
-        \ 'Tag': 0,
-        \ 'BufTag': 1,
-        \ 'Function': 1,
-        \ 'Line': 0,
-        \ 'Colorscheme': 0,
-        \ 'Rg': 0,
-        \ 'Gtags': 0
-        \}
+      \ 'File': 0,
+      \ 'Buffer': 0,
+      \ 'Mru': 0,
+      \ 'Tag': 0,
+      \ 'BufTag': 1,
+      \ 'Function': 1,
+      \ 'Line': 0,
+      \ 'Colorscheme': 0,
+      \ 'Rg': 0,
+      \ 'Gtags': 0
+      \}
 
 
 function! s:search_here() abort
@@ -49,33 +49,41 @@ function! s:search_project() abort
 endfunction
 
 
+nnoremap <leader>.  :call <SID>search_here()<CR>
+nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>ff :Leaderf file <CR>
 nnoremap <leader>fp :LeaderfFile $v<CR>
-nnoremap <leader>.  :call <SID>search_here()<CR>
-nnoremap <leader>pf  :call <SID>search_project()<CR>
-nnoremap <leader>fr :Leaderf mru <CR>
-nnoremap <leader>b  :Leaderf buffer <CR>
-nnoremap <leader>gt :LeaderfBufTag<CR>
 nnoremap <leader>fq :Leaderf ghq --popup<CR>
+nnoremap <leader>fr :Leaderf mru <CR>
+nnoremap <leader>gt :LeaderfBufTag<CR>
+nnoremap <leader>pf  :call <SID>search_project()<CR>
 nnoremap <leader>si :Leaderf function<CR>
 nnoremap gb  :Leaderf buffer <CR>
+nnoremap gr  :<C-U>Leaderf rg -e<Space>
 
-" nnoremap <leader>gs :Leaderf stars <CR>
+command! -bar -bang -nargs=0 Rg call s:rg(<bang>0)
+command! -bar -nargs=* History call s:history(<q-args>)
+command! -bar -nargs=0 BLines Leaderf line --all
+command! -bar -nargs=0 Buffers Leaderf buffer
+command! -bar -nargs=0 BuffersAll Leaderf buffer --all
+command! -bar -nargs=0 Commands Leaderf command
+command! -bar -nargs=0 FileTypes Leaderf filetype
+command! -bar -nargs=0 Lines Leaderf line
 
-nnoremap <leader>gr :Leaderf ghq <CR>
+function! s:history(arg)
+  if a:arg[0] == ':'
+    Leaderf cmdHistory
+  elseif a:arg[0] == '/'
+    exec "Leaderf searchHistory" | silent! norm! n
+  else
+    Leaderf mru
+  endif
+endfunction
 
-
-" nnoremap <leader>ff :Leaderf file --popup<CR>
-" nnoremap <leader>fr :Leaderf mru --popup<CR>
-" nnoremap <leader>b  :Leaderf buffer --popup<CR>
-" nnoremap <leader>gt :LeaderfBufTag<CR>
-" nnoremap gb  :Leaderf buffer --popup<CR>
-"
-" if plugpac#has_plugin('LeaderF-github-stars')
-"   nnoremap <leader>gs :Leaderf stars --popup<CR>
-" endif
-"
-" if plugpac#has_plugin('LeaderF-ghq')
-"   nnoremap <leader>gr :Leaderf ghq --popup<CR>
-" endif
-
+function! s:rg(bang)
+  if a:bang
+    exec "Leaderf! rg --recall"
+  else
+    call leaderf#Rg#Interactive()
+  endif
+endfunction
