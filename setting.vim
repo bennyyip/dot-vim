@@ -1,6 +1,5 @@
 " Setting [[[1
 let s:is_tty = !match(&term, 'linux')
-let s:is_win = has('win32')
 let s:is_nvim = has('nvim')
 " general settings [[[2
 set nocompatible
@@ -56,16 +55,7 @@ set encoding=utf-8
 scriptencoding utf-8
 
 if !s:is_tty
-  if s:is_win
-    set renderoptions=type:directx
-    let &listchars = 'tab:▸ ,extends:>,precedes:<,nbsp:.'
-    let &showbreak = '-> '
-    highlight VertSplit ctermfg=242
-    augroup vimrc
-      autocmd InsertEnter * set listchars-=trail:⣿
-      autocmd InsertLeave * set listchars+=trail:⣿
-    augroup END
-  elseif has('multi_byte') && &encoding ==# 'utf-8'
+  if has('multi_byte') && &encoding ==# 'utf-8'
     let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
     let &fillchars = 'diff: '  " ▚
     let &showbreak = '↳ '
