@@ -2,6 +2,11 @@
   "[markdown][css]": {
     "coc.preferences.formatOnSave": true
   },
+  "cSpell.enabledLanguageIds": [
+    "markdown",
+    "plaintext",
+    "text"
+  ],
   "diagnostic.displayByAle": true,
   "languageserver": {
     "golang": {
