@@ -1,15 +1,20 @@
 [submodule "pack/minpac/opt/vim-surround"]
 	path = pack/minpac/opt/vim-surround
 	url = git@github.com:tpope/vim-surround
+	shallow = true
 [submodule "pack/minpac/opt/vim-sensible"]
 	path = pack/minpac/start/vim-sensible
 	url = git@github.com:tpope/vim-sensible
+	shallow = true
 [submodule "pack/minpac/opt/vim-unimpaired"]
 	path = pack/minpac/opt/vim-unimpaired
 	url = git@github.com:tpope/vim-unimpaired
+	shallow = true
 [submodule "pack/minpac/start/vim-gruvbox8"]
 	path = pack/minpac/start/vim-gruvbox8
 	url = git@github.com:lifepillar/vim-gruvbox8.git
+	shallow = true
 [submodule "pack/minpac/opt/minpac"]
 	path = pack/minpac/opt/minpac
 	url = git@github.com:k-takata/minpac.git
+	shallow = true

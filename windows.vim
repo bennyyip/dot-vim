@@ -16,4 +16,3 @@ if s:is_gvim
   " 調整行高
   set linespace=-2
 endif
-
