@@ -149,6 +149,7 @@ else
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 endif
 " misc [[[3
+set updatetime=300
 set autoread
 set autowrite              " Automatically save before commands like :next and :make
 set wrapscan               " Searches wrap around end-of-file.
@@ -347,7 +348,7 @@ if !g:is_ssh && has("termguicolors")
 endif
 if s:is_win
   set iminsert=2
-  let &pythonthreedll = expand(substitute(exepath('python.exe'), 'python.exe', 'python31?.dll', ''))
+  let &pythonthreedll = expand(substitute(exepath('python.exe'), 'python.exe', 'python3[0-9][0-9].dll', ''))
   let &pythonthreehome = substitute(exepath('python.exe'), 'python.exe', '', '')
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
@@ -376,33 +377,32 @@ if !isdirectory(s:minpac_dir)
   silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', s:minpac_dir)
 end
 
-let g:plugpac_cfg_path = $v . '/rc'
+let g:plugpac_rc_path = $v . '/rc'
+let g:plugpac_default_type = 'delay'
 call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 " general [[[2
 Pack 'junegunn/gv.vim', { 'on': 'GV' }
-Pack 'junegunn/vim-easy-align', { 'type': 'lazyall' }
+Pack 'junegunn/vim-easy-align'
 Pack 'junegunn/fzf'
 Pack 'junegunn/fzf.vim'
 
-Pack 'Shougo/junkfile.vim', { 'type': 'lazy' }
+Pack 'dyng/ctrlsf.vim'
+Pack 'romainl/vim-qf'
+Pack 'yegappan/greplace'
 
-Pack 'dyng/ctrlsf.vim', { 'type': 'lazyall' }
-Pack 'romainl/vim-qf', { 'type': 'lazy' }
-Pack 'yegappan/greplace', { 'type': 'lazy' }
-
-Pack 'bennyyip/is.vim', { 'type': 'lazyall' }
-Pack 'markonm/traces.vim', { 'type': 'lazy' }
-Pack 'haya14busa/vim-asterisk', { 'type': 'lazyall' }
+Pack 'bennyyip/is.vim'
+Pack 'markonm/traces.vim'
+Pack 'haya14busa/vim-asterisk'
 
 Pack 'cocopon/vaffle.vim'
 
-Pack 'justinmk/vim-sneak', { 'type': 'lazyall' }
+Pack 'justinmk/vim-sneak'
 
-Pack 'hotoo/pangu.vim', { 'type': 'lazy' }
+Pack 'hotoo/pangu.vim'
 
 Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
-Pack 'AndrewRadev/splitjoin.vim', { 'type': 'lazy' }
+Pack 'AndrewRadev/splitjoin.vim'
 Pack 'AndrewRadev/sideways.vim', { 'on': ['SidewaysLeft', 'SidewaysRight'] }
 Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
 Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
@@ -410,31 +410,29 @@ Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Pack 'vim-voom/VOoM', { 'on': 'Voom' }
 Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
 
-Pack 'tommcdo/vim-exchange', { 'type': 'lazy' }
-Pack 'tommcdo/vim-fugitive-blame-ext', { 'type': 'lazy' }
-Pack 'tommcdo/vim-fubitive', { 'type': 'lazy' }
+Pack 'tommcdo/vim-exchange'
+Pack 'tommcdo/vim-fugitive-blame-ext'
+Pack 'tommcdo/vim-fubitive', { 'type': 'start' }
 
-Pack 'svermeulen/vim-yoink', { 'type': 'lazyall' }
-Pack 'machakann/vim-highlightedyank', { 'type': 'lazyall' }
+Pack 'svermeulen/vim-yoink'
+Pack 'machakann/vim-highlightedyank'
 
-Pack 'andymass/vim-matchup', { 'type': 'lazy' }
+Pack 'andymass/vim-matchup'
 
-Pack 'vimoutliner/vimoutliner', { 'type': 'lazyall' }
+Pack 'vimoutliner/vimoutliner'
 
-Pack 'justinmk/vim-gtfo', { 'type': 'lazy' }
-Pack 'bergercookie/vim-debugstring', { 'type': 'lazy' }
+Pack 'justinmk/vim-gtfo'
+Pack 'bergercookie/vim-debugstring'
 
-Pack 'bootleq/vim-cycle', { 'type': 'lazyall' }
+Pack 'bootleq/vim-cycle'
 
-Pack 'janko-m/vim-test', {'type': 'lazy'}
+Pack 'voldikss/vim-searchme'
+Pack 'voldikss/vim-translate-me'
 
-Pack 'voldikss/vim-searchme', { 'type': 'lazyall' }
-Pack 'voldikss/vim-translate-me', { 'type': 'lazyall' }
+Pack 'wellle/targets.vim'
+Pack 'michaeljsmith/vim-indent-object'
 
-Pack 'wellle/targets.vim', { 'type': 'lazy' }
-Pack 'michaeljsmith/vim-indent-object', { 'type': 'lazy' }
-
-Pack 'tomtom/tcomment_vim', {'type': 'lazy'}
+Pack 'tomtom/tcomment_vim'
 
 " leaderf [[[3
 if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
@@ -443,78 +441,64 @@ if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
   else
     Pack 'Yggdroot/LeaderF', {'do': {-> system('/install.sh')}}
   endif
-  Pack 'Yggdroot/LeaderF-marks', {'type': 'lazy'}
-  " Pack 'bennyyip/LeaderF-github-stars', {'type': 'lazy'}
-  Pack 'bennyyip/LeaderF-ghq', {'type': 'lazy'}
 endif
 
 " coc [[[3
-Pack 'davidhalter/jedi-vim', { 'type': 'opt' }
-Pack 'neoclide/coc.nvim', { 'branch': 'release' }
-" if executable('node')
-"   packadd! coc.nvim
-" else
-"   packadd! jedi-vim
-" endif
+Pack 'neoclide/coc.nvim', { 'branch': 'release', 'type': 'start' }
 
 " vim 8 [[[3
-Pack 'skywind3000/asyncrun.vim', { 'type': 'lazyall' }
-Pack 'w0rp/ale', {'type': 'lazyall'}
+Pack 'skywind3000/asyncrun.vim'
+Pack 'dense-analysis/ale', {'type': 'delay'}
 " *nix stuff [[[3
-Pack 'christoomey/vim-tmux-navigator', { 'type': 'lazyall' }
-Pack 'lilydjwg/fcitx.vim', { 'type': 'lazy' }
+Pack 'christoomey/vim-tmux-navigator'
+Pack 'lilydjwg/fcitx.vim'
 " look [[[3
-Pack 'itchyny/lightline.vim', { 'type': 'lazyall' }
-Pack 'mhinz/vim-startify'
+Pack 'itchyny/lightline.vim'
+Pack 'mhinz/vim-startify', { 'type': 'start' }
 Pack 'sainnhe/gruvbox-material', { 'type': 'opt' }
 Pack 'morhetz/gruvbox', { 'type': 'opt' }
-Pack 'lifepillar/vim-gruvbox8'
+Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
 Pack 'vim-scripts/lilypink', { 'type': 'opt' }
 Pack 'hachy/eva01.vim', { 'type': 'opt' }
-Pack 'luochen1990/rainbow'
-Pack 'itchyny/vim-cursorword', { 'type': 'lazy' }
-Pack 'bennyyip/vim-interestingwords', { 'type': 'lazy' }
+Pack 'luochen1990/rainbow', { 'type': 'start' }
+Pack 'itchyny/vim-cursorword'
+Pack 'bennyyip/vim-interestingwords'
 " tpope [[[3
-Pack 'tpope/vim-abolish', { 'type': 'lazyall' }
-Pack 'tpope/vim-apathy', { 'type': 'lazy' }
-Pack 'tpope/vim-capslock', { 'type': 'lazy' }
-Pack 'tpope/vim-characterize', { 'type': 'lazy' }
-Pack 'tpope/vim-eunuch', { 'type': 'lazy' }
-Pack 'tpope/vim-fugitive'
-Pack 'tpope/vim-jdaddy', { 'type': 'lazy' }
-Pack 'tpope/vim-repeat'
-Pack 'tpope/vim-rhubarb', { 'type': 'lazy' }
-Pack 'tpope/vim-rsi', { 'type': 'lazy' }
-Pack 'tpope/vim-sensible'
-Pack 'tpope/vim-surround', { 'type': 'lazy' }
-Pack 'tpope/vim-unimpaired', { 'type': 'lazy' }
+Pack 'tpope/vim-abolish'
+Pack 'tpope/vim-apathy'
+Pack 'tpope/vim-capslock'
+Pack 'tpope/vim-characterize'
+Pack 'tpope/vim-eunuch'
+Pack 'tpope/vim-fugitive', { 'type': 'start' }
+Pack 'tpope/vim-jdaddy'
+Pack 'tpope/vim-repeat', { 'type': 'start' }
+Pack 'tpope/vim-rhubarb'
+Pack 'tpope/vim-rsi'
+Pack 'tpope/vim-sensible', { 'type': 'start' }
+Pack 'tpope/vim-surround'
+Pack 'tpope/vim-unimpaired'
 " language [[[2
-Pack 'JuliaEditorSupport/julia-vim'
-Pack 'kdheepak/JuliaFormatter.vim'
-" Pack 'fatih/vim-go', { 'type': 'lazy' }
 Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
-Pack 'Shiracamus/vim-syntax-x86-objdump-d'
+Pack 'Shiracamus/vim-syntax-x86-objdump-d', { 'type': 'start' }
 Pack 'cespare/vim-toml', { 'for': 'toml' }
 Pack 'derekwyatt/vim-scala', { 'for': 'scala' }
 Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }
 Pack 'chr4/nginx.vim', { 'type': 'opt' }
 Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
-" Pack 'rust-lang/rust.vim', { 'type': 'opt', 'for': 'rust' }
-Pack 'rust-lang/rust.vim', { 'type': 'lazy' }
 Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
 Pack 'chrisbra/csv.vim', { 'type': 'opt' }
 " python [[[3
 Pack 'vim-python/python-syntax', { 'for': 'python'}
 " typescript [[[3
 Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
-Pack 'peitalin/vim-jsx-typescript', { 'type': 'lazy' }
+Pack 'peitalin/vim-jsx-typescript'
 " markup [[[3
 Pack 'Rykka/riv.vim', { 'for': 'rst' }
 Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
 " Pack 'lervag/vimtex', {'for': 'tex' }
 " web [[[3
-Pack 'lilydjwg/colorizer', { 'type': 'lazy' }
+Pack 'lilydjwg/colorizer'
 Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
 Pack 'othree/html5.vim', {'for': 'html' }
 call plugpac#end()
@@ -534,9 +518,9 @@ nnoremap [oN :set number relativenumber<CR>
 nnoremap ]oN :set nonumber norelativenumber<CR>
 
 " gx
-nmap <unique> gX <Plug>NetrwBrowseX
+nmap gX <Plug>NetrwBrowseX
 nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))<cr>
-xmap <unique> gX <Plug>NetrwBrowseXVis
+xmap gX <Plug>NetrwBrowseXVis
 xno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
 
 " fold [[[3
@@ -618,7 +602,7 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG'.(has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
 " vimrc
 nnoremap <leader>fed :e $VIMRC<CR>
-nnoremap <leader>fee :so $VIMRC<CR>
+nnoremap <leader>fee :source $VIMRC<CR>
 " run current line
 nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 " visual [[[2
@@ -743,25 +727,6 @@ augroup vimrc
   " save on focus lost
   autocmd FocusLost * :silent! wa
 augroup END
-" Plugin Config [[[1
-" Plugin: Yggdroot/LeaderF [[[2
-let g:Lf_PopupColorscheme = 'gruvbox_material'
-if s:colorscheme == 'gruvbox'
-  let g:Lf_StlColorscheme = 'gruvbox'
-elseif s:colorscheme == 'gruvbox8'
-  let g:Lf_StlColorscheme = 'gruvbox8'
-elseif s:colorscheme == 'gruvbox-material'
-  let g:Lf_StlColorscheme = 'gruvbox_material'
-else
-  let g:Lf_StlColorscheme = 'one'
-endif
-" Plugin: skywind3000/asyncrun.vim [[[2
-" if s:is_win
-"   let g:asyncrun_encs = 'gbk'
-" endif
-
-" Plugin: dense-analysis/ale [[[2
-let g:ale_disable_lsp = 1
 " ending [[[1
 if filereadable($HOME. '/local.vim')
   source $HOME/local.vim

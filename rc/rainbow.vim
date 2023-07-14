@@ -1,5 +1,6 @@
 " Plugin: 'luochen1990/rainbow'
 
+let g:rainbow_active = 1
 
 let g:rainbow_conf = {
       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
@@ -16,4 +17,6 @@ augroup rainbow_config
   auto!
   auto syntax * call rainbow_main#load()
   auto colorscheme * call rainbow_main#load()
+  auto BufEnter * call rainbow_main#load()
 augroup END
+

@@ -1,7 +1,4 @@
 " Plugin: cocopon/vaffle.vim
-if !plugpac#has_plugin('vaffle.vim')
-  finish
-endif
 
 nmap -  :<C-u>Vaffle %:p<CR>
 

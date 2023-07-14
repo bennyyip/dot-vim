@@ -47,5 +47,3 @@ let g:startify_session_autoload = 0
 let g:startify_session_persistence = 0
 let g:startify_update_oldfiles = 1
 let g:startify_use_env = 1
-
-
