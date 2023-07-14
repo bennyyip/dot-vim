@@ -163,7 +163,7 @@ set splitright
 set titlestring=VIM:\ %f
 set switchbuf=useopen,usetab
 set ttyfast
-set lazyredraw
+" set lazyredraw
 " set timeoutlen=500
 " set ttimeoutlen=50
 set noshowmode " Hide the mode text (e.g. -- INSERT --)
@@ -347,19 +347,19 @@ if !g:is_ssh && has("termguicolors")
 endif
 if s:is_win
   set iminsert=2
-  let &pythonthreedll = expand('C:\Program Files\Python310\python310.dll')
-  let &pythonthreehome = 'C:\Program Files\Python310'
-  silent! python3 pass
+  let &pythonthreedll = expand(substitute(exepath('python.exe'), 'python.exe', 'python31?.dll', ''))
+  let &pythonthreehome = substitute(exepath('python.exe'), 'python.exe', '', '')
   let g:netrw_cygwin = 0
   let g:netrw_silent = 1
 
   if s:is_gvim
-    "https://github.com/derekmcloughlin/gvimfullscreen_win32
     augroup vimrc
       autocmd GUIEnter *  simalt ~x
     augroup END
     set guioptions-=egmrLtT
     set guifont=Sarasa\ Term\ CL\ Nerd:h14
+    " 調整行高
+    set linespace=-2
   endif
 else
   set guioptions-=aegimrLtT
@@ -532,6 +532,12 @@ endfunction
 nnoremap yoN :set <C-R>=<SID>number_options()<CR><CR>
 nnoremap [oN :set number relativenumber<CR>
 nnoremap ]oN :set nonumber norelativenumber<CR>
+
+" gx
+nmap <unique> gX <Plug>NetrwBrowseX
+nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))<cr>
+xmap <unique> gX <Plug>NetrwBrowseXVis
+xno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
 
 " fold [[[3
 nmap z] zo]z

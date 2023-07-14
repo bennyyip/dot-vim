@@ -19,7 +19,8 @@ let g:ale_fixers = {
       \   ],
       \   'python': [
       \       'black',
-      \       'isort'
+      \       'isort',
+      \       'ruff',
       \   ],
       \   'javascript': [
       \       'prettier',
@@ -54,7 +55,7 @@ let s:general_ale_fixer = [
       \  'trim_whitespace',
       \  'remove_trailing_lines',
       \  ]
-" call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
+call map(g:ale_fixers, { k, v -> s:general_ale_fixer + v })
 let g:ale_sh_shfmt_options = '-i 2'
 let g:ale_json_jq_options = '--sort-keys'
 
@@ -64,7 +65,7 @@ let g:ale_linters = {
       \  'zsh': ['shell', 'shellcheck'],
       \  'javascript': ['eslint'],
       \  'typescript': ['eslint'],
-      \  'python': ['pylint'],
+      \  'python': ['ruff'],
       \  'go': ['golint'],
       \   }
 
@@ -74,4 +75,3 @@ nmap <silent> [s <Plug>(ale_previous_wrap)
 nmap <silent> <leader>= <Plug>(ale_fix)
 nmap <silent> <leader>+ <Plug>(ale_enable_buffer)
 
-let g:ale_python_pylint_options = "--load-plugins=pylint_django"
