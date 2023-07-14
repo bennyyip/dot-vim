@@ -1,26 +1,28 @@
 {
-  "typescript.showUnused": false,
+  "[markdown][css]": {
+    "coc.preferences.formatOnSave": true
+  },
   "diagnostic.displayByAle": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "rootPatterns": [
-        "go.mod",
-        ".vim/",
-        ".git/",
-        ".hg/"
-      ],
       "filetypes": [
         "go"
       ],
       "initializationOptions": {
         "usePlaceholders": true
-      }
+      },
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ]
     }
   },
-  "[markdown][css]": {
-    "coc.preferences.formatOnSave": true
-  },
+  "pyright.enable": true,
   "python.formatting.provider": "black",
-  "snippets.ultisnips.pythonPrompt": false
+  "python.linting.enabled": false,
+  "snippets.ultisnips.pythonPrompt": false,
+  "typescript.showUnused": false
 }
