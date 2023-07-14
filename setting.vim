@@ -198,7 +198,8 @@ else
   set viminfo='100,n$vimtmp/info/viminfo
 endif
 
-set cdhome
+" old vim don't have cdhome, ignore error
+silent! set cdhome
 
 augroup vimrc
   " go back to where you exited
