@@ -8,10 +8,10 @@ let g:plugpac_default_type = 'delay'
 call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 
-Pack 'vim-sensible', { 'type': 'start' }
-Pack 'vim-gruvbox8', { 'type': 'start' }
-Pack 'vim-surround'
-Pack 'vim-unimpaired'
+Pack 'tpope/vim-sensible', { 'type': 'start' }
+Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
+Pack 'tpope/vim-surround'
+Pack 'tpope/vim-unimpaired'
 
 if !g:minimal_plugins
   " general [[[2
