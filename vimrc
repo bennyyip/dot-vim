@@ -3,11 +3,12 @@ let s:is_win = has('win32')
 let s:is_tty = !match(&term, 'linux')
 let s:is_gvim = has('gui_running')
 let s:is_nvim = has('nvim')
+let g:minimal_plugins = v:false
 let $v = $HOME.(s:is_win ? '\vimfiles' : '/.vim')
 let $VIMRC = $v . '/vimrc'
 
-if has("python3")
-  exe "py3file" $v . "/vimrc.py"
+if filereadable($HOME. '/local.vim')
+  source $HOME/local.vim
 endif
 
 execute 'source ' . $v . "/setting.vim"
@@ -21,8 +22,9 @@ else
   execute 'source ' . $v . "/unix.vim"
 endif
 
-if filereadable($HOME. '/local.vim')
-  source $HOME/local.vim
+
+if has("python3")
+  exe "py3file" $v . "/vimrc.py"
 endif
 
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim
