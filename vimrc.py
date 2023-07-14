@@ -1,7 +1,8 @@
-import vim
-import subprocess
-import shlex
 import enum
+import shlex
+import subprocess
+
+import vim
 
 
 class EchoKind(enum.Enum):

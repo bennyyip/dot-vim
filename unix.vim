@@ -1,3 +1,2 @@
-  set guioptions-=aegimrLtT
-  set guifont=Monospace\ 18
-
+set guioptions-=aegimrLtT
+set guifont=Monospace\ 18
