@@ -31,9 +31,9 @@ var lazy = { 'ft': {}, 'map': {}, 'cmd': {}, 'delay': {} }
 var repos = {}
 var delay_repos = []
 
-var cached_plugin_dict = {}
+var cached_installed_plugins = {}
 
-const plugpac_rc_path = get(g:, 'plugpac_rc_path', '')
+const plugpac_plugin_conf_path = get(g:, 'plugpac_plugin_conf_path', '')
 
 export def Begin()
 
@@ -114,9 +114,9 @@ export def Add(repo: string, opts: dict<any> = {})
     endfor
   endif
 
-  if plugpac_rc_path != ''
-    var pre_rc_path = expand(plugpac_rc_path .. '/pre-' .. substitute(name, '\.n\?vim$', '', '') .. '.vim')
-    var rc_path = expand(plugpac_rc_path .. '/' .. substitute(name, '\.n\?vim$', '', '') .. '.vim')
+  if plugpac_plugin_conf_path != '' && has_key(GetInstalledPlugins(), name)
+    var pre_rc_path = expand(plugpac_plugin_conf_path .. '/pre-' .. substitute(name, '\.n\?vim$', '', '') .. '.vim')
+    var rc_path = expand(plugpac_plugin_conf_path .. '/' .. substitute(name, '\.n\?vim$', '', '') .. '.vim')
     if filereadable(pre_rc_path)
         execute printf('source %s', pre_rc_path)
     endif
@@ -137,7 +137,7 @@ export def Add(repo: string, opts: dict<any> = {})
 enddef
 
 export def HasPlugin(plugin: string): bool
-  return has_key(GetPluginList(), plugin)
+  return has_key(GetInstalledPlugins(), plugin)
 enddef
 
 def Assoc(dict: dict<any>, key: string, val: any)
@@ -202,7 +202,7 @@ def Init()
     call minpac#add(repo, opts)
   endfor
 
-  cached_plugin_dict = {}
+  cached_installed_plugins = {}
 enddef
 
 def DisableEnablePlugin(plugin: string, disable: bool)
@@ -214,7 +214,7 @@ def DisableEnablePlugin(plugin: string, disable: bool)
     dst = 'opt'
   endif
 
-  const plugins = GetPluginList(src_)
+  const plugins = GetInstalledPlugins(src_)
   if !has_key(plugins, plugin)
     Err(plugin .. ' does not exists.')
     return
@@ -231,19 +231,19 @@ def DisableEnablePlugin(plugin: string, disable: bool)
 enddef
 
 def StartPluginComplete(A: string, L: string, P: number): list<string>
-  const plugins = GetPluginList('start')
+  const plugins = GetInstalledPlugins('start')
   return filter(keys(plugins), 'v:val =~ "' .. A .. '"')
 enddef
 
 
 def OptPluginComplete(A: string, L: string, P: number): list<string>
-  const plugins = GetPluginList('opt')
+  const plugins = GetInstalledPlugins('opt')
   return filter(keys(plugins), 'v:val =~ "' .. A .. '"')
 enddef
 
-def GetPluginList(type_: string = 'all'): dict<string>
-  if has_key(cached_plugin_dict, type_)
-    return cached_plugin_dict[type_]
+def GetInstalledPlugins(type_: string = 'all'): dict<string>
+  if has_key(cached_installed_plugins, type_)
+    return cached_installed_plugins[type_]
   endif
 
   var t = type_
@@ -258,7 +258,7 @@ def GetPluginList(type_: string = 'all'): dict<string>
     result[substitute(p, '^.*[/\\]', '', '')] = p
   endfor
 
-  cached_plugin_dict[type_] = result
+  cached_installed_plugins[type_] = result
   return result
 enddef
 

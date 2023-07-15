@@ -4,7 +4,7 @@ if !isdirectory(minpac_dir)
   silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
 endif
 
-g:plugpac_rc_path = $v .. '/rc'
+g:plugpac_plugin_conf_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
 plugpac#Begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
