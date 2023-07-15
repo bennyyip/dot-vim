@@ -96,12 +96,6 @@ function! ben#quote() abort
 endfunction
 
 let s:quotes = [
-      \ ["「世界上有什麼不會失去的東西嗎？」","「我相信有，妳也最好相信。」"],
-      \ ["「獨步天下，吾心自潔，無欲無求，如林中之象」"],
-      \ ["「生死去來，棚頭傀儡，一線斷時，落落磊磊。」"],
-      \ ["「懷舊是戀尸癖的早期症狀。」"],
-      \ ["「你我猶如隔鏡視物所見無非虛幻迷濛」"],
-      \ ["Brute force never fails, unless you're not using enough of it."],
       \ ["vi vi vi, the editor of the beast."]
       \]
 " Function: #daily_node {{{1
