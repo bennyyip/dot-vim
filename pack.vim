@@ -1,10 +1,11 @@
-let s:minpac_dir = $v . '/pack/minpac/opt/minpac'
-if !isdirectory(s:minpac_dir)
-  silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', s:minpac_dir)
-end
+vim9script
+const minpac_dir = $v .. '/pack/minpac/opt/minpac'
+if !isdirectory(minpac_dir)
+  silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
+endif
 
-let g:plugpac_rc_path = $v . '/rc'
-let g:plugpac_default_type = 'delay'
+g:plugpac_rc_path = $v .. '/rc'
+g:plugpac_default_type = 'delay'
 call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 
@@ -14,7 +15,7 @@ Pack 'tpope/vim-surround'
 Pack 'tpope/vim-unimpaired'
 
 if !g:minimal_plugins
-  " general [[[2
+  # general [[[2
   Pack 'junegunn/gv.vim', { 'on': 'GV' }
   Pack 'junegunn/vim-easy-align'
   Pack 'junegunn/fzf'
@@ -67,7 +68,7 @@ if !g:minimal_plugins
 
   Pack 'tomtom/tcomment_vim'
 
-  " leaderf [[[3
+  # leaderf [[[3
   if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
     if has('win32')
       Pack 'Yggdroot/LeaderF', {'do': {-> system('/install.bat')}}
@@ -76,23 +77,23 @@ if !g:minimal_plugins
     endif
   endif
 
-  " coc [[[3
+  # coc [[[3
   Pack 'neoclide/coc.nvim', { 'branch': 'release', 'type': 'start' }
 
-  " vim 8 [[[3
+  # vim 8 [[[3
   Pack 'skywind3000/asyncrun.vim'
   Pack 'dense-analysis/ale', {'type': 'delay'}
-  " *nix stuff [[[3
+  # *nix stuff [[[3
   Pack 'christoomey/vim-tmux-navigator'
   Pack 'lilydjwg/fcitx.vim'
-  " look [[[3
+  # look [[[3
   Pack 'itchyny/lightline.vim'
   Pack 'mhinz/vim-startify', { 'type': 'start' }
   Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
   Pack 'luochen1990/rainbow', { 'type': 'start' }
   Pack 'itchyny/vim-cursorword'
   Pack 'bennyyip/vim-interestingwords'
-  " tpope [[[3
+  # tpope [[[3
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy'
   Pack 'tpope/vim-capslock'
@@ -103,7 +104,7 @@ if !g:minimal_plugins
   Pack 'tpope/vim-repeat', { 'type': 'start' }
   Pack 'tpope/vim-rhubarb'
   Pack 'tpope/vim-rsi'
-  " language [[[2
+  # language [[[2
   Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
   Pack 'Shiracamus/vim-syntax-x86-objdump-d', { 'type': 'start' }
   Pack 'cespare/vim-toml', { 'for': 'toml' }
@@ -114,16 +115,16 @@ if !g:minimal_plugins
   Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
   Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
   Pack 'chrisbra/csv.vim', { 'type': 'opt' }
-  " python [[[3
+  # python [[[3
   Pack 'vim-python/python-syntax', { 'for': 'python'}
-  " typescript [[[3
+  # typescript [[[3
   Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
   Pack 'peitalin/vim-jsx-typescript'
-  " markup [[[3
+  # markup [[[3
   Pack 'Rykka/riv.vim', { 'for': 'rst' }
   Pack 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
-  " Pack 'lervag/vimtex', {'for': 'tex' }
-  " web [[[3
+  # Pack 'lervag/vimtex', {'for': 'tex' }
+  # web [[[3
   Pack 'lilydjwg/colorizer'
   Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
   Pack 'othree/html5.vim', {'for': 'html' }
@@ -131,4 +132,4 @@ endif
 call plugpac#end()
 
 
-" vim:fdm=marker:fmr=[[[,]]]:ft=vim
+#  vim:fdm=marker:fmr=[[[,]]]:ft=vim
