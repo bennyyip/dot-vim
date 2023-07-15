@@ -6,7 +6,7 @@ endif
 
 g:plugpac_rc_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
-call plugpac#begin()
+plugpac#Begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 
 Pack 'tpope/vim-sensible', { 'type': 'start' }
@@ -69,13 +69,7 @@ if !g:minimal_plugins
   Pack 'tomtom/tcomment_vim'
 
   # leaderf [[[3
-  if !(v:version < 704 || v:version == 704 && has("patch330") == 0)
-    if has('win32')
-      Pack 'Yggdroot/LeaderF', {'do': {-> system('/install.bat')}}
-    else
-      Pack 'Yggdroot/LeaderF', {'do': {-> system('/install.sh')}}
-    endif
-  endif
+  Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
 
   # coc [[[3
   Pack 'neoclide/coc.nvim', { 'branch': 'release', 'type': 'start' }
@@ -129,7 +123,7 @@ if !g:minimal_plugins
   Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
   Pack 'othree/html5.vim', {'for': 'html' }
 endif
-call plugpac#end()
+plugpac#End()
 
 
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim

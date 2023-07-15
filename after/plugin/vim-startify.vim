@@ -1,5 +1,5 @@
 " Plugin: mhinz/vim-startify
-if !plugpac#has_plugin('vim-startify')
+if !plugpac#HasPlugin('vim-startify')
   finish
 endif
 
