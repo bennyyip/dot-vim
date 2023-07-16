@@ -11,8 +11,8 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 
 Pack 'tpope/vim-sensible', { 'type': 'start' }
 Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
-Pack 'tpope/vim-surround'
-Pack 'tpope/vim-unimpaired'
+Pack 'tpope/vim-surround', { 'type': 'delay' }
+Pack 'tpope/vim-unimpaired', { 'type': 'delay' }
 
 if !g:minimal_plugins
   # general [[[2
@@ -31,7 +31,7 @@ if !g:minimal_plugins
 
   Pack 'cocopon/vaffle.vim'
 
-  Pack 'justinmk/vim-sneak'
+  Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t' ] }
   Pack 'monkoose/vim9-stargate'
 
   Pack 'hotoo/pangu.vim'
@@ -79,7 +79,7 @@ if !g:minimal_plugins
 
   # vim 8 [[[3
   Pack 'skywind3000/asyncrun.vim'
-  Pack 'skywind3000/vim-terminal-help', { 'on': 'H' }
+  Pack 'skywind3000/vim-terminal-help'
   Pack 'dense-analysis/ale'
   # *nix stuff [[[3
   Pack 'christoomey/vim-tmux-navigator'
