@@ -1,4 +1,3 @@
-" Plugin: mhinz/vim-startify
 let s:ascii_art = [
       \"             ________ ++     ________             ",
       \"            /VVVVVVVV\++++  /VVVVVVVV\\           ",
@@ -23,8 +22,6 @@ let g:startify_custom_header =
 let g:startify_skiplist = [
       \ 'COMMIT_EDITMSG',
       \ 'bundle/.*/doc',
-      \ '/data/repo/neovim/runtime/doc',
-      \ '/Users/mhi/local/vim/share/vim/vim74/doc',
       \ ]
 let g:startify_bookmarks = [
       \ { 'c': $VIMRC },

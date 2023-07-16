@@ -54,7 +54,7 @@ enddef
 export def End()
   for [name, cmds] in items(lazy.cmd)
     for cmd in cmds
-      execute printf("command! -nargs=* -range -bang %s packadd %s | call DoCmd('%s', \"<bang>\", <line1>, <line2>, <q-args>)", cmd, name, cmd)
+      execute printf("command! -nargs=* -range -bang %s call DoCmd('%s', '%s', \"<bang>\", <line1>, <line2>, <q-args>)", cmd, name, cmd)
     endfor
   endfor
 
@@ -91,7 +91,6 @@ export def Add(repo: string, opts: dict<any> = {})
   endif
 
   if type == 'delay'
-    call add(delay_repos, name)
     opts['type'] = 'opt'
   endif
 
@@ -117,26 +116,33 @@ export def Add(repo: string, opts: dict<any> = {})
     endfor
   endif
 
-  if plugpac_plugin_conf_path != '' && has_key(GetInstalledPlugins(), name)
-    const pre_rc_path = expand(plugpac_plugin_conf_path .. '/pre-' .. substitute(name, '\.n\?vim$', '', '') .. '.vim')
-    const rc_path = expand(plugpac_plugin_conf_path .. '/' .. substitute(name, '\.n\?vim$', '', '') .. '.vim')
-    if filereadable(pre_rc_path)
-      execute printf('source %s', pre_rc_path)
-    endif
-    if filereadable(rc_path)
-      if type == 'delay'
-        lazy.delay[name] = rc_path
-      else
-        execute printf('source %s', rc_path)
-      endif
+  const pre_rc_path = GetRcPath(name, true)
+  const rc_path = GetRcPath(name, false)
+  if filereadable(pre_rc_path)
+    execute printf('source %s', pre_rc_path)
+  endif
+  if filereadable(rc_path)
+    if type == 'delay' || type == 'start'
+      call add(delay_repos, name)
+      lazy.delay[name] = rc_path
     endif
   endif
 
   if type == 'delay' && !has_key(lazy.delay, name)
+    call add(delay_repos, name)
     lazy.delay[name] = ''
   endif
 
   repos[repo] = opts
+enddef
+
+def GetRcPath(plugin: string, is_pre: bool = false): string
+  if plugpac_plugin_conf_path != '' && has_key(GetInstalledPlugins(), plugin)
+    const prefix = is_pre ? 'pre-' : ''
+    return expand(plugpac_plugin_conf_path .. '/' .. prefix .. substitute(plugin, '\.n\?vim$', '', '') .. '.vim')
+  else
+    return ''
+  endif
 enddef
 
 export def HasPlugin(plugin: string): bool
@@ -158,7 +164,13 @@ def Err(msg: any)
 enddef
 
 
-def DoCmd(cmd: any, bang: any, start_: number, end_: number, args_: any)
+def DoCmd(plugin: string, cmd: any, bang: any, start_: number, end_: number, args_: any)
+  execute 'delcommand ' .. cmd
+  execute "packadd " .. plugin
+
+  const rc_path = GetRcPath(plugin)
+  execute printf('source %s', rc_path)
+
   execute printf('%s%s%s %s', (start_ == end_ ? '' : (start_ .. ',' .. end_)), cmd, bang, args_)
 enddef
 
@@ -166,6 +178,10 @@ def DoMap(plugin: string, map_: any, with_prefix: any, prefix_: any)
   execute "unmap " .. map_
   execute "iunmap " .. map_
   execute "packadd " .. plugin
+
+  const rc_path = GetRcPath(plugin)
+  execute printf('source %s', rc_path)
+
   var extra = ''
   while 1
     const c = getchar(0)
