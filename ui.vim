@@ -1,4 +1,5 @@
 " Apprence [[[1
+let s:is_ssh = ($SSH_CONNECTION != "")
 let s:is_gvim = has('gui_running')
 let s:is_tty = !match(&term, 'linux')
 " Color Scheme [[[3
@@ -120,7 +121,7 @@ function! LightlineMode() "[[[4
 endfunction
 " other [[[3
 " terminal true color
-if !g:is_ssh && has("termguicolors")
+if !s:is_ssh && has("termguicolors")
   " fix bug for vim
   set t_8f=[38;2;%lu;%lu;%lum
   set t_8b=[48;2;%lu;%lu;%lum

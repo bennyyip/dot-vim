@@ -170,21 +170,6 @@ function! ben#get_pattern_at_cursor(pat)
     return ""
   endif
 endfunction
-" Function: #trycycle {{{1
-function! ben#trycycle(dir)
-  let pat = ben#get_pattern_at_cursor('[+-]\?\d\+')
-  if pat
-    if a:dir ==? 'x'
-      return "\<C-X>"
-    else
-      return "\<C-A>"
-    end
-  else
-    let mode = mode() =~ 'n' ? 'w' : 'v'
-    let dir = a:dir ==? 'x' ? -1 : 1
-    return ":\<C-U>call Cycle('" . mode . "', " . dir . ", v:count1)\<CR>"
-  end
-endfunction
 " Function: #chdir
 function! ben#chdir(path)
   if has('nvim')
