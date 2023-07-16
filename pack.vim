@@ -32,6 +32,7 @@ if !g:minimal_plugins
   Pack 'cocopon/vaffle.vim'
 
   Pack 'justinmk/vim-sneak'
+  Pack 'monkoose/vim9-stargate'
 
   Pack 'hotoo/pangu.vim'
 
@@ -68,6 +69,8 @@ if !g:minimal_plugins
 
   Pack 'tomtom/tcomment_vim'
 
+  Pack 'tyru/open-browser.vim'
+
   # leaderf [[[3
   Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
 
@@ -76,7 +79,8 @@ if !g:minimal_plugins
 
   # vim 8 [[[3
   Pack 'skywind3000/asyncrun.vim'
-  Pack 'dense-analysis/ale', {'type': 'delay'}
+  Pack 'skywind3000/vim-terminal-help', { 'on': 'H' }
+  Pack 'dense-analysis/ale'
   # *nix stuff [[[3
   Pack 'christoomey/vim-tmux-navigator'
   Pack 'lilydjwg/fcitx.vim'
@@ -124,6 +128,30 @@ if !g:minimal_plugins
   Pack 'othree/html5.vim', {'for': 'html' }
 endif
 plugpac#End()
+
+def PackList(...args_: list<any>): string
+    plugpac#Init()
+    return join(sort(keys(minpac#getpluglist())), "\n")
+enddef
+
+command! -nargs=1 -complete=custom,PackList
+      \ PackOpenUrl call plugpac#Init() | call openbrowser#open(
+      \    minpac#getpluginfo(<q-args>).url)
+
+command! -nargs=1 -complete=custom,PackList
+    \ PackOpenDir call plugpac#Init() | call term_start(g:terminal_shell,
+    \    {'cwd': minpac#getpluginfo(<q-args>).dir,
+    \     'term_finish': 'close'})
+
+command! -nargs=1 -complete=custom,PackList
+    \ PackRc call plugpac#Init() | execute 'edit ' ..
+    \ g:plugpac_plugin_conf_path .. '/' ..
+    \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
+
+command! -nargs=1 -complete=custom,PackList
+    \ PackPreRc call plugpac#Init() | execute 'edit ' ..
+    \ g:plugpac_plugin_conf_path .. '/pre-' ..
+    \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
 
 
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim

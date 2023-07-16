@@ -175,3 +175,4 @@ inoremap <M-l> <Right>
 noremap H ^
 noremap L $
 
+" vim:fdm=marker:fmr=[[[,]]]:ft=vim

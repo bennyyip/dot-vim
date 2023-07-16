@@ -201,7 +201,7 @@ def Setup_command()
   command! -bar -nargs=1 -complete=customlist,OptPluginComplete PackEnable call DisableEnablePlugin(<q-args>, v:false)
 enddef
 
-def Init()
+export def Init()
   packadd minpac
 
   minpac#init()
