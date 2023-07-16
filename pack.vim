@@ -42,9 +42,9 @@ if !g:minimal_plugins
   Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
   Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
   Pack 'vim-voom/VOoM', { 'on': 'Voom' }
-  Pack 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+  Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
-  Pack 'tommcdo/vim-exchange'
+  Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' }
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tommcdo/vim-fubitive', {'type': 'start'}
 
@@ -86,7 +86,7 @@ if !g:minimal_plugins
   Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
   Pack 'luochen1990/rainbow', { 'type': 'start' }
   Pack 'itchyny/vim-cursorword'
-  Pack 'bennyyip/vim-interestingwords'
+  Pack 'bennyyip/vim-interestingwords', { 'on': '<Plug>InterestingWords' }
   # tpope [[[3
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy'
