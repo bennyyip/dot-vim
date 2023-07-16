@@ -1,6 +1,7 @@
-" Plugin: justinmk/vim-sneak
+vim9script
 
-let g:sneak#label = 1
+g:sneak#label = 1
+g:sneak#s_next = 1
 
 map S <Plug>Sneak_S
 map s <Plug>Sneak_s
