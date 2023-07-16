@@ -1,5 +1,4 @@
 vim9script
-g:is_ssh = ($SSH_CONNECTION != "")
 const is_win = has('win32')
 const is_tty = !match(&term, 'linux')
 const is_gvim = has('gui_running')
