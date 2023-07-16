@@ -29,6 +29,7 @@ let g:loaded_spellfile_plugin = 1
 let g:loaded_tarPlugin = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_zipPlugin = 1
+
 " indent settings [[[3
 set autoindent
 set cinoptions=>2,l1,p0,)50,*50,t0
