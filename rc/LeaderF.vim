@@ -3,6 +3,8 @@
 if executable('rg')
   let g:Lf_DefaultExternalTool = 'rg'
 endif
+let g:Lf_StlColorscheme = 'gruvbox_material'
+
 let g:Lf_ShortcutF=''
 let g:Lf_ShortcutB=''
 let g:Lf_MruMaxFiles=500

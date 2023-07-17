@@ -3,5 +3,8 @@
 let g:linediff_buffer_type = 'scratch'
 
 vnoremap zd :Linediff<CR>
-autocmd User LinediffBufferReady nnoremap <buffer> gs :LinediffReset<cr>
+
+augroup vimrc
+  autocmd User LinediffBufferReady nnoremap <buffer> gs :LinediffReset<cr>
+augroup end
 

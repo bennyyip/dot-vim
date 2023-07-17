@@ -1,6 +1,5 @@
 " Setting [[[1
 let s:is_tty = !match(&term, 'linux')
-let s:is_nvim = has('nvim')
 " general settings [[[2
 set nocompatible
 " clear augroup on reload [[[3
@@ -183,21 +182,15 @@ set nowritebackup
 
 set updatecount=100
 set undofile
-if s:is_nvim
-  set backupdir -=.
-  set shada      ='100
-else
+let $vimtmp = $HOME . '/.config/vimtmp/'
+for s:tmp in ['backup', 'swap', 'undo', 'info']
+  call mkdir($vimtmp . s:tmp, 'p')
+endfor
 
-  let $vimtmp = $HOME . '/.config/vimtmp/'
-  for s:tmp in ['backup', 'swap', 'undo', 'info']
-    call mkdir($vimtmp . s:tmp, 'p')
-  endfor
-
-  set backupdir=$vimtmp/backup/
-  set directory=$vimtmp/swap/
-  set undodir=$vimtmp/undo/
-  set viminfo='100,n$vimtmp/info/viminfo
-endif
+set backupdir=$vimtmp/backup/
+set directory=$vimtmp/swap/
+set undodir=$vimtmp/undo/
+set viminfo='100,n$vimtmp/info/viminfo
 
 " old vim don't have cdhome, ignore error
 silent! set cdhome
