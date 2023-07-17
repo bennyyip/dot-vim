@@ -1,5 +1,4 @@
 " Key Mapping [[[1
-let s:is_win = has('win32')
 let s:is_gvim = has('gui_running')
 " misc [[[2
 nmap     t= mxHmygg=G`yzt`x
@@ -61,13 +60,6 @@ nnoremap <leader>v :call ben#daily_note()<CR>
 " window [[[2
 " quick <C-w>
 nnoremap ' <C-w>
-if s:is_win || s:is_gvim
-  let g:tmux_navigator_no_mappings=1
-  nnoremap <silent><C-h> <C-w>h
-  nnoremap <silent><C-j> <C-w>j
-  nnoremap <silent><C-k> <C-w>k
-  nnoremap <silent><C-l> <C-w>l
-endif
 " edit [[[2
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
@@ -80,6 +72,7 @@ inoremap <M-o> <C-O>o
 inoremap <M-O> <C-O>O
 " script helper
 inoreabbrev <expr> #!! "#!/usr/bin/env" . (empty(&filetype) ? '' : ' '.&filetype)
+inoreabbrev <expr> #!s "#!/bin/bash -e"
 " get output from python
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 " time
@@ -174,5 +167,7 @@ inoremap <M-h> <left>
 inoremap <M-l> <Right>
 noremap H ^
 noremap L $
-
+" text object [[[2
+xnoremap <silent> ae gg0oG$
+onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim

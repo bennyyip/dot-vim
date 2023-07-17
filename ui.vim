@@ -12,4 +12,7 @@ if !s:is_ssh && has("termguicolors")
   " enable true color
   set termguicolors
 endif
+" Other [[[2
+set guioptions=
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim
+

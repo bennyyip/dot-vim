@@ -29,7 +29,7 @@ if !g:minimal_plugins
   Pack 'markonm/traces.vim'
   Pack 'haya14busa/vim-asterisk'
 
-  Pack 'cocopon/vaffle.vim'
+  Pack 'cocopon/vaffle.vim', { 'type': 'delay' }
 
   Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t' ] }
   Pack 'monkoose/vim9-stargate'

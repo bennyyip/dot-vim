@@ -1,4 +1,4 @@
-if plugpac#has_plugin("asyncrun.vim")
+if plugpac#HasPlugin("asyncrun.vim")
   nnoremap <buffer><F5> :w<CR>:AsyncRun xelatex %<CR>
 endif
 
