@@ -26,6 +26,7 @@
     }
   },
   "pyright.enable": true,
+  "vimlsp.debug": true,
   "python.formatting.provider": "black",
   "python.linting.enabled": false,
   "snippets.ultisnips.pythonPrompt": false,

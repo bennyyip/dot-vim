@@ -6,7 +6,7 @@ endif
 
 g:plugpac_plugin_conf_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
-plugpac#Begin()
+call plugpac#Begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 
 Pack 'tpope/vim-sensible', { 'type': 'start' }

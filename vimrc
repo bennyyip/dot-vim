@@ -24,7 +24,8 @@ endif
 
 
 if has("python3")
-  exe "py3file" $v .. "/vimrc.py"
+  execute "py3file" $v .. "/vimrc.py"
 endif
+
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

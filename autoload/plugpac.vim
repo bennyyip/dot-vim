@@ -51,6 +51,7 @@ export def Begin()
   call Setup_command()
 enddef
 
+
 export def End()
   for [name, cmds] in items(lazy.cmd)
     for cmd in cmds
@@ -169,7 +170,9 @@ def DoCmd(plugin: string, cmd: any, bang: any, start_: number, end_: number, arg
   execute "packadd " .. plugin
 
   const rc_path = GetRcPath(plugin)
-  execute printf('source %s', rc_path)
+  if filereadable(rc_path)
+    execute printf('source %s', rc_path)
+  endif
 
   execute printf('%s%s%s %s', (start_ == end_ ? '' : (start_ .. ',' .. end_)), cmd, bang, args_)
 enddef
@@ -180,7 +183,9 @@ def DoMap(plugin: string, map_: any, with_prefix: any, prefix_: any)
   execute "packadd " .. plugin
 
   const rc_path = GetRcPath(plugin)
-  execute printf('source %s', rc_path)
+  if filereadable(rc_path)
+    execute printf('source %s', rc_path)
+  endif
 
   var extra = ''
   while 1
