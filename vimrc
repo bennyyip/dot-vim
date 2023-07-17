@@ -1,8 +1,5 @@
 vim9script
 const is_win = has('win32')
-const is_tty = !match(&term, 'linux')
-const is_gvim = has('gui_running')
-const is_nvim = has('nvim')
 g:minimal_plugins = v:false
 $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
 $VIMRC = $v .. '/vimrc'
@@ -22,10 +19,8 @@ else
   execute 'source ' .. $v .. "/unix.vim"
 endif
 
-
 if has("python3")
   execute "py3file" $v .. "/vimrc.py"
 endif
-
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

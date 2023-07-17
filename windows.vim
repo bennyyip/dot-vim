@@ -9,9 +9,8 @@ let g:netrw_silent = 1
 
 if s:is_gvim
   augroup vimrc
-    autocmd GUIEnter *  simalt ~x
+    autocmd GUIEnter *  ++once simalt ~x
   augroup END
-  set guioptions-=egmrLtT
   set guifont=Sarasa\ Term\ CL\ Nerd:h14
   " 調整行高
   set linespace=-2

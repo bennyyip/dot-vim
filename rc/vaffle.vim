@@ -7,7 +7,7 @@ function! s:customize_vaffle_mappings() abort
   nmap <buffer> - <Plug>(vaffle-open-parent)
 endfunction
 
-augroup vimrc_vaffle
+augroup vimrc
   autocmd!
   autocmd FileType vaffle call s:customize_vaffle_mappings()
 augroup END

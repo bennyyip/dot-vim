@@ -63,7 +63,9 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup vimrc
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup end
 
 " Remap for rename current word
 nmap <f2> <Plug>(coc-rename)
