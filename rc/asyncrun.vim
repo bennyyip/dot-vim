@@ -47,9 +47,3 @@ noremap <leader>: :AsyncStop<CR>
 noremap <F8>      :Make<CR>
 
 noremap <silent> <leader>q :<C-u>call asyncrun#quickfix_toggle(8)<CR>
-
-if has('win32')
-  let g:asyncrun_wrapper = 'powershell -NoProfile -Command'
-  nmap <leader>ii :AsyncRun Invoke-Item '$(VIM_FILEDIR)'<CR>
-  nmap <leader>ps :AsyncRun wt new-tab -d '$(VIM_FILEDIR)'<CR>
-endif

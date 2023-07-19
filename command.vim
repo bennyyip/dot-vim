@@ -18,7 +18,7 @@ function ChineseCount() range
   echo cc
 endfunc
 
-vnoremap <F7> :call ChineseCount()<cr>
+vnoremap <F7> :call <SID>ChineseCount()<cr>
 
 # :Shuffle | Shuffle selected lines [[[2
 command! -range Shuffle <line1>,<line2>call ben#shuffle()

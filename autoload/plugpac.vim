@@ -260,13 +260,13 @@ enddef
 
 def StartPluginComplete(A: string, L: string, P: number): list<string>
   const plugins = GetInstalledPlugins('start')
-  return filter(keys(plugins), 'v:val =~ "' .. A .. '"')
+  return matchfuzzy(keys(plugins), A)
 enddef
 
 
 def OptPluginComplete(A: string, L: string, P: number): list<string>
   const plugins = GetInstalledPlugins('opt')
-  return filter(keys(plugins), 'v:val =~ "' .. A .. '"')
+  return matchfuzzy(keys(plugins), A)
 enddef
 
 def GetInstalledPlugins(type_: string = 'all'): dict<string>

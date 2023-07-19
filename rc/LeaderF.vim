@@ -59,7 +59,6 @@ nnoremap <leader>fq :Leaderf ghq --popup<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
 nnoremap <leader>pf  :call <SID>search_project()<CR>
-nnoremap <leader>si :Leaderf function<CR>
 nnoremap gb  :Leaderf buffer <CR>
 nnoremap gr  :<C-U>Leaderf rg -e<Space>
 
