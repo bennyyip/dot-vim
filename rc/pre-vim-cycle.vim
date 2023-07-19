@@ -1,4 +1,26 @@
 " Plugin: bootleq/vim-cycle
+function! s:get_pattern_at_cursor(pat)
+  let col = col('.') - 1
+  let line = getline('.')
+  let ebeg = -1
+  let cont = match(line, a:pat, 0)
+  while (ebeg >= 0 || (0 <= cont) && (cont <= col))
+    let contn = matchend(line, a:pat, cont)
+    if (cont <= col) && (col < contn)
+      let ebeg = match(line, a:pat, cont)
+      let elen = contn - ebeg
+      break
+    else
+      let cont = match(line, a:pat, contn)
+    endif
+  endwhile
+  if ebeg >= 0
+    return strpart(line, ebeg, elen)
+  else
+    return ""
+  endif
+endfunction
+
 
 let g:cycle_default_groups = [
       \ [['true', 'false']],
@@ -32,7 +54,7 @@ let g:cycle_default_groups = [
 let g:cycle_no_mappings = 1
 
 function! s:trycycle(dir)
-  let pat = ben#get_pattern_at_cursor('[+-]\?\d\+')
+  let pat = s:get_pattern_at_cursor('[+-]\?\d\+')
   if pat
     if a:dir ==? 'x'
       return "\<C-X>"
