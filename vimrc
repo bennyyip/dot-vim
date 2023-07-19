@@ -4,10 +4,6 @@ g:minimal_plugins = v:false
 $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
 $VIMRC = $v .. '/vimrc'
 
-if filereadable($HOME .. '/local.vim')
-  source $HOME/local.vim
-endif
-
 execute 'source ' .. $v .. "/setting.vim"
 execute 'source ' .. $v .. "/pack.vim"
 execute 'source ' .. $v .. "/ui.vim"
@@ -18,6 +14,11 @@ if is_win
 else
   execute 'source ' .. $v .. "/unix.vim"
 endif
+
+if filereadable($HOME .. '/local.vim')
+  source $HOME/local.vim
+endif
+
 
 if has("python3")
   execute "py3file" $v .. "/vimrc.py"

@@ -1,9 +1,6 @@
 " Key Mapping [[[1
 let s:is_gvim = has('gui_running')
 " misc [[[2
-nmap     t= mxHmygg=G`yzt`x
-nmap     tj Jx
-
 nnoremap <localleader>j :set ft=javascript<CR>
 nnoremap <localleader>h :set ft=html<CR>
 " toogle line number and relative line number
@@ -13,23 +10,18 @@ endfunction
 nnoremap yoN :set <C-R>=<SID>number_options()<CR><CR>
 nnoremap [oN :set number relativenumber<CR>
 nnoremap ]oN :set nonumber norelativenumber<CR>
-
-" gx
-nmap gX <Plug>NetrwBrowseX
-nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))<cr>
-xmap gX <Plug>NetrwBrowseXVis
-xno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
-
 " fold [[[3
 nmap z] zo]z
 nmap z[ zo[z
 " correct spell [[[3
-cab Q q
-cab Qa qa
-cab W w
-cab Wq wq
-cab Wa wa
-cab X x
+cabbrev Q q
+cabbrev Qa qa
+cabbrev W w
+cabbrev Wq wq
+cabbrev Wa wa
+cabbrev X x
+cabbrev Help help
+cabbrev v verbose
 " syntax [[[3
 " nnoremap <leader>si  :echo ben#syninfo()<cr>
 " nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
@@ -56,7 +48,6 @@ nnoremap <silent><expr> <backspace> (v:count ? ':<C-U>:call ben#save_change_mark
       \ . ':nohlsearch'.(has('diff')?'\|diffupdate':'')
       \ . '<CR><C-L>'
 nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
-nnoremap <leader>v :call ben#daily_note()<CR>
 " window [[[2
 " quick <C-w>
 nnoremap ' <C-w>
@@ -86,12 +77,11 @@ xnoremap <silent><C-c> "+y
 nnoremap Y   y$
 xnoremap x  "_d
 xnoremap P  "0p
-nmap     tp "+P
 " select what I just pasted
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " copy entire file contents (to gui-clipboard if available)
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG'.(has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
-" vimrc
+" vimrc [[[2
 nnoremap <leader>fed :e $VIMRC<CR>
 nnoremap <leader>fee :source $VIMRC<CR>
 " run current line
@@ -103,7 +93,7 @@ xnoremap <expr> < v:count ? "<" : "<gv"
 " niceblock
 xnoremap <expr> I (mode()=~#'[vV]'?'<C-v>^o^I':'I')
 xnoremap <expr> A (mode()=~#'[vV]'?'<C-v>0o$A':'A')
-
+" macro [[[2
 " quick edit macro  | ["register]<leader>m
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
@@ -128,6 +118,7 @@ nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
+nnoremap <leader>v :call ben#daily_note()<CR>
 " tab [[[2
 nmap     T :tabnew<cr>
 nnoremap ]t :tabn<cr>

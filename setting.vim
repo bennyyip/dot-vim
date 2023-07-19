@@ -36,7 +36,6 @@ set cinoptions=>2,l1,p0,)50,*50,t0
 " Instead set softtabstop=-1, then 'shiftwidth' is used.
 set smarttab expandtab shiftwidth=4 softtabstop=-1
 " display settings [[[3
-set display=lastline
 set laststatus=2
 set list
 set modeline
@@ -92,7 +91,7 @@ set hlsearch
 set ignorecase
 set smartcase
 set scrolloff=4
-set sidescroll=5
+" set sidescroll=5
 set number            " line number
 set relativenumber    " relative line number
 if has('patch-8.1.1564')
@@ -109,7 +108,7 @@ set suffixes     +=.a,.1,.class
 set wildignore   +=*.o,*.so,*.zip,*.png
 set wildmenu
 "set wildmode=list:longest,full
-set wildoptions=tagfile
+" set wildoptions=tagfile
 set path+=**
 set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
