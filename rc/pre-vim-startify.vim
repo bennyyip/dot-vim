@@ -1,3 +1,16 @@
+function! s:quote() abort
+  let l:quotes = [
+        \ ["vi vi vi, the editor of the beast."]
+        \]
+  let quote = l:quotes[rand() % len(l:quotes)]
+  let lines = []
+  for l in quote
+    let offset = 50 - strwidth(l)
+    let lines += [repeat(' ', offset).l ]
+  endfor
+  return lines
+endfunction
+
 let s:ascii_art = [
       \"             ________ ++     ________             ",
       \"            /VVVVVVVV\++++  /VVVVVVVV\\           ",
@@ -18,7 +31,7 @@ let s:ascii_art = [
       \"                                                  ",
       \]
 let g:startify_custom_header =
-      \ map(s:ascii_art + ben#quote(), '"   ".v:val')
+      \ map(s:ascii_art + s:quote(), '"   ".v:val')
 let g:startify_skiplist = [
       \ 'COMMIT_EDITMSG',
       \ 'bundle/.*/doc',

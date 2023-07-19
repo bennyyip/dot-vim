@@ -1,4 +1,5 @@
 import enum
+import random
 import shlex
 import subprocess
 
@@ -33,6 +34,15 @@ def LilyPaste():
         pass
     vimprint(url, style="Underlined", kind=EchoKind.echon)
     curl.wait()
+
+
+def Shuffle():
+    r = vim.current.range
+    start = r.start
+    end = r.end
+    lines = list(r)
+    random.shuffle(lines)
+    vim.current.buffer[start:end] = lines
 
 
 def vimprint(text, *, style="Normal", kind=EchoKind.normal):

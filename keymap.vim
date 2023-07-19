@@ -118,7 +118,17 @@ nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
-nnoremap <leader>v :call ben#daily_note()<CR>
+
+
+function! s:daily_note()
+  let filename = expand($HOME . "/Obsidian-Vault/Daily/". strftime('%Y-%m-%d'). '.md')
+  let daily_note_dir = fnamemodify(filename, ':h')
+  if !isdirectory(daily_note_dir)
+    call mkdir(daily_note_dir, 'p')
+  endif
+  execute 'edit' fnameescape(filename)
+endfunction
+nnoremap <leader>v :call <SID>daily_note()<CR>
 " tab [[[2
 nmap     T :tabnew<cr>
 nnoremap ]t :tabn<cr>
