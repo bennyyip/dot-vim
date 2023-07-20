@@ -171,4 +171,6 @@ noremap L $
 " text object [[[2
 xnoremap <silent> ae gg0oG$
 onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>
+" ]]]
+" ]]]
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim

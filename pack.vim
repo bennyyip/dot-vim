@@ -1,4 +1,7 @@
 vim9script
+
+import "./utils.vim" as Utils
+
 const minpac_dir = $v .. '/pack/minpac/opt/minpac'
 if !isdirectory(minpac_dir)
   silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
@@ -121,8 +124,9 @@ endif
 plugpac#End()
 # plugpac helpers [[[1
 def PackList(A: string, ...args: list<any>): list<string>
-    plugpac#Init()
-    return minpac#getpluglist()->keys()->sort()->matchfuzzy(A)
+  plugpac#Init()
+  const pluglist = minpac#getpluglist()->keys()->sort()
+  return pluglist->Utils.Matchfuzzy(A)
 enddef
 
 command! -nargs=1 -complete=customlist,PackList
@@ -130,17 +134,17 @@ command! -nargs=1 -complete=customlist,PackList
       \    minpac#getpluginfo(<q-args>).url)
 
 command! -nargs=1 -complete=customlist,PackList
-    \ PackOpenDir call plugpac#Init() | execute 'edit ' .. minpac#getpluginfo(<q-args>).dir
+      \ PackOpenDir call plugpac#Init() | execute 'edit ' .. minpac#getpluginfo(<q-args>).dir
 
 command! -nargs=1 -complete=customlist,PackList
-    \ PackRc call plugpac#Init() | execute 'edit ' ..
-    \ g:plugpac_plugin_conf_path .. '/' ..
-    \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
+      \ PackRc call plugpac#Init() | execute 'edit ' ..
+      \ g:plugpac_plugin_conf_path .. '/' ..
+      \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
 
 command! -nargs=1 -complete=customlist,PackList
-    \ PackRcPre call plugpac#Init() | execute 'edit ' ..
-    \ g:plugpac_plugin_conf_path .. '/pre-' ..
-    \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
-
+      \ PackRcPre call plugpac#Init() | execute 'edit ' ..
+      \ g:plugpac_plugin_conf_path .. '/pre-' ..
+      \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
+# ]]]
 
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim

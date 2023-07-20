@@ -36,6 +36,7 @@ set cinoptions=>2,l1,p0,)50,*50,t0
 " Instead set softtabstop=-1, then 'shiftwidth' is used.
 set smarttab expandtab shiftwidth=4 softtabstop=-1
 " display settings [[[3
+" set display=lastline
 set laststatus=2
 set list
 set modeline
@@ -203,5 +204,8 @@ augroup vimrc
   " save on focus lost
   autocmd FocusLost * :silent! wa
 augroup END
+" ]]]
+" ]]]
+" ]]]
 
 " vim:fdm=marker:fmr=[[[,]]]:ft=vim

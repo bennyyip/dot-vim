@@ -258,15 +258,22 @@ def DisableEnablePlugin(plugin: string, disable: bool)
   call rename(plugin_dir, dst_dir)
 enddef
 
-def StartPluginComplete(A: string, L: string, P: number): list<string>
-  const plugins = GetInstalledPlugins('start')
-  return matchfuzzy(keys(plugins), A)
+def Matchfuzzy(l: list<string>, str: string): list<string>
+  if str == ''
+    return l
+  else
+    return matchfuzzy(l, str)
+  endif
 enddef
 
+def StartPluginComplete(A: string, L: string, P: number): list<string>
+  const plugins = GetInstalledPlugins('start')->keys()
+  return plugins->Matchfuzzy(A)
+enddef
 
 def OptPluginComplete(A: string, L: string, P: number): list<string>
-  const plugins = GetInstalledPlugins('opt')
-  return matchfuzzy(keys(plugins), A)
+  const plugins = GetInstalledPlugins('opt')->keys()
+  return plugins->Matchfuzzy(A)
 enddef
 
 def GetInstalledPlugins(type_: string = 'all'): dict<string>
