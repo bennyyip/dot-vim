@@ -1,7 +1,10 @@
 vim9script
-# :Reverse [[[2
+
+import "./utils.vim" as Utils
+
+# :Reverse [[[1
 command! -bar -range=% Reverse :<line1>,<line2>global/^/m <line1>-1<bar>nohl
-# ChineseCount [[[2
+# ChineseCount [[[1
 function ChineseCount() range
   let save = @z
   silent exec 'normal! gv"zy'
@@ -20,12 +23,12 @@ endfunc
 
 vnoremap <F7> :call <SID>ChineseCount()<cr>
 
-# :Shuffle | Shuffle selected lines [[[2
+# :Shuffle | Shuffle selected lines [[[1
 command! -range=% Shuffle :<line1>,<line2>py3 Shuffle()
-# :A [[[2
+# :A [[[1
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
-# :PX | chmod +x [[[2
+# :PX | chmod +x [[[1
 command! PX if !empty(expand('%'))
       \|   write
       \|   call system('chmod +x '.expand('%'))
@@ -35,11 +38,11 @@ command! PX if !empty(expand('%'))
       \|   echo 'Save the file first'
       \|   echohl None
       \| endif
-# RFC [[[2
+# RFC [[[1
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
-# Paste [[[2
+# Paste [[[1
 command! -range=% Paste :<line1>,<line2>py3 LilyPaste()
-# 使用分隔符连接多行 [[[2
+# Join [[[1
 function Lilydjwg_join(sep, bang) range
   if a:sep[0] == '\'
     let sep = strpart(a:sep, 1)
@@ -62,13 +65,29 @@ function Lilydjwg_join(sep, bang) range
   endif
 endfunction
 command! -nargs=1 -range=% -bang Join :<line1>,<line2>call Lilydjwg_join(<q-args>, "<bang>")
-# Quote [[[2
+# Quote [[[1
 def Quote(quote: string, bang: string)
   const q = quote == '' ? '"' : quote
   const l = getline('.')
-  if l != '' || bang == '!'
+  if l != '' || bang != '!'
     (q .. l .. q)->setline(line('.'))
   endif
 enddef
 command! -bang -nargs=? -range=% Quote :<line1>,<line2>call Quote(<q-args>, "<bang>")
+# StrArray [[[1
+def StrArray(line1: number, line2: number)
+  execute printf(":%s,%sQuote", line1, line2)
+  execute printf(":%s,%sJoin ,", line1, line2)
+  execute printf("normal yss]")
+enddef
+command! -bang -nargs=? -range=% StrArray :call StrArray(<line1>, <line2>)
+# Ghq [[[1
+def GhqList(A: string, ...args: list<any>): list<string>
+  const projs =  globpath(expand('~/ghq/github.com'), '*/*', 0, 1)
+    ->map((k, x) => substitute(x, '^.*[/\\]\ze[^/\\]*[/\\]', '', ''))
+  return projs->Utils.Matchfuzzy(A)
+enddef
+command! -nargs=1 -complete=customlist,GhqList Ghq execute 'edit ' .. expand('~/ghq/github.com/') .. <q-args>
+# ]]]
+
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
