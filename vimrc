@@ -4,15 +4,27 @@ g:minimal_plugins = v:false
 $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
 $VIMRC = $v .. '/vimrc'
 
-execute 'source ' .. $v .. "/setting.vim"
-execute 'source ' .. $v .. "/pack.vim"
-execute 'source ' .. $v .. "/ui.vim"
-execute 'source ' .. $v .. "/command.vim"
-execute 'source ' .. $v .. "/keymap.vim"
+def Source(file: string)
+  execute $'source $v/{file}.vim'
+enddef
+
+if exists('#vimrc')
+  augroup vimrc
+    autocmd!
+  augroup END
+  augroup! vimrc
+endif
+
+Source('setting')
+Source('pack')
+Source('ui')
+Source('command')
+Source('keymap')
+Source('autocmd')
 if is_win
-  execute 'source ' .. $v .. "/windows.vim"
+  Source('windows')
 else
-  execute 'source ' .. $v .. "/unix.vim"
+  Source('unix')
 endif
 
 if filereadable($HOME .. '/local.vim')
@@ -23,6 +35,5 @@ endif
 if has("python3")
   execute "py3file" $v .. "/vimrc.py"
 endif
-
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

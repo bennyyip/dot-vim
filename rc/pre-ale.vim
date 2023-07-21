@@ -1,4 +1,5 @@
-" Plugin: dense-analysis/ale
+vim9script
+# Plugin: dense-analysis/ale
 
-let g:ale_disable_lsp = 1
+g:ale_disable_lsp = 1
 

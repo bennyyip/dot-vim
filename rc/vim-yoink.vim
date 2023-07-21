@@ -1,4 +1,5 @@
-" Plugin: svermeulen/vim-yoink
+vim9script
+# Plugin: svermeulen/vim-yoink
 
 nmap <c-n> <plug>(YoinkPostPasteSwapBack)
 nmap <c-p> <plug>(YoinkPostPasteSwapForward)

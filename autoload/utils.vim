@@ -15,5 +15,21 @@ export def GetCurorLines() # [[[1
         \ : [line('.')]
 enddef
 
+export def Debounce(Fn: func, timeout: number = 200): func
+  var timer = -1
+  return (...args: list<any>) => {
+    if timer != -1
+      timer_stop(timer)
+    endif
+    timer = timer_start(timeout, (t) => {
+      timer = -1
+      # TODO args
+      # Fn(...args)
+      Fn()
+    })
+  }
+enddef
+
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
+

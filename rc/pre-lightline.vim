@@ -1,4 +1,4 @@
-" machakann/vim-highlightedyank [[[1
+" Plugin: itchyny/lightline.vim [[[1
 let s:is_tty = !match(&term, 'linux')
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },

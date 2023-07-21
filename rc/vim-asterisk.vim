@@ -1,4 +1,5 @@
-" Plugin: haya14busa/vim-asterisk
+vim9script
+# Plugin: haya14busa/vim-asterisk
 
 map *   ms<Plug>(asterisk-*)zzzv
 map g*  ms<Plug>(asterisk-g*)zzzv

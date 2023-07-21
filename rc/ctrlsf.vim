@@ -1,12 +1,13 @@
-" Plugin: dyng/ctrlsf.vim
+vim9script
+# Plugin: dyng/ctrlsf.vim
 
-let g:ctrlsf_default_root = 'project'
-let g:ctrlsf_mapping = {
+g:ctrlsf_default_root = 'project'
+g:ctrlsf_mapping = {
       \ 'next': 'n',
       \ 'prev': 'N',
       \ 'vsplit': 'x'
       \ }
-let g:ctrlsf_extra_backend_args = {
+g:ctrlsf_extra_backend_args = {
       \ 'rg': '--hidden'
       \ }
 

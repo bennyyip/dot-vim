@@ -1,15 +1,15 @@
-" Plugin: cocopon/vaffle.vim
+vim9script
+# Plugin: cocopon/vaffle.vim
 
 nmap -  :<C-u>Vaffle %:p<CR>
 
-function! s:customize_vaffle_mappings() abort
-  " Customize key mappings here
+def CustomizeVaffleMappings()
+  # Customize key mappings here
   nmap <buffer> - <Plug>(vaffle-open-parent)
   nmap <buffer> <Bslash> <Plug>(vaffle-open-root)
 
-endfunction
+enddef
 
 augroup vimrc
-  autocmd!
-  autocmd FileType vaffle call s:customize_vaffle_mappings()
+  autocmd FileType vaffle call CustomizeVaffleMappings()
 augroup END
