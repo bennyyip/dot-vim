@@ -1,28 +1,8 @@
-" Plugin: bootleq/vim-cycle
-function! s:get_pattern_at_cursor(pat)
-  let col = col('.') - 1
-  let line = getline('.')
-  let ebeg = -1
-  let cont = match(line, a:pat, 0)
-  while (ebeg >= 0 || (0 <= cont) && (cont <= col))
-    let contn = matchend(line, a:pat, cont)
-    if (cont <= col) && (col < contn)
-      let ebeg = match(line, a:pat, cont)
-      let elen = contn - ebeg
-      break
-    else
-      let cont = match(line, a:pat, contn)
-    endif
-  endwhile
-  if ebeg >= 0
-    return strpart(line, ebeg, elen)
-  else
-    return ""
-  endif
-endfunction
+vim9script
+# Plugin: bootleq/vim-cycle
 
 
-let g:cycle_default_groups = [
+g:cycle_default_groups = [
       \ [['true', 'false']],
       \ [['yes', 'no']],
       \ [['and', 'or']],
@@ -51,27 +31,50 @@ let g:cycle_default_groups = [
       \ [['up', 'down']],
       \ [['after', 'before']],
       \ ]
-let g:cycle_no_mappings = 1
+g:cycle_no_mappings = 1
 
-function! s:trycycle(dir)
-  let pat = s:get_pattern_at_cursor('[+-]\?\d\+')
-  if pat
-    if a:dir ==? 'x'
-      return "\<C-X>"
-    else
-      return "\<C-A>"
-    end
-  else
-    let mode = mode() =~ 'n' ? 'w' : 'v'
-    let dir = a:dir ==? 'x' ? -1 : 1
-    return ":\<C-U>call Cycle('" . mode . "', " . dir . ", v:count1)\<CR>"
-  end
-endfunction
 
-nnoremap <expr> <silent> <C-X> <SID>trycycle('x')
-vnoremap <expr> <silent> <C-X> <SID>trycycle('x')
-nnoremap <expr> <silent> <C-A> <SID>trycycle('p')
-vnoremap <expr> <silent> <C-A> <SID>trycycle('p')
+nnoremap <expr> <silent> <C-X> <SID>TryCycle('x')
+vnoremap <expr> <silent> <C-X> <SID>TryCycle('x')
+nnoremap <expr> <silent> <C-A> <SID>TryCycle('p')
+vnoremap <expr> <silent> <C-A> <SID>TryCycle('p')
 nnoremap <Plug>CycleFallbackNext <C-A>
 nnoremap <Plug>CycleFallbackPrev <C-X>
 
+def GetPatternAtCursor(pat: string): string
+  const col = col('.') - 1
+  const line = getline('.')
+  var ebeg = -1
+  var elen = -1
+  var cont = match(line, pat, 0)
+  while (ebeg >= 0 || (0 <= cont) && (cont <= col))
+    const contn = matchend(line, pat, cont)
+    if (cont <= col) && (col < contn)
+      ebeg = match(line, pat, cont)
+      elen = contn - ebeg
+      break
+    else
+      cont = match(line, pat, contn)
+    endif
+  endwhile
+  if ebeg >= 0
+    return strpart(line, ebeg, elen)
+  else
+    return ""
+  endif
+enddef
+
+def TryCycle(dir: string): string
+  const pat = GetPatternAtCursor('[+-]\?\d\+')
+  if pat != ""
+    if dir ==? 'x'
+      return "\<C-X>"
+    else
+      return "\<C-A>"
+    endif
+  else
+    const mode = mode() =~ 'n' ? 'w' : 'v'
+    const d = dir ==? 'x' ? -1 : 1
+    return ":\<C-U>call Cycle('" .. mode .. "', " .. d .. ", v:count1)\<CR>"
+  endif
+enddef

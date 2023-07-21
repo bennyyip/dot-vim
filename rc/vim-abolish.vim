@@ -1,5 +1,7 @@
-" Plugin: tpope/vim-abolish
+vim9script
+# Plugin: tpope/vim-abolish
 
+Abolish cosnt const
 Abolish qutoa quota
 Abolish improt import
 Abolish udpate{,s} update{}

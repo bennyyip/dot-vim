@@ -1,6 +1,7 @@
-" Plugin: AndrewRadev/linediff.vim
+vim9script
+# Plugin: AndrewRadev/linediff.vim
 
-let g:linediff_buffer_type = 'scratch'
+g:linediff_buffer_type = 'scratch'
 
 vnoremap zd :Linediff<CR>
 

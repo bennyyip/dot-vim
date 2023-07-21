@@ -1,6 +1,6 @@
 vim9script
 
-import "./utils.vim" as Utils
+import autoload "./autoload/utils.vim" as Utils
 
 const minpac_dir = $v .. '/pack/minpac/opt/minpac'
 if !isdirectory(minpac_dir)
@@ -11,7 +11,11 @@ g:plugpac_plugin_conf_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
 
 # plugins [[[1
-call plugpac#Begin()
+call plugpac#Begin({
+  progress_open: 'tab',
+  status_open: 'vertical',
+  verbose: 2,
+})
 Pack 'k-takata/minpac', {'type': 'opt'}
 
 Pack 'tpope/vim-sensible', { 'type': 'start' }
@@ -27,15 +31,16 @@ if !g:minimal_plugins
   Pack 'bennyyip/vim-interestingwords', { 'on': '<Plug>InterestingWords' }
   Pack 'cocopon/vaffle.vim', { 'type': 'start' }
   Pack 'itchyny/vim-cursorword'
-  Pack 'luochen1990/rainbow', { 'type': 'delay' }
-  Pack 'machakann/vim-highlightedyank'
+  Pack 'luochen1990/rainbow'
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
   Pack 'romainl/vim-qf'
   Pack 'skywind3000/vim-terminal-help'
   Pack 'tpope/vim-characterize'
-  Pack 'tpope/vim-repeat', { 'type': 'start' }
+  Pack 'tpope/vim-repeat'
   Pack 'vim-voom/VOoM', { 'on': 'Voom' }
+  Pack 'editorconfig/editorconfig-vim'
+  Pack 'Eliot00/auto-pairs'
 
   Pack 'junegunn/fzf'
   Pack 'junegunn/fzf.vim'
@@ -48,15 +53,18 @@ if !g:minimal_plugins
 
   Pack 'chrisbra/NrrwRgn'
 
+  Pack 'machakann/vim-highlightedyank', {type: 'opt'}
   # Vim [[[3
   Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
   Pack 'tyru/restart.vim', { 'on': 'Restart' }
   # VCS [[[3
-  Pack 'tpope/vim-rhubarb'
-  Pack 'tpope/vim-fugitive', { 'type': 'start' }
+  Pack 'Eliot00/git-lens.vim'
   Pack 'junegunn/gv.vim', { 'on': 'GV' }
-  Pack 'tommcdo/vim-fubitive', {'type': 'start'}
+  # Pack 'shumphrey/fugitive-gitlab.vim'
+  # Pack 'tommcdo/vim-fubitive'
   Pack 'tommcdo/vim-fugitive-blame-ext'
+  Pack 'tpope/vim-fugitive'
+  Pack 'tpope/vim-rhubarb'
   # Text Edit [[[3
   Pack 'AndrewRadev/sideways.vim'
   Pack 'AndrewRadev/splitjoin.vim'
@@ -88,14 +96,16 @@ if !g:minimal_plugins
   Pack 'lilydjwg/fcitx.vim'
   # Appearance [[[3
   Pack 'itchyny/lightline.vim'
-  Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
+  Pack 'monkoose/boa-vim'
+  # Pack 'Bakudankun/qline.vim', {'type': 'delay'}
+
   Pack 'mhinz/vim-startify', { 'type': 'start' }
   # Language [[[2
-  Pack 'neoclide/coc.nvim', { 'branch': 'release', 'type': 'start' }
+  Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
 
   Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
-  Pack 'Shiracamus/vim-syntax-x86-objdump-d', { 'type': 'start' }
+  Pack 'Shiracamus/vim-syntax-x86-objdump-d'
   Pack 'cespare/vim-toml', { 'for': 'toml' }
   Pack 'derekwyatt/vim-scala', { 'for': 'scala' }
   Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }

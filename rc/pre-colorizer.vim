@@ -1,2 +1,3 @@
-let g:colorizer_startup = 0
-let g:colorizer_nomap = 1
+vim9script
+g:colorizer_startup = 0
+g:colorizer_nomap = 1
