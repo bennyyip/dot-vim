@@ -1,1 +1,2 @@
-let g:nrrw_rgn_wdth = 30
+vim9script
+g:nrrw_rgn_wdth = 30

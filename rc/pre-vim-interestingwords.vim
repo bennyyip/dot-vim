@@ -1,8 +1,9 @@
-" Plugin: lfv89/vim-interestingwords
+vim9script
+# Plugin: lfv89/vim-interestingwords
 
-let g:interestingWordsDefaultMappings = 0
+g:interestingWordsDefaultMappings = 0
 
-let g:interestingWordsCycleColors = 1
+g:interestingWordsCycleColors = 1
 
 nmap <silent> <leader>m <Plug>InterestingWords
 vmap <silent> <leader>m <Plug>InterestingWords

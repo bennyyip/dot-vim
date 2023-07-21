@@ -1,6 +1,6 @@
 vim9script
 
-import "./utils.vim" as Utils
+import autoload "./autoload/utils.vim" as Utils
 
 # :Reverse [[[1
 command! -bar -range=% Reverse :<line1>,<line2>global/^/m <line1>-1<bar>nohl

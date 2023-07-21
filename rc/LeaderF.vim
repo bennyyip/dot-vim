@@ -1,19 +1,20 @@
-" Plugin: Yggdroot/LeaderF
+vim9script
+# Plugin: Yggdroot/LeaderF
 
 if executable('rg')
-  let g:Lf_DefaultExternalTool = 'rg'
+  g:Lf_DefaultExternalTool = 'rg'
 endif
-let g:Lf_StlColorscheme = 'gruvbox_material'
+g:Lf_StlColorscheme = 'gruvbox_material'
 
-let g:Lf_ShortcutF=''
-let g:Lf_ShortcutB=''
-let g:Lf_MruMaxFiles=500
-let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
-let g:Lf_HideHelp = 1
-let g:Lf_ShowRelativePath = 1
-let g:Lf_JumpToExistingWindow = 0
-let g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>']}
-let g:Lf_NormalMap = {
+g:Lf_ShortcutF = ''
+g:Lf_ShortcutB = ''
+g:Lf_MruMaxFiles = 500
+g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
+g:Lf_HideHelp = 1
+g:Lf_ShowRelativePath = 1
+g:Lf_JumpToExistingWindow = 0
+g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>']}
+g:Lf_NormalMap = {
       \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
       \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
       \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
@@ -22,7 +23,7 @@ let g:Lf_NormalMap = {
       \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
       \ }
 
-let g:Lf_PreviewResult = {
+g:Lf_PreviewResult = {
       \ 'File': 0,
       \ 'Buffer': 0,
       \ 'Mru': 0,
@@ -36,34 +37,34 @@ let g:Lf_PreviewResult = {
       \}
 
 
-function! s:search_here() abort
-  let l:sv = get(g:, 'Lf_WorkingDirectoryMode', 'c')
-  let g:Lf_WorkingDirectoryMode = 'f'
+def SearchHere()
+  const sv = get(g:, 'Lf_WorkingDirectoryMode', 'c')
+  g:Lf_WorkingDirectoryMode = 'f'
   execute 'LeaderfFile'
-  let g:Lf_WorkingDirectoryMode = l:sv
-endfunction
+  g:Lf_WorkingDirectoryMode = sv
+enddef
 
-function! s:search_project() abort
-  let l:sv = get(g:, 'Lf_WorkingDirectoryMode', 'c')
-  let g:Lf_WorkingDirectoryMode = 'A'
+def SearchProject()
+  const sv = get(g:, 'Lf_WorkingDirectoryMode', 'c')
+  g:Lf_WorkingDirectoryMode = 'A'
   execute 'LeaderfFile'
-  let g:Lf_WorkingDirectoryMode = l:sv
-endfunction
+  g:Lf_WorkingDirectoryMode = sv
+enddef
 
 
-nnoremap <leader>.  :call <SID>search_here()<CR>
+nnoremap <leader>.  :call <SID>SearchHere()<CR>
 nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>ff :Leaderf file <CR>
 nnoremap <leader>fp :LeaderfFile $v<CR>
 nnoremap <leader>fq :Leaderf ghq --popup<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>gt :LeaderfBufTag<CR>
-nnoremap <leader>pf  :call <SID>search_project()<CR>
+nnoremap <leader>pf  :call <SID>SearchProject()<CR>
 nnoremap gb  :Leaderf buffer <CR>
 nnoremap gr  :<C-U>Leaderf rg -e<Space>
 
-command! -bar -bang -nargs=0 Rg call s:rg(<bang>0)
-command! -bar -nargs=* History call s:history(<q-args>)
+command! -bar -bang -nargs=0 Rg call <SID>Rg(<bang>0)
+command! -bar -nargs=? History call <SID>History(<q-args>)
 command! -bar -nargs=0 BLines Leaderf line --all
 command! -bar -nargs=0 Buffers Leaderf buffer
 command! -bar -nargs=0 BuffersAll Leaderf buffer --all
@@ -71,20 +72,20 @@ command! -bar -nargs=0 Commands Leaderf command
 command! -bar -nargs=0 FileTypes Leaderf filetype
 command! -bar -nargs=0 Lines Leaderf line
 
-function! s:history(arg)
-  if a:arg[0] == ':'
+def History(arg: string)
+  if arg[0] == ':'
     Leaderf cmdHistory
-  elseif a:arg[0] == '/'
+  elseif arg[0] == '/'
     exec "Leaderf searchHistory" | silent! norm! n
   else
     Leaderf mru
   endif
-endfunction
+enddef
 
-function! s:rg(bang)
-  if a:bang
+def Rg(bang: any)
+  if bang
     exec "Leaderf! rg --recall"
   else
     call leaderf#Rg#Interactive()
   endif
-endfunction
+enddef
