@@ -53,10 +53,10 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
 
 def ShowDocumentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+  if (index(['vim', 'help'], &filetype) >= 0)
+    execute 'h ' .. expand('<cword>')
   else
-    call CocAction('doHover')
+    call g:CocAction('doHover')
   endif
 enddef
 

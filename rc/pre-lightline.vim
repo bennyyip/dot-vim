@@ -1,7 +1,6 @@
 " Plugin: itchyny/lightline.vim [[[1
 let s:is_tty = !match(&term, 'linux')
 let g:lightline = {
-      \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
       \   'right': [ [ 'lineinfo' ],
