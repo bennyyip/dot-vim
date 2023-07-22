@@ -92,8 +92,8 @@ nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 xnoremap <expr> > v:count ? ">" : ">gv"
 xnoremap <expr> < v:count ? "<" : "<gv"
 # niceblock
-xnoremap <expr> I (mode()=~#'[vV]'?'<C-v>^o^I':'I')
-xnoremap <expr> A (mode()=~#'[vV]'?'<C-v>0o$A':'A')
+xnoremap <expr> I (mode()=~#'[vV]' ? '<C-v>^o^I' : 'I')
+xnoremap <expr> A (mode()=~#'[vV]' ? '<C-v>0o$A' : 'A')
 # macro [[[2
 # quick edit macro  | ["register]<leader>m
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @' .. v:register .. ' = ' .. string(getreg(v:register))<cr><c-f><left>
