@@ -22,6 +22,7 @@ Pack 'tpope/vim-sensible', { 'type': 'start' }
 Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
 Pack 'tpope/vim-surround', { 'type': 'delay' }
 Pack 'tpope/vim-unimpaired', { 'type': 'delay' }
+Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 
 if !g:minimal_plugins
   # General [[[2
@@ -74,7 +75,6 @@ if !g:minimal_plugins
   Pack 'junegunn/vim-easy-align'
   Pack 'svermeulen/vim-yoink'
   Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' }
-  Pack 'tomtom/tcomment_vim'
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy'
   Pack 'tpope/vim-capslock'
