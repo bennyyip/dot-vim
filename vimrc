@@ -15,6 +15,10 @@ if exists('#vimrc')
   augroup! vimrc
 endif
 
+if filereadable($HOME .. '/local.vim')
+  source $HOME/local.vim
+endif
+
 Source('setting')
 Source('pack')
 Source('ui')
@@ -26,11 +30,6 @@ if is_win
 else
   Source('unix')
 endif
-
-if filereadable($HOME .. '/local.vim')
-  source $HOME/local.vim
-endif
-
 
 if has("python3")
   execute "py3file" $v .. "/vimrc.py"

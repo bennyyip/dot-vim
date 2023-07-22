@@ -8,9 +8,9 @@ nnoremap <localleader>h :set ft=html<CR>
 def NumberOptions(): string
   return &number && &relativenumber ? 'nonumber norelativenumber' : 'number relativenumber'
 enddef
-nnoremap yoN :set <C-R>=<SID>NumberOptions()<CR><CR>
-nnoremap [oN :set number relativenumber<CR>
-nnoremap ]oN :set nonumber norelativenumber<CR>
+nnoremap yon :set <C-R>=<SID>NumberOptions()<CR><CR>
+nnoremap [on :set number relativenumber<CR>
+nnoremap ]on :set nonumber norelativenumber<CR>
 # fold [[[3
 nmap z] zo]z
 nmap z[ zo[z
@@ -20,7 +20,7 @@ cabbrev Qa qa
 cabbrev W w
 cabbrev Wq wq
 cabbrev Wa wa
-cabbrev X x
+# cabbrev X x
 cabbrev Help help
 cabbrev ve verbose
 # syntax [[[3

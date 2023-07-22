@@ -27,10 +27,12 @@ if !g:minimal_plugins
   # General [[[2
   # Enhance [[[3
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
+  Pack 'Eliot00/auto-pairs'
   Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
-  Pack 'bennyyip/vim-interestingwords', { 'on': '<Plug>InterestingWords' }
   Pack 'cocopon/vaffle.vim', { 'type': 'start' }
+  Pack 'editorconfig/editorconfig-vim'
   Pack 'itchyny/vim-cursorword'
+  Pack 'lfv89/vim-interestingwords', { 'on': '<Plug>InterestingWords' }
   Pack 'luochen1990/rainbow'
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
@@ -39,8 +41,6 @@ if !g:minimal_plugins
   Pack 'tpope/vim-characterize'
   Pack 'tpope/vim-repeat'
   Pack 'vim-voom/VOoM', { 'on': 'Voom' }
-  Pack 'editorconfig/editorconfig-vim'
-  Pack 'Eliot00/auto-pairs'
 
   Pack 'junegunn/fzf'
   Pack 'junegunn/fzf.vim'
@@ -90,7 +90,7 @@ if !g:minimal_plugins
   Pack 'haya14busa/vim-asterisk'
   Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t' ] }
   Pack 'markonm/traces.vim'
-  Pack 'monkoose/vim9-stargate'
+  # Pack 'monkoose/vim9-stargate'
   # *nix Stuff [[[3
   Pack 'christoomey/vim-tmux-navigator'
   Pack 'lilydjwg/fcitx.vim'
@@ -140,11 +140,11 @@ def PackList(A: string, ...args: list<any>): list<string>
 enddef
 
 command! -nargs=1 -complete=customlist,PackList
-      \ PackOpenUrl call plugpac#Init() | call openbrowser#open(
+      \ PackUrl call plugpac#Init() | call openbrowser#open(
       \    minpac#getpluginfo(<q-args>).url)
 
 command! -nargs=1 -complete=customlist,PackList
-      \ PackOpenDir call plugpac#Init() | execute 'edit ' .. minpac#getpluginfo(<q-args>).dir
+      \ PackDir call plugpac#Init() | execute 'edit ' .. minpac#getpluginfo(<q-args>).dir
 
 command! -nargs=1 -complete=customlist,PackList
       \ PackRc call plugpac#Init() | execute 'edit ' ..
