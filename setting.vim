@@ -172,6 +172,8 @@ g:is_posix = 1
 
 set cmdheight=1
 set langmenu=en_US
+
+set cryptmethod=blowfish2
 # backup/swap/info/undo settings [[[3
 # Disable backup because of coc.nvim #649
 set nobackup
