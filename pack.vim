@@ -55,7 +55,7 @@ if !g:minimal_plugins
 
   Pack 'chrisbra/NrrwRgn'
 
-  Pack 'machakann/vim-highlightedyank', {type: 'opt'}
+  Pack 'bennyyip/vim-highlightedyank'
   # Vim [[[3
   Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
   Pack 'tyru/restart.vim', { 'on': 'Restart' }
@@ -67,6 +67,7 @@ if !g:minimal_plugins
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tpope/vim-fugitive'
   Pack 'tpope/vim-rhubarb'
+  Pack 'rhysd/conflict-marker.vim'
   # Text Edit [[[3
   Pack 'AndrewRadev/sideways.vim'
   Pack 'AndrewRadev/splitjoin.vim'

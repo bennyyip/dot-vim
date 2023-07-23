@@ -19,6 +19,7 @@ if filereadable($HOME .. '/local.vim')
   source $HOME/local.vim
 endif
 
+
 Source('setting')
 Source('pack')
 Source('ui')
