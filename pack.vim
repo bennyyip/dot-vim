@@ -102,7 +102,7 @@ if !g:minimal_plugins
   Pack 'monkoose/boa-vim'
   # Pack 'Bakudankun/qline.vim', {'type': 'delay'}
 
-  Pack 'mhinz/vim-startify', { 'type': 'start' }
+  Pack 'mhinz/vim-startify', { 'type': 'opt' }
   # Language [[[2
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
