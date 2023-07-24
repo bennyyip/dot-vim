@@ -1,10 +1,13 @@
 /pack/minpac/opt/*
 /pack/minpac/start/*
-!pack/minpac/start/vim-sensible
-!pack/minpac/start/vim-gruvbox8
+
+!pack/minpac/opt/tcomment_vim
+!pack/minpac/opt/vim-oscyank
 !pack/minpac/opt/vim-surround
 !pack/minpac/opt/vim-unimpaired
-!pack/minpac/opt/tcomment_vim
+!pack/minpac/start/vim-gruvbox8
+!pack/minpac/start/vim-sensible
+
 !pack/minpac/opt/minpac
 
 local.vim
