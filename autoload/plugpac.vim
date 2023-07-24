@@ -84,6 +84,16 @@ export def End()
     }])
   endfor
 
+  for name in keys(lazy.delay)
+    autocmd_add([{
+      event: 'VimEnter',
+      pattern: '*',
+      group: 'PlugPac',
+      once: true,
+      cmd: $'timer_start(lazy.delay["{name}"].delay, (_) => lazy.delay["{name}"].load())',
+    }])
+  endfor
+
   timer_start(200, (timer) => {
     for [k, v] in items(lazy.delay)
       if !v.done
@@ -174,17 +184,6 @@ export def Add(repo: string, opts: dict<any> = {})
       }
     }
   endif
-
-  if lazy.delay->has_key(name)
-    autocmd_add([{
-      event: 'VimEnter',
-      pattern: '*',
-      group: 'PlugPac',
-      once: true,
-      cmd: $'timer_start(lazy.delay["{name}"].delay, (_) => lazy.delay["{name}"].load())',
-    }])
-  endif
-
 enddef
 
 def GetRcPath(plugin: string, is_pre: bool = false): string
@@ -216,7 +215,7 @@ enddef
 
 
 def DoCmd(plugin: string, cmd: any, bang: any, start_: number, end_: number, args_: any)
-  execute $'delcommand {cmd}' 
+  execute $'delcommand {cmd}'
   execute $'packadd {plugin}'
 
   const rc_path = GetRcPath(plugin)
