@@ -88,6 +88,25 @@ def GhqList(A: string, ...args: list<any>): list<string>
   return projs->Utils.Matchfuzzy(A)
 enddef
 command! -nargs=1 -complete=customlist,GhqList Ghq execute 'edit ' .. expand('~/ghq/github.com/') .. <q-args>
+# FollowLink [[[1
+def FollowLink()
+  const filepath = expand('%')
+  if !filereadable(filepath)
+    return
+  endif
+  const resolved = resolve(filepath)
+  if resolved ==# filepath
+    return
+  endif
+  echom fnameescape(resolved)
+  # FIXME: dont affect other window
+  # enew
+  # bwipeout #
+  execute 'bwipeout %'
+  execute 'edit ' .. fnameescape(resolved)
+  redraw
+enddef
+command! -nargs=0 FollowLink call <SID>FollowLink()
 # ]]]
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
