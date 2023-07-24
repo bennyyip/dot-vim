@@ -4,14 +4,14 @@ vim9script
 g:coc_data_home = $v .. '/coc/'
 
 g:coc_global_extensions = [
-      \ 'coc-json',
-      \ 'coc-snippets',
-      \ 'coc-tsserver',
-      \ 'coc-vimlsp',
-      \ 'coc-yaml',
-      \ 'coc-pyright',
-      \ 'coc-spell-checker',
-      \ ]
+  'coc-json',
+  'coc-pyright',
+  'coc-snippets',
+  'coc-spell-checker',
+  'coc-tsserver',
+  'coc-vimlsp',
+  'coc-yaml',
+]
 if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
 endif
@@ -29,7 +29,7 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 # Make <CR> to accept selected completion item or notify coc.nvim to format
 # <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 export def g:CheckBackspace(): bool
   const col = col('.') - 1
@@ -63,7 +63,7 @@ enddef
 # Highlight symbol under cursor on CursorHold
 augroup vimrc
   autocmd CursorHold * silent call CocActionAsync('highlight')
- # HACK: coc delay load
+  # HACK: coc delay load
   autocmd BufRead * ++once CocStart
 augroup end
 
@@ -106,5 +106,3 @@ command! -nargs=0 Prettier :call CocActionAsync('runCommand', 'prettier.formatFi
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-
