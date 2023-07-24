@@ -61,14 +61,15 @@ if !g:minimal_plugins
   Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
   Pack 'tyru/restart.vim', { 'on': 'Restart' }
   # VCS [[[3
-  Pack 'Eliot00/git-lens.vim'
-  Pack 'junegunn/gv.vim', { 'on': 'GV' }
   # Pack 'shumphrey/fugitive-gitlab.vim'
   # Pack 'tommcdo/vim-fubitive'
+  Pack 'Eliot00/git-lens.vim'
+  Pack 'junegunn/gv.vim', { 'on': 'GV' }
+  Pack 'rhysd/conflict-marker.vim'
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tpope/vim-fugitive'
   Pack 'tpope/vim-rhubarb'
-  Pack 'rhysd/conflict-marker.vim'
+  Pack 'tpope/vim-git'
   # Text Edit [[[3
   Pack 'AndrewRadev/sideways.vim'
   Pack 'AndrewRadev/splitjoin.vim'
@@ -102,7 +103,7 @@ if !g:minimal_plugins
   Pack 'monkoose/boa-vim'
   # Pack 'Bakudankun/qline.vim', {'type': 'delay'}
 
-  Pack 'mhinz/vim-startify', { 'type': 'opt' }
+  Pack 'mhinz/vim-startify', { 'type': 'delay' }
   # Language [[[2
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
@@ -130,6 +131,7 @@ if !g:minimal_plugins
   # Markup [[[3
   Pack 'Rykka/riv.vim', { 'for': 'rst' }
   Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
+  Pack 'preservim/vim-markdown', { type: 'start' }
   # Pack 'lervag/vimtex', {'for': 'tex' }
   # Text [[[3
   Pack 'hotoo/pangu.vim'

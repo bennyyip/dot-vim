@@ -11,6 +11,7 @@ g:coc_global_extensions = [
   'coc-tsserver',
   'coc-vimlsp',
   'coc-yaml',
+  '@yaegassy/coc-marksman'
 ]
 if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
