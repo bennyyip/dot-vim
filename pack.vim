@@ -18,11 +18,12 @@ call plugpac#Begin({
 })
 Pack 'k-takata/minpac', {'type': 'opt'}
 
-Pack 'tpope/vim-sensible', { 'type': 'start' }
 Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
+Pack 'ojroques/vim-oscyank', { 'type': 'delay' }
+Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
+Pack 'tpope/vim-sensible', { 'type': 'start' }
 Pack 'tpope/vim-surround', { 'type': 'delay' }
 Pack 'tpope/vim-unimpaired', { 'type': 'delay' }
-Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 
 if !g:minimal_plugins
   # General [[[2
