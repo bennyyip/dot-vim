@@ -26,6 +26,7 @@
     }
   },
   "pyright.enable": true,
+  "diagnostic.enable": false,
   "vimlsp.debug": true,
   "python.formatting.provider": "black",
   "python.linting.enabled": false,

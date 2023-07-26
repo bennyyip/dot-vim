@@ -10,4 +10,3 @@ else
   g:gruvbox_italic = 0
   g:gruvbox_italicize_strings = 0
 endif
-

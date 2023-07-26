@@ -262,8 +262,13 @@ enddef
 
 def Setup_command()
   command! -bar -nargs=+ Pack call Add(<args>)
-
-  command! -bar PackInstall call Init() | call minpac#update(keys(filter(copy(minpac#pluglist), (k, v) => !isdirectory(v.dir .. '/.git'))))
+  command! -bar PackInstall call Init() |
+        \ call minpac#update(
+        \ minpac#pluglist
+        \ ->copy()
+        \ ->filter((k, v) => !isdirectory(v.dir .. '/.git'))
+        \ ->keys()
+        \ )
   command! -bar PackUpdate  call Init() | call minpac#update('', {'do': 'call minpac#status()'})
   command! -bar PackClean   call Init() | call minpac#clean()
   command! -bar PackStatus  call Init() | call minpac#status()
