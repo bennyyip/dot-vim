@@ -1,6 +1,8 @@
 vim9script
 # Plugin: Yggdroot/LeaderF
 
+echom 'leaderf rc'
+
 if executable('rg')
   g:Lf_DefaultExternalTool = 'rg'
 endif
@@ -30,7 +32,7 @@ g:Lf_PreviewResult = {
       \ 'Tag': 0,
       \ 'BufTag': 1,
       \ 'Function': 1,
-      \ 'Line': 0,
+      \ 'Line': 1,
       \ 'Colorscheme': 0,
       \ 'Rg': 0,
       \ 'Gtags': 0

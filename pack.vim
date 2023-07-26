@@ -12,7 +12,7 @@ g:plugpac_default_type = 'delay'
 
 # plugins [[[1
 call plugpac#Begin({
-  progress_open: 'tab',
+  # progress_open: tab',
   status_open: 'vertical',
   verbose: 2,
 })
