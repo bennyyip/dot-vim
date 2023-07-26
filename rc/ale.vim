@@ -61,18 +61,17 @@ g:ale_sh_shfmt_options = '-i 2'
 g:ale_json_jq_options = '--sort-keys'
 
 g:ale_linters = {
-      \  'sh': ['shellcheck'],
-      \  'bash': ['shell', 'shellcheck'],
-      \  'zsh': ['shell', 'shellcheck'],
-      \  'javascript': ['eslint'],
-      \  'typescript': ['eslint'],
-      \  'python': ['ruff'],
-      \  'go': ['golint'],
-      \   }
+  'sh': ['shellcheck'],
+  'bash': ['shell', 'shellcheck'],
+  'zsh': ['shell', 'shellcheck'],
+  'javascript': ['eslint'],
+  'typescript': ['eslint'],
+  'python': ['ruff'],
+  'go': ['golint'],
+}
 
 # override ]s [s
 nmap <silent> ]s <Plug>(ale_next_wrap)
 nmap <silent> [s <Plug>(ale_previous_wrap)
 nmap <silent> <leader>= <Plug>(ale_fix)
 nmap <silent> <leader>+ <Plug>(ale_enable_buffer)
-
