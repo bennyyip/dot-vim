@@ -136,6 +136,8 @@ nnoremap ]t :tabn<cr>
 nnoremap [t :tabp<cr>
 noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
+nnoremap <silent><leader>tc :tabclose<CR>
+nnoremap <silent><leader>to :tabonly<CR>
 def SwitchTab(i: number): string
   if tabpagenr() == i
     return ":tabprev\<CR>"
