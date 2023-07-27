@@ -60,7 +60,6 @@ nnoremap <leader>ff :Leaderf file <CR>
 nnoremap <leader>fp :LeaderfFile $v<CR>
 nnoremap <leader>fq :Leaderf ghq --popup<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
-nnoremap <leader>gt :LeaderfBufTag<CR>
 nnoremap <leader>pf  :call <SID>SearchProject()<CR>
 nnoremap gb  :Leaderf buffer <CR>
 nnoremap gr  :<C-U>Leaderf rg -e<Space>
