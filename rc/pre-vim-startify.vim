@@ -57,3 +57,8 @@ g:startify_session_autoload = 0
 g:startify_session_persistence = 1
 g:startify_update_oldfiles = 1
 g:startify_use_env = 0
+
+
+augroup vimrc
+  autocmd FileType startify ++once hi StartifyHeader ctermfg=214 ctermbg=NONE guifg=#fabd2f guibg=NONE guisp=NONE cterm=NONE gui=NONE
+augroup end

@@ -144,6 +144,7 @@ def PackList(A: string, ...args: list<any>): list<string>
   return pluglist->Utils.Matchfuzzy(A)
 enddef
 
+
 command! -nargs=1 -complete=customlist,PackList
       \ PackUrl call plugpac#Init() | call openbrowser#open(
       \    minpac#getpluginfo(<q-args>).url)

@@ -1,15 +1,13 @@
 vim9script
 # Plugin: cocopon/vaffle.vim
 
-nmap -  :<C-u>Vaffle %:p<CR>
+nmap -  :<C-u>Vaffle %:p:h<CR>
 
 def CustomizeVaffleMappings()
   # Customize key mappings here
   nmap <buffer> - <Plug>(vaffle-open-parent)
-  nmap <buffer> <Bslash> <Plug>(vaffle-open-root)
-
 enddef
 
 augroup vimrc
-  autocmd FileType vaffle call CustomizeVaffleMappings()
+  autocmd FileType vaffle CustomizeVaffleMappings()
 augroup END
