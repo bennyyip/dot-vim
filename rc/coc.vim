@@ -11,6 +11,7 @@ g:coc_global_extensions = [
   'coc-tsserver',
   'coc-vimlsp',
   'coc-yaml',
+  'coc-css',
   '@yaegassy/coc-marksman'
 ]
 if matchstr(&rtp, 'coc.nvim') != ''
@@ -66,6 +67,7 @@ augroup vimrc
   autocmd CursorHold * silent call CocActionAsync('highlight')
   # HACK: coc delay load
   autocmd BufRead * ++once CocStart
+  autocmd FileType css setl iskeyword+=-
 augroup end
 
 # Remap for rename current word
