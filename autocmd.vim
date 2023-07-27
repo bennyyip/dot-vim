@@ -8,6 +8,15 @@ def JumpToLastPosition() # [[[2
   endif
 enddef
 
+def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [[[2
+  execute $'setlocal shiftwidth={n} tabstop={n} softtabstop={softtabstop}'
+  if expandtab
+    setlocal expandtab
+  else
+    setlocal noexpandtab
+  endif
+enddef
+
 # Autocmd [[[1
 augroup vimrc
   autocmd FocusGained * silent! checktime
@@ -15,4 +24,22 @@ augroup vimrc
   autocmd BufReadPost * JumpToLastPosition()
 augroup END
 
+# FileType
+for ft in ['vim', 'sh', 'zsh', 'bash', 'css', 'html', 'javascript', 'typescript']
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: $'SetTabWidth(2, true)' }])
+endfor
+
+for ft in ['python']
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: $'SetTabWidth(4, true)' }])
+endfor
+
+for ft in ['go']
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: $'SetTabWidth(4, false)' }])
+endfor
+
+for ft in ['make']
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: $'SetTabWidth(8, false, 0)' }])
+endfor
+
+# ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

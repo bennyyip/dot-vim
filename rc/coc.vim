@@ -18,7 +18,7 @@ if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
 endif
 
-# let g:coc_snippet_next = '<tab>'
+# g:coc_snippet_next = '<C-k>'
 
 # Use tab for trigger completion with characters ahead and navigate
 # NOTE: There's always complete item selected by default, you may want to enable

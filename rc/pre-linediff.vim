@@ -3,9 +3,8 @@ vim9script
 
 g:linediff_buffer_type = 'scratch'
 
-vnoremap zd :Linediff<CR>
+noremap <C-G>d :Linediff<CR>
 
 augroup vimrc
   autocmd User LinediffBufferReady nnoremap <buffer> gs :LinediffReset<cr>
 augroup end
-
