@@ -1,8 +1,6 @@
 vim9script
 # Plugin: Yggdroot/LeaderF
 
-echom 'leaderf rc'
-
 if executable('rg')
   g:Lf_DefaultExternalTool = 'rg'
 endif
