@@ -43,11 +43,9 @@ noremap <F8>      :Make<CR>
 
 noremap <silent> <leader>q :<C-u>call asyncrun#quickfix_toggle(8)<CR>
 
-
-
 def MapPython()
-  nnoremap <buffer><F5>      :AsyncRun -raw -mode=term python %<CR>
-  inoremap <buffer><F5> <ESC>:AsyncRun -raw -mode=term python %<CR>
+  nnoremap <buffer><F5>      :AsyncRun -raw -mode=term -pos=thelp python %<CR>
+  inoremap <buffer><F5> <ESC>:AsyncRun -raw -mode=term -pos=thelp python %<CR>
   xnoremap <buffer><F5>      :AsyncRun -raw python<CR>
 enddef
 
