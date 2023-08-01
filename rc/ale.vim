@@ -26,6 +26,9 @@ g:ale_fixers = {
   'css': [
     'prettier',
   ],
+  'scss': [
+    'prettier',
+  ],
   'javascript': [
     'prettier',
   ],

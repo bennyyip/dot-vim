@@ -34,7 +34,7 @@ if !g:minimal_plugins
   Pack 'cocopon/vaffle.vim', { 'type': 'start' }
   Pack 'editorconfig/editorconfig-vim'
   Pack 'itchyny/vim-cursorword'
-  Pack 'lfv89/vim-interestingwords', { 'on': '<Plug>InterestingWords' }
+  Pack 'lfv89/vim-interestingwords'
   Pack 'luochen1990/rainbow'
   Pack 'machakann/vim-highlightedyank'
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
