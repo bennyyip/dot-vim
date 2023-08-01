@@ -19,6 +19,7 @@ enddef
 
 # Autocmd [[[1
 augroup vimrc
+  autocmd FocusLost * :silent! wa
   autocmd FocusGained * silent! checktime
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufReadPost * JumpToLastPosition()
