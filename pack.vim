@@ -19,7 +19,7 @@ call plugpac#Begin({
 Pack 'k-takata/minpac', {'type': 'opt'}
 
 Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
-Pack 'ojroques/vim-oscyank', { 'type': 'delay' }
+Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' }
 Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 Pack 'tpope/vim-sensible', { 'type': 'start' }
 Pack 'tpope/vim-surround', { 'type': 'delay' }
