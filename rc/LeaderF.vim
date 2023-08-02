@@ -13,7 +13,7 @@ g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 g:Lf_HideHelp = 1
 g:Lf_ShowRelativePath = 1
 g:Lf_JumpToExistingWindow = 0
-g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>']}
+g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>'], '<C-j>': ['<C-j>', '<C-n>'], '<C-k>': ['<C-k>', '<C-p>']}
 g:Lf_NormalMap = {
       \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
       \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],

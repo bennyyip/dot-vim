@@ -57,6 +57,7 @@ g:ale_fixers = {
   'proto': [
     'protolint',
   ],
+  'ps1': [],
 }
 const general_ale_fixer = [
   'trim_whitespace',
