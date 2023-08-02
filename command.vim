@@ -107,6 +107,17 @@ def FollowLink()
   redraw
 enddef
 command! -nargs=0 FollowLink call <SID>FollowLink()
+# Capture [[[1
+const scratchFile = $HOME .. '/tmp/scratch.txt'
+def Capture()
+  call mkdir($HOME .. "/tmp", 'p')
+  Scratch
+  normal G
+  silent put +
+  write
+enddef
+command! -nargs=0 Scratch execute $"edit {scratchFile}"
+command! -nargs=0 Capture call <SID>Capture()
 # ]]]
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

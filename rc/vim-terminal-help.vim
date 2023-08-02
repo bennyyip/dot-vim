@@ -10,6 +10,7 @@ g:terminal_list = 0
 g:terminal_close = 1
 g:terminal_pos = "rightbelow"
 g:terminal_height = 10
+g:terminal_cd = 'cd'
 
 const repeat_last = has('win32') ? "Invoke-History -id (Get-History | Select-Object -Last 1).id" : "!!"
 command! -nargs=0 HRepeat execute($"H {repeat_last}")

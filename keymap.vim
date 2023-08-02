@@ -82,6 +82,8 @@ xnoremap P  "0p
 nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
 # copy entire file contents (to gui-clipboard if available)
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG' .. (has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
+# yank filepath
+nnoremap <silent> <leader>yp :let @+ = expand("%:p")<cr>:let @" = expand("%:p")<cr>
 # vimrc [[[2
 nnoremap <silent><leader>fed :e $VIMRC<CR>
 nnoremap <silent><leader>fee :source $VIMRC<CR>
@@ -172,6 +174,8 @@ inoremap <M-l> <Right>
 noremap H ^
 noremap L $
 # text object [[[2
+xnoremap <silent> ag gg0oG$
+onoremap <silent> ag :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 xnoremap <silent> ae gg0oG$
 onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 # ]]]

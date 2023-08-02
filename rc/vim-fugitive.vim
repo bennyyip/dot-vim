@@ -9,3 +9,5 @@ augroup vimrc
   autocmd FileType gitcommit wincmd J
   autocmd BufReadPost fugitive://* setl bufhidden=delete
 augroup end
+
+delcommand Gbrowse
