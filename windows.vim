@@ -1,7 +1,7 @@
 vim9script
 const is_gvim = has('gui_running')
 
-set renderoptions=type:directx
+# set renderoptions=type:directx
 set iminsert=2
 &pythonthreedll = expand(substitute(exepath('python.exe'), 'python.exe', 'python3[0-9][0-9].dll', ''))
 &pythonthreehome = substitute(exepath('python.exe'), 'python.exe', '', '')
