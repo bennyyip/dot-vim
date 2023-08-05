@@ -94,7 +94,7 @@ export def End()
     }])
   endfor
 
-  timer_start(200, (timer) => {
+  timer_start(0, (timer) => {
     for [k, v] in items(lazy.delay)
       if !v.done
         return
