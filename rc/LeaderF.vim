@@ -55,7 +55,7 @@ enddef
 nnoremap <leader>.  :call <SID>SearchHere()<CR>
 nnoremap <leader>b  :Leaderf buffer <CR>
 nnoremap <leader>ff :Leaderf file <CR>
-nnoremap <leader>fp :LeaderfFile $v<CR>
+nnoremap <leader>fp :execute('Leaderf file ' .. expand("$v"))<CR>
 nnoremap <leader>fq :Leaderf ghq --popup<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>pf  :call <SID>SearchProject()<CR>
