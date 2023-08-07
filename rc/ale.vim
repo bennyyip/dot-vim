@@ -23,6 +23,9 @@ g:ale_fixers = {
     'isort',
     'ruff',
   ],
+  'markdown': [
+    'prettier',
+  ],
   'css': [
     'prettier',
   ],
