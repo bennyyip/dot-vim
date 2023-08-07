@@ -52,6 +52,7 @@ nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_mark
 # window [[[2
 # quick <C-w>
 nnoremap ' <C-w>
+nnoremap '' <C-w>w
 # edit [[[2
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
