@@ -11,3 +11,4 @@ augroup vimrc
 augroup end
 
 delcommand Gbrowse
+cabbrev gi Git
