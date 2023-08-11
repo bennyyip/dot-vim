@@ -2,6 +2,8 @@ vim9script
 
 import autoload "./autoload/utils.vim" as Utils
 
+const is_win = has('win32')
+
 const minpac_dir = $v .. '/pack/minpac/opt/minpac'
 if !isdirectory(minpac_dir)
   silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
@@ -67,7 +69,7 @@ if !g:minimal_plugins
   Pack 'junegunn/gv.vim', { 'on': 'GV' }
   Pack 'rhysd/conflict-marker.vim'
   Pack 'tommcdo/vim-fugitive-blame-ext'
-  Pack 'tpope/vim-fugitive'
+  Pack 'tpope/vim-fugitive', { type: 'start' }
   Pack 'tpope/vim-rhubarb'
   Pack 'tpope/vim-git'
   # Text Edit [[[3
@@ -108,6 +110,10 @@ if !g:minimal_plugins
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
 
+  if !is_win
+    # bhurlow/vim-parinfer
+    Pack 'eraserhd/parinfer-rust'
+  endif
   Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
   Pack 'Shiracamus/vim-syntax-x86-objdump-d'
   Pack 'cespare/vim-toml', { 'for': 'toml' }
@@ -119,9 +125,9 @@ if !g:minimal_plugins
   Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
   Pack 'chrisbra/csv.vim', { 'type': 'opt' }
   # Python [[[3
-  Pack 'vim-python/python-syntax', { 'for': 'python'}
+  Pack 'vim-python/python-syntax', { 'for': 'python' }
   # Typescript [[[3
-  Pack 'leafgarland/typescript-vim', { 'for': 'typescript'}
+  Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Pack 'peitalin/vim-jsx-typescript'
   # Web [[[3
   Pack 'lilydjwg/colorizer'

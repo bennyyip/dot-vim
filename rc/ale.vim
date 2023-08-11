@@ -6,61 +6,27 @@ vim9script
 g:ale_linters_explicit = 1
 g:ale_fix_on_save = 0
 g:ale_fixers = {
-  'vim': [],
-  'tex': [],
   'dockerfile': [],
-  'rust': [
-    'rustfmt',
-  ],
-  'c': [
-    'clang-format',
-  ],
-  'cpp': [
-    'clang-format',
-  ],
-  'python': [
-    'black',
-    'isort',
-    'ruff',
-  ],
-  'markdown': [
-    'prettier',
-  ],
-  'css': [
-    'prettier',
-  ],
-  'scss': [
-    'prettier',
-  ],
-  'javascript': [
-    'prettier',
-  ],
-  'typescript': [
-    'eslint',
-    'prettier',
-  ],
-  'bash': [
-    'shfmt'
-  ],
-  'sh': [
-    'shfmt'
-  ],
-  'json': [
-    'jq',
-  ],
-  'go': [
-    'goimports',
-  ],
-  'html': [
-    'tidy',
-  ],
-  'yaml': [
-    'prettier',
-  ],
-  'proto': [
-    'protolint',
-  ],
+  'lisp': [],
   'ps1': [],
+  'tex': [],
+  'vim': [],
+  'bash': [ 'shfmt' ],
+  'c': [ 'clang-format' ],
+  'cpp': [ 'clang-format' ],
+  'css': [ 'prettier' ],
+  'go': [ 'goimports', ],
+  'html': [ 'tidy', ],
+  'javascript': [ 'prettier', ],
+  'json': [ 'jq', ],
+  'markdown': [ 'prettier' ],
+  'proto': [ 'protolint', ],
+  'python': [ 'black', 'isort', 'ruff' ],
+  'rust': [ 'rustfmt' ],
+  'scss': [ 'prettier', ],
+  'sh': [ 'shfmt' ],
+  'typescript': [ 'eslint', 'prettier', ],
+  'yaml': [ 'prettier', ],
 }
 const general_ale_fixer = [
   'trim_whitespace',
