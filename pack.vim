@@ -85,6 +85,8 @@ if !g:minimal_plugins
   Pack 'tpope/vim-apathy'
   Pack 'tpope/vim-capslock'
   Pack 'tpope/vim-rsi'
+  Pack 'tridactyl/vim-tridactyl'
+
 
   Pack 'michaeljsmith/vim-indent-object'
   Pack 'wellle/targets.vim'
