@@ -15,7 +15,16 @@ export def GetCurorLines() # [[[1
         \ : [line('.')]
 enddef
 
-export def Debounce(Fn: func, timeout: number = 200): func
+export def GetVisualSelection(): string # [[[1
+  const [lnum1, col1] = getpos("'<")[1 : 2]
+  const [lnum2, col2] = getpos("'>")[1 : 2]
+  var lines = getline(lnum1, lnum2)
+  lines[-1] = lines[-1][ : col2 - (&selection == 'inclusive' ? 1 : 2)]
+  lines[0] = lines[0][col1 - 1 : ]
+  return join(lines, "\n")
+enddef
+
+export def Debounce(Fn: func, timeout: number = 200): func # [[[1
   var timer = -1
   return (...args: list<any>) => {
     if timer != -1
@@ -32,4 +41,3 @@ enddef
 
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
-
