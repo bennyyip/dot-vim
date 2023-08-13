@@ -110,6 +110,8 @@ if !g:minimal_plugins
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
 
+  Pack 'rhysd/devdocs.vim'
+
   if !is_win
     # bhurlow/vim-parinfer
     Pack 'eraserhd/parinfer-rust'

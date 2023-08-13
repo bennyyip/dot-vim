@@ -32,7 +32,14 @@ def Rg(root: number, append: number, args: string)
     cmd ..= "-append "
   endif
 
-  cmd ..= "@ rg --smart-case --vimgrep " .. fnameescape(args) .. ' ' .. shellescape(path)
+  # split args with '#'
+  # TODO: escape
+  var escaped_args = ""
+  for x in args->split('#')
+    escaped_args ..= " " .. fnameescape(x)
+  endfor
+
+  cmd ..= "@ rg --smart-case --vimgrep " .. escaped_args .. ' ' .. shellescape(path)
   execute cmd
 enddef
 
@@ -42,6 +49,9 @@ noremap <leader>: :AsyncStop<CR>
 noremap <F8>      :Make<CR>
 
 noremap <silent> <leader>q :<C-u>call asyncrun#quickfix_toggle(8)<CR>
+
+nnoremap <leader>/ :Qrgr<space>
+nnoremap <leader>sd :Qrg<space>
 
 def MapPython()
   nnoremap <buffer><F5>      :AsyncRun -raw -mode=term -pos=thelp python %<CR>
