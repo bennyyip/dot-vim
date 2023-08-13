@@ -74,8 +74,8 @@ def Quote(quote: string, bang: string)
   endif
 enddef
 command! -bang -nargs=? -range=% Quote :<line1>,<line2>call Quote(<q-args>, "<bang>")
-# StrArray [[[1
 def StrArray(line1: number, line2: number)
+# StrArray [[[1
   execute printf(":%s,%sQuote", line1, line2)
   execute printf(":%s,%sJoin ,", line1, line2)
   execute printf("normal yss]")
@@ -116,8 +116,9 @@ def Capture()
   silent put +
   write
 enddef
-command! -nargs=0 Scratch execute $"edit {scratchFile}"
+command! -nargs=0 Scratch call Utils.OpenInTab(scratchFile)
 command! -nargs=0 Capture call <SID>Capture()
+nnoremap <silent> <leader>x :Scratch<CR>
 # ]]]
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
