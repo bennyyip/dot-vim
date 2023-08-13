@@ -16,7 +16,7 @@ g:ale_fixers = {
   'cpp': [ 'clang-format' ],
   'css': [ 'prettier' ],
   'go': [ 'goimports', ],
-  'html': [ 'tidy', ],
+  'html': [ 'prettier', ],
   'javascript': [ 'prettier', ],
   'json': [ 'jq', ],
   'markdown': [ 'prettier' ],

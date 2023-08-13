@@ -6,8 +6,6 @@ if executable('rg')
 endif
 g:Lf_StlColorscheme = 'gruvbox_material'
 
-g:Lf_ShortcutF = ''
-g:Lf_ShortcutB = ''
 g:Lf_MruMaxFiles = 500
 g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 g:Lf_HideHelp = 1

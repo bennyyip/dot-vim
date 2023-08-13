@@ -6,3 +6,5 @@ def RenameInteractive()
 enddef
 
 command -nargs=0 RenameI call RenameInteractive()
+
+nnoremap <silent> <leader>fR :RenameI<CR>
