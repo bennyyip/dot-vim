@@ -28,14 +28,12 @@ let g:lightline = {
 
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
-if !s:is_tty
-  let g:lightline.colorscheme = 'gruvbox8'
-  " let g:lightline.separator = { 'left': "", 'right': "\ue0be" }
-  " let g:lightline.subseparator = { 'left': "", 'right': "\ue0b9" }
+let s:enable_nerd_font = v:false && !s:is_tty
+let g:lightline.colorscheme = 'gruvbox8'
+
+if s:enable_nerd_font
   let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
   let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
-  " let g:lightline.tabline_separator = { 'left': "", 'right': "\ue0be" }
-  " let g:lightline.tabline_subseparator = { 'left': "", 'right': "\ue0b9" }
   let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
   let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
 endif
@@ -60,10 +58,11 @@ function! LightlineFilename() "[[[2
     endif
   endif
 
-  let l:fname = expand('%:~')
-  return ('' !=# LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+  let l:fname = winwidth(0) > 70 ? expand('%:~') : expand('%:t')
+  let ret = ('' !=# LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
         \ ('' !=# l:fname ? l:fname : '[No Name]') .
         \ ('' !=# LightlineModified() ? ' ' . LightlineModified() : '')
+  return ret->substitute('\\', '/', 'g')
 endfunction
 function! LightlineFugitive() "[[[2
   try
