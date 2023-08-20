@@ -173,16 +173,17 @@ g:is_posix = 1
 set cmdheight=1
 set langmenu=en_US
 
-set cryptmethod=blowfish2
+if has('sodium')
+  set cryptmethod=xchacha20v2
+else
+  set cryptmethod=blowfish2
+endif
 
 set conceallevel=2
 # backup/swap/info/undo settings [[[3
-# Disable backup because of coc.nvim #649
-set nobackup
-set nowritebackup
-# set backup
-# set backupskip=
-# set backupext=-vimbackup
+set backup
+set backupskip=
+set backupext=-vimbackup
 
 set updatecount=100
 set undofile
