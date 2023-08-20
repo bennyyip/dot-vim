@@ -12,8 +12,14 @@ g:coc_global_extensions = [
   'coc-vimlsp',
   'coc-yaml',
   'coc-css',
+  '@yaegassy/coc-ansible',
   '@yaegassy/coc-marksman'
 ]
+
+g:coc_filetype_map = {
+  'yaml.ansible': 'ansible',
+}
+
 if matchstr(&rtp, 'coc.nvim') != ''
   call coc#add_extension()
 endif

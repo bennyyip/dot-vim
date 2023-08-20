@@ -44,6 +44,7 @@ g:ale_linters = {
   'typescript': ['eslint'],
   'python': ['ruff'],
   'go': ['golint'],
+  'yaml': [ 'yamllint' ],
 }
 
 # override ]s [s

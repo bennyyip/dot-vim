@@ -128,6 +128,7 @@ if !g:minimal_plugins
   Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
   Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
   Pack 'chrisbra/csv.vim', { 'type': 'opt' }
+  Pack 'pearofducks/ansible-vim'
   # Python [[[3
   Pack 'vim-python/python-syntax', { 'for': 'python' }
   # Typescript [[[3
