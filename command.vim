@@ -31,7 +31,7 @@ command! AV call ben#a('botright vertical split')
 # :PX | chmod +x [[[1
 command! PX if !empty(expand('%'))
       \|   write
-      \|   call system('chmod +x '.expand('%'))
+      \|   call system('chmod +x ' .. expand('%'))
       \|   silent e
       \| else
       \|   echohl WarningMsg
