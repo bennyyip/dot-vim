@@ -1,5 +1,5 @@
 {
-  "[markdown][css]": {
+  "[css]": {
     "coc.preferences.formatOnSave": true
   },
   "cSpell.enabledLanguageIds": [
@@ -8,6 +8,7 @@
     "text"
   ],
   "diagnostic.displayByAle": true,
+  "diagnostic.enable": false,
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -26,10 +27,9 @@
     }
   },
   "pyright.enable": true,
-  "diagnostic.enable": false,
-  "vimlsp.debug": true,
   "python.formatting.provider": "black",
   "python.linting.enabled": false,
   "snippets.ultisnips.pythonPrompt": false,
-  "typescript.showUnused": false
+  "typescript.showUnused": false,
+  "vimlsp.debug": true
 }
