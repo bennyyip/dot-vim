@@ -58,7 +58,7 @@ nnoremap <leader>fq :Leaderf ghq --popup<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>pf  :call <SID>SearchProject()<CR>
 nnoremap gb  :Leaderf buffer <CR>
-nnoremap gr  :<C-U>Leaderf rg -e<Space>
+nnoremap gR  :<C-U>Leaderf rg -e<Space>
 
 command! -bar -bang -nargs=0 Rg call <SID>Rg(<bang>0)
 command! -bar -nargs=? History call <SID>History(<q-args>)
