@@ -173,7 +173,7 @@ g:is_posix = 1
 set cmdheight=1
 set langmenu=en_US
 
-if has('sodium')
+if has('sodium') && has("patch-9.0.1481")
   set cryptmethod=xchacha20v2
 else
   set cryptmethod=blowfish2
