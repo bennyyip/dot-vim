@@ -13,6 +13,7 @@ g:plugpac_plugin_conf_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
 
 # plugins [[[1
+
 call plugpac#Begin({
   # progress_open: tab',
   status_open: 'vertical',
@@ -34,7 +35,17 @@ if !g:minimal_plugins
   Pack 'Eliot00/auto-pairs'
   Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
   Pack 'cocopon/vaffle.vim', { 'type': 'start' }
-  Pack 'editorconfig/editorconfig-vim'
+  if has("patch-9.0.1811")
+    autocmd_add([{
+      event: 'VimEnter',
+      pattern: '*',
+      group: 'PlugPac',
+      once: true,
+      cmd: 'timer_start(1, (_) => execute("packadd editorconfig"))',
+    }])
+  else
+    Pack 'editorconfig/editorconfig-vim'
+  endif
   Pack 'itchyny/vim-cursorword'
   Pack 'lfv89/vim-interestingwords'
   Pack 'luochen1990/rainbow'
