@@ -117,7 +117,7 @@ nnoremap / ms/
 # file, buffer [[[2
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>
-nnoremap <leader>fp :let @+=expand("%:p")<CR>:echo "buffer path copied"<CR>
+nnoremap <leader>fP :let @+=expand("%:p")<CR>:echo "buffer path copied"<CR>
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 

@@ -153,7 +153,7 @@ if !g:minimal_plugins
   # Markup [[[3
   Pack 'Rykka/riv.vim', { 'for': 'rst' }
   Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
-  Pack 'preservim/vim-markdown', { type: 'start' }
+  # Pack 'preservim/vim-markdown', { type: 'start' }
   # Pack 'lervag/vimtex', {'for': 'tex' }
   # Text [[[3
   Pack 'hotoo/pangu.vim'
