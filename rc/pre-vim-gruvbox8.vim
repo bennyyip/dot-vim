@@ -1,6 +1,5 @@
 vim9script
 const is_gvim = has('gui_running')
-g:gruvbox_material_background = 'hard'
 g:gruvbox_plugin_hi_groups = 1
 g:gruvbox_filetype_hi_groups = 1
 if is_gvim
