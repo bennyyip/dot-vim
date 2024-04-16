@@ -142,6 +142,7 @@ if !g:minimal_plugins
   Pack 'pearofducks/ansible-vim'
   # Python [[[3
   Pack 'vim-python/python-syntax', { 'for': 'python' }
+  Pack 'meatballs/vim-xonsh'
   # Typescript [[[3
   Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Pack 'peitalin/vim-jsx-typescript'
