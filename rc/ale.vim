@@ -11,6 +11,7 @@ g:ale_fixers = {
   'ps1': [],
   'tex': [],
   'vim': [],
+  'xonsh': [],
   'bash': [ 'shfmt' ],
   'c': [ 'clang-format' ],
   'cpp': [ 'clang-format' ],
@@ -21,7 +22,8 @@ g:ale_fixers = {
   'json': [ 'jq', ],
   'markdown': [ 'prettier' ],
   'proto': [ 'protolint', ],
-  'python': [ 'black', 'isort', 'ruff' ],
+  # 'python': [ 'black', 'isort', 'ruff' ],
+  'python': [ 'ruff_format', 'ruff' ],
   'rust': [ 'rustfmt' ],
   'scss': [ 'prettier', ],
   'sh': [ 'shfmt' ],
@@ -35,6 +37,7 @@ const general_ale_fixer = [
 map(g:ale_fixers, (k, v) => general_ale_fixer + v)
 g:ale_sh_shfmt_options = '-i 2'
 g:ale_json_jq_options = '--sort-keys'
+g:ale_python_ruff_options = '--select I'
 
 g:ale_linters = {
   'sh': ['shellcheck'],
@@ -46,6 +49,7 @@ g:ale_linters = {
   'go': ['golint'],
   'yaml': [ 'yamllint' ],
 }
+
 
 # override ]s [s
 nmap <silent> ]s <Plug>(ale_next_wrap)
