@@ -46,7 +46,7 @@ set matchtime=0
 set showmode
 
 set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,utf-16le,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
+set fileencodings=ucs-bom,utf-8,utf-16le,big5,gbk,gb18030,gb2312,cp936,usc-bom,euc-jp
 set encoding=utf-8
 scriptencoding utf-8
 
