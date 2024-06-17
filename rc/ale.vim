@@ -15,20 +15,21 @@ g:ale_fixers = {
   'bash': [ 'shfmt' ],
   'c': [ 'clang-format' ],
   'cpp': [ 'clang-format' ],
-  'css': [ 'prettier' ],
   'go': [ 'goimports', ],
   'html': [ 'prettier', ],
-  'javascript': [ 'prettier', ],
-  'json': [ 'jq', ],
-  'markdown': [ 'prettier' ],
+  'css': [ 'prettier' ],
+  'javascript': [ 'dprint', ],
+  'markdown': [ 'dprint' ],
+  'scss': [ 'prettier', ],
+  'typescript': [ 'eslint', 'dprint', ],
+  'json': [ 'dprint', ],
   'proto': [ 'protolint', ],
   # 'python': [ 'black', 'isort', 'ruff' ],
   'python': [ 'ruff_format', 'ruff' ],
   'rust': [ 'rustfmt' ],
-  'scss': [ 'prettier', ],
   'sh': [ 'shfmt' ],
-  'typescript': [ 'eslint', 'prettier', ],
   'yaml': [ 'prettier', ],
+  'toml': [ 'dprint', ],
 }
 const general_ale_fixer = [
   'trim_whitespace',
@@ -38,6 +39,7 @@ map(g:ale_fixers, (k, v) => general_ale_fixer + v)
 g:ale_sh_shfmt_options = '-i 2'
 g:ale_json_jq_options = '--sort-keys'
 g:ale_python_ruff_options = '--select I'
+g:ale_dprint_use_global = 1
 
 g:ale_linters = {
   'sh': ['shellcheck'],

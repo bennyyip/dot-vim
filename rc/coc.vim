@@ -12,6 +12,7 @@ g:coc_global_extensions = [
   'coc-vimlsp',
   'coc-yaml',
   'coc-css',
+  'coc-biome',
   '@yaegassy/coc-ansible',
   '@yaegassy/coc-marksman'
 ]

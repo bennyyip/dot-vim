@@ -60,7 +60,7 @@ nnoremap <leader>pf  :call <SID>SearchProject()<CR>
 nnoremap gb  :Leaderf buffer <CR>
 nnoremap gR  :<C-U>Leaderf rg -e<Space>
 
-command! -bar -bang -nargs=0 Rg call <SID>Rg(<bang>0)
+command! -bar -bang -nargs=0 Lrg call <SID>Rg(<bang>0)
 command! -bar -nargs=? History call <SID>History(<q-args>)
 command! -bar -nargs=0 BLines Leaderf line --all
 command! -bar -nargs=0 Buffers Leaderf buffer
