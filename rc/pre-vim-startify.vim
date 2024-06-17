@@ -31,7 +31,7 @@ const ascii_art = [
   "                                                  ",
   "                                                  ",
 ]
-g:startify_custom_header = map(ascii_art + Quote(), '"   " .. v:val')
+g:startify_custom_header = ascii_art->extendnew(Quote())
 g:startify_skiplist = [
   'COMMIT_EDITMSG',
 ]
