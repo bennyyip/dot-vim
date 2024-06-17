@@ -10,10 +10,14 @@ augroup END
 
 command! -bang -nargs=* -complete=file -bar Make  AsyncRun<bang> -save=1 -program=make -auto=make @ <args>
 
-command! -bang -nargs=* Qrg     call <SID>Rg(0, 0, <q-args>)
-command! -bang -nargs=* Qrgr    call <SID>Rg(1, 0, <q-args>)
-command! -bang -nargs=* Qrgadd  call <SID>Rg(0, 1, <q-args>)
-command! -bang -nargs=* Qrgradd call <SID>Rg(1, 1, <q-args>)
+command! -bang -nargs=* Rg     call <SID>Rg(0, 0, <q-args>)
+command! -bang -nargs=* Rgr    call <SID>Rg(1, 0, <q-args>)
+command! -bang -nargs=* Rgadd  call <SID>Rg(0, 1, <q-args>)
+command! -bang -nargs=* Rgradd call <SID>Rg(1, 1, <q-args>)
+
+# vim-fugitive
+command! -bang -bar -nargs=* Gpush execute 'AsyncRun<bang> -cwd=' .. fnameescape(g:FugitiveGitDir()) 'git push' <q-args>
+command! -bang -bar -nargs=* Gfetch execute 'AsyncRun<bang> -cwd=' .. fnameescape(g:FugitiveGitDir()) 'git fetch' <q-args>
 
 def Rg(root: number, append: number, args: string)
   # avoid some plugin modify errorformat
@@ -50,8 +54,8 @@ noremap <F8>      :Make<CR>
 
 noremap <silent> <leader>q :<C-u>call asyncrun#quickfix_toggle(8)<CR>
 
-nnoremap <leader>/ :Qrgr<space>
-nnoremap <leader>sd :Qrg<space>
+nnoremap <leader>/ :Rgr<space>
+nnoremap <leader>sd :Rg<space>
 
 def MapPython()
   nnoremap <buffer><F5>      :AsyncRun -raw -mode=term -pos=thelp python %<CR>

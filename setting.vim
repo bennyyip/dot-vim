@@ -97,7 +97,7 @@ else
   set signcolumn=yes
 endif
 if has('mouse')
-  set mouse=
+  set mouse=nv
   set mousehide
 endif
 # wild stuff [[[3
