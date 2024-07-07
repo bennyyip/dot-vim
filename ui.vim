@@ -15,19 +15,23 @@ if !is_ssh && has("termguicolors")
 
 endif
 # Change cursor style dependent on mode
-if empty($TMUX)
-  if &term =~ 'xterm' || &term == 'win32'
-    &t_SI = "\<Esc>[6 q"
-    &t_SR = "\<Esc>[3 q"
-    &t_EI = "\<Esc>[2 q"
-  else
-    &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  endif
-else
-  &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-endif
+# if empty($TMUX)
+#   if &term =~ 'xterm' || &term == 'win32'
+#     &t_SI = "\<Esc>[6 q"
+#     &t_SR = "\<Esc>[3 q"
+#     &t_EI = "\<Esc>[2 q"
+#   else
+#     &t_SI = "\<Esc>]50;CursorShape=1\x7"
+#     &t_EI = "\<Esc>]50;CursorShape=0\x7"
+#   endif
+# else
+#   &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+#   &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+# endif
+
+&t_SI = "\<Esc>[6 q"
+&t_SR = "\<Esc>[3 q"
+&t_EI = "\<Esc>[2 q"
 
 # Other [[[2
 set guioptions=
