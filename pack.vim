@@ -82,7 +82,9 @@ if !g:minimal_plugins
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tpope/vim-fugitive', { type: 'start' }
   Pack 'tpope/vim-rhubarb'
-  Pack 'tpope/vim-git'
+  # vim-git is part of vim now
+  # Pack 'tpope/vim-git'
+  Pack 'errael/splice9'
   # Text Edit [[[3
   Pack 'AndrewRadev/sideways.vim'
   Pack 'AndrewRadev/splitjoin.vim'
@@ -140,6 +142,9 @@ if !g:minimal_plugins
   Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
   Pack 'chrisbra/csv.vim', { 'type': 'opt' }
   Pack 'pearofducks/ansible-vim'
+
+  Pack 'bfrg/vim-jq'
+  Pack 'bfrg/vim-jqplay'
   # Python [[[3
   Pack 'vim-python/python-syntax', { 'for': 'python' }
   Pack 'meatballs/vim-xonsh'

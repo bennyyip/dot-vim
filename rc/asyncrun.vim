@@ -50,6 +50,7 @@ enddef
 
 noremap <leader>; :AsyncRun<space>
 noremap <leader>: :AsyncStop<CR>
+noremap <F5>      :AsyncRun<UP><CR>
 noremap <F8>      :Make<CR>
 
 noremap <silent> <leader>q :<C-u>call asyncrun#quickfix_toggle(8)<CR>
@@ -58,9 +59,9 @@ nnoremap <leader>/ :Rgr<space>
 nnoremap <leader>sd :Rg<space>
 
 def MapPython()
-  nnoremap <buffer><F5>      :AsyncRun -raw -mode=term -pos=thelp python %<CR>
-  inoremap <buffer><F5> <ESC>:AsyncRun -raw -mode=term -pos=thelp python %<CR>
-  xnoremap <buffer><F5>      :AsyncRun -raw python<CR>
+  nnoremap <buffer><F6>      :AsyncRun -raw -mode=term -pos=thelp python %<CR>
+  inoremap <buffer><F6> <ESC>:AsyncRun -raw -mode=term -pos=thelp python %<CR>
+  xnoremap <buffer><F6>      :AsyncRun -raw python<CR>
 enddef
 
 augroup vimrc
