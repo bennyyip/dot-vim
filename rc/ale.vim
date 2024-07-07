@@ -3,6 +3,8 @@ vim9script
 
 # let g:ale_set_loclist = 0
 # let g:ale_set_quickfix = 1
+# g:ale_disable_lsp = 1
+g:ale_use_global_executables = v:true
 g:ale_linters_explicit = 1
 g:ale_fix_on_save = 0
 g:ale_fixers = {
@@ -40,15 +42,17 @@ const general_ale_fixer = [
 map(g:ale_fixers, (k, v) => general_ale_fixer + v)
 g:ale_sh_shfmt_options = '-i 2'
 g:ale_json_jq_options = '--sort-keys'
-g:ale_python_ruff_options = '--select I'
+g:ale_python_ruff_format_options = '--select I'
 g:ale_dprint_use_global = 1
+
+# g:ale_biome_use_global = 1
 
 g:ale_linters = {
   'sh': ['shellcheck'],
   'bash': ['shell', 'shellcheck'],
   'zsh': ['shell', 'shellcheck'],
-  'javascript': ['eslint'],
-  'typescript': ['eslint'],
+  'javascript': ['biome', 'eslint'],
+  'typescript': ['biome', 'eslint'],
   'python': ['ruff'],
   'go': ['golint'],
   'yaml': [ 'yamllint' ],
