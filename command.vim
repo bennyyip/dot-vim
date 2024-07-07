@@ -119,6 +119,12 @@ enddef
 command! -nargs=0 Scratch call Utils.OpenInTab(scratchFile)
 command! -nargs=0 Capture call <SID>Capture()
 nnoremap <silent> <leader>x :Scratch<CR>
+# SetTabWidth [[[1
+command! -nargs=0 SetTabWidth2 call Utils.SetTabWidth(2, true)
+command! -nargs=0 SetTabWidth4 call Utils.SetTabWidth(4, true)
+command! -nargs=0 SetHardTabWidth2 call Utils.SetTabWidth(2, false, 0)
+command! -nargs=0 SetHardTabWidth4 call Utils.SetTabWidth(4, false, 0)
+command! -nargs=0 SetHardTabWidth8 call Utils.SetTabWidth(8, false, 0)
 # ]]]
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

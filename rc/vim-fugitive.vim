@@ -12,3 +12,4 @@ augroup end
 
 delcommand Gbrowse
 cabbrev gi Git
+cabbrev gbl Git blame

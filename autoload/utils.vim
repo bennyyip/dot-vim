@@ -70,6 +70,15 @@ export def OpenInTab(fname: string) # [[[1
     endfor
 enddef
 
+export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [[[1
+  execute $'setlocal shiftwidth={n} tabstop={n} softtabstop={softtabstop}'
+  if expandtab
+    setlocal expandtab
+  else
+    setlocal noexpandtab
+  endif
+enddef
+
 
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

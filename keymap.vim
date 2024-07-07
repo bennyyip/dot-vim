@@ -24,8 +24,8 @@ cabbrev Wa wa
 cabbrev Help help
 cabbrev ve verbose
 # syntax [[[3
-# nnoremap <leader>si  :echo ben#syninfo()<cr>
-# nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+nnoremap <leader>si  :echo ben#syninfo()<cr>
+nnoremap <leader>ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 # diff [[[3
 nnoremap <silent><leader>di :windo diffthis<CR>
 nnoremap <silent><leader>du :windo diffupdate<CR>

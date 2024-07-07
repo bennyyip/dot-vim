@@ -125,14 +125,6 @@ set breakindentopt=min:40
 set cpoptions=aABcfFqsZ # -e
 set formatoptions=jtcroql
 set formatoptions+=m    #允许对multi_byte字符换行（否则默认只能空格或者英文标点，详见set breakat=）
-# Change cursor style dependent on mode
-if empty($TMUX)
-  &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  &t_EI = "\<Esc>]50;CursorShape=0\x7"
-else
-  &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-endif
 # misc [[[3
 set updatetime=300
 set autoread
