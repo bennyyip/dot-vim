@@ -30,7 +30,7 @@ for ft in ['go']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'Utils.SetTabWidth(4, false)' }])
 endfor
 
-for ft in ['make']
+for ft in ['make', 'snippets']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'Utils.SetTabWidth(8, false, 0)' }])
 endfor
 
