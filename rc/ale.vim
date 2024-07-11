@@ -1,6 +1,9 @@
 vim9script
 # Plugin: dense-analysis/ale
 
+# https://github.com/dense-analysis/ale/issues/4804
+autocmd_delete([{'event': 'InsertEnter', 'group': 'ALEEvents'}])
+
 # let g:ale_set_loclist = 0
 # let g:ale_set_quickfix = 1
 # g:ale_disable_lsp = 1
