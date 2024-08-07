@@ -125,6 +125,7 @@ command! -nargs=0 SetTabWidth4 call Utils.SetTabWidth(4, true)
 command! -nargs=0 SetHardTabWidth2 call Utils.SetTabWidth(2, false, 0)
 command! -nargs=0 SetHardTabWidth4 call Utils.SetTabWidth(4, false, 0)
 command! -nargs=0 SetHardTabWidth8 call Utils.SetTabWidth(8, false, 0)
+
 # ]]]
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

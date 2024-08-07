@@ -73,6 +73,7 @@ if !g:minimal_plugins
   # Vim [[[3
   Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
   Pack 'tyru/restart.vim', { 'on': 'Restart' }
+  Pack 'chrisbra/vim_faq'
   # VCS [[[3
   # Pack 'shumphrey/fugitive-gitlab.vim'
   # Pack 'tommcdo/vim-fubitive'
@@ -84,7 +85,7 @@ if !g:minimal_plugins
   Pack 'tpope/vim-rhubarb'
   # vim-git is part of vim now
   # Pack 'tpope/vim-git'
-  Pack 'errael/splice9'
+  # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Text Edit [[[3
   Pack 'AndrewRadev/sideways.vim'
   Pack 'AndrewRadev/splitjoin.vim'
@@ -109,7 +110,7 @@ if !g:minimal_plugins
   # Move Around [[[3
   Pack 'bennyyip/is.vim'
   Pack 'haya14busa/vim-asterisk'
-  Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t' ] }
+  Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t'] }
   Pack 'markonm/traces.vim'
   # Pack 'monkoose/vim9-stargate'
   # *nix Stuff [[[3
