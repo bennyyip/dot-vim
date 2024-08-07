@@ -10,6 +10,8 @@
 
 !pack/minpac/opt/minpac
 
+pack/non-managed
+
 local.vim
 .netrwhist
 
