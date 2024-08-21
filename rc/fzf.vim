@@ -14,3 +14,6 @@ g:fzf_colors = { 'fg': ['fg', 'Normal'],
    'spinner': ['fg', 'Label'],
    'header': ['fg', 'Comment']
 }
+
+
+# g:fzf_layout = { 'down': '40%' }
