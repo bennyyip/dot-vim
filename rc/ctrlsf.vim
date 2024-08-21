@@ -1,20 +1,13 @@
 vim9script
 # Plugin: dyng/ctrlsf.vim
 
-g:ctrlsf_default_root = 'project'
-g:ctrlsf_mapping = {
-      \ 'next': 'n',
-      \ 'prev': 'N',
-      \ 'vsplit': 'x'
-      \ }
-g:ctrlsf_extra_backend_args = {
-      \ 'rg': '--hidden'
-      \ }
+g:ctrlsf_default_root = 'project+fw'
+g:ctrlsf_populate_qflist = 1
 
 nmap     <leader>sf <Plug>CtrlSFPrompt
-vmap     <leader>sf <Plug>CtrlSFVwordPath
-vmap     <leader>sF <Plug>CtrlSFVwordExec
-nmap     <leader>sn <Plug>CtrlSFCwordPath
-nmap     <leader>sp <Plug>CtrlSFPwordPath
-nnoremap <leader>so :CtrlSFOpen<CR>
-nnoremap <leader>st :CtrlSFToggle<CR>
+nmap     <leader>s* <Plug>CtrlSFCwordExec
+vmap     <leader>sF <Plug>CtrlSFVwordPath
+vmap     <leader>sf <Plug>CtrlSFVwordExec
+nmap     <leader>sP <Plug>CtrlSFPwordPath
+nmap     <leader>sp <Plug>CtrlSFPwordExec
+nnoremap <leader>so :CtrlSFToggle<CR>
