@@ -12,7 +12,7 @@ if is_gvim
   augroup vimrc
     autocmd GUIEnter *  ++once simalt ~x
   augroup END
-  set guifont=Sarasa\ Term\ CL\ Nerd:h14
+  &guifont = "Sarasa Term CL Nerd Font:h14"
   # 調整行高
   set linespace=-2
 endif

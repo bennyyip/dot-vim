@@ -1,6 +1,6 @@
 vim9script
 # Author:  Ben Yip (yebenmy@gmail.com)
-# URL:     http//github.com/bennyyip/plugpac.vim
+# URL:     https://github.com/bennyyip/plugpac.vim
 # Version: 2.0
 #
 # Copyright (c) 2023 Ben Yip
