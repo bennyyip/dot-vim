@@ -28,7 +28,7 @@ let g:lightline = {
 
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
-let s:enable_nerd_font = v:false && !s:is_tty
+let s:enable_nerd_font = !s:is_tty && !has('gui_running')
 let g:lightline.colorscheme = 'gruvbox8'
 
 if s:enable_nerd_font
