@@ -45,7 +45,7 @@ const general_ale_fixer = [
 map(g:ale_fixers, (k, v) => general_ale_fixer + v)
 g:ale_sh_shfmt_options = '-i 2'
 g:ale_json_jq_options = '--sort-keys'
-g:ale_python_ruff_format_options = '--select I'
+g:ale_python_ruff_options = '--select I'
 g:ale_dprint_use_global = 1
 
 # g:ale_biome_use_global = 1
