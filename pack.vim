@@ -153,7 +153,7 @@ if !g:minimal_plugins
   Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Pack 'peitalin/vim-jsx-typescript'
   # Web [[[3
-  Pack 'lilydjwg/colorizer'
+  Pack 'BourgeoisBear/clrzr'
   Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
   Pack 'othree/html5.vim', {'for': 'html' }
   Pack 'tpope/vim-jdaddy'
