@@ -2,28 +2,27 @@
   "[css]": {
     "coc.preferences.formatOnSave": true
   },
-  "cSpell.enabledLanguageIds": [
-    "markdown",
-    "plaintext",
-    "text"
-  ],
+  "cSpell.enabledLanguageIds": ["markdown", "plaintext", "text"],
   "diagnostic.displayByAle": true,
   "diagnostic.enable": false,
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "filetypes": [
-        "go"
-      ],
+      "filetypes": ["go"],
       "initializationOptions": {
         "usePlaceholders": true
       },
-      "rootPatterns": [
-        "go.mod",
-        ".vim/",
-        ".git/",
-        ".hg/"
-      ]
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
     }
   },
   "pyright.enable": true,
