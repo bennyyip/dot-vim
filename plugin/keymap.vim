@@ -46,13 +46,21 @@ nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_mark
 nnoremap ' <C-w>
 nnoremap '' <C-w>w
 # edit [[[1
+inoremap "<space><space> ""<ESC>i
+inoremap '<space><space> ''<ESC>i
+inoremap (<space><space> ()<ESC>i
+inoremap [<space><space> []<ESC>i
+inoremap <<space><space> <><ESC>i
+inoremap {<space><space> {<space><space>}<ESC>hi
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
-inoremap {; {<CR>};<Esc>O
-inoremap {, {<CR>},<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
-inoremap [; [<CR>];<Esc>O
-inoremap [, [<CR>],<Esc>O
+inoremap (; (<space><space>);<Esc>hhi
+inoremap (, (<space><space>),<Esc>hhi
+inoremap {; {<space><space>};<Esc>hhi
+inoremap {, {<space><space>},<Esc>hhi
+inoremap [; [<space><space>];<Esc>hhi
+inoremap [, [<space><space>],<Esc>hhi
 inoremap <M-o> <C-O>o
 inoremap <M-O> <C-O>O
 # script helper
@@ -106,6 +114,19 @@ nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 # mark position before search
 nnoremap / ms/
+# Emacs C-s C-w like solution: hightlight in visual mode and then type * or #
+# `cgn` to replace text
+# https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
+xnoremap * :<c-u> call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<c-u> call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+# SID means script local function; 'call' is optional in vim9script.
+def VSetSearch(cmdtype: string)
+    var temp = getreg('s') # 's' is some register
+    norm! gv"sy
+    setreg('/', '\V' .. substitute(escape(@s, cmdtype .. '\'), '\n', '\\n', 'g'))
+    setreg('s', temp) # restore whatever was in 's'
+enddef
+
 # file, buffer [[[1
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>

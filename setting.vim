@@ -9,43 +9,28 @@ filetype plugin indent on
 g:mapleader = "\<Space>"
 g:localleader = "\\"
 g:vimsyn_folding = 'f'
-g:is_bash = 1
-g:lisp_rainbow = 1
 
-g:markdown_fenced_languages = ['vim']
-
-g:loaded_2html_plugin = 1
-g:loaded_getscriptPlugin = 1
-g:loaded_gzip = 1
-g:loaded_logiPat = 1
-g:loaded_logipat = 1
-g:loaded_manpager_plugin = 1
-# let g:loaded_matchparen = 1
-g:loaded_rrhelper = 1
-g:loaded_spellfile_plugin = 1
-g:loaded_tarPlugin = 1
-g:loaded_vimballPlugin = 1
-g:loaded_zipPlugin = 1
+# g:markdown_fenced_languages = ['vim']
 
 # indent settings [[[3
 set autoindent
-set cinoptions=>2,l1,p0,)50,*50,t0
+# set cinoptions=>2,l1,p0,)50,*50,t0
 # Don't mess with 'tabstop', with 'expandtab' it isn't used.
 # Instead set softtabstop=-1, then 'shiftwidth' is used.
 set smarttab expandtab shiftwidth=4 softtabstop=-1
 # display settings [[[3
-# set display=lastline
+set display=lastline smoothscroll
 set laststatus=2
 set list
 set modeline
 set modelines=1
 set nostartofline
 set numberwidth=1
-set shortmess=aoOTIc
 set showcmd
 set showmatch
 set matchtime=0
 set showmode
+set ruler
 
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,utf-16le,gbk,big5,gb18030,gb2312,cp936,usc-bom,euc-jp
@@ -76,60 +61,44 @@ endif
 set noerrorbells
 set novisualbell
 set t_vb=
-if exists('&belloff')
-  set belloff=all
-endif
+set belloff=all shortmess=aoOTIc
 # better navigation [[[3
-set cursorline
 set foldmethod=marker
 set foldopen+=jump
 set foldtext=ben#foldy()
 set foldlevelstart=999
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
+set hlsearch incsearch ignorecase smartcase
 set scrolloff=4
-set sidescroll=1
-set sidescrolloff=2
-set number            # line number
-set relativenumber    # relative line number
-if has('patch-8.1.1564')
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set sidescroll=1 sidescrolloff=3
+set number relativenumber cursorline cursorlineopt=number signcolumn=number
 if has('mouse')
-  set mouse=nv
-  set mousehide
+  set mouse=a
+  # set mouse=nv
+  # set mousehide
 endif
 set jumpoptions=stack
 # wild stuff [[[3
 set suffixes+=.a,.1,.class
-set wildignore+=*.o,*.so,*.zip,*.png
-set wildmenu
-# set wildmode=list:longest,full
-# set wildoptions=tagfile
+set wildmenu wildoptions=pum,fuzzy pumheight=20
+set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags
 set path+=**
 set complete-=i   # disable scanning included files
 set complete-=t   # disable searching tags
-# set completeopt=longest,menu "preview
-set completeopt-=preview
-set completeopt+=longest,menuone,noselect
+set completeopt=menu,popup,fuzzy completepopup=highlight:Pmenu
 # grep [[[3
-&grepprg = 'rg --vimgrep'
+&grepprg = 'rg --vimgrep --no-heading -H'
 &grepformat = '%f:%l:%c:%m'
 &errorformat ..= ',%f\|%\s%#%l col%\s%#%c%\s%#\| %m'
 # breaking [[[3
-set wrap
-set nolinebreak
-set breakindent
-set breakindentopt=min:40
+set nowrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
+# set breakindentopt=min:40
 
 set cpoptions=aABcfFqsZ # -e
 set formatoptions=jtcroql
 set formatoptions+=m    #允许对multi_byte字符换行（否则默认只能空格或者英文标点，详见set breakat=）
 # misc [[[3
+set nospell
+set virtualedit=block
 set updatetime=300
 set autoread
 set autowrite              # Automatically save before commands like :next and :make
@@ -139,29 +108,28 @@ set synmaxcol=99999        # Only highlight the first 500 columns.
 set history=1000
 set backspace=indent,eol,start
 set hidden
-set nrformats-=octal
+set nrformats=bin,hex,unsigned
 set splitbelow
 set splitright
 set titlestring=VIM:\ %f
 set switchbuf=useopen,usetab
 set ttyfast
 # set lazyredraw
-set ttimeout
-set ttimeoutlen=100
+set ttimeout ttimeoutlen=25
 set noshowmode # Hide the mode text (e.g. -- INSERT --)
 set tabpagemax=50
-set sessionoptions-=options
+set sessionoptions=buffers,curdir,tabpages,winsize
 set viewoptions-=options
 set nolangremap
 
 # diffopt
-&diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"
+# &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"
+set diffopt+=vertical,algorithm:histogram,indent-heuristic
 nnoremap <silent> [w :let &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"<CR>:echo &diffopt<CR>
 nnoremap <silent> ]w :let &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience,iwhiteall,iblank"<CR>:echo &diffopt<CR>
 
 #LF
-set fileformat=unix
-set fileformats=unix,dos
+set fileformat=unix fileformats=unix,dos
 
 # use old regex engine for better performance
 set regexpengine=1
@@ -195,13 +163,9 @@ endfor
 set backupdir=$vimtmp/backup/
 set directory=$vimtmp/swap/
 set undodir=$vimtmp/undo/
-set viminfo='100,n$vimtmp/info/viminfo
-
-# old vim don't have cdhome, ignore error
-silent! set cdhome
+set viminfo='200,n$vimtmp/info/viminfo
 
 # ]]]
 # ]]]
 # ]]]
-
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

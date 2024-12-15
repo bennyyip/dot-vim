@@ -30,5 +30,5 @@
   "python.linting.enabled": false,
   "snippets.ultisnips.pythonPrompt": false,
   "typescript.showUnused": false,
-  "vimlsp.debug": true
+  "vimlsp.debug": false
 }

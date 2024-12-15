@@ -10,7 +10,7 @@ g:Lf_MruMaxFiles = 500
 g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 g:Lf_HideHelp = 1
 g:Lf_ShowRelativePath = 1
-g:Lf_JumpToExistingWindow = 0
+g:Lf_JumpToExistingWindow = 1
 g:Lf_CommandMap = {'<ESC>': ['<ESC>', '<C-G>'], '<C-j>': ['<C-j>', '<C-n>'], '<C-k>': ['<C-k>', '<C-p>']}
 g:Lf_NormalMap = {
       \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
@@ -60,7 +60,8 @@ nnoremap gb  :Leaderf buffer <CR>
 nnoremap gR  :<C-U>Leaderf rg -e<Space>
 
 command! -bar -bang -nargs=0 Lrg call <SID>Rg(<bang>0)
-command! -bar -nargs=? History call <SID>History(<q-args>)
+
+command! -complete=customlist,HistoryCompelte -bar -nargs=? History call <SID>History(<q-args>)
 command! -bar -nargs=0 BLines Leaderf line --all
 command! -bar -nargs=0 Buffers Leaderf buffer
 command! -bar -nargs=0 BuffersAll Leaderf buffer --all
@@ -74,8 +75,13 @@ def History(arg: string)
   elseif arg[0] == '/'
     exec "Leaderf searchHistory" | silent! norm! n
   else
-    Leaderf mru
+    Leaderf cmdHistory
+    # Leaderf mru
   endif
+enddef
+
+def HistoryCompelte(A: any, L: any, P: any): list<string>
+  return [":", "/"]
 enddef
 
 def Rg(bang: any)

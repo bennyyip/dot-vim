@@ -18,6 +18,21 @@ if is_win
   packadd! helptoc
 endif
 
+g:loaded_2html_plugin = 1
+g:loaded_getscriptPlugin = 1
+g:loaded_gzip = 1
+g:loaded_logiPat = 1
+g:loaded_logipat = 1
+g:loaded_manpager_plugin = 1
+# let g:loaded_matchparen = 1
+g:loaded_rrhelper = 1
+g:loaded_spellfile_plugin = 1
+g:loaded_tarPlugin = 1
+g:loaded_vimballPlugin = 1
+g:loaded_zipPlugin = 1
+
+packadd! matchit
+
 call plugpac#Begin({
   # progress_open: tab',
   status_open: 'vertical',
@@ -26,8 +41,8 @@ call plugpac#Begin({
 Pack 'k-takata/minpac', {'type': 'opt'}
 
 Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
-Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' }
-if has("patch-9.0.2190")
+Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
+if v:version >= 901 && !getcompletion('comment', 'packadd')->empty()
     autocmd_add([{
       event: 'VimEnter',
       pattern: '*',
@@ -38,18 +53,21 @@ if has("patch-9.0.2190")
 else
   Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 endif
-# Pack 'tpope/vim-sensible', { 'type': 'start' }
-# Pack 'tpope/vim-surround', { 'type': 'delay' }
+Pack 'bootleq/vim-cycle'
+Pack 'itchyny/lightline.vim'
 Pack 'machakann/vim-sandwich'
-# Pack 'tpope/vim-unimpaired', { 'type': 'delay' }
 
 if !g:minimal_plugins
   # General [[[2
   # Enhance [[[3
-  Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
+  Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   # Pack 'Eliot00/auto-pairs'
-  Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
-  Pack 'habamax/vim-dir'
+  Pack 'airblade/vim-rooter', { 'on': 'Rooter' } # <leader>r
+
+  g:loaded_netrw       = 1
+  g:loaded_netrwPlugin = 1
+  Pack 'habamax/vim-dir', { 'type': 'start' }
+
   if has("patch-9.0.1811")
     autocmd_add([{
       event: 'VimEnter',
@@ -64,18 +82,14 @@ if !g:minimal_plugins
   Pack 'itchyny/vim-cursorword'
   Pack 'lfv89/vim-interestingwords'
   Pack 'luochen1990/rainbow'
-  Pack 'machakann/vim-highlightedyank'
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-  Pack 'romainl/vim-qf'
-  Pack 'skywind3000/vim-terminal-help'
+  Pack 'romainl/vim-qf' # { } H L
+  # Pack 'skywind3000/vim-terminal-help'
   Pack 'tpope/vim-characterize'
-  # Pack 'tpope/vim-repeat'
-  # Pack 'vim-voom/VOoM', { 'on': 'Voom' }
+  Pack 'tpope/vim-repeat'
 
-  Pack 'junegunn/fzf'
-  Pack 'junegunn/fzf.vim'
-  Pack 'justinmk/vim-gtfo'
+  Pack 'justinmk/vim-gtfo' # gof got
   Pack 'skywind3000/asyncrun.vim'
   Pack 'tyru/open-browser.vim'
   Pack 'tpope/vim-eunuch'
@@ -84,47 +98,36 @@ if !g:minimal_plugins
 
   Pack 'girishji/vimsuggest'
 
-  Pack 'chrisbra/NrrwRgn'
+  Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 
   Pack 'bennyyip/vim-highlightedyank'
   # Vim [[[3
-  Pack 'tyru/restart.vim', { 'on': 'Restart' }
   Pack 'chrisbra/vim_faq'
   # VCS [[[3
-  # Pack 'shumphrey/fugitive-gitlab.vim'
-  # Pack 'tommcdo/vim-fubitive'
   Pack 'Eliot00/git-lens.vim'
   Pack 'junegunn/gv.vim', { 'on': 'GV' }
-  Pack 'rhysd/conflict-marker.vim'
+  Pack 'rhysd/conflict-marker.vim' # [x ]x
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tpope/vim-fugitive', { type: 'start' }
   Pack 'tpope/vim-rhubarb'
-  # vim-git is part of vim now
-  # Pack 'tpope/vim-git'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Text Edit [[[3
-  Pack 'machakann/vim-swap'
-  # Pack 'AndrewRadev/sideways.vim'
-  # Pack 'AndrewRadev/splitjoin.vim'
-  Pack 'andymass/vim-matchup'
-  Pack 'bergercookie/vim-debugstring'
-  Pack 'bootleq/vim-cycle'
-  Pack 'junegunn/vim-easy-align'
-  Pack 'svermeulen/vim-yoink'
-  Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' }
+  Pack 'machakann/vim-swap' # g, g. gs gS
+  Pack 'bergercookie/vim-debugstring' # <leader>ds
+  Pack 'tommcdo/vim-lion' # <count>gl<motion>=
+  Pack 'svermeulen/vim-yoink' # :Yanks
+  Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } # gx gxx gxg
   Pack 'tpope/vim-abolish'
-  Pack 'tpope/vim-apathy'
-  # Pack 'tpope/vim-rsi'
-  Pack 'tridactyl/vim-tridactyl'
+  Pack 'tpope/vim-apathy' # 'path'
 
   Pack 'michaeljsmith/vim-indent-object'
   # Pack 'wellle/targets.vim'
 
   Pack 'dyng/ctrlsf.vim'
-  Pack 'yegappan/greplace'
+  # Pack 'yegappan/greplace'
   # Move Around [[[3
-  Pack 'bennyyip/is.vim'
-  Pack 'haya14busa/vim-asterisk'
+  # Pack 'bennyyip/is.vim' # <c-g> <c-t> <c-l> :help incsearch
+  # Pack 'haya14busa/vim-asterisk'
   Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t'] }
   Pack 'markonm/traces.vim'
   # Pack 'monkoose/vim9-stargate'
@@ -132,9 +135,6 @@ if !g:minimal_plugins
   Pack 'christoomey/vim-tmux-navigator'
   Pack 'lilydjwg/fcitx.vim'
   # Appearance [[[3
-  Pack 'itchyny/lightline.vim'
-  Pack 'monkoose/boa-vim'
-  # Pack 'Bakudankun/qline.vim', {'type': 'delay'}
 
   Pack 'mhinz/vim-startify', { 'type': 'delay' }
   # Language [[[2
@@ -144,10 +144,10 @@ if !g:minimal_plugins
   Pack 'girishji/devdocs.vim'
   # Pack 'rhysd/devdocs.vim'
 
-  if !is_win
-    # bhurlow/vim-parinfer
-    Pack 'eraserhd/parinfer-rust'
-  endif
+  # if !is_win
+  #   # bhurlow/vim-parinfer
+  #   Pack 'eraserhd/parinfer-rust'
+  # endif
   Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
   Pack 'Shiracamus/vim-syntax-x86-objdump-d'
   Pack 'cespare/vim-toml', { 'for': 'toml' }
@@ -160,10 +160,12 @@ if !g:minimal_plugins
   Pack 'chrisbra/csv.vim', { 'type': 'opt' }
   Pack 'pearofducks/ansible-vim'
 
+  Pack 'tridactyl/vim-tridactyl'
+
   Pack 'bfrg/vim-jq'
   Pack 'bfrg/vim-jqplay'
   # Python [[[3
-  Pack 'vim-python/python-syntax', { 'for': 'python' }
+  # Pack 'vim-python/python-syntax', { 'for': 'python' }
   Pack 'meatballs/vim-xonsh'
   # Typescript [[[3
   Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -175,8 +177,6 @@ if !g:minimal_plugins
   # Markup [[[3
   Pack 'Rykka/riv.vim', { 'for': 'rst' }
   Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
-  # Pack 'preservim/vim-markdown', { type: 'start' }
-  # Pack 'lervag/vimtex', {'for': 'tex' }
 endif
 plugpac#End()
 # plugpac helpers [[[1
@@ -186,6 +186,11 @@ def PackList(A: string, ...args: list<any>): list<string>
   return pluglist->Utils.Matchfuzzy(A)
 enddef
 
+command! PackSummary {
+  plugpac#Init()
+  const pluglist = minpac#getpluglist()
+  echom $'{pluglist->len()} packages installed.'
+}
 
 command! -nargs=1 -complete=customlist,PackList
       \ PackUrl call plugpac#Init() | call openbrowser#open(
@@ -204,5 +209,6 @@ command! -nargs=1 -complete=customlist,PackList
       \ g:plugpac_plugin_conf_path .. '/pre-' ..
       \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
 # ]]]
+
 
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim
