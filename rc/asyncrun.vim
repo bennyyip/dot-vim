@@ -53,8 +53,6 @@ noremap <leader>: :AsyncStop<CR>
 noremap <F5>      :AsyncRun<UP><CR>
 noremap <F8>      :Make<CR>
 
-noremap <silent> <leader>q :<C-u>call asyncrun#quickfix_toggle(8)<CR>
-
 nnoremap <leader>/ :Rgr<space>
 nnoremap <leader>sd :Rg<space>
 

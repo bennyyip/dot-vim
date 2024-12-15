@@ -29,3 +29,5 @@ local.vim
 
 coc/**/*
 !coc/.gitkeep
+
+/doc

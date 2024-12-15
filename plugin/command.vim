@@ -1,6 +1,6 @@
 vim9script
 
-import autoload "./autoload/utils.vim" as Utils
+import autoload "../autoload/utils.vim" as Utils
 
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 \ | diffthis | wincmd p | diffthis
@@ -127,6 +127,16 @@ command! -nargs=0 SetTabWidth4 call Utils.SetTabWidth(4, true)
 command! -nargs=0 SetHardTabWidth2 call Utils.SetTabWidth(2, false, 0)
 command! -nargs=0 SetHardTabWidth4 call Utils.SetTabWidth(4, false, 0)
 command! -nargs=0 SetHardTabWidth8 call Utils.SetTabWidth(8, false, 0)
+
+# save and load sessions [[1
+if !isdirectory($'{$vimtmp}/session')
+    mkdir($'{$vimtmp}/session', "p")
+endif
+command! -nargs=1 -complete=custom,SessionComplete SaveSession :exe $'mksession! {$vimtmp}/session/<args>'
+command! -nargs=1 -complete=custom,SessionComplete LoadSession :%bd <bar> exe $'so {$vimtmp}/session/<args>'
+def SessionComplete(_, _, _): string
+    return globpath($'{$vimtmp}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
+enddef
 
 # ]]]
 

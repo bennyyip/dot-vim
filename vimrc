@@ -19,13 +19,9 @@ if filereadable($HOME .. '/local.vim')
   source $HOME/local.vim
 endif
 
-
 Source('setting')
 Source('pack')
 Source('ui')
-Source('command')
-Source('keymap')
-Source('autocmd')
 if is_win
   Source('windows')
 else

@@ -1,5 +1,6 @@
 vim9script
-import autoload "./autoload/utils.vim" as Utils
+import autoload "../autoload/utils.vim" as Utils
+
 
 # Functions [[[1
 def JumpToLastPosition() # [[[2
@@ -15,6 +16,8 @@ augroup vimrc
   autocmd FocusGained * silent! checktime
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufReadPost * JumpToLastPosition()
+
+  au VimLeavePre * :exe $'mksession! {$vimtmp}/session/LAST'
 augroup END
 
 # FileType

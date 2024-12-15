@@ -42,8 +42,8 @@ g:startify_transformations = [
   ['.*vimrc$', 'vimrc'],
 ]
 g:startify_lists = [
-  { 'type': 'files',     'header': ['   MRU']            },
   { 'type': 'sessions',  'header': ['   Sessions']       },
+  { 'type': 'files',     'header': ['   MRU']            },
   { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
   { 'type': 'commands',  'header': ['   Commands']       },
 ]
@@ -54,7 +54,7 @@ g:startify_enable_special = 0
 g:startify_files_number = 7
 g:startify_session_dir = $vimtmp .. '/session'
 g:startify_session_autoload = 0
-g:startify_session_persistence = 1
+g:startify_session_persistence = 0
 g:startify_update_oldfiles = 1
 g:startify_use_env = 0
 
