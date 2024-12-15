@@ -3,6 +3,8 @@ vim9script
 const is_tty = !match(&term, 'linux')
 # general settings [[[2
 set nocompatible
+syntax on # turn on syntax highlighting
+filetype plugin indent on
 # init [[[3
 g:mapleader = "\<Space>"
 g:localleader = "\\"
@@ -88,7 +90,8 @@ set hlsearch
 set ignorecase
 set smartcase
 set scrolloff=4
-# set sidescroll=5
+set sidescroll=1
+set sidescrolloff=2
 set number            # line number
 set relativenumber    # relative line number
 if has('patch-8.1.1564')
@@ -143,9 +146,13 @@ set titlestring=VIM:\ %f
 set switchbuf=useopen,usetab
 set ttyfast
 # set lazyredraw
-# set timeoutlen=500
-# set ttimeoutlen=50
+set ttimeout
+set ttimeoutlen=100
 set noshowmode # Hide the mode text (e.g. -- INSERT --)
+set tabpagemax=50
+set sessionoptions-=options
+set viewoptions-=options
+set nolangremap
 
 # diffopt
 &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"

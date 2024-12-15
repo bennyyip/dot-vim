@@ -247,7 +247,7 @@ def DoMap(plugin: string, map_: any, with_prefix: any, prefix_: any)
 
 
   if with_prefix
-    var prefix = v:count ? v:count : ''
+    var prefix = v:count > 0 ? v:count : ''
     prefix ..= '"' .. v:register .. prefix_
     if mode(1) == 'no'
       if v:operator == 'c'
