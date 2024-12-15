@@ -34,7 +34,7 @@ if !g:minimal_plugins
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
   Pack 'Eliot00/auto-pairs'
   Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
-  Pack 'cocopon/vaffle.vim', { 'type': 'start' }
+  Pack 'habamax/vim-dir'
   if has("patch-9.0.1811")
     autocmd_add([{
       event: 'VimEnter',
@@ -71,7 +71,6 @@ if !g:minimal_plugins
 
   Pack 'bennyyip/vim-highlightedyank'
   # Vim [[[3
-  Pack 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
   Pack 'tyru/restart.vim', { 'on': 'Restart' }
   Pack 'chrisbra/vim_faq'
   # VCS [[[3
