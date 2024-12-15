@@ -100,6 +100,7 @@ if has('mouse')
   set mouse=nv
   set mousehide
 endif
+set jumpoptions=stack
 # wild stuff [[[3
 set suffixes+=.a,.1,.class
 set wildignore+=*.o,*.so,*.zip,*.png
