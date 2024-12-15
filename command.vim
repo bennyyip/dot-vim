@@ -2,6 +2,8 @@ vim9script
 
 import autoload "./autoload/utils.vim" as Utils
 
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+\ | diffthis | wincmd p | diffthis
 # :Reverse [[[1
 command! -bar -range=% Reverse :<line1>,<line2>global/^/m <line1>-1<bar>nohl
 # ChineseCount [[[1

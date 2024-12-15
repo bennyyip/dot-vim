@@ -1,16 +1,8 @@
 vim9script
-# Key Mapping [[[1
 const is_gvim = has('gui_running')
-# misc [[[2
+# misc [[[1
 nnoremap <localleader>j :set ft=javascript<CR>
 nnoremap <localleader>h :set ft=html<CR>
-# toogle line number and relative line number
-def NumberOptions(): string
-  return &number && &relativenumber ? 'nonumber norelativenumber' : 'number relativenumber'
-enddef
-nnoremap yon :set <C-R>=<SID>NumberOptions()<CR><CR>
-nnoremap [on :set number relativenumber<CR>
-nnoremap ]on :set nonumber norelativenumber<CR>
 # fold [[[3
 nmap z] zo]z
 nmap z[ zo[z
@@ -45,15 +37,15 @@ nnoremap <silent>  >q :call quickfixed#newer()<CR>
 #   - update the current diff (if any)
 # Use {count}<backspace> to:
 #   - reload (:edit) the current buffer
-nnoremap <silent><expr> <backspace> (v:count ? ':<C-U>:call ben#save_change_marks()\|edit\|call ben#restore_change_marks()<CR>' : '')
+nnoremap <silent><expr> <backspace> (v:count > 0 ? ':<C-U>:call ben#save_change_marks()\|edit\|call ben#restore_change_marks()<CR>' : '')
       \ .. ':nohlsearch' .. (has('diff') ? '\|diffupdate' : '')
       \ .. '<CR><C-L>'
 nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
-# window [[[2
+# window [[[1
 # quick <C-w>
 nnoremap ' <C-w>
 nnoremap '' <C-w>w
-# edit [[[2
+# edit [[[1
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {; {<CR>};<Esc>O
@@ -70,7 +62,7 @@ inoreabbrev <expr> #!s "#!/bin/bash -e"
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
-# yank and paste [[[2
+# yank and paste [[[1
 cnoremap <C-v>         <C-R>+
 inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
 inoremap <silent><C-z> <ESC>u
@@ -85,26 +77,26 @@ nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG' .. (has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
 # yank filepath
 nnoremap <silent> <leader>yp :let @+ = expand("%:p")<cr>:let @" = expand("%:p")<cr>
-# vimrc [[[2
+# vimrc [[[1
 nnoremap <silent><leader>fed :e $VIMRC<CR>
 nnoremap <silent><leader>fee :source $VIMRC<CR>
 # run current line
 nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
-# visual [[[2
+# visual [[[1
 # keep selection when indent line in visual mode
 xnoremap <expr> > v:count ? ">" : ">gv"
 xnoremap <expr> < v:count ? "<" : "<gv"
 # niceblock
 xnoremap <expr> I (mode() =~# '[vV]' ? '<C-v>^o^I' : 'I')
 xnoremap <expr> A (mode() =~# '[vV]' ? '<C-v>0o$A' : 'A')
-# macro [[[2
+# macro [[[1
 # quick edit macro  | ["register]<leader>m
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @' .. v:register .. ' = ' .. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
 xnoremap Q :normal @q<CR>
 # repeat last command for each line of a visual selection
 xnoremap . :normal .<CR>
-# search and substitute [[[2
+# search and substitute [[[1
 # quick substitute
 vnoremap qs "zy:%s`<C-R>z``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
@@ -114,7 +106,7 @@ nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 # mark position before search
 nnoremap / ms/
-# file, buffer [[[2
+# file, buffer [[[1
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>
 nnoremap <leader>fP :let @+=expand("%:p")<CR>:echo "buffer path copied"<CR>
@@ -133,7 +125,7 @@ def DailyNote()
   execute 'edit' fnameescape(filename)
 enddef
 nnoremap <leader>v :call <SID>DailyNote()<CR>
-# tab [[[2
+# tab [[[1
 nmap     T :tabnew<cr>
 nnoremap ]t :tabn<cr>
 nnoremap [t :tabp<cr>
@@ -163,7 +155,7 @@ def MapSwitchTab()
   endfor
 enddef
 MapSwitchTab()
-# move [[[2
+# move [[[1
 inoremap <silent> <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
 inoremap <silent> <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
 inoremap <M-j> <Down>
@@ -172,11 +164,49 @@ inoremap <M-h> <left>
 inoremap <M-l> <Right>
 noremap H ^
 noremap L $
-# text object [[[2
+# text object [[[1
 xnoremap <silent> ag gg0oG$
 onoremap <silent> ag :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 xnoremap <silent> ae gg0oG$
 onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 # ]]]
+# rsi [[[1
+inoremap        <C-A> <C-O>^
+cnoremap        <C-A> <Home>
+
+inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
+
+noremap!        <M-b> <S-Left>
+noremap!        <M-f> <S-Right>
+noremap!        <M-d> <C-O>dw
+cnoremap        <M-d> <S-Right><C-W>
+# unimpared [[[1
+# toogle line number and relative line number
+def NumberOptions(): string
+  return &number && &relativenumber ? 'nonumber norelativenumber' : 'number relativenumber'
+enddef
+nnoremap yon :set <C-R>=<SID>NumberOptions()<CR><CR>
+# Buffer navigation
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+# quickfix list
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [Q :cfirst<CR>
+nnoremap <silent> ]Q :clast<CR>
+# location list (buffer local quickfix list)
+nnoremap <silent> [l :lprevious<CR>
+nnoremap <silent> ]l :lnext<CR>
+nnoremap <silent> [L :lfirst<CR>
+nnoremap <silent> ]L :llast<CR>
+# file list -> load buffers using :args * :args **/*.js **/*.css
+nnoremap <silent> [f :previous<CR>
+nnoremap <silent> ]f :next<CR>
+nnoremap <silent> [F :first<CR>
+nnoremap <silent> ]F :last<CR>
+# [c ]c for diff
+
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

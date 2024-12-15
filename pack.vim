@@ -13,6 +13,10 @@ g:plugpac_plugin_conf_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
 
 # plugins [[[1
+if is_win
+  # packadd! editexisting
+  packadd! helptoc
+endif
 
 call plugpac#Begin({
   # progress_open: tab',
@@ -23,16 +27,27 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 
 Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
 Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' }
-Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
-Pack 'tpope/vim-sensible', { 'type': 'start' }
-Pack 'tpope/vim-surround', { 'type': 'delay' }
-Pack 'tpope/vim-unimpaired', { 'type': 'delay' }
+if has("patch-9.0.2190")
+    autocmd_add([{
+      event: 'VimEnter',
+      pattern: '*',
+      group: 'PlugPac',
+      once: true,
+      cmd: 'timer_start(1, (_) => execute("packadd comment"))',
+    }])
+else
+  Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
+endif
+# Pack 'tpope/vim-sensible', { 'type': 'start' }
+# Pack 'tpope/vim-surround', { 'type': 'delay' }
+Pack 'machakann/vim-sandwich'
+# Pack 'tpope/vim-unimpaired', { 'type': 'delay' }
 
 if !g:minimal_plugins
   # General [[[2
   # Enhance [[[3
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
-  Pack 'Eliot00/auto-pairs'
+  # Pack 'Eliot00/auto-pairs'
   Pack 'airblade/vim-rooter', { 'on': 'Rooter' }
   Pack 'habamax/vim-dir'
   if has("patch-9.0.1811")
@@ -55,8 +70,8 @@ if !g:minimal_plugins
   Pack 'romainl/vim-qf'
   Pack 'skywind3000/vim-terminal-help'
   Pack 'tpope/vim-characterize'
-  Pack 'tpope/vim-repeat'
-  Pack 'vim-voom/VOoM', { 'on': 'Voom' }
+  # Pack 'tpope/vim-repeat'
+  # Pack 'vim-voom/VOoM', { 'on': 'Voom' }
 
   Pack 'junegunn/fzf'
   Pack 'junegunn/fzf.vim'
@@ -66,6 +81,8 @@ if !g:minimal_plugins
   Pack 'tpope/vim-eunuch'
 
   Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
+
+  Pack 'girishji/vimsuggest'
 
   Pack 'chrisbra/NrrwRgn'
 
@@ -86,8 +103,9 @@ if !g:minimal_plugins
   # Pack 'tpope/vim-git'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Text Edit [[[3
-  Pack 'AndrewRadev/sideways.vim'
-  Pack 'AndrewRadev/splitjoin.vim'
+  Pack 'machakann/vim-swap'
+  # Pack 'AndrewRadev/sideways.vim'
+  # Pack 'AndrewRadev/splitjoin.vim'
   Pack 'andymass/vim-matchup'
   Pack 'bergercookie/vim-debugstring'
   Pack 'bootleq/vim-cycle'
@@ -96,13 +114,11 @@ if !g:minimal_plugins
   Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' }
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy'
-  Pack 'tpope/vim-capslock'
-  Pack 'tpope/vim-rsi'
+  # Pack 'tpope/vim-rsi'
   Pack 'tridactyl/vim-tridactyl'
 
-
   Pack 'michaeljsmith/vim-indent-object'
-  Pack 'wellle/targets.vim'
+  # Pack 'wellle/targets.vim'
 
   Pack 'dyng/ctrlsf.vim'
   Pack 'yegappan/greplace'
@@ -125,7 +141,8 @@ if !g:minimal_plugins
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
 
-  Pack 'rhysd/devdocs.vim'
+  Pack 'girishji/devdocs.vim'
+  # Pack 'rhysd/devdocs.vim'
 
   if !is_win
     # bhurlow/vim-parinfer
@@ -155,14 +172,11 @@ if !g:minimal_plugins
   Pack 'BourgeoisBear/clrzr'
   Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
   Pack 'othree/html5.vim', {'for': 'html' }
-  Pack 'tpope/vim-jdaddy'
   # Markup [[[3
   Pack 'Rykka/riv.vim', { 'for': 'rst' }
   Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
   # Pack 'preservim/vim-markdown', { type: 'start' }
   # Pack 'lervag/vimtex', {'for': 'tex' }
-  # Text [[[3
-  Pack 'hotoo/pangu.vim'
 endif
 plugpac#End()
 # plugpac helpers [[[1
