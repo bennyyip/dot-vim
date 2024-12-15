@@ -5,14 +5,14 @@ const is_ssh = ($SSH_CONNECTION != "")
 set background=dark
 colorscheme gruvbox8
 # Terminal True Color [[[2
-if !is_ssh && has("termguicolors")
+# if !is_ssh && has("termguicolors")
+if has("termguicolors")
   # fix bug for vim
   set t_8f=[38;2;%lu;%lu;%lum
   set t_8b=[48;2;%lu;%lu;%lum
 
   # enable true color
   set termguicolors
-
 endif
 # Change cursor style dependent on mode
 # if empty($TMUX)
