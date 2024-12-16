@@ -17,7 +17,9 @@ augroup vimrc
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufReadPost * JumpToLastPosition()
 
-  au VimLeavePre * :exe $'mksession! {$vimtmp}/session/LAST'
+  if !has('win32') || filewritable('C:\Windows\System32') == 0
+    au VimLeavePre * :exe $'mksession! {$vimtmp}/session/LAST'
+  endif
 augroup END
 
 # FileType
@@ -40,36 +42,36 @@ endfor
 var vim9cmdline_enable = false
 
 command Vim9cmdlineToggle {
-    vim9cmdline_enable = !vim9cmdline_enable
+  vim9cmdline_enable = !vim9cmdline_enable
 }
 
 augroup vim9cmdline | autocmd!
-    autocmd CmdlineEnter : {
-        if vim9cmdline_enable
-            if visualmode() == null_string
-                setcmdline('vim9 ')
-            else
-                setcmdline('vim9 :')
-                visualmode(1)
-            endif
-            cnoremap        <c-u>    <c-u>vim9<space>
-            cnoremap        <c-b>    <c-b><c-right><right>
-            cnoremap <expr> <c-w>    getcmdpos() > 6 ? "\<c-w>" : ""
-            cnoremap <expr> <c-left> getcmdpos() > 6 ? "\<c-left>" : ""
-            cnoremap <expr> <bs>     getcmdpos() > 6 ? "\<bs>" : ""
-            cnoremap <expr> <left>   getcmdpos() > 6 ? "\<left>" : ""
-        endif
-    }
-    autocmd CmdlineLeave : {
-        if vim9cmdline_enable
-            cunmap <c-u>
-            cunmap <c-w>
-            cunmap <c-b>
-            cunmap <c-left>
-            cunmap <bs>
-            cunmap <left>
-        endif
-    }
+  autocmd CmdlineEnter : {
+    if vim9cmdline_enable
+      if visualmode() == null_string
+        setcmdline('vim9 ')
+      else
+        setcmdline('vim9 :')
+        visualmode(1)
+      endif
+      cnoremap        <c-u>    <c-u>vim9<space>
+      cnoremap        <c-b>    <c-b><c-right><right>
+      cnoremap <expr> <c-w>    getcmdpos() > 6 ? "\<c-w>" : ""
+      cnoremap <expr> <c-left> getcmdpos() > 6 ? "\<c-left>" : ""
+      cnoremap <expr> <bs>     getcmdpos() > 6 ? "\<bs>" : ""
+      cnoremap <expr> <left>   getcmdpos() > 6 ? "\<left>" : ""
+    endif
+  }
+  autocmd CmdlineLeave : {
+    if vim9cmdline_enable
+      cunmap <c-u>
+      cunmap <c-w>
+      cunmap <c-b>
+      cunmap <c-left>
+      cunmap <bs>
+      cunmap <left>
+    endif
+  }
 augroup END
 
 # ]]]
