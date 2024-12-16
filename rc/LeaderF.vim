@@ -58,6 +58,7 @@ nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>pf  :call <SID>SearchProject()<CR>
 nnoremap gb  :Leaderf buffer <CR>
 nnoremap gR  :<C-U>Leaderf rg -e<Space>
+nnoremap <M-x> :<C-U>History :<CR>
 
 command! -bar -bang -nargs=0 Lrg call <SID>Rg(<bang>0)
 

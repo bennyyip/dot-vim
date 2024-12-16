@@ -17,9 +17,12 @@ augroup vimrc
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufReadPost * JumpToLastPosition()
 
-  if !has('win32') || filewritable('C:\Windows\System32') == 0
-    au VimLeavePre * :exe $'mksession! {$vimtmp}/session/LAST'
-  endif
+  au VimLeavePre * {
+    if !has('win32') || filewritable('C:\Windows\System32') == 0
+      && getbufinfo({'bufloaded': 1, 'buflisted': 1})->len() > 2
+      exe $'mksession! {$vimtmp}/session/LAST'
+    endif
+  }
 augroup END
 
 # FileType
