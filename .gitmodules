@@ -18,3 +18,12 @@
 	url = git@github.com:ojroques/vim-oscyank.git
 	ignore = dirty
 	shallow = true
+[submodule "pack/minpac/opt/vim-cycle"]
+	path = pack/minpac/opt/vim-cycle
+	url = https://github.com/bootleq/vim-cycle
+[submodule "pack/minpac/opt/lightline.vim"]
+	path = pack/minpac/opt/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+[submodule "pack/minpac/opt/vim-sandwich"]
+	path = pack/minpac/opt/vim-sandwich
+	url = https://github.com/machakann/vim-sandwich
