@@ -132,8 +132,10 @@ if !g:minimal_plugins
   Pack 'markonm/traces.vim'
   # Pack 'monkoose/vim9-stargate'
   # *nix Stuff [[[3
-  Pack 'christoomey/vim-tmux-navigator'
-  Pack 'lilydjwg/fcitx.vim'
+  if !is_win
+    Pack 'christoomey/vim-tmux-navigator'
+    Pack 'lilydjwg/fcitx.vim'
+  endif
   # Appearance [[[3
 
   Pack 'mhinz/vim-startify', { 'type': 'delay' }
