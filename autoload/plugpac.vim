@@ -35,6 +35,7 @@ var cached_installed_plugins = {}
 var minpac_init_opts = {}
 
 var package_name = "minpac"
+var quiet = v:false
 
 const plugpac_plugin_conf_path = get(g:, 'plugpac_plugin_conf_path', '')
 
@@ -45,6 +46,7 @@ export def Begin(opts: dict<any> = {})
   minpac_init_opts = opts
 
   package_name = get(opts, 'package_name', 'minpac')
+  quiet = get(opts, 'quiet', v:false)
 
   if exists('#PlugPac')
     augroup PlugPac
@@ -132,7 +134,9 @@ export def Add(repo: string, opts: dict<any> = {})
 
   if !HasPlugin(name)
     timer_start(20, (_) => {
-      echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
+      if !quiet
+        echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
+      endif
     })
     return
   endif
