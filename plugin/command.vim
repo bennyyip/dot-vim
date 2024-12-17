@@ -138,5 +138,35 @@ def SessionComplete(_, _, _): string
     return globpath($'{$vimtmp}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
 enddef
 
+# Goto [[[1
+command! -nargs=1 -complete=command GotoCommand DoGotoDef("command", <f-args>)
+command! -nargs=1 -complete=customlist,KeymapCompleteN GotoIMap DoGotoDef("imap", <f-args>)
+command! -nargs=1 -complete=customlist,KeymapCompleteI GotoNMap DoGotoDef("nmap", <f-args>)
+def KeymapComplete(kind: string, A: string, L: string, P: number): list<string>
+  var l = execute(kind)->split("\n")
+  l->map((_, x) => {
+  const m = x->matchlist('\v^(\a)?\s+(\S+)')
+  if m->len() > 2
+    return m[2]
+  endif
+  return ""
+  })->filter('v:val != ""')
+   return  l->Utils.Matchfuzzy(A)
+enddef
+const KeymapCompleteN: any = (A: string, L: string, P: number) => KeymapComplete("imap", A, L, P)
+const KeymapCompleteI: any = (A: string, L: string, P: number) => KeymapComplete("nmap", A, L, P)
+
+def DoGotoDef(kind: string, item: string)
+  var cmdstr = $'verbose {kind} {item}'
+  var lines = execute(cmdstr)->split("\n")
+  for line in lines
+    const m = line->matchlist('\v\s*Last set from (.+) line (\d+)')
+    if !m->empty() && m[1] != null_string && m[2] != null_string
+      exe $"e +{str2nr(m[2])} {m[1]}"
+      return
+    endif
+  endfor
+enddef
+
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
