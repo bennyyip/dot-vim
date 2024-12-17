@@ -62,7 +62,7 @@ inoremap [<CR> [<CR>]<Esc>O
 inoremap (; (<space><space>);<Esc>hhi
 inoremap (, (<space><space>),<Esc>hhi
 inoremap {; {<space><space>};<Esc>hhi
-inoremap {, {<space><space>},<Esc>hhi
+# inoremap {, {<space><space>},<Esc>hhi
 inoremap [; [<space><space>];<Esc>hhi
 inoremap [, [<space><space>],<Esc>hhi
 inoremap <Plug>(meta-o) <C-O>o

@@ -34,6 +34,8 @@ var cached_installed_plugins = {}
 
 var minpac_init_opts = {}
 
+var package_name = "minpac"
+
 const plugpac_plugin_conf_path = get(g:, 'plugpac_plugin_conf_path', '')
 
 export def Begin(opts: dict<any> = {})
@@ -41,6 +43,8 @@ export def Begin(opts: dict<any> = {})
   repos = {}
 
   minpac_init_opts = opts
+
+  package_name = get(opts, 'package_name', 'minpac')
 
   if exists('#PlugPac')
     augroup PlugPac
@@ -340,7 +344,7 @@ def GetInstalledPlugins(type_: string = 'all'): dict<string>
     t = '*'
   endif
 
-  const pat = 'pack/minpac/' .. t .. '/*'
+  const pat = $'pack/{package_name}/{t}/*'
   final plugin_paths = filter(globpath(&packpath, pat, 0, 1), (k, v) => isdirectory(v))
   final result = {}
   for p in plugin_paths
