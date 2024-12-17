@@ -59,6 +59,7 @@ g:ale_linters = {
   'python': ['ruff'],
   'go': ['golint'],
   'yaml': [ 'yamllint' ],
+  'vim': [],
 }
 
 

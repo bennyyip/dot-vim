@@ -61,8 +61,8 @@ inoremap {; {<space><space>};<Esc>hhi
 inoremap {, {<space><space>},<Esc>hhi
 inoremap [; [<space><space>];<Esc>hhi
 inoremap [, [<space><space>],<Esc>hhi
-inoremap <M-o> <C-O>o
-inoremap <M-O> <C-O>O
+inoremap <Plug>(meta-o) <C-O>o
+inoremap <Plug>(meta-O) <C-O>O
 # script helper
 inoreabbrev <expr> #!! "#!/usr/bin/env" .. (empty(&filetype) ? '' : ' ' .. &filetype)
 inoreabbrev <expr> #!s "#!/bin/bash -e"
@@ -121,10 +121,10 @@ xnoremap * :<c-u> call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<c-u> call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 # SID means script local function; 'call' is optional in vim9script.
 def VSetSearch(cmdtype: string)
-    var temp = getreg('s') # 's' is some register
-    norm! gv"sy
-    setreg('/', '\V' .. substitute(escape(@s, cmdtype .. '\'), '\n', '\\n', 'g'))
-    setreg('s', temp) # restore whatever was in 's'
+  var temp = getreg('s') # 's' is some register
+  norm! gv"sy
+  setreg('/', '\V' .. substitute(escape(@s, cmdtype .. '\'), '\n', '\\n', 'g'))
+  setreg('s', temp) # restore whatever was in 's'
 enddef
 
 # file, buffer [[[1
@@ -154,25 +154,17 @@ noremap  <silent><C-tab> :tabprev<CR>
 inoremap <silent><C-tab> <ESC>:tabprev<CR>
 nnoremap <silent><leader>tc :tabclose<CR>
 nnoremap <silent><leader>to :tabonly<CR>
-def SwitchTab(i: number): string
+def SwitchTab(i: number)
   if tabpagenr() == i
-    return ":tabprev\<CR>"
+    tabprev
   else
-    return ":tabn " .. i .. "\<CR>"
+    execute $"tabn {i}"
   endif
 enddef
 def MapSwitchTab()
   for i in range(1, 9)
-    execute printf("nnoremap <silent><expr> <leader>%d <SID>SwitchTab(%d)", i, i)
-    if is_gvim
-      execute printf("nnoremap <silent><expr> <M-%d> <SID>SwitchTab(%d)", i, i)
-    else
-      # Use customized key code for alt mappings to avoid breaking macros like
-      # `<ESC>j`, see:
-      # https://github.com/bennyyip/dotfiles/blob/master/config/.config/alacritty/alacritty.yml
-      # https://zhuanlan.zhihu.com/p/20902166
-      execute printf("nnoremap <silent><expr> <ESC>]{0}%d~ <SID>SwitchTab(%d)", i, i)
-    endif
+    execute $"nnoremap <Plug>(meta-{i}) <scriptcmd>SwitchTab({i})<CR>"
+    execute $"nnoremap <silent> <leader>{i} <scriptcmd>SwitchTab({i})<CR>"
   endfor
 enddef
 MapSwitchTab()
@@ -197,10 +189,10 @@ cnoremap        <C-A> <Home>
 
 inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
 
-noremap!        <M-b> <S-Left>
-noremap!        <M-f> <S-Right>
-noremap!        <M-d> <C-O>dw
-cnoremap        <M-d> <S-Right><C-W>
+noremap!        <Plug>(meta-b) <S-Left>
+noremap!        <Plug>(meta-f) <S-Right>
+noremap!        <Plug>(meta-d) <C-O>dw
+cnoremap        <Plug>(meta-d) <S-Right><C-W>
 # unimpared [[[1
 # toogle line number and relative line number
 def NumberOptions(): string
@@ -229,5 +221,28 @@ nnoremap <silent> [F :first<CR>
 nnoremap <silent> ]F :last<CR>
 # [c ]c for diff
 
+def MapMeta(x: string)
+  for m in ["n", "c"]
+    const cmd = mapcheck($"<Plug>(meta-{x})", m)
+    if cmd != ""
+      # echom $"{m} {x} {cmd}"
+      execute is_gvim ? $"{m}map <M-{x}> <Plug>(meta-{x})"
+        : $"{m}map <ESC>{x} <Plug>(meta-{x})"
+    endif
+  endfor
+  if mapcheck($"<Plug>(meta-{x})", "i") != ""
+    # map <ESC> slows entering normal mode. so only map for gui
+    if is_gvim
+      execute $"nmap <M-{x}> <Plug>(meta-{x})"
+    endif
+  endif
+enddef
+
+for i in range(33, 122)
+  MapMeta(nr2char(i))
+endfor
+
 # ]]]
+
+
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

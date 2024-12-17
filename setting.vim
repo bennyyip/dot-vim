@@ -89,7 +89,7 @@ set completeopt=menu,popup,fuzzy completepopup=highlight:Pmenu
 &grepformat = '%f:%l:%c:%m'
 &errorformat ..= ',%f\|%\s%#%l col%\s%#%c%\s%#\| %m'
 # breaking [[[3
-set nowrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
+set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
 # set breakindentopt=min:40
 
 set cpoptions=aABcfFqsZ # -e
@@ -115,9 +115,10 @@ set switchbuf=useopen,usetab
 set ttyfast
 # set lazyredraw
 set ttimeout ttimeoutlen=25
+# set timeoutlen=250
 set noshowmode # Hide the mode text (e.g. -- INSERT --)
 set tabpagemax=50
-set sessionoptions=buffers,curdir,tabpages,winsize
+set sessionoptions=buffers,curdir,tabpages,winsize,help
 set viewoptions-=options
 set nolangremap
 
