@@ -15,6 +15,10 @@ cabbrev Wa wa
 # cabbrev X x
 cabbrev Help help
 cabbrev ve verbose
+cabbrev vec verbose<space>command
+cabbrev veim verbose<space>imap
+cabbrev venm verbose<space>nmap
+cabbrev vem verbose<space>map
 # syntax [[[3
 nnoremap <leader>Si  :echo ben#syninfo()<cr>
 nnoremap <leader>Ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>

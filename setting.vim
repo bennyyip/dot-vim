@@ -71,7 +71,7 @@ set scrolloff=4
 set sidescroll=1 sidescrolloff=3
 set number relativenumber cursorline cursorlineopt=number signcolumn=number
 if has('mouse')
-  set mouse=a
+  set mouse=
   # set mouse=nv
   # set mousehide
 endif
