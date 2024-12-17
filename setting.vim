@@ -9,8 +9,7 @@ filetype plugin indent on
 g:mapleader = "\<Space>"
 g:localleader = "\\"
 g:vimsyn_folding = 'f'
-
-# g:markdown_fenced_languages = ['vim']
+g:markdown_fenced_languages = ['html', 'js=javascript', 'ruby', 'bash=sh', 'python']
 
 # indent settings [[[3
 set autoindent
