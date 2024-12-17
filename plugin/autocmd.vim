@@ -18,7 +18,7 @@ augroup vimrc
   autocmd BufReadPost * JumpToLastPosition()
 
   au VimLeavePre * {
-    if !has('win32') || filewritable('C:\Windows\System32') == 0
+    if (!has('win32') || filewritable('C:\Windows\System32') == 0)
       && getbufinfo({'bufloaded': 1, 'buflisted': 1})->len() > 2
       exe $'mksession! {$vimtmp}/session/LAST'
     endif

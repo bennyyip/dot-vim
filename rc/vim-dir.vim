@@ -13,6 +13,10 @@ def CustomizeMappings()
   noremap <buffer> < <scriptcmd>action.WidenView(v:count > 0)<cr>
   noremap <buffer> > <scriptcmd>action.ShrinkView(v:count > 0)<cr>
   noremap <buffer> <silent> <BS> <cmd>nohlsearch<CR>
+  if plugpac#HasPlugin("LeaderF")
+    nmap <buffer> <leader>ff <leader>.
+    nnoremap <buffer> <leader>.  <scriptcmd>execute($'Leaderf file {b:dir_cwd}')<cr>
+  endif
 enddef
 
 augroup vimrc

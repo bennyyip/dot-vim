@@ -96,7 +96,7 @@ if !g:minimal_plugins
 
   Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
 
-  Pack 'girishji/vimsuggest'
+  # Pack 'girishji/vimsuggest'
 
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 
@@ -142,6 +142,7 @@ if !g:minimal_plugins
   # Language [[[2
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
+  Pack 'maximbaz/lightline-ale'
 
   Pack 'girishji/devdocs.vim'
   # Pack 'rhysd/devdocs.vim'

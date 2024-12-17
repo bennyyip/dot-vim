@@ -1,29 +1,6 @@
 vim9script
-# Plugin: neoclide/coc.nvim
 
-g:coc_data_home = $v .. '/coc/'
-
-g:coc_global_extensions = [
-  'coc-json',
-  'coc-pyright',
-  'coc-snippets',
-  'coc-spell-checker',
-  'coc-tsserver',
-  'coc-vimlsp',
-  'coc-yaml',
-  'coc-css',
-  'coc-biome',
-  '@yaegassy/coc-ansible',
-  '@yaegassy/coc-marksman'
-]
-
-g:coc_filetype_map = {
-  'yaml.ansible': 'ansible',
-}
-
-if matchstr(&rtp, 'coc.nvim') != ''
-  call coc#add_extension()
-endif
+coc#add_extension()
 
 # g:coc_snippet_next = '<C-k>'
 
@@ -47,7 +24,6 @@ enddef
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
-
 # Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -55,7 +31,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 # Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gD <Plug>(coc-implementation)
+# nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 # Use K to show documentation in preview window
@@ -110,7 +86,6 @@ vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
 nnoremap <silent> <leader>cc :CocList commands<CR>
-
 
 command! -nargs=0 Prettier :call CocActionAsync('runCommand', 'prettier.formatFile')
 command! -nargs=0 Format :call CocActionAsync('format')
