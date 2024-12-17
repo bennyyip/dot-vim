@@ -1,10 +1,11 @@
 vim9script
 
 import autoload "./autoload/utils.vim" as Utils
+const is_ssh = ($SSH_CONNECTION != "")
 
 const is_win = has('win32')
-
-const minpac_dir = $v .. '/pack/minpac/opt/minpac'
+const package_name = g:minimal_plugins ? 'minimal' : 'minpac'
+const minpac_dir = $'{$v}/pack/{package_name}/opt/minpac'
 if !isdirectory(minpac_dir)
   silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
 endif
@@ -35,13 +36,17 @@ packadd! matchit
 
 call plugpac#Begin({
   # progress_open: tab',
+  quiet: g:minimal_plugins || v:true,
+  package_name: package_name,
   status_open: 'vertical',
   verbose: 2,
 })
 Pack 'k-takata/minpac', {'type': 'opt'}
 
-Pack 'lifepillar/vim-gruvbox8', { 'type': 'start' }
-Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
+Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
+if is_ssh
+  Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
+endif
 if v:version >= 901 && !getcompletion('comment', 'packadd')->empty()
     autocmd_add([{
       event: 'VimEnter',
@@ -91,7 +96,10 @@ if !g:minimal_plugins
 
   Pack 'justinmk/vim-gtfo' # gof got
   Pack 'skywind3000/asyncrun.vim'
-  Pack 'tyru/open-browser.vim'
+  if !is_ssh
+    Pack 'tyru/open-browser.vim'
+  endif
+
   Pack 'tpope/vim-eunuch'
 
   Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }

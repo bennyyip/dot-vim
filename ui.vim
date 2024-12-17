@@ -3,7 +3,11 @@ vim9script
 const is_ssh = ($SSH_CONNECTION != "")
 # Color Scheme [[[2
 set background=dark
-colorscheme gruvbox8
+try
+  colorscheme gruvbox8
+catch
+  colorscheme retrobox
+endtry
 # Terminal True Color [[[2
 # if !is_ssh && has("termguicolors")
 if has("termguicolors")
