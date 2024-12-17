@@ -25,8 +25,8 @@ enddef
 inoremap <silent><expr> <c-space> coc#refresh()
 
 # Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+# nmap <silent> [g <Plug>(coc-diagnostic-prev)
+# nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 # Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
