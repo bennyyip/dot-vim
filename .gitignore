@@ -1,16 +1,6 @@
 /pack/minpac/opt/*
 /pack/minpac/start/*
 
-!pack/minpac/opt/tcomment_vim
-!pack/minpac/opt/vim-oscyank
-!pack/minpac/opt/vim-cycle
-!pack/minpac/opt/lightline.vim
-!pack/minpac/opt/vim-sandwich
-
-!pack/minpac/start/vim-gruvbox8
-
-!pack/minpac/opt/minpac
-
 pack/non-managed
 
 local.vim
