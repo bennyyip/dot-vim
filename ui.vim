@@ -6,7 +6,9 @@ set background=dark
 try
   colorscheme gruvbox8
 catch
-  colorscheme retrobox
+  try
+    colorscheme retrobox
+  endtry
 endtry
 # Terminal True Color [[[2
 # if !is_ssh && has("termguicolors")
