@@ -162,7 +162,7 @@ def SwitchTab(i: number)
   if tabpagenr() == i
     tabprev
   else
-    execute $"tabn {i}"
+    silent! execute $"tabn {i}"
   endif
 enddef
 def MapSwitchTab()

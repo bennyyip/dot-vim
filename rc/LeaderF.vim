@@ -58,7 +58,6 @@ nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>pf  :call <SID>SearchProject()<CR>
 nnoremap gb  :Leaderf buffer <CR>
 nnoremap gR  :<C-U>Leaderf rg -e<Space>
-nnoremap <M-x> :<C-U>History :<CR>
 
 command! -bar -bang -nargs=0 Lrg call <SID>Rg(<bang>0)
 
@@ -66,7 +65,6 @@ command! -complete=customlist,HistoryCompelte -bar -nargs=? History call <SID>Hi
 command! -bar -nargs=0 BLines Leaderf line --all
 command! -bar -nargs=0 Buffers Leaderf buffer
 command! -bar -nargs=0 BuffersAll Leaderf buffer --all
-command! -bar -nargs=0 Commands Leaderf command
 command! -bar -nargs=0 FileTypes Leaderf filetype
 command! -bar -nargs=0 Lines Leaderf line
 
