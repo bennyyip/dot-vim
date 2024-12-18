@@ -140,6 +140,7 @@ enddef
 
 # Goto [[[1
 command! -nargs=1 -complete=command Command DoGotoDef("command", <f-args>)
+# command! -nargs=1 -complete=customlist,MapComplete Map DoGotoDef("map", <f-args>)
 command! -nargs=1 -complete=customlist,NmapComplete Imap DoGotoDef("imap", <f-args>)
 command! -nargs=1 -complete=customlist,ImapComplete Nmap DoGotoDef("nmap", <f-args>)
 command! -nargs=1 -complete=customlist,CmapComplete Cmap DoGotoDef("cmap", <f-args>)
@@ -153,6 +154,7 @@ def GotoDefComplete(kind: string, A: string, L: string, P: number): list<string>
   })->filter('v:val != ""')
   return  l->Utils.Matchfuzzy(A)
 enddef
+const MapComplete = (A: string, L: string, P: number) => GotoDefComplete("map", A, L, P)
 const NmapComplete = (A: string, L: string, P: number) => GotoDefComplete("imap", A, L, P)
 const ImapComplete = (A: string, L: string, P: number) => GotoDefComplete("nmap", A, L, P)
 const CmapComplete = (A: string, L: string, P: number) => GotoDefComplete("cmap", A, L, P)
