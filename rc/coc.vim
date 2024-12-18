@@ -85,6 +85,8 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
+# nmap <leader>lf <Plug>(coc-fix-current)
+
 nnoremap <silent> <leader>cc :CocList commands<CR>
 
 command! -nargs=0 Prettier :call CocActionAsync('runCommand', 'prettier.formatFile')

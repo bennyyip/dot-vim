@@ -75,7 +75,9 @@ if has('mouse')
   # set mouse=nv
   # set mousehide
 endif
-set jumpoptions=stack
+if has("patch-9.0.1921")
+  set jumpoptions=stack
+endif
 # wild stuff [[[3
 set suffixes+=.a,.1,.class
 set wildmenu wildoptions=pum,fuzzy pumheight=20
@@ -118,7 +120,7 @@ set ttimeout ttimeoutlen=25
 # set timeoutlen=250
 set noshowmode # Hide the mode text (e.g. -- INSERT --)
 set tabpagemax=50
-set sessionoptions=buffers,curdir,tabpages,winsize,help
+set sessionoptions=buffers,curdir,tabpages,winsize
 set viewoptions-=options
 set nolangremap
 
