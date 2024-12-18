@@ -85,7 +85,9 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags
 set path+=**
 set complete-=i   # disable scanning included files
 set complete-=t   # disable searching tags
-set completeopt=menu,popup,fuzzy completepopup=highlight:Pmenu
+# set completeopt=menu,popup,fuzzy completepopup=highlight:Pmenu
+set completeopt=menu,longest,menuone,popup,noselect
+set completepopup=highlight:Pmenu
 # grep [[[3
 &grepprg = 'rg --vimgrep --no-heading -H'
 &grepformat = '%f:%l:%c:%m'
