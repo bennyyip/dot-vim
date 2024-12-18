@@ -86,6 +86,7 @@ vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
 # nmap <leader>lf <Plug>(coc-fix-current)
+nmap 
 
 nnoremap <silent> <leader>cc :CocList commands<CR>
 
