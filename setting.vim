@@ -71,7 +71,7 @@ set scrolloff=4
 set sidescroll=1 sidescrolloff=3
 set number relativenumber cursorline cursorlineopt=number signcolumn=number
 if has('mouse')
-  set mouse=
+  set mouse=a
   # set mouse=nv
   # set mousehide
 endif
@@ -88,6 +88,7 @@ set complete-=t   # disable searching tags
 # set completeopt=menu,popup,fuzzy completepopup=highlight:Pmenu
 set completeopt=menu,longest,menuone,popup,noselect
 set completepopup=highlight:Pmenu
+set completepopup+=border:off
 # grep [[[3
 &grepprg = 'rg --vimgrep --no-heading -H'
 &grepformat = '%f:%l:%c:%m'

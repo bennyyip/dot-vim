@@ -179,8 +179,6 @@ inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
-noremap H ^
-noremap L $
 # text object [[[1
 xnoremap <silent> ag gg0oG$
 onoremap <silent> ag :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
@@ -247,6 +245,33 @@ for i in range(33, 122)
 endfor
 
 # ]]]
+# mark ring [[[1
+var mark_ring = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+var mark_ring_i = 0
 
+def g:MarkPush()
+  mark_ring[mark_ring_i] = {'path': expand('%:p'), 'line': line('.'), 'col': col('.')}
+  mark_ring_i = (mark_ring_i + 1) % len(mark_ring)
+enddef
+
+def g:MarkPop(d: number)
+  mark_ring[mark_ring_i] = {'path': expand('%:p'), 'line': line('.'), 'col': col('.')}
+  mark_ring_i = (mark_ring_i + d + len(mark_ring)) %  len(mark_ring)
+  var mark = mark_ring[mark_ring_i]
+  if !has_key(mark, 'path')
+    echo 'empty mark_ping'
+    return
+  endif
+  if mark.path !=# expand('%:p')
+    silent exec 'e ' .. fnameescape(mark.path)
+  endif
+  call cursor(mark.line, mark.col)
+enddef
+
+nnoremap H <scriptcmd>g:MarkPop(-1)<CR>
+nnoremap L <scriptcmd>g:MarkPop(1)<CR>
+nnoremap <X1Mouse> <scriptcmd>g:MarkPop(-1)<CR>
+nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
+# nnoremap mm <scriptcmd>g:MarkPush()<CR>
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
