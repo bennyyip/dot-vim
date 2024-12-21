@@ -29,8 +29,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 # nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 # Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gd <cmd>call MarkPush()<cr>:call CocAction("jumpDefinition")<cr>
+nmap <silent> <2-LeftMouse> <cmd>call MarkPush()<cr>:call CocAction("jumpDefinition")<cr>
+nmap <silent> gy <cmd>call MarkPush()<cr>:call CocAction("jumpTypeDefinition")<cr>
 # nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
@@ -86,7 +87,7 @@ vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
 # nmap <leader>lf <Plug>(coc-fix-current)
-nmap 
+nmap <leader>li <cmd>CocList outline<cr>
 
 nnoremap <silent> <leader>cc :CocList commands<CR>
 
@@ -94,3 +95,6 @@ command! -nargs=0 Prettier :call CocActionAsync('runCommand', 'prettier.formatFi
 command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+# nmap xn <cmd>CocNext<cr>
+# nmap xp <cmd>CocPrev<cr>

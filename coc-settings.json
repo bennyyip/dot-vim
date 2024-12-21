@@ -19,6 +19,9 @@
        "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
        "rootPatterns": [".ccls-root", ".git/"],
        "initializationOptions": {
+       "cache": {
+         "directory": "/tmp/ccls"
+       },
          "capabilities": {
            "foldingRangeProvider": false,
            "workspace": {

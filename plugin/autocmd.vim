@@ -19,7 +19,7 @@ augroup vimrc
 
   au VimLeavePre * {
     if (!has('win32') || filewritable('C:\Windows\System32') == 0)
-      && getbufinfo({'bufloaded': 1, 'buflisted': 1})->len() > 2
+      && getbufinfo({'bufloaded': 1, 'buflisted': 1})->len() > 1
       exe $'mksession! {$vimtmp}/session/LAST'
     endif
   }

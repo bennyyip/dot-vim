@@ -21,5 +21,5 @@ g:coc_filetype_map = {
   'yaml.ansible': 'ansible',
 }
 
-nmap <silent> <Plug>(meta-j) <Plug>(coc-definition)
-nmap <silent> <Plug>(meta-m) <Plug>(coc-references)
+# nmap <silent> <Plug>(meta-j) <cmd>call MarkPush()<cr>:call CocAction("jumpDefinition")<cr>
+# nmap <silent> <Plug>(meta-m) <Plug>(coc-references)

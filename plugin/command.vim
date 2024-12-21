@@ -139,19 +139,24 @@ def SessionComplete(_, _, _): string
 enddef
 
 # Goto [[[1
-command! -nargs=1 -complete=command Command DoGotoDef("command", <f-args>)
-# command! -nargs=1 -complete=customlist,MapComplete Map DoGotoDef("map", <f-args>)
-command! -nargs=1 -complete=customlist,NmapComplete Imap DoGotoDef("imap", <f-args>)
-command! -nargs=1 -complete=customlist,ImapComplete Nmap DoGotoDef("nmap", <f-args>)
-command! -nargs=1 -complete=customlist,CmapComplete Cmap DoGotoDef("cmap", <f-args>)
-command! -nargs=1 -complete=customlist,XmapComplete Xmap DoGotoDef("xmap", <f-args>)
+command! -bang -nargs=1 -complete=command Command DoGotoDef("command", <f-args>)
+command! -bang -nargs=1 -complete=customlist,MapComplete Map DoGotoDef("map", <f-args>)
+command! -bang -nargs=1 -complete=customlist,NmapComplete Imap DoGotoDef("imap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,ImapComplete Nmap DoGotoDef("nmap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,CmapComplete Cmap DoGotoDef("cmap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,XmapComplete Xmap DoGotoDef("xmap", <f-args>)
 
 def GotoDefComplete(kind: string, A: string, L: string, P: number): list<string>
+  const cmd = L->split(' ')[0]
+  const is_bang = cmd[-1 : ] == '!'
   var l = execute(kind)->split("\n")
   l->map((_, x) => {
     const m = x->matchlist('\v^(\a)?\s+(\S+)')
     return m->len() > 2 ? m[2] : ""
   })->filter('v:val != ""')
+  if is_bang
+    l->filter("v:val =~  '<Plug>'")
+  endif
   return  l->Utils.Matchfuzzy(A)
 enddef
 const MapComplete = (A: string, L: string, P: number) => GotoDefComplete("map", A, L, P)
