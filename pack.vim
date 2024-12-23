@@ -67,7 +67,7 @@ if !g:minimal_plugins
   # Enhance [[[3
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   # Pack 'Eliot00/auto-pairs'
-  Pack 'airblade/vim-rooter', { 'on': 'Rooter' } # <leader>r
+  Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
 
   g:loaded_netrw       = 1
   g:loaded_netrwPlugin = 1
@@ -148,6 +148,7 @@ if !g:minimal_plugins
 
   Pack 'mhinz/vim-startify', { 'type': 'delay' }
   # Language [[[2
+  Pack 'ludovicchabant/vim-gutentags'
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
   Pack 'maximbaz/lightline-ale'
