@@ -1,9 +1,9 @@
 vim9script
 # Author:  Ben Yip (yebenmy@gmail.com)
 # URL:     https://github.com/bennyyip/plugpac.vim
-# Version: 2.0
+# Version: 2.3
 #
-# Copyright (c) 2023 Ben Yip
+# Copyright (c) 2024 Ben Yip
 #
 # MIT License
 #
@@ -231,7 +231,7 @@ def DoCmd(plugin: string, cmd: any, bang: any, start_: number, end_: number, arg
     execute $'source {rc_path}'
   endif
 
-  execute printf('%s%s%s %s', (start_ == end_ ? '' : (start_ .. ',' .. end_)), cmd, bang, args_)
+  execute printf('%s%s%s %s', (start_ == end_ ? '' : $":{start_},{end_}"), cmd, bang, args_)
 enddef
 
 def DoMap(plugin: string, map_: any, with_prefix: any, prefix_: any)

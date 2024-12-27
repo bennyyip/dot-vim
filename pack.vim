@@ -204,9 +204,11 @@ command! PackSummary {
   echom $'{pluglist->len()} packages installed.'
 }
 
-command! -nargs=1 -complete=customlist,PackList
-      \ PackUrl call plugpac#Init() | call openbrowser#open(
-      \    minpac#getpluginfo(<q-args>).url)
+command! -nargs=1 -complete=customlist,PackList PackUrl {
+  plugpac#Init()
+  const url = minpac#getpluginfo(<q-args>).url
+  execute $'OpenBrowser {url}'
+}
 
 command! -nargs=1 -complete=customlist,PackList
       \ PackDir call plugpac#Init() | execute 'edit ' .. minpac#getpluginfo(<q-args>).dir

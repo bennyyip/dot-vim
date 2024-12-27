@@ -145,6 +145,7 @@ command! -bang -nargs=1 -complete=customlist,NmapComplete Imap DoGotoDef("imap",
 command! -bang -nargs=1 -complete=customlist,ImapComplete Nmap DoGotoDef("nmap", <f-args>)
 command! -bang -nargs=1 -complete=customlist,CmapComplete Cmap DoGotoDef("cmap", <f-args>)
 command! -bang -nargs=1 -complete=customlist,XmapComplete Xmap DoGotoDef("xmap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,XmapComplete Vmap DoGotoDef("xmap", <f-args>)
 
 def GotoDefComplete(kind: string, A: string, L: string, P: number): list<string>
   const cmd = L->split(' ')[0]
