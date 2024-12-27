@@ -142,7 +142,7 @@ nnoremap <silent><leader><tab> :<C-u>b!#<CR>
 
 
 def DailyNote()
-  const filename = expand($HOME .. "/Obsidian-Vault/Daily/" .. strftime('%Y-%m-%d') .. '.md')
+  const filename = expand($HOME .. "/Obsidian-Vault/0003 Journal/" .. strftime('%Y/W%W/%Y-%m-%d') .. '.md')
   const daily_note_dir = fnamemodify(filename, ':h')
   if !isdirectory(daily_note_dir)
     call mkdir(daily_note_dir, 'p')
