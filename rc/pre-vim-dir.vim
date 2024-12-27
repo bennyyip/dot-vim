@@ -2,7 +2,6 @@ vim9script
 g:dir_columns = "name"
 g:dir_show_hidden = v:false
 
-
 nmap -  :<C-u>Dir %:p:h<CR>
 
 import autoload 'dir/action.vim'

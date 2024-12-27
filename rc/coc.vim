@@ -86,7 +86,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
-# nmap <leader>lf <Plug>(coc-fix-current)
+nmap <leader>lf <Plug>(coc-fix-current)
 nmap <leader>li <cmd>CocList outline<cr>
 
 nnoremap <silent> <leader>cc :CocList commands<CR>
