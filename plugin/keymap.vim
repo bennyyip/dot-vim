@@ -139,7 +139,8 @@ nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
 nnoremap <silent><leader><tab> :<C-u>b!#<CR>
-nnoremap gF  :e <cfile><cr>
+nnoremap gF :e <cfile><cr>
+nnoremap gb :b<space>
 
 def DailyNote()
   const filename = expand($HOME .. "/Obsidian-Vault/0003 Journal/" .. strftime('%Y/W%W/%Y-%m-%d') .. '.md')
