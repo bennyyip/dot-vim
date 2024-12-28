@@ -56,7 +56,6 @@ nnoremap <leader>ff :Leaderf file <CR>
 nnoremap <leader>fp :execute('Leaderf file ' .. expand("$v"))<CR>
 nnoremap <leader>fr :Leaderf mru <CR>
 nnoremap <leader>pf  :call <SID>SearchProject()<CR>
-nnoremap gb  :Leaderf buffer <CR>
 nnoremap gR  :<C-U>Leaderf rg -e<Space>
 
 command! -bar -bang -nargs=0 Lrg call <SID>Rg(<bang>0)
