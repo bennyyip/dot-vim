@@ -76,7 +76,8 @@ imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><lef
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
 # yank and paste [[[1
 cnoremap <C-v>         <C-R>+
-inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
+# inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
+inoremap <silent><C-v> <C-R><C-o>+
 inoremap <silent><C-z> <ESC>u
 xnoremap <silent>Y     "+y
 xnoremap <silent><C-c> "+y
