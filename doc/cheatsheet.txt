@@ -1,0 +1,57 @@
+*cheatsheet.txt*    My own *cheatsheet*
+
+==============================================================================
+'incsearch'~
+	You can use the CTRL-G and CTRL-T 在匹配項間移動
+
+	CTRL-L 加入下一個字
+
+==============================================================================
+Folding ~
+
+OPENING AND CLOSING FOLDS
+	zR 打開全部
+	zM 關閉全部
+
+	zo / ZO
+	zc / zC
+
+MOVING OVER FOLDS
+	zj / zk
+	[z / ]z
+
+==============================================================================
+ins-completion ~
+
+	1. Whole lines	                                        |i_CTRL-X_CTRL-L|
+	13. keywords in 'complete' (from other buffers)	        |i_CTRL-N| |i_CTRL-P|
+	2. keywords in the current file				|i_CTRL-X_CTRL-N|
+	5. keywords in the current and included files		|i_CTRL-X_CTRL-I|
+	6. tags							|i_CTRL-X_CTRL-]|
+	7. file names						|i_CTRL-X_CTRL-F|
+	8. definitions or macros				|i_CTRL-X_CTRL-D|
+	12. Spelling suggestions				|i_CTRL-X_s|
+	3. keywords in 'dictionary'				|i_CTRL-X_CTRL-K|
+
+	*Todo	try thesaurus
+	4. keywords in 'thesaurus', thesaurus-style		|i_CTRL-X_CTRL-T|
+
+
+==============================================================================
+ins-special-keys ~
+
+	CTRL-I or <TAB> Insert a tab.			           |i_CTRL-I|
+	CTRL-R {register}				           |i_CTRL-R|
+	CTRL-R CTRL-O {register}	insert as it is            |i_CTRL-R_CTRL-R|
+	CTRL-Y		Insert 上一行同樣位置的字符
+	CTRL-]		Trigger abbreviation, without inserting a character.
+	CTRL-T		>>
+	{0,^}CTRL-D	<<
+	CTRL-G {j,k,CTRL-J, CTRL-K}	上下移動cursor             |i_CTRL-G_j|
+	CTRL-O		execute one command, return to Insert mode |i_CTRL-O|
+
+	CTRL-G CTRL-T   時間
+	CTRL-G d	:Linediff
+
+vim:tw=78:ts=8:noet:ft=help:norl:
+

@@ -181,6 +181,7 @@ def DoGotoDef(kind: string, item: string)
       return
     endif
   endfor
+  echo 'no match!'
 enddef
 
 # ]]]

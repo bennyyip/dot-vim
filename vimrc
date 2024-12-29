@@ -2,6 +2,7 @@ vim9script
 const is_win = has('win32')
 g:minimal_plugins = v:false
 $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
+$vimtmp = $HOME .. '/.config/vimtmp/'
 $VIMRC = $v .. '/vimrc'
 
 def Source(file: string)

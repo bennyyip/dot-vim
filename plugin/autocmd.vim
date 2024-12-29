@@ -15,7 +15,7 @@ augroup vimrc
   autocmd FocusLost * :silent! wa
   autocmd FocusGained * silent! checktime
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
-  autocmd BufReadPost * JumpToLastPosition()
+  # autocmd BufReadPost * JumpToLastPosition()
 
   au VimLeavePre * {
     if (!has('win32') || filewritable('C:\Windows\System32') == 0)

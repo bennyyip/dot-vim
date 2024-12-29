@@ -3,6 +3,7 @@ setlocal commentstring=//\ %s
 
 setl cino+=g0,:0,j1,l1,N-s,t0,(0
 
+
 #  (reference
 # not call
 nmap <localleader>f <scriptcmd>g:CocLocations("ccls", "textDocument/references", {"excludeRole": 32})<cr>
@@ -27,4 +28,3 @@ nmap <localleader>C <scriptcmd>g:CocLocations("ccls", "$ccls/call", {"callee": v
 # member
 nmap <localleader>m <scriptcmd>g:CocLocations("ccls", "$ccls/member")<cr>
 nmap <localleader>t <scriptcmd>MarkPush()<cr>:call CocAction("jumpTypeDefinition")<cr>
-

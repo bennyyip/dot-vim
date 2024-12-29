@@ -14,11 +14,7 @@ g:plugpac_plugin_conf_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
 
 # plugins [[[1
-if is_win
-  # packadd! editexisting
-  packadd! helptoc
-endif
-
+# Builtin [[[2
 g:loaded_2html_plugin = 1
 g:loaded_getscriptPlugin = 1
 g:loaded_gzip = 1
@@ -32,8 +28,10 @@ g:loaded_tarPlugin = 1
 g:loaded_vimballPlugin = 1
 g:loaded_zipPlugin = 1
 
+# packadd! editexisting
+packadd! helptoc
 packadd! matchit
-
+# ]]]
 call plugpac#Begin({
   # progress_open: tab',
   quiet: g:minimal_plugins || v:true,
@@ -63,11 +61,14 @@ Pack 'itchyny/lightline.vim'
 Pack 'machakann/vim-sandwich'
 
 if !g:minimal_plugins
-  # General [[[2
-  # Enhance [[[3
+  # Lab [[[2
+  Pack 'zhimsel/vim-stay', {'type': 'start'}
+  Pack 'Konfekt/FastFold'
+  # Enhance [[[2
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
-  # Pack 'Eliot00/auto-pairs'
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
+
+  Pack 'mhinz/vim-startify', { 'type': 'delay' }
 
   g:loaded_netrw       = 1
   g:loaded_netrwPlugin = 1
@@ -90,7 +91,6 @@ if !g:minimal_plugins
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
   Pack 'romainl/vim-qf' # { } H L
-  # Pack 'skywind3000/vim-terminal-help'
   Pack 'tpope/vim-characterize'
   Pack 'tpope/vim-repeat'
 
@@ -104,22 +104,15 @@ if !g:minimal_plugins
 
   Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
 
-  # Pack 'girishji/vimsuggest'
-
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 
   Pack 'bennyyip/vim-highlightedyank'
-  # Vim [[[3
   Pack 'chrisbra/vim_faq'
-  # VCS [[[3
-  Pack 'Eliot00/git-lens.vim'
-  Pack 'junegunn/gv.vim', { 'on': 'GV' }
-  Pack 'rhysd/conflict-marker.vim' # [x ]x
-  Pack 'tommcdo/vim-fugitive-blame-ext'
-  Pack 'tpope/vim-fugitive', { type: 'start' }
-  Pack 'tpope/vim-rhubarb'
-  # Pack 'errael/splice9', { type: 'start', frozen: true }
-  # Text Edit [[[3
+  if !is_win
+    Pack 'christoomey/vim-tmux-navigator'
+    Pack 'lilydjwg/fcitx.vim'
+  endif
+  # Motion and Edit [[[2
   Pack 'machakann/vim-swap' # g, g. gs gS
   Pack 'bergercookie/vim-debugstring' # <leader>ds
   Pack 'tommcdo/vim-lion' # <count>gl<motion>=
@@ -129,24 +122,19 @@ if !g:minimal_plugins
   Pack 'tpope/vim-apathy' # 'path'
 
   Pack 'michaeljsmith/vim-indent-object'
-  # Pack 'wellle/targets.vim'
 
   Pack 'dyng/ctrlsf.vim'
-  # Pack 'yegappan/greplace'
-  # Move Around [[[3
-  # Pack 'bennyyip/is.vim' # <c-g> <c-t> <c-l> :help incsearch
-  # Pack 'haya14busa/vim-asterisk'
   Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t'] }
   Pack 'markonm/traces.vim'
   # Pack 'monkoose/vim9-stargate'
-  # *nix Stuff [[[3
-  if !is_win
-    Pack 'christoomey/vim-tmux-navigator'
-    Pack 'lilydjwg/fcitx.vim'
-  endif
-  # Appearance [[[3
-
-  Pack 'mhinz/vim-startify', { 'type': 'delay' }
+  # VCS [[[2
+  Pack 'Eliot00/git-lens.vim'
+  Pack 'junegunn/gv.vim', { 'on': 'GV' }
+  Pack 'rhysd/conflict-marker.vim' # [x ]x
+  Pack 'tommcdo/vim-fugitive-blame-ext'
+  Pack 'tpope/vim-fugitive', { type: 'start' }
+  Pack 'tpope/vim-rhubarb'
+  # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Language [[[2
   Pack 'ludovicchabant/vim-gutentags'
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -155,20 +143,9 @@ if !g:minimal_plugins
 
   Pack 'girishji/devdocs.vim'
   # Pack 'rhysd/devdocs.vim'
-
-  # if !is_win
-  #   # bhurlow/vim-parinfer
-  #   Pack 'eraserhd/parinfer-rust'
-  # endif
-  Pack 'PProvost/vim-ps1', { 'for': ['ps1', 'ps1xml'] }
   Pack 'Shiracamus/vim-syntax-x86-objdump-d'
-  Pack 'cespare/vim-toml', { 'for': 'toml' }
-  Pack 'derekwyatt/vim-scala', { 'for': 'scala' }
-  Pack 'ekalinin/Dockerfile.vim', { 'for': ['yaml.docker-compose', 'Dockerfile'] }
-  Pack 'chr4/nginx.vim', { 'type': 'opt' }
   Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
   Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
-  Pack 'Firef0x/PKGBUILD.vim', { 'for': ['PKGBUILD', 'PKGINFO'] }
   Pack 'chrisbra/csv.vim', { 'type': 'opt' }
   Pack 'pearofducks/ansible-vim'
 
@@ -177,7 +154,6 @@ if !g:minimal_plugins
   Pack 'bfrg/vim-jq'
   Pack 'bfrg/vim-jqplay'
   # Python [[[3
-  # Pack 'vim-python/python-syntax', { 'for': 'python' }
   Pack 'meatballs/vim-xonsh'
   # Typescript [[[3
   Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -187,7 +163,6 @@ if !g:minimal_plugins
   Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
   Pack 'othree/html5.vim', {'for': 'html' }
   # Markup [[[3
-  Pack 'Rykka/riv.vim', { 'for': 'rst' }
   Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
 endif
 plugpac#End()
@@ -223,6 +198,4 @@ command! -nargs=1 -complete=customlist,PackList
       \ g:plugpac_plugin_conf_path .. '/pre-' ..
       \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
 # ]]]
-
-
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim

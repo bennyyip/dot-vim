@@ -98,3 +98,6 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 
 # nmap xn <cmd>CocNext<cr>
 # nmap xp <cmd>CocPrev<cr>
+
+inoremap <c-n> <c-n>
+inoremap <c-p> <c-p>

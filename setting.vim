@@ -11,6 +11,8 @@ g:localleader = "\\"
 g:vimsyn_folding = 'f'
 g:markdown_fenced_languages = ['html', 'js=javascript', 'ruby', 'bash=sh', 'python']
 
+legacy let c_no_comment_fold = 1
+legacy let c_comment_strings = 1
 # indent settings [[[3
 set autoindent
 # set cinoptions=>2,l1,p0,)50,*50,t0
@@ -65,7 +67,7 @@ set belloff=all shortmess=aoOTIc
 set foldmethod=marker
 set foldopen+=jump
 set foldtext=ben#foldy()
-set foldlevelstart=999
+# set foldlevelstart=999
 set hlsearch incsearch ignorecase smartcase
 set scrolloff=4
 set sidescroll=1 sidescrolloff=3
@@ -123,8 +125,8 @@ set ttimeout ttimeoutlen=25
 # set timeoutlen=250
 set noshowmode # Hide the mode text (e.g. -- INSERT --)
 set tabpagemax=50
-set sessionoptions=buffers,curdir,tabpages,winsize
-set viewoptions-=options
+set sessionoptions=buffers,curdir,tabpages,winsize,slash,unix
+set viewoptions=cursor,folds,slash,unix
 set nolangremap
 
 # diffopt
@@ -160,8 +162,7 @@ set backupext=-vimbackup
 
 set updatecount=100
 set undofile
-$vimtmp = $HOME .. '/.config/vimtmp/'
-for tmp in ['backup', 'swap', 'undo', 'info']
+for tmp in ['backup', 'swap', 'undo', 'info', 'view']
   call mkdir($vimtmp .. tmp, 'p')
 endfor
 
@@ -169,6 +170,7 @@ set backupdir=$vimtmp/backup/
 set directory=$vimtmp/swap/
 set undodir=$vimtmp/undo/
 set viminfo='200,n$vimtmp/info/viminfo
+set viewdir=$vimtmp/view
 
 # ]]]
 # ]]]

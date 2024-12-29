@@ -1,10 +1,12 @@
 vim9script
+import autoload 'dir/action.vim'
+
 g:dir_columns = "name"
 g:dir_show_hidden = v:false
+g:dir_invert_split = v:true
 
 nmap -  :<C-u>Dir %:p:h<CR>
 
-import autoload 'dir/action.vim'
 
 def CustomizeMappings()
   # Customize key mappings here
