@@ -136,7 +136,9 @@ if !g:minimal_plugins
   Pack 'tpope/vim-rhubarb'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Language [[[2
-  Pack 'ludovicchabant/vim-gutentags'
+  if executable('ctags')
+    Pack 'ludovicchabant/vim-gutentags'
+  endif
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'
   Pack 'maximbaz/lightline-ale'

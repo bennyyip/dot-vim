@@ -50,12 +50,12 @@ nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_mark
 nnoremap ' <C-w>
 nnoremap '' <C-w>w
 # edit [[[1
-inoremap "<space><space> ""<ESC>i
-inoremap '<space><space> ''<ESC>i
-inoremap (<space><space> ()<ESC>i
-inoremap [<space><space> []<ESC>i
-inoremap <<space><space> <><ESC>i
-inoremap {<space><space> {<space><space>}<ESC>hi
+# inoremap "<space><space> ""<ESC>i
+# inoremap '<space><space> ''<ESC>i
+# inoremap (<space><space> ()<ESC>i
+# inoremap [<space><space> []<ESC>i
+# inoremap <<space><space> <><ESC>i
+# inoremap {<space><space> {<space><space>}<ESC>hi
 inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
@@ -275,5 +275,7 @@ nnoremap L <scriptcmd>g:MarkPop(1)<CR>
 nnoremap <X1Mouse> <scriptcmd>g:MarkPop(-1)<CR>
 nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
 # nnoremap mm <scriptcmd>g:MarkPush()<CR>
+
+# nnoremap <c-m> <scriptcmd>feedkeys($"yyp{getpos('.')[2] - 1}l")<CR>
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

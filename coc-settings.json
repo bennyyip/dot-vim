@@ -60,6 +60,7 @@
   "pyright.enable": true,
   "python.formatting.provider": "black",
   "python.linting.enabled": false,
+  "pyright.inlayHints.variableTypes": false,
   "snippets.ultisnips.pythonPrompt": false,
   "typescript.showUnused": false
   // "vimlsp.debug": false,
