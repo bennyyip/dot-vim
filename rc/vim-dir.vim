@@ -21,6 +21,7 @@ def CustomizeMappings()
     nnoremap <buffer> <leader>.  <scriptcmd>execute($'Leaderf file {b:dir_cwd}')<cr>
   endif
   noremap <buffer> g: <scriptcmd>DoFillCmdline()<cr>
+  nnoremap <buffer> cd <scriptcmd>execute($'lcd {b:dir_cwd}')<cr>
 enddef
 
 def DoFillCmdline()

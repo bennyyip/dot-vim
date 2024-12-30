@@ -97,8 +97,8 @@ nnoremap <silent><leader>fee :source $VIMRC<CR>
 nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
 # visual [[[1
 # keep selection when indent line in visual mode
-xnoremap <expr> > v:count ? ">" : ">gv"
-xnoremap <expr> < v:count ? "<" : "<gv"
+xnoremap <expr> > v:count > 0 ? ">" : ">gv"
+xnoremap <expr> < v:count > 0 ? "<" : "<gv"
 # niceblock
 xnoremap <expr> I (mode() =~# '[vV]' ? '<C-v>^o^I' : 'I')
 xnoremap <expr> A (mode() =~# '[vV]' ? '<C-v>0o$A' : 'A')
@@ -119,6 +119,11 @@ nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 # mark position before search
 nnoremap / ms/
+# search in selection
+xnoremap / <ESC>/\%><c-r>=line("'<")-1<cr>l\%<<c-r>=line("'>")+1<cr>l<HOME>
+# restore /
+xnoremap g/ /
+
 # Emacs C-s C-w like solution: hightlight in visual mode and then type * or #
 # `cgn` to replace text
 # https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
@@ -188,8 +193,10 @@ xnoremap <silent> ae gg0oG$
 onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 # ]]]
 # rsi [[[1
-inoremap        <C-A> <C-O>^
-cnoremap        <C-A> <Home>
+inoremap <C-A> <C-O>^
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
 
 inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
 

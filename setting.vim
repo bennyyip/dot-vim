@@ -67,7 +67,7 @@ set belloff=all shortmess=aoOTIc
 set foldmethod=marker
 set foldopen+=jump
 set foldtext=ben#foldy()
-# set foldlevelstart=999
+set foldlevelstart=999
 set hlsearch incsearch ignorecase smartcase
 set scrolloff=4
 set sidescroll=1 sidescrolloff=3
@@ -82,8 +82,9 @@ if has("patch-9.0.1921")
 endif
 # wild stuff [[[3
 set suffixes+=.a,.1,.class
-set wildmenu wildoptions=pum,fuzzy pumheight=20
+set wildmenu wildmode=longest:full,full wildoptions=pum,fuzzy pumheight=20
 set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags
+set wildignore+=*~,*.py[co],__pycache__,
 set path+=**
 set complete-=i   # disable scanning included files
 set complete-=t   # disable searching tags
