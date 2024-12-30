@@ -62,8 +62,8 @@ Pack 'machakann/vim-sandwich'
 
 if !g:minimal_plugins
   # Lab [[[2
-  Pack 'zhimsel/vim-stay', {'type': 'start'}
-  Pack 'Konfekt/FastFold'
+  # Pack 'zhimsel/vim-stay', {'type': 'start'}
+  # Pack 'Konfekt/FastFold'
   # Enhance [[[2
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
