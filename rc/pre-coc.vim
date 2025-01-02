@@ -6,6 +6,7 @@ g:coc_data_home = $v .. '/coc/'
 g:coc_global_extensions = [
   'coc-json',
   'coc-pyright',
+  '@yaegassy/coc-ruff',
   'coc-snippets',
   'coc-spell-checker',
   'coc-tsserver',

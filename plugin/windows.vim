@@ -1,4 +1,5 @@
 vim9script
+if !has('win32') | finish | endif
 const is_gvim = has('gui_running')
 
 # set renderoptions=type:directx

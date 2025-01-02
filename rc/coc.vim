@@ -82,8 +82,8 @@ endif
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+vmap <localleader>a <Plug>(coc-codeaction-selected)
+nmap <localleader>a <Plug>(coc-codeaction-selected)
 
 nmap <leader>lf <Plug>(coc-fix-current)
 nmap <leader>li <cmd>CocList outline<cr>
