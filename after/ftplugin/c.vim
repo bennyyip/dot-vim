@@ -2,7 +2,9 @@ vim9script
 setlocal commentstring=//\ %s
 
 setl cino+=g0,:0,j1,l1,N-s,t0,(0
+set foldnestmax=1
 
+nmap <silent> <2-LeftMouse> <cmd>call MarkPush()<cr>:call CocAction("jumpDefinition")<cr>
 
 #  (reference
 # not call
@@ -28,3 +30,4 @@ nmap <localleader>C <scriptcmd>g:CocLocations("ccls", "$ccls/call", {"callee": v
 # member
 nmap <localleader>m <scriptcmd>g:CocLocations("ccls", "$ccls/member")<cr>
 nmap <localleader>t <scriptcmd>MarkPush()<cr>:call CocAction("jumpTypeDefinition")<cr>
+
