@@ -5,6 +5,7 @@ g:operator#sandwich#set('all', 'all', 'highlight', 0)
 g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 g:sandwich#recipes += [
   {'buns': ['|', '|'], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
+  {'buns': ['```', '```'], 'motionwise': ['line']},
 ]
 
 omap is <Plug>(textobj-sandwich-auto-i)
@@ -20,4 +21,3 @@ nmap dss <Plug>(sandwich-delete-auto)
 nmap cs <Plug>(sandwich-replace)
 nmap css <Plug>(sandwich-replace-auto)
 xmap S <Plug>(sandwich-add)
-

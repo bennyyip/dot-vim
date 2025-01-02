@@ -11,6 +11,9 @@ nmap -  :<C-u>Dir %:p:h<CR>
 def CustomizeMappings()
   # Customize key mappings here
   nmap <buffer> gg 4G
+  nnoremap <buffer> gb :b<space>
+  nnoremap <buffer> gB <scriptcmd>action.BookmarkJumpMenu()<cr>
+
   noremap <buffer> < <scriptcmd>action.WidenView()<cr>
   noremap <buffer> > <scriptcmd>action.ShrinkView()<cr>
   # noremap <buffer> < <scriptcmd>action.WidenView(v:count > 0)<cr>
@@ -27,7 +30,7 @@ enddef
 def DoFillCmdline()
   const cfile = action.VisualItemsInList(line('v'), line('.'))->mapnew((idx, x) => x.name)->join(' ')
 
-  const cmdline = $":\<C-U>AsyncRun {cfile}\<HOME>\<S-Right> "
+  const cmdline = $":\<C-U>AsyncCmd {cfile}\<HOME>\<S-Right> "
   feedkeys(cmdline)
 enddef
 

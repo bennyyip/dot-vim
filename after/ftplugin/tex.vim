@@ -1,7 +1,3 @@
-if plugpac#HasPlugin("asyncrun.vim")
-  nnoremap <buffer><F5> :w<CR>:AsyncRun xelatex %<CR>
-endif
-
 " ae and ie conflict with kana/vim-textobj-entire
 omap <buffer>aE <plug>(vimtex-ae)
 xmap <buffer>aE <plug>(vimtex-ae)

@@ -70,7 +70,9 @@ if s:enable_nerd_font
 endif
 
 function LightlineAsyncrun() "[[[2
-  return get(g:, 'asyncrun_status', '')
+  const jobs = get(g:, 'async_jobs', {})
+  return jobs->len() > 0 ? 'Running' : ''
+  " return get(g:, 'asyncrun_status', '')
 endfunction
 
 function! LightlineModified() "[[[2
