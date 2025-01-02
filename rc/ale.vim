@@ -33,6 +33,7 @@ g:ale_fixers = {
   'scss': [ 'prettier', ],
   'typescript': [ 'eslint', 'dprint', ],
   'json': [ 'dprint', ],
+  'jsonc': [ 'biome', ],
   'proto': [ 'protolint', ],
   # 'python': [ 'black', 'isort', 'ruff' ],
   'python': [ 'ruff_format', 'ruff' ],

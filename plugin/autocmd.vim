@@ -10,6 +10,17 @@ def JumpToLastPosition() # [[[2
   endif
 enddef
 
+g:format_on_save = v:false
+def FormatOnSave() # [[[2
+  if !get(b:, 'format_on_save', g:format_on_save)
+    return
+  endif
+  const save_view = winsaveview()
+  normal! gggqG
+  execute 'write'
+  winrestview(save_view)
+enddef
+
 # Autocmd [[[1
 augroup vimrc
   autocmd FocusLost * :silent! wa
@@ -23,10 +34,11 @@ augroup vimrc
       exe $'mksession! {$vimtmp}/session/LAST'
     endif
   }
+  autocmd BufWritePost * FormatOnSave()
 augroup END
 
 # FileType
-for ft in ['vim', 'sh', 'zsh', 'bash', 'css', 'html', 'javascript', 'typescript', 'ps1', 'lisp']
+for ft in ['vim', 'sh', 'zsh', 'bash', 'css', 'html', 'javascript', 'typescript', 'ps1', 'lisp', 'json']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'Utils.SetTabWidth(2, true)' }])
 endfor
 

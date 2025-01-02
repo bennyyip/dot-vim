@@ -79,6 +79,5 @@ export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [
   endif
 enddef
 
-
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
