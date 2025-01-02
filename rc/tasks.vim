@@ -19,8 +19,14 @@ nnoremap <leader>q <cmd>copen<CR>
 noremap <leader>; :AsyncCmd<space>
 noremap <leader>: :StopJobs<CR>
 
-command! -bang -bar -nargs=* Gpush execute 'AsyncCmd git push' <q-args>
-command! -bang -bar -nargs=* Gfetch execute 'AsyncCmd git fetch' <q-args>
+
+command! -bang -bar -nargs=* Gpush  {
+  execute $'AsyncCmd git -C {fnameescape(g:FugitiveGitDir())} push' <q-args>
+}
+command! -bang -bar -nargs=* Gfetch  {
+  execute $'AsyncCmd git -C {fnameescape(g:FugitiveGitDir())} fetch' <q-args>
+}
+
 
 noremap <F5> :Async<UP><CR>
 noremap <F8> :Compiler<UP><CR>
