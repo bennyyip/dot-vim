@@ -30,7 +30,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 # Remap keys for gotos
 nmap <silent> gd <cmd>call MarkPush()<cr>:call CocAction("jumpDefinition")<cr>
-nmap <silent> <2-LeftMouse> <cmd>call MarkPush()<cr>:call CocAction("jumpDefinition")<cr>
 nmap <silent> gy <cmd>call MarkPush()<cr>:call CocAction("jumpTypeDefinition")<cr>
 # nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)

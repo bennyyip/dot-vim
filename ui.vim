@@ -4,7 +4,7 @@ const is_ssh = ($SSH_CONNECTION != "")
 # Color Scheme [[[2
 set background=dark
 try
-  colorscheme gruvbox8
+  colorscheme gruvbox8_hard
 catch
   try
     colorscheme retrobox

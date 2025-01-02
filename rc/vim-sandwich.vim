@@ -8,10 +8,10 @@ g:sandwich#recipes += [
   {'buns': ['```', '```'], 'motionwise': ['line']},
 ]
 
-omap is <Plug>(textobj-sandwich-auto-i)
-xmap is <Plug>(textobj-sandwich-auto-i)
-omap as <Plug>(textobj-sandwich-auto-a)
-xmap as <Plug>(textobj-sandwich-auto-a)
+omap ik <Plug>(textobj-sandwich-auto-i)
+xmap ik <Plug>(textobj-sandwich-auto-i)
+omap ak <Plug>(textobj-sandwich-auto-a)
+xmap ak <Plug>(textobj-sandwich-auto-a)
 
 nmap ys <Plug>(sandwich-add)
 onoremap <SID>line :normal! ^vg_<CR>

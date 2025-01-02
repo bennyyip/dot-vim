@@ -28,6 +28,11 @@ g:loaded_tarPlugin = 1
 g:loaded_vimballPlugin = 1
 g:loaded_zipPlugin = 1
 
+if !is_win
+  # :Man <leader>K
+  runtime! ftplugin/man.vim
+endif
+
 # packadd! editexisting
 packadd! helptoc
 packadd! matchit
@@ -139,7 +144,7 @@ if !g:minimal_plugins
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Language [[[2
   if executable('ctags')
-    Pack 'ludovicchabant/vim-gutentags'
+    Pack 'ludovicchabant/vim-gutentags', { type: 'start' }
   endif
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
   Pack 'dense-analysis/ale'

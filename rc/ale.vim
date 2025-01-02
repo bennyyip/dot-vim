@@ -1,6 +1,9 @@
 vim9script
 # Plugin: dense-analysis/ale
 
+# disable by default
+ALEDisable
+
 # https://github.com/dense-analysis/ale/issues/4804
 autocmd_delete([{'event': 'InsertEnter', 'group': 'ALEEvents'}])
 

@@ -6,6 +6,7 @@ nnoremap <localleader>h :set ft=html<CR>
 # fold [[[3
 nmap z] zo]z
 nmap z[ zo[z
+nnoremap <leader><space> za
 # correct spell [[[3
 cabbrev Q q
 cabbrev Qa qa
@@ -145,7 +146,7 @@ nnoremap <leader>fP :let @+=expand("%:p")<CR>:echo "buffer path copied"<CR>
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
-nnoremap <silent><leader><tab> :<C-u>b!#<CR>
+nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
 

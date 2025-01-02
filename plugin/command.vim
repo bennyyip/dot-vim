@@ -185,4 +185,6 @@ def DoGotoDef(kind: string, item: string)
 enddef
 
 # ]]]
+# Zen [[[
+command! Zen normal <C-W>v<C-W>h:enew<CR>70<C-W><lt><C-W><C-W>
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

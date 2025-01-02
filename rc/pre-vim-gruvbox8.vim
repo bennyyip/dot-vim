@@ -6,6 +6,6 @@ if is_gvim
   g:gruvbox_italic = 1
   g:gruvbox_italicize_strings = 1
 else
-  g:gruvbox_italic = 0
-  g:gruvbox_italicize_strings = 0
+  g:gruvbox_italic = 1
+  g:gruvbox_italicize_strings = 1
 endif
