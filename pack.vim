@@ -70,6 +70,7 @@ if !g:minimal_plugins
   # Pack 'zhimsel/vim-stay', {'type': 'start'}
   # Pack 'Konfekt/FastFold'
   Pack 'Konfekt/vim-scratchpad'
+  Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   # Enhance [[[2
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
@@ -176,7 +177,9 @@ if !g:minimal_plugins
   Pack 'othree/html5.vim', {'for': 'html' }
   Pack "hail2u/vim-css3-syntax"
   # Markup [[[3
-  Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
+  if is_win
+    Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
+  endif
 endif
 plugpac#End()
 # plugpac helpers [[[1
