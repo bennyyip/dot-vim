@@ -21,54 +21,31 @@ command! -nargs=* Locate call <SID>Locate(<q-args>)
 command! -bang -bar -nargs=* Gpush execute 'AsyncRun<bang> -cwd=' .. fnameescape(g:FugitiveGitDir()) 'git push' <q-args>
 command! -bang -bar -nargs=* Gfetch execute 'AsyncRun<bang> -cwd=' .. fnameescape(g:FugitiveGitDir()) 'git fetch' <q-args>
 
-def Locate(args: string)
-  g:ben_old_efm = &efm
-  set efm=%f
-
-  var cmd =  "AsyncRun! -post=let\\ &efm=g:ben_old_efm "
-
-  const escaped_args = substitute(args, "[%#]", '\\\0', 'g')
-  cmd ..= "@ locate " .. escaped_args
-  execute cmd
-enddef
 
 def Rg(root: number, append: number, args: string)
   # avoid some plugin modify errorformat
   g:ben_old_efm = &efm
   set efm=%f:%\\s%#%l:%c:%m
 
-  var cmd =  "AsyncRun! -post=let\\ &efm=g:ben_old_efm "
+  var cmd =  "AsyncRun!"
 
-  var path = root == 0 ? expand('%:h:p') : asyncrun#get_root('%')
-
-  if path == ""
-    path = "."
+  if root != 0
+    cmd ..= ' -cwd=<root>'
+  else
+    cmd ..= ' -cwd=$(VIM_FILEDIR)'
   endif
+  cmd ..= " -post=let\\ &efm=g:ben_old_efm"
 
   if append != 0
     cmd ..= "-append "
   endif
 
   const escaped_args = substitute(args, "[%#]", '\\\0', 'g')
-  cmd ..= "@ rg --smart-case --vimgrep " .. escaped_args .. ' ' .. shellescape(path)
+  cmd ..= " @ rg --smart-case --vimgrep " .. escaped_args .. ' .'
+  echom cmd
   execute cmd
 enddef
 
 noremap <leader>; :AsyncRun<space>
 noremap <leader>: :AsyncStop<CR>
 noremap <F5>      :AsyncRun<UP><CR>
-noremap <F8>      :Make<CR>
-
-nnoremap <leader>/ :Rgr<space>
-nnoremap <leader>sd :Rg<space>
-nnoremap <leader>F :Locate<space>
-
-def MapPython()
-  nnoremap <buffer><F6>      :AsyncRun -raw -mode=term -pos=thelp python %<CR>
-  inoremap <buffer><F6> <ESC>:AsyncRun -raw -mode=term -pos=thelp python %<CR>
-  xnoremap <buffer><F6>      :AsyncRun -raw python<CR>
-enddef
-
-augroup vimrc
-  autocmd FileType python MapPython()
-augroup END

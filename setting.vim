@@ -9,7 +9,7 @@ filetype plugin indent on
 g:mapleader = "\<Space>"
 g:localleader = "\\"
 g:vimsyn_folding = 'f'
-g:markdown_fenced_languages = ['html', 'js=javascript', 'ruby', 'bash=sh', 'python']
+g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'bash=sh', 'python']
 
 legacy let c_no_comment_fold = 1
 legacy let c_comment_strings = 1

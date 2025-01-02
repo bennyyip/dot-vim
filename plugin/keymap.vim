@@ -43,7 +43,8 @@ nnoremap <silent>  >q :call quickfixed#newer()<CR>
 #   - reload (:edit) the current buffer
 nnoremap <silent><expr> <backspace> (v:count > 0 ? ':<C-U>:call ben#save_change_marks()\|edit\|call ben#restore_change_marks()<CR>' : '')
       \ .. ':nohlsearch' .. (has('diff') ? '\|diffupdate' : '')
-      \ .. '<CR><C-L>'
+      \ .. '<CR>'
+      # \ .. '<CR><C-L>'
 nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
 # window [[[1
 # quick <C-w>

@@ -14,8 +14,8 @@ augroup vimrc
   autocmd FileType qf QfMappings()
 augroup END
 
-nmap <leader>q <Plug>(qf_qf_toggle_stay)
-nmap <leader>Q <Plug>(qf_qf_toggle)
+# nmap <leader>q <Plug>(qf_qf_toggle_stay)
+# nmap <leader>Q <Plug>(qf_qf_toggle)
 
 # nmap <leader>l <Plug>(qf_loc_toggle_stay)
 # nmap <leader>L <Plug>(qf_loc_toggle)

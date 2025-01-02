@@ -57,13 +57,14 @@ else
   Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 endif
 Pack 'bootleq/vim-cycle'
-Pack 'itchyny/lightline.vim'
+Pack 'bennyyip/lightline.vim' # fork to disable in nofile
 Pack 'machakann/vim-sandwich'
 
 if !g:minimal_plugins
   # Lab [[[2
   # Pack 'zhimsel/vim-stay', {'type': 'start'}
   # Pack 'Konfekt/FastFold'
+  Pack 'Konfekt/vim-scratchpad'
   # Enhance [[[2
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
@@ -95,7 +96,8 @@ if !g:minimal_plugins
   Pack 'tpope/vim-repeat'
 
   Pack 'justinmk/vim-gtfo' # gof got
-  Pack 'skywind3000/asyncrun.vim'
+  Pack 'bennyyip/tasks.vim'
+  # Pack 'skywind3000/asyncrun.vim'
   if !is_ssh
     Pack 'tyru/open-browser.vim'
   endif
@@ -143,6 +145,8 @@ if !g:minimal_plugins
   Pack 'dense-analysis/ale'
   Pack 'maximbaz/lightline-ale'
 
+  Pack 'Konfekt/vim-compilers'
+
   Pack 'girishji/devdocs.vim'
   # Pack 'rhysd/devdocs.vim'
   Pack 'Shiracamus/vim-syntax-x86-objdump-d'
@@ -164,6 +168,7 @@ if !g:minimal_plugins
   Pack 'BourgeoisBear/clrzr'
   Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
   Pack 'othree/html5.vim', {'for': 'html' }
+  Pack "hail2u/vim-css3-syntax"
   # Markup [[[3
   Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
 endif
