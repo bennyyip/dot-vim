@@ -3,8 +3,8 @@
     "coc.preferences.formatOnSave": true
   },
   "cSpell.enabledLanguageIds": ["markdown", "plaintext", "text"],
-  "diagnostic.displayByAle": true,
-  "diagnostic.enable": true,
+  "diagnostic.displayByAle": false,
+  "diagnostic.enable": false,
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -57,12 +57,22 @@
 //      }
 //    }
   },
+
+   "ruff.autoFixOnSave": true,
+   // "ruff.nativeServer": true,
+   "ruff.lint.args": ["--select", "I"]
+  "ruff.enableExperimentalFormatter": true,
+
+
   "pyright.enable": true,
-  "python.formatting.provider": "black",
+  "python.formatting.provider": "none",
   "python.linting.enabled": false,
   "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.parameterTypes": false,
   "snippets.ultisnips.pythonPrompt": false,
+
   "typescript.showUnused": false
+
   // "vimlsp.debug": false,
   // "vimlsp.diagnostic.enable": true
 }

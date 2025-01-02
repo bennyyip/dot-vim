@@ -22,7 +22,7 @@ def FormatOnSave() # [[[2
   endif
   const save_view = winsaveview()
   normal! gggqG
-  execute 'write'
+  # execute 'write'
   winrestview(save_view)
 enddef
 

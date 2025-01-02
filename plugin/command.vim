@@ -25,8 +25,6 @@ endfunc
 
 vnoremap <F7> :call <SID>ChineseCount()<cr>
 
-# :Shuffle | Shuffle selected lines [[[1
-command! -range=% Shuffle :<line1>,<line2>py3 Shuffle()
 # :A [[[1
 command! A call ben#a('e')
 command! AV call ben#a('botright vertical split')
@@ -42,8 +40,6 @@ command! PX if !empty(expand('%'))
       \| endif
 # RFC [[[1
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
-# Paste [[[1
-command! -range=% Paste :<line1>,<line2>py3 LilyPaste()
 # Join [[[1
 function Lilydjwg_join(sep, bang) range
   if a:sep[0] == '\'

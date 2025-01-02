@@ -5,10 +5,6 @@ $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
 $vimtmp = $HOME .. '/.config/vimtmp/'
 $VIMRC = $v .. '/vimrc'
 
-def Source(file: string)
-  execute $'source $v/{file}.vim'
-enddef
-
 if exists('#vimrc')
   augroup vimrc
     autocmd!
@@ -20,17 +16,16 @@ if filereadable($HOME .. '/local.vim')
   source $HOME/local.vim
 endif
 
-Source('setting')
-Source('pack')
-Source('ui')
-if is_win
-  Source('windows')
-else
-  Source('unix')
-endif
+source $v/setting.vim
+source $v/pack.vim
 
-if has("python3")
-  execute "py3file" $v .. "/vimrc.py"
-endif
+set background=dark
+try
+  colorscheme gruvbox8_hard
+catch
+  try
+    colorscheme retrobox
+  endtry
+endtry
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

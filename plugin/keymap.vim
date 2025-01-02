@@ -30,8 +30,6 @@ nnoremap <silent><leader>do :windo diffoff<CR>
 # linewise partial staging in visual-mode.
 xnoremap <c-p> :diffput<cr>
 xnoremap <c-o> :diffget<cr>
-# toggle iwhite
-nnoremap yo<space> :set <C-R>=(&diffopt =~# 'iwhite') ? 'diffopt-=iwhite' : 'diffopt+=iwhite'<CR><CR>
 # quickfix and loclist [[[3
 nnoremap <silent>  <q :call quickfixed#older()<CR>
 nnoremap <silent>  >q :call quickfixed#newer()<CR>
@@ -233,10 +231,10 @@ nnoremap <silent> ]q :cnext<CR>
 nnoremap <silent> [Q :cfirst<CR>
 nnoremap <silent> ]Q :clast<CR>
 # location list (buffer local quickfix list)
-nnoremap <silent> [l :lprevious<CR>
-nnoremap <silent> ]l :lnext<CR>
-nnoremap <silent> [L :lfirst<CR>
-nnoremap <silent> ]L :llast<CR>
+nnoremap <silent> [s :lprevious<CR>
+nnoremap <silent> ]s :lnext<CR>
+nnoremap <silent> [S :lfirst<CR>
+nnoremap <silent> ]S :llast<CR>
 # file list -> load buffers using :args * :args **/*.js **/*.css
 nnoremap <silent> [f :previous<CR>
 nnoremap <silent> ]f :next<CR>
