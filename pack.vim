@@ -152,7 +152,7 @@ if !g:minimal_plugins
   # Pack 'maximbaz/lightline-ale'
 
   Pack 'Konfekt/vim-compilers'
-  Pack 'Konfekt/vim-formatprgs'
+  # Pack 'Konfekt/vim-formatprgs'
 
   Pack 'girishji/devdocs.vim'
   # Pack 'rhysd/devdocs.vim'

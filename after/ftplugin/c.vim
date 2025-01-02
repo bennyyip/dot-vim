@@ -4,6 +4,8 @@ setlocal commentstring=//\ %s
 setl cino+=g0,:0,j1,l1,N-s,t0,(0
 set foldnestmax=1
 
+setlocal formatprg=clang-format
+
 nmap <silent> <2-LeftMouse> <cmd>call MarkPush()<cr>:call CocAction("jumpDefinition")<cr>
 
 #  (reference

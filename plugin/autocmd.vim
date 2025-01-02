@@ -12,6 +12,11 @@ enddef
 
 g:format_on_save = v:false
 def FormatOnSave() # [[[2
+  const enalbe_ft = { c: 1, cpp: 1 }
+  if get(enalbe_ft, &filetype, 0) == 0
+    return
+  endif
+
   if !get(b:, 'format_on_save', g:format_on_save)
     return
   endif
