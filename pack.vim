@@ -147,10 +147,11 @@ if !g:minimal_plugins
     Pack 'ludovicchabant/vim-gutentags', { type: 'start' }
   endif
   Pack 'neoclide/coc.nvim', { 'branch': 'release' }
-  Pack 'dense-analysis/ale'
-  Pack 'maximbaz/lightline-ale'
+  # Pack 'dense-analysis/ale'
+  # Pack 'maximbaz/lightline-ale'
 
   Pack 'Konfekt/vim-compilers'
+  Pack 'Konfekt/vim-formatprgs'
 
   Pack 'girishji/devdocs.vim'
   # Pack 'rhysd/devdocs.vim'

@@ -139,6 +139,16 @@ def VSetSearch(cmdtype: string)
   setreg('s', temp) # restore whatever was in 's'
 enddef
 
+def RemoveSpaces()
+  const save_view = winsaveview()
+  # Trim spaces
+  silent keeppatterns :%s#\s\+$##e
+  # Remove trailing blank lines
+  silent keeppatterns :%s#\($\n\s*\)\+\%$##e
+  winrestview(save_view)
+enddef
+
+nnoremap <silent> <leader>= <scriptcmd>RemoveSpaces()<CR>
 # file, buffer [[[1
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>
