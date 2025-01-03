@@ -74,6 +74,17 @@ inoreabbrev <expr> #!s "#!/bin/bash -e"
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
+# 26 simple text objects
+# ----------------------
+# i_ i. i: i, i; i| i/ i\ i* i+ i- i# i<tab>
+# a_ a. a: a, a; a| a/ a\ a* a+ a- a# a<tab>
+import autoload 'text.vim'
+for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#', '<tab>' ]
+    execute $"xnoremap <silent> i{char} <esc><scriptcmd>text.Obj('{char}', 1)<CR>"
+    execute $"xnoremap <silent> a{char} <esc><scriptcmd>text.Obj('{char}', 0)<CR>"
+    execute $"onoremap <silent> i{char} :normal vi{char}<CR>"
+    execute $"onoremap <silent> a{char} :normal va{char}<CR>"
+endfor
 # yank and paste [[[1
 cnoremap <C-v>         <C-R>+
 # inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
@@ -157,24 +168,21 @@ nnoremap cu :lcd ..<bar>pwd<cr>
 nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
+import autoload 'buf.vim'
 
 def DailyNote()
-  const filename = expand($HOME .. "/Obsidian-Vault/0003 Journal/" .. strftime('%Y/W%W/%Y-%m-%d') .. '.md')
+  const filename = expand($HOME .. "/Obsidian-Vault/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')
   const daily_note_dir = fnamemodify(filename, ':h')
   if !isdirectory(daily_note_dir)
     call mkdir(daily_note_dir, 'p')
   endif
-  execute 'edit' fnameescape(filename)
+  fnameescape(filename)->buf.EditInTab()
 enddef
 nnoremap <leader>v :call <SID>DailyNote()<CR>
 # tab [[[1
 nmap     T :tabnew<cr>
 nnoremap ]t :tabn<cr>
 nnoremap [t :tabp<cr>
-noremap  <silent><C-tab> :tabprev<CR>
-inoremap <silent><C-tab> <ESC>:tabprev<CR>
-nnoremap <silent><leader>tc :tabclose<CR>
-nnoremap <silent><leader>to :tabonly<CR>
 def SwitchTab(i: number)
   if tabpagenr() == i
     tabprev
@@ -294,5 +302,12 @@ nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
 # nnoremap mm <scriptcmd>g:MarkPush()<CR>
 
 # nnoremap <c-m> <scriptcmd>feedkeys($"yyp{getpos('.')[2] - 1}l")<CR>
+# Git [[[1
+import autoload 'git.vim'
+nnoremap <silent> <leader>gh <scriptcmd>git.GithubOpen()<CR>
+xnoremap <silent> <leader>gh <scriptcmd>git.GithubOpen(line("v"), line("."))<CR>
 
+command! GBrowse git.GithubOpen()
+# external [[[1
+nnoremap <silent> gX :call os#Gx()<CR>
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

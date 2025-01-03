@@ -1,7 +1,6 @@
 vim9script
 import autoload "../autoload/utils.vim" as Utils
 
-
 # Functions [[[1
 def JumpToLastPosition() # [[[2
   const last_pos = getpos("'\"")

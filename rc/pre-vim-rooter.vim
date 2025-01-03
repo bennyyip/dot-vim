@@ -19,7 +19,7 @@ def SourceProjectVimrc()
 enddef
 
 
-nmap <silent> <leader>r :Rooter<bar>pwd<CR>
+nmap <silent> <leader>r :silent! Rooter<bar>pwd<CR>
 
 augroup vimrc
   autocmd BufReadPost,BufEnter * SourceProjectVimrc()
