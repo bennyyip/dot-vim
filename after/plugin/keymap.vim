@@ -25,7 +25,6 @@ cabbrev venm verbose<space>nmap
 cabbrev vem verbose<space>map
 # syntax [[[3
 nnoremap <leader>Si  :echo ben#syninfo()<cr>
-nnoremap <leader>Ss  :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 # diff [[[3
 nnoremap <silent><leader>di :windo diffthis<CR>
 nnoremap <silent><leader>du :windo diffupdate<CR>
@@ -52,6 +51,12 @@ nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_mark
 # quick <C-w>
 nnoremap ' <C-w>
 nnoremap '' <C-w>w
+# toogle window zoom
+import autoload 'zoom.vim'
+nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
+nmap <C-w>o <C-w><C-o>
+nmap 'o <C-w><C-o>
+
 # edit [[[1
 # inoremap "<space><space> ""<ESC>i
 # inoremap '<space><space> ''<ESC>i
@@ -87,6 +92,26 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', 
     execute $"onoremap <silent> i{char} :normal vi{char}<CR>"
     execute $"onoremap <silent> a{char} :normal va{char}<CR>"
 endfor
+# indent text object
+onoremap <silent>ii <scriptcmd>text.ObjIndent(v:true)<CR>
+onoremap <silent>ai <scriptcmd>text.ObjIndent(v:false)<CR>
+xnoremap <silent>ii <esc><scriptcmd>text.ObjIndent(v:true)<CR>
+xnoremap <silent>ai <esc><scriptcmd>text.ObjIndent(v:false)<CR>
+
+# onoremap <silent>ic <scriptcmd>text.ObjComment(v:true)<CR>
+# onoremap <silent>ac <scriptcmd>text.ObjComment(v:false)<CR>
+# xnoremap <silent>ic <esc><scriptcmd>text.ObjComment(v:true)<CR>
+# xnoremap <silent>ac <esc><scriptcmd>text.ObjComment(v:false)<CR>
+xnoremap <silent> in <esc><scriptcmd>text.ObjNumber()<CR>
+onoremap <silent> in :<C-u>normal vin<CR>
+
+# line text object
+xnoremap <silent> il <esc><scriptcmd>text.ObjLine(1)<CR>
+onoremap <silent> il :<C-u>normal vil<CR>
+xnoremap <silent> al <esc><scriptcmd>text.ObjLine(0)<CR>
+onoremap <silent> al :<C-u>normal val<CR>
+
+
 # yank and paste [[[1
 cnoremap <C-v>         <C-R>+
 # inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
@@ -130,6 +155,27 @@ xnoremap <expr> < v:count > 0 ? "<" : "<gv"
 # niceblock
 xnoremap <expr> I (mode() =~# '[vV]' ? '<C-v>^o^I' : 'I')
 xnoremap <expr> A (mode() =~# '[vV]' ? '<C-v>0o$A' : 'A')
+# In visual block { and } navigate to the first/last line of paragraph,
+# which is useful if followed by I or A.
+def VisualBlockPara(cmd: string)
+    if mode() == "\<C-V>"
+        var target_row = getpos($"'{cmd}")[1]
+        if getline(target_row) =~ "^\s*$"
+            target_row += (cmd == "{" ? 1 : -1)
+            if target_row == line('.')
+                target_row = (cmd == "{" ? prevnonblank(target_row - 1)
+                                         : nextnonblank(target_row + 1))
+            endif
+        endif
+        if target_row > 0
+            exe $":{target_row}"
+        endif
+    else
+        exe $"normal! {cmd}"
+    endif
+enddef
+xnoremap { <scriptcmd>VisualBlockPara("{")<CR>
+xnoremap } <scriptcmd>VisualBlockPara("}")<CR>
 # macro [[[1
 # quick edit macro  | ["register]<leader>m
 nnoremap <leader>em  :<c-u><c-r><c-r>='let @' .. v:register .. ' = ' .. string(getreg(v:register))<cr><c-f><left>
@@ -139,9 +185,9 @@ xnoremap Q :normal @q<CR>
 xnoremap . :normal .<CR>
 # search and substitute [[[1
 # quick substitute
-vnoremap qs "zy:%s`<C-R>z``g<left><left>
+xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
-vnoremap qS "zy:%S`<C-R>z``g<left><left>
+xnoremap qS "zy:%S`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
 nnoremap qS :%S`<C-R><C-W>``g<left><left>
 nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
@@ -222,6 +268,11 @@ inoremap <C-A> <C-O>^
 cnoremap <C-A> <Home>
 cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
+# CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+# so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+# spell correction for the first suggested
+# inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
 
 inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
 
@@ -256,6 +307,11 @@ nnoremap <silent> ]f :next<CR>
 nnoremap <silent> [F :first<CR>
 nnoremap <silent> ]F :last<CR>
 # [c ]c for diff
+
+# move lines
+xnoremap <tab> :sil! m '>+1<CR>gv
+xnoremap <s-tab> :sil! m '<-2<CR>gv
+
 
 def MapMeta(x: string)
   for m in ["n", "c"]

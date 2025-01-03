@@ -33,9 +33,13 @@ if !is_win
   runtime! ftplugin/man.vim
 endif
 
-# packadd! editexisting
-packadd! helptoc
-packadd! matchit
+# HACK: for unknown reason, `filetype plugin indent on` breaks `va%`
+packadd matchit
+timer_start(1000, (_) => {
+  # packadd! editexisting
+  packadd! helptoc
+})
+
 # ]]]
 call plugpac#Begin({
   # progress_open: tab',
@@ -115,10 +119,9 @@ if !g:minimal_plugins
 
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 
-  Pack 'bennyyip/vim-highlightedyank'
+  # Pack 'bennyyip/vim-highlightedyank'
   Pack 'chrisbra/vim_faq'
   if !is_win
-    Pack 'christoomey/vim-tmux-navigator'
     Pack 'lilydjwg/fcitx.vim'
   endif
   # Motion and Edit [[[2
@@ -130,7 +133,7 @@ if !g:minimal_plugins
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'
 
-  Pack 'michaeljsmith/vim-indent-object'
+  # Pack 'michaeljsmith/vim-indent-object'
 
   Pack 'dyng/ctrlsf.vim'
   Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t'] }
