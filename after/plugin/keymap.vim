@@ -1,4 +1,7 @@
 vim9script
+import autoload 'utils.vim'
+import autoload 'text.vim'
+import autoload 'buf.vim'
 const is_gvim = has('gui_running')
 # misc [[[1
 nnoremap <localleader>j :set ft=javascript<CR>
@@ -78,7 +81,6 @@ inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M
 # ----------------------
 # i_ i. i: i, i; i| i/ i\ i* i+ i- i# i<tab>
 # a_ a. a: a, a; a| a/ a\ a* a+ a- a# a<tab>
-import autoload 'text.vim'
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#', '<tab>' ]
     execute $"xnoremap <silent> i{char} <esc><scriptcmd>text.Obj('{char}', 1)<CR>"
     execute $"xnoremap <silent> a{char} <esc><scriptcmd>text.Obj('{char}', 0)<CR>"
@@ -104,8 +106,23 @@ nnoremap <silent> <leader>yp :let @+ = expand("%:p")<cr>:let @" = expand("%:p")<
 # vimrc [[[1
 nnoremap <silent><leader>fed :e $VIMRC<CR>
 nnoremap <silent><leader>fee :source $VIMRC<CR>
-# run current line
-nnoremap <silent> yr :exec getline('.') \| echo 'executed!'<CR>
+# source vimscript (operator)
+def SourceVim(...args: list<any>): string
+    if len(args) == 0
+        &opfunc = matchstr(expand('<stack>'), '[^. ]*\ze[')
+        return 'g@'
+    endif
+    if getline(1) =~ '^vim9script$'
+        vim9cmd :'[,']source
+    else
+        :'[,']source
+    endif
+    echo 'executed!'
+    return ''
+enddef
+nnoremap <silent> <expr> yr SourceVim()
+nnoremap <silent> <expr> yrr SourceVim() .. '_'
+xnoremap <silent> <expr> <space>v SourceVim()
 # visual [[[1
 # keep selection when indent line in visual mode
 xnoremap <expr> > v:count > 0 ? ">" : ">gv"
@@ -148,16 +165,7 @@ def VSetSearch(cmdtype: string)
   setreg('s', temp) # restore whatever was in 's'
 enddef
 
-def RemoveSpaces()
-  const save_view = winsaveview()
-  # Trim spaces
-  silent keeppatterns :%s#\s\+$##e
-  # Remove trailing blank lines
-  silent keeppatterns :%s#\($\n\s*\)\+\%$##e
-  winrestview(save_view)
-enddef
-
-nnoremap <silent> <leader>= <scriptcmd>RemoveSpaces()<CR>
+nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>
 # file, buffer [[[1
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>
@@ -168,7 +176,6 @@ nnoremap cu :lcd ..<bar>pwd<cr>
 nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
-import autoload 'buf.vim'
 
 def DailyNote()
   const filename = expand($HOME .. "/Obsidian-Vault/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')

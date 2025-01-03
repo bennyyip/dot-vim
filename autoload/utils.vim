@@ -48,5 +48,71 @@ export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [
   endif
 enddef
 
+export def RemoveSpaces() # [[[1
+  const save_view = winsaveview()
+  # Trim spaces
+  silent keeppatterns :%s#\s\+$##e
+  # Remove trailing blank lines
+  silent keeppatterns :%s#\($\n\s*\)\+\%$##e
+  winrestview(save_view)
+enddef
+
+export def StrArray(line1: number, line2: number) # [[[1
+  execute printf(":%s,%sQuote", line1, line2)
+  execute printf(":%s,%sJoin ,", line1, line2)
+  execute printf("normal kyss]")
+enddef
+
+export def Quote(quote: string, bang: string) # [[[1
+  const q = quote == '' ? '"' : quote
+  const l = getline('.')
+  if l != '' || bang != '!'
+    (q .. l .. q)->setline(line('.'))
+  endif
+enddef
+
+export function Lilydjwg_join(sep, bang) range " [[[1
+  if a:sep[0] == '\'
+    let sep = strpart(a:sep, 1)
+  else
+    let sep = a:sep
+  endif
+  let lines = getline(a:firstline, a:lastline)
+  if a:firstline == 1 && a:lastline == line('$')
+    let dellast = 1
+  else
+    let dellast = 0
+  endif
+  exe a:firstline .. ',' .. a:lastline .. 'd_'
+  if a:bang != '!'
+    call map(lines, "substitute(v:val, '^\\s\\+\\|\\s\\+$', '', 'g')")
+  endif
+  call append(a:firstline-1, join(lines, sep))
+  if dellast
+    $d_
+  endif
+endfunction
+
+export def SessionComplete(_, _, _): string # [[[1
+    return globpath($'{$vimtmp}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
+enddef
+
+export def FollowLink() # [[[1
+  const filepath = expand('%')
+  if !filereadable(filepath)
+    return
+  endif
+  const resolved = resolve(filepath)
+  if resolved ==# filepath
+    return
+  endif
+  echom fnameescape(resolved)
+  # FIXME: dont affect other window
+  # enew
+  # bwipeout #
+  execute 'bwipeout %'
+  execute 'edit ' .. fnameescape(resolved)
+  redraw
+enddef
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
