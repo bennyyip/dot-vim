@@ -84,6 +84,14 @@ command! Zen normal <C-W>v<C-W>h:enew<CR>70<C-W><lt><C-W><C-W>
 import autoload "share.vim"
 command! -range=% -nargs=? -complete=custom,share.Complete Share share.Paste(<q-args>, <line1>, <line2>)
 # literal search [[[1
-command! -nargs=1 Search @/ = $'\V{escape(<q-args>, '\\')}' | normal! n
-
+command! -nargs=? Search {
+  var arg = <q-args>
+  if <q-args> == ''
+    arg = input("Search: ")
+  endif
+  setreg('/', $'\V{escape(arg, '\\')}')
+  normal! n
+}
+# syntax group names under cursor [[[1
+command! Inspect :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

@@ -1,28 +1,4 @@
 let s:is_win = has('win32')
-" Function: #foldy ('foldtext') {{{1
-function! ben#foldy()
-  let linelen = &tw ? &tw : 80
-  let marker  = strpart(&fmr, 0, stridx(&fmr, ',')) . '\d*'
-  let range   = foldclosedend(v:foldstart) - foldclosed(v:foldstart) + 1
-
-  let left    = substitute(getline(v:foldstart), marker, '', '')
-  let leftlen = len(left)
-
-  let right    = range . ' [' . v:foldlevel . ']'
-  let rightlen = len(right)
-
-  let tmp    = strpart(left, 0, linelen - rightlen)
-  let tmplen = len(tmp)
-
-  if leftlen > len(tmp)
-    let left    = strpart(tmp, 0, tmplen - 4) . '... '
-    let leftlen = tmplen
-  endif
-
-  let fill = repeat(' ', linelen - (leftlen + rightlen))
-
-  return left . fill . right . repeat(' ', 100)
-endfunction
 " Function: #a (switch between .cc and .h) {{{1
 function! ben#a(cmd)
   let l:name = expand('%:r')

@@ -1,4 +1,8 @@
 vim9script
+set nocompatible
+syntax on
+filetype plugin indent on
+
 const is_win = has('win32')
 g:minimal_plugins = v:false
 $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
@@ -25,6 +29,8 @@ try
 catch
   try
     colorscheme retrobox
+  catch
+    colorscheme elflord
   endtry
 endtry
 

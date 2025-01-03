@@ -17,6 +17,10 @@ command! -nargs=1 -bang Rgr {
   async#qfix(<q-args>, {'grep': 1})
   # chdir(saved_cwd)
 }
+# Ripgrep word under cursor
+nnoremap <space>8 <scriptcmd>exe "Rg" expand("<cword>")<cr>
+xnoremap <space>8 "0y<scriptcmd>exe "Rg" getreg("0")<cr>
+
 command! -nargs=* Locate async#qfix(<q-args>, {'errorformat': "%f", "makeprg": "locate"})
 
 nnoremap <leader>q <cmd>copen<CR>
