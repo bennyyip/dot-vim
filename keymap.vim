@@ -223,15 +223,6 @@ nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
 
-def DailyNote()
-  const filename = expand($HOME .. "/Obsidian-Vault/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')
-  const daily_note_dir = fnamemodify(filename, ':h')
-  if !isdirectory(daily_note_dir)
-    call mkdir(daily_note_dir, 'p')
-  endif
-  fnameescape(filename)->buf.EditInTab()
-enddef
-nnoremap <leader>v :call <SID>DailyNote()<CR>
 # tab [[[1
 nmap     T :tabnew<cr>
 nnoremap ]t :tabn<cr>
@@ -311,7 +302,6 @@ nnoremap <silent> ]F :last<CR>
 # move lines
 xnoremap <tab> :sil! m '>+1<CR>gv
 xnoremap <s-tab> :sil! m '<-2<CR>gv
-
 
 def MapMeta(x: string)
   for m in ["n", "c"]

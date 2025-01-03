@@ -1,8 +1,5 @@
 vim9script
 
-g:mapleader = "\<Space>"
-g:localleader = "\\"
-
 set hidden confirm
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
 # set cinoptions=>2,l1,p0,)50,*50,t0
@@ -17,14 +14,12 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags
 set wildignore+=*~,*.py[co],__pycache__,
 # set completeopt=menu,popup,fuzzy completepopup=highlight:Pmenu
 set completeopt=menu,longest,menuone,popup,noselect
-set number relativenumber cursorline cursorlineopt=number signcolumn=number
 # set breakindentopt=min:40
 set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
 set fillchars=fold:\ ,vert:│
 set virtualedit=block
 set backspace=indent,eol,start
 set nostartofline
-set fileformat=unix fileformats=unix,dos
 set sidescroll=1 sidescrolloff=3 scrolloff=4
 set nrformats=bin,hex,unsigned
 set nospell
@@ -67,17 +62,15 @@ set showmatch
 set matchtime=0
 set noshowmode # Hide the mode text (e.g. -- INSERT --)
 
-set fileencoding=utf-8
+set fileformats=unix,dos
 set fileencodings=ucs-bom,utf-8,utf-16le,gbk,big5,gb18030,gb2312,cp936,usc-bom,euc-jp
 set encoding=utf-8
 scriptencoding utf-8
 
-set list listchars=tab:›\ ,nbsp:␣,trail:⣿,extends:…,precedes:… showbreak=↪
 augroup vimrc
   autocmd InsertEnter * set listchars-=trail:⣿
   autocmd InsertLeave * set listchars+=trail:⣿
 augroup END
-
 # const is_tty = !match(&term, 'linux')
 # if !is_tty
 #   if has('multi_byte') && &encoding ==# 'utf-8'

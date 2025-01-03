@@ -1,9 +1,8 @@
 vim9script
 
-import autoload "./autoload/utils.vim" as Utils
 const is_ssh = $SSH_CONNECTION != ""
-
 const is_win = has('win32')
+
 const package_name = g:minimal_plugins ? 'minimal' : 'minpac'
 const minpac_dir = $'{$v}/pack/{package_name}/opt/minpac'
 if !isdirectory(minpac_dir)
@@ -15,18 +14,6 @@ g:plugpac_default_type = 'delay'
 
 # plugins [[[1
 # Builtin [[[2
-g:loaded_2html_plugin = 1
-g:loaded_getscriptPlugin = 1
-g:loaded_gzip = 1
-g:loaded_logiPat = 1
-g:loaded_logipat = 1
-g:loaded_manpager_plugin = 1
-# let g:loaded_matchparen = 1
-g:loaded_rrhelper = 1
-g:loaded_spellfile_plugin = 1
-g:loaded_tarPlugin = 1
-g:loaded_vimballPlugin = 1
-g:loaded_zipPlugin = 1
 
 if !is_win
   # :Man <leader>K
@@ -34,8 +21,8 @@ if !is_win
 endif
 
 # HACK: for unknown reason, `filetype plugin indent on` breaks `va%`
-packadd matchit
-timer_start(1000, (_) => {
+timer_start(5000, (_) => {
+  packadd matchit
   # packadd! editexisting
   packadd! helptoc
 })
@@ -79,7 +66,7 @@ if !g:minimal_plugins
   Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
 
-  Pack 'mhinz/vim-startify', { 'type': 'delay' }
+  Pack 'mhinz/vim-startify', { 'type': 'start' }
 
   g:loaded_netrw       = 1
   g:loaded_netrwPlugin = 1
@@ -187,35 +174,11 @@ if !g:minimal_plugins
 endif
 plugpac#End()
 # plugpac helpers [[[1
-def PackList(A: string, ...args: list<any>): list<string>
-  plugpac#Init()
-  const pluglist = minpac#getpluglist()->keys()->sort()
-  return pluglist->Utils.Matchfuzzy(A)
-enddef
-
-command! PackSummary {
-  plugpac#Init()
-  const pluglist = minpac#getpluglist()
-  echom $'{pluglist->len()} packages installed.'
-}
-
-command! -nargs=1 -complete=customlist,PackList PackUrl {
-  plugpac#Init()
-  const url = minpac#getpluginfo(<q-args>).url
-  os#Open(url)
-}
-
-command! -nargs=1 -complete=customlist,PackList
-      \ PackDir call plugpac#Init() | execute 'edit ' .. minpac#getpluginfo(<q-args>).dir
-
-command! -nargs=1 -complete=customlist,PackList
-      \ PackRc call plugpac#Init() | execute 'edit ' ..
-      \ g:plugpac_plugin_conf_path .. '/' ..
-      \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
-
-command! -nargs=1 -complete=customlist,PackList
-      \ PackRcPre call plugpac#Init() | execute 'edit ' ..
-      \ g:plugpac_plugin_conf_path .. '/pre-' ..
-      \ substitute(minpac#getpluginfo(<q-args>).name, '\.n\?vim$', '', '') .. '.vim'
+import autoload "plugpac_helper.vim" as P
+command! PackSummary P.PackSummary()
+command! -nargs=1 -complete=customlist,P.PackList PackUrl   P.PackUrl(<q-args>)
+command! -nargs=1 -complete=customlist,P.PackList PackDir   P.PackDir(<q-args>)
+command! -nargs=1 -complete=customlist,P.PackList PackRc    P.PackRc(<q-args>)
+command! -nargs=1 -complete=customlist,P.PackList PackRcPre P.PackRcPre(<q-args>)
 # ]]]
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim
