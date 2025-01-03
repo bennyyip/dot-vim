@@ -40,47 +40,12 @@ command! PX if !empty(expand('%'))
       \| endif
 # RFC [[[1
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
-# Paste [[[1
-command! -range=% Paste :<line1>,<line2>py3 LilyPaste()
 # Join [[[1
-function Lilydjwg_join(sep, bang) range
-  if a:sep[0] == '\'
-    let sep = strpart(a:sep, 1)
-  else
-    let sep = a:sep
-  endif
-  let lines = getline(a:firstline, a:lastline)
-  if a:firstline == 1 && a:lastline == line('$')
-    let dellast = 1
-  else
-    let dellast = 0
-  endif
-  exe a:firstline .. ',' .. a:lastline .. 'd_'
-  if a:bang != '!'
-    call map(lines, "substitute(v:val, '^\\s\\+\\|\\s\\+$', '', 'g')")
-  endif
-  call append(a:firstline-1, join(lines, sep))
-  if dellast
-    $d_
-  endif
-endfunction
-command! -nargs=1 -range=% -bang Join :<line1>,<line2>call Lilydjwg_join(<q-args>, "<bang>")
+command! -nargs=1 -range=% -bang Join :<line1>,<line2>call Utils.Lilydjwg_join(<q-args>, "<bang>")
 # Quote [[[1
-def Quote(quote: string, bang: string)
-  const q = quote == '' ? '"' : quote
-  const l = getline('.')
-  if l != '' || bang != '!'
-    (q .. l .. q)->setline(line('.'))
-  endif
-enddef
-command! -bang -nargs=? -range=% Quote :<line1>,<line2>call Quote(<q-args>, "<bang>")
-def StrArray(line1: number, line2: number)
-# StrArray [[[1
-  execute printf(":%s,%sQuote", line1, line2)
-  execute printf(":%s,%sJoin ,", line1, line2)
-  execute printf("normal yss]")
-enddef
-command! -bang -nargs=? -range=% StrArray :call StrArray(<line1>, <line2>)
+command! -bang -nargs=? -range=% Quote :<line1>,<line2>call Utils.Quote(<q-args>, "<bang>")
+
+command! -bang -nargs=? -range=% StrArray Utils.StrArray(<line1>, <line2>)
 # Ghq [[[1
 def GhqList(A: string, ...args: list<any>): list<string>
   const projs =  globpath(expand('~/ghq/github.com'), '*/*', 0, 1)
@@ -89,86 +54,28 @@ def GhqList(A: string, ...args: list<any>): list<string>
 enddef
 command! -nargs=1 -complete=customlist,GhqList Ghq execute 'edit ' .. expand('~/ghq/github.com/') .. <q-args>
 # FollowLink [[[1
-def FollowLink()
-  const filepath = expand('%')
-  if !filereadable(filepath)
-    return
-  endif
-  const resolved = resolve(filepath)
-  if resolved ==# filepath
-    return
-  endif
-  echom fnameescape(resolved)
-  # FIXME: dont affect other window
-  # enew
-  # bwipeout #
-  execute 'bwipeout %'
-  execute 'edit ' .. fnameescape(resolved)
-  redraw
-enddef
-command! -nargs=0 FollowLink call <SID>FollowLink()
+command! -nargs=0 FollowLink Utils.FollowLink()
 # SetTabWidth [[[1
 command! -nargs=0 SetTabWidth2 call Utils.SetTabWidth(2, true)
 command! -nargs=0 SetTabWidth4 call Utils.SetTabWidth(4, true)
 command! -nargs=0 SetHardTabWidth2 call Utils.SetTabWidth(2, false, 0)
 command! -nargs=0 SetHardTabWidth4 call Utils.SetTabWidth(4, false, 0)
 command! -nargs=0 SetHardTabWidth8 call Utils.SetTabWidth(8, false, 0)
-
 # save and load sessions [[[1
 if !isdirectory($'{$vimtmp}/session')
     mkdir($'{$vimtmp}/session', "p")
 endif
-command! -nargs=1 -complete=custom,SessionComplete SaveSession :exe $'mksession! {$vimtmp}/session/<args>'
-command! -nargs=1 -complete=custom,SessionComplete LoadSession :%bd <bar> exe $'so {$vimtmp}/session/<args>'
-def SessionComplete(_, _, _): string
-    return globpath($'{$vimtmp}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
-enddef
-
+command! -nargs=1 -complete=custom,Utils.SessionComplete SaveSession :exe $'mksession! {$vimtmp}/session/<args>'
+command! -nargs=1 -complete=custom,Utils.SessionComplete LoadSession :%bd <bar> exe $'so {$vimtmp}/session/<args>'
 # Goto [[[1
-command! -bang -nargs=1 -complete=command Command DoGotoDef("command", <f-args>)
-command! -bang -nargs=1 -complete=customlist,MapComplete Map DoGotoDef("map", <f-args>)
-command! -bang -nargs=1 -complete=customlist,NmapComplete Imap DoGotoDef("imap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,ImapComplete Nmap DoGotoDef("nmap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,CmapComplete Cmap DoGotoDef("cmap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,XmapComplete Xmap DoGotoDef("xmap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,XmapComplete Vmap DoGotoDef("xmap", <f-args>)
-
-def GotoDefComplete(kind: string, A: string, L: string, P: number): list<string>
-  const cmd = L->split(' ')[0]
-  const is_bang = cmd[-1 : ] == '!'
-  var l = execute(kind)->split("\n")
-  l->map((_, x) => {
-    const m = x->matchlist('\v^(\a)?\s+(\S+)')
-    return m->len() > 2 ? m[2] : ""
-  })->filter('v:val != ""')
-  if is_bang
-    l->filter("v:val =~  '<Plug>'")
-  endif
-  return  l->Utils.Matchfuzzy(A)
-enddef
-const MapComplete = (A: string, L: string, P: number) => GotoDefComplete("map", A, L, P)
-const NmapComplete = (A: string, L: string, P: number) => GotoDefComplete("imap", A, L, P)
-const ImapComplete = (A: string, L: string, P: number) => GotoDefComplete("nmap", A, L, P)
-const CmapComplete = (A: string, L: string, P: number) => GotoDefComplete("cmap", A, L, P)
-const XmapComplete = (A: string, L: string, P: number) => GotoDefComplete("xmap", A, L, P)
-
-def DoGotoDef(kind: string, item: string)
-  if kind == 'command' && item[0] !~# '\u'
-    execute $"help {item}"
-    return
-  endif
-
-  var cmdstr = $'verbose {kind} {item}'
-  var lines = execute(cmdstr)->split("\n")
-  for line in lines
-    const m = line->matchlist('\v\s*Last set from (.+) line (\d+)')
-    if !m->empty() && m[1] != null_string && m[2] != null_string
-      exe $"e +{str2nr(m[2])} {m[1]}"
-      return
-    endif
-  endfor
-  echo 'no match!'
-enddef
+import autoload 'gotodef.vim'
+command! -bang -nargs=1 -complete=command Command gotodef.DoGotoDef("command", <f-args>)
+command! -bang -nargs=1 -complete=customlist,gotodef.MapComplete  Map  gotodef.DoGotoDef("map", <f-args>)
+command! -bang -nargs=1 -complete=customlist,gotodef.NmapComplete Imap gotodef.DoGotoDef("imap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,gotodef.ImapComplete Nmap gotodef.DoGotoDef("nmap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,gotodef.CmapComplete Cmap gotodef.DoGotoDef("cmap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,gotodef.XmapComplete Xmap gotodef.DoGotoDef("xmap", <f-args>)
+command! -bang -nargs=1 -complete=customlist,gotodef.XmapComplete Vmap gotodef.DoGotoDef("xmap", <f-args>)
 
 # ]]]
 # Zen [[[1
@@ -176,6 +83,7 @@ command! Zen normal <C-W>v<C-W>h:enew<CR>70<C-W><lt><C-W><C-W>
 # Share[[[1
 import autoload "share.vim"
 command! -range=% -nargs=? -complete=custom,share.Complete Share share.Paste(<q-args>, <line1>, <line2>)
-
+# literal search [[[1
+command! -nargs=1 Search @/ = $'\V{escape(<q-args>, '\\')}' | normal! n
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
