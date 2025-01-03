@@ -1,7 +1,7 @@
 vim9script
 
 import autoload "./autoload/utils.vim" as Utils
-const is_ssh = ($SSH_CONNECTION != "")
+const is_ssh = $SSH_CONNECTION != ""
 
 const is_win = has('win32')
 const package_name = g:minimal_plugins ? 'minimal' : 'minpac'
@@ -103,10 +103,11 @@ if !g:minimal_plugins
 
   Pack 'justinmk/vim-gtfo' # gof got
   Pack 'bennyyip/tasks.vim'
+  # Pack 'habamax/vim-shout'
   # Pack 'skywind3000/asyncrun.vim'
-  if !is_ssh
-    Pack 'tyru/open-browser.vim'
-  endif
+  # if !is_ssh
+  #   Pack 'tyru/open-browser.vim'
+  # endif
 
   Pack 'tpope/vim-eunuch'
 
@@ -141,7 +142,7 @@ if !g:minimal_plugins
   Pack 'rhysd/conflict-marker.vim' # [x ]x
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tpope/vim-fugitive', { type: 'start' }
-  Pack 'tpope/vim-rhubarb'
+  # Pack 'tpope/vim-rhubarb'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Language [[[2
   if executable('ctags')
@@ -169,13 +170,13 @@ if !g:minimal_plugins
   # Python [[[3
   Pack 'meatballs/vim-xonsh'
   # Typescript [[[3
-  Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
-  Pack 'peitalin/vim-jsx-typescript'
+  # Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
+  # Pack 'peitalin/vim-jsx-typescript'
   # Web [[[3
   Pack 'BourgeoisBear/clrzr'
   Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
-  Pack 'othree/html5.vim', {'for': 'html' }
-  Pack "hail2u/vim-css3-syntax"
+  # Pack 'othree/html5.vim', { 'for': 'html' }
+  # Pack "hail2u/vim-css3-syntax", { 'for': 'css' }
   # Markup [[[3
   if is_win
     Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
@@ -198,7 +199,7 @@ command! PackSummary {
 command! -nargs=1 -complete=customlist,PackList PackUrl {
   plugpac#Init()
   const url = minpac#getpluginfo(<q-args>).url
-  execute $'OpenBrowser {url}'
+  os#Open(url)
 }
 
 command! -nargs=1 -complete=customlist,PackList

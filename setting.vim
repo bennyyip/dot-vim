@@ -82,7 +82,7 @@ if has("patch-9.0.1921")
 endif
 # wild stuff [[[3
 set suffixes+=.a,.1,.class
-set wildmenu wildmode=longest:full,full wildoptions=pum,fuzzy pumheight=20
+set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20
 set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags
 set wildignore+=*~,*.py[co],__pycache__,
 set path+=**
@@ -140,7 +140,7 @@ nnoremap <silent> ]w :let &diffopt = "internal,filler,closeoff,hiddenoff,algorit
 set fileformat=unix fileformats=unix,dos
 
 # use old regex engine for better performance
-set regexpengine=1
+# set regexpengine=1
 
 # this makes sure that shell scripts are highlighted
 # as bash scripts and not sh scripts

@@ -40,6 +40,8 @@ command! PX if !empty(expand('%'))
       \| endif
 # RFC [[[1
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
+# Paste [[[1
+command! -range=% Paste :<line1>,<line2>py3 LilyPaste()
 # Join [[[1
 function Lilydjwg_join(sep, bang) range
   if a:sep[0] == '\'
@@ -105,18 +107,6 @@ def FollowLink()
   redraw
 enddef
 command! -nargs=0 FollowLink call <SID>FollowLink()
-# Capture [[[1
-const scratchFile = $HOME .. '/tmp/scratch.txt'
-def Capture()
-  call mkdir($HOME .. "/tmp", 'p')
-  Scratch
-  normal G
-  silent put +
-  write
-enddef
-command! -nargs=0 Scratch call Utils.OpenInTab(scratchFile)
-command! -nargs=0 Capture call <SID>Capture()
-nnoremap <silent> <leader>x :Scratch<CR>
 # SetTabWidth [[[1
 command! -nargs=0 SetTabWidth2 call Utils.SetTabWidth(2, true)
 command! -nargs=0 SetTabWidth4 call Utils.SetTabWidth(4, true)
@@ -181,6 +171,11 @@ def DoGotoDef(kind: string, item: string)
 enddef
 
 # ]]]
-# Zen [[[
+# Zen [[[1
 command! Zen normal <C-W>v<C-W>h:enew<CR>70<C-W><lt><C-W><C-W>
+# Share[[[1
+import autoload "share.vim"
+command! -range=% -nargs=? -complete=custom,share.Complete Share share.Paste(<q-args>, <line1>, <line2>)
+
+
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

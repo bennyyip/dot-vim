@@ -39,37 +39,6 @@ export def Debounce(Fn: func, timeout: number = 200): func # [[[1
   }
 enddef
 
-export def OpenInTab(fname: string) # [[[1
-# Open file in new tab if it's not open in any tab
-# Otherwise switch to the tab
-
-    const b = bufnr(fname)
-    if b == -1
-      # Open in new tab if not exists
-        execute 'tabedit ' .. fnameescape(fname)
-        return
-    endif
-
-    for t in range(tabpagenr("$"))
-      const bufs = tabpagebuflist(t + 1)
-      for i in bufs
-        if i == b
-          # Switch to the tab
-          execute "tabn " .. (t + 1)
-          for w in range(winnr('$'))
-            const wb = winbufnr(w + 1)
-            if wb == b
-              # Move cursor to the window
-              execute $":{w + 1}wincmd w"
-              return
-            endif
-          endfor
-          return
-        endif
-      endfor
-    endfor
-enddef
-
 export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [[[1
   execute $'setlocal shiftwidth={n} tabstop={n} softtabstop={softtabstop}'
   if expandtab
