@@ -56,7 +56,7 @@ def FormatOnSave() # [[[2
     return
   endif
   const save_view = winsaveview()
-  normal! gggqG
+  :keepj normal! gggqG
   # execute 'write'
   winrestview(save_view)
 enddef
