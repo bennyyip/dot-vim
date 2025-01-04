@@ -30,14 +30,15 @@ g:loaded_fzf = 1
 set list listchars=tab:▸\ ,nbsp:␣,trail:⣿,extends:…,precedes:… showbreak=↪
 set number relativenumber cursorline cursorlineopt=number signcolumn=number
 
-source $v/pack.vim
-
 if exists('#vimrc')
   augroup vimrc
     autocmd!
   augroup END
   augroup! vimrc
 endif
+
+source $v/keymap.vim
+source $v/pack.vim
 
 set background=dark
 try
@@ -53,7 +54,6 @@ endtry
 def Init(..._: list<any>)
   filetype plugin indent on
   source $v/setting.vim
-  source $v/keymap.vim
 
   hi StartifyHeader ctermfg=214 ctermbg=NONE guifg=#fabd2f guibg=NONE guisp=NONE cterm=NONE gui=NONE
 

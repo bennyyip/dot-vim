@@ -16,7 +16,7 @@ snippet err
 	fprintf(stderr, "${1:error}\n");${2}
 # For Loop
 snippet for
-	for(${1:size_t} ${2:i}=${3:0}; $2<${4:count}; $2${5:++}){
+	for(${1:size_t} ${2:i} = ${3:0}; $2 < ${4:count}; $2${5:++}) {
 	  ${6}
 	}${7}
 snippet if
@@ -48,10 +48,10 @@ snippet ifdef
 # (the randomizer code is taken directly from TextMate; it could probably be
 # cleaner, I don't know how to do it in vim script)
 snippet once
-	#ifndef ${1:`toupper(vim_snippets#Filename('$1_H', 'UNTITLED_H'))`}
+	#ifndef ${1:`toupper(vim_snippets#Filename('_$1_H', 'UNTITLED_H'))`}
 	#define $1
 	${2}
-	#endif /* end of include guard: $1 */
+	#endif // $1
 # While Loop
 snippet wh
 	while (${1:/* condition */}) {
