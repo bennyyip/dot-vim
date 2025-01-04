@@ -106,7 +106,7 @@ if !g:minimal_plugins
 
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 
-  # Pack 'bennyyip/vim-highlightedyank'
+  Pack 'bennyyip/vim-highlightedyank'
   Pack 'chrisbra/vim_faq'
   if !is_win
     Pack 'lilydjwg/fcitx.vim'

@@ -10,7 +10,10 @@ enddef
 export def PackSummary()
   plugpac#Init()
   const pluglist = minpac#getpluglist()
-  echom $'{pluglist->len()} packages installed.'
+  const start_cnt = pluglist->mapnew((k, v) => v['type'])->count('start')
+  const opt_cnt = pluglist->mapnew((k, v) => v['type'])->count('opt')
+
+  echom $'{pluglist->len()} packages installed. {start_cnt} start, {opt_cnt} opt.'
 enddef
 
 export def PackUrl(pack: string)

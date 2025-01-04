@@ -44,10 +44,6 @@ keymap~
 	CTRL-R CTRL-O {register}	insert as it is	     |i_CTRL-R_CTRL-R|
 	CTRL-Y		Insert 上一行同樣位置的字符
 	CTRL-]		Trigger abbreviation, without inserting a character.
-	CTRL-T		>>
-	{0,^}CTRL-D	<<
-	CTRL-G {j,k,CTRL-J, CTRL-K}	上下移動cursor             |i_CTRL-G_j|
-	CTRL-O		execute one command, return to Insert mode   |i_CTRL-O|
 
 	CTRL-G CTRL-T   時間
 	CTRL-G d	:Linediff
@@ -169,6 +165,12 @@ bonx 第一個{2,8,10,16}進制
 |gn| |gN| goto match and enter visual mode
 
 
+888. unimportant 
+insert mode~
+	CTRL-T		>>
+	{0,^}CTRL-D	<<
+	CTRL-G {j,k,CTRL-J, CTRL-K}	上下移動cursor             |i_CTRL-G_j|
+	CTRL-O		execute one command, return to Insert mode   |i_CTRL-O|
 
 ==============================================================================
 999. other
