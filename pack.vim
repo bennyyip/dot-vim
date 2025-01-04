@@ -94,7 +94,7 @@ if !g:minimal_plugins
 
   Pack 'justinmk/vim-gtfo' # gof got
   Pack 'bennyyip/tasks.vim'
-  # Pack 'habamax/vim-shout'
+  Pack 'habamax/vim-shout'
   # Pack 'skywind3000/asyncrun.vim'
   # if !is_ssh
   #   Pack 'tyru/open-browser.vim'

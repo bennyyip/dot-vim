@@ -58,6 +58,10 @@ nmap <C-w>o <C-w><C-o>
 nmap 'o <C-w><C-o>
 
 # edit [[[1
+# swap <c-n> and <c-x><c-n>
+inoremap <c-n> <c-x><c-n>
+inoremap <c-x><c-n> <c-n>
+
 # inoremap "<space><space> ""<ESC>i
 # inoremap '<space><space> ''<ESC>i
 # inoremap (<space><space> ()<ESC>i
@@ -110,7 +114,6 @@ xnoremap <silent> il <esc><scriptcmd>text.ObjLine(1)<CR>
 onoremap <silent> il :<C-u>normal vil<CR>
 xnoremap <silent> al <esc><scriptcmd>text.ObjLine(0)<CR>
 onoremap <silent> al :<C-u>normal val<CR>
-
 
 # yank and paste [[[1
 cnoremap <C-v>         <C-R>+

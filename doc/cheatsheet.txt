@@ -20,10 +20,10 @@ moving over folds~
 completion~
 							      |ins-completion|
 
-	1. Whole lines	                                        |i_CTRL-X_CTRL-L|
+	1. 整行	                                        |i_CTRL-X_CTRL-L|
 	13. keywords in 'complete' (from other buffers)	        |i_CTRL-N| |i_CTRL-P|
-	2. keywords in the current file				|i_CTRL-X_CTRL-N|
-	5. keywords in the current and included files		|i_CTRL-X_CTRL-I|
+	2. 當前文件					    	|i_CTRL-X_CTRL-N|
+	5. 當前文件 + include			    		|i_CTRL-X_CTRL-I|
 	6. tags							|i_CTRL-X_CTRL-]|
 	7. file names						|i_CTRL-X_CTRL-F|
 	8. definitions or macros				|i_CTRL-X_CTRL-D|

@@ -12,7 +12,7 @@ coc#add_extension()
 inoremap <silent><expr> <C-O> coc#refresh()
 
 g:coc_snippet_next = '<C-T>'
-imap <C-0> <Plug>(coc-snippets-expand-jump)
+imap <C-T> <Plug>(coc-snippets-expand-jump)
 
 # Use tab for trigger completion with characters ahead and navigate
 # NOTE: There's always complete item selected by default, you may want to enable
