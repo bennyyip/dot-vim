@@ -34,7 +34,6 @@ command! -bang -bar -nargs=* Gfetch  {
   execute $'AsyncCmd git -C {fnameescape(g:FugitiveGitDir())} fetch' <q-args>
 }
 
-
 noremap <F5> :Async<UP><CR>
 noremap <F8> :Compiler<UP><CR>
 

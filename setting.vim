@@ -23,6 +23,7 @@ set nostartofline
 set sidescroll=1 sidescrolloff=3 scrolloff=4
 set nrformats=bin,hex,unsigned
 set nospell
+set number relativenumber cursorline cursorlineopt=number signcolumn=number
 
 # &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"
 set diffopt+=vertical,algorithm:histogram,indent-heuristic
@@ -67,6 +68,7 @@ set fileencodings=ucs-bom,utf-8,utf-16le,gbk,big5,gb18030,gb2312,cp936,usc-bom,e
 set encoding=utf-8
 scriptencoding utf-8
 
+set list listchars=tab:▸\ ,nbsp:␣,trail:⣿,extends:…,precedes:… showbreak=↪
 augroup vimrc
   autocmd InsertEnter * set listchars-=trail:⣿
   autocmd InsertLeave * set listchars+=trail:⣿

@@ -225,7 +225,7 @@ nnoremap cu :lcd ..<bar>pwd<cr>
 nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
-
+nnoremap <C-G><C-G> <C-G>
 # tab [[[1
 nmap     T :tabnew<cr>
 nnoremap ]t :tabn<cr>

@@ -11,7 +11,6 @@ endif
 
 g:plugpac_plugin_conf_path = $v .. '/rc'
 g:plugpac_default_type = 'delay'
-
 # plugins [[[1
 # Builtin [[[2
 
@@ -21,8 +20,7 @@ if !is_win
 endif
 
 # HACK: for unknown reason, `filetype plugin indent on` breaks `va%`
-timer_start(5000, (_) => {
-  packadd matchit
+timer_start(0, (_) => {
   # packadd! editexisting
   packadd! helptoc
 })
@@ -53,23 +51,28 @@ else
   Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 endif
 Pack 'bootleq/vim-cycle'
-Pack 'bennyyip/lightline.vim' # fork to disable in nofile
+Pack 'itchyny/lightline.vim'
 Pack 'machakann/vim-sandwich'
 
-if !g:minimal_plugins
+if g:minimal_plugins
+  g:loaded_netrw       = 0
+  g:loaded_netrwPlugin = 0
+  packadd matchit
+else
   # Lab [[[2
-  # Pack 'zhimsel/vim-stay', {'type': 'start'}
-  # Pack 'Konfekt/FastFold'
-  Pack 'Konfekt/vim-scratchpad'
+  Pack 'dyng/ctrlsf.vim'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
+  Pack 'andymass/vim-matchup', { 'type': 'start' }
+  Pack 'chrisbra/vim_faq'
   # Enhance [[[2
-  Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
-
   Pack 'mhinz/vim-startify', { 'type': 'start' }
+  Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
+  Pack 'bennyyip/tasks.vim'
+  Pack 'romainl/vim-qf' # { } H L
+  Pack 'habamax/vim-shout'
+  Pack 'tpope/vim-eunuch'
 
-  g:loaded_netrw       = 1
-  g:loaded_netrwPlugin = 1
   Pack 'habamax/vim-dir', { 'type': 'start' }
 
   if has("patch-9.0.1811")
@@ -83,46 +86,33 @@ if !g:minimal_plugins
   else
     Pack 'editorconfig/editorconfig-vim'
   endif
+
+  Pack 'AndrewRadev/linediff.vim', { 'on': 'Linediff' } # <C-g>d
   Pack 'itchyny/vim-cursorword'
   Pack 'lfv89/vim-interestingwords'
   Pack 'luochen1990/rainbow'
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-  Pack 'romainl/vim-qf' # { } H L
   Pack 'tpope/vim-characterize'
   Pack 'tpope/vim-repeat'
-
-  Pack 'justinmk/vim-gtfo' # gof got
-  Pack 'bennyyip/tasks.vim'
-  Pack 'habamax/vim-shout'
-  # Pack 'skywind3000/asyncrun.vim'
-  # if !is_ssh
-  #   Pack 'tyru/open-browser.vim'
-  # endif
-
-  Pack 'tpope/vim-eunuch'
-
-  Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
-
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
-
+  Pack 'justinmk/vim-gtfo' # gof got
   Pack 'bennyyip/vim-highlightedyank'
-  Pack 'chrisbra/vim_faq'
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif
   # Motion and Edit [[[2
   Pack 'machakann/vim-swap' # g, g. gs gS
   Pack 'bergercookie/vim-debugstring' # <leader>ds
-  Pack 'tommcdo/vim-lion' # <count>gl<motion>=
+  Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
   Pack 'svermeulen/vim-yoink' # :Yanks
   Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } # gx gxx gxg
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'
+  Pack 'Konfekt/vim-scratchpad'
 
   # Pack 'michaeljsmith/vim-indent-object'
 
-  Pack 'dyng/ctrlsf.vim'
   Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t'] }
   Pack 'markonm/traces.vim'
   # Pack 'monkoose/vim9-stargate'
@@ -171,6 +161,8 @@ if !g:minimal_plugins
   if is_win
     Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
   endif
+  # ]]]
+  # ]]]
 endif
 plugpac#End()
 # plugpac helpers [[[1

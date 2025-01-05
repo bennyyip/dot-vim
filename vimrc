@@ -1,5 +1,6 @@
 vim9script
 set nocompatible
+filetype plugin indent on
 syntax on
 
 const is_win = has('win32')
@@ -23,12 +24,11 @@ g:loaded_spellfile_plugin = 1
 g:loaded_tarPlugin = 1
 g:loaded_vimballPlugin = 1
 g:loaded_zipPlugin = 1
+g:loaded_netrw       = 1
+g:loaded_netrwPlugin = 1
 
 g:load_black = 1
 g:loaded_fzf = 1
-
-set list listchars=tab:▸\ ,nbsp:␣,trail:⣿,extends:…,precedes:… showbreak=↪
-set number relativenumber cursorline cursorlineopt=number signcolumn=number
 
 if exists('#vimrc')
   augroup vimrc
@@ -37,7 +37,13 @@ if exists('#vimrc')
   augroup! vimrc
 endif
 
+source $v/setting.vim
 source $v/keymap.vim
+
+if filereadable($HOME .. '/local.vim')
+  source $HOME/local.vim
+endif
+
 source $v/pack.vim
 
 set background=dark
@@ -51,20 +57,4 @@ catch
   endtry
 endtry
 
-def Init(..._: list<any>)
-  filetype plugin indent on
-  source $v/setting.vim
-
-  hi StartifyHeader ctermfg=214 ctermbg=NONE guifg=#fabd2f guibg=NONE guisp=NONE cterm=NONE gui=NONE
-
-  if filereadable($HOME .. '/local.vim')
-    source $HOME/local.vim
-  endif
-enddef
-
-if is_win
-  Init()
-else
-  timer_start(0, Init)
-endif
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
