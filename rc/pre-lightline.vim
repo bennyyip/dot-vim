@@ -1,89 +1,34 @@
-" Plugin: itchyny/lightline.vim [[[1
+vim9script
 
-let s:is_tty = !match(&term, 'linux')
-let g:lightline = {
-      \ 'active': {
-      \   'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'cocstatus', 'asyncrun', 'fileformat', 'fileencoding', 'filetype'] ]
-      \ },
-      \ 'inactive': {
-      \ 'left': [ [ 'filename' ] ],
-      \ 'right': [ [ 'lineinfo' ],
-      \            [ 'percent' ] ],
-      \ },
-      \ 'component_function': {
-      \   'modified':     'LightlineModified',
-      \   'readonly':     'LightlineReadonly',
-      \   'fugitive':     'LightlineFugitive',
-      \   'filename':     'LightlineFilename',
-      \   'fileformat':   'LightlineFileformat',
-      \   'filetype':     'LightlineFiletype',
-      \   'fileencoding': 'LightlineFileencoding',
-      \   'mode':         'LightlineMode',
-      \   'asyncrun':     'LightlineAsyncrun',
-      \   'cocstatus':    'coc#status',
-      \ },
-      \ }
+const is_tty = !match(&term, 'linux')
+g:lightline = {
+  'active': {
+    'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
+    'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileinfo'] ]
+  },
+  'inactive': {
+    'left': [ [ 'filename' ] ],
+    'right': [ [ 'lineinfo' ], [ 'percent' ] ],
+  },
+  'component_function': {
+    'fugitive':  'LightlineFugitive',
+    'filename':  'LightlineFilename',
+    'fileinfo':  'LightlineFileInfo',
+  },
+}
 
-if plugpac#HasPlugin("lightline-ale")
-  let g:lightline.component_expand = {
-        \  'linter_checking': 'lightline#ale#checking',
-        \  'linter_infos': 'lightline#ale#infos',
-        \  'linter_warnings': 'lightline#ale#warnings',
-        \  'linter_errors': 'lightline#ale#errors',
-        \  'linter_ok': 'lightline#ale#ok',
-        \ }
-  let g:lightline.component_type = {
-        \     'linter_checking': 'right',
-        \     'linter_infos': 'right',
-        \     'linter_warnings': 'warning',
-        \     'linter_errors': 'error',
-        \     'linter_ok': 'right',
-        \ }
+g:lightline.component = {
+  'mode': '%{lightline#mode()[0]}',
+}
 
-  let g:lightline.active.right = [
-        \  [  'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok', 'lineinfo', ],
-        \  [ 'percent' ],
-        \  [ 'cocstatus', 'asyncrun', 'fileformat', 'fileencoding', 'filetype' ] ]
+g:lightline.colorscheme = 'gruvbox8'
 
-  let g:lightline#ale#indicator_checking = "\uf110"
-  " let g:lightline#ale#indicator_infos = "\uf129"
-  " let g:lightline#ale#indicator_warnings = "\uf071"
-  " let g:lightline#ale#indicator_errors = "\uf05e"
-  let g:lightline#ale#indicator_ok = "\uf00c"
-endif
+def g:LightlineFilename(): string
+  const modified =  &modified ? '+' : &modifiable ? '' : '-'
+  const readonly = &readonly ? (is_tty ? 'RO' : "\ue0a2") : ''
 
-
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-" let s:enable_nerd_font = !s:is_tty && !has('gui_running')
-let s:enable_nerd_font = v:false
-let g:lightline.colorscheme = 'gruvbox8'
-
-if s:enable_nerd_font
-  let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-  let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
-  let g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-  let g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
-endif
-
-function LightlineAsyncrun() "[[[2
-  const jobs = get(g:, 'async_jobs', {})
-  return jobs->len() > 0 ? 'Running' : ''
-  " return get(g:, 'asyncrun_status', '')
-endfunction
-
-function! LightlineModified() "[[[2
-  return &filetype =~# 'help\|vaffle\|undotree\|qf' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-function! LightlineReadonly() "[[[2
-  return &filetype !~? 'help\|vaffle\|undotree\|qf' && &readonly ? (s:is_tty ? 'RO' : "\ue0a2") : ''
-endfunction
-function! LightlineFilename() "[[[2
   if &filetype ==# 'qf'
-    let wininfo = filter(getwininfo(), {i,v -> v.winnr == winnr()})[0]
+    const wininfo = filter(getwininfo(), (i, v) => v.winnr == winnr())[0]
     if wininfo.loclist
       return "[Location List]"
     else
@@ -91,36 +36,55 @@ function! LightlineFilename() "[[[2
     endif
   endif
 
-  let l:fname = winwidth(0) > 70 ? expand('%:~') : expand('%:t')
-  let ret = ('' !=# LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' !=# l:fname ? l:fname : '[No Name]') .
-        \ ('' !=# LightlineModified() ? ' ' . LightlineModified() : '')
-  return ret->substitute('\\', '/', 'g')
-endfunction
-function! LightlineFugitive() "[[[2
-  try
-    if expand('%:t') !~? 'undotree\|diffpanel' && &filetype !~? 'vaffle'
-      let l:mark = (s:is_tty ? '' : "\ue0a0 ")
-      let l:branch = fugitive#Head()
-      return l:branch !=# '' ? l:mark .. l:branch : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
-function! LightlineFileformat() "[[[2
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-function! LightlineFiletype() "[[[2
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-function! LightlineFileencoding() "[[[2
-  return winwidth(0) > 70 ? (&fileencoding !=# '' ? &fileencoding : &encoding) : ''
-endfunction
-function! LightlineMode() "[[[2
-  " let l:fname = expand('%:~')
-  return &filetype =~# 'vaffle\|undotree' ? 'P' :
-        \ lightline#mode()[0]
-endfunction
+  var fname = winwidth(0) < 70 ? expand('%:t') : expand('%:~')
+  fname = fname->substitute('\\', '/', 'g')
+  fname = '' !=# fname ? fname : '[No Name]'
 
-" vim:fdm=marker:fmr=[[[,]]]:ft=vim
+  return [readonly, fname, modified]->FilterAndJoin()
+enddef
+
+def g:LightlineFugitive(): string
+  const mark = (is_tty ? '' : "\ue0a0 ")
+  const branch = fugitive#Head()
+  return branch !=# '' ? $"{mark}{branch}" : ''
+enddef
+
+def PluginStatus(): list<string>
+  const jobs = get(g:, 'async_jobs', {})
+  const async_status = jobs->len() > 0 ? 'Running' : ''
+
+  const coc_status = coc#status()
+  const coc_current_function = get(b:, 'coc_current_function', ' ')
+
+  return [coc_current_function, async_status, coc_status]
+enddef
+
+def g:LightlineFileInfo(): string
+  if winwidth(0) < 70
+    return ""
+  endif
+
+  const fileencoding = &fenc !=# "" ? &fenc : &enc
+  const fileformat = &ff
+  const filetype = &ft !=# "" ? &ft : "no ft"
+
+  return PluginStatus()
+    ->extend([fileformat, fileencoding, filetype])
+    ->FilterAndJoin(' | ')
+enddef
+
+def FilterAndJoin(l: list<string>, sep: string = " "): string
+  return l->filter("v:val != ''")->join(sep)
+enddef
+
+# let s:enable_nerd_font = !is_tty && !has('gui_running')
+const enable_nerd_font = v:false
+if enable_nerd_font
+  g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  g:lightline.tabline_separator = { 'left': "\ue0b8", 'right': "\ue0be" }
+  g:lightline.tabline_subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
+endif
+
+# ]]]
+# vim:fdm=marker:fmr=[[[,]]]:ft=vim

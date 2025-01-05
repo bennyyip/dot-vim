@@ -7,6 +7,10 @@ vim9script
 
 coc#add_extension()
 
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+nnoremap <c-g><c-f> <cmd>echo get(b:, 'coc_current_function', ' ')<CR>
+
 # By default <C-O> goto normal and play one command,
 # which I never use
 inoremap <silent><expr> <C-O> coc#refresh()
