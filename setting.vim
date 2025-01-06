@@ -1,5 +1,6 @@
 vim9script
 
+set confirm
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
 # set cinoptions=>2,l1,p0,)50,*50,t0
@@ -25,10 +26,9 @@ set nrformats=bin,hex,unsigned
 set nospell
 set number relativenumber cursorline cursorlineopt=number signcolumn=number
 
-# &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"
-set diffopt+=vertical,algorithm:histogram,indent-heuristic
-nnoremap <silent> [w :let &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience"<CR>:echo &diffopt<CR>
-nnoremap <silent> ]w :let &diffopt = "internal,filler,closeoff,hiddenoff,algorithm:patience,iwhiteall,iblank"<CR>:echo &diffopt<CR>
+set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:patience
+nnoremap <silent> [w <cmd>set diffopt-=iwhiteall,iblank<BAR>echo &diffopt<CR>
+nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall,iblank<BAR>echo &diffopt<CR>
 set sessionoptions=buffers,curdir,tabpages,winsize,slash,unix
 set viewoptions=cursor,folds,slash,unix
 
