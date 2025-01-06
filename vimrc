@@ -38,7 +38,6 @@ if exists('#vimrc')
 endif
 
 source $v/setting.vim
-source $v/keymap.vim
 
 if filereadable($HOME .. '/local.vim')
   source $HOME/local.vim

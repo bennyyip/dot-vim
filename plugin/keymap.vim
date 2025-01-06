@@ -145,7 +145,6 @@ def SourceVim(...args: list<any>): string
     else
         :'[,']source
     endif
-    echo 'executed!'
     return ''
 enddef
 nnoremap <silent> <expr> yr SourceVim()
