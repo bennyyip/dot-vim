@@ -9,6 +9,10 @@ $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
 $vimtmp = $HOME .. '/.config/vimtmp/'
 $VIMRC = $v .. '/vimrc'
 
+if is_win
+  $SHELL = 'pwsh'
+endif
+
 g:mapleader = "\<Space>"
 g:localleader = "\\"
 

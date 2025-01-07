@@ -59,8 +59,8 @@ nmap 'o <C-w><C-o>
 
 # edit [[[1
 # swap <c-n> and <c-x><c-n>
-inoremap <c-n> <c-x><c-n>
-inoremap <c-x><c-n> <c-n>
+inoremap <expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
+inoremap <C-X><C-N> <C-N>
 
 # inoremap "<space><space> ""<ESC>i
 # inoremap '<space><space> ''<ESC>i
@@ -365,4 +365,9 @@ xnoremap <silent> <leader>gh <scriptcmd>git.GithubOpen(line("v"), line("."))<CR>
 command! GBrowse git.GithubOpen()
 # external [[[1
 nnoremap <silent> gX :call os#Gx()<CR>
+
+import autoload 'term.vim'
+xnoremap <expr> <space>t term.Send()
+nnoremap <expr> <space>t term.Send()
+nnoremap <expr> <space>tt term.Send() .. '_'
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

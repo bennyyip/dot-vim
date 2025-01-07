@@ -1,6 +1,14 @@
 vim9script
 setlocal commentstring=//\ %s
 
+augroup formatprgsC
+  autocmd! * <buffer>
+  if exists('##ShellFilterPost')
+    autocmd ShellFilterPost <buffer> if v:shell_error | execute 'echom "shell filter returned error "..v:shell_error..", undoing changes"' | undo | endif
+  endif
+augroup END
+
+
 setl cino+=g0,:0,j1,l1,N-s,t0,(0
 set foldnestmax=1
 
