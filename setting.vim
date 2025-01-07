@@ -13,8 +13,14 @@ set hlsearch incsearch ignorecase smartcase
 set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20
 set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags
 set wildignore+=*~,*.py[co],__pycache__,
-# set completeopt=menu,popup,fuzzy completepopup=highlight:Pmenu
-set completeopt=menu,longest,menuone,popup,noselect
+set complete-=i # disable scanning included files
+set complete-=t # disable searching tags
+# set completeopt=menu,longest,menuone,popup,noselect
+set completeopt=menu,popup,preview
+set completepopup=highlight:Pmenu,border:off
+set suffixes+=.a,.1,.class
+set path+=**
+set cpoptions=aABcfFqsZ # -e
 # set breakindentopt=min:40
 set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
 set fillchars=fold:\ ,vert:│
@@ -32,7 +38,7 @@ nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall,iblank<BAR>echo &diffopt<CR>
 set sessionoptions=buffers,curdir,tabpages,winsize,slash,unix
 set viewoptions=cursor,folds,slash,unix
 
-set mouse=a
+# set mouse=a
 
 # &errorformat ..= ',%f\|%\s%#%l col%\s%#%c%\s%#\| %m'
 if executable('rg')
@@ -40,11 +46,14 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m
 endif
 
+set history=1000
+set updatetime=300
+set updatecount=100
+set undofile
 set backup
 # set backupskip=
 set backupext=-vimbackup
-set updatecount=100
-set undofile
+
 set backupdir=$vimtmp/backup/
 set directory=$vimtmp/swap/
 set undodir=$vimtmp/undo/
@@ -101,7 +110,7 @@ augroup END
 # set t_vb=
 
 # better navigation
-set foldmethod=marker
+# set foldmethod=marker
 set foldopen+=jump
 # set foldtext=ben#foldy()
 set foldlevelstart=999
@@ -110,19 +119,10 @@ if has("patch-9.0.1921")
   set jumpoptions=stack
 endif
 
-set suffixes+=.a,.1,.class
-set path+=**
-set complete-=i # disable scanning included files
-set complete-=t # disable searching tags
-set completepopup=highlight:Pmenu
-set completepopup+=border:off
-set cpoptions=aABcfFqsZ # -e
-set updatetime=300
  # Automatically save before commands like :next and :make
 set autoread autowrite
 set report=0 # Always report changed lines.
 # set synmaxcol=99999 # Only highlight the first 500 columns.
-set history=1000
 set splitbelow splitright
 set titlestring=VIM:\ %f
 set switchbuf=useopen,usetab

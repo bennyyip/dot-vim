@@ -13,7 +13,7 @@ nnoremap <c-g><c-f> <cmd>echo get(b:, 'coc_current_function', ' ')<CR>
 
 # By default <C-O> goto normal and play one command,
 # which I never use
-inoremap <silent><expr> <C-O> coc#refresh()
+inoremap <silent><expr> <C-O> coc#pum#visible() ? coc#pum#next(1) : coc#refresh()
 
 g:coc_snippet_next = '<C-T>'
 imap <C-T> <Plug>(coc-snippets-expand-jump)
@@ -26,6 +26,10 @@ imap <C-T> <Plug>(coc-snippets-expand-jump)
 # inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : g:CheckBackspace() ? "\<Tab>" : coc#refresh()
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : pumvisible() ? "\<C-N>" : "\<Tab>"
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : pumvisible() ? "\<C-P>" : "\<C-H>"
+
+# swap <c-n> and <c-x><c-n>
+inoremap <silent><expr> <C-N> coc#pum#visible() ? coc#pum#next(1) : pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
+inoremap <C-X><C-N> <C-N>
 
 # Make <CR> to accept selected completion item or notify coc.nvim to format
 # <C-g>u breaks current undo, please make your own choice

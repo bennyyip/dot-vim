@@ -1,5 +1,5 @@
 vim9script
-g:lightline#colorscheme#gruvbox8#palette = {
+g:lightline#colorscheme#gruvbox9#palette = {
     inactive: {
         right: [
             ["#7c6f64", "#3c3836", "243", "237"],
@@ -30,8 +30,8 @@ g:lightline#colorscheme#gruvbox8#palette = {
         middle: [["#a89984", "#3c3836", "246", "237"]],
         warning: [["#504945", "#fabd2f", "239", "214"]],
         left: [
-            ["#282828", "#a89984", "235", "246", "bold"],
-            ["#a89984", "#504945", "246", "239"],
+            ["#282828", "#ebdbb2", "235", "246", "bold"],
+            ["#ebdbb2", "#504945", "246", "239"],
         ],
         error: [["#282828", "#fe8019", "235", "208"]],
     },
@@ -50,7 +50,7 @@ g:lightline#colorscheme#gruvbox8#palette = {
         right: [["#282828", "#fe8019", "235", "208"]],
         middle: [["#282828", "#282828", "235", "235"]],
         left: [["#a89984", "#504945", "246", "239"]],
-        tabsel: [["#282828", "#a89984", "235", "246"]],
+        tabsel: [["#282828", "#ebdbb2", "235", "246"]],
     },
     terminal: {
         right: [

@@ -62,8 +62,10 @@ else
   # Lab [[[2
   Pack 'dyng/ctrlsf.vim'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
-  Pack 'andymass/vim-matchup', { 'type': 'start' }
+  Pack 'andymass/vim-matchup'
   Pack 'chrisbra/vim_faq'
+  # Pack 'hahdookin/miniterm.vim'
+  Pack 'bennyyip/miniterm.vim'
   # Enhance [[[2
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }

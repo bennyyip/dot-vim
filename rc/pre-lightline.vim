@@ -21,7 +21,7 @@ g:lightline.component = {
   'mode': '%{lightline#mode()[0]}',
 }
 
-g:lightline.colorscheme = 'gruvbox8'
+g:lightline.colorscheme = 'gruvbox9'
 
 def g:LightlineFilename(): string
   const modified =  &modified ? '+' : &modifiable ? '' : '-'
@@ -36,17 +36,24 @@ def g:LightlineFilename(): string
     endif
   endif
 
-  var fname = winwidth(0) < 70 ? expand('%:t') : expand('%:~')
+  var fname = winwidth(0) < 70 ? expand('%:t') : expand('%:.')
   fname = fname->substitute('\\', '/', 'g')
   fname = '' !=# fname ? fname : '[No Name]'
 
-  return [readonly, fname, modified]->FilterAndJoin()
+  if &ft =~? 'dir\|fugitive\|undotree'
+    return fname
+  else
+    return [readonly, fname, modified]->FilterAndJoin()
+  endif
 enddef
 
 def g:LightlineFugitive(): string
-  const mark = (is_tty ? '' : "\ue0a0 ")
+  const mark = (is_tty ? '' : "\ue0a0")
   const branch = fugitive#Head()
-  return branch !=# '' ? $"{mark}{branch}" : ''
+  if branch == 'master' || branch == 'main'
+    return mark
+  endif
+  return branch !=# '' ? $"{mark} {branch}" : ''
 enddef
 
 def PluginStatus(): list<string>
