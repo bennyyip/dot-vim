@@ -11,10 +11,11 @@ var pack_jobs = []
 #   nnoremap <silent> <space>gh <scriptcmd>git.GithubOpen()<CR>
 #   xnoremap <silent> <space>gh <scriptcmd>git.GithubOpen(line("v"), line("."))<CR>
 export def GithubOpen(firstline: number = line("."), lastline: number = line("."))
-    var gitroot = systemlist("git rev-parse --show-toplevel")->join('')
+    const gitpath = fnameescape(g:FugitiveGitDir())
+    var gitroot = systemlist($"git -C {gitpath} rev-parse --show-toplevel")->join('')
     var filename = strpart(expand('%:p'), len(gitroot) + 1)->tr('\', '/')
-    var branch = systemlist("git rev-parse --abbrev-ref HEAD")->join('')
-    var remote_url = systemlist("git remote get-url origin")->join('')
+    var branch = systemlist($"git -C {gitpath} rev-parse --abbrev-ref HEAD")->join('')
+    var remote_url = systemlist($"git -C {gitpath} remote get-url origin")->join('')
     if remote_url =~ '^git@github.com'
         remote_url = remote_url->substitute('^git@github.com:', 'https://github.com/', '')
     endif

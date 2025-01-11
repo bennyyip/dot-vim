@@ -14,6 +14,9 @@ augroup end
 
 command! -nargs=* Glog vertical Git log --oneline --decorate --graph <args>
 
-delcommand Gbrowse
 cabbrev gi Git
 cabbrev gbl Git blame
+
+import autoload 'git.vim'
+delcommand Gbrowse
+command! -range GBrowse git.GithubOpen(<line1>, <line2>)
