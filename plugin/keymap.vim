@@ -56,7 +56,23 @@ import autoload 'zoom.vim'
 nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
 nmap <C-w>o <C-w><C-o>
 nmap 'o <C-w><C-o>
-
+# Toggle quickfix and loclist
+def ToggleQF()
+  if getwininfo()->filter('v:val.quickfix')->len() > 0
+    cclose
+  else
+    copen
+  endif
+enddef
+def ToggleLoc()
+  if getwininfo()->filter('v:val.loclist')->len() > 0
+    lclose
+  else
+    lopen
+  endif
+enddef
+nnoremap <leader>q <scriptcmd>ToggleQF()<CR>
+nnoremap <leader>L <scriptcmd>ToggleLoc()<CR>
 # edit [[[1
 # swap <c-n> and <c-x><c-n>
 inoremap <expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
@@ -287,13 +303,13 @@ nnoremap <silent> ]B :blast<CR>
 # quickfix list
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
-nnoremap <silent> [Q :cfirst<CR>
-nnoremap <silent> ]Q :clast<CR>
+nnoremap <silent> [Q :cNfile<CR>
+nnoremap <silent> ]Q :cnfile<CR>
 # location list (buffer local quickfix list)
 nnoremap <silent> [s :lprevious<CR>
 nnoremap <silent> ]s :lnext<CR>
-nnoremap <silent> [S :lfirst<CR>
-nnoremap <silent> ]S :llast<CR>
+nnoremap <silent> [S :lNfile<CR>
+nnoremap <silent> ]S :lnfile<CR>
 # file list -> load buffers using :args * :args **/*.js **/*.css
 nnoremap <silent> [f :previous<CR>
 nnoremap <silent> ]f :next<CR>
@@ -357,12 +373,6 @@ nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
 # nnoremap mm <scriptcmd>g:MarkPush()<CR>
 
 # nnoremap <c-m> <scriptcmd>feedkeys($"yyp{getpos('.')[2] - 1}l")<CR>
-# Git [[[1
-import autoload 'git.vim'
-nnoremap <silent> <leader>gh <scriptcmd>git.GithubOpen()<CR>
-xnoremap <silent> <leader>gh <scriptcmd>git.GithubOpen(line("v"), line("."))<CR>
-
-command! GBrowse git.GithubOpen()
 # external [[[1
 nnoremap <silent> gX :call os#Gx()<CR>
 
@@ -370,4 +380,5 @@ import autoload 'term.vim'
 xnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>tt term.Send() .. '_'
+# ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

@@ -21,7 +21,6 @@ xnoremap <leader>* "0y<scriptcmd>exe "Rg" getreg("0")<cr>
 
 command! -nargs=* Locate async#qfix(<q-args>, {'errorformat': "%f", "makeprg": "locate"})
 
-nnoremap <leader>q <cmd>copen<CR>
 
 noremap <leader>; :AsyncCmd<space>
 noremap <leader>: :StopJobs<CR>

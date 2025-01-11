@@ -71,7 +71,7 @@ else
   Pack 'mhinz/vim-startify', { 'type': 'start' }
   Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
   Pack 'bennyyip/tasks.vim'
-  Pack 'romainl/vim-qf' # { } H L
+  # Pack 'romainl/vim-qf' # { } H L
   Pack 'habamax/vim-shout'
   Pack 'tpope/vim-eunuch'
 
