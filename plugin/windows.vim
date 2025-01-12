@@ -19,7 +19,7 @@ def DailyNote()
   fnameescape(filename)->buf.EditInTab()
 enddef
 def GotoObsidian()
-  if expand('%:h') !~# 'Obsidian-Vault'
+  if expand('%:~') !~# 'Obsidian-Vault'
     echo 'Not in obsidian vault!'
     return
   endif
