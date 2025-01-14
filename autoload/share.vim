@@ -1,4 +1,5 @@
 vim9script
+import autoload 'os.vim'
 
 # Name: autoload/share.vim
 # Author: Maxim Kim <habamax@gmail.com>
@@ -32,13 +33,8 @@ var paste_service = {
 export def Paste(service: string, line1: number, line2: number)
     var [paste_url, paste_param] = paste_service->get(service, paste_service["0x0"])
     var url = Curl(paste_url, paste_param, line1, line2)
-    if $SSH_CONNECTION != ""
-        g:OSCYank(url)
-    elseif has("+clipboard")
-      # skip compiler check
-      legacy let @+ = url
-    endif
-    @@ = url
+    os.Yank(url)
+    setreg('@', url)
     echom $"Shared as {url}"
 enddef
 

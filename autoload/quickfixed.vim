@@ -41,6 +41,10 @@ function! s:history(goNewer)
     if s:length() | break | endif
   endwhile
 
+  call quickfixed#print()
+endfunction
+
+function! quickfixed#print()
   " Set the height of the quickfix window to the size of the list, max-height 10
   " execute 'resize' min([ 10, max([ 1, s:length() ]) ])
 

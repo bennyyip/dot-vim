@@ -16,6 +16,11 @@
       },
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"]
     },
+    "ocaml": {
+      "command": "ocamllsp",
+      "filetypes": ["ocaml"]
+      "initializationOptions": {"inlayHints": false}
+    }
      "ccls": {
        "command": "ccls",
        "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],

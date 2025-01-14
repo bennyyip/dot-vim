@@ -159,3 +159,12 @@ export def Gx()
 
     Open(escape(URL, '#%!'))
 enddef
+
+# Pack 'ojroques/vim-oscyank'
+export def Yank(s: string)
+    if $SSH_CONNECTION != ""
+        silent! g:OSCYank(s)
+    else
+        setreg('+', s)
+    endif
+enddef
