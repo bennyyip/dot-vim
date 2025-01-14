@@ -60,7 +60,7 @@ if g:minimal_plugins
   packadd matchit
 else
   # Lab [[[2
-  Pack 'dyng/ctrlsf.vim'
+  # Pack 'dyng/ctrlsf.vim'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'andymass/vim-matchup'
   Pack 'chrisbra/vim_faq'
@@ -75,7 +75,7 @@ else
   Pack 'habamax/vim-shout'
   Pack 'tpope/vim-eunuch'
 
-  Pack 'habamax/vim-dir', { 'type': 'start' }
+  Pack 'bennyyip/vim-dir', { 'type': 'start' }
 
   if has("patch-9.0.1811")
     autocmd_add([{

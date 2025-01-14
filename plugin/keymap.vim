@@ -84,11 +84,11 @@ inoremap <C-X><C-N> <C-N>
 # inoremap [<space><space> []<ESC>i
 # inoremap <<space><space> <><ESC>i
 # inoremap {<space><space> {<space><space>}<ESC>hi
-inoremap (<CR> (<CR>)<Esc>O
+# inoremap (<CR> (<CR>)<Esc>O
 inoremap {<CR> {<CR>}<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
-inoremap (; (<space><space>);<Esc>hhi
-inoremap (, (<space><space>),<Esc>hhi
+# inoremap (; (<space><space>);<Esc>hhi
+# inoremap (, (<space><space>),<Esc>hhi
 inoremap {; {<space><space>};<Esc>hhi
 # inoremap {, {<space><space>},<Esc>hhi
 inoremap [; [<space><space>];<Esc>hhi
@@ -145,8 +145,6 @@ xnoremap P  "0p
 nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
 # copy entire file contents (to gui-clipboard if available)
 nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG' .. (has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
-# yank filepath
-nnoremap <silent> <leader>yp :let @+ = expand("%:p")<cr>:let @" = expand("%:p")<cr>
 # vimrc [[[1
 nnoremap <silent><leader>fed :e $VIMRC<CR>
 nnoremap <silent><leader>fee :source $VIMRC<CR>
@@ -232,8 +230,8 @@ enddef
 nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>
 # file, buffer [[[1
 nnoremap <leader>fs :w<CR>
-nnoremap <leader>fy :let @+=expand("%")<CR>:echo "buffer filename copied"<CR>
-nnoremap <leader>fP :let @+=expand("%:p")<CR>:echo "buffer path copied"<CR>
+nnoremap <silent> <leader>fy :call os#Yank(expand("%:t"))<CR>:echo "buffer filename copied"<CR>
+nnoremap <silent> <leader>fP :call os#Yank(expand("%:p"))<CR>:echo "buffer path copied"<CR>
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
 
