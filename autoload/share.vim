@@ -20,6 +20,7 @@ import autoload 'os.vim'
 
 
 var paste_service = {
+    'nichi': ['https://pb.nichi.co/', 'file=@-'],
     '0x0': ['https://0x0.st/', 'file=@-'],
     'envs': ['https://envs.sh/', 'file=@-;'],
     'clbin': ['https://clbin.com/', 'clbin=<-'],
@@ -31,7 +32,7 @@ var paste_service = {
 # Paste lines from current buffer to one of the s:paste_service
 # Save URL in clipboard.
 export def Paste(service: string, line1: number, line2: number)
-    var [paste_url, paste_param] = paste_service->get(service, paste_service["0x0"])
+    var [paste_url, paste_param] = paste_service->get(service, paste_service["nichi"])
     var url = Curl(paste_url, paste_param, line1, line2)
     os.Yank(url)
     setreg('@', url)
