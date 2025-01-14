@@ -150,4 +150,7 @@ g:is_posix = 1
 
 legacy let c_no_comment_fold = 1
 legacy let c_comment_strings = 1
+
+g:snips_author = 'Ben Yip'
+
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
