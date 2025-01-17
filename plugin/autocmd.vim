@@ -55,11 +55,17 @@ def FormatOnSave() # [[[2
   if !get(b:, 'format_on_save', g:format_on_save)
     return
   endif
+  Format()
+enddef
+
+def Format()
   const save_view = winsaveview()
   :keepj normal! gggqG
   # execute 'write'
   winrestview(save_view)
 enddef
+
+command! -nargs=0 Fmt Format()
 
 # Autocmd [[[1
 augroup vimrc

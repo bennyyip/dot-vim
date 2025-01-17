@@ -319,26 +319,6 @@ nnoremap <silent> ]F :last<CR>
 xnoremap <tab> :sil! m '>+1<CR>gv
 xnoremap <s-tab> :sil! m '<-2<CR>gv
 
-def MapMeta(x: string)
-  for m in ["n", "c"]
-    const cmd = mapcheck($"<Plug>(meta-{x})", m)
-    if cmd != ""
-      # echom $"{m} {x} {cmd}"
-      execute is_gvim ? $"{m}map <M-{x}> <Plug>(meta-{x})"
-        : $"{m}map <ESC>{x} <Plug>(meta-{x})"
-    endif
-  endfor
-  if mapcheck($"<Plug>(meta-{x})", "i") != ""
-    # map <ESC> slows entering normal mode. so only map for gui
-    if is_gvim
-      execute $"nmap <M-{x}> <Plug>(meta-{x})"
-    endif
-  endif
-enddef
-
-for i in range(33, 122)
-  MapMeta(nr2char(i))
-endfor
 
 # ]]]
 # mark ring [[[1
