@@ -115,4 +115,26 @@ export def FollowLink() # [[[1
   redraw
 enddef
 # ]]]
+
+const is_gvim = has('gui_running')
+export def MapMeta() #[[[1
+  for i in range(33, 122)
+    const x = nr2char(i)
+    for m in ["n", "c"]
+      const cmd = mapcheck($"<Plug>(meta-{x})", m)
+      if cmd != ""
+        # echom $"{m} {x} {cmd}"
+        execute is_gvim ? $"{m}map <M-{x}> <Plug>(meta-{x})"
+          : $"{m}map <ESC>{x} <Plug>(meta-{x})"
+      endif
+    endfor
+    if mapcheck($"<Plug>(meta-{x})", "i") != ""
+      # map <ESC> slows entering normal mode. so only map for gui
+      if is_gvim
+        execute $"nmap <M-{x}> <Plug>(meta-{x})"
+      endif
+    endif
+  endfor
+enddef
+
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

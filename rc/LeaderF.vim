@@ -50,13 +50,13 @@ def SearchProject()
 enddef
 
 
-nnoremap <leader>.  :call <SID>SearchHere()<CR>
-nnoremap <leader>b  :Leaderf buffer <CR>
-nnoremap <leader>ff :Leaderf file <CR>
-nnoremap <leader>fp :execute('Leaderf file ' .. expand("$v"))<CR>
-nnoremap <leader>fr :Leaderf mru <CR>
-nnoremap <leader>pf  :call <SID>SearchProject()<CR>
-nnoremap gR  :<C-U>Leaderf rg -e<Space>
+# nnoremap <leader>.  :call <SID>SearchHere()<CR>
+# nnoremap <leader>b  :Leaderf buffer <CR>
+# nnoremap <leader>ff :Leaderf file <CR>
+# nnoremap <leader>fp :execute('Leaderf file ' .. expand("$v"))<CR>
+# nnoremap <leader>fr :Leaderf mru <CR>
+# nnoremap <leader>pf  :call <SID>SearchProject()<CR>
+# nnoremap gR  :<C-U>Leaderf rg -e<Space>
 
 command! -bar -bang -nargs=0 Lrg call <SID>Rg(<bang>0)
 

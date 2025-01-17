@@ -106,6 +106,9 @@ export def End()
         return
       endif
     endfor
+    if minpac_init_opts->has_key('after_hook')
+      minpac_init_opts.after_hook()
+    endif
     doautocmd VimEnter
     timer_stop(timer)
   }, { repeat: -1 })

@@ -11,7 +11,7 @@ set belloff=all shortmess+=Ic
 set display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
 set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20
-set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags
+set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi
 set wildignore+=*~,*.py[co],__pycache__,
 set complete-=i # disable scanning included files
 set complete-=t # disable searching tags

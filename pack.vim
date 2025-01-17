@@ -26,12 +26,17 @@ timer_start(0, (_) => {
 })
 
 # ]]]
+import autoload "utils.vim"
+const AfterFun = () => {
+  utils.MapMeta()
+}
 call plugpac#Begin({
   # progress_open: tab',
   quiet: g:minimal_plugins || v:true,
   package_name: package_name,
   status_open: 'vertical',
   verbose: 2,
+  after_hook: AfterFun,
 })
 Pack 'k-takata/minpac', {'type': 'opt'}
 
@@ -64,12 +69,16 @@ else
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'andymass/vim-matchup'
   Pack 'chrisbra/vim_faq'
+  # Pack 'yegappan/mru'
+  Pack 'yegappan/taglist'
+  Pack 'girishji/scope.vim'
+  # Pack 'yegappan/fileselect'
   # Pack 'hahdookin/miniterm.vim'
   Pack 'bennyyip/miniterm.vim'
   # Enhance [[[2
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
-  Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
+  # Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
   Pack 'bennyyip/tasks.vim'
   # Pack 'romainl/vim-qf' # { } H L
   Pack 'habamax/vim-shout'
