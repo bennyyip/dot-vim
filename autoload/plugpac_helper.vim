@@ -29,14 +29,20 @@ enddef
 
 export def PackRc(pack: string)
   call plugpac#Init()
-  execute 'edit ' ..
-        \ g:plugpac_plugin_conf_path .. '/' ..
-        \ substitute(minpac#getpluginfo(pack).name, '\.n\?vim$', '', '') .. '.vim'
+  execute 'edit ' .. RcPath(minpac#getpluginfo(pack).name)
 enddef
 
 export def PackRcPre(pack: string)
   call plugpac#Init()
-  execute 'edit ' ..
-        \ g:plugpac_plugin_conf_path .. '/pre-' ..
-        \ substitute(minpac#getpluginfo(pack).name, '\.n\?vim$', '', '') .. '.vim'
+  execute 'edit ' .. RcPath(minpac#getpluginfo(pack).name, 'pre-')
+enddef
+
+def RcPath(name: string, prefix: string = ''): string
+  return $"{g:plugpac_plugin_conf_path}/{prefix}{substitute(name, '\.n\?vim$', '', '')}.vim"
+enddef
+
+export def PackUnusedRC(): list<string>
+  plugpac#Init()
+  const rcs = minpac#getpluglist()->keys()->mapnew((_, k) => [RcPath(k), RcPath(k, 'pre-')])->flattennew()
+  return globpath(g:plugpac_plugin_conf_path, "*", 0, 1)->filter((_, x) => rcs->index(x) == -1)
 enddef

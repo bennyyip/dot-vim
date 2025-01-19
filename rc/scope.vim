@@ -8,11 +8,11 @@ sp.OptionsSet({emacsKeys: true})
 sp.OptionsSet({borderhighlight: ['Identifier']})
 
 def Fd(dir: string = "")
-  fuzzy.File($'fd -tf --follow . {dir}')
+  fuzzy.File($'fd --hidden -tf --follow . {dir}')
 enddef
 
 command -nargs=1 -complete=dir ScopeGrep fuzzy.Grep('rg --vimgrep', true, null_string, <f-args>)
-command -nargs=1 -complete=dir ScopeFile fuzzy.File($'fd -tf --follow . {<f-args>}')
+command -nargs=1 -complete=dir ScopeFile Fd({<f-args>}')
 
 def SearchProject()
   const root = g:FindRootDirectory()
