@@ -35,6 +35,17 @@ export def Send(...args: list<any>): string
         return 'g@'
     endif
 
+
+    var region_type = {line: "V", char: "v", block: "\<c-v>"}
+    var text = PrepareText(getregion(getpos("'["),
+                                     getpos("']"),
+                                     {type: get(region_type, args[0])}))
+
+    SendText(text)
+    return ""
+enddef
+
+export def SendText(text: list<string>): string
     var terms = getwininfo()->filter((_, v) => getbufvar(v.bufnr, '&buftype') == 'terminal')
     if len(terms) < 1
         echomsg "There is no visible terminal!"
@@ -48,14 +59,9 @@ export def Send(...args: list<any>): string
 
     var term_window = terms[0].winnr
 
-    var region_type = {line: "V", char: "v", block: "\<c-v>"}
-    var text = PrepareText(getregion(getpos("'["),
-                                     getpos("']"),
-                                     {type: get(region_type, args[0])}))
     if len(text) > 0 && text[-1] =~ '^\s\+'
         text[-1] ..= "\r"
     endif
     term_sendkeys(winbufnr(term_window), text->join("\r") .. "\r")
-
     return ""
 enddef

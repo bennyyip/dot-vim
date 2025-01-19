@@ -15,3 +15,5 @@ command! -buffer -nargs=0 AddDebugString
             \ put=s:DebugStringFunBase(g:DebugstringPrefixStr(), g:debugStringCounter)
 command! -buffer -nargs=1 AddDebugStringExpr
             \ put=s:DebugStringFunBase(<args> . ': ', <args>)
+
+nnoremap <buffer> <expr> <leader>T term#SendText([$'#use "{expand("%:t")}";;'])

@@ -75,6 +75,7 @@ else
   # Pack 'yegappan/fileselect'
   # Pack 'hahdookin/miniterm.vim'
   Pack 'bennyyip/miniterm.vim'
+  Pack 'ocaml/vim-ocaml'
   # Enhance [[[2
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
@@ -108,7 +109,7 @@ else
   Pack 'tpope/vim-repeat'
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
   Pack 'justinmk/vim-gtfo' # gof got
-  Pack 'bennyyip/vim-highlightedyank'
+  # Pack 'bennyyip/vim-highlightedyank'
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif
@@ -179,9 +180,12 @@ plugpac#End()
 # plugpac helpers [[[1
 import autoload "plugpac_helper.vim" as P
 command! PackSummary P.PackSummary()
-command! -nargs=1 -complete=customlist,P.PackList PackUrl   P.PackUrl(<q-args>)
-command! -nargs=1 -complete=customlist,P.PackList PackDir   P.PackDir(<q-args>)
-command! -nargs=1 -complete=customlist,P.PackList PackRc    P.PackRc(<q-args>)
-command! -nargs=1 -complete=customlist,P.PackList PackRcPre P.PackRcPre(<q-args>)
+const PackList = P.PackList
+command! -nargs=1 -complete=customlist,PackList PackUrl   P.PackUrl(<q-args>)
+command! -nargs=1 -complete=customlist,PackList PackDir   P.PackDir(<q-args>)
+command! -nargs=1 -complete=customlist,PackList PackRc    P.PackRc(<q-args>)
+command! -nargs=1 -complete=customlist,PackList PackRcPre P.PackRcPre(<q-args>)
+command! PackUnusedRC cexpr P.PackUnusedRC()->map((_, x) => $"{x}:1:1: Unused")
+
 # ]]]
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim
