@@ -59,6 +59,9 @@ def FormatOnSave() # [[[2
 enddef
 
 def Format()
+  if &formatprg == '' || &formatexpr == ''
+    return
+  endif
   const save_view = winsaveview()
   :keepj normal! gggqG
   # execute 'write'
@@ -75,7 +78,6 @@ augroup vimrc
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufReadPost * JumpToLastPosition()
   autocmd BufWritePost * FormatOnSave()
-
 
   # create non-existent directory before buffer save
   au BufWritePre * {

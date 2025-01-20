@@ -2,13 +2,15 @@ vim9script
 import autoload 'scope/fuzzy.vim'
 import autoload 'scope/popup.vim' as sp
 
-cabbrev sc Scope
-
 sp.OptionsSet({emacsKeys: true})
 sp.OptionsSet({borderhighlight: ['Identifier']})
 
 def Fd(dir: string = "")
-  fuzzy.File($'fd --hidden -tf --follow . {dir}')
+  if executable("fd")
+    fuzzy.File($'fd --hidden -tf --follow . {dir}')
+  else
+    fuzzy.File(fuzzy.FindCmd(dir))
+  endif
 enddef
 
 command -nargs=1 -complete=dir ScopeGrep fuzzy.Grep('rg --vimgrep', true, null_string, <f-args>)
@@ -33,4 +35,3 @@ nnoremap <leader>b <scriptcmd>fuzzy.Buffer(v:none, false)<cr>
 
 command! History fuzzy.CmdHistory()
 nnoremap <Plug>(meta-x) <scriptcmd>fuzzy.CmdHistory()<cr>
-

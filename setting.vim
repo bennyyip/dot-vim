@@ -7,7 +7,7 @@ set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
 set ttimeout ttimeoutlen=25
 set ruler
 # set belloff=all shortmess=aoOTIc
-set belloff=all shortmess+=Ic
+set belloff=all shortmess=aoOTIc
 set display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
 set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20

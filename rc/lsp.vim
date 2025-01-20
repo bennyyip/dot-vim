@@ -1,9 +1,9 @@
 vim9script
 
 var lsp_options = {
-  autoComplete: v:false,
-  omniComplete: v:true,
-  usePopupInCodeAction: v:true,
+  autoComplete: false,
+  omniComplete: true,
+  usePopupInCodeAction: true,
   showSignature: true,
 }
 
@@ -93,6 +93,16 @@ if executable('tsserver')
   })
 endif
 
+if executable('rust-analyzer')
+  lsp_servers->add({
+    name: 'rustlang',
+    filetype: ['rust'],
+    path: 'rust-analyzer',
+    args: [],
+    syncInit: true
+  })
+endif
+
 def DisableDiag()
   g:LspOptionsSet({
     showDiagInBalloon: false,
@@ -137,7 +147,7 @@ def BindKeys()
   nnoremap <silent><buffer> <C-W>gd   <Cmd>call MarkPush()<cr>:execute 'topleft '  .. v:count .. 'LspGotoDefinition'<CR>
   nnoremap <silent><buffer> gi        <Cmd>LspGotoImpl<CR>
   nnoremap <silent><buffer> gt        <Cmd>LspGotoTypeDef<CR>
-  nnoremap <silent><buffer> gr        <Cmd>LspShowReferences
+  nnoremap <silent><buffer> gr        <Cmd>LspShowReferences<CR>
   nnoremap <silent><buffer> <F2>      <Cmd>LspRename<CR>
 
   nnoremap <silent><buffer> <LocalLeader>s <Cmd>LspShowSignature<CR>
@@ -147,10 +157,9 @@ def BindKeys()
   xnoremap <silent><buffer> <LocalLeader>e <Cmd>LspSelectionExpand<CR>
   xnoremap <silent><buffer> <LocalLeader>s <Cmd>LspSelectionShrink<CR>
 
-  nnoremap yos <scriptcmd>ToggoleDiag()<CR>
+  nnoremap <silent><buffer> yos <scriptcmd>ToggoleDiag()<CR>
 
   setlocal keywordprg=:LspHover
-
 enddef
 
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-N>" : "\<Tab>"

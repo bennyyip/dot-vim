@@ -164,8 +164,14 @@ bonx 第一個{2,8,10,16}進制
 |search-offset| e to the end
 |gn| |gN| goto match and enter visual mode
 
+==============================================================================
+7. data structure
 
-888. unimportant 
+len({expr})
+extend({expr1}, {expr2} [, {expr3}])
+
+==============================================================================
+888. unimportant
 insert mode~
 	CTRL-T		>>
 	{0,^}CTRL-D	<<

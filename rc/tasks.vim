@@ -17,12 +17,10 @@ command! -nargs=1 -bang Rgr {
 nnoremap <leader>* <scriptcmd>exe "Rg" expand("<cword>")<cr>
 xnoremap <leader>* "0y<scriptcmd>exe "Rg" getreg("0")<cr>
 
-command! -nargs=* Locate async#qfix(<q-args>, {'errorformat': "%f", "makeprg": "locate"})
+command! -nargs=* Locate async#qfix(<q-args>, {'grepformat': "%f", "grepprg": "locate", "grep": 1})
 
 noremap <leader>; :AsyncCmd<space>
 noremap <leader>: :StopJobs<CR>
-cabbrev qf AsyncQf
-cabbrev cm Compiler
 
 command! -bang -bar -nargs=* Gpush  {
   execute $'AsyncCmd git -C {fnameescape(g:FugitiveGitDir())} push' <q-args>

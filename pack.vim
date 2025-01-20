@@ -63,6 +63,7 @@ if g:minimal_plugins
 else
   # Lab [[[2
   # Pack 'dyng/ctrlsf.vim'
+  Pack 'Konfekt/vim-alias'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'andymass/vim-matchup'
   Pack 'chrisbra/vim_faq'
