@@ -16,4 +16,3 @@ elseif executable('yapf')
 elseif executable('autopep8')
   setlocal formatprg=autopep8\ --quiet\ --skip-string-normalization\ -
 endif
-

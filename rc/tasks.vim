@@ -2,10 +2,9 @@ vim9script
 
 call extend(g:async_default_opts, {'openqf': 1, 'nojump': 1})
 
-
-command! -nargs=1 -bang -complete=file AsyncCmd  call async#cmd(<q-args>, 'cmdline', {'writelogs': <bang>0})
-command! -nargs=1 -bang -complete=file Async     call async#cmd(<q-args>, 'headless', {'writelogs': <bang>0})
-command! -nargs=1 -bang -complete=file AsyncQf     call async#cmd(<q-args>, 'quickfix', {'writelogs': <bang>0})
+command! -nargs=1 -bang -complete=file AsyncCmd call async#cmd(<q-args>, 'cmdline',  {'writelogs': <bang>0})
+command! -nargs=1 -bang -complete=file Async    call async#cmd(<q-args>, 'headless', {'writelogs': <bang>0})
+command! -nargs=1 -bang -complete=file AsyncQf  call async#cmd(<q-args>, 'quickfix', {'writelogs': <bang>0})
 
 command! -nargs=1 -bang Rg call async#qfix(<q-args>, {'grep': 1})
 command! -nargs=1 -bang Rgr {

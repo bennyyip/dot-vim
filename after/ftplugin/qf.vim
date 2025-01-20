@@ -5,3 +5,6 @@ nnoremap <silent> <buffer> <Left>     :call quickfixed#older()<CR>
 nnoremap <silent> <buffer> <Right>    :call quickfixed#newer()<CR>
 nnoremap <silent> <buffer> {          :cNfile<CR>
 nnoremap <silent> <buffer> }          :cnfile<CR>
+
+command! -nargs=+ -buffer Keep   :Cfilter  <args>
+command! -nargs=+ -buffer Reject :Cfilter! <args>

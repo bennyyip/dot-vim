@@ -1,6 +1,6 @@
 vim9script
 
-set confirm
+# set confirm
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
 # set cinoptions=>2,l1,p0,)50,*50,t0

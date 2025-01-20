@@ -9,6 +9,9 @@ snippet self
 	self.${1:attr} = $1${2}
 snippet .
 	self.
+snippet ifmain
+	if __name__ == '__main__':
+		${1}
 snippet main
 	if __name__ == '__main__':
 		${1}
@@ -56,14 +59,6 @@ snippet err
 snippet usage
 	print('用法: %s ${1}' % os.path.basename((sys.argv[0])))
 	
-snippet enc
-	# vim:fileencoding=utf-8
-snippet fpf
-	from __future__ import print_function
-snippet fdiv
-	from __future__ import division
-snippet fai
-	from __future__ import absolute_import
 snippet aa
 	*args, **kwargs)
 snippet yf

@@ -3,9 +3,6 @@ import autoload 'utils.vim'
 import autoload 'text.vim'
 import autoload 'buf.vim'
 const is_gvim = has('gui_running')
-# misc [[[1
-nnoremap <localleader>j :set ft=javascript<CR>
-nnoremap <localleader>h :set ft=html<CR>
 # fold [[[3
 nmap z] zo]z
 nmap z[ zo[z
@@ -72,7 +69,7 @@ def ToggleLoc()
   endif
 enddef
 nnoremap <leader>q <scriptcmd>ToggleQF()<CR>
-nnoremap <leader>L <scriptcmd>ToggleLoc()<CR>
+nnoremap <leader>l <scriptcmd>ToggleLoc()<CR>
 # edit [[[1
 # swap <c-n> and <c-x><c-n>
 inoremap <expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
@@ -194,7 +191,7 @@ xnoremap { <scriptcmd>VisualBlockPara("{")<CR>
 xnoremap } <scriptcmd>VisualBlockPara("}")<CR>
 # macro [[[1
 # quick edit macro  | ["register]<leader>m
-nnoremap <leader>em  :<c-u><c-r><c-r>='let @' .. v:register .. ' = ' .. string(getreg(v:register))<cr><c-f><left>
+nnoremap <c-g>m  :<c-u><c-r><c-r>='let @' .. v:register .. ' = ' .. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
 xnoremap Q :normal @q<CR>
 # repeat last command for each line of a visual selection

@@ -12,7 +12,7 @@ def Fd(dir: string = "")
 enddef
 
 command -nargs=1 -complete=dir ScopeGrep fuzzy.Grep('rg --vimgrep', true, null_string, <f-args>)
-command -nargs=1 -complete=dir ScopeFile Fd({<f-args>}')
+command -nargs=1 -complete=dir ScopeFile Fd(<f-args>)
 
 def SearchProject()
   const root = g:FindRootDirectory()

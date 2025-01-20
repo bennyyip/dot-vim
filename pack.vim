@@ -19,11 +19,8 @@ if !is_win
   runtime! ftplugin/man.vim
 endif
 
-# HACK: for unknown reason, `filetype plugin indent on` breaks `va%`
-timer_start(0, (_) => {
-  # packadd! editexisting
-  packadd! helptoc
-})
+packadd! cfilter
+packadd! helptoc
 
 # ]]]
 import autoload "utils.vim"
@@ -32,7 +29,7 @@ const AfterFun = () => {
 }
 call plugpac#Begin({
   # progress_open: tab',
-  quiet: g:minimal_plugins || v:true,
+  quiet: g:minimal_plugins,
   package_name: package_name,
   status_open: 'vertical',
   verbose: 2,
@@ -75,7 +72,8 @@ else
   # Pack 'yegappan/fileselect'
   # Pack 'hahdookin/miniterm.vim'
   Pack 'bennyyip/miniterm.vim'
-  Pack 'ocaml/vim-ocaml'
+  Pack 'Shougo/neosnippet.vim'
+  Pack 'honza/vim-snippets', { 'type': 'opt' }
   # Enhance [[[2
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
@@ -109,13 +107,13 @@ else
   Pack 'tpope/vim-repeat'
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
   Pack 'justinmk/vim-gtfo' # gof got
-  # Pack 'bennyyip/vim-highlightedyank'
+  Pack 'bennyyip/vim-highlightedyank'
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif
   # Motion and Edit [[[2
   Pack 'machakann/vim-swap' # g, g. gs gS
-  Pack 'bergercookie/vim-debugstring' # <leader>ds
+  Pack 'bennyyip/vim-debugstring' # <leader>ds
   Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
   Pack 'svermeulen/vim-yoink' # :Yanks
   Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } # gx gxx gxg
@@ -140,9 +138,7 @@ else
   if executable('ctags')
     Pack 'ludovicchabant/vim-gutentags', { type: 'start' }
   endif
-  Pack 'neoclide/coc.nvim', { 'branch': 'release' }
-  # Pack 'dense-analysis/ale'
-  # Pack 'maximbaz/lightline-ale'
+  Pack 'yegappan/lsp', { type: 'start' }
 
   Pack 'Konfekt/vim-compilers'
   # Pack 'Konfekt/vim-formatprgs'
@@ -171,7 +167,8 @@ else
   # Pack "hail2u/vim-css3-syntax", { 'for': 'css' }
   # Markup [[[3
   if is_win
-    Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
+    # Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
+    Pack 'iamcco/markdown-preview.nvim'
   endif
   # ]]]
   # ]]]
