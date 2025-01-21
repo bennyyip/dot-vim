@@ -9,7 +9,9 @@ nnoremap g<space>  :G<space>
 
 augroup vimrc
   autocmd FileType gitcommit wincmd J
-  autocmd BufReadPost fugitive://* setl bufhidden=delete
+  autocmd BufReadPost fugitive://* {
+    setl bufhidden=delete
+  }
 augroup end
 
 command! -nargs=* Glog vertical Git log --oneline --decorate --graph <args>

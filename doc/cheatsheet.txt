@@ -164,11 +164,26 @@ bonx 第一個{2,8,10,16}進制
 |search-offset| e to the end
 |gn| |gN| goto match and enter visual mode
 
+|helpgrep| grep help to quickfix
+
 ==============================================================================
 7. data structure
 
+List manipulation:						|list-functions|
+Dictionary manipulation:					|dict-functions|
+
 len({expr})
 extend({expr1}, {expr2} [, {expr3}])
+
+==============================================================================
+8. Move
+|w| |b| begin of word
+|e| |ge| end of word
+
+When using blockwise selection, Use "O" to move to the other corner in the
+same line.
+
+textobj s = sentence
 
 ==============================================================================
 888. unimportant

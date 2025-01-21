@@ -3,7 +3,7 @@ vim9script
 const is_tty = !match(&term, 'linux')
 g:lightline = {
   'active': {
-    'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'] ],
+    'left':  [ [ 'mode', 'paste' ], [ 'fugitive', 'filename'], [ 'plugin' ] ],
     'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileinfo'] ]
   },
   'inactive': {
@@ -14,6 +14,7 @@ g:lightline = {
     'fugitive':  'LightlineFugitive',
     'filename':  'LightlineFilename',
     'fileinfo':  'LightlineFileInfo',
+    'plugin':    'LightlinePluginStatus',
   },
 }
 
@@ -56,14 +57,15 @@ def g:LightlineFugitive(): string
   return branch !=# '' ? $"{mark} {branch}" : ''
 enddef
 
-def PluginStatus(): list<string>
+def g:LightlinePluginStatus(): string
   const jobs = get(g:, 'async_jobs', {})
   const async_status = jobs->len() > 0 ? 'Running' : ''
 
-  const coc_status = exists("*coc#status") ? coc#status() : ''
-  const coc_current_function = get(b:, 'coc_current_function', ' ')
-
-  return [coc_current_function, async_status, coc_status]
+  # const coc_status = exists("*coc#status") ? coc#status() : ''
+  # const coc_current_function = get(b:, 'coc_current_function', '')
+  # return [coc_current_function, async_status, coc_status]
+  const tagname = taglist#Tlist_Get_Tagname_By_Line()
+  return [tagname, async_status]->FilterAndJoin(' | ')
 enddef
 
 def g:LightlineFileInfo(): string
@@ -75,9 +77,7 @@ def g:LightlineFileInfo(): string
   const fileformat = &ff
   const filetype = &ft !=# "" ? &ft : "no ft"
 
-  return PluginStatus()
-    ->extend([fileformat, fileencoding, filetype])
-    ->FilterAndJoin(' | ')
+  return [fileformat, fileencoding, filetype]->FilterAndJoin(' | ')
 enddef
 
 def FilterAndJoin(l: list<string>, sep: string = " "): string

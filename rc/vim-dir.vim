@@ -1,12 +1,12 @@
 vim9script
 import autoload 'dir/action.vim'
+import autoload 'dir/mark.vim'
 
 g:dir_columns = "name"
 g:dir_show_hidden = v:false
 g:dir_invert_split = v:true
 
-nmap -  :<C-u>Dir %:p:h<CR>
-
+nmap -  :<C-u>Dir<CR>
 
 def CustomizeMappings()
   # Customize key mappings here
@@ -23,14 +23,29 @@ def CustomizeMappings()
     nmap <buffer> <leader>ff <leader>.
     nnoremap <buffer> <leader>.  <scriptcmd>execute($'Leaderf file {b:dir_cwd}')<cr>
   endif
-  noremap <buffer> g: <scriptcmd>DoFillCmdline()<cr>
+  nnoremap <buffer> g: <scriptcmd>DoFillCmdline("AsyncCmd", 'n')<cr>
+  nnoremap <buffer> g; <scriptcmd>DoFillCmdline("", 'n')<cr>
+  xnoremap <buffer> g: <scriptcmd>DoFillCmdline("AsyncCmd", 'v')<cr>
+  xnoremap <buffer> g; <scriptcmd>DoFillCmdline("", 'v')<cr>
   nnoremap <buffer> cd <scriptcmd>execute($'lcd {b:dir_cwd}')<cr>
+  nnoremap <buffer> g? <cmd>help vim-dir<cr>
 enddef
 
-def DoFillCmdline()
-  const cfile = action.VisualItemsInList(line('v'), line('.'))->mapnew((idx, x) => x.name)->join(' ')
+def DoFillCmdline(prefix: string, mode: string)
+  var files: list<any> = []
+  if mode == 'v'
+    files = action.VisualItemsInList(line('v'), line('.'))
+  else
+    files = mark.List()
+    if files->len() == 0
+      files = action.VisualItemsInList(line('v'), line('.'))
+    endif
+  endif
 
-  const cmdline = $":\<C-U>AsyncCmd {cfile}\<HOME>\<S-Right> "
+  const cmdline = $":\<C-U>{prefix} {files->mapnew("v:val.name")->join(" ")}\<HOME>"
+  if prefix != ''
+    cmdline ..= "\<S-Right> "
+  endif
   feedkeys(cmdline)
 enddef
 

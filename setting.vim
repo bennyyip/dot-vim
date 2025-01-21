@@ -46,7 +46,7 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m
 endif
 
-set history=1000
+set history=9999
 set updatetime=300
 set updatecount=100
 set undofile

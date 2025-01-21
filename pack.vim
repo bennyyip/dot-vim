@@ -84,7 +84,7 @@ else
   Pack 'habamax/vim-shout'
   Pack 'tpope/vim-eunuch'
 
-  Pack 'bennyyip/vim-dir', { 'type': 'start' }
+  Pack 'habamax/vim-dir', { 'type': 'start' }
 
   if has("patch-9.0.1811")
     autocmd_add([{
@@ -139,7 +139,8 @@ else
   if executable('ctags')
     Pack 'ludovicchabant/vim-gutentags', { type: 'start' }
   endif
-  Pack 'yegappan/lsp', { type: 'start' }
+  # Pack 'bennyyip/lsp', { type: 'start', branch: 'dev' }
+  Pack 'yegappan/lsp', { type: 'start', branch: 'main' }
 
   Pack 'Konfekt/vim-compilers'
   # Pack 'Konfekt/vim-formatprgs'
@@ -163,7 +164,7 @@ else
   # Pack 'peitalin/vim-jsx-typescript'
   # Web [[[3
   Pack 'BourgeoisBear/clrzr'
-  Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
+  # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
   # Pack 'othree/html5.vim', { 'for': 'html' }
   # Pack "hail2u/vim-css3-syntax", { 'for': 'css' }
   # Markup [[[3

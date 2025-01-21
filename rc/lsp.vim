@@ -1,12 +1,5 @@
 vim9script
 
-var lsp_options = {
-  autoComplete: false,
-  omniComplete: true,
-  usePopupInCodeAction: true,
-  showSignature: true,
-}
-
 var lsp_servers: list<dict<any>> = []
 
 if executable('ccls')
@@ -23,7 +16,7 @@ if executable('ccls')
           }
         }
       },
-      "clang": {"extraArgs": ["--gcc-toolchain=/usr"]},
+      "clang": {"extraArgs": ["--gcc-toolchain=/usr", "-std=c++20"]},
       "completion": {
         "detailedLabel": true,
         "placeholder": true
@@ -65,7 +58,6 @@ endif
 #     }
 #   })
 # endif
-
 
 if executable('pylsp')
   lsp_servers->add({
@@ -176,7 +168,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-P>" : "\<C-H>"
 # swap <c-n> and <c-x><c-n>
 inoremap <silent><expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
 inoremap <C-X><C-N> <C-N>
-inoremap <C-O> <C-X><C-O>
+inoremap <silent><expr> <C-O> pumvisible() ? "\<C-N>" : "\<C-X>\<C-O>"
 
 augroup vimrc
   autocmd User LspAttached call BindKeys()
@@ -185,7 +177,14 @@ augroup END
 highlight link LspSigActiveParameter Type
 
 # MUST set options before add server
+var lsp_options = {
+  autoComplete: false,
+  omniComplete: true,
+  usePopupInCodeAction: true,
+  showSignature: true,
+  semanticHighlight: false,
+  condensedCompletionMenu: true,
+}
 g:LspOptionsSet(lsp_options)
-g:LspAddServer(lsp_servers)
-
 silent! DisableDiag()
+g:LspAddServer(lsp_servers)

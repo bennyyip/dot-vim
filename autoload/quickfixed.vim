@@ -8,7 +8,7 @@ endfunction
 
 function! s:length()
   " Get the size of the current quickfix/location list
-  return len(s:isLocation() ? getloclist(0) : getqflist()->filter('v:val.valid == 1'))
+  return len(s:isLocation() ? getloclist(0) : getqflist())
 endfunction
 
 function! s:getProperty(key, ...)
