@@ -60,6 +60,9 @@ enddef
 
 def Format()
   if &formatprg == '' || &formatexpr == ''
+    if lsp#buffer#CurbufGetServers()->len() > 0
+      LspFormat
+    endif
     return
   endif
   const save_view = winsaveview()

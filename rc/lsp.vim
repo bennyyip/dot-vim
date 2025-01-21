@@ -49,24 +49,6 @@ if executable('ocamllsp')
   })
 endif
 
-if executable('ruff')
-  # MUST before other python lsp
-  lsp_servers->add({
-    filetype: 'python',
-    name: 'ruff',
-    path: 'ruff',
-    args: ['server']
-  })
-endif
-
-if executable('pylsp')
-  lsp_servers->add({
-    filetype: 'python',
-    name: 'pylsp',
-    path: 'pylsp',
-  })
-endif
-
 # if executable('pyright-langserver')
 #   lsp_servers->add({
 #     name: 'pyright',
@@ -83,6 +65,32 @@ endif
 #     }
 #   })
 # endif
+
+
+if executable('pylsp')
+  lsp_servers->add({
+    filetype: 'python',
+    name: 'pylsp',
+    path: 'pylsp',
+    features: {
+      # leave these to ruff
+      diagnostics: false,
+      codeAction: false,
+      documentFormatting: false,
+      documentRangeFormatting: false,
+      executeCommand: false,
+    }
+  })
+endif
+
+if executable('ruff')
+  lsp_servers->add({
+    filetype: 'python',
+    name: 'ruff',
+    path: 'ruff',
+    args: ['server']
+  })
+endif
 
 if executable('tsserver')
   lsp_servers->add({
