@@ -50,11 +50,11 @@ enddef
 
 export def RemoveSpaces() # [[[1
   const save_view = winsaveview()
+  defer winrestview(save_view)
   # Trim spaces
   keepj silent! keeppatterns :%s#\s\+$##e
   # Remove trailing blank lines
   keepj silent! keeppatterns :%s#\($\n\s*\)\+\%$##e
-  winrestview(save_view)
 enddef
 
 export def StrArray(line1: number, line2: number) # [[[1
@@ -94,7 +94,7 @@ export function Lilydjwg_join(sep, bang) range " [[[1
 endfunction
 
 export def SessionComplete(_, _, _): string # [[[1
-    return globpath($'{$vimtmp}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
+    return globpath($'{$VIMSTATE}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
 enddef
 
 export def FollowLink() # [[[1
@@ -115,6 +115,26 @@ export def FollowLink() # [[[1
   redraw
 enddef
 # ]]]
+export def A(cmd: string) # Switch between .cc and .h [[[1
+  const name = expand('%:r')
+  const ext = tolower(expand('%:e'))
+  const sources = ['c', 'cc', 'cpp', 'cxx', 'mli']
+  const headers = ['h', 'hh', 'hpp', 'hxx', 'ml']
+  for pair in [[sources, headers], [headers, sources]]
+    const [set1, set2] = pair
+    if index(set1, ext) >= 0
+      for h in set2
+        const aname = $'{name}.{h}'
+        for a in [aname, toupper(aname)]
+          if filereadable(a)
+            execute $"{cmd} {a}"
+            return
+          endif
+        endfor
+      endfor
+    endif
+  endfor
+enddef
 
 const is_gvim = has('gui_running')
 export def MapMeta() #[[[1
@@ -131,10 +151,55 @@ export def MapMeta() #[[[1
     if mapcheck($"<Plug>(meta-{x})", "i") != ""
       # map <ESC> slows entering normal mode. so only map for gui
       if is_gvim
-        execute $"nmap <M-{x}> <Plug>(meta-{x})"
+        execute $"imap <M-{x}> <Plug>(meta-{x})"
       endif
     endif
   endfor
 enddef
+export def KeepChangeMarksExec(cmd: string) # [[[1
+  # do not clobber '[ '] on :write
+  SaveChangeMarks()
+  defer RestoreChangeMarks()
+  execute(cmd)
+enddef
+var change_marks = [[0], [0]]
+def SaveChangeMarks()
+  change_marks = [getpos("'["), getpos("']")]
+enddef
+def RestoreChangeMarks()
+  setpos("'[", change_marks[0])
+  setpos("']", change_marks[1])
+enddef
 
+export def Syninfo(): string #[[[1
+  const syn = Synnames()
+  var info = ''
+  if syn.visual != ''
+    info ..= printf('visual: %s', syn.visual)
+    if syn.visual != syn.visual_link
+      info ..= printf(' (as %s)', syn.visual_link)
+    endif
+  endif
+  if syn.effective != syn.visual
+    if syn.visual != ''
+      info ..= ', '
+    endif
+    info ..= printf('effective: %s', syn.effective)
+    if syn.effective != syn.effective_link
+      info ..= printf(' (as %s)', syn.effective_link)
+    endif
+  endif
+  return info
+enddef
+def Synnames(): dict<any>
+  var syn                 = {}
+  const [lnum, cnum]        = [line('.'), col('.')]
+  const [effective, visual] = [synID(lnum, cnum, 0), synID(lnum, cnum, 1)]
+  syn.effective       = synIDattr(effective, 'name')
+  syn.effective_link  = synIDattr(synIDtrans(effective), 'name')
+  syn.visual          = synIDattr(visual, 'name')
+  syn.visual_link     = synIDattr(synIDtrans(visual), 'name')
+  return syn
+enddef
+#]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

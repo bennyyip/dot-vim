@@ -23,12 +23,13 @@ def CustomizeMappings()
     nmap <buffer> <leader>ff <leader>.
     nnoremap <buffer> <leader>.  <scriptcmd>execute($'Leaderf file {b:dir_cwd}')<cr>
   endif
-  nnoremap <buffer> g: <scriptcmd>DoFillCmdline("AsyncCmd", 'n')<cr>
-  nnoremap <buffer> g; <scriptcmd>DoFillCmdline("", 'n')<cr>
-  xnoremap <buffer> g: <scriptcmd>DoFillCmdline("AsyncCmd", 'v')<cr>
-  xnoremap <buffer> g; <scriptcmd>DoFillCmdline("", 'v')<cr>
-  nnoremap <buffer> cd <scriptcmd>execute($'lcd {b:dir_cwd}')<cr>
-  nnoremap <buffer> g? <cmd>help vim-dir<cr>
+  nnoremap <buffer> g:   <scriptcmd>DoFillCmdline("AsyncCmd", 'n')<cr>
+  nnoremap <buffer> g;   <scriptcmd>DoFillCmdline("", 'n')<cr>
+  xnoremap <buffer> g:   <scriptcmd>DoFillCmdline("AsyncCmd", 'v')<cr>
+  xnoremap <buffer> g;   <scriptcmd>DoFillCmdline("", 'v')<cr>
+  nnoremap <buffer> cd   <scriptcmd>execute($'lcd {b:dir_cwd}')<cr>
+  nnoremap <buffer> g?   <cmd>help vim-dir-mappings<cr>
+  nmap     <buffer> <F1> g?
 enddef
 
 def DoFillCmdline(prefix: string, mode: string)
@@ -42,7 +43,7 @@ def DoFillCmdline(prefix: string, mode: string)
     endif
   endif
 
-  const cmdline = $":\<C-U>{prefix} {files->mapnew("v:val.name")->join(" ")}\<HOME>"
+  var cmdline = $":\<C-U>{prefix} {files->mapnew("v:val.name")->join(" ")}\<HOME>"
   if prefix != ''
     cmdline ..= "\<S-Right> "
   endif

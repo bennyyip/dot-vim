@@ -1,5 +1,5 @@
 vim9script
-import autoload "../autoload/utils.vim" as Utils
+import autoload "../autoload/utils.vim"
 
 # Vim9 [[[1
 # var vim9cmdline_enable = false
@@ -60,8 +60,8 @@ enddef
 
 def Format()
   if &l:formatprg == '' && &l:formatexpr == ''
-    if lsp#buffer#CurbufGetServers()->len() > 0
-      LspFormat
+    if plugpac#HasPlugin('lsp') && lsp#buffer#CurbufGetServers()->len() > 0
+      execute "LspFormat"
     endif
     return
   endif
@@ -75,7 +75,6 @@ command! -nargs=0 Fmt Format()
 
 # Autocmd [[[1
 augroup vimrc
-  au Filetype * setl formatoptions=qjlrontcm
   autocmd FocusLost * :silent! wa
   autocmd FocusGained * silent! checktime
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
@@ -89,29 +88,42 @@ augroup vimrc
     endif
   }
 
+  # save LAST session
   au VimLeavePre * {
     if (!has('win32') || filewritable('C:\Windows\System32') == 0)
         && getbufinfo({'bufloaded': 1, 'buflisted': 1})->len() > 1
-      exe $'mksession! {$vimtmp}/session/LAST'
+      exe $'mksession! {$VIMSTATE}/session/LAST'
     endif
   }
+
+  # dont move cursor after operatorfunc()
+  # https://vimways.org/2019/making-things-flow/
+  autocmd OptionSet operatorfunc w:opfuncview = winsaveview()
+  autocmd CursorMoved * {
+    if !empty(&operatorfunc)
+      call winrestview(w:opfuncview)
+      unlet w:opfuncview
+      noautocmd set operatorfunc=
+    endif
+  }
+
 augroup END
 
 # FileType
 for ft in ['vim', 'sh', 'zsh', 'bash', 'css', 'html', 'javascript', 'typescript', 'ps1', 'lisp', 'json', 'ocaml']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'Utils.SetTabWidth(2, true)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(2, true)' }])
 endfor
 
 for ft in ['python']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'Utils.SetTabWidth(4, true)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, true)' }])
 endfor
 
 for ft in ['go']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'Utils.SetTabWidth(4, false)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, false)' }])
 endfor
 
 for ft in ['make', 'snippets']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'Utils.SetTabWidth(8, false, 0)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(8, false, 0)' }])
 endfor
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

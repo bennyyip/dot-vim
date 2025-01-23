@@ -49,6 +49,9 @@ def g:LightlineFilename(): string
 enddef
 
 def g:LightlineFugitive(): string
+  if !plugpac#HasPlugin('vim-fugitive')
+    return ''
+  endif
   const mark = (is_tty ? '' : "\ue0a0")
   const branch = fugitive#Head()
   if branch == 'master' || branch == 'main'
@@ -64,7 +67,7 @@ def g:LightlinePluginStatus(): string
   # const coc_status = exists("*coc#status") ? coc#status() : ''
   # const coc_current_function = get(b:, 'coc_current_function', '')
   # return [coc_current_function, async_status, coc_status]
-  const tagname = taglist#Tlist_Get_Tagname_By_Line()
+  const tagname = plugpac#HasPlugin('taglist') ? taglist#Tlist_Get_Tagname_By_Line() : ''
   return [tagname, async_status]->FilterAndJoin(' | ')
 enddef
 

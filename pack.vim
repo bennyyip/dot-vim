@@ -20,7 +20,11 @@ if !is_win
 endif
 
 packadd! cfilter
-packadd! helptoc
+try
+  # debian 12
+  packadd! helptoc
+catch
+endtry
 
 # ]]]
 import autoload "utils.vim"
@@ -63,6 +67,8 @@ if g:minimal_plugins
 else
   # Lab [[[2
   # Pack 'dyng/ctrlsf.vim'
+  Pack 'nickspoons/vim-movefast'
+  Pack 'ubaldot/vim9-conversion-aid'
   Pack 'Konfekt/vim-alias'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'andymass/vim-matchup'
@@ -108,7 +114,8 @@ else
   Pack 'tpope/vim-repeat'
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
   Pack 'justinmk/vim-gtfo' # gof got
-  Pack 'bennyyip/vim-highlightedyank'
+  # Pack 'bennyyip/vim-highlightedyank'
+  Pack 'ubaldot/vim-highlight-yanked'
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif

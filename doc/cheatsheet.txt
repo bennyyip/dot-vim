@@ -3,6 +3,9 @@
 ==============================================================================
 1. 摺疊								     |Folding|
 
+enable / disable fold~
+	zn zN zi
+
 opening and closing folds~
 	zR 打開全部
 	zM 關閉全部
@@ -161,7 +164,7 @@ bonx 第一個{2,8,10,16}進制
 
 ==============================================================================
 6. search
-|search-offset| e to the end
+|search-offset| e to the end /foo/e-1 /foo/b+1 /foo/+1
 |gn| |gN| goto match and enter visual mode
 
 |helpgrep| grep help to quickfix
@@ -185,6 +188,18 @@ same line.
 
 textobj s = sentence
 
+[{ ]} [( [) goto first unmatching 
+
+==============================================================================
+9. Register
+快速創建命令/map~
+qq錄製宏
+<C-R>=keytrans(@q)
+
+大寫register用來append
+qQ
+"AY
+
 ==============================================================================
 888. unimportant
 insert mode~
@@ -199,9 +214,5 @@ insert mode~
 
  								|faq-12.9|
 12.9. How do I yank all the lines containing a pattern into a buffer?
-
-快速創建命令/map~
-qq錄製宏
-<C-R>=keytrans(@q)
 
 vim:tw=78:ts=8:noet:ft=help:norl:

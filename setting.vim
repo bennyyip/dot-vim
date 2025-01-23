@@ -4,6 +4,7 @@ vim9script
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
 # set cinoptions=>2,l1,p0,)50,*50,t0
+set ttyfast
 set ttimeout ttimeoutlen=25
 set ruler
 # set belloff=all shortmess=aoOTIc
@@ -19,10 +20,11 @@ set complete-=t # disable searching tags
 set completeopt=menu,popup,preview
 set completepopup=highlight:Pmenu,border:off
 set suffixes+=.a,.1,.class
-set path+=**
+set path=.,,,**
 set cpoptions=aABcfFqsZ # -e
 # set breakindentopt=min:40
 set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
+set formatoptions=tcqlnjromB1
 set fillchars=fold:\ ,vert:│
 set virtualedit=block
 set backspace=indent,eol,start
@@ -35,7 +37,7 @@ set number relativenumber cursorline cursorlineopt=number signcolumn=number
 set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:patience
 nnoremap <silent> [w <cmd>set diffopt-=iwhiteall,iblank<BAR>echo &diffopt<CR>
 nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall,iblank<BAR>echo &diffopt<CR>
-set sessionoptions=buffers,curdir,tabpages,winsize,slash,unix
+set sessionoptions=buffers,curdir,help,tabpages,winsize,slash,unix,resize
 set viewoptions=cursor,folds,slash,unix
 
 # set mouse=a
@@ -54,14 +56,14 @@ set backup
 # set backupskip=
 set backupext=-vimbackup
 
-set backupdir=$vimtmp/backup/
-set directory=$vimtmp/swap/
-set undodir=$vimtmp/undo/
-set viminfo='200,n$vimtmp/info/viminfo
-set viewdir=$vimtmp/view
+set backupdir=$VIMSTATE/backup/
+set directory=$VIMSTATE/swap/
+set undodir=$VIMSTATE/undo/
+set viminfo='200,:10000,<50,s32,h,n$VIMSTATE/info/viminfo
+set viewdir=$VIMSTATE/view
 
-for tmp in ['backup', 'swap', 'undo', 'info', 'view']
-  mkdir($vimtmp .. tmp, 'p')
+for d in ['backup', 'swap', 'undo', 'info', 'view']
+  mkdir($VIMSTATE .. d, 'p')
 endfor
 
 set laststatus=2
@@ -112,7 +114,6 @@ augroup END
 # better navigation
 # set foldmethod=marker
 set foldopen+=jump
-# set foldtext=ben#foldy()
 set foldlevelstart=999
 
 if has("patch-9.0.1921")
@@ -125,7 +126,7 @@ set report=0 # Always report changed lines.
 # set synmaxcol=99999 # Only highlight the first 500 columns.
 set splitbelow splitright
 set titlestring=VIM:\ %f
-set switchbuf=useopen,usetab
+set switchbuf=uselast
 set tabpagemax=50
 set nolangremap
 

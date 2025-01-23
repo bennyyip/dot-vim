@@ -6,7 +6,7 @@ syntax on
 const is_win = has('win32')
 g:minimal_plugins = v:false
 $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
-$vimtmp = $HOME .. '/.config/vimtmp/'
+$VIMSTATE = $HOME .. '/.local/state/vim/'
 $VIMRC = $v .. '/vimrc'
 
 if is_win

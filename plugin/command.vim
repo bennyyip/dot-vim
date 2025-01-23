@@ -1,10 +1,8 @@
 vim9script
 
-import autoload "../autoload/utils.vim" as Utils
+import autoload "../autoload/utils.vim"
 
-command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
-\ | diffthis | wincmd p | diffthis
-# :Reverse [[[1
+# Reverse [[[1
 command! -bar -range=% Reverse :<line1>,<line2>global/^/m <line1>-1<bar>nohl
 # ChineseCount [[[1
 function ChineseCount() range
@@ -24,11 +22,10 @@ function ChineseCount() range
 endfunc
 
 vnoremap <F7> :call <SID>ChineseCount()<cr>
-
-# :A [[[1
-command! A call ben#a('e')
-command! AV call ben#a('botright vertical split')
-# :PX | chmod +x [[[1
+# A [[[1
+command! A call utils.A('e')
+command! AV call utils.A('botright vertical split')
+# PX: chmod +x [[[1
 command! PX if !empty(expand('%'))
       \|   write
       \|   call system('chmod +x ' .. expand('%'))
@@ -41,33 +38,33 @@ command! PX if !empty(expand('%'))
 # RFC [[[1
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
 # Join [[[1
-command! -nargs=1 -range=% -bang Join :<line1>,<line2>call Utils.Lilydjwg_join(<q-args>, "<bang>")
+command! -nargs=1 -range=% -bang Join :<line1>,<line2>call utils.Lilydjwg_join(<q-args>, "<bang>")
 # Quote [[[1
-command! -bang -nargs=? -range=% Quote :<line1>,<line2>call Utils.Quote(<q-args>, "<bang>")
+command! -bang -nargs=? -range=% Quote :<line1>,<line2>call utils.Quote(<q-args>, "<bang>")
 
-command! -bang -nargs=? -range=% StrArray Utils.StrArray(<line1>, <line2>)
+command! -bang -nargs=? -range=% StrArray utils.StrArray(<line1>, <line2>)
 # Ghq [[[1
 def GhqList(A: string, ...args: list<any>): list<string>
   const projs =  globpath(expand('~/ghq/github.com'), '*/*', 0, 1)
     ->map((k, x) => substitute(x, '^.*[/\\]\ze[^/\\]*[/\\]', '', ''))
-  return projs->Utils.Matchfuzzy(A)
+  return projs->utils.Matchfuzzy(A)
 enddef
 command! -nargs=1 -complete=customlist,GhqList Ghq execute 'edit ' .. expand('~/ghq/github.com/') .. <q-args>
 # FollowLink [[[1
-command! -nargs=0 FollowLink Utils.FollowLink()
+command! -nargs=0 FollowLink utils.FollowLink()
 # SetTabWidth [[[1
-command! -nargs=0 SetTabWidth2 call Utils.SetTabWidth(2, true)
-command! -nargs=0 SetTabWidth4 call Utils.SetTabWidth(4, true)
-command! -nargs=0 SetHardTabWidth2 call Utils.SetTabWidth(2, false, 0)
-command! -nargs=0 SetHardTabWidth4 call Utils.SetTabWidth(4, false, 0)
-command! -nargs=0 SetHardTabWidth8 call Utils.SetTabWidth(8, false, 0)
-# save and load sessions [[[1
-if !isdirectory($'{$vimtmp}/session')
-    mkdir($'{$vimtmp}/session', "p")
+command! -nargs=0 SetTabWidth2 call utils.SetTabWidth(2, true)
+command! -nargs=0 SetTabWidth4 call utils.SetTabWidth(4, true)
+command! -nargs=0 SetHardTabWidth2 call utils.SetTabWidth(2, false, 0)
+command! -nargs=0 SetHardTabWidth4 call utils.SetTabWidth(4, false, 0)
+command! -nargs=0 SetHardTabWidth8 call utils.SetTabWidth(8, false, 0)
+# SaveSession and LoadSession [[[1
+if !isdirectory($'{$VIMSTATE}/session')
+    mkdir($'{$VIMSTATE}/session', "p")
 endif
-command! -nargs=1 -complete=custom,Utils.SessionComplete SaveSession :exe $'mksession! {$vimtmp}/session/<args>'
-command! -nargs=1 -complete=custom,Utils.SessionComplete LoadSession :%bd <bar> exe $'so {$vimtmp}/session/<args>'
-# Goto [[[1
+command! -nargs=1 -complete=custom,utils.SessionComplete SaveSession :exe $'mksession! {$VIMSTATE}/session/<args>'
+command! -nargs=1 -complete=custom,utils.SessionComplete LoadSession :%bd <bar> exe $'so {$VIMSTATE}/session/<args>'
+# GotoDef [[[1
 import autoload 'gotodef.vim'
 command! -bang -nargs=1 -complete=command Command gotodef.DoGotoDef("command", <f-args>)
 command! -bang -nargs=1 -complete=customlist,gotodef.MapComplete  Map  gotodef.DoGotoDef("map", <f-args>)
@@ -79,11 +76,11 @@ command! -bang -nargs=1 -complete=customlist,gotodef.XmapComplete Vmap gotodef.D
 
 # ]]]
 # Zen [[[1
-command! Zen normal <C-W>v<C-W>h:enew<CR>70<C-W><lt><C-W><C-W>
+command! Zen silent! normal! <C-W>v<C-W>h:enew<CR>70<C-W><lt><C-W><C-W>
 # Share[[[1
 import autoload "share.vim"
 command! -range=% -nargs=? -complete=custom,share.Complete Share share.Paste(<q-args>, <line1>, <line2>)
-# literal search [[[1
+# Search: literal search [[[1
 command! -nargs=? Search {
   var arg = <q-args>
   if <q-args> == ''
@@ -92,6 +89,13 @@ command! -nargs=? Search {
   setreg('/', $'\V{escape(arg, '\\')}')
   normal! n
 }
-# syntax group names under cursor [[[1
+# Inspect: syntax group names under cursor [[[1
 command! Inspect :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+# ]]]
+# Bonly [[[1
+command! Bonly :%bd<BAR>:e %%
+# DiffOrig [[[1
+command DiffOrig vert new | set bt=nofile | r ++edit %%
+      \ | :0d _ | diffthis | wincmd p | diffthis
+# ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

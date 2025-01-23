@@ -3,6 +3,8 @@ vim9script
 set winaltkeys=no
 set guioptions=cM!
 
+set mousemodel=popup_setpos
+
 if has("win32")
     set linespace=0
 

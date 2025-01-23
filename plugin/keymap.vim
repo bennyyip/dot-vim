@@ -2,6 +2,7 @@ vim9script
 import autoload 'utils.vim'
 import autoload 'text.vim'
 import autoload 'buf.vim'
+import autoload 'os.vim'
 const is_gvim = has('gui_running')
 # fold [[[3
 nmap z] zo]z
@@ -17,7 +18,7 @@ cabbrev Wa wa
 cabbrev Help help
 cabbrev ve verbose
 # syntax [[[3
-nnoremap <leader>Si  :echo ben#syninfo()<cr>
+nnoremap <leader>Si  <scriptcmd>echo utils.Syninfo()<cr>
 # diff [[[3
 nnoremap <silent><leader>di :windo diffthis<CR>
 nnoremap <silent><leader>du :windo diffupdate<CR>
@@ -29,17 +30,17 @@ xnoremap <c-o> :diffget<cr>
 nnoremap <silent>  <q :call quickfixed#older()<CR>
 nnoremap <silent>  >q :call quickfixed#newer()<CR>
 # nohl [[[3
-# Use <backspace> to:
-#   - redraw
-#   - clear 'hlsearch'
-#   - update the current diff (if any)
-# Use {count}<backspace> to:
-#   - reload (:edit) the current buffer
-nnoremap <silent><expr> <backspace> (v:count > 0 ? ':<C-U>:call ben#save_change_marks()\|edit\|call ben#restore_change_marks()<CR>' : '')
-      \ .. ':nohlsearch' .. (has('diff') ? '\|diffupdate' : '')
-      \ .. '<CR>'
-      # \ .. '<CR><C-L>'
-nnoremap z. :call ben#save_change_marks()<Bar>w<Bar>call ben#restore_change_marks()<cr>z.
+def Refresh(doedit: bool)
+  if doedit
+    utils.KeepChangeMarksExec('edit')
+  endif
+  if has('diff')
+    diffupdate
+  endif
+  normal! <C-L>
+enddef
+nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
+nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
 # window [[[1
 # quick <C-w>
 nnoremap ' <C-w>
@@ -136,8 +137,8 @@ xnoremap x  "_d
 xnoremap P  "0p
 # select what I just pasted
 nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
-# copy entire file contents (to gui-clipboard if available)
-nnoremap yY :let b:winview=winsaveview()<bar>exe 'keepjumps keepmarks norm ggVG' .. (has('clipboard')?'"+y':'y')<bar>call winrestview(b:winview)<cr>
+# copy entire file contents to system clipboard
+nnoremap yY <scriptcmd>os.Yank(getline(1, '$')->join("\n"))<CR>
 # vimrc [[[1
 nnoremap <silent><leader>fed :e $VIMRC<CR>
 nnoremap <silent><leader>fee :source $VIMRC<CR>
@@ -186,10 +187,10 @@ enddef
 xnoremap { <scriptcmd>VisualBlockPara("{")<CR>
 xnoremap } <scriptcmd>VisualBlockPara("}")<CR>
 # macro [[[1
-# quick edit macro  | ["register]<leader>m
+# quick edit macro  | ["register]<c-g>m
 nnoremap <c-g>m  :<c-u><c-r><c-r>='let @' .. v:register .. ' = ' .. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
-xnoremap Q :normal @q<CR>
+xnoremap Q :normal! @q<CR>
 # repeat last command for each line of a visual selection
 xnoremap . :normal .<CR>
 # search and substitute [[[1
@@ -202,6 +203,7 @@ nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 # mark position before search
 nnoremap / ms/
+nnoremap ? ms?
 # search in selection
 xnoremap / <ESC>/\%><c-r>=line("'<")-1<cr>l\%<<c-r>=line("'>")+1<cr>l<HOME>
 # restore /
@@ -222,7 +224,7 @@ enddef
 
 nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>
 # file, buffer [[[1
-nnoremap <leader>fs :w<CR>
+nnoremap <leader>fs <scriptcmd>utils.KeepChangeMarksExec('update')<CR>
 nnoremap <silent> <leader>fy :call os#Yank(expand("%:t"))<CR>:echo "buffer filename copied"<CR>
 nnoremap <silent> <leader>fP :call os#Yank(expand("%:p"))<CR>:echo "buffer path copied"<CR>
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
@@ -258,18 +260,17 @@ inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
 # text object [[[1
-xnoremap <silent> ag gg0oG$
-onoremap <silent> ag :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 xnoremap <silent> ae gg0oG$
 onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 # ]]]
 # rsi [[[1
-inoremap <C-A> <C-O>^
-cnoremap <C-A> <Home>
+inoremap      <C-A> <C-O>^
+inoremap <C-X><C-A> <C-A>
+cnoremap      <C-A> <Home>
+cnoremap <C-X><C-A> <C-A>
 cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
-# CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-# so that you can undo CTRL-U after inserting a line break.
+# C-U sets a new undo point before deleting.
 inoremap <C-U> <C-G>u<C-U>
 # spell correction for the first suggested
 # inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
@@ -278,8 +279,10 @@ inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? 
 
 noremap!        <Plug>(meta-b) <S-Left>
 noremap!        <Plug>(meta-f) <S-Right>
-noremap!        <Plug>(meta-d) <C-O>dw
+inoremap        <Plug>(meta-d) <C-O>dw
 cnoremap        <Plug>(meta-d) <S-Right><C-W>
+noremap!        <Plug>(meta-n) <Down>
+noremap!        <Plug>(meta-p) <Up>
 # unimpared [[[1
 # toogle line number and relative line number
 def NumberOptions(): string
@@ -287,23 +290,23 @@ def NumberOptions(): string
 enddef
 nnoremap yon :set <C-R>=<SID>NumberOptions()<CR><CR>
 # Buffer navigation
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [b :<C-U><C-R>=v:count1<CR>bprevious<CR>
+nnoremap <silent> ]b :<C-U><C-R>=v:count1<CR>bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 # quickfix list
-nnoremap <silent> [q :cprevious<CR>
-nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [q :<C-U><C-R>=v:count1<CR>cprevious<CR>
+nnoremap <silent> ]q :<C-U><C-R>=v:count1<CR>cnext<CR>
 nnoremap <silent> [Q :cNfile<CR>
 nnoremap <silent> ]Q :cnfile<CR>
 # location list (buffer local quickfix list)
-nnoremap <silent> [s :lprevious<CR>
-nnoremap <silent> ]s :lnext<CR>
+nnoremap <silent> [s :<C-U><C-R>=v:count1<CR>lprevious<CR>
+nnoremap <silent> ]s :<C-U><C-R>=v:count1<CR>lnext<CR>
 nnoremap <silent> [S :lNfile<CR>
 nnoremap <silent> ]S :lnfile<CR>
 # file list -> load buffers using :args * :args **/*.js **/*.css
-nnoremap <silent> [f :previous<CR>
-nnoremap <silent> ]f :next<CR>
+nnoremap <silent> [f :<C-U><C-R>=v:count1<CR>previous<CR>
+nnoremap <silent> ]f :<C-U><C-R>=v:count1<CR>next<CR>
 nnoremap <silent> [F :first<CR>
 nnoremap <silent> ]F :last<CR>
 # [c ]c for diff
@@ -352,4 +355,6 @@ xnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>tt term.Send() .. '_'
 # ]]]
+# tags [[[1
+nnoremap '] <c-w>v<c-w>]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
