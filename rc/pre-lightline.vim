@@ -10,16 +10,16 @@ g:lightline = {
     'left': [ [ 'filename' ] ],
     'right': [ [ 'lineinfo' ], [ 'percent' ] ],
   },
+  'mode_map': {
+    'n': 'N', 'i': 'I', 'R': 'R', 'v': 'V', 'V': 'L', "\<C-v>": 'B',
+    'c': 'C', 's': 'S', 'S': 'L', "\<C-s>": 'B', 't': 'T'
+  },
   'component_function': {
     'fugitive':  'LightlineFugitive',
     'filename':  'LightlineFilename',
     'fileinfo':  'LightlineFileInfo',
     'plugin':    'LightlinePluginStatus',
   },
-}
-
-g:lightline.component = {
-  'mode': '%{lightline#mode()[0]}',
 }
 
 g:lightline.colorscheme = 'gruvbox9'

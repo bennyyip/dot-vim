@@ -97,5 +97,8 @@ command! Bonly :%bd<BAR>:e %%
 # DiffOrig [[[1
 command DiffOrig vert new | set bt=nofile | r ++edit %%
       \ | :0d _ | diffthis | wincmd p | diffthis
+# Lab [[[1
+#   设置成 Linux 下适用的格式
+command Lin setl ff=unix fenc=utf8 nobomb eol
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

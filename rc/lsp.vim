@@ -84,11 +84,11 @@ if executable('ruff')
   })
 endif
 
-if executable('tsserver')
+if executable('typescript-language-server')
   lsp_servers->add({
     filetype: ['javascript', 'typescript'],
-    name: 'tsserver',
-    path: 'typescript-language-server',
+    name: 'typescript-language-server',
+    path: has('win32') ? $HOME .. "/AppData/Local/pnpm/typescript-language-server.CMD" : '/usr/bin/typescript-language-server',
     args: ['--stdio']
   })
 endif
@@ -157,18 +157,12 @@ def BindKeys()
   xnoremap <silent><buffer> <LocalLeader>e <Cmd>LspSelectionExpand<CR>
   xnoremap <silent><buffer> <LocalLeader>s <Cmd>LspSelectionShrink<CR>
 
+  inoremap <silent><buffer> <C-G>s <C-R>=g:LspShowSignature()<CR>
+
   nnoremap <silent><buffer> yos <scriptcmd>ToggoleDiag()<CR>
 
   setlocal keywordprg=:LspHover
 enddef
-
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-P>" : "\<C-H>"
-
-# swap <c-n> and <c-x><c-n>
-inoremap <silent><expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
-inoremap <C-X><C-N> <C-N>
-inoremap <silent><expr> <C-O> pumvisible() ? "\<C-N>" : "\<C-X>\<C-O>"
 
 augroup vimrc
   autocmd User LspAttached call BindKeys()
@@ -181,7 +175,7 @@ var lsp_options = {
   autoComplete: false,
   omniComplete: true,
   usePopupInCodeAction: true,
-  showSignature: true,
+  showSignature: false,
   semanticHighlight: false,
   condensedCompletionMenu: true,
 }

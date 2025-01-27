@@ -66,7 +66,7 @@ if g:minimal_plugins
   packadd matchit
 else
   # Lab [[[2
-  # Pack 'dyng/ctrlsf.vim'
+  Pack 'LunarWatcher/auto-pairs'
   Pack 'nickspoons/vim-movefast'
   Pack 'ubaldot/vim9-conversion-aid'
   Pack 'Konfekt/vim-alias'
@@ -111,7 +111,7 @@ else
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
   Pack 'tpope/vim-characterize'
-  Pack 'tpope/vim-repeat'
+  Pack 'tpope/vim-repeat', { type: 'start' }
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
   Pack 'justinmk/vim-gtfo' # gof got
   # Pack 'bennyyip/vim-highlightedyank'
@@ -192,6 +192,5 @@ command! -nargs=1 -complete=customlist,PackList PackDir   P.PackDir(<q-args>)
 command! -nargs=1 -complete=customlist,PackList PackRc    P.PackRc(<q-args>)
 command! -nargs=1 -complete=customlist,PackList PackRcPre P.PackRcPre(<q-args>)
 command! PackUnusedRC cexpr P.PackUnusedRC()->map((_, x) => $"{x}:1:1: Unused")
-
 # ]]]
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim

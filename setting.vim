@@ -4,6 +4,7 @@ vim9script
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
 # set cinoptions=>2,l1,p0,)50,*50,t0
+set cinoptions+=m1
 set ttyfast
 set ttimeout ttimeoutlen=25
 set ruler
@@ -12,14 +13,14 @@ set belloff=all shortmess=aoOTIc
 set display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
 set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20
-set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi
-set wildignore+=*~,*.py[co],__pycache__,
+set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi,*~,*.py[co],__pycache__,
 set complete-=i # disable scanning included files
 set complete-=t # disable searching tags
 # set completeopt=menu,longest,menuone,popup,noselect
 set completeopt=menu,popup,preview
 set completepopup=highlight:Pmenu,border:off
 set suffixes+=.a,.1,.class
+set isfname-==
 set path=.,,,**
 set cpoptions=aABcfFqsZ # -e
 # set breakindentopt=min:40
@@ -32,15 +33,14 @@ set nostartofline
 set sidescroll=1 sidescrolloff=3 scrolloff=4
 set nrformats=bin,hex,unsigned
 set nospell
-set number relativenumber cursorline cursorlineopt=number signcolumn=number
+set number relativenumber cursorline signcolumn=number
+set conceallevel=0 concealcursor=n
 
 set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:patience
 nnoremap <silent> [w <cmd>set diffopt-=iwhiteall,iblank<BAR>echo &diffopt<CR>
 nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall,iblank<BAR>echo &diffopt<CR>
 set sessionoptions=buffers,curdir,help,tabpages,winsize,slash,unix,resize
 set viewoptions=cursor,folds,slash,unix
-
-# set mouse=a
 
 # &errorformat ..= ',%f\|%\s%#%l col%\s%#%c%\s%#\| %m'
 if executable('rg')
@@ -71,6 +71,7 @@ set modeline
 set modelines=1
 set showcmd
 set showmatch
+set matchpairs=(:),{:},[:],《:》,〈:〉,［:］,（:）,「:」,『:』,‘:’,“:”
 set matchtime=0
 set noshowmode # Hide the mode text (e.g. -- INSERT --)
 
@@ -139,11 +140,10 @@ else
   set cryptmethod=blowfish2
 endif
 
-set conceallevel=2
 
 g:vimsyn_folding = 'f'
 
-g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'bash=sh', 'python']
+g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'bash=sh', 'python', 'ocaml']
 
 # this makes sure that shell scripts are highlighted
 # as bash scripts and not sh scripts

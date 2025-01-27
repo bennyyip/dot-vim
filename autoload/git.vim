@@ -11,7 +11,7 @@ var pack_jobs = []
 #   nnoremap <silent> <space>gh <scriptcmd>git.GithubOpen()<CR>
 #   xnoremap <silent> <space>gh <scriptcmd>git.GithubOpen(line("v"), line("."))<CR>
 export def GithubOpen(firstline: number = line("."), lastline: number = line("."))
-    const gitpath = fnameescape(g:FugitiveGitDir())
+    const gitpath = fnameescape(g:FugitiveGitDir() .. '/../')
     var gitroot = systemlist($"git -C {gitpath} rev-parse --show-toplevel")->join('')
     var filename = strpart(expand('%:p'), len(gitroot) + 1)->tr('\', '/')
     var branch = systemlist($"git -C {gitpath} rev-parse --abbrev-ref HEAD")->join('')

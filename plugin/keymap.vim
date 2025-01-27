@@ -4,89 +4,24 @@ import autoload 'text.vim'
 import autoload 'buf.vim'
 import autoload 'os.vim'
 const is_gvim = has('gui_running')
-# fold [[[3
-nmap z] zo]z
-nmap z[ zo[z
-nnoremap <leader><space> za
-# correct spell [[[3
-cabbrev Q q
-cabbrev Qa qa
-cabbrev W w
-cabbrev Wq wq
-cabbrev Wa wa
-# cabbrev X x
-cabbrev Help help
-cabbrev ve verbose
-# syntax [[[3
-nnoremap <leader>Si  <scriptcmd>echo utils.Syninfo()<cr>
-# diff [[[3
-nnoremap <silent><leader>di :windo diffthis<CR>
-nnoremap <silent><leader>du :windo diffupdate<CR>
-nnoremap <silent><leader>do :windo diffoff<CR>
-# linewise partial staging in visual-mode.
-xnoremap <c-p> :diffput<cr>
-xnoremap <c-o> :diffget<cr>
-# quickfix and loclist [[[3
-nnoremap <silent>  <q :call quickfixed#older()<CR>
-nnoremap <silent>  >q :call quickfixed#newer()<CR>
-# nohl [[[3
-def Refresh(doedit: bool)
-  if doedit
-    utils.KeepChangeMarksExec('edit')
-  endif
-  if has('diff')
-    diffupdate
-  endif
-  normal! <C-L>
-enddef
-nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
-nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
-# window [[[1
-# quick <C-w>
-nnoremap ' <C-w>
-nnoremap '' <C-w>w
-# toogle window zoom
-import autoload 'zoom.vim'
-nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
-nmap <C-w>o <C-w><C-o>
-nmap 'o <C-w><C-o>
-# Toggle quickfix and loclist
-def ToggleQF()
-  if getwininfo()->filter('v:val.quickfix')->len() > 0
-    cclose
-  else
-    botright copen
-  endif
-enddef
-def ToggleLoc()
-  if getwininfo()->filter('v:val.loclist')->len() > 0
-    lclose
-  else
-    botright lopen
-  endif
-enddef
-nnoremap <leader>q <scriptcmd>ToggleQF()<CR>
-nnoremap <leader>l <scriptcmd>ToggleLoc()<CR>
+# move [[[1
+inoremap <silent> <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
+inoremap <silent> <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <left>
+inoremap <C-l> <Right>
 # edit [[[1
+# open q:
+set cedit=<C-Y>
 # swap <c-n> and <c-x><c-n>
 inoremap <expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
 inoremap <C-X><C-N> <C-N>
+inoremap <silent><expr> <C-O> pumvisible() ? "\<C-N>" : "\<C-X>\<C-O>"
 
-# inoremap "<space><space> ""<ESC>i
-# inoremap '<space><space> ''<ESC>i
-# inoremap (<space><space> ()<ESC>i
-# inoremap [<space><space> []<ESC>i
-# inoremap <<space><space> <><ESC>i
-# inoremap {<space><space> {<space><space>}<ESC>hi
-# inoremap (<CR> (<CR>)<Esc>O
-inoremap {<CR> {<CR>}<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
-# inoremap (; (<space><space>);<Esc>hhi
-# inoremap (, (<space><space>),<Esc>hhi
-inoremap {; {<space><space>};<Esc>hhi
-# inoremap {, {<space><space>},<Esc>hhi
-inoremap [; [<space><space>];<Esc>hhi
-inoremap [, [<space><space>],<Esc>hhi
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-N>" : "\<Tab>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-P>" : "\<C-H>"
+
 inoremap <Plug>(meta-o) <C-O>o
 inoremap <Plug>(meta-O) <C-O>O
 # script helper
@@ -96,6 +31,29 @@ inoreabbrev <expr> #!s "#!/bin/bash -e"
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
+# rsi [[[1
+inoremap      <C-A> <C-O>^
+inoremap <C-X><C-A> <C-A>
+cnoremap      <C-A> <Home>
+cnoremap <C-X><C-A> <C-A>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+# C-U sets a new undo point before deleting.
+inoremap <C-U> <C-G>u<C-U>
+# spell correction for the first suggested
+# inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
+
+inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
+
+noremap!        <Plug>(meta-b) <S-Left>
+noremap!        <Plug>(meta-f) <S-Right>
+inoremap        <Plug>(meta-d) <C-O>dw
+cnoremap        <Plug>(meta-d) <S-Right><C-W>
+noremap!        <Plug>(meta-n) <Down>
+noremap!        <Plug>(meta-p) <Up>
+# text object [[[1
+xnoremap <silent> ae gg0oG$
+onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 # 26 simple text objects
 # ----------------------
 # i_ i. i: i, i; i| i/ i\ i* i+ i- i# i<tab>
@@ -124,8 +82,7 @@ xnoremap <silent> il <esc><scriptcmd>text.ObjLine(1)<CR>
 onoremap <silent> il :<C-u>normal vil<CR>
 xnoremap <silent> al <esc><scriptcmd>text.ObjLine(0)<CR>
 onoremap <silent> al :<C-u>normal val<CR>
-
-# yank and paste [[[1
+# yank [[[1
 cnoremap <C-v>         <C-R>+
 # inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
 inoremap <silent><C-v> <C-R><C-o>+
@@ -139,25 +96,6 @@ xnoremap P  "0p
 nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
 # copy entire file contents to system clipboard
 nnoremap yY <scriptcmd>os.Yank(getline(1, '$')->join("\n"))<CR>
-# vimrc [[[1
-nnoremap <silent><leader>fed :e $VIMRC<CR>
-nnoremap <silent><leader>fee :source $VIMRC<CR>
-# source vimscript (operator)
-def SourceVim(...args: list<any>): string
-    if len(args) == 0
-        &opfunc = matchstr(expand('<stack>'), '[^. ]*\ze[')
-        return 'g@'
-    endif
-    if getline(1) =~ '^vim9script$'
-        vim9cmd :'[,']source
-    else
-        :'[,']source
-    endif
-    return ''
-enddef
-nnoremap <silent> <expr> yr SourceVim()
-nnoremap <silent> <expr> yrr SourceVim() .. '_'
-xnoremap <silent> <expr> <space>v SourceVim()
 # visual [[[1
 # keep selection when indent line in visual mode
 xnoremap <expr> > v:count > 0 ? ">" : ">gv"
@@ -194,6 +132,18 @@ xnoremap Q :normal! @q<CR>
 # repeat last command for each line of a visual selection
 xnoremap . :normal .<CR>
 # search and substitute [[[1
+# nohl [[[1
+def Refresh(doedit: bool)
+  if doedit
+    utils.KeepChangeMarksExec('edit')
+  endif
+  if has('diff')
+    diffupdate
+  endif
+  normal! <C-L>
+enddef
+nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
+nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
 # quick substitute
 xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
@@ -216,13 +166,39 @@ xnoremap * :<c-u> call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<c-u> call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 # SID means script local function; 'call' is optional in vim9script.
 def VSetSearch(cmdtype: string)
-  var temp = getreg('s') # 's' is some register
+  var temp = getreg('s')
+  defer setreg('s', temp)
   norm! gv"sy
   setreg('/', '\V' .. substitute(escape(@s, cmdtype .. '\'), '\n', '\\n', 'g'))
-  setreg('s', temp) # restore whatever was in 's'
 enddef
 
 nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>
+# window [[[1
+# quick <C-w>
+nnoremap ' <C-w>
+nnoremap '' <C-w>w
+# toogle window zoom
+import autoload 'zoom.vim'
+nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
+nmap <C-w>o <C-w><C-o>
+nmap 'o <C-w><C-o>
+# Toggle quickfix and loclist
+def ToggleQF()
+  if getwininfo()->filter('v:val.quickfix')->len() > 0
+    cclose
+  else
+    botright copen
+  endif
+enddef
+def ToggleLoc()
+  if getwininfo()->filter('v:val.loclist')->len() > 0
+    lclose
+  else
+    botright lopen
+  endif
+enddef
+nnoremap <leader>q <scriptcmd>ToggleQF()<CR>
+nnoremap <leader>l <scriptcmd>ToggleLoc()<CR>
 # file, buffer [[[1
 nnoremap <leader>fs <scriptcmd>utils.KeepChangeMarksExec('update')<CR>
 nnoremap <silent> <leader>fy :call os#Yank(expand("%:t"))<CR>:echo "buffer filename copied"<CR>
@@ -252,37 +228,6 @@ def MapSwitchTab()
   endfor
 enddef
 MapSwitchTab()
-# move [[[1
-inoremap <silent> <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
-inoremap <silent> <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
-inoremap <M-j> <Down>
-inoremap <M-k> <Up>
-inoremap <M-h> <left>
-inoremap <M-l> <Right>
-# text object [[[1
-xnoremap <silent> ae gg0oG$
-onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
-# ]]]
-# rsi [[[1
-inoremap      <C-A> <C-O>^
-inoremap <C-X><C-A> <C-A>
-cnoremap      <C-A> <Home>
-cnoremap <C-X><C-A> <C-A>
-cnoremap <C-F> <Right>
-cnoremap <C-B> <Left>
-# C-U sets a new undo point before deleting.
-inoremap <C-U> <C-G>u<C-U>
-# spell correction for the first suggested
-# inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
-
-inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
-
-noremap!        <Plug>(meta-b) <S-Left>
-noremap!        <Plug>(meta-f) <S-Right>
-inoremap        <Plug>(meta-d) <C-O>dw
-cnoremap        <Plug>(meta-d) <S-Right><C-W>
-noremap!        <Plug>(meta-n) <Down>
-noremap!        <Plug>(meta-p) <Up>
 # unimpared [[[1
 # toogle line number and relative line number
 def NumberOptions(): string
@@ -295,10 +240,15 @@ nnoremap <silent> ]b :<C-U><C-R>=v:count1<CR>bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 # quickfix list
+nmap <F6> :cnext<CR>
+nmap <S-F6> :cprevious<CR>
 nnoremap <silent> [q :<C-U><C-R>=v:count1<CR>cprevious<CR>
 nnoremap <silent> ]q :<C-U><C-R>=v:count1<CR>cnext<CR>
 nnoremap <silent> [Q :cNfile<CR>
 nnoremap <silent> ]Q :cnfile<CR>
+# quickfix and loclist
+nnoremap <silent>  <q :call quickfixed#older()<CR>
+nnoremap <silent>  >q :call quickfixed#newer()<CR>
 # location list (buffer local quickfix list)
 nnoremap <silent> [s :<C-U><C-R>=v:count1<CR>lprevious<CR>
 nnoremap <silent> ]s :<C-U><C-R>=v:count1<CR>lnext<CR>
@@ -314,9 +264,6 @@ nnoremap <silent> ]F :last<CR>
 # move lines
 xnoremap <tab> :sil! m '>+1<CR>gv
 xnoremap <s-tab> :sil! m '<-2<CR>gv
-
-
-# ]]]
 # mark ring [[[1
 var mark_ring = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
 var mark_ring_i = 0
@@ -347,14 +294,57 @@ nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
 # nnoremap mm <scriptcmd>g:MarkPush()<CR>
 
 # nnoremap <c-m> <scriptcmd>feedkeys($"yyp{getpos('.')[2] - 1}l")<CR>
-# external [[[1
-nnoremap <silent> gX :call os#Gx()<CR>
-
+# terminal [[[1
+set termwinkey=<C-\\>
 import autoload 'term.vim'
 xnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>tt term.Send() .. '_'
-# ]]]
-# tags [[[1
+# correct spell [[[1
+cabbrev Q q
+cabbrev Qa qa
+cabbrev W w
+cabbrev Wq wq
+cabbrev Wa wa
+# cabbrev X x
+cabbrev Help help
+cabbrev ve verbose
+# misc [[[1
+# fold
+nmap z] zo]z
+nmap z[ zo[z
+nnoremap <leader><space> za
+# syntax
+nnoremap <leader>Si  <scriptcmd>echo utils.Syninfo()<cr>
+# diff
+nnoremap <silent><leader>di :windo diffthis<CR>
+nnoremap <silent><leader>du :windo diffupdate<CR>
+nnoremap <silent><leader>do :windo diffoff<CR>
+# linewise partial staging in visual-mode.
+xnoremap <c-p> :diffput<cr>
+xnoremap <c-o> :diffget<cr>
+# tags
 nnoremap '] <c-w>v<c-w>]
+# vimrc
+nnoremap <silent><leader>fed :e $VIMRC<CR>
+nnoremap <silent><leader>fee :source $VIMRC<CR>
+# source vimscript (operator)
+def SourceVim(...args: list<any>): string
+    if len(args) == 0
+        &opfunc = matchstr(expand('<stack>'), '[^. ]*\ze[')
+        return 'g@'
+    endif
+    if getline(1) =~ '^vim9script$'
+        vim9cmd :'[,']source
+    else
+        :'[,']source
+    endif
+    return ''
+enddef
+nnoremap <silent> <expr> yr SourceVim()
+nnoremap <silent> <expr> yrr SourceVim() .. '_'
+xnoremap <silent> <expr> <space>v SourceVim()
+# external [[[1
+nnoremap <silent> gX :call os#Gx()<CR>
+# ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

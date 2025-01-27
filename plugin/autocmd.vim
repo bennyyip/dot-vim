@@ -96,16 +96,16 @@ augroup vimrc
     endif
   }
 
-  # dont move cursor after operatorfunc()
-  # https://vimways.org/2019/making-things-flow/
-  autocmd OptionSet operatorfunc w:opfuncview = winsaveview()
-  autocmd CursorMoved * {
-    if !empty(&operatorfunc)
-      call winrestview(w:opfuncview)
-      unlet w:opfuncview
-      noautocmd set operatorfunc=
-    endif
-  }
+  # # dont move cursor after operatorfunc()
+  # # https://vimways.org/2019/making-things-flow/
+  # autocmd OptionSet operatorfunc w:opfuncview = winsaveview()
+  # autocmd CursorMoved * {
+  #   if !empty(&operatorfunc)
+  #     call winrestview(w:opfuncview)
+  #     unlet w:opfuncview
+  #     noautocmd set operatorfunc=
+  #   endif
+  # }
 
 augroup END
 
