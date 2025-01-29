@@ -295,7 +295,7 @@ nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
 
 # nnoremap <c-m> <scriptcmd>feedkeys($"yyp{getpos('.')[2] - 1}l")<CR>
 # terminal [[[1
-set termwinkey=<C-\\>
+# set termwinkey=<C-\\>
 import autoload 'term.vim'
 xnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>t term.Send()

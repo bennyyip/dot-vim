@@ -8,3 +8,5 @@ augroup END
 let &l:formatprg=$'ocamlformat --profile=janestreet --enable-outside-detected-project --name {expand("%:p")->fnameescape()} -'
 
 nnoremap <buffer> <expr> <leader>T term#SendText([$'#use "{expand("%:t")}";;'])
+
+let b:AutoPairs = {'"': '"', '[': ']', '(': ')', '{': '}'}
