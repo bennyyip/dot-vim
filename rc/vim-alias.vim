@@ -20,5 +20,8 @@ Alias tl   Tlist
 Alias ghq  Ghq
 Alias f    find
 Alias F    find
+Alias t    Term
+Alias T    Term
+Alias f5   F5
 Alias -range     il   ilist\ /\v/<left><c-r>=Eatchar("\ ")<cr>
 Alias -range     dl   dlist\ //<left><c-r>=Eatchar("\ ")<cr>

@@ -1,6 +1,7 @@
 vim9script
 
 import autoload "../autoload/utils.vim"
+import autoload "../autoload/term.vim"
 
 # Reverse [[[1
 command! -bar -range=% Reverse :<line1>,<line2>global/^/m <line1>-1<bar>nohl
@@ -100,5 +101,14 @@ command DiffOrig vert new | set bt=nofile | r ++edit %%
 # Lab [[[1
 #   设置成 Linux 下适用的格式
 command Lin setl ff=unix fenc=utf8 nobomb eol
+# F5: Execute command and save to register `c`. Press F5 to repeat. [[[1
+def F5(cmd: string)
+  execute cmd
+  setreg('c', cmd)
+enddef
+command! -nargs=+ -complete=command F5 F5(<q-args>)
+nnoremap <silent> <F5> <cmd>execute getreg('c')<CR>
+# Term: send comamnd to terminal
+command! -nargs=+ -complete=shellcmdline Term term.SendLine(<q-args>)
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

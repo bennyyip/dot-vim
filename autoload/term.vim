@@ -65,3 +65,8 @@ export def SendText(text: list<string>): string
     term_sendkeys(winbufnr(term_window), text->join("\r") .. "\r")
     return ""
 enddef
+
+export def SendLine(...args: list<any>): string
+  SendText([args->join(' ')])
+  return ""
+enddef

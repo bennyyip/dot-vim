@@ -16,3 +16,5 @@
 " elseif executable('autopep8')
 "   setlocal formatprg=autopep8\ --quiet\ --skip-string-normalization\ -
 " endif
+
+nnoremap <buffer> <expr> <leader>T term#SendLine('python', expand('%:p'))

@@ -21,21 +21,15 @@ export def WslToWindowsPath(path: string): string
     return empty(res) ? path : res[0]
 enddef
 
-def GetPath(suffix: string = ''): string
-    var path = ''
-    if expand("%:p") == ""
-        path = expand("%:p:h" .. suffix)
-    else
-        path = expand("%:p" .. suffix)
-    endif
-    path = substitute(path, "^dir://", "", "")
-    return path
-enddef
-
-
 # Open explorer/nautilus/dolphin with current file selected (if possible).
 export def FileManager()
-    var path = GetPath()
+    var path = ''
+    if expand("%:p") == ""
+        path = expand("%:p:h")
+    else
+        path = expand("%:p")
+    endif
+    path = substitute(path, "^dir://", "", "")
     var select = isdirectory(path) ? "" : "--select"
 
     if executable("cmd.exe")
@@ -57,11 +51,21 @@ enddef
 # Open terminal/tmux in current file path
 const istmux = !(empty($TMUX))
 export def Terminal()
-  var path = GetPath(':h')
+  var path = ""
+  if expand("%:p") == ""
+      path = expand("%:p:h")
+  else
+      path = expand("%:p")
+  endif
+  path = substitute(path, "^dir://", "", "")
+  if !isdirectory(path)
+    path = expand("%:p:h")
+  endif
+
   if executable("wt.exe")
-    job_start('wt.exe -d ' .. path->shellescape(1))
+    job_start(['wt.exe', '-d', path])
   elseif istmux
-    job_start($"tmux split-window -h -c '{path}'")
+    job_start(["tmux", "split-window", "-h", "-c", path])
   endif
 enddef
 

@@ -58,7 +58,7 @@ else
 endif
 Pack 'bootleq/vim-cycle'
 Pack 'itchyny/lightline.vim'
-Pack 'machakann/vim-sandwich'
+Pack 'machakann/vim-sandwich', { type: 'start' }
 
 if g:minimal_plugins
   g:loaded_netrw       = 0

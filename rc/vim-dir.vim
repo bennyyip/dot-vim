@@ -11,6 +11,7 @@ nmap -  :<C-u>Dir<CR>
 def CustomizeMappings()
   # Customize key mappings here
   nmap <buffer> gg 4G
+  xmap <buffer> gg 4G
   nnoremap <buffer> gb :b<space>
   nnoremap <buffer> gB <scriptcmd>action.BookmarkJumpMenu()<cr>
 
