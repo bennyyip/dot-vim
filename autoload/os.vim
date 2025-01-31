@@ -21,16 +21,21 @@ export def WslToWindowsPath(path: string): string
     return empty(res) ? path : res[0]
 enddef
 
+def GetPath(suffix: string = ''): string
+    var path = ''
+    if expand("%:p") == ""
+        path = expand("%:p:h" .. suffix)
+    else
+        path = expand("%:p" .. suffix)
+    endif
+    path = substitute(path, "^dir://", "", "")
+    return path
+enddef
+
 
 # Open explorer/nautilus/dolphin with current file selected (if possible).
 export def FileManager()
-    var path = ''
-    if expand("%:p") == ""
-        path = expand("%:p:h")
-    else
-        path = expand("%:p")
-    endif
-    path = substitute(path, "^dir://", "", "")
+    var path = GetPath()
     var select = isdirectory(path) ? "" : "--select"
 
     if executable("cmd.exe")
@@ -49,26 +54,16 @@ export def FileManager()
     endif
 enddef
 
-
-# Silently execute OS command
-export def Exe(cmd: string)
-    var job_opts = {}
-    if exists("$WSLENV")
-        job_opts.cwd = "/mnt/c"
-    endif
-    job_start(cmd, job_opts)
+# Open terminal/tmux in current file path
+const istmux = !(empty($TMUX))
+export def Terminal()
+  var path = GetPath(':h')
+  if executable("wt.exe")
+    job_start('wt.exe -d ' .. path->shellescape(1))
+  elseif istmux
+    job_start($"tmux split-window -h -c '{path}'")
+  endif
 enddef
-
-
-# Silently execute OS command
-export def ExeTerm(cmd: string)
-    var job_opts = {term_finish: "close", term_rows: 15}
-    if exists("$WSLENV")
-        job_opts.cwd = "/mnt/c"
-    endif
-    botright term_start(cmd, job_opts)
-enddef
-
 
 # Open filename in an OS
 export def Open(url: string)
@@ -77,31 +72,7 @@ export def Open(url: string)
         g:OSCYank(url)
         return
     endif
-    var cmd = ''
-    if executable('cmd.exe')
-        cmd = 'cmd.exe /C start ""'
-    elseif executable('xdg-open')
-        cmd = "xdg-open"
-    elseif executable('open')
-        cmd = "open"
-    else
-        echohl Error
-        echomsg "Can't find proper opener for an URL!"
-        echohl None
-        return
-    endif
-    var job_opts = {}
-    if exists("$WSLENV")
-        job_opts.cwd = "/mnt/c"
-        if filereadable(url)
-            url_x = WslToWindowsPath(url)->escape('\\')
-        endif
-    endif
-    if $DESKTOP_SESSION == "plasma"
-        system(printf('%s "%s" &', cmd, url_x))
-    else
-        job_start(printf('%s "%s"', cmd, url_x), job_opts)
-    endif
+    dist#vim9#Open(url)
 enddef
 
 

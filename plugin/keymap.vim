@@ -345,6 +345,9 @@ nnoremap <silent> <expr> yr SourceVim()
 nnoremap <silent> <expr> yrr SourceVim() .. '_'
 xnoremap <silent> <expr> <space>v SourceVim()
 # external [[[1
-nnoremap <silent> gX :call os#Gx()<CR>
+nnoremap <silent> gX  :call os#Gx()<CR>
+nnoremap <silent> gof :call os#FileManager()<CR>
+nnoremap <silent> got :call os#Terminal()<CR>
+
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

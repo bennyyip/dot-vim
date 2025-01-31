@@ -113,7 +113,7 @@ else
   Pack 'tpope/vim-characterize'
   Pack 'tpope/vim-repeat', { type: 'start' }
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
-  Pack 'justinmk/vim-gtfo' # gof got
+  # Pack 'justinmk/vim-gtfo' # gof got
   # Pack 'bennyyip/vim-highlightedyank'
   Pack 'ubaldot/vim-highlight-yanked'
   if !is_win
