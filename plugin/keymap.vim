@@ -31,6 +31,7 @@ inoreabbrev <expr> #!s "#!/bin/bash -e"
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S","%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
+inoremap <silent> <C-G><C-Y> <ESC><cmd>call setreg('a', getline('.')->slice(0, getpos('.')[2]))<BAR>put a<CR>A
 # rsi [[[1
 inoremap      <C-A> <C-O>^
 inoremap <C-X><C-A> <C-A>

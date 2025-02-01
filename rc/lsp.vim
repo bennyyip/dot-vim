@@ -125,7 +125,7 @@ def EnableDiag()
     showDiagInPopup: true,
     showDiagWithSign: true,
     autoPopulateDiags: true,
-    showDiagWithVirtualText: true,
+    showDiagWithVirtualText: false,
     showDiagOnStatusLine: true,
     autoHighlightDiags: true,
   })

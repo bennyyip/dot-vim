@@ -66,22 +66,17 @@ if g:minimal_plugins
   packadd matchit
 else
   # Lab [[[2
-  Pack 'LunarWatcher/auto-pairs'
-  Pack 'nickspoons/vim-movefast'
   Pack 'ubaldot/vim9-conversion-aid'
-  Pack 'Konfekt/vim-alias'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
-  Pack 'andymass/vim-matchup'
   Pack 'chrisbra/vim_faq'
   # Pack 'yegappan/mru'
-  Pack 'yegappan/taglist'
-  Pack 'girishji/scope.vim'
   # Pack 'yegappan/fileselect'
   # Pack 'hahdookin/miniterm.vim'
-  Pack 'bennyyip/miniterm.vim'
-  Pack 'Shougo/neosnippet.vim'
-  Pack 'honza/vim-snippets', { 'type': 'opt' }
   # Enhance [[[2
+  Pack 'LunarWatcher/auto-pairs'
+  Pack 'Konfekt/vim-alias'
+  Pack 'andymass/vim-matchup'
+  Pack 'nickspoons/vim-movefast'
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
   # Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
@@ -119,8 +114,11 @@ else
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif
+  Pack 'girishji/scope.vim'
+  Pack 'bennyyip/miniterm.vim'
   # Motion and Edit [[[2
   Pack 'machakann/vim-swap' # g, g. gs gS
+  Pack 'yegappan/taglist'
   Pack 'bennyyip/vim-debugstring' # <leader>ds
   Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
   Pack 'svermeulen/vim-yoink' # :Yanks
@@ -180,6 +178,8 @@ else
   endif
   # ]]]
   # ]]]
+  Pack 'Shougo/neosnippet.vim'
+  Pack 'honza/vim-snippets', { 'type': 'opt' }
 endif
 plugpac#End()
 # plugpac helpers [[[1
