@@ -4,6 +4,7 @@ func Eatchar(pat)
 endfunc
 
 Alias sc   Scope
+Alias scf   ScopeFile
 Alias gbl  Git\ blame
 Alias gi   Git
 Alias cm   Compiler

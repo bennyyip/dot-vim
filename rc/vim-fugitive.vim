@@ -5,7 +5,7 @@ nmap <silent> <leader>gg :if &previewwindow<Bar>pclose<Bar>elseif exists(':Git')
 nnoremap <silent> <leader>gb  :Git blame<CR>
 nnoremap <silent> <leader>gd  :Gvdiffsplit<CR>
 nnoremap <silent> <leader>gD  :Git difftool -y<CR>
-nnoremap g<space>  :G<space>
+nnoremap g<space>  :Git<space>
 
 augroup vimrc
   autocmd FileType gitcommit wincmd J

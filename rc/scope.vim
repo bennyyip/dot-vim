@@ -16,10 +16,14 @@ enddef
 command -nargs=1 -complete=dir ScopeGrep fuzzy.Grep('rg --vimgrep', true, null_string, <f-args>)
 command -nargs=1 -complete=dir ScopeFile Fd(<f-args>)
 
+def DirOfBuf(): string
+  return &ft == 'dir' ? expand('%:.')->substitute("^dir://", "", "") : expand('%:.:h')
+enddef
+
 def SearchProject()
   const root = g:FindRootDirectory()
   if root == ''
-    Fd(expand('%:.:h'))
+    Fd(DirOfBuf())
   else
     Fd(root)
   endif
@@ -27,7 +31,7 @@ enddef
 
 nnoremap <leader>ff <scriptcmd>SearchProject()<cr>
 nnoremap <leader>fF <scriptcmd>Fd()<cr>
-nnoremap <leader>. <scriptcmd>Fd(expand('%:.:h'))<cr>
+nnoremap <leader>. <scriptcmd>Fd(DirOfBuf())<cr>
 nnoremap <leader>fp <scriptcmd>Fd(expand("$v"))<cr>
 
 # noremap <leader>fr <scriptcmd>fuzzy.MRU()<cr>
