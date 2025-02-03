@@ -163,6 +163,7 @@ else
   Pack 'bfrg/vim-jq'
   Pack 'bfrg/vim-jqplay'
   Pack 'vim-python/python-syntax'
+  Pack 'lervag/vimtex'
   # Typescript [[[3
   # Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
   # Pack 'peitalin/vim-jsx-typescript'

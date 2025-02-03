@@ -202,4 +202,8 @@ def Synnames(): dict<any>
   return syn
 enddef
 #]]]
+export def In_mkdMath(): bool # [[[1
+  const in_mkdmath = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')->index('mkdMath') >= 0
+  return in_mkdmath
+enddef
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
