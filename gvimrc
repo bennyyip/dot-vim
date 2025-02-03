@@ -8,7 +8,7 @@ set mousemodel=popup_setpos
 if has("win32")
     set linespace=0
 
-    &guifont = "Sarasa Term CL Nerd Font:h16"
+    &guifont = "Sarasa Mono CL:h16"
 
     # :h w32-experimental-keycode-trans-strategy
     # Should fix CTRL-=

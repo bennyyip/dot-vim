@@ -2,10 +2,10 @@ vim9script
 # disable animation
 g:operator#sandwich#set('all', 'all', 'highlight', 0)
 
-# g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-# g:sandwich#recipes += [
-#   # {'buns': ['|', '|'], 'quoteescape': 1, 'expand_range': 0, 'nesting': 0, 'linewise': 0},
-# ]
+g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+g:sandwich#recipes += [
+  {'buns': ['“', '”'], 'input': ['Q']},
+]
 
 omap ik <Plug>(textobj-sandwich-auto-i)
 xmap ik <Plug>(textobj-sandwich-auto-i)
@@ -20,3 +20,27 @@ nmap dss <Plug>(sandwich-delete-auto)
 nmap cs <Plug>(sandwich-replace)
 nmap css <Plug>(sandwich-replace-auto)
 xmap S <Plug>(sandwich-add)
+
+def MarkdownSetup()
+  b:sandwich_recipes = deepcopy(g:sandwich#recipes)
+  b:sandwich_recipes += [
+    {'buns': ['```', '```'], 'motionwise': ['line'], 'input': ['c'] },
+    {'buns': ['**', '**'], 'input': ['b']},
+    {'buns': ['_', '_'], 'input': ['i']},
+    {'buns': ['$', '$'], 'input': ['$']},
+    {'buns': ['~~', '~~'], 'input': ['~~']},
+
+    {'buns': ['<span style="background-color:#ffc2c2">', '</span>'], 'input': ['R']},
+    {'buns': ['<span style="background-color:#bfe0af">', '</span>'], 'input': ['G']},
+    {'buns': ['<span style="background-color:#abdcf5">', '</span>'], 'input': ['B']},
+    {'buns': ['<span style="background-color:#ffee99">', '</span>'], 'input': ['Y']},
+  ]
+  xmap <buffer> \r SR
+  xmap <buffer> \g SG
+  xmap <buffer> \b SB
+  xmap <buffer> \y SY
+enddef
+
+augroup vimrc
+  autocmd FileType markdown call MarkdownSetup()
+augroup END

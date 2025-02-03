@@ -32,6 +32,9 @@ set backspace=indent,eol,start
 set nostartofline
 set sidescroll=1 sidescrolloff=3 scrolloff=4
 set nrformats=bin,hex,unsigned
+set spelllang=en_us,cjk
+# set spelloptions=camel
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 set nospell
 set number relativenumber cursorline signcolumn=number
 set conceallevel=0 concealcursor=n

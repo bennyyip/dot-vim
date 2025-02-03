@@ -9,8 +9,8 @@ inoremap <silent> <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
 inoremap <silent> <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
-inoremap <C-h> <left>
-inoremap <C-l> <Right>
+# inoremap <C-h> <left>
+# inoremap <C-l> <Right>
 # edit [[[1
 # open q:
 set cedit=<C-Y>
@@ -251,10 +251,10 @@ nnoremap <silent> ]Q :cnfile<CR>
 nnoremap <silent>  <q :call quickfixed#older()<CR>
 nnoremap <silent>  >q :call quickfixed#newer()<CR>
 # location list (buffer local quickfix list)
-nnoremap <silent> [s :<C-U><C-R>=v:count1<CR>lprevious<CR>
-nnoremap <silent> ]s :<C-U><C-R>=v:count1<CR>lnext<CR>
-nnoremap <silent> [S :lNfile<CR>
-nnoremap <silent> ]S :lnfile<CR>
+nnoremap <silent> [d :<C-U><C-R>=v:count1<CR>lprevious<CR>
+nnoremap <silent> ]d :<C-U><C-R>=v:count1<CR>lnext<CR>
+nnoremap <silent> [D :lNfile<CR>
+nnoremap <silent> ]D :lnfile<CR>
 # file list -> load buffers using :args * :args **/*.js **/*.css
 nnoremap <silent> [f :<C-U><C-R>=v:count1<CR>previous<CR>
 nnoremap <silent> ]f :<C-U><C-R>=v:count1<CR>next<CR>

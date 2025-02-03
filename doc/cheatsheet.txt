@@ -82,6 +82,9 @@ incsearch~
 	    CTRL-L 加入下一個字
 
 
+Get output from command
+:put =execute('messages')
+
 ==============================================================================
 4. change							    |change.txt|
 
@@ -201,12 +204,25 @@ qQ
 "AY
 
 ==============================================================================
+10. spell check
+{count}z= 改正
+|i_CTRL-X_CTRL-S| |i_CTRL-X_s| 進入補全改正
+[s ]s [S ]S 跳轉。大寫skip rare words
+zg zw 好詞good 壞詞wrong
+zug zuw 取消標記
+
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
+
+
+==============================================================================
 888. unimportant
 insert mode~
 	CTRL-T		>>
 	{0,^}CTRL-D	<<
 	CTRL-G {j,k,CTRL-J, CTRL-K}	上下移動cursor             |i_CTRL-G_j|
 	CTRL-O		execute one command, return to Insert mode   |i_CTRL-O|
+
 
 ==============================================================================
 999. other

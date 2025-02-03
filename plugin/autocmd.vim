@@ -96,16 +96,12 @@ augroup vimrc
     endif
   }
 
-  # # dont move cursor after operatorfunc()
-  # # https://vimways.org/2019/making-things-flow/
-  # autocmd OptionSet operatorfunc w:opfuncview = winsaveview()
-  # autocmd CursorMoved * {
-  #   if !empty(&operatorfunc)
-  #     call winrestview(w:opfuncview)
-  #     unlet w:opfuncview
-  #     noautocmd set operatorfunc=
-  #   endif
-  # }
+  # turn on spell checker for commit messages
+  autocmd FileType gitcommit,hgcommit setlocal spell
+  # and emails and plain text files
+  autocmd FileType mail,text,markdown setlocal spell
+  # except 'help' files
+  autocmd BufEnter *.txt if &filetype == 'help' | setlocal nospell | endif
 
 augroup END
 
@@ -122,8 +118,9 @@ for ft in ['go']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, false)' }])
 endfor
 
-for ft in ['make', 'snippets']
+for ft in ['make', 'snippets', 'neosnippet']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(8, false, 0)' }])
 endfor
+
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
