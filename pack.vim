@@ -178,7 +178,8 @@ else
   endif
   # ]]]
   # ]]]
-  Pack 'Shougo/neosnippet.vim'
+  Pack 'SirVer/ultisnips'
+  # Pack 'Shougo/neosnippet.vim', { type: 'opt'}
   Pack 'honza/vim-snippets', { 'type': 'opt' }
 endif
 plugpac#End()
