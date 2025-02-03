@@ -1,10 +1,8 @@
 vim9script
 
-def RenameInteractive()
-  const new_name = input('New file name: ', expand('%:t'))
+def RenameInteractive(name: string=null_string)
+  const new_name = name == null_string ? input('New file name: ', expand('%:t')) : name
   execute 'Rename ' .. new_name
 enddef
 
-command -nargs=0 RenameI call RenameInteractive()
-
-nnoremap <silent> <leader>fR :RenameI<CR>
+command -nargs=? -complete=dir RenameI call RenameInteractive(<q-args>)

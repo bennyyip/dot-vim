@@ -36,7 +36,7 @@ set spelllang=en_us,cjk
 # set spelloptions=camel
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 set nospell
-set number relativenumber cursorline signcolumn=number
+set number relativenumber nocursorline signcolumn=number
 set conceallevel=0 concealcursor=n
 
 set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:patience

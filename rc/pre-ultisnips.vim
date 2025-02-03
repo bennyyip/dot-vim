@@ -2,4 +2,4 @@ vim9script
 g:UltiSnipsExpandOrJumpTrigger = "<c-t>"
 g:UltiSnipsJumpForwardTrigger = "<c-g><c-n>"
 g:UltiSnipsJumpBackwardTrigger = "<c-g><c-p>"
-g:UltiSnipsListSnippets = "<c-g><c-t>"
+g:UltiSnipsListSnippets = "<c-g>t"

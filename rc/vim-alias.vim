@@ -3,6 +3,7 @@ func Eatchar(pat)
   return (c =~ a:pat) ? '' : c
 endfunc
 
+
 Alias sc   Scope
 Alias scf   ScopeFile
 Alias gbl  Git\ blame
@@ -24,5 +25,8 @@ Alias F    find
 Alias t    Term
 Alias T    Term
 Alias f5   F5
+Alias mv   RenameI
+
+
 Alias -range     il   ilist\ /\v/<left><c-r>=Eatchar("\ ")<cr>
 Alias -range     dl   dlist\ //<left><c-r>=Eatchar("\ ")<cr>

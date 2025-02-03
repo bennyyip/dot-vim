@@ -94,6 +94,7 @@ augroup vimrc
         && getbufinfo({'bufloaded': 1, 'buflisted': 1})->len() > 1
       exe $'mksession! {$VIMSTATE}/session/LAST'
     endif
+    :MruRefresh
   }
 
   # turn on spell checker for commit messages

@@ -24,9 +24,6 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-P>" : "\<C-H>"
 
 inoremap <Plug>(meta-o) <C-O>o
 inoremap <Plug>(meta-O) <C-O>O
-# script helper
-inoreabbrev <expr> #!! "#!/usr/bin/env" .. (empty(&filetype) ? '' : ' ' .. &filetype)
-inoreabbrev <expr> #!s "#!/bin/bash -e"
 # get output from python
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
@@ -301,15 +298,6 @@ import autoload 'term.vim'
 xnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>tt term.Send() .. '_'
-# correct spell [[[1
-cabbrev Q q
-cabbrev Qa qa
-cabbrev W w
-cabbrev Wq wq
-cabbrev Wa wa
-# cabbrev X x
-cabbrev Help help
-cabbrev ve verbose
 # misc [[[1
 # fold
 nmap z] zo]z

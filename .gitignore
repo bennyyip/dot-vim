@@ -21,3 +21,4 @@ local.vim
 coc/**/*
 !coc/.gitkeep
 
+spell/*.spl

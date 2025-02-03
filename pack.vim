@@ -28,9 +28,10 @@ endtry
 
 # ]]]
 import autoload "utils.vim"
-const AfterFun = () => {
+def AfterFun()
+  vim9cmd source $v/keymap.vim
   utils.MapMeta()
-}
+enddef
 call plugpac#Begin({
   # progress_open: tab',
   quiet: g:minimal_plugins,
