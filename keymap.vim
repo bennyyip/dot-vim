@@ -81,12 +81,13 @@ onoremap <silent> il :<C-u>normal vil<CR>
 xnoremap <silent> al <esc><scriptcmd>text.ObjLine(0)<CR>
 onoremap <silent> al :<C-u>normal val<CR>
 # yank [[[1
-cnoremap <C-v>         <C-R>+
 # inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
-inoremap <silent><C-v> <C-R><C-o>+
 inoremap <silent><C-z> <ESC>u
-xnoremap <silent>Y     "+y
-xnoremap <silent><C-c> "+y
+if $SSH_CONNECTION == ""
+  xnoremap <silent><C-c> "+y
+  cnoremap <C-v>         <C-R>+
+  inoremap <silent><C-v> <C-R><C-o>+
+endif
 nnoremap Y   y$
 xnoremap x  "_d
 xnoremap P  "0p
@@ -130,7 +131,7 @@ xnoremap Q :normal! @q<CR>
 # repeat last command for each line of a visual selection
 xnoremap . :normal .<CR>
 # search and substitute [[[1
-# nohl [[[1
+# nohl
 def Refresh(doedit: bool)
   if doedit
     utils.KeepChangeMarksExec('edit')
@@ -298,6 +299,8 @@ import autoload 'term.vim'
 xnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>t term.Send()
 nnoremap <expr> <space>tt term.Send() .. '_'
+tnoremap <F1> <C-W>N
+tnoremap <C-W><C-W> <C-W>.
 # misc [[[1
 # fold
 nmap z] zo]z

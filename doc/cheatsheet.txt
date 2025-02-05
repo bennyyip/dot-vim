@@ -213,6 +213,11 @@ zug zuw 取消標記
 
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
+==============================================================================
+11. terminal
+	CTRL-W :	enter an Ex command
+	CTRL-W .	send a CTRL-W to the job in the terminal
+	CTRL-W " {reg}  paste register {reg}		|t_CTRL-W_quote|
 
 
 ==============================================================================

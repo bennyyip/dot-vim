@@ -115,7 +115,7 @@ for ft in ['python']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, true)' }])
 endfor
 
-for ft in ['go']
+for ft in ['go', 'gitconfig']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, false)' }])
 endfor
 
