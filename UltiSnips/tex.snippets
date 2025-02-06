@@ -1,10 +1,10 @@
 global !p
 
 def tex_or_mkdMath():
-	return vim.eval('&ft == "tex" || utils#In_mkdMath()')
+	return vim.eval('&ft == "tex" || utils#In_mkdMath()') == '1'
 
 def math():
-	return vim.eval('utils#In_mkdMath() || vimtex#syntax#in_mathzone() == 1')
+	return vim.eval('utils#In_mkdMath() || vimtex#syntax#in_mathzone() == 1') == '1'
 
 def comment():
 	return vim.eval('vimtex#syntax#in_comment()') == '1'
@@ -686,7 +686,7 @@ snippet DD "D" iA
 endsnippet
 
 context "math()"
-snippet LL "lambda" iA
+snippet @l "lambda" iA
 \lambda 
 endsnippet
 # vim:ft=snippets

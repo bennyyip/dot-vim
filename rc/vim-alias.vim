@@ -5,7 +5,8 @@ endfunc
 
 
 Alias sc   Scope
-Alias scf   ScopeFile
+Alias scf  ScopeFile
+Alias dotf ScopeFile\ ~/dotfiles<CR>
 Alias gbl  Git\ blame
 Alias gi   Git
 Alias cm   Compiler

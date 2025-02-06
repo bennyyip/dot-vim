@@ -146,7 +146,7 @@ endif
 
 g:vimsyn_folding = 'f'
 
-g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'bash=sh', 'python', 'ocaml']
+g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml']
 
 # this makes sure that shell scripts are highlighted
 # as bash scripts and not sh scripts

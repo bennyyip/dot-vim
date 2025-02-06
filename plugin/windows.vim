@@ -6,6 +6,9 @@ if has('directx')
   set renderoptions=type:directx
 endif
 
+$SHELL = 'bash'
+set shell=$SHELL
+
 set iminsert=2
 &pythonthreedll = expand(substitute(exepath('python.exe'), 'python.exe', 'python3[0-9][0-9].dll', ''))
 &pythonthreehome = substitute(exepath('python.exe'), 'python.exe', '', '')
