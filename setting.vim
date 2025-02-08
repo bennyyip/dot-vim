@@ -13,7 +13,7 @@ set belloff=all shortmess=aoOTIc
 set display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
 set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20
-set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi,*~,*.py[co],__pycache__,
+set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi,*~,*.py[co],__pycache__
 set complete-=i # disable scanning included files
 set complete-=t # disable searching tags
 # set completeopt=menu,longest,menuone,popup,noselect
@@ -32,9 +32,9 @@ set backspace=indent,eol,start
 set nostartofline
 set sidescroll=1 sidescrolloff=3 scrolloff=4
 set nrformats=bin,hex,unsigned
-set spelllang=en_us,cjk
+set spelllang=en_us,cjk spellcapcheck=
 # set spelloptions=camel
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+inoremap <C-b> <c-g>u<Esc>[s1z=`]a<c-g>u
 set nospell
 set number relativenumber nocursorline signcolumn=number
 set conceallevel=0 concealcursor=n
@@ -47,8 +47,8 @@ set viewoptions=cursor,folds,slash,unix
 
 # &errorformat ..= ',%f\|%\s%#%l col%\s%#%c%\s%#\| %m'
 if executable('rg')
-    set grepprg=rg\ -H\ --no-heading\ --vimgrep
-    set grepformat=%f:%l:%c:%m
+  set grepprg=rg\ -H\ --no-heading\ --vimgrep
+  set grepformat=%f:%l:%c:%m
 endif
 
 set history=9999
@@ -124,7 +124,7 @@ if has("patch-9.0.1921")
   set jumpoptions=stack
 endif
 
- # Automatically save before commands like :next and :make
+# Automatically save before commands like :next and :make
 set autoread autowrite
 set report=0 # Always report changed lines.
 # set synmaxcol=99999 # Only highlight the first 500 columns.

@@ -6,20 +6,20 @@ set guioptions=cM!
 set mousemodel=popup_setpos
 
 if has("win32")
-    set linespace=0
+  set linespace=0
 
-    # 我可以吞下玻璃，他不會傷害我
-    # I can eat glasses, it doesn't hurt me
-    &guifont = "Sarasa Mono CL:h16"
+  # 我可以吞下玻璃，他不會傷害我
+  # I can eat glasses, it doesn't hurt me
+  &guifont = "Sarasa Mono CL:h16"
 
-    # :h w32-experimental-keycode-trans-strategy
-    # Should fix CTRL-=
-    augroup mswin_strat | au!
-        au VimEnter * test_mswin_event('set_keycode_trans_strategy', {'strategy': 'experimental'})
-        autocmd GUIEnter *  ++once simalt ~x
-    augroup END
+  # :h w32-experimental-keycode-trans-strategy
+  # Should fix CTRL-=
+  augroup mswin_strat | au!
+    au VimEnter * test_mswin_event('set_keycode_trans_strategy', {'strategy': 'experimental'})
+    autocmd GUIEnter *  ++once simalt ~x
+  augroup END
 else
-    set guifont=Monospace\ 19
+  set guifont=Monospace\ 19
 endif
 
 

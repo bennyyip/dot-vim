@@ -47,13 +47,13 @@ if is_ssh
   Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
 endif
 if v:version >= 901 && !getcompletion('comment', 'packadd')->empty()
-    autocmd_add([{
-      event: 'VimEnter',
-      pattern: '*',
-      group: 'PlugPac',
-      once: true,
-      cmd: 'timer_start(1, (_) => execute("packadd comment"))',
-    }])
+  autocmd_add([{
+    event: 'VimEnter',
+    pattern: '*',
+    group: 'PlugPac',
+    once: true,
+    cmd: 'timer_start(1, (_) => execute("packadd comment"))',
+  }])
 else
   Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 endif
@@ -67,6 +67,7 @@ if g:minimal_plugins
   packadd matchit
 else
   # Lab [[[2
+  Pack 'mg979/vim-visual-multi'
   Pack 'ubaldot/vim9-conversion-aid'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'chrisbra/vim_faq'

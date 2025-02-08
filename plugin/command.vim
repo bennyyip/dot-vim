@@ -61,7 +61,7 @@ command! -nargs=0 SetHardTabWidth4 call utils.SetTabWidth(4, false, 0)
 command! -nargs=0 SetHardTabWidth8 call utils.SetTabWidth(8, false, 0)
 # SaveSession and LoadSession [[[1
 if !isdirectory($'{$VIMSTATE}/session')
-    mkdir($'{$VIMSTATE}/session', "p")
+  mkdir($'{$VIMSTATE}/session', "p")
 endif
 command! -nargs=1 -complete=custom,utils.SessionComplete SaveSession :exe $'mksession! {$VIMSTATE}/session/<args>'
 command! -nargs=1 -complete=custom,utils.SessionComplete LoadSession :%bd <bar> exe $'so {$VIMSTATE}/session/<args>'

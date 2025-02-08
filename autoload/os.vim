@@ -1,6 +1,7 @@
 vim9script
 
 const istmux = !(empty($TMUX))
+const iszellij = !(empty($ZELLIJ))
 
 # Return true if vim is in WSL environment
 export def IsWsl(): bool
@@ -42,6 +43,8 @@ export def FileManager()
     job_start('cmd.exe /c start "" explorer.exe /select,' .. path, job_opts)
   elseif istmux && executable("yazi")
     job_start(["tmux", "split-window", "-v", "yazi", path])
+  elseif iszellij
+    job_start(['zellij', 'run', '--', 'yazi', path])
   elseif executable("dolphin")
     system($'dolphin {select} {path} &')
   elseif executable("nautilus")
@@ -68,6 +71,8 @@ export def Terminal()
     job_start(['wt.exe', '-d', path])
   elseif istmux
     job_start(["tmux", "split-window", "-h", "-c", path])
+  elseif iszellij
+    job_start(['zellij', 'action', 'new-pane', '-c', '--cwd', path, '--', $SHELL])
   endif
 enddef
 

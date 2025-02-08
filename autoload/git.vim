@@ -14,13 +14,16 @@ export def GithubOpen(firstline: number = line("."), lastline: number = line("."
     const gitpath = fnameescape(g:FugitiveGitDir() .. '/../')
     var gitroot = systemlist($"git -C {gitpath} rev-parse --show-toplevel")->join('')
     var filename = strpart(expand('%:p'), len(gitroot) + 1)->tr('\', '/')
-    var branch = systemlist($"git -C {gitpath} rev-parse --abbrev-ref HEAD")->join('')
+    var branch = systemlist($"git -C {gitpath} describe --tags --exact-match HEAD")->join('')
+    if v:shell_error != 0
+      branch = systemlist($"git -C {gitpath} rev-parse HEAD")->join('')
+    endif
     var remote_url = systemlist($"git -C {gitpath} remote get-url origin")->join('')
     if remote_url =~ '^git@github.com'
         remote_url = remote_url->substitute('^git@github.com:', 'https://github.com/', '')
     endif
     remote_url = remote_url->substitute('.git$', '', '')
     var github_url = $'{remote_url}/blob/{branch}/{filename}#L{firstline}-L{lastline}'
-    os.Open(github_url)
+    echo github_url
+    silent! call os.Open(github_url)
 enddef
-

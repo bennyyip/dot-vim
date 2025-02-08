@@ -47,7 +47,7 @@ enddef
 
 g:format_on_save = v:false
 def FormatOnSave() # [[[2
-  const enalbe_ft = { c: 1, cpp: 1 }
+  const enalbe_ft = { c: 1, cpp: 1, ocaml: 1 }
   if get(enalbe_ft, &filetype, 0) == 0
     return
   endif
@@ -59,10 +59,8 @@ def FormatOnSave() # [[[2
 enddef
 
 def Format()
-  if &l:formatprg == '' && &l:formatexpr == ''
-    if plugpac#HasPlugin('lsp') && lsp#buffer#CurbufGetServers()->len() > 0
-      execute "LspFormat"
-    endif
+  if plugpac#HasPlugin('lsp') && lsp#buffer#CurbufGetServers()->len() > 0
+    execute "LspFormat"
     return
   endif
   const save_view = winsaveview()
