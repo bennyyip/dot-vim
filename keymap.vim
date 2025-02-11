@@ -241,6 +241,10 @@ def NumberOptions(): string
     return &number && &relativenumber ? 'nonumber norelativenumber' : 'number relativenumber'
 enddef
 nnoremap yon :set <C-R>=<SID>NumberOptions()<CR><CR>
+def SpellOptions(): string
+  return &spell ? 'nospell' : 'spell'
+enddef
+nnoremap yos :setlocal <C-R>=<SID>SpellOptions()<CR><CR>
 # Buffer navigation
 nnoremap <silent> [b :<C-U><C-R>=v:count1<CR>bprevious<CR>
 nnoremap <silent> ]b :<C-U><C-R>=v:count1<CR>bnext<CR>

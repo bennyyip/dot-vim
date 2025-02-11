@@ -144,6 +144,7 @@ else
 endif
 
 
+g:nogx = true
 g:vimsyn_folding = 'f'
 
 g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml']

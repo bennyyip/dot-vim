@@ -159,7 +159,7 @@ def BindKeys()
 
   inoremap <silent><buffer> <C-G>s <C-R>=g:LspShowSignature()<CR>
 
-  nnoremap <silent><buffer> yos <scriptcmd>ToggoleDiag()<CR>
+  nnoremap <silent><buffer> yod <scriptcmd>ToggoleDiag()<CR>
 
   setlocal keywordprg=:LspHover
 enddef

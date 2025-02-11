@@ -21,6 +21,7 @@ Alias Qa   qa
 Alias Q    q
 Alias tl   Tlist
 Alias ghq  Ghq
+Alias gp   Gpush
 Alias f    find
 Alias F    find
 Alias t    Term

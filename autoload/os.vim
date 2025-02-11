@@ -44,7 +44,7 @@ export def FileManager()
   elseif istmux && executable("yazi")
     job_start(["tmux", "split-window", "-v", "yazi", path])
   elseif iszellij
-    job_start(['zellij', 'run', '--', 'yazi', path])
+    job_start(['zellij', 'run', '-c', '--', $SHELL, '-i', '-c', $"y {path}; exec $SHELL"])
   elseif executable("dolphin")
     system($'dolphin {select} {path} &')
   elseif executable("nautilus")

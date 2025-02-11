@@ -67,6 +67,7 @@ if g:minimal_plugins
   packadd matchit
 else
   # Lab [[[2
+  Pack 'rhysd/vim-gfm-syntax'
   Pack 'mg979/vim-visual-multi'
   Pack 'ubaldot/vim9-conversion-aid'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
@@ -77,7 +78,8 @@ else
   # Enhance [[[2
   Pack 'LunarWatcher/auto-pairs'
   Pack 'Konfekt/vim-alias'
-  Pack 'andymass/vim-matchup'
+  # Pack 'andymass/vim-matchup'
+  packadd matchit
   Pack 'nickspoons/vim-movefast'
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
