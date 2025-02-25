@@ -51,7 +51,7 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m
 endif
 
-set history=9999
+set history=3000
 set updatetime=300
 set updatecount=100
 set undofile
@@ -62,7 +62,7 @@ set backupext=-vimbackup
 set backupdir=$VIMSTATE/backup/
 set directory=$VIMSTATE/swap/
 set undodir=$VIMSTATE/undo/
-set viminfo='200,:10000,<50,s32,h,n$VIMSTATE/info/viminfo
+set viminfo='200,/500,<50,s10,h,n$VIMSTATE/info/viminfo
 set viewdir=$VIMSTATE/view
 
 for d in ['backup', 'swap', 'undo', 'info', 'view']
@@ -147,7 +147,7 @@ endif
 g:nogx = true
 g:vimsyn_folding = 'f'
 
-g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml']
+g:markdown_fenced_languages = ['html', 'datacorejsx=jsx', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml']
 
 # this makes sure that shell scripts are highlighted
 # as bash scripts and not sh scripts

@@ -178,6 +178,7 @@ var lsp_options = {
   showSignature: false,
   semanticHighlight: false,
   condensedCompletionMenu: true,
+  useQuickfixForLocations: true,
 }
 g:LspOptionsSet(lsp_options)
 silent! DisableDiag()

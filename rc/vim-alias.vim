@@ -13,7 +13,7 @@ Alias cm   Compiler
 Alias lcm  LCompiler
 Alias qf   AsyncQf
 Alias ve   verbose
-Alias Help help
+" Alias Help help
 Alias Wa   wa
 Alias Wq   wq
 Alias W    w
@@ -30,6 +30,7 @@ Alias f5   F5
 Alias mv   RenameI
 Alias zlr  ZellijRun
 Alias zlrf ZellijRunFloat
+Alias fmt  Fmt
 
 
 Alias -range     il   ilist\ /\v/<left><c-r>=Eatchar("\ ")<cr>

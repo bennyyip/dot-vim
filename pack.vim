@@ -170,7 +170,7 @@ else
   Pack 'lervag/vimtex'
   # Typescript [[[3
   # Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
-  # Pack 'peitalin/vim-jsx-typescript'
+  Pack 'MaxMEllon/vim-jsx-pretty'
   # Web [[[3
   Pack 'BourgeoisBear/clrzr'
   # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }

@@ -97,7 +97,13 @@ endif
 nnoremap Y   y$
 xnoremap x  "_d
 # do not overwrite register
-xnoremap p "_dP
+def VisualPaste()
+  setreg('a', getreg('"'))
+  defer setreg('"', getreg('a'))
+  norm! p
+enddef
+xnoremap p <scriptcmd>VisualPaste()<CR>
+# xnoremap p "_dP
 xnoremap <leader>p p
 # select what I just pasted
 nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
