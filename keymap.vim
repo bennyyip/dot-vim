@@ -109,6 +109,9 @@ xnoremap <leader>p p
 nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
 # copy entire file contents to system clipboard
 nnoremap yY <scriptcmd>os.Yank(getline(1, '$')->join("\n"))<CR>
+# duplicate line retaining the column position:
+# nnoremap <C-j> <cmd>copy.<CR>
+# nnoremap <C-k> <cmd>copy-1<CR>
 # visual [[[1
 # keep selection when indent line in visual mode
 xnoremap <expr> > v:count > 0 ? ">" : ">gv"
@@ -314,9 +317,10 @@ nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
 # terminal [[[1
 # set termwinkey=<C-\\>
 import autoload 'term.vim'
-xnoremap <expr> <space>t term.Send()
-nnoremap <expr> <space>t term.Send()
-nnoremap <expr> <space>tt term.Send() .. '_'
+xnoremap <expr> <c-q> term.Send()
+nnoremap <expr> <c-q> term.Send()
+nnoremap <expr> <c-q><c-q> term.Send() .. '_'
+imap <c-q> <ESC>m`<c-q><c-q>``a
 tnoremap <F1> <C-W>N
 tnoremap <C-W><C-W> <C-W>.
 # misc [[[1
@@ -356,7 +360,7 @@ def SourceVim(...args: list<any>): string
 enddef
 nnoremap <silent> <expr> yr SourceVim()
 nnoremap <silent> <expr> yrr SourceVim() .. '_'
-xnoremap <silent> <expr> <space>v SourceVim()
+xnoremap <silent> <expr> <leader>v SourceVim()
 # external [[[1
 nnoremap <silent> gX  :call os#Gx()<CR>
 nnoremap <silent> gof :call os#FileManager()<CR>

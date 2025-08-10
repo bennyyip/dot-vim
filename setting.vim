@@ -36,10 +36,10 @@ set spelllang=en_us,cjk spellcapcheck=
 # set spelloptions=camel
 inoremap <C-b> <c-g>u<Esc>[s1z=`]a<c-g>u
 set nospell
-set number relativenumber nocursorline signcolumn=number
+set cursorline cursorlineopt=number number relativenumber signcolumn=number
 set conceallevel=0 concealcursor=n
 
-set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:patience
+set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:histogram,inline:char,linematch:50
 nnoremap <silent> [w <cmd>set diffopt-=iwhiteall,iblank<BAR>echo &diffopt<CR>
 nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall,iblank<BAR>echo &diffopt<CR>
 set sessionoptions=buffers,curdir,help,tabpages,winsize,slash,unix,resize
@@ -147,7 +147,7 @@ endif
 g:nogx = true
 g:vimsyn_folding = 'f'
 
-g:markdown_fenced_languages = ['html', 'datacorejsx=jsx', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml']
+g:markdown_fenced_languages = ['html', 'datacorejsx=jsx', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml', 'base=yaml']
 
 # this makes sure that shell scripts are highlighted
 # as bash scripts and not sh scripts

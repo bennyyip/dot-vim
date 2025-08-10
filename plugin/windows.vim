@@ -6,7 +6,7 @@ if has('directx')
   set renderoptions=type:directx
 endif
 
-# $SHELL = 'bash'
+$SHELL = 'bash'
 # set shell=$SHELL
 
 set noshellslash

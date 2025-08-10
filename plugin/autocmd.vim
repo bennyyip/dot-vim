@@ -98,7 +98,7 @@ augroup vimrc
   # turn on spell checker for commit messages
   autocmd FileType gitcommit,hgcommit setlocal spell
   # and emails and plain text files
-  autocmd FileType mail,text setlocal spell
+  # autocmd FileType mail,text setlocal spell
   # except 'help' files
   autocmd BufEnter *.txt if &filetype == 'help' | setlocal nospell | endif
 

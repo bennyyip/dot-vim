@@ -59,7 +59,7 @@ else
 endif
 Pack 'bootleq/vim-cycle'
 Pack 'itchyny/lightline.vim'
-Pack 'machakann/vim-sandwich', { type: 'start' }
+Pack 'bennyyip/vim-sandwich', { type: 'start' }
 
 if g:minimal_plugins
   g:loaded_netrw       = 0
@@ -168,6 +168,7 @@ else
   Pack 'bfrg/vim-jqplay'
   Pack 'vim-python/python-syntax'
   Pack 'lervag/vimtex'
+  Pack 'elkasztano/nushell-syntax-vim'
   # Typescript [[[3
   # Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Pack 'MaxMEllon/vim-jsx-pretty'

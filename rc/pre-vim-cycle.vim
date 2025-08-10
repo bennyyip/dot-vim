@@ -24,7 +24,7 @@ g:cycle_default_groups = [
   [["encode", "decode"]],
   [["left", "right"]],
   [["hide", "show"]],
-  [['「:」', '『:』'], 'sub_pairs'],
+  [['(:)', '（:）', '「:」', '『:』'], 'sub_pairs'],
   [['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
     'Friday', 'Saturday'], 'hard_case', {'name': 'Days'}],
   [["enable", "disable"]],
@@ -41,6 +41,8 @@ nnoremap <expr> <silent> <C-A> <SID>TryCycle('p')
 vnoremap <expr> <silent> <C-A> <SID>TryCycle('p')
 nnoremap <Plug>CycleFallbackNext <C-A>
 nnoremap <Plug>CycleFallbackPrev <C-X>
+nmap <silent> <leader>ga <Plug>CycleSelect
+vmap <silent> <leader>ga <Plug>CycleSelect
 
 def GetPatternAtCursor(pat: string): string
   const col = col('.') - 1
