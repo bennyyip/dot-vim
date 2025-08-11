@@ -17,22 +17,3 @@ set iminsert=2
 
 g:netrw_cygwin = 0
 g:netrw_silent = 1
-
-def DailyNote()
-  const filename = expand($HOME .. "/Obsidian-Vault/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')
-  const daily_note_dir = fnamemodify(filename, ':h')
-  if !isdirectory(daily_note_dir)
-    call mkdir(daily_note_dir, 'p')
-  endif
-  fnameescape(filename)->buf.EditInTab()
-enddef
-def GotoObsidian()
-  if expand('%:~') !~# 'Obsidian-Vault'
-    echo 'Not in obsidian vault!'
-    return
-  endif
-  const pos = getpos('.')
-  call os#Open($"obsidian://adv-uri?vault=Obsidian-Vault&filepath={expand('%:t')}&line={pos[1]}&column={pos[2]}")
-enddef
-nnoremap <leader>v :call <SID>DailyNote()<CR>
-nnoremap <leader>V <scriptcmd>GotoObsidian()<CR>

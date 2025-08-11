@@ -26,6 +26,8 @@ try
 catch
 endtry
 
+packadd! matchit
+
 # ]]]
 import autoload "utils.vim"
 def AfterFun()
@@ -47,13 +49,7 @@ if is_ssh
   Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
 endif
 if v:version >= 901 && !getcompletion('comment', 'packadd')->empty()
-  autocmd_add([{
-    event: 'VimEnter',
-    pattern: '*',
-    group: 'PlugPac',
-    once: true,
-    cmd: 'timer_start(1, (_) => execute("packadd comment"))',
-  }])
+  packadd! comment
 else
   Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 endif
@@ -64,7 +60,6 @@ Pack 'bennyyip/vim-sandwich', { type: 'start' }
 if g:minimal_plugins
   g:loaded_netrw       = 0
   g:loaded_netrwPlugin = 0
-  packadd matchit
 else
   # Lab [[[2
   Pack 'rhysd/vim-gfm-syntax'
@@ -79,7 +74,6 @@ else
   Pack 'LunarWatcher/auto-pairs'
   Pack 'Konfekt/vim-alias'
   # Pack 'andymass/vim-matchup'
-  packadd matchit
   Pack 'nickspoons/vim-movefast'
   Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
@@ -92,13 +86,7 @@ else
   Pack 'habamax/vim-dir', { 'type': 'start' }
 
   if has("patch-9.0.1811")
-    autocmd_add([{
-      event: 'VimEnter',
-      pattern: '*',
-      group: 'PlugPac',
-      once: true,
-      cmd: 'timer_start(1, (_) => execute("packadd editorconfig"))',
-    }])
+    packadd! editorconfig
   else
     Pack 'editorconfig/editorconfig-vim'
   endif
@@ -114,7 +102,13 @@ else
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
   # Pack 'justinmk/vim-gtfo' # gof got
   # Pack 'bennyyip/vim-highlightedyank'
-  Pack 'ubaldot/vim-highlight-yanked'
+  if has("patch-9.1.1230")
+    packadd! hlyank
+    g:hlyank_hlgroup = "Search"
+    g:hlyank_duration = 500
+  else
+    Pack 'ubaldot/vim-highlight-yanked'
+  endif
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif

@@ -31,10 +31,10 @@ enddef
 
 export def Send(...args: list<any>): string
     if len(args) == 0
+        w:opfuncview = winsaveview()
         &opfunc = matchstr(expand('<stack>'), '[^. ]*\ze[')
         return 'g@'
     endif
-
 
     var region_type = {line: "V", char: "v", block: "\<c-v>"}
     var text = PrepareText(getregion(getpos("'["),
@@ -42,6 +42,10 @@ export def Send(...args: list<any>): string
                                      {type: get(region_type, args[0])}))
 
     SendText(text)
+    if exists("w:opfuncview")
+      winrestview(w:opfuncview)
+      unlet w:opfuncview
+    endif
     return ""
 enddef
 

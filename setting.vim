@@ -157,5 +157,6 @@ legacy let c_no_comment_fold = 1
 legacy let c_comment_strings = 1
 
 g:snips_author = 'Ben Yip'
+g:obsidian_vault = $HOME .. '/Obsidian-Vault'
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

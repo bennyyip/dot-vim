@@ -11,7 +11,7 @@ if executable('tidy')
   " See https://stackoverflow.com/questions/7151180/use-html-tidy-to-just-indent-html-code
   autocmd formatprgsHTML BufWinEnter <buffer> ++once let &l:formatprg = 'tidy -xml -quiet ' .
         \ ' --show-errors 0 -bare --show-body-only auto -wrap 0 '.
-        \ ' -indent ' . (&expandtab ? '' : '--indent-with-tabs') . ' --indent-spaces ' . &l:shiftwidth . 
+        \ ' -indent ' . (&expandtab ? '' : '--indent-with-tabs') . ' --indent-spaces ' . &l:shiftwidth .
         \ ' || exit 0'
         " \ (has('win32') ? ' 2>nul' : ' 2>/dev/null') .
   compiler tidy
@@ -22,5 +22,3 @@ elseif executable('html-beautify')
 elseif executable('prettier')
   autocmd formatprgsHTML BufWinEnter <buffer> ++once let &l:formatprg = 'prettier --stdin-filepath=%:S --parser=html --single-quote --tab-width=' . &l:shiftwidth . (&expandtab ? '' : '--use-tabs') . ' --'
 endif
-
-

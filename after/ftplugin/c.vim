@@ -62,5 +62,3 @@ nmap <buffer> <localleader>m <scriptcmd>g:LspFindLocations('ccls', false, "$ccls
 # nmap <localleader>C <scriptcmd>g:CocLocations("ccls", "$ccls/call", {"callee": v:true})<cr>
 # # member
 # nmap <localleader>m <scriptcmd>g:CocLocations("ccls", "$ccls/member")<cr>
-
-

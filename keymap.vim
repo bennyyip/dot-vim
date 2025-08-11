@@ -320,7 +320,7 @@ import autoload 'term.vim'
 xnoremap <expr> <c-q> term.Send()
 nnoremap <expr> <c-q> term.Send()
 nnoremap <expr> <c-q><c-q> term.Send() .. '_'
-imap <c-q> <ESC>m`<c-q><c-q>``a
+imap <c-q> <ESC><c-q><c-q>a
 tnoremap <F1> <C-W>N
 tnoremap <C-W><C-W> <C-W>.
 # misc [[[1
@@ -365,6 +365,20 @@ xnoremap <silent> <expr> <leader>v SourceVim()
 nnoremap <silent> gX  :call os#Gx()<CR>
 nnoremap <silent> gof :call os#FileManager()<CR>
 nnoremap <silent> got :call os#Terminal()<CR>
-
+# obsidian [[[1
+def DailyNote()
+  const filename = expand(g:obsidian_vault .. "/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')
+  echom filename
+  if !filereadable(filename)
+    echom "Create daily note in obsidian first."
+    return
+  endif
+  # const daily_note_dir = fnamemodify(filename, ':h')
+  # if !isdirectory(daily_note_dir)
+  #   call mkdir(daily_note_dir, 'p')
+  # endif
+  fnameescape(filename)->buf.EditInTab()
+enddef
+nnoremap <leader>V :call <SID>DailyNote()<CR>
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
