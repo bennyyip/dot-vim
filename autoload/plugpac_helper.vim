@@ -38,7 +38,7 @@ export def PackRcPre(pack: string)
 enddef
 
 def RcPath(name: string, prefix: string = ''): string
-  return $"{g:plugpac_plugin_conf_path}/{prefix}{substitute(name, '\.n\?vim$', '', '')}.vim"
+  return $"{g:plugpac_plugin_conf_path}/{prefix}{substitute(name, '\.n\?vim$', '', '')}.vim"->expand()
 enddef
 
 export def PackUnusedRC(): list<string>
@@ -46,3 +46,4 @@ export def PackUnusedRC(): list<string>
   const rcs = minpac#getpluglist()->keys()->mapnew((_, k) => [RcPath(k), RcPath(k, 'pre-')])->flattennew()
   return globpath(g:plugpac_plugin_conf_path, "*", 0, 1)->filter((_, x) => rcs->index(x) == -1)
 enddef
+

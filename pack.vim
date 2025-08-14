@@ -112,7 +112,7 @@ else
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif
-  Pack 'girishji/scope.vim', { type: 'opt' }
+  # Pack 'girishji/scope.vim', { type: 'opt' }
   Pack 'bennyyip/miniterm.vim'
   # Motion and Edit [[[2
   Pack 'machakann/vim-swap' # g, g. gs gS
