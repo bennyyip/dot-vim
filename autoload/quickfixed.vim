@@ -66,6 +66,7 @@ function! quickfixed#print()
   echohl None
 endfunction
 
+
 function! quickfixed#older()
   call s:history(0)
 endfunction

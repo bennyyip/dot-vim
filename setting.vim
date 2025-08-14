@@ -12,13 +12,6 @@ set ruler
 set belloff=all shortmess=aoOTIc
 set display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
-set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20
-set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi,*~,*.py[co],__pycache__
-set complete-=i # disable scanning included files
-set complete-=t # disable searching tags
-# set completeopt=menu,longest,menuone,popup,noselect
-set completeopt=menu,popup,preview
-set completepopup=highlight:Pmenu,border:off
 set suffixes+=.a,.1,.class
 set isfname-==
 set path=.,,,**

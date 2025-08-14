@@ -4,7 +4,7 @@ if expand('%:p')->stridx(g:obsidian_vault->expand()) != 0
   finish
 endif
 
-setbufvar('', '&path', g:obsidian_vault .. '/**,.,,**')
+setbufvar('', '&path', g:obsidian_vault .. '/**')
 
 def GotoObsidian()
   const pos = getpos('.')
@@ -21,7 +21,8 @@ def IncludeExpr(): string
   if cur[1] == head[0] && head[0] == tail[0] && head[1] < tail[1] && head[1] <= cur[2]
     const len = tail[1] - head[1] - 2
     const line = getline('.')
-    return strpart(line, head[1] + 1, len) .. '.md'
+    const ret = strpart(line, head[1] + 1, len) .. '.md'
+    return ret
   else
     return v:fname
   endif

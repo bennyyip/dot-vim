@@ -7,7 +7,11 @@ sp.OptionsSet({borderhighlight: ['Identifier']})
 
 def Fd(dir: string = "")
   if executable("fd")
-    fuzzy.File($'fd --hidden -tf --follow . {dir}')
+    fuzzy.File($'fd . --path-separator / --type f --hidden --follow --exclude .git {dir}')
+  elseif executable("fdfind")
+    fuzzy.File($'fdfind . --path-separator / --type f --hidden --follow --exclude .git {dir}')
+  elseif executable("rg")
+    fuzzy.File($'rg --path-separator / --files --hidden --glob !.git {dir}')
   else
     fuzzy.File(fuzzy.FindCmd(dir))
   endif

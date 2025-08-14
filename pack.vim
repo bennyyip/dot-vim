@@ -62,7 +62,7 @@ if g:minimal_plugins
   g:loaded_netrwPlugin = 0
 else
   # Lab [[[2
-  Pack 'rhysd/vim-gfm-syntax'
+  Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
   Pack 'mg979/vim-visual-multi'
   Pack 'ubaldot/vim9-conversion-aid'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
@@ -75,7 +75,7 @@ else
   Pack 'Konfekt/vim-alias'
   # Pack 'andymass/vim-matchup'
   Pack 'nickspoons/vim-movefast'
-  Pack 'airblade/vim-rooter', { 'type': 'start' } # <leader>r
+  Pack 'airblade/vim-rooter', { 'type': 'opt' } # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
   # Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
   Pack 'bennyyip/tasks.vim'
@@ -112,7 +112,7 @@ else
   if !is_win
     Pack 'lilydjwg/fcitx.vim'
   endif
-  Pack 'girishji/scope.vim'
+  Pack 'girishji/scope.vim', { type: 'opt' }
   Pack 'bennyyip/miniterm.vim'
   # Motion and Edit [[[2
   Pack 'machakann/vim-swap' # g, g. gs gS

@@ -13,3 +13,6 @@ enddef
 
 noremap <F9> <scriptcmd>Rerun()<CR>
 
+command -nargs=+ -complete=shellcmdline Shf {
+  execute "Sh " .. (<q-args>) ..  ' ' .. shellescape(expand("%:p"))
+}

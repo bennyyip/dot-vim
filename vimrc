@@ -8,6 +8,7 @@ g:minimal_plugins = v:false
 $v = $HOME .. (is_win ? '\vimfiles' : '/.vim')
 $VIMSTATE = $HOME .. '/.local/state/vim/'
 $VIMRC = $v .. '/vimrc'
+$RIPGREP_CONFIG_PATH = $HOME .. '/.ripgreprc'
 
 g:mapleader   = "\<Space>"
 g:localleader = "\\"

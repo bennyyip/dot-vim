@@ -80,6 +80,7 @@ if executable('ruff')
     filetype: 'python',
     name: 'ruff',
     path: 'ruff',
+    # args: ['server', '-v', '--config', $HOME .. '/ruff.toml']
     args: ['server']
   })
 endif
