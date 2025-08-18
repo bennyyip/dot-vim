@@ -246,6 +246,10 @@ def SpellOptions(): string
 enddef
 nnoremap yos :setlocal <C-R>=<SID>SpellOptions()<CR><CR>
 # Buffer navigation
+nnoremap <silent> [a :<C-U><C-R>=v:count1<CR>previous<CR>
+nnoremap <silent> ]a :<C-U><C-R>=v:count1<CR>next<CR>
+nnoremap <silent> [A :first<CR>
+nnoremap <silent> ]A :last<CR>
 nnoremap <silent> [b :<C-U><C-R>=v:count1<CR>bprevious<CR>
 nnoremap <silent> ]b :<C-U><C-R>=v:count1<CR>bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
@@ -274,14 +278,19 @@ nnoremap <silent> ]D :lnfile<CR>
 def EditFileByOffset(num: number, first_or_last: number = 0)
   var file = expand('%:p')
 
+  const sep = has('win32') ? '\' : '/'
+
   if empty(file)
-    file = getcwd() .. '/'
+    file = getcwd() .. sep
   endif
 
   const path = fnamemodify(file, ':h')
+
+  const filter_suffixes = substitute(escape(&suffixes, '~.*$^'), ',', '$\\|', 'g') .. '$'
+
   const files = path
-    ->readdirex( (x) => x.type == 'file')
-    ->map((k, v) => fnamemodify($'{path}/{v.name}', ':p')->expand())
+    ->readdirex((x) => x.type == 'file' && x.name !~# filter_suffixes)
+    ->map((k, v) => fnamemodify($'{path}{sep}{v.name}', ':p'))
     ->filter((k, v) => v != '')
 
   var idx = index(files, file)

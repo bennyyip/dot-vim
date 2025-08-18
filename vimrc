@@ -26,6 +26,7 @@ g:loaded_vimballPlugin    = 1
 g:loaded_zipPlugin        = 1
 g:loaded_netrw            = 1
 g:loaded_netrwPlugin      = 1
+g:loaded_tutor_mode_plugin = 1
 
 g:load_black = 1
 g:loaded_fzf = 1

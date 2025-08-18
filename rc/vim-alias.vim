@@ -13,6 +13,7 @@ Alias cm   Compiler
 Alias lcm  LCompiler
 Alias qf   AsyncQf
 Alias ve   verbose
+Alias vf   vertical\ sfind
 " Alias Help help
 Alias Wa   wa
 Alias Wq   wq

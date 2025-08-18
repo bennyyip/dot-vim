@@ -62,9 +62,9 @@ if g:minimal_plugins
   g:loaded_netrwPlugin = 0
 else
   # Lab [[[2
-  Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
-  Pack 'mg979/vim-visual-multi'
-  Pack 'ubaldot/vim9-conversion-aid'
+  # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
+  # Pack 'mg979/vim-visual-multi'
+  Pack 'ubaldot/vim9-conversion-aid', { 'on': 'Vim9Convert' }
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'chrisbra/vim_faq'
   # Pack 'yegappan/mru'
@@ -75,7 +75,7 @@ else
   Pack 'Konfekt/vim-alias'
   # Pack 'andymass/vim-matchup'
   Pack 'nickspoons/vim-movefast'
-  Pack 'airblade/vim-rooter', { 'type': 'opt' } # <leader>r
+  Pack 'airblade/vim-rooter' # <leader>r
   Pack 'mhinz/vim-startify', { 'type': 'start' }
   # Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
   Pack 'bennyyip/tasks.vim'
@@ -152,25 +152,18 @@ else
   # Pack 'rhysd/devdocs.vim'
   Pack 'Shiracamus/vim-syntax-x86-objdump-d'
   Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-  Pack 'tikhomirov/vim-glsl', { 'for': 'glsl' }
-  Pack 'chrisbra/csv.vim', { 'type': 'opt' }
+  Pack 'chrisbra/csv.vim'
   Pack 'pearofducks/ansible-vim'
 
   Pack 'tridactyl/vim-tridactyl'
 
   Pack 'bfrg/vim-jq'
   Pack 'bfrg/vim-jqplay'
-  Pack 'vim-python/python-syntax'
   Pack 'lervag/vimtex'
-  Pack 'elkasztano/nushell-syntax-vim'
-  # Typescript [[[3
-  # Pack 'leafgarland/typescript-vim', { 'for': 'typescript' }
-  Pack 'MaxMEllon/vim-jsx-pretty'
   # Web [[[3
+  Pack 'MaxMEllon/vim-jsx-pretty'
   Pack 'BourgeoisBear/clrzr'
   # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
-  # Pack 'othree/html5.vim', { 'for': 'html' }
-  # Pack "hail2u/vim-css3-syntax", { 'for': 'css' }
   # Markup [[[3
   if is_win
     # Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }

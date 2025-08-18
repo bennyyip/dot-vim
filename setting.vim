@@ -12,7 +12,7 @@ set ruler
 set belloff=all shortmess=aoOTIc
 set display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
-set suffixes+=.a,.1,.class
+set suffixes+=.a,.1,.class,.mkv,.mp4
 set isfname-==
 set path=.,,,**
 set cpoptions=aABcfFqsZ # -e
@@ -140,6 +140,7 @@ endif
 g:nogx = true
 g:vimsyn_folding = 'f'
 
+g:python_highlight_all = 1
 g:markdown_fenced_languages = ['html', 'datacorejsx=jsx', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml', 'base=yaml']
 
 # this makes sure that shell scripts are highlighted
