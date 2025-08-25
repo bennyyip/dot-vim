@@ -119,7 +119,7 @@ else
   Pack 'yegappan/taglist'
   Pack 'bennyyip/vim-debugstring' # <leader>ds
   Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
-  Pack 'svermeulen/vim-yoink' # :Yanks
+  # Pack 'svermeulen/vim-yoink' # :Yanks
   Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } # gx gxx gxg
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'

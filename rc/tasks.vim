@@ -4,7 +4,7 @@ call extend(g:async_default_opts, {'openqf': 1, 'nojump': 1})
 
 command! -nargs=1 -bang -complete=shellcmdline AsyncCmd call async#cmd(<q-args>, 'cmdline',  {'writelogs': <bang>0})
 command! -nargs=1 -bang -complete=shellcmdline Async    call async#cmd(<q-args>, 'headless', {'writelogs': <bang>0})
-command! -nargs=1 -bang -complete=shellcmdline AsyncQf  call async#cmd(<q-args>, 'quickfix', {'writelogs': <bang>0})
+command! -nargs=1 -bang -complete=shellcmdline AsyncQf  call async#cmd(<q-args>, 'quickfix', {'writelogs': <bang>0, 'nojump': 0})
 
 def Escape(s: string): string
   return substitute(s, "[#]", '\\\0', 'g')

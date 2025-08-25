@@ -16,7 +16,7 @@ if executable('ccls')
           }
         }
       },
-      "clang": {"extraArgs": ["--gcc-toolchain=/usr", "-std=c++20"]},
+      "clang": {"extraArgs": ["--gcc-toolchain=/usr"]},
       "completion": {
         "detailedLabel": true,
         "placeholder": true
@@ -96,7 +96,7 @@ endif
 
 if executable('rust-analyzer')
   lsp_servers->add({
-    name: 'rustlang',
+    name: 'rustanalyzer',
     filetype: ['rust'],
     path: 'rust-analyzer',
     args: [],
@@ -180,6 +180,7 @@ var lsp_options = {
   semanticHighlight: false,
   condensedCompletionMenu: true,
   useQuickfixForLocations: true,
+  ignoreCompleteItemsIsIncomplete: ['rustanalyzer']
 }
 g:LspOptionsSet(lsp_options)
 silent! DisableDiag()

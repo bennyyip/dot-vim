@@ -108,6 +108,7 @@ def F5(cmd: string)
 enddef
 command! -nargs=+ -complete=command F5 F5(<q-args>)
 nnoremap <silent> <F5> <cmd>execute getreg('c')<CR>
+inoremap <silent> <F5> <ESC><cmd>execute getreg('c')<CR>
 nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
 # Term: send comamnd to terminal
 command! -nargs=+ -complete=shellcmdline Term term.SendLine(<q-args>)

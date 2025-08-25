@@ -51,6 +51,7 @@ inoremap <C-h> <scriptcmd>Navigate("h")<CR>
 inoremap <C-j> <scriptcmd>Navigate("j")<CR>
 inoremap <C-k> <scriptcmd>Navigate("k")<CR>
 inoremap <C-l> <scriptcmd>Navigate("l")<CR>
+# inoremap <expr> <C-l> pumvisible() ? "\<C-L>" : Navigate("l")
 tnoremap <C-h> <scriptcmd>Navigate("h")<CR>
 tnoremap <C-j> <scriptcmd>Navigate("j")<CR>
 tnoremap <C-k> <scriptcmd>Navigate("k")<CR>

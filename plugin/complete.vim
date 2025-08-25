@@ -3,7 +3,7 @@ vim9script
 # insert mode completion
 set completepopup=highlight:Pmenu,border:off
 # set completeopt=menu,longest,menuone,popup,noselect
-set completeopt=menu,popup,preview #,fuzzy
+set completeopt=menu,popup,preview,fuzzy
 set completefuzzycollect=keyword
 set complete=.^7,w^5,b^5,u^3
 if has("patch-9.1.1409")
