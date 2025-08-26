@@ -47,14 +47,14 @@ endif
 source $v/pack.vim
 
 set background=dark
-# try
-#   colorscheme gruvbox8_hard
-# catch
+try
+  colorscheme gruvbox8_hard
+catch
   try
     colorscheme retrobox
   catch
     colorscheme elflord
   endtry
-# endtry
+endtry
 
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

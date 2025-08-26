@@ -417,6 +417,6 @@ def DailyNote()
   # endif
   fnameescape(filename)->buf.EditInTab()
 enddef
-nnoremap <leader>V :call <SID>DailyNote()<CR>
+nnoremap <leader>v :call <SID>DailyNote()<CR>
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

@@ -16,7 +16,7 @@ setlocal nolist
 setlocal nonumber norelativenumber
 setlocal statusline=\ YAT
 
-var nop_maps = []
+var nop_maps = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "<CR>", "q"]
 var undo_maps = []
 
 b:undo_ftplugin = undo_opts .. ' | '

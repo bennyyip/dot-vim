@@ -64,6 +64,8 @@ if g:minimal_plugins
   g:loaded_netrwPlugin = 0
 else
   # Lab [[[2
+  Pack 'ubaldot/vim-outline'
+  Pack 'junegunn/goyo.vim', { on: 'Goyo' }
   # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
   # Pack 'mg979/vim-visual-multi'
   Pack 'ubaldot/vim9-conversion-aid'
@@ -176,6 +178,7 @@ else
   Pack 'SirVer/ultisnips'
   # Pack 'Shougo/neosnippet.vim', { type: 'opt'}
   Pack 'honza/vim-snippets', { 'type': 'opt' }
+  Pack 'lifepillar/vim-colortemplate'
 endif
 plugpac#End()
 # plugpac helpers [[[1

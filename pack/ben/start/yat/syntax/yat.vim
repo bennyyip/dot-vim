@@ -8,7 +8,7 @@ if exists("b:current_syntax")
   finish
 endif
 
-let s:sep = '/'
+let s:sep = !exists('+shellslash') || &shellslash ? '/' : '\'
 let s:padding_left = repeat(' ', get(g:, 'yat_padding_left', 3))
 
 syntax sync fromstart
@@ -63,4 +63,3 @@ hi YatSlash guifg=#928374 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 hi YatSpecial guifg=#504945 guibg=NONE guisp=NONE gui=NONE cterm=NONE
 
 let b:current_syntax = 'yat'
-

@@ -32,6 +32,7 @@ Alias mv   RenameI
 Alias zlr  ZellijRun
 Alias zlrf ZellijRunFloat
 Alias fmt  Fmt
+Alias zen  Goyo
 
 
 Alias -range     il   ilist\ /\v/<left><c-r>=Eatchar("\ ")<cr>
