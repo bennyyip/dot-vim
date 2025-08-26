@@ -4,15 +4,17 @@ vim9script
 g:rainbow_active = 1
 
 # let gruvbox8 do it
-# g:rainbow_conf = {
-#       \ 'guifgs': ['#458588', '#d79921', '#d3869b', '#fb4934'],
-#       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-#       \ 'separately': {
-#       \    'ocaml': {
-#       \       'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
-#       \    }
-#       \ }
-#       \}
+if get(g:, "colors_name", "") != 'gruvbox8'
+  g:rainbow_conf = {
+    'guifgs': [ '#d65d0e', '#cc241d', '#b16286', '#458588' ],
+    'ctermfgs': [ '166', 'red', 'magenta', 'blue' ],
+    'separately': {
+      'ocaml': {
+        'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
+      }
+    }
+  }
+endif
 
 # Some colorscheme invoke `syntax reset`, clears `syntax` autocmd
 augroup vimrc

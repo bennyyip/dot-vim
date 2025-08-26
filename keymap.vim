@@ -208,10 +208,13 @@ nnoremap <leader>q <scriptcmd>ToggleQF()<CR>
 nnoremap <leader>l <scriptcmd>ToggleLoc()<CR>
 # file, buffer [[[1
 nnoremap <leader>fs <scriptcmd>utils.KeepChangeMarksExec('update')<CR>
-nnoremap <silent> <leader>fy :call os#Yank(expand("%:t"))<CR>:echo "buffer filename copied"<CR>
-nnoremap <silent> <leader>fP :call os#Yank(expand("%:p"))<CR>:echo "buffer path copied"<CR>
+nnoremap <silent> <leader>fY :call os#Yank(expand("%:p:t"))<CR>:echo $"{(expand('%:p:t'))} copied"<CR>
+nnoremap <silent> <leader>fy :call os#Yank(expand("%:p"))<CR>:echo $"{expand('%:p')} copied"<CR>
+nnoremap <silent> <leader>dY :call os#Yank(expand("%:p:h:t"))<CR>:echo $"{expand('%:p:h:t')} copied"<CR>
+nnoremap <silent> <leader>dy :call os#Yank(expand("%:p:h"))<CR>:echo $"{expand('%:p:h')} copied"<CR>
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
+
 
 nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>

@@ -22,7 +22,7 @@ g:lightline = {
   },
 }
 
-g:lightline.colorscheme = 'gruvbox9'
+g:lightline.colorscheme = 'retrobox'
 
 def g:LightlineFilename(): string
   const modified =  &modified ? '+' : &modifiable ? '' : '-'

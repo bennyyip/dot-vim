@@ -44,7 +44,9 @@ call plugpac#Begin({
 })
 Pack 'k-takata/minpac', {'type': 'opt'}
 
-Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
+if get(g:, "colors_name", "") == 'gruvbox8'
+  Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
+endif
 if is_ssh
   Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
 endif
@@ -64,7 +66,7 @@ else
   # Lab [[[2
   # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
   # Pack 'mg979/vim-visual-multi'
-  Pack 'ubaldot/vim9-conversion-aid', { 'on': 'Vim9Convert' }
+  Pack 'ubaldot/vim9-conversion-aid'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'chrisbra/vim_faq'
   # Pack 'yegappan/mru'
@@ -76,7 +78,7 @@ else
   # Pack 'andymass/vim-matchup'
   Pack 'nickspoons/vim-movefast'
   Pack 'airblade/vim-rooter' # <leader>r
-  Pack 'mhinz/vim-startify', { 'type': 'start' }
+  # Pack 'mhinz/vim-startify', { 'type': 'start' }
   # Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
   Pack 'bennyyip/tasks.vim'
   # Pack 'romainl/vim-qf' # { } H L
