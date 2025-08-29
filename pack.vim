@@ -54,7 +54,7 @@ else
   Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
 endif
 Pack 'bootleq/vim-cycle'
-Pack 'itchyny/lightline.vim'
+# Pack 'itchyny/lightline.vim', { type: 'opt' }
 Pack 'bennyyip/vim-sandwich', { type: 'start' }
 
 if g:minimal_plugins

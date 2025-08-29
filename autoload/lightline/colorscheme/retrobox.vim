@@ -1,66 +1,68 @@
-" ------------------------------------------------------------------------------------------------------------
-" File: retrobox.vim
-" Description: Retro groove color scheme similar to gruvbox originally designed by morhetz <morhetz@gmail.com>
-" Author: Prateek Tade <prateek.tade@gmail.com>, ported from gruvbox8 of Lifepillar <lifepillar@lifepillar.me>
-" Source: https://github.com/itchyny/lightline.vim
-" Last Modified: 18 Dec 2022
-" ------------------------------------------------------------------------------------------------------------
+vim9script
 
-if lightline#colorscheme#background() ==# 'dark'
-  let s:bg0 =    ['#1c1c1c', 234]
-  let s:bg1 =    ['#3c3836', 237]
-  let s:bg2 =    ['#504945', 239]
-  let s:bg4 =    ['#7c6f64', 243]
-  let s:fg1 =    ['#ebdbb2', 187]
-  let s:fg4 =    ['#a89984', 137]
-  let s:red =    ['#fb4934', 203]
-  let s:yellow = ['#fabd2f', 214]
-  let s:blue =   ['#82a598', 109]
-  let s:aqua =   ['#8ec07c', 107]
-  let s:orange = ['#fe8019', 208]
-  let s:green =  ['#b8bb26', 142]
-else
-  let s:bg0 =    ['#fbf1c7', 230]
-  let s:bg1 =    ['#ebdbb2', 187]
-  let s:bg2 =    ['#e5d4b1', 188]
-  let s:bg4 =    ['#a89984', 137]
-  let s:fg1 =    ['#3c3836', 237]
-  let s:fg4 =    ['#7c6f64', 243]
-  let s:red =    ['#9d0006', 124]
-  let s:yellow = ['#b57614', 172]
-  let s:blue =   ['#076678',  23]
-  let s:aqua =   ['#427b58',  29]
-  let s:orange = ['#ff5f00', 202]
-  let s:green =  ['#79740e',  64]
-endif
+# ------------------------------------------------------------------------------------------------------------
+# File: retrobox.vim
+# Description: Retro groove color scheme similar to gruvbox originally designed by morhetz <morhetz@gmail.com>
+# Author: Prateek Tade <prateek.tade@gmail.com>, ported from gruvbox8 of Lifepillar <lifepillar@lifepillar.me>
+# Source: http//github.com/itchyny/lightline.vim
+# Last Modified: 18 Dec 2022
+# ------------------------------------------------------------------------------------------------------------
 
-let s:p = {'normal':{}, 'inactive':{}, 'insert':{}, 'replace':{}, 'visual':{}, 'tabline':{}}
+# if lightline#colorscheme#background() ==# 'dark'
+  var  bg0 =    ['#1c1c1c', 234]
+  var  bg1 =    ['#3c3836', 237]
+  var  bg2 =    ['#504945', 239]
+  var  bg4 =    ['#7c6f64', 243]
+  var  fg1 =    ['#ebdbb2', 187]
+  var  fg4 =    ['#a89984', 137]
+  var  red =    ['#fb4934', 203]
+  var  yellow = ['#fabd2f', 214]
+  var  blue =   ['#82a598', 109]
+  var  aqua =   ['#8ec07c', 107]
+  var  orange = ['#fe8019', 208]
+  var  green =  ['#b8bb26', 142]
+# else
+#   var bg0 =    ['#fbf1c7', 230]
+#   var bg1 =    ['#ebdbb2', 187]
+#   var bg2 =    ['#e5d4b1', 188]
+#   var bg4 =    ['#a89984', 137]
+#   var fg1 =    ['#3c3836', 237]
+#   var fg4 =    ['#7c6f64', 243]
+#   var red =    ['#9d0006', 124]
+#   var yellow = ['#b57614', 172]
+#   var blue =   ['#076678',  23]
+#   var aqua =   ['#427b58',  29]
+#   var orange = ['#ff5f00', 202]
+#   var green =  ['#79740e',  64]
+# endif
 
-let s:p.normal.left = [ [ s:bg0, s:fg1, 'bold' ], [ s:fg4, s:bg2 ] ]
-let s:p.normal.right = [ [ s:bg0, s:fg1], [ s:fg4, s:bg2 ] ]
-let s:p.normal.middle = [ [ s:fg4, s:bg1 ] ]
-let s:p.normal.error = [ [ s:bg0, s:orange ] ]
-let s:p.normal.warning = [ [ s:bg2, s:yellow ] ]
+var p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-let s:p.inactive.right = [ [ s:bg4, s:bg1 ], [ s:bg4, s:bg1 ] ]
-let s:p.inactive.left =  [ [ s:bg4, s:bg1 ], [ s:bg4, s:bg1 ] ]
-let s:p.inactive.middle = [ [ s:bg4, s:bg1 ] ]
+p.normal.left = [ [ bg0, fg1, 'bold' ], [ fg4, bg2 ] ]
+p.normal.right = [ [ bg0, fg1], [ fg4, bg2 ] ]
+p.normal.middle = [ [ fg4, bg1 ] ]
+p.normal.error = [ [ bg0, orange ] ]
+p.normal.warning = [ [ bg2, yellow ] ]
 
-let s:p.insert.left = [ [ s:bg0, s:blue, 'bold' ], [ s:fg1, s:bg2 ] ]
-let s:p.insert.right = [ [ s:bg0, s:blue ], [ s:fg1, s:bg2 ] ]
-let s:p.insert.middle = [ [ s:fg4, s:bg2 ] ]
+p.inactive.right = [ [ bg4, bg1 ], [ bg4, bg1 ] ]
+p.inactive.left =  [ [ bg4, bg1 ], [ bg4, bg1 ] ]
+p.inactive.middle = [ [ bg4, bg1 ] ]
 
-let s:p.replace.left = [ [ s:bg0, s:red, 'bold' ], [ s:fg1, s:bg2 ] ]
-let s:p.replace.right = [ [ s:bg0, s:red ], [ s:fg1, s:bg2 ] ]
-let s:p.replace.middle = [ [ s:fg4, s:bg2 ] ]
+p.insert.left = [ [ bg0, blue, 'bold' ], [ fg1, bg2 ] ]
+p.insert.right = [ [ bg0, blue ], [ fg1, bg2 ] ]
+p.insert.middle = [ [ fg4, bg2 ] ]
 
-let s:p.visual.left = [ [ s:bg0, s:yellow, 'bold' ], [ s:bg0, s:bg4 ] ]
-let s:p.visual.right = [ [ s:bg0, s:yellow ], [ s:bg0, s:bg4 ] ]
-let s:p.visual.middle = [ [ s:fg4, s:bg1 ] ]
+p.replace.left = [ [ bg0, red, 'bold' ], [ fg1, bg2 ] ]
+p.replace.right = [ [ bg0, red ], [ fg1, bg2 ] ]
+p.replace.middle = [ [ fg4, bg2 ] ]
 
-let s:p.tabline.left = [ [ s:fg4, s:bg2 ] ]
-let s:p.tabline.tabsel = [ [ s:bg0, s:fg4 ] ]
-let s:p.tabline.middle = [ [ s:bg0, s:bg0 ] ]
-let s:p.tabline.right = [ [ s:bg0, s:orange ] ]
+p.visual.left = [ [ bg0, yellow, 'bold' ], [ bg0, bg4 ] ]
+p.visual.right = [ [ bg0, yellow ], [ bg0, bg4 ] ]
+p.visual.middle = [ [ fg4, bg1 ] ]
 
-let g:lightline#colorscheme#retrobox#palette = lightline#colorscheme#flatten(s:p)
+p.tabline.left = [ [ fg4, bg2 ] ]
+p.tabline.tabsel = [ [ bg0, fg4, 'bold' ] ]
+p.tabline.middle = [ [ bg0, bg0 ] ]
+p.tabline.right = [ [ bg0, orange ] ]
+
+g:lightline#colorscheme#retrobox#palette = lightline#colorscheme#flatten(p)
