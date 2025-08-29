@@ -15,10 +15,8 @@ def CustomizeMappings()
   nnoremap <buffer> gb :b<space>
   nnoremap <buffer> gB <scriptcmd>action.BookmarkJumpMenu()<cr>
 
-  noremap <buffer> < <scriptcmd>action.WidenView()<cr>
-  noremap <buffer> > <scriptcmd>action.ShrinkView()<cr>
-  # noremap <buffer> < <scriptcmd>action.WidenView(v:count > 0)<cr>
-  # noremap <buffer> > <scriptcmd>action.ShrinkView(v:count > 0)<cr>
+  noremap <nowait><buffer> > <scriptcmd>action.WidenView()<cr>
+  noremap <nowait><buffer> < <scriptcmd>action.ShrinkView()<cr>
   noremap <buffer> <silent> <BS> <cmd>nohlsearch<CR>
   if plugpac#HasPlugin("LeaderF")
     nmap <buffer> <leader>ff <leader>.

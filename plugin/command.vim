@@ -90,8 +90,6 @@ command! -nargs=? Search {
   setreg('/', $'\V{escape(arg, '\\')}')
   normal! n
 }
-# Inspect: syntax group names under cursor [[[1
-command! Inspect :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 # ]]]
 # Bonly [[[1
 command! Bonly :%bd<BAR>:e %%

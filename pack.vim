@@ -174,7 +174,6 @@ else
   Pack 'SirVer/ultisnips'
   # Pack 'Shougo/neosnippet.vim', { type: 'opt'}
   Pack 'honza/vim-snippets', { 'type': 'opt' }
-  Pack 'lifepillar/vim-colortemplate'
 endif
 plugpac#End()
 # plugpac helpers [[[1

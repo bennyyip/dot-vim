@@ -367,8 +367,6 @@ tnoremap <C-W><C-W> <C-W>.
 nmap z] zo]z
 nmap z[ zo[z
 nnoremap <leader><space> za
-# syntax
-nnoremap <leader>Si  <scriptcmd>echo utils.Syninfo()<cr>
 # diff
 nnoremap <silent><leader>di :windo diffthis<CR>
 nnoremap <silent><leader>du :windo diffupdate<CR>

@@ -22,8 +22,6 @@ g:lightline = {
   },
 }
 
-g:lightline.colorscheme = 'retrobox'
-
 def g:LightlineFilename(): string
   const modified =  &modified ? '+' : &modifiable ? '' : '-'
   const readonly = &readonly ? (is_tty ? 'RO' : "\ue0a2") : ''
