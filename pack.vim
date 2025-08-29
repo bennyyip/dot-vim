@@ -44,9 +44,7 @@ call plugpac#Begin({
 })
 Pack 'k-takata/minpac', {'type': 'opt'}
 
-if get(g:, "colors_name", "") == 'gruvbox8'
-  Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
-endif
+Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
 if is_ssh
   Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
 endif
@@ -80,7 +78,6 @@ else
   # Pack 'andymass/vim-matchup'
   Pack 'nickspoons/vim-movefast'
   Pack 'airblade/vim-rooter' # <leader>r
-  # Pack 'mhinz/vim-startify', { 'type': 'start' }
   # Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
   Pack 'bennyyip/tasks.vim'
   # Pack 'romainl/vim-qf' # { } H L
@@ -100,7 +97,6 @@ else
   Pack 'lfv89/vim-interestingwords'
   Pack 'luochen1990/rainbow'
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-  Pack 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
   Pack 'tpope/vim-characterize'
   Pack 'tpope/vim-repeat', { type: 'start' }
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR

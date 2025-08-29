@@ -55,7 +55,7 @@ set backupext=-vimbackup
 set backupdir=$VIMSTATE/backup/
 set directory=$VIMSTATE/swap/
 set undodir=$VIMSTATE/undo/
-set viminfo='200,/500,<50,s10,h,n$VIMSTATE/info/viminfo
+set viminfo='0,/500,<50,s10,h,n$VIMSTATE/info/viminfo
 set viewdir=$VIMSTATE/view
 
 for d in ['backup', 'swap', 'undo', 'info', 'view']

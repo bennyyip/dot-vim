@@ -6,15 +6,15 @@ g:yat_padding_left = 3
 
 g:yat_header = [
   "             ________ ++     ________             ",
-  "            /VVVVVVVV\++++  /VVVVVVVV\\           ",
-  "            \VVVVVVVV/++++++\VVVVVVVV/            ",
+  '            /VVVVVVVV\++++  /VVVVVVVV\            ',
+  '            \VVVVVVVV/++++++\VVVVVVVV/            ',
   "             |VVVVVV|++++++++/VVVVV/'             ",
   "             |VVVVVV|++++++/VVVVV/'               ",
   "            +|VVVVVV|++++/VVVVV/'+                ",
   "          +++|VVVVVV|++/VVVVV/'+++++              ",
   "        +++++|VVVVVV|/VVV___++++++++++            ",
   "          +++|VVVVVVVVVV/##/ +_+_+_+_             ",
-  "            +|VVVVVVVVV___ +/#_#,#_#,\\           ",
+  '            +|VVVVVVVVV___ +/#_#,#_#,\            ',
   "             |VVVVVVV//##/+/#/+/#/'/#/            ",
   "             |VVVVV/'+/#/+/#/+/#/ /#/             ",
   "             |VVV/'++/#/+/#/ /#/ /#/              ",
@@ -22,8 +22,9 @@ g:yat_header = [
   "                      ++                          ",
   "                                                  ",
   "                                                  ",
-  "                vi vi vi, the editor of the beast.",
+  "           vi vi vi, the editor of the beast.     ",
 ]
+
 
 command! Yat yat.Open()
 
