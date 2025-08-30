@@ -41,6 +41,9 @@ import autoload "../autoload/utils.vim"
 def JumpToLastPosition() # [[[2
   const last_pos = getpos("'\"")
   if last_pos[1] >= 1 && last_pos[1] <= line('$')
+      && &filetype !~# 'commit'
+      && index(['xxd', 'gitrebase'], &filetype) == -1
+      && !&diff
     setpos('.', getpos("'\""))
   endif
 enddef
@@ -75,7 +78,6 @@ command! -nargs=0 Fmt Format()
 augroup vimrc
   autocmd FocusLost * :silent! wa
   autocmd FocusGained * silent! checktime
-  autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufReadPost * JumpToLastPosition()
   autocmd BufWritePost * FormatOnSave()
 
@@ -102,6 +104,8 @@ augroup vimrc
   # except 'help' files
   autocmd BufEnter *.txt if &filetype == 'help' | setlocal nospell | endif
 
+  autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
+  autocmd BufEnter * if &buftype == 'terminal' | wall | endif
 augroup END
 
 # FileType

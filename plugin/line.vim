@@ -91,9 +91,9 @@ def LineFilename(): string
 enddef
 
 def LineFugitive(): string
-  if !plugpac#HasPlugin('vim-fugitive')
-    return ''
-  endif
+  # if !exists('*fugitive#Head')
+  #   return ''
+  # endif
   const mark = (is_tty ? '' : "\ue0a0")
   const branch = fugitive#Head()
   if branch == 'master' || branch == 'main'
@@ -109,7 +109,7 @@ def LinePluginStatus(): string
   # const coc_status = exists("*coc#status") ? coc#status() : ''
   # const coc_current_function = get(b:, 'coc_current_function', '')
   # return [coc_current_function, async_status, coc_status]
-  const tagname = plugpac#HasPlugin('taglist') ? taglist#Tlist_Get_Tagname_By_Line() : ''
+  const tagname = exists('*taglist#Tlist_Get_Tagname_By_Line') ? taglist#Tlist_Get_Tagname_By_Line() : ''
   return [tagname, async_status]->FilterAndJoin(' | ')
 enddef
 
@@ -126,10 +126,10 @@ def LineFileInfo(): string
 enddef
 
 def g:StatusLine(): string
-  const inactive = g:statusline_winid != win_getid(winnr())
+  const inactive = get(g:, 'statusline_winid', win_getid(winnr())) != win_getid(winnr())
   if inactive
-    return [
-      LineFilename(), # filename
+    return '%#BenStl_middle#' .. [
+      '%t', # filename
       '%=', # middle
       '%p%%', # percent
       '%l:%c', # lineinfo
@@ -197,10 +197,10 @@ def Highlight()
 
   for part in ['left', 'right']
     var p = palette.normal[part]
-    for [i, r] in p->items()
-      exec $'hi BenStl_{part}{i} guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
-    endfor
-    var r = palette.normal['middle'][0]
+    var r = p[0]
+    exec $'hi BenStl_{part}{0} guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
+    exec $'hi BenStl_{part}{1} guifg={r[1]} guibg={p[1][1]} ctermfg={r[3]} ctermbg={p[1][2]} {HiStyle(r)}'
+    r = palette.normal['middle'][0]
     exec $'hi BenStl_{part}{2} guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
   endfor
 
@@ -212,10 +212,15 @@ def Highlight()
 
   var r = palette.normal['middle'][0]
   exec $'hi BenStl_middle guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
+  exec $'hi StatusLine guifg={r[1]} guibg={r[0]} ctermfg={r[3]} ctermbg={r[2]} {HiStyle(r)}'
+  exec $'hi StatusLineNC guifg={r[1]} guibg={r[0]} ctermfg={r[3]} ctermbg={r[2]} {HiStyle(r)}'
 
 enddef
 
-set tabline=%!g:Tabline()
-set statusline=%!g:StatusLine()
-
-Highlight()
+augroup vimrc
+  autocmd VimEnter * {
+    set tabline=%!g:Tabline()
+    set statusline=%!g:StatusLine()
+    call Highlight()
+  }
+augroup END

@@ -144,8 +144,8 @@ command! LspDisableDiag DisableDiag()
 command! LspEnableDiag EnableDiag()
 
 def BindKeys()
-  nnoremap <silent><buffer> gd        <Cmd>call MarkPush()<cr>:execute v:count  .. 'LspGotoDefinition'<CR>
-  nnoremap <silent><buffer> 'd   <Cmd>call MarkPush()<cr>:execute 'vertical '  .. v:count .. 'LspGotoDefinition'<CR>
+  nnoremap <silent><buffer> gd        <Cmd>execute v:count  .. 'LspGotoDefinition'<CR>
+  nnoremap <silent><buffer> 'd   <Cmd>execute 'vertical '  .. v:count .. 'LspGotoDefinition'<CR>
   # nnoremap <silent><buffer> gi        <Cmd>LspGotoImpl<CR>
   nnoremap <silent><buffer> gt        <Cmd>LspGotoTypeDef<CR>
   nnoremap <silent><buffer> gr        <Cmd>LspShowReferences<CR>

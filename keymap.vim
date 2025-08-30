@@ -16,6 +16,9 @@ nnoremap <c-u> <c-u>zz
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
+# tag stack
+nnoremap H <cmd>pop<CR>
+nnoremap L <cmd>tag<CR>
 # edit [[[1
 # open q:
 set cedit=<C-Y>
@@ -317,42 +320,9 @@ nnoremap <silent> [f <scriptcmd>EditFileByOffset(-v:count1)<CR>
 nnoremap <silent> ]f <scriptcmd>EditFileByOffset(v:count1)<CR>
 nnoremap <silent> [F <scriptcmd>EditFileByOffset(0, -1)<CR>
 nnoremap <silent> ]F <scriptcmd>EditFileByOffset(0, 1)<CR>
-# [c ]c for diff
-
-
 # move lines
 xnoremap <tab> :sil! m '>+1<CR>gv
 xnoremap <s-tab> :sil! m '<-2<CR>gv
-# mark ring [[[1
-var mark_ring = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
-var mark_ring_i = 0
-
-def g:MarkPush()
-    mark_ring[mark_ring_i] = {'path': expand('%:p'), 'line': line('.'), 'col': col('.')}
-    mark_ring_i = (mark_ring_i + 1) % len(mark_ring)
-enddef
-
-def g:MarkPop(d: number)
-    mark_ring[mark_ring_i] = {'path': expand('%:p'), 'line': line('.'), 'col': col('.')}
-    mark_ring_i = (mark_ring_i + d + len(mark_ring)) %  len(mark_ring)
-    var mark = mark_ring[mark_ring_i]
-    if !has_key(mark, 'path')
-        echo 'empty mark_ping'
-        return
-    endif
-    if mark.path !=# expand('%:p')
-        exec 'e ' .. fnameescape(mark.path)
-    endif
-    call cursor(mark.line, mark.col)
-enddef
-
-nnoremap H <scriptcmd>g:MarkPop(-1)<CR>
-nnoremap L <scriptcmd>g:MarkPop(1)<CR>
-nnoremap <X1Mouse> <scriptcmd>g:MarkPop(-1)<CR>
-nnoremap <X2Mouse> <scriptcmd>g:MarkPop(1)<CR>
-# nnoremap mm <scriptcmd>g:MarkPush()<CR>
-
-# nnoremap <c-m> <scriptcmd>feedkeys($"yyp{getpos('.')[2] - 1}l")<CR>
 # terminal [[[1
 # set termwinkey=<C-\\>
 import autoload 'term.vim'
