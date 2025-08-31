@@ -17,3 +17,10 @@ set iminsert=2
 
 g:netrw_cygwin = 0
 g:netrw_silent = 1
+
+if has('sodium') && has("patch-9.0.1481")
+  set cryptmethod=xchacha20v2
+else
+  set cryptmethod=blowfish2
+endif
+

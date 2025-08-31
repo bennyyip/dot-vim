@@ -175,6 +175,7 @@ highlight link LspSigActiveParameter Type
 var lsp_options = {
   autoComplete: false,
   omniComplete: true,
+  # completionMatcher: 'fuzzy',
   usePopupInCodeAction: true,
   showSignature: false,
   semanticHighlight: false,

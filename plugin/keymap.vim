@@ -4,6 +4,7 @@ import autoload 'text.vim'
 import autoload 'buf.vim'
 import autoload 'os.vim'
 const is_gvim = has('gui_running')
+
 # move [[[1
 inoremap <silent> <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
 inoremap <silent> <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
@@ -341,6 +342,8 @@ nnoremap <leader><space> za
 nnoremap <silent><leader>di :windo diffthis<CR>
 nnoremap <silent><leader>du :windo diffupdate<CR>
 nnoremap <silent><leader>do :windo diffoff<cr>
+nnoremap <silent> [w <cmd>set diffopt-=iwhiteall,iblank<BAR>echo &diffopt<CR>
+nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall,iblank<BAR>echo &diffopt<CR>
 # resolve conflict. left and right
 nnoremap <silent>gh <cmd>diffget //2<CR>
 nnoremap <silent>gH <cmd>diffget //3<CR>
@@ -350,8 +353,8 @@ xnoremap <c-o> :diffget<cr>
 # tags
 nnoremap '] <c-w>v<c-w>]
 # vimrc
-nnoremap <silent><leader>fed :e $VIMRC<CR>
-nnoremap <silent><leader>fee :source $VIMRC<CR>
+nnoremap <silent><leader>fed :e $MYVIMRC<CR>
+nnoremap <silent><leader>fee :source $MYVIMRC<CR>
 # source vimscript (operator)
 def SourceVim(...args: list<any>): string
     if len(args) == 0

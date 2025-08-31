@@ -1,23 +1,24 @@
 vim9script
 
+const minimal_plugins = get(g:, 'minimal_plugins', false)
 const is_ssh = $SSH_CONNECTION != ""
 const is_win = has('win32')
 
-const package_name = g:minimal_plugins ? 'minimal' : 'minpac'
-const minpac_dir = $'{$v}/pack/{package_name}/opt/minpac'
+const package_name = minimal_plugins ? 'minimal' : 'minpac'
+const minpac_dir = $'{$MYVIMDIR}/pack/{package_name}/opt/minpac'
 if !isdirectory(minpac_dir)
   silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
 endif
 
-g:plugpac_plugin_conf_path = $v .. '/rc'
+g:plugpac_plugin_conf_path = $MYVIMDIR .. '/rc'
 g:plugpac_default_type = 'delay'
 # plugins [[[1
 # Builtin [[[2
 
-if !is_win
-  # :Man <leader>K
-  runtime! ftplugin/man.vim
-endif
+# if !is_win
+#   # :Man <leader>K
+#   runtime! ftplugin/man.vim
+# endif
 
 packadd! cfilter
 try
@@ -31,12 +32,11 @@ packadd! matchit
 # ]]]
 import autoload "utils.vim"
 def AfterFun()
-  vim9cmd source $v/keymap.vim
   utils.MapMeta()
 enddef
 call plugpac#Begin({
   # progress_open: tab',
-  quiet: g:minimal_plugins,
+  quiet: minimal_plugins,
   package_name: package_name,
   status_open: 'vertical',
   verbose: 2,
@@ -57,7 +57,7 @@ Pack 'bootleq/vim-cycle'
 # Pack 'itchyny/lightline.vim', { type: 'opt' }
 Pack 'bennyyip/vim-sandwich', { type: 'start' }
 
-if g:minimal_plugins
+if minimal_plugins
   g:loaded_netrw       = 0
   g:loaded_netrwPlugin = 0
 else
@@ -120,7 +120,7 @@ else
   Pack 'bennyyip/vim-debugstring' # <leader>ds
   Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
   # Pack 'svermeulen/vim-yoink' # :Yanks
-  Pack 'tommcdo/vim-exchange', { 'on': '<Plug>(Exchange)' } # gx gxx gxg
+  Pack 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] } # gx gxx gxg
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'
   Pack 'Konfekt/vim-scratchpad'
@@ -142,7 +142,6 @@ else
   if executable('ctags')
     Pack 'ludovicchabant/vim-gutentags', { type: 'start' }
   endif
-  # Pack 'bennyyip/lsp', { type: 'start', branch: 'dev' }
   Pack 'yegappan/lsp', { type: 'start', branch: 'main' }
 
   Pack 'Konfekt/vim-compilers'
