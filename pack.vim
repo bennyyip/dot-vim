@@ -62,6 +62,7 @@ if minimal_plugins
   g:loaded_netrwPlugin = 0
 else
   # Lab [[[2
+  Pack 'vim/mytermdebug', { type: 'local', on: 'Termdebug' }
   Pack 'ubaldot/vim-outline'
   Pack 'junegunn/goyo.vim', { on: 'Goyo' }
   # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }

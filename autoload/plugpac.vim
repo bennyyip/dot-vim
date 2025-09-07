@@ -124,7 +124,7 @@ export def Add(repo: string, opts: dict<any> = {})
   endif
 
   # `for` and `on` implies optional and override delay
-  if has_key(opts, 'for') || has_key(opts, 'on')
+  if type != 'local' && (has_key(opts, 'for') || has_key(opts, 'on'))
     type = 'opt'
     opts['type'] = 'opt'
   endif
@@ -135,7 +135,7 @@ export def Add(repo: string, opts: dict<any> = {})
 
   repos[repo] = opts
 
-  if !HasPlugin(name)
+  if type != 'local' && !HasPlugin(name)
     timer_start(20, (_) => {
       if !quiet
         echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
@@ -292,6 +292,7 @@ export def Init()
 
   minpac#init(minpac_init_opts)
   for [repo, opts] in items(repos)
+    if opts['type'] == 'local' | continue | endif
     call minpac#add(repo, opts)
   endfor
 

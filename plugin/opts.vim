@@ -35,3 +35,4 @@ g:snips_author = 'Ben Yip'
 g:obsidian_vault = $HOME .. '/Obsidian-Vault'
 
 $RIPGREP_CONFIG_PATH = $HOME .. '/.ripgreprc'
+

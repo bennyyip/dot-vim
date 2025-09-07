@@ -62,9 +62,6 @@ def g:LightlinePluginStatus(): string
   const jobs = get(g:, 'async_jobs', {})
   const async_status = jobs->len() > 0 ? 'Running' : ''
 
-  # const coc_status = exists("*coc#status") ? coc#status() : ''
-  # const coc_current_function = get(b:, 'coc_current_function', '')
-  # return [coc_current_function, async_status, coc_status]
   const tagname = plugpac#HasPlugin('taglist') ? taglist#Tlist_Get_Tagname_By_Line() : ''
   return [tagname, async_status]->FilterAndJoin(' | ')
 enddef

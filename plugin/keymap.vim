@@ -389,5 +389,30 @@ def DailyNote()
   fnameescape(filename)->buf.EditInTab()
 enddef
 nnoremap <leader>v :call <SID>DailyNote()<CR>
-# ]]]
+# popup [[[1
+def ScrollPopup(nlines: number)
+  const winids = popup_list()
+  if len(winids) == 0
+    return
+  endif
+
+  # Ignore hidden popups
+  const prop = popup_getpos(winids[0])
+  if prop.visible != 1
+    return
+  endif
+
+  var firstline = prop.firstline + nlines
+  const buf_lastline = str2nr(trim(win_execute(winids[0], "echo line('$')")))
+  if firstline < 1
+    firstline = 1
+  elseif prop.lastline + nlines > buf_lastline
+    firstline = buf_lastline + prop.firstline - prop.lastline
+  endif
+
+  call popup_setoptions(winids[0], {'firstline': firstline})
+enddef
+nnoremap <DOWN> <scriptcmd>ScrollPopup(3)<CR>
+nnoremap <UP>   <scriptcmd>ScrollPopup(-3)<CR>
+#]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim
