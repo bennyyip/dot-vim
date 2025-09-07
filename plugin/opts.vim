@@ -29,7 +29,7 @@ legacy let c_comment_strings = 1
 g:is_posix = 1
 
 g:python_highlight_all = 1
-g:markdown_fenced_languages = ['html', 'datacorejsx=jsx', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml', 'base=yaml']
+g:markdown_fenced_languages = ['html', 'datacorejsx=jsx', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml', 'base=yaml', 'vimhelp=help']
 
 g:snips_author = 'Ben Yip'
 g:obsidian_vault = $HOME .. '/Obsidian-Vault'

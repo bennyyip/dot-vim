@@ -15,11 +15,6 @@ g:plugpac_default_type = 'delay'
 # plugins [[[1
 # Builtin [[[2
 
-# if !is_win
-#   # :Man <leader>K
-#   runtime! ftplugin/man.vim
-# endif
-
 packadd! cfilter
 try
   # debian 12
@@ -31,16 +26,17 @@ packadd! matchit
 
 # ]]]
 import autoload "utils.vim"
-def AfterFun()
+
+au User PlugPacPost {
   utils.MapMeta()
-enddef
+}
+
 call plugpac#Begin({
   # progress_open: tab',
   quiet: minimal_plugins,
   package_name: package_name,
   status_open: 'vertical',
   verbose: 2,
-  after_hook: AfterFun,
 })
 Pack 'k-takata/minpac', {'type': 'opt'}
 
@@ -124,7 +120,7 @@ else
   Pack 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] } # gx gxx gxg
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'
-  Pack 'Konfekt/vim-scratchpad'
+  Pack 'Konfekt/vim-scratchpad', { type: 'local', on: '<Plug>(ToggleScratchPad)' }
 
   # Pack 'michaeljsmith/vim-indent-object'
 

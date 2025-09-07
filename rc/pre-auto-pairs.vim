@@ -9,4 +9,4 @@ g:AutoPairsMoveExpression = ''
 
 # inoremap <silent> <c-p>s <esc>:call autopairs#Keybinds#IgnoreInsertEnterCmd(":call autopairs#AutoPairsJump()")<CR>a
 
-nnoremap <silent> <Plug>(meta-p) :call autopairs#AutoPairsToggle()<CR>
+nnoremap <silent> <Plug>(meta-p) <scriptcmd>autopairs#AutoPairsToggle()<CR>

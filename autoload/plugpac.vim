@@ -31,6 +31,7 @@ var lazy = { 'ft': {}, 'map': {}, 'cmd': {}, 'delay': {} }
 var repos = {}
 
 var cached_installed_plugins = {}
+var local_plugins = []
 
 var minpac_init_opts = {}
 
@@ -106,8 +107,8 @@ export def End()
         return
       endif
     endfor
-    if minpac_init_opts->has_key('after_hook')
-      minpac_init_opts.after_hook()
+    if exists('#User#PlugpacPost')
+      doauto <nomodeline> User PlugpacPost
     endif
     doautocmd VimEnter
     timer_stop(timer)
@@ -116,7 +117,7 @@ export def End()
 enddef
 
 export def Add(repo: string, opts: dict<any> = {})
-  const name = substitute(repo, '^.*/', '', '')
+  const name = get(opts, 'name', substitute(repo, '^.*/', '', ''))
   const default_type = get(g:, 'plugpac_default_type', 'start')
   var type = get(opts, 'type', default_type)
   if opts->has_key('delay')
@@ -131,11 +132,14 @@ export def Add(repo: string, opts: dict<any> = {})
 
   if type == 'delay'
     opts['type'] = 'opt'
+  elseif type == 'local'
+    local_plugins->add(name)
   endif
+
 
   repos[repo] = opts
 
-  if type != 'local' && !HasPlugin(name)
+  if !HasPlugin(name)
     timer_start(20, (_) => {
       if !quiet
         echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
@@ -172,6 +176,7 @@ export def Add(repo: string, opts: dict<any> = {})
     execute $'source {pre_rc_path}'
   endif
   if filereadable(rc_path)
+    # TODO: all local plugins are opt
     if type == 'delay' || type == 'start'
       lazy.delay[name] = {
         delay: opts->get('delay', 0),
@@ -207,7 +212,7 @@ def GetRcPath(plugin: string, is_pre: bool = false): string
 enddef
 
 export def HasPlugin(plugin: string): bool
-  return has_key(GetInstalledPlugins(), plugin)
+  return has_key(GetInstalledPlugins(), plugin) || index(local_plugins, plugin) >= 0
 enddef
 
 def Assoc(dict: dict<any>, key: string, val: any)
@@ -273,13 +278,13 @@ enddef
 
 def Setup_command()
   command! -bar -nargs=+ Pack call Add(<args>)
-  command! -bar PackInstall call Init() |
-        \ call minpac#update(
-        \ minpac#pluglist
-        \ ->copy()
-        \ ->filter((k, v) => !isdirectory(v.dir .. '/.git'))
-        \ ->keys()
-        \ )
+  command! -bar PackInstall {
+    Init()
+    minpac#pluglist->copy()
+      ->filter((k, v) => !isdirectory(v.dir .. '/.git'))
+      ->keys()
+      ->minpac#update()
+  }
   command! -bar PackUpdate  call Init() | call minpac#update('', {'do': 'call minpac#status()'})
   command! -bar PackClean   call Init() | call minpac#clean()
   command! -bar PackStatus  call Init() | call minpac#status()

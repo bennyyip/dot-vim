@@ -10,6 +10,7 @@ $SHELL = 'bash'
 # set shell=$SHELL
 
 set noshellslash
+set completeslash=slash
 
 set iminsert=2
 &pythonthreedll = expand(substitute(exepath('python.exe'), 'python.exe', 'python3[0-9][0-9].dll', ''))

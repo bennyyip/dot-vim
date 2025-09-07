@@ -91,15 +91,9 @@ if $SSH_CONNECTION == ""
 endif
 nnoremap Y   y$
 xnoremap x  "_d
-# do not overwrite register
-def VisualPaste()
-  setreg('a', getreg('"'))
-  defer setreg('"', getreg('a'))
-  norm! p
-enddef
-xnoremap p <scriptcmd>VisualPaste()<CR>
-# xnoremap p "_dP
-xnoremap <leader>p p
+# do not overwrite register. see :help v_P
+xnoremap p P
+xnoremap P p
 # select what I just pasted
 nnoremap <expr> gp '`[' .. strpart(getregtype(), 0, 1) .. '`]'
 # copy entire file contents to system clipboard
