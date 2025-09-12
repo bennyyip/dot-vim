@@ -59,7 +59,6 @@ if minimal_plugins
 else
   # Lab [[[2
   Pack 'vim/mytermdebug', { type: 'local', on: 'Termdebug' }
-  Pack 'ubaldot/vim-outline'
   Pack 'junegunn/goyo.vim', { on: 'Goyo' }
   # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
   # Pack 'mg979/vim-visual-multi'

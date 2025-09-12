@@ -57,9 +57,9 @@ tnoremap <C-j> <scriptcmd>Navigate("j")<CR>
 tnoremap <C-k> <scriptcmd>Navigate("k")<CR>
 tnoremap <C-l> <scriptcmd>Navigate("l")<CR>
 
-if !empty($ZELLIJ)
-  noremap <Plug>(meta-m) <scriptcmd>ZelljAction("toggle-floating-panes")<CR>
-endif
+# if !empty($ZELLIJ)
+  # noremap <Plug>(meta-m) <scriptcmd>ZelljAction("toggle-floating-panes")<CR>
+# endif
 
 command! -nargs=1 -complete=shellcmdline ZellijRun {
    job_start("zellij run -- " .. <q-args>)

@@ -4,6 +4,7 @@ vim9script
 set completepopup=highlight:Pmenu,border:off
 # set completeopt=menu,longest,menuone,popup,noselect
 set completeopt=menu,popup,preview,fuzzy
+# set completeopt=menuone,popup,preview,preinsert
 set completefuzzycollect=keyword
 set complete=.^7,w^5,b^5,u^3
 # if has("patch-9.1.1409")
@@ -13,9 +14,10 @@ set complete=.^7,w^5,b^5,u^3
 # endif
 
 # set autocomplete
+# set autocompletedelay=800
 
 # command line completion
-set wildmenu wildmode=full wildoptions=pum,fuzzy pumheight=20
+set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy pumheight=20
 set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi,*~,*.py[co],__pycache__
 
 # swap <c-n> and <c-x><c-n> and <c-o>

@@ -102,6 +102,9 @@ nnoremap yY <scriptcmd>os.Yank(getline(1, '$')->join("\n"))<CR>
 nnoremap <C-G><C-j> <cmd>copy.<CR>
 nnoremap <C-G><C-k> <cmd>copy-1<CR>
 # visual [[[1
+# Map C-/ to do search within visually selected text
+# (C-_ produces the same hex code as C-/)
+vnoremap <C-_> <Esc>/\%V
 # keep selection when indent line in visual mode
 xnoremap <expr> > v:count > 0 ? ">" : ">gv"
 xnoremap <expr> < v:count > 0 ? "<" : "<gv"
@@ -182,6 +185,10 @@ nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>
 # quick <C-w>
 nnoremap ' <C-w>
 nnoremap '' <C-w>w
+nnoremap <silent> <C-Up> :resize +2<cr>
+nnoremap <silent> <C-Down> :resize -2<cr>
+nnoremap <silent> <C-Right> :vertical resize -2<cr>
+nnoremap <silent> <C-Left> :vertical resize +2<cr>
 # toogle window zoom
 import autoload 'zoom.vim'
 nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
@@ -365,6 +372,10 @@ enddef
 nnoremap <silent> <expr> yr SourceVim()
 nnoremap <silent> <expr> yrr SourceVim() .. '_'
 xnoremap <silent> <expr> <leader>v SourceVim()
+# redirect shell command, use :il /foo to filter lines
+nnoremap <leader>vR :new \| exec "nn <buffer> q :bd!\<cr\>" \| r !
+# redirect vim cmd, use <leader>fi to filter
+nnoremap <leader>vr :enew \| exec "nn <buffer> q :bd!\<cr\>" \| put = execute('')<left><left>
 # external [[[1
 nnoremap <silent> gX  :call os#Gx()<CR>
 nnoremap <silent> gof :call os#FileManager()<CR>
@@ -382,7 +393,7 @@ def DailyNote()
   # endif
   fnameescape(filename)->buf.EditInTab()
 enddef
-nnoremap <leader>v :call <SID>DailyNote()<CR>
+nnoremap <leader>o :call <SID>DailyNote()<CR>
 # popup [[[1
 def ScrollPopup(nlines: number)
   const winids = popup_list()

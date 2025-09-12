@@ -34,5 +34,5 @@ command! -bang -bar -nargs=* Gfetch  {
 }
 
 nnoremap <leader>/ :Rgr<space>
-nnoremap <leader>sd :Rg<space>
+nnoremap <leader>? :Rg<space>
 nnoremap <leader>F :Locate<space>

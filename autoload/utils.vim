@@ -49,6 +49,9 @@ export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [
 enddef
 
 export def RemoveSpaces() # [[[1
+  if &binary || &filetype == 'diff'
+    return
+  endif
   const save_view = winsaveview()
   defer winrestview(save_view)
   # Trim spaces
