@@ -15,14 +15,15 @@ g:plugpac_default_type = 'delay'
 # plugins [[[1
 # Builtin [[[2
 
-packadd! cfilter
-try
-  # debian 12
-  packadd! helptoc
-catch
-endtry
-
-packadd! matchit
+if !getcompletion('helpdoc', 'packadd')->empty()
+  packadd! helpdoc
+endif
+if !getcompletion('cfilter', 'packadd')->empty()
+  packadd! cfilter
+endif
+if !getcompletion('matchit', 'packadd')->empty()
+  packadd! matchit
+endif
 
 # ]]]
 import autoload "utils.vim"
@@ -44,7 +45,8 @@ Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
 if is_ssh
   Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
 endif
-if v:version >= 901 && !getcompletion('comment', 'packadd')->empty()
+
+if !getcompletion('comment', 'packadd')->empty()
   packadd! comment
 else
   Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
@@ -74,7 +76,6 @@ else
   # Pack 'andymass/vim-matchup'
   Pack 'nickspoons/vim-movefast'
   Pack 'airblade/vim-rooter' # <leader>r
-  # Pack 'Yggdroot/LeaderF', { 'do': "packadd LeaderF \| LeaderfInstallCExtension" }
   Pack 'bennyyip/tasks.vim'
   # Pack 'romainl/vim-qf' # { } H L
   Pack 'habamax/vim-shout'
@@ -82,7 +83,7 @@ else
 
   Pack 'habamax/vim-dir', { 'type': 'start' }
 
-  if has("patch-9.0.1811")
+  if !getcompletion('editorconfig', 'packadd')->empty()
     packadd! editorconfig
   else
     Pack 'editorconfig/editorconfig-vim'
@@ -98,7 +99,7 @@ else
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
   # Pack 'justinmk/vim-gtfo' # gof got
   # Pack 'bennyyip/vim-highlightedyank'
-  if has("patch-9.1.1230")
+  if !getcompletion('hlyank', 'packadd')->empty()
     packadd! hlyank
     g:hlyank_hlgroup = "Search"
     g:hlyank_duration = 500

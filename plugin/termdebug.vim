@@ -19,7 +19,7 @@ au User TermdebugStartPost {
 
   nnoremap <F5>             <CMD>RunOrContinue<CR>
   # TODO toggle
-  nnoremap <F9>             <CMD>Break<CR>
+  nnoremap <F9>             <CMD>ToggleBreak<CR>
   nnoremap <F10>            <CMD>Over<CR>
   nnoremap <F11>            <CMD>Step<CR>
   nnoremap <S-F11>          <CMD>Finish<CR>

@@ -22,7 +22,7 @@ noremap <leader>fr :MRU<space>
 let g:MRU_File = $HOME . '/.vim_mru_files'
 let g:MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'
 let g:MRU_Max_Entries = 500
-let g:MRU_FuzzyMatch = 0
+let g:MRU_FuzzyMatch = 1
 " MY CONFIG ENDS
 
 if v:version < 700

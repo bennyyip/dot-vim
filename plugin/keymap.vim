@@ -102,9 +102,6 @@ nnoremap yY <scriptcmd>os.Yank(getline(1, '$')->join("\n"))<CR>
 nnoremap <C-G><C-j> <cmd>copy.<CR>
 nnoremap <C-G><C-k> <cmd>copy-1<CR>
 # visual [[[1
-# Map C-/ to do search within visually selected text
-# (C-_ produces the same hex code as C-/)
-vnoremap <C-_> <Esc>/\%V
 # keep selection when indent line in visual mode
 xnoremap <expr> > v:count > 0 ? ">" : ">gv"
 xnoremap <expr> < v:count > 0 ? "<" : "<gv"
@@ -163,9 +160,11 @@ xnoremap & n:&&<CR>
 nnoremap / ms/
 nnoremap ? ms?
 # search in selection
-xnoremap / <ESC>/\%><c-r>=line("'<")-1<cr>l\%<<c-r>=line("'>")+1<cr>l<HOME>
+vnoremap / <Esc>/\%V
 # restore /
 xnoremap g/ /
+# insert group quickly
+cnoremap <F2> \(.\{-}\)
 
 # Emacs C-s C-w like solution: hightlight in visual mode and then type * or #
 # `cgn` to replace text

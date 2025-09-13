@@ -13,8 +13,10 @@ set complete=.^7,w^5,b^5,u^3
   # set complete^=Fcompletor#Lsp^10
 # endif
 
-# set autocomplete
-# set autocompletedelay=800
+if exists('+autocompletedelay')
+  set autocomplete
+  set autocompletedelay=800
+endif
 
 # command line completion
 set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy pumheight=20

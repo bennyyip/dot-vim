@@ -28,17 +28,45 @@ set background=dark
 const fallback = get(g:, 'colorscheme_fallback', ['gruvbox8_hard', 'retrobox', 'elflord'])
 
 for c in fallback
-  try
+  if !getcompletion(c, 'color')->empty()
     execute $"colorscheme {c}"
     break
-  catch
-    continue
-  endtry
+  endif
 endfor
 
 # Inspect: syntax group names under cursor
 command! Inspect :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 
 # syntax
-import autoload 'utils.vim'
-nnoremap <leader>Si  <scriptcmd>echo utils.Syninfo()<cr>
+nnoremap <leader>Si  <scriptcmd>echo Syninfo()<cr>
+
+def Syninfo(): string
+  const syn = Synnames()
+  var info = ''
+  if syn.visual != ''
+    info ..= printf('visual: %s', syn.visual)
+    if syn.visual != syn.visual_link
+      info ..= printf(' (as %s)', syn.visual_link)
+    endif
+  endif
+  if syn.effective != syn.visual
+    if syn.visual != ''
+      info ..= ', '
+    endif
+    info ..= printf('effective: %s', syn.effective)
+    if syn.effective != syn.effective_link
+      info ..= printf(' (as %s)', syn.effective_link)
+    endif
+  endif
+  return info
+enddef
+def Synnames(): dict<any>
+  var syn                 = {}
+  const [lnum, cnum]        = [line('.'), col('.')]
+  const [effective, visual] = [synID(lnum, cnum, 0), synID(lnum, cnum, 1)]
+  syn.effective       = synIDattr(effective, 'name')
+  syn.effective_link  = synIDattr(synIDtrans(effective), 'name')
+  syn.visual          = synIDattr(visual, 'name')
+  syn.visual_link     = synIDattr(synIDtrans(visual), 'name')
+  return syn
+enddef

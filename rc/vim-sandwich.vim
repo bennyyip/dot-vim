@@ -23,10 +23,10 @@ xmap S <Plug>(sandwich-add)
 
 def MarkdownSetup()
   b:sandwich_recipes = g:sandwich#recipes->extendnew([
-    {'buns': ['```', '```'], 'motionwise': ['line'], 'input': ['c'] },
+    {'buns': ['```', '```'], 'nesting': 0, 'cursor': 'headend', 'linewise': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['c']},
+    { 'buns': ['```\w*', '```'], 'regex': 1, 'nesting': 0, 'linewise': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'skip_break': 1, 'input': ['c'] },
+    {'buns': ['[[', ']]'], 'nesting': 0, 'expand_range': 0, 'input': ['w']},
     {'buns': ['**', '**'], 'input': ['b']},
-    {'buns': ['$', '$'], 'input': ['$']},
-    {'buns': ['_', '_'], 'input': ['i']},
     {'buns': ['~~', '~~'], 'input': ['~~']},
 
     {'buns': ['<span style="background-color:#ffc2c2">', '</span>'], 'input': ['R']},

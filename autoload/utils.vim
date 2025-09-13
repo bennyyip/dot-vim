@@ -174,36 +174,6 @@ def RestoreChangeMarks()
   setpos("']", change_marks[1])
 enddef
 
-export def Syninfo(): string #[[[1
-  const syn = Synnames()
-  var info = ''
-  if syn.visual != ''
-    info ..= printf('visual: %s', syn.visual)
-    if syn.visual != syn.visual_link
-      info ..= printf(' (as %s)', syn.visual_link)
-    endif
-  endif
-  if syn.effective != syn.visual
-    if syn.visual != ''
-      info ..= ', '
-    endif
-    info ..= printf('effective: %s', syn.effective)
-    if syn.effective != syn.effective_link
-      info ..= printf(' (as %s)', syn.effective_link)
-    endif
-  endif
-  return info
-enddef
-def Synnames(): dict<any>
-  var syn                 = {}
-  const [lnum, cnum]        = [line('.'), col('.')]
-  const [effective, visual] = [synID(lnum, cnum, 0), synID(lnum, cnum, 1)]
-  syn.effective       = synIDattr(effective, 'name')
-  syn.effective_link  = synIDattr(synIDtrans(effective), 'name')
-  syn.visual          = synIDattr(visual, 'name')
-  syn.visual_link     = synIDattr(synIDtrans(visual), 'name')
-  return syn
-enddef
 #]]]
 export def In_mkdMath(): bool # [[[1
   const in_mkdmath = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')->index('mkdMath') >= 0
