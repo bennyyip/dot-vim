@@ -60,7 +60,7 @@ if minimal_plugins
   g:loaded_netrwPlugin = 0
 else
   # Lab [[[2
-  Pack 'vim/mytermdebug', { on: 'Termdebug', 'local': true }
+  Pack 'vim/termdebug', { on: 'Termdebug', 'local': true }
   Pack 'junegunn/goyo.vim', { on: 'Goyo' }
   # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
   # Pack 'mg979/vim-visual-multi'
