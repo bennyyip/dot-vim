@@ -10,24 +10,20 @@ nmap -  :<C-u>Dir<CR>
 
 def CustomizeMappings()
   # Customize key mappings here
-  nmap <buffer> gg 4G
-  xmap <buffer> gg 4G
+  nmap     <buffer> gg 4G
+  xmap     <buffer> gg 4G
   nnoremap <buffer> gb :b<space>
   nnoremap <buffer> gB <scriptcmd>action.BookmarkJumpMenu()<cr>
 
-  noremap <nowait><buffer> > <scriptcmd>action.WidenView()<cr>
-  noremap <nowait><buffer> < <scriptcmd>action.ShrinkView()<cr>
-  noremap <buffer> <silent> <BS> <cmd>nohlsearch<CR>
-  if plugpac#HasPlugin("LeaderF")
-    nmap <buffer> <leader>ff <leader>.
-    nnoremap <buffer> <leader>.  <scriptcmd>execute($'Leaderf file {b:dir_cwd}')<cr>
-  endif
-  nnoremap <buffer> g:   <scriptcmd>DoFillCmdline("AsyncCmd", 'n')<cr>
-  nnoremap <buffer> g;   <scriptcmd>DoFillCmdline("", 'n')<cr>
-  xnoremap <buffer> g:   <scriptcmd>DoFillCmdline("AsyncCmd", 'v')<cr>
-  xnoremap <buffer> g;   <scriptcmd>DoFillCmdline("", 'v')<cr>
-  nnoremap <buffer> cd   <scriptcmd>execute($'lcd {b:dir_cwd}')<cr>
-  nnoremap <buffer> g?   <cmd>help vim-dir-mappings<cr>
+  noremap  <nowait><buffer> > <scriptcmd>action.WidenView()<cr>
+  noremap  <nowait><buffer> < <scriptcmd>action.ShrinkView()<cr>
+  noremap  <buffer><silent> <BS> <cmd>nohlsearch<CR>
+  nnoremap <buffer> g: <scriptcmd>DoFillCmdline("AsyncCmd", 'n')<cr>
+  nnoremap <buffer> g; <scriptcmd>DoFillCmdline("", 'n')<cr>
+  xnoremap <buffer> g: <scriptcmd>DoFillCmdline("AsyncCmd", 'v')<cr>
+  xnoremap <buffer> g; <scriptcmd>DoFillCmdline("", 'v')<cr>
+  nnoremap <buffer> cd <scriptcmd>execute($'lcd {b:dir_cwd}')<cr>
+  nnoremap <buffer> g? <cmd>help vim-dir-mappings<cr>
   nmap     <buffer> <F1> g?
 enddef
 

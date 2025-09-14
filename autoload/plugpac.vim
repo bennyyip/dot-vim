@@ -56,7 +56,7 @@ export def Begin(opts: dict<any> = {})
     augroup! PlugPac
   endif
 
-  call Setup_command()
+  SetupCommands()
 enddef
 
 
@@ -101,16 +101,26 @@ export def End()
     }])
   endfor
 
-  timer_start(0, (timer) => {
+  timer_start(10, (timer) => {
     for [k, v] in items(lazy.delay)
       if !v.done
         return
       endif
     endfor
+
+    for [repo, opts] in items(repos)
+      const rc_path = GetRcPath(opts['name'], false)
+      if filereadable(rc_path)
+        execute $'source {rc_path}'
+      endif
+    endfor
+
     if exists('#User#PlugpacPost')
       doauto <nomodeline> User PlugpacPost
     endif
+
     doautocmd VimEnter
+
     timer_stop(timer)
   }, { repeat: -1 })
 
@@ -118,24 +128,30 @@ enddef
 
 export def Add(repo: string, opts: dict<any> = {})
   const name = get(opts, 'name', substitute(repo, '^.*/', '', ''))
+  opts['name'] = name
   const default_type = get(g:, 'plugpac_default_type', 'start')
   var type = get(opts, 'type', default_type)
   if opts->has_key('delay')
     type = 'delay'
   endif
 
+  if !opts->has_key('local')
+    opts['local'] = false
+  endif
+
   # `for` and `on` implies optional and override delay
-  if type != 'local' && (has_key(opts, 'for') || has_key(opts, 'on'))
+  if has_key(opts, 'for') || has_key(opts, 'on')
     type = 'opt'
     opts['type'] = 'opt'
   endif
 
   if type == 'delay'
     opts['type'] = 'opt'
-  elseif type == 'local'
-    local_plugins->add(name)
   endif
 
+  if opts['local']
+    local_plugins->add(name)
+  endif
 
   repos[repo] = opts
 
@@ -157,40 +173,25 @@ export def Add(repo: string, opts: dict<any> = {})
     for cmd in ToArray(opts.on)
       if cmd =~? '^<Plug>.\+'
         if empty(mapcheck(cmd)) && empty(mapcheck(cmd, 'i'))
-          call Assoc(lazy.map, name, cmd)
+          Assoc(lazy.map, name, cmd)
         endif
       elseif cmd =~# '^[A-Z]'
         if exists(":" .. cmd) != 2
-          call Assoc(lazy.cmd, name, cmd)
+          Assoc(lazy.cmd, name, cmd)
         endif
       else
-        call Err('Invalid `on` option: ' .. cmd ..
+        Err('Invalid `on` option: ' .. cmd ..
           '. Should start with an uppercase letter or `<Plug>`.')
       endif
     endfor
   endif
 
   const pre_rc_path = GetRcPath(name, true)
-  const rc_path = GetRcPath(name, false)
   if filereadable(pre_rc_path)
     execute $'source {pre_rc_path}'
   endif
-  if filereadable(rc_path)
-    # TODO: all local plugins are opt
-    if type == 'delay' || type == 'start'
-      lazy.delay[name] = {
-        delay: opts->get('delay', 0),
-        done: false,
-        load: () => {
-          execute $'packadd {name}'
-          execute $'source {rc_path}'
-          lazy.delay[name].done = true
-        }
-      }
-    endif
-  endif
 
-  if type == 'delay' && !has_key(lazy.delay, name)
+  if type == 'delay'
     lazy.delay[name] = {
       delay: opts->get('delay', 0),
       done: false,
@@ -200,6 +201,7 @@ export def Add(repo: string, opts: dict<any> = {})
       }
     }
   endif
+
 enddef
 
 def GetRcPath(plugin: string, is_pre: bool = false): string
@@ -276,7 +278,7 @@ def DoMap(plugin: string, map_: any, with_prefix: any, prefix_: any)
   feedkeys(substitute(map_, '^<Plug>', "\<Plug>", '') .. extra)
 enddef
 
-def Setup_command()
+def SetupCommands()
   command! -bar -nargs=+ Pack call Add(<args>)
   command! -bar PackInstall {
     Init()
@@ -297,8 +299,9 @@ export def Init()
 
   minpac#init(minpac_init_opts)
   for [repo, opts] in items(repos)
-    if opts['type'] == 'local' | continue | endif
-    call minpac#add(repo, opts)
+    if !opts['local']
+      minpac#add(repo, opts)
+    endif
   endfor
 
   cached_installed_plugins = {}
@@ -326,7 +329,7 @@ def DisableEnablePlugin(plugin: string, disable: bool)
     Err(dst_dir .. 'exists.')
     return
   endif
-  call rename(plugin_dir, dst_dir)
+  rename(plugin_dir, dst_dir)
 enddef
 
 def Matchfuzzy(l: list<string>, str: string): list<string>

@@ -14,8 +14,9 @@ augroup vimrc
   }
 augroup end
 
+command! Gpull G pull
 command! -nargs=* Glog vertical Git log --oneline --decorate --graph <args>
 
 import autoload 'git.vim'
-delcommand Gbrowse
+# delcommand! Gbrowse
 command! -range GBrowse git.GithubOpen(<line1>, <line2>)

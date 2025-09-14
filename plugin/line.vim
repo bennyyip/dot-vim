@@ -215,6 +215,6 @@ augroup vimrc
   autocmd VimEnter * {
     set tabline=%!g:Tabline()
     set statusline=%!g:StatusLine()
-    call Highlight()
+    Highlight()
   }
 augroup END

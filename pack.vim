@@ -60,7 +60,7 @@ if minimal_plugins
   g:loaded_netrwPlugin = 0
 else
   # Lab [[[2
-  Pack 'vim/mytermdebug', { type: 'local', on: 'Termdebug' }
+  Pack 'vim/mytermdebug', { on: 'Termdebug', 'local': true }
   Pack 'junegunn/goyo.vim', { on: 'Goyo' }
   # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
   # Pack 'mg979/vim-visual-multi'
@@ -120,7 +120,7 @@ else
   Pack 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] } # gx gxx gxg
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'
-  Pack 'Konfekt/vim-scratchpad', { type: 'local', on: '<Plug>(ToggleScratchPad)' }
+  Pack 'Konfekt/vim-scratchpad', { 'local': true, on: '<Plug>(ToggleScratchPad)' }
 
   # Pack 'michaeljsmith/vim-indent-object'
 

@@ -354,7 +354,6 @@ xnoremap <c-o> :diffget<cr>
 nnoremap '] <c-w>v<c-w>]
 # vimrc
 nnoremap <silent><leader>fed :e $MYVIMRC<CR>
-nnoremap <silent><leader>fee :source $MYVIMRC<CR>
 # source vimscript (operator)
 def SourceVim(...args: list<any>): string
     if len(args) == 0
