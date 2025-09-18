@@ -11,7 +11,7 @@ def GotoObsidian()
   # https://github.com/Vinzent03/obsidian-advanced-uri
   call os#Open($"obsidian://adv-uri?vault=Obsidian-Vault&filepath={expand('%:t')}&line={pos[1]}&column={pos[2]}")
 enddef
-nnoremap <buffer> <localleader>v <scriptcmd>GotoObsidian()<CR>
+nnoremap <buffer> <localleader>o <scriptcmd>GotoObsidian()<CR>
 
 # [[url]] or [[url|description]]
 def IncludeExpr(): string

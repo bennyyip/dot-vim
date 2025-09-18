@@ -88,6 +88,8 @@ if $SSH_CONNECTION == ""
     xnoremap <silent><C-c> "+y
     cnoremap <C-v>         <C-R>+
     inoremap <silent><C-v> <C-R><C-o>+
+    inoremap <C-S-V> <C-R>+
+    cnoremap <C-S-V> <C-R><C-o>+
 endif
 nnoremap Y   y$
 xnoremap x  "_d
