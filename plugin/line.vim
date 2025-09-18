@@ -217,4 +217,7 @@ augroup vimrc
     set statusline=%!g:StatusLine()
     Highlight()
   }
+  autocmd ColorScheme * {
+    Highlight()
+  }
 augroup END

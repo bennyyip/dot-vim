@@ -41,7 +41,9 @@ call plugpac#Begin({
 })
 Pack 'k-takata/minpac', {'type': 'opt'}
 
-Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
+if getcompletion('retrobox', 'color')->empty()
+  Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
+endif
 if is_ssh
   Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
 endif

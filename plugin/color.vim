@@ -1,4 +1,14 @@
 vim9script
+
+if has("termguicolors") && !has('gui_running')
+  # fix bug for vim
+  set t_8f=[38;2;%lu;%lu;%lum
+  set t_8b=[48;2;%lu;%lu;%lum
+
+  # enable true color
+  set termguicolors
+endif
+
 augroup colorscheme_override
   autocmd!
   autocmd ColorScheme gruvbox8_hard {
@@ -20,12 +30,15 @@ augroup colorscheme_override
     if exists('g:lightline')
       g:lightline.colorscheme = 'retrobox'
     endif
+    hi! link debugBreakpoint ErrorMsg
+    hi! link debugPC QuickFixLine
+    # hi debugPC term=reverse ctermbg=darkblue guibg=#444422
   }
 augroup END
 
 set background=dark
 
-const fallback = get(g:, 'colorscheme_fallback', ['gruvbox8_hard', 'retrobox', 'elflord'])
+const fallback = get(g:, 'colorscheme_fallback', ['retrobox', 'gruvbox8_hard', 'elflord'])
 
 for c in fallback
   if !getcompletion(c, 'color')->empty()

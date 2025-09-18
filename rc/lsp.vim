@@ -143,7 +143,7 @@ enddef
 command! LspDisableDiag DisableDiag()
 command! LspEnableDiag EnableDiag()
 
-def BindKeys()
+def LspSetup()
   nnoremap <silent><buffer> gd        <Cmd>execute v:count  .. 'LspGotoDefinition'<CR>
   nnoremap <silent><buffer> 'd   <Cmd>execute 'vertical '  .. v:count .. 'LspGotoDefinition'<CR>
   # nnoremap <silent><buffer> gi        <Cmd>LspGotoImpl<CR>
@@ -162,11 +162,12 @@ def BindKeys()
 
   nnoremap <silent><buffer> yod <scriptcmd>ToggoleDiag()<CR>
 
+	setlocal tagfunc=lsp#lsp#TagFunc
   setlocal keywordprg=:LspHover
 enddef
 
 augroup vimrc
-  autocmd User LspAttached call BindKeys()
+  autocmd User LspAttached call LspSetup()
 augroup END
 
 highlight link LspSigActiveParameter Type
