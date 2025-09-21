@@ -4,7 +4,7 @@ g:loaded_2html_plugin     = 1
 g:loaded_getscriptPlugin  = 1
 g:loaded_gzip             = 1
 g:loaded_logiPat          = 1
-# g:loaded_manpager_plugin  = 1
+g:loaded_manpager_plugin  = 1
 # g:loaded_matchparen       = 1
 g:loaded_rrhelper         = 1
 g:loaded_spellfile_plugin = 1
@@ -35,4 +35,3 @@ g:snips_author = 'Ben Yip'
 g:obsidian_vault = $HOME .. '/Obsidian-Vault'
 
 $RIPGREP_CONFIG_PATH = $HOME .. '/.ripgreprc'
-

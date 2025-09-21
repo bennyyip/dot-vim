@@ -73,6 +73,7 @@ def Format()
 enddef
 
 command! -nargs=0 Fmt Format()
+nnoremap g= <scriptcmd>Format()<CR>
 
 # Autocmd [[[1
 augroup vimrc

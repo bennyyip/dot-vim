@@ -158,6 +158,9 @@ else
   Pack 'bfrg/vim-jq'
   Pack 'bfrg/vim-jqplay'
   Pack 'lervag/vimtex'
+  if !is_win
+    Pack 'habamax/vim-man', { 'local': true }
+  endif
   # Web [[[3
   Pack 'MaxMEllon/vim-jsx-pretty'
   Pack 'BourgeoisBear/clrzr'
