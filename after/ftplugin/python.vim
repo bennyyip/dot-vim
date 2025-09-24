@@ -17,8 +17,6 @@
 "   setlocal formatprg=autopep8\ --quiet\ --skip-string-normalization\ -
 " endif
 
-nnoremap <buffer> <expr> <leader>T term#SendLine('python', shellescape(expand('%:p')))
-
 if exists(':LspHover')
   setlocal keywordprg=:LspHover
 endif

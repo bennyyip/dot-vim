@@ -30,7 +30,7 @@ command! Yat yat.Open()
 
 augroup yat
   autocmd VimEnter *  {
-    if argc() == 0
+    if !argc() && line('$') == 1 && getline('.') == ''
       yat.Open()
     endif
   }

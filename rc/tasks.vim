@@ -36,3 +36,6 @@ command! -bang -bar -nargs=* Gfetch  {
 nnoremap <leader>/ :Rgr<space>
 nnoremap <leader>? :Rg<space>
 nnoremap <leader>F :Locate<space>
+
+# repeat
+nnoremap <localleader>q :AsyncQf<UP><CR>

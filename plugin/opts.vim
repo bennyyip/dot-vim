@@ -4,7 +4,7 @@ g:loaded_2html_plugin     = 1
 g:loaded_getscriptPlugin  = 1
 g:loaded_gzip             = 1
 g:loaded_logiPat          = 1
-g:loaded_manpager_plugin  = 1
+# g:loaded_manpager_plugin  = 1
 # g:loaded_matchparen       = 1
 g:loaded_rrhelper         = 1
 g:loaded_spellfile_plugin = 1
@@ -29,7 +29,7 @@ legacy let c_comment_strings = 1
 g:is_posix = 1
 
 g:python_highlight_all = 1
-g:markdown_fenced_languages = ['html', 'datacorejsx=jsx', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml', 'base=yaml', 'vimhelp=help']
+g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml', 'base=yaml', 'vimhelp=help']
 
 g:snips_author = 'Ben Yip'
 g:obsidian_vault = $HOME .. '/Obsidian-Vault'
