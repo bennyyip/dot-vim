@@ -76,6 +76,7 @@ nnoremap <leader>ff <scriptcmd>SearchProject()<cr>
 nnoremap <leader>. <scriptcmd>Fd(BufDir())<cr>
 nnoremap <leader>fF :<C-U>find<space>
 nnoremap <leader>fp <scriptcmd>Fd(expand("$MYVIMDIR"))<cr>
+nnoremap <leader>fd <scriptcmd>Fd($HOME .. "/dotfiles")<cr>
 nnoremap <leader>fR <scriptcmd>Fd(expand("$VIMRUNTIME"))<cr>
 
 command -bang -nargs=1 -complete=dir Fd Fd(<f-args>, "<bang>" == '!')

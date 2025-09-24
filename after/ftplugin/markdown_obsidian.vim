@@ -28,3 +28,5 @@ def IncludeExpr(): string
   endif
 enddef
 setlocal includeexpr=IncludeExpr()
+
+SetHardTabWidth4

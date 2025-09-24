@@ -10,7 +10,7 @@ g:cycle_default_groups = [
   [['and', 'or']],
   [['on', 'off']],
   [['>', '<']],
-  [['==', '!=']],
+  [['==', '!='], { 'cond': (group, tick) => &ft != 'lua' }],
   [['是', '否']],
   [['有', '无']],
   [['在', '再']],
@@ -33,6 +33,10 @@ g:cycle_default_groups = [
   [["add", "remove"]],
   [['up', 'down']],
   [['after', 'before']],
+]
+
+g:cycle_default_groups_for_lua = [
+  [['==', '~=']],
 ]
 
 g:cycle_default_groups_for_markdown = [

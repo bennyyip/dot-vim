@@ -5,6 +5,7 @@ g:termdebug_config = {
   evaluate_in_popup: true,
   map_minus: false,
   map_plus: false,
+  winbar: false,
 }
 
 var saved_mappings = {}

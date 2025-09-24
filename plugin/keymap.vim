@@ -23,8 +23,8 @@ nnoremap L <cmd>tag<CR>
 # edit [[[1
 # open q:
 set cedit=<C-Y>
-inoremap <Plug>(meta-o) <C-O>o
-inoremap <Plug>(meta-O) <C-O>O
+inoremap <Plug>(meta-j) <C-O>o
+inoremap <Plug>(meta-k) <C-O>O
 # get output from python
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
