@@ -29,7 +29,8 @@ g:yat_header = [
 command! Yat yat.Open()
 
 augroup yat
-  autocmd VimEnter *  {
+  autocmd!
+  autocmd VimEnter * ++once  {
     if !argc() && line('$') == 1 && getline('.') == ''
       yat.Open()
     endif

@@ -1,42 +1,6 @@
 vim9script
 import autoload "../autoload/utils.vim"
 
-# Vim9 [[[1
-# var vim9cmdline_enable = false
-
-# command Vim9cmdlineToggle {
-#   vim9cmdline_enable = !vim9cmdline_enable
-# }
-
-# augroup vim9cmdline | autocmd!
-#   autocmd CmdlineEnter : {
-#     if vim9cmdline_enable
-#       if visualmode() == null_string
-#         setcmdline('vim9 ')
-#       else
-#         setcmdline('vim9 :')
-#         visualmode(1)
-#       endif
-#       cnoremap        <c-u>    <c-u>vim9<space>
-#       cnoremap        <c-b>    <c-b><c-right><right>
-#       cnoremap <expr> <c-w>    getcmdpos() > 6 ? "\<c-w>" : ""
-#       cnoremap <expr> <c-left> getcmdpos() > 6 ? "\<c-left>" : ""
-#       cnoremap <expr> <bs>     getcmdpos() > 6 ? "\<bs>" : ""
-#       cnoremap <expr> <left>   getcmdpos() > 6 ? "\<left>" : ""
-#     endif
-#   }
-#   autocmd CmdlineLeave : {
-#     if vim9cmdline_enable
-#       cunmap <c-u>
-#       cunmap <c-w>
-#       cunmap <c-b>
-#       cunmap <c-left>
-#       cunmap <bs>
-#       cunmap <left>
-#     endif
-#   }
-# augroup END
-
 # Functions [[[1
 def JumpToLastPosition() # [[[2
   const last_pos = getpos("'\"")
@@ -101,12 +65,19 @@ augroup vimrc
   # turn on spell checker for commit messages
   autocmd FileType gitcommit,hgcommit setlocal spell
   # and emails and plain text files
-  # autocmd FileType mail,text setlocal spell
+  autocmd FileType mail,text setlocal spell
   # except 'help' files
   autocmd BufEnter *.txt if &filetype == 'help' | setlocal nospell | endif
 
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufEnter * if &buftype == 'terminal' | wall | endif
+
+  # zellj EditScrollback
+  autocmd BufEnter *.dump  setlocal nowrap
+
+  # ftdetect
+  autocmd BufNewFile,BufRead *.base setfiletype yaml
+  autocmd BufReadPost,BufNewFile *.mly setfiletype menhir
 augroup END
 
 # FileType
@@ -152,6 +123,7 @@ augroup Binary
     endif
   }
 augroup END
+
 
 # ]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

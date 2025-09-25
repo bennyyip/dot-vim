@@ -47,3 +47,4 @@ def SetCursor()
 enddef
 
 autocmd yat CursorMoved <buffer> SetCursor()
+autocmd yat BufRead <buffer> SetCursor()

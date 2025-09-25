@@ -28,8 +28,10 @@ endif
 # ]]]
 import autoload "utils.vim"
 
-au User PlugPacPost {
+au User PlugpacPost {
   utils.MapMeta()
+  doautocmd BufRead
+  normal! <C-L>
 }
 
 call plugpac#Begin({
@@ -51,11 +53,11 @@ endif
 if !getcompletion('comment', 'packadd')->empty()
   packadd! comment
 else
-  Pack 'tomtom/tcomment_vim', { 'type': 'delay' }
+  Pack 'tomtom/tcomment_vim'
 endif
 Pack 'bootleq/vim-cycle'
 # Pack 'itchyny/lightline.vim', { type: 'opt' }
-Pack 'bennyyip/vim-sandwich', { type: 'start' }
+Pack 'bennyyip/vim-sandwich'
 
 if minimal_plugins
   g:loaded_netrw       = 0
@@ -69,9 +71,7 @@ else
   Pack 'ubaldot/vim9-conversion-aid'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'chrisbra/vim_faq'
-  # Pack 'yegappan/mru'
-  # Pack 'yegappan/fileselect'
-  # Pack 'hahdookin/miniterm.vim'
+  Pack 'local/singlefile', { 'local': true }
   # Enhance [[[2
   Pack 'LunarWatcher/auto-pairs'
   Pack 'Konfekt/vim-alias'
@@ -97,7 +97,7 @@ else
   Pack 'luochen1990/rainbow'
   Pack 'mbbill/undotree', { 'on': 'UndotreeToggle' }
   Pack 'tpope/vim-characterize'
-  Pack 'tpope/vim-repeat', { type: 'start' }
+  Pack 'tpope/vim-repeat'
   Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
   # Pack 'justinmk/vim-gtfo' # gof got
   # Pack 'bennyyip/vim-highlightedyank'
@@ -134,14 +134,14 @@ else
   Pack 'junegunn/gv.vim', { 'on': 'GV' }
   Pack 'rhysd/conflict-marker.vim' # [x ]x
   Pack 'tommcdo/vim-fugitive-blame-ext'
-  Pack 'tpope/vim-fugitive', { type: 'start' }
+  Pack 'tpope/vim-fugitive'
   # Pack 'tpope/vim-rhubarb'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Language [[[2
   if executable('ctags')
-    Pack 'ludovicchabant/vim-gutentags', { type: 'start' }
+    Pack 'ludovicchabant/vim-gutentags'
   endif
-  Pack 'yegappan/lsp', { type: 'start', branch: 'main' }
+  Pack 'yegappan/lsp', { branch: 'main' }
 
   Pack 'Konfekt/vim-compilers'
   # Pack 'Konfekt/vim-formatprgs'

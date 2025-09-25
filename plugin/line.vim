@@ -91,8 +91,11 @@ def LineFilename(): string
 enddef
 
 def LineFugitive(): string
+  if !exists('*g:FugitiveHead')
+    return ''
+  endif
   const mark = (is_tty ? '' : "\ue0a0")
-  const branch = fugitive#Head()
+  const branch = g:FugitiveHead()
   if branch == 'master' || branch == 'main'
     return mark
   endif
