@@ -33,6 +33,7 @@ g:cycle_default_groups = [
   [["add", "remove"]],
   [['up', 'down']],
   [['after', 'before']],
+  [['yellow', 'red', 'green', 'blue']],
 ]
 
 g:cycle_default_groups_for_lua = [

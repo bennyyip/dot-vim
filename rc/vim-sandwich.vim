@@ -27,17 +27,7 @@ def MarkdownSetup()
     { 'buns': ['```\w*', '```'], 'regex': 1, 'nesting': 0, 'linewise': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'skip_break': 1, 'input': ['c'] },
     {'buns': ['[[', ']]'], 'nesting': 0, 'expand_range': 0, 'input': ['w']},
     {'buns': ['**', '**'], 'input': ['b']},
-    {'buns': ['~~', '~~'], 'input': ['~~']},
-
-    {'buns': ['<span style="background-color:#ffc2c2">', '</span>'], 'input': ['R']},
-    {'buns': ['<span style="background-color:#bfe0af">', '</span>'], 'input': ['G']},
-    {'buns': ['<span style="background-color:#abdcf5">', '</span>'], 'input': ['B']},
-    {'buns': ['<span style="background-color:#ffee99">', '</span>'], 'input': ['Y']},
   ])
-  xmap <buffer> \r SR
-  xmap <buffer> \g SG
-  xmap <buffer> \b SB
-  xmap <buffer> \y SY
 enddef
 
 augroup vimrc

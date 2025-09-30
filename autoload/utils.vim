@@ -55,7 +55,9 @@ export def RemoveSpaces() # [[[1
   const save_view = winsaveview()
   defer winrestview(save_view)
   # Trim spaces
-  keepj silent! keeppatterns :%s#\s\+$##e
+  if &ft != 'markdown'
+    keepj silent! keeppatterns :%s#\s\+$##e
+  endif
   # Remove trailing blank lines
   keepj silent! keeppatterns :%s#\($\n\s*\)\+\%$##e
 enddef
