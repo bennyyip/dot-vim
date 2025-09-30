@@ -195,23 +195,6 @@ import autoload 'zoom.vim'
 nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
 nmap <C-w>o <C-w><C-o>
 nmap 'o <C-w><C-o>
-# Toggle quickfix and loclist
-def ToggleQF()
-    if getwininfo()->filter('v:val.quickfix')->len() > 0
-        cclose
-    else
-        botright copen
-    endif
-enddef
-def ToggleLoc()
-    if getwininfo()->filter('v:val.loclist')->len() > 0
-        lclose
-    else
-        botright lopen
-    endif
-enddef
-nnoremap <leader>q <scriptcmd>ToggleQF()<CR>
-nnoremap <leader>l <scriptcmd>ToggleLoc()<CR>
 # file, buffer [[[1
 nnoremap <leader>fs <scriptcmd>utils.KeepChangeMarksExec('update')<CR>
 nnoremap <silent> <leader>fY :call os#Yank(expand("%:p:t"))<CR>:echo $"{(expand('%:p:t'))} copied"<CR>
@@ -332,10 +315,10 @@ import autoload 'term.vim'
 xnoremap <expr> <c-q> term.Send()
 nnoremap <expr> <c-q> term.Send()
 nnoremap <expr> <c-q><c-q> term.Send() .. '_'
-imap <c-q> <ESC><c-q><c-q>a
+# imap <c-q> <ESC><c-q><c-q>a
 tnoremap <F1> <C-W>N
 # repeat
-nnoremap <localleader>t :Term<UP><CR>
+nnoremap <localleader>t <cmd>update<BAR>Term<UP><CR>
 # misc [[[1
 # fold
 nmap z] zo]z

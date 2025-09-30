@@ -173,10 +173,15 @@ def RestoreChangeMarks()
   setpos("'[", change_marks[0])
   setpos("']", change_marks[1])
 enddef
-
 #]]]
 export def In_mkdMath(): bool # [[[1
   const in_mkdmath = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')->index('mkdMath') >= 0
   return in_mkdmath
 enddef
+#]]]
+export def Eatchar(pat: string): string # [[[1
+    var c = nr2char(getchar(0))
+    return (c =~ pat) ? '' : c
+enddef
+#]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

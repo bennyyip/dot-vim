@@ -112,4 +112,7 @@ command! -nargs=+ -complete=shellcmdline Term term.SendLine(<q-args>)
 #   设置成 Linux 下适用的格式
 command Lin setl ff=unix fenc=utf8 nobomb eol
 # }}}
+
+import autoload 'hlblink.vim'
+command BlinkLine hlblink.Line()
 # vim:fdm=marker:ft=vim

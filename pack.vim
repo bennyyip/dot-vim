@@ -30,7 +30,7 @@ import autoload "utils.vim"
 
 au User PlugpacPost {
   utils.MapMeta()
-  doautocmd BufRead
+  doautocmd BufEnter
   normal! <C-L>
 }
 
@@ -80,7 +80,7 @@ else
   Pack 'airblade/vim-rooter' # <leader>r
   Pack 'bennyyip/tasks.vim'
   # Pack 'romainl/vim-qf' # { } H L
-  Pack 'habamax/vim-shout'
+  # Pack 'habamax/vim-shout'
   Pack 'tpope/vim-eunuch'
 
   Pack 'habamax/vim-dir', { 'type': 'start' }
@@ -122,7 +122,7 @@ else
   Pack 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] } # gx gxx gxg
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'
-  Pack 'Konfekt/vim-scratchpad', { 'local': true, on: '<Plug>(ToggleScratchPad)' }
+  Pack 'Konfekt/vim-scratchpad', { 'local': true }
 
   # Pack 'michaeljsmith/vim-indent-object'
 

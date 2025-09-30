@@ -1,7 +1,3 @@
-func Eatchar(pat)
-  let c = nr2char(getchar(0))
-  return (c =~ a:pat) ? '' : c
-endfunc
 let g:cmdalias_cmdprefixes = g:cmdalias_cmdprefixes->add('F5')
 
 Alias sc   Scope
@@ -35,5 +31,5 @@ Alias fmt  Fmt
 Alias zen  Goyo
 
 
-Alias -range     il   ilist\ /\v/<left><c-r>=Eatchar("\ ")<cr>
-Alias -range     dl   dlist\ //<left><c-r>=Eatchar("\ ")<cr>
+Alias -range     il   ilist\ /\v/<left><c-r>=utils#Eatchar("\ ")<cr>
+Alias -range     dl   dlist\ //<left><c-r>=utils#Eatchar("\ ")<cr>
