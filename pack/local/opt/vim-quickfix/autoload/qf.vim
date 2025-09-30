@@ -1,6 +1,6 @@
 vim9script
 
-def IsLocationList(): bool
+export def IsLocationList(): bool
     return getloclist(winnr(), {'filewinid': 0}).filewinid > 0
 enddef
 

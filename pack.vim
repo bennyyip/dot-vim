@@ -14,7 +14,6 @@ g:plugpac_plugin_conf_path = $MYVIMDIR .. '/rc'
 g:plugpac_default_type = 'delay'
 # plugins [[[1
 # Builtin [[[2
-
 if !getcompletion('helpdoc', 'packadd')->empty()
   packadd! helpdoc
 endif
@@ -24,7 +23,6 @@ endif
 if !getcompletion('matchit', 'packadd')->empty()
   packadd! matchit
 endif
-
 # ]]]
 import autoload "utils.vim"
 
@@ -71,8 +69,9 @@ else
   Pack 'ubaldot/vim9-conversion-aid'
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'chrisbra/vim_faq'
-  Pack 'local/singlefile', { 'local': true }
   # Enhance [[[2
+  Pack 'local/misc', { 'local': true }
+  Pack 'local/vim-quickfix', { 'local': true }
   Pack 'LunarWatcher/auto-pairs'
   Pack 'Konfekt/vim-alias'
   # Pack 'andymass/vim-matchup'
@@ -138,6 +137,8 @@ else
   # Pack 'tpope/vim-rhubarb'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Language [[[2
+  Pack 'local/ocaml', { 'local': true }
+  Pack 'local/formatters', { 'local': true }
   if executable('ctags')
     Pack 'ludovicchabant/vim-gutentags'
   endif

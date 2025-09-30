@@ -14,5 +14,10 @@ nnoremap <silent> <buffer> H          <scriptcmd>qf.Older()<CR>
 nnoremap <silent> <buffer> L          <scriptcmd>qf.Newer()<CR>
 nnoremap <silent> <buffer> <C-G><C-G> <scriptcmd>qf.Print()<CR>
 
-command! -nargs=+ -buffer Keep   :Cfilter  <args>
-command! -nargs=+ -buffer Reject :Cfilter! <args>
+if qf.IsLocationList()
+  command! -nargs=+ -buffer Keep   :Lfilter  <args>
+  command! -nargs=+ -buffer Reject :Lfilter! <args>
+else
+  command! -nargs=+ -buffer Keep   :Cfilter  <args>
+  command! -nargs=+ -buffer Reject :Cfilter! <args>
+endif
