@@ -140,9 +140,10 @@ xnoremap Q :normal! @q<CR>
 xnoremap . :normal .<CR>
 # search and substitute [[[1
 # nohl
-def Refresh(doedit: bool)
-    if doedit
+def Refresh(hard: bool)
+    if hard
         utils.KeepChangeMarksExec('edit')
+        syntax sync fromstart
     endif
     if has('diff')
         diffupdate

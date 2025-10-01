@@ -1,7 +1,6 @@
 vim9script
 setlocal commentstring=//\ %s
 
-setl cino+=g0,:0,j1,l1,N-s,t0,(0
 set foldnestmax=1
 
 # not call

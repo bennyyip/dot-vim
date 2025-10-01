@@ -5,4 +5,4 @@ noremap <buffer><F9> :Sh .build/main<CR>
 
 b:ale_fix_on_save = 1
 
-g:Harpoon('m', 'CMakeLists.txt')
+g:Harpoon('M', 'CMakeLists.txt')

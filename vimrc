@@ -18,8 +18,7 @@ endif
 # set confirm
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
-# set cinoptions=>2,l1,p0,)50,*50,t0
-set cinoptions+=m1
+set cinoptions=t0,l1,:0,L0,g0,N-s cinkeys-=0#
 set ttyfast
 set ttimeout ttimeoutlen=25
 set belloff=all shortmess=aoOTIc
@@ -31,14 +30,14 @@ set path=.,,,**
 set cpoptions=aABcfFqsZ # -e
 # set breakindentopt=min:40
 set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
-set formatoptions=tcqlnjromB1
+set formatoptions=tcqlnjromB1/ 
 set fillchars=fold:\ ,vert:│
 set virtualedit=block
 set backspace=indent,eol,start
 set nostartofline
 set sidescroll=1 sidescrolloff=3 scrolloff=4
 set nrformats=bin,hex,unsigned
-set spelllang=en_us,cjk spellcapcheck=
+set spelllang=en_us,cjk spellcapcheck= spellfile=$MYVIMDIR/spell/en.utf-8.add
 # set spelloptions=camel
 inoremap <C-b> <c-g>u<Esc>[s1z=`]a<c-g>u
 set nospell
@@ -86,6 +85,26 @@ set titlestring=VIM:\ %f
 set switchbuf=uselast
 set tabpagemax=50
 set nolangremap
+
+if $W64DEVKIT != ""
+    set sh=sh shcf=-c sxq=\"
+    $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
+                \ -Wno-sign-conversion -Wno-unused-parameter
+                \ -Wno-unused-function -Wno-unknown-pragmas
+                \ -fsanitize=undefined -fsanitize-trap"
+    $LDFLAGS = "-nostartfiles"
+else
+    $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
+                \ -Wno-sign-conversion -Wno-unused-parameter
+                \ -Wno-unused-function -Wno-unknown-pragmas
+                \ -fsanitize=undefined,address
+                \ -fsanitize-undefined-trap-on-error"
+    $LDFLAGS = " "
+endif
+$CXXFLAGS = $CFLAGS .. ' -std=c++23'
+set makeprg=make\ -e\ %:r
+set efm^=%-G%f%l:\ note:%m
+
 
 if filereadable($HOME .. '/local.vim')
   source $HOME/local.vim

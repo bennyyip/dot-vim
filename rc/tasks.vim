@@ -37,5 +37,13 @@ nnoremap <leader>/ :Rgr<space>
 nnoremap <leader>? :Rg<space>
 nnoremap <leader>F :Locate<space>
 
+# Expand last search to all files with matching extension
+nnoremap <localleader>/ :execute "Rg -t " .. &ft .. ' ' .. @/<CR>
+# slower
+nnoremap <localLeader>? :execute "vimgrep // **/*." . expand("%:e")<CR>
+
+nnoremap [I <cmd>LGrep \\b<cword>\\b %<CR>
+nmap ]I [I
+
 # repeat
 nnoremap <localleader>q :AsyncQf<UP><CR>

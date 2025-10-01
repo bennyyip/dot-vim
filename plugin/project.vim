@@ -60,4 +60,6 @@ augroup Project
   autocmd BufReadPost,BufEnter * SourceProjectVimrc()
 augroup END
 
-g:Harpoon('v', '~/.vim', 4)
+g:Harpoon('V', "$MYVIMDIR")
+g:Harpoon('D', '~/dotfiles')
+g:Harpoon('Z', '~/dotfiles/zsh/.zshrc')
