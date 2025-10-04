@@ -115,4 +115,6 @@ command Lin setl ff=unix fenc=utf8 nobomb eol
 
 import autoload 'hlblink.vim'
 command BlinkLine hlblink.Line()
+
+command! Ctags utils.GenCtags()
 # vim:fdm=marker:ft=vim

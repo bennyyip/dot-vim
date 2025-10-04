@@ -99,7 +99,7 @@ export function Lilydjwg_join(sep, bang) range " [[[1
 endfunction
 
 export def SessionComplete(_, _, _): string # [[[1
-    return globpath($'{$VIMSTATE}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
+  return globpath($'{$VIMSTATE}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
 enddef
 
 export def FollowLink() # [[[1
@@ -182,8 +182,23 @@ export def In_mkdMath(): bool # [[[1
 enddef
 #]]]
 export def Eatchar(pat: string): string # [[[1
-    var c = nr2char(getchar(0))
-    return (c =~ pat) ? '' : c
+  var c = nr2char(getchar(0))
+  return (c =~ pat) ? '' : c
+enddef
+export def GenCtags() # [[[1
+  var cmd = ["ctags", '-R']
+  job_start(cmd, {
+    exit_cb: (job, rcode) => {
+      if rcode == 0
+        echom "tags generated."
+      else
+        echom "failed to generate tags."
+      endif
+    },
+    err_cb: (ch, msg) => {
+      echom msg
+    }
+  })
 enddef
 #]]]
 # vim:fdm=marker:fmr=[[[,]]]:ft=vim

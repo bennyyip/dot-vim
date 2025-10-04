@@ -1,6 +1,8 @@
 vim9script
 setlocal commentstring=//\ %s
 
+set makeprg=make\ -e\ %:r
+
 set foldnestmax=1
 
 # not call

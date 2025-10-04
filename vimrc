@@ -102,7 +102,6 @@ else
     $LDFLAGS = " "
 endif
 $CXXFLAGS = $CFLAGS .. ' -std=c++23'
-set makeprg=make\ -e\ %:r
 set efm^=%-G%f%l:\ note:%m
 
 

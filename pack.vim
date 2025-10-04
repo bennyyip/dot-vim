@@ -139,9 +139,6 @@ else
   # Language [[[2
   Pack 'local/ocaml', { 'local': true }
   Pack 'local/formatters', { 'local': true }
-  if executable('ctags')
-    Pack 'ludovicchabant/vim-gutentags'
-  endif
   Pack 'yegappan/lsp', { branch: 'main' }
 
   Pack 'Konfekt/vim-compilers'
