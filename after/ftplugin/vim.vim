@@ -3,14 +3,16 @@ vim9script
 def Help(args: string)
   const syn_name = synIDattr(synID(line('.'), col('.'), 1), 'name')
 
+  const cmd = 'vertical help'
+
   if syn_name =~# 'vimCommand'
-    execute $'help :{args}'
+    execute $'{cmd} :{args}'
   elseif syn_name =~# 'vimOption'
-    execute $"help '{args}'"
+    execute $"{cmd} '{args}'"
   elseif syn_name =~# 'vimFunc'
-    execute $'help {args}()'
+    execute $'{cmd} {args}()'
   else
-    execute $'help {args}'
+    execute $'{cmd} {args}'
   endif
 enddef
 

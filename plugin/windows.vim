@@ -9,7 +9,7 @@ endif
 $SHELL = 'bash'
 # set shell=$SHELL
 
-set noshellslash
+set shellslash
 set completeslash=slash
 
 set iminsert=2

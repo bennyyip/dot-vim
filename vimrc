@@ -18,7 +18,7 @@ endif
 # set confirm
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
-set cinoptions=t0,l1,:0,L0,g0,N-s cinkeys-=0#
+set cinoptions=(0,t0,l1,:0,L0,g0,N-s cinkeys-=0#
 set ttyfast
 set ttimeout ttimeoutlen=25
 set belloff=all shortmess=aoOTIc
@@ -30,7 +30,7 @@ set path=.,,,**
 set cpoptions=aABcfFqsZ # -e
 # set breakindentopt=min:40
 set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
-set formatoptions=tcqlnjromB1/ 
+set formatoptions=tcqlnjromB1/
 set fillchars=fold:\ ,vert:│
 set virtualedit=block
 set backspace=indent,eol,start
@@ -81,7 +81,7 @@ set autoread autowrite
 set report=0 # Always report changed lines.
 # set synmaxcol=99999 # Only highlight the first 500 columns.
 set splitbelow splitright
-set titlestring=VIM:\ %f
+set titlestring=VIM
 set switchbuf=uselast
 set tabpagemax=50
 set nolangremap

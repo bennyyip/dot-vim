@@ -1,5 +1,7 @@
 *cheatsheet.txt*    My own *cheatsheet*
 
+:help quickref
+
 ==============================================================================
 1. 摺疊								     |Folding|
 

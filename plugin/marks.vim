@@ -14,6 +14,9 @@ def UpdateMarks(bufnr: number = bufnr())
     var local_marks = getmarklist(bufnr)->filter((_, v) => v.mark =~ '[[:alpha:]]')
     var global_marks = getmarklist()->filter((_, v) => v.mark =~ '[[:alpha:]]' && v.pos[0] == bufnr)
     local_marks->extend(global_marks)->foreach((_, v) => {
+        if v.mark == "'z" # see :nmap J
+            return
+        endif
         sign_place(0, "marks", $"mark_{v.mark}", v.pos[0], {lnum: v.pos[1]})
     })
 enddef

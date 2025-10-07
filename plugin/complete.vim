@@ -6,7 +6,7 @@ set completepopup=highlight:Pmenu,border:off
 set completeopt=menu,popup,preview,fuzzy
 # set completeopt=menuone,popup,preview,preinsert
 set completefuzzycollect=keyword
-set complete=.^7,w^5,b^5,u^3
+set complete=.^7,w^5,b^5,u^3,t
 # if has("patch-9.1.1409")
   # set complete+=Fcompletor#Abbrev^3
   # set complete+=Fcompletor#Register^5
@@ -14,8 +14,8 @@ set complete=.^7,w^5,b^5,u^3
 # endif
 
 if exists('+autocompletedelay')
-  set autocomplete
-  set autocompletedelay=800
+  # set autocomplete
+  # set autocompletedelay=800
 endif
 
 # command line completion

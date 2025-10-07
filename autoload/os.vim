@@ -1,13 +1,35 @@
 vim9script
 
+import autoload "dist/vim9.vim"
+
 const istmux = !(empty($TMUX))
 const iszellij = !(empty($ZELLIJ))
+
+var shell = &shell
+var shellslash = &shellslash
+var shellcmdflag = &shellcmdflag
 
 # Return true if vim is in WSL environment
 export def IsWsl(): bool
   return exists("$WSLENV")
 enddef
 
+def ForceCmdexe()
+  if &shell !~? "cmd" || &shellslash
+    shell = &shell
+    shellslash = &shellslash
+    shellcmdflag = &shellcmdflag
+
+    &shell = $COMSPEC
+    set noshellslash shellcmdflag=/c
+  endif
+enddef
+
+def RestoreShell()
+  &shell = shell
+  &shellslash = shellslash
+  &shellcmdflag = shellcmdflag
+enddef
 
 # Return Windows path from WSL
 export def WslToWindowsPath(path: string): string
@@ -25,6 +47,11 @@ enddef
 
 # Open explorer/nautilus/dolphin with current file selected (if possible).
 export def FileManager()
+  if executable("cmd.exe")
+    ForceCmdexe()
+    defer RestoreShell()
+  endif
+
   var path = ''
   if expand("%:p") == ""
     path = expand("%:p:h")
@@ -78,18 +105,24 @@ enddef
 
 # Open filename in an OS
 export def Open(url: string)
-  var url_x = url
+  echom url
   if $SSH_CONNECTION != ""
     g:OSCYank(url)
     return
   endif
-  dist#vim9#Open(url)
+
+  if executable("cmd.exe")
+    ForceCmdexe()
+    defer RestoreShell()
+  endif
+  vim9.Open(url)
 enddef
 
 
 # Better gx to open URLs. https://ya.ru
 # nnoremap <silent> gx :call os#Gx()<CR>
 export def Gx()
+
   # URL regexes
   var rx_base = '\%(\%(http\|ftp\|irc\)s\?\|file\)://\S'
   var rx_bare = rx_base .. '\+'
@@ -97,9 +130,10 @@ export def Gx()
 
   var URL = ""
 
-  # markdown URL [link text](http://ya.ru 'yandex search')
   var save_view = winsaveview()
   defer winrestview(save_view)
+
+  # markdown URL [link text](http://ya.ru 'yandex search')
   if searchpair('\[.\{-}\](', '', ')\zs', 'cbW', '', line('.')) > 0
     URL = matchstr(getline('.')[col('.') - 1 : ], '\[.\{-}\](\zs' .. rx_embd .. '\ze\(\s\+.\{-}\)\?)')
   endif
@@ -139,7 +173,9 @@ export def Gx()
     return
   endif
 
-  Open(escape(URL, '#%!'))
+
+  Open(URL)
+  # endif
 enddef
 
 # Pack 'ojroques/vim-oscyank'
@@ -150,3 +186,4 @@ export def Yank(s: string)
     setreg('+', s)
   endif
 enddef
+

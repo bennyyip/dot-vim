@@ -70,6 +70,7 @@ augroup vimrc
 
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   autocmd BufEnter * if &buftype == 'terminal' | wall | endif
+  autocmd ModeChanged *:nt setlocal relativenumber
 
   # zellj EditScrollback
   autocmd BufEnter *.dump  setlocal nowrap

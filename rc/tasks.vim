@@ -17,9 +17,6 @@ command! -nargs=1 -bang Rgr {
   async#qfix(Escape(<q-args>), {'grep': 1})
   # chdir(saved_cwd)
 }
-# Ripgrep word under cursor
-nnoremap <leader>* <scriptcmd>exe "Rg" expand("<cword>")<cr>
-xnoremap <leader>* "0y<scriptcmd>exe "Rg" getreg("0")<cr>
 
 command! -nargs=* Locate async#qfix(<q-args>, {'grepformat': "%f", "grepprg": "locate", "grep": 1})
 
@@ -41,9 +38,6 @@ nnoremap <leader>F :Locate<space>
 nnoremap <localleader>/ :execute "Rg -t " .. &ft .. ' ' .. @/<CR>
 # slower
 nnoremap <localLeader>? :execute "vimgrep // **/*." . expand("%:e")<CR>
-
-nnoremap [I <cmd>LGrep \\b<cword>\\b %<CR>
-nmap ]I [I
 
 # repeat
 nnoremap <localleader>q :AsyncQf<UP><CR>

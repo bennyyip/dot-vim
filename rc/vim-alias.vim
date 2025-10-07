@@ -11,6 +11,8 @@ Alias qf   AsyncQf
 Alias ve   verbose
 Alias vf   vertical\ sfind
 " Alias Help help
+Alias h vertical\ help
+Alias H vertical\ help
 Alias Wa   wa
 Alias Wq   wq
 Alias W    w

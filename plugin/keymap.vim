@@ -86,10 +86,11 @@ onoremap <silent> al :<C-u>normal val<CR>
 inoremap <silent><C-z> <ESC>u
 if $SSH_CONNECTION == ""
     xnoremap <silent><C-c> "+y
+    xnoremap <silent><M-v> "+p
     cnoremap <C-v>         <C-R>+
     inoremap <silent><C-v> <C-R><C-o>+
-    inoremap <C-S-V> <C-R>+
     cnoremap <C-S-V> <C-R><C-o>+
+    tnoremap <C-S-v> <C-F>"+
 endif
 nnoremap Y   y$
 xnoremap x  "_d
@@ -174,6 +175,8 @@ cnoremap <F2> \(.\{-}\)
 # https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
 xnoremap * :<c-u> call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<c-u> call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+xmap     <leader>* ms*<cmd>lvimgrep //j %<BAR>:lopen<CR>
+nnoremap <leader>* ms*<cmd>lvimgrep //j %<BAR>:lopen<CR>
 # SID means script local function; 'call' is optional in vim9script.
 def VSetSearch(cmdtype: string)
     var temp = getreg('s')
@@ -338,7 +341,9 @@ nnoremap <silent>gH <cmd>diffget //3<CR>
 xnoremap <c-p> :diffput<cr>
 xnoremap <c-o> :diffget<cr>
 # tags
-nnoremap '] <c-w>v<c-w>]
+nnoremap <silent>'] <cmd>execute $"vertical ptjump {expand('<cword>')}"<BAR>wincmd =<CR>
+nnoremap <silent><Plug>(meta-j) :wincmd p<BAR>normal! 10jzz<CR>:wincmd p<CR>
+nnoremap <silent><Plug>(meta-k) :wincmd p<BAR>normal! 10kzz<CR>:wincmd p<CR>
 # vimrc
 nnoremap <silent><leader>fed :e $MYVIMRC<CR>
 # source vimscript (operator)
@@ -363,6 +368,7 @@ nnoremap <leader>vR :new \| exec "nn <buffer> q :bd!\<cr\>" \| r !
 nnoremap <leader>vr :enew \| exec "nn <buffer> q :bd!\<cr\>" \| put = execute('')<left><left>
 # external [[[1
 nnoremap <silent> gX  :call os#Gx()<CR>
+xnoremap gX <scriptcmd>os#Open(utils#GetVisualSelection()[0])<CR>
 nnoremap <silent> gof :call os#FileManager()<CR>
 nnoremap <silent> got :call os#Terminal()<CR>
 # obsidian [[[1

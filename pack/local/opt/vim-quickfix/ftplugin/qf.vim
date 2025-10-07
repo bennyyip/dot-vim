@@ -21,3 +21,5 @@ else
   command! -nargs=+ -buffer Keep   :Cfilter  <args>
   command! -nargs=+ -buffer Reject :Cfilter! <args>
 endif
+
+setlocal winfixbuf

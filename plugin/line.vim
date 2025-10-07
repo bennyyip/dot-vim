@@ -126,7 +126,7 @@ def g:StatusLine(): string
   const inactive = get(g:, 'statusline_winid', win_getid(winnr())) != win_getid(winnr())
   if inactive
     return '%#BenStl_middle#' .. [
-      '%t', # filename
+      '%f', # filename
       '%=', # middle
       '%p%%', # percent
       '%l:%c', # lineinfo
