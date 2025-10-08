@@ -14,7 +14,7 @@ export def IsWsl(): bool
   return exists("$WSLENV")
 enddef
 
-def ForceCmdexe()
+export def ForceCmdexe()
   if &shell !~? "cmd" || &shellslash
     shell = &shell
     shellslash = &shellslash
@@ -25,7 +25,7 @@ def ForceCmdexe()
   endif
 enddef
 
-def RestoreShell()
+export def RestoreShell()
   &shell = shell
   &shellslash = shellslash
   &shellcmdflag = shellcmdflag

@@ -47,5 +47,11 @@ enddef
 
 
 augroup vimrc
-  autocmd FileType dir CustomizeMappings()
+  autocmd FileType dir {
+    CustomizeMappings()
+    call os#ForceCmdexe()
+  }
+  autocmd BufLeave dir://* {
+    call os#RestoreShell()
+  }
 augroup END
