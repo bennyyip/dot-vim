@@ -87,21 +87,24 @@ set tabpagemax=50
 set nolangremap
 
 if $W64DEVKIT != ""
-    set sh=sh shcf=-c sxq=\"
-    $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
+  # set sh=sh shcf=-c sxq=\" sxe=
+    $CFLAGS = "-g -gcodeview -Wall -Wextra -Wdouble-promotion -Wconversion
                 \ -Wno-sign-conversion -Wno-unused-parameter
                 \ -Wno-unused-function -Wno-unknown-pragmas
-                \ -fsanitize=undefined -fsanitize-trap"
-    $LDFLAGS = "-nostartfiles"
+                \ -fsanitize=undefined
+                \ -fsanitize-trap"
+    # $LDFLAGS = "-nostartfiles"
 else
     $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
                 \ -Wno-sign-conversion -Wno-unused-parameter
                 \ -Wno-unused-function -Wno-unknown-pragmas
                 \ -fsanitize=undefined,address
                 \ -fsanitize-undefined-trap-on-error"
-    $LDFLAGS = " "
+  $LDFLAGS = " "
 endif
 $CXXFLAGS = $CFLAGS .. ' -std=c++23'
+
+set makeprg=make\ -e
 set efm^=%-G%f%l:\ note:%m
 
 

@@ -26,6 +26,10 @@ def FormatOnSave() # [[[2
 enddef
 
 def Format()
+  if ['vim']->index(&ft) != -1
+    utils.RemoveSpaces()
+    return
+  endif
   if plugpac#HasPlugin('lsp') && lsp#buffer#CurbufGetServers()->len() > 0
     execute "LspFormat"
     return

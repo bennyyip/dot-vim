@@ -197,6 +197,7 @@ endfunc
 " Saves the MRU file names to the MRU file
 func! s:MRU_SaveList() abort
   let l = []
+  call filter(s:MRU_files, "v:val->stridx('\\') == -1")
   call add(l, '# Most recently edited files in Vim (version 3.0)')
   call extend(l, s:MRU_files)
   call writefile(l, s:MRU_File)

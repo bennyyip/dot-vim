@@ -22,4 +22,4 @@ else
   command! -nargs=+ -buffer Reject :Cfilter! <args>
 endif
 
-setlocal winfixbuf
+# setlocal winfixbuf

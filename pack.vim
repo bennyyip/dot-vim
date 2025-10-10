@@ -14,8 +14,8 @@ g:plugpac_plugin_conf_path = $MYVIMDIR .. '/rc'
 g:plugpac_default_type = 'delay'
 # plugins [[[1
 # Builtin [[[2
-if !getcompletion('helpdoc', 'packadd')->empty()
-  packadd! helpdoc
+if !getcompletion('helptoc', 'packadd')->empty()
+  packadd! helptoc
 endif
 if !getcompletion('cfilter', 'packadd')->empty()
   packadd! cfilter

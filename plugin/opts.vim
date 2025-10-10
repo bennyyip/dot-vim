@@ -31,6 +31,7 @@ g:is_posix = 1
 
 g:python_highlight_all = 1
 g:markdown_fenced_languages = ['html', 'dataviewjs=javascript', 'js=javascript', 'ruby', 'zsh', 'bash=sh', 'python', 'ocaml', 'base=yaml', 'vimhelp=help']
+g:markdown_folding = 1
 
 g:snips_author = 'Ben Yip'
 g:obsidian_vault = $HOME .. '/Obsidian-Vault'

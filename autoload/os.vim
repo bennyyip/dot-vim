@@ -15,6 +15,10 @@ export def IsWsl(): bool
 enddef
 
 export def ForceCmdexe()
+  if !executable("cmd.exe")
+    return
+  endif
+
   if &shell !~? "cmd" || &shellslash
     shell = &shell
     shellslash = &shellslash
@@ -26,6 +30,9 @@ export def ForceCmdexe()
 enddef
 
 export def RestoreShell()
+  if !executable("cmd.exe")
+    return
+  endif
   &shell = shell
   &shellslash = shellslash
   &shellcmdflag = shellcmdflag
@@ -186,4 +193,3 @@ export def Yank(s: string)
     setreg('+', s)
   endif
 enddef
-
