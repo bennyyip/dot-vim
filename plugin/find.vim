@@ -40,22 +40,34 @@ augroup find
   autocmd CmdlineEnter * {
     files_cache = []
   }
-  autocmd BufWinEnter * {
-    if !empty(saved_cwd)
-      chdir(saved_cwd, 'window')
-      saved_cwd = ''
-    endif
-  }
 augroup END
 
 set findfunc=Find
 
+def RestoreCwd()
+  chdir(saved_cwd, 'window')
+  saved_cwd = ''
+enddef
+
 def Fd(dir: string, keepcwd: bool = true)
   if keepcwd
     saved_cwd = getcwd()->fnamemodify(':p')
+
+    # find is canceled
+    autocmd CmdlineLeave : ++once {
+      if v:char != "\015" # <CR>
+        RestoreCwd()
+      endif
+    }
+
+    autocmd BufWinEnter * ++once {
+      if !empty(saved_cwd)
+        RestoreCwd()
+      endif
+    }
   endif
+
   chdir(dir, 'window')
-  # pwd
   feedkeys(':find ')
 enddef
 

@@ -6,16 +6,19 @@ command! -nargs=1 -bang -complete=shellcmdline AsyncCmd call async#cmd(<q-args>,
 command! -nargs=1 -bang -complete=shellcmdline Async    call async#cmd(<q-args>, 'headless', {'writelogs': <bang>0})
 command! -nargs=1 -bang -complete=shellcmdline AsyncQf  call async#cmd(<q-args>, 'quickfix', {'writelogs': <bang>0, 'nojump': 0, 'wall': 1})
 
-def Escape(s: string): string
-  return substitute(s, "[#]", '\\\0', 'g')
+def Rg(txt: string, bang: string)
+  var s = txt
+  if empty(s)
+    s = expand("<cword>")
+  endif
+
+  async#qfix(s, {'grep': 1, 'nojump': bang == '!' ? 1 : 0 })
 enddef
 
-command! -nargs=1 -bang Rg call async#qfix(Escape(<q-args>), {'grep': 1})
-command! -nargs=1 -bang Rgr {
-  # const saved_cwd = getcwd()
-  chdir(g:FindRootDirectory())
-  async#qfix(Escape(<q-args>), {'grep': 1})
-  # chdir(saved_cwd)
+command! -nargs=* -bang -complete=file Rg call Rg(<q-args>, "<bang>")
+command! -nargs=* -bang -complete=file Rgr {
+  chdir(g:FindRootDirectory(), 'window')
+  Rg(<q-args>, "<bang>")
 }
 
 command! -nargs=* Locate async#qfix(<q-args>, {'grepformat': "%f", "grepprg": "locate", "grep": 1})
