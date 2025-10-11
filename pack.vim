@@ -59,7 +59,7 @@ Pack 'bennyyip/vim-sandwich'
 
 Pack 'vim/termdebug', { on: 'Termdebug', 'local': true }
 Pack 'local/misc', { 'local': true }
-Pack 'local/vim-quickfix', { 'local': true }
+# Pack 'local/vim-quickfix', { 'local': true }
 
 Pack 'Konfekt/vim-scratchpad', { 'local': true }
 Pack 'local/ocaml', { 'local': true }
@@ -155,7 +155,9 @@ else
   Pack 'Shiracamus/vim-syntax-x86-objdump-d'
   Pack 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
   Pack 'chrisbra/csv.vim'
-  Pack 'pearofducks/ansible-vim'
+  if !is_win
+    Pack 'pearofducks/ansible-vim'
+  endif
 
   Pack 'tridactyl/vim-tridactyl'
 

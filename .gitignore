@@ -2,6 +2,7 @@
 /pack/minpac/start/*
 
 pack/non-managed
+pack/devel
 
 local.vim
 .netrwhist

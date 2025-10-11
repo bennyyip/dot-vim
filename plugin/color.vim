@@ -32,13 +32,29 @@ augroup colorscheme_override
     endif
     hi! link debugBreakpoint ErrorMsg
     hi! link debugPC QuickFixLine
-    # hi debugPC term=reverse ctermbg=darkblue guibg=#444422
+
+    hi BenStl_insert   term=bold   cterm=bold  ctermfg=234   ctermbg=109 gui=bold guifg=#1c1c1c guibg=#82a598
+    hi BenStl_left0    term=bold   cterm=bold  ctermfg=234   ctermbg=187 gui=bold guifg=#1c1c1c guibg=#ebdbb2
+    hi BenStl_left1    term=bold   cterm=bold  ctermfg=187   ctermbg=137 gui=bold guifg=#ebdbb2 guibg=#504945
+    hi BenStl_left2    ctermfg=137 ctermbg=237 guifg=#a89984 guibg=#3c3836
+    hi BenStl_middle   ctermfg=137 ctermbg=237 guifg=#a89984 guibg=#3c3836
+    hi BenStl_normal   term=bold   cterm=bold  ctermfg=234   ctermbg=187 gui=bold guifg=#1c1c1c guibg=#ebdbb2
+    hi BenStl_replace  term=bold   cterm=bold  ctermfg=234   ctermbg=203 gui=bold guifg=#1c1c1c guibg=#fb4934
+    hi BenStl_right0   ctermfg=234 ctermbg=187 guifg=#1c1c1c guibg=#ebdbb2
+    hi BenStl_right1   ctermfg=187 ctermbg=137 guifg=#ebdbb2 guibg=#504945
+    hi BenStl_right2   ctermfg=137 ctermbg=237 guifg=#a89984 guibg=#3c3836
+    hi BenStl_visual   term=bold   cterm=bold  ctermfg=234   ctermbg=214 gui=bold guifg=#1c1c1c guibg=#fabd2f
+    hi BenTabLine      ctermfg=137 ctermbg=239 guifg=#a89984 guibg=#504945
+    hi BenTabLineFill  ctermfg=234 ctermbg=234 guifg=#1c1c1c guibg=#1c1c1c
+    hi BenTabLineRight ctermfg=234 ctermbg=208 guifg=#1c1c1c guibg=#fe8019
+    hi BenTabLineSel   term=bold   cterm=bold  ctermfg=234   ctermbg=137 gui=bold guifg=#1c1c1c guibg=#a89984
+
   }
 augroup END
 
 set background=dark
 
-const fallback = get(g:, 'colorscheme_fallback', ['retrobox', 'gruvbox8_hard', 'elflord'])
+const fallback = get(g:, 'colorscheme_fallback', ['flexoki', 'retrobox', 'gruvbox8_hard', 'elflord'])
 
 for c in fallback
   if !getcompletion(c, 'color')->empty()

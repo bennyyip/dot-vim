@@ -218,9 +218,11 @@ augroup vimrc
   autocmd VimEnter * {
     set tabline=%!g:Tabline()
     set statusline=%!g:StatusLine()
-    Highlight()
+    # Highlight()
   }
   autocmd Syntax,ColorScheme * {
-    Highlight()
+    # Highlight()
+
   }
 augroup END
+
