@@ -11,6 +11,9 @@ let g:loaded_sayoara = 1
 
 " MY CONFIG
 nnoremap <silent>gs :Sayonara<CR>
+let g:sayonara_filetypes = {
+      \ 'undotree': 'UndotreeHide',
+      \ }
 " MY CONFIG ENDS
 
 let s:prototype = {}

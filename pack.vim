@@ -57,12 +57,23 @@ Pack 'bootleq/vim-cycle'
 # Pack 'itchyny/lightline.vim', { type: 'opt' }
 Pack 'bennyyip/vim-sandwich'
 
+Pack 'vim/termdebug', { on: 'Termdebug', 'local': true }
+Pack 'local/misc', { 'local': true }
+Pack 'local/vim-quickfix', { 'local': true }
+
+Pack 'Konfekt/vim-scratchpad', { 'local': true }
+Pack 'local/ocaml', { 'local': true }
+Pack 'local/formatters', { 'local': true }
+
+if !is_win
+  Pack 'habamax/vim-man', { 'local': true }
+endif
+
 if minimal_plugins
   g:loaded_netrw       = 0
   g:loaded_netrwPlugin = 0
 else
   # Lab [[[2
-  Pack 'vim/termdebug', { on: 'Termdebug', 'local': true }
   Pack 'junegunn/goyo.vim', { on: 'Goyo' }
   # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
   # Pack 'mg979/vim-visual-multi'
@@ -70,8 +81,6 @@ else
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'chrisbra/vim_faq'
   # Enhance [[[2
-  Pack 'local/misc', { 'local': true }
-  Pack 'local/vim-quickfix', { 'local': true }
   Pack 'LunarWatcher/auto-pairs'
   Pack 'Konfekt/vim-alias'
   # Pack 'andymass/vim-matchup'
@@ -121,7 +130,6 @@ else
   Pack 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] } # gx gxx gxg
   Pack 'tpope/vim-abolish'
   Pack 'tpope/vim-apathy' # 'path'
-  Pack 'Konfekt/vim-scratchpad', { 'local': true }
 
   # Pack 'michaeljsmith/vim-indent-object'
 
@@ -137,8 +145,6 @@ else
   # Pack 'tpope/vim-rhubarb'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
   # Language [[[2
-  Pack 'local/ocaml', { 'local': true }
-  Pack 'local/formatters', { 'local': true }
   Pack 'yegappan/lsp', { branch: 'main' }
 
   Pack 'Konfekt/vim-compilers'
@@ -156,9 +162,6 @@ else
   Pack 'bfrg/vim-jq'
   Pack 'bfrg/vim-jqplay'
   Pack 'lervag/vimtex'
-  if !is_win
-    Pack 'habamax/vim-man', { 'local': true }
-  endif
   # Web [[[3
   Pack 'MaxMEllon/vim-jsx-pretty'
   Pack 'BourgeoisBear/clrzr'
