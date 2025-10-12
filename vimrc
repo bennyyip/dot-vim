@@ -26,7 +26,7 @@ set ruler display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
 set suffixes+=.a,.1,.class,.mkv,.mp4
 set isfname-==
-set path=.,,,**
+set path=.,,
 set cpoptions=aABcfFqsZ # -e
 # set breakindentopt=min:40
 set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
