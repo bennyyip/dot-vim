@@ -21,7 +21,9 @@ export def QuickFixText(info: dict<any>): list<string>
             if items[idx].col != 0
                 text ..= $":{items[idx].col}"
             endif
-            text ..= $":{items[idx].text}"
+            if !empty(items[idx].text)
+              text ..= $":{items[idx].text}"
+            endif
             add(l, text)
         else
             add(l, items[idx].text)

@@ -32,7 +32,8 @@ function! AutoReply(cmdline) abort
   let s:has_replied = v:true
 
   if previous_cmd ==# 'global'
-    call s:feedkeys(':')
+    " ignore global
+    " call s:feedkeys(':')
   elseif previous_cmd ==# 'undolist'
     call s:feedkeys(':undo' . ' ')
   elseif previous_cmd ==# 'oldfiles'
