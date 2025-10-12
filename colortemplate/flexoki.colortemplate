@@ -152,19 +152,22 @@ CursorLineSign       -> FoldColumn
 PreInsert            -> LineNr
 
 Normal               tx                bg_1
+Bold                 none              none              bold
+Italic               none              none              italic
 
 Added                gr                none
-Bold                 none              none              bold
 Changed              or                none
-Conceal              none              none
 DiffAdd              bg_1              gr
 DiffChange           bg_2              pu
 DiffDelete           bg_2              re
 DiffText             bg_1              bl_2
-Italic               none              none              italic
 Removed              re                none
-Title                bl                none              bold
-WarningMsg           re                bg_1
+
+Cursor               bg_1              tx
+Conceal              bg_2              none
+
+Title                gr                none              bold
+WarningMsg           re                none              bold
 
 SpellBad             omit              omit              s=re undercurl
 SpellCap             omit              omit              s=bl undercurl
@@ -233,6 +236,7 @@ Typedef              ye                none
 Underlined           bl                none              underline
 
 Directory            gr                none              bold
+ModeMsg              ye                none              bold
 MoreMsg              ye                none              bold
 Question             or                none              bold
 Search               none              colorSrch
@@ -240,16 +244,16 @@ IncSearch            none              colorInc
 QuickFixLine         none              colorQF
 
 
-Pmenu                tx                bg_1
-PmenuBorder          tx_2              bg_1
-PmenuSbar            none              bg_1
+Pmenu                tx                bg_2
+PmenuBorder          tx_2              bg_2
+PmenuSbar            none              bg_2
 PmenuSel             none              ui_3
 PmenuThumb           none              ui
-PmenuKind            re                bg_1
+PmenuKind            re                bg_2
 PmenuKindSel         re                ui_3
-PmenuExtra           tx_2              bg_1
+PmenuExtra           tx_2              bg_2
 PmenuExtraSel        tx_2              ui_3
-PmenuMatch           pu                bg_1              bold
+PmenuMatch           pu                bg_2              bold
 PmenuMatchSel        pu                ui_3              bold
 WildMenu             bl                bg_2              bold
 

@@ -53,17 +53,13 @@ if !getcompletion('comment', 'packadd')->empty()
 else
   Pack 'tomtom/tcomment_vim'
 endif
-Pack 'bootleq/vim-cycle'
-# Pack 'itchyny/lightline.vim', { type: 'opt' }
-Pack 'bennyyip/vim-sandwich'
 
 Pack 'vim/termdebug', { on: 'Termdebug', 'local': true }
-Pack 'local/misc', { 'local': true }
-# Pack 'local/vim-quickfix', { 'local': true }
-
 Pack 'Konfekt/vim-scratchpad', { 'local': true }
-Pack 'local/ocaml', { 'local': true }
+Pack 'bennyyip/vim-sandwich'
 Pack 'local/formatters', { 'local': true }
+Pack 'local/misc', { 'local': true }
+Pack 'local/ocaml', { 'local': true }
 
 if !is_win
   Pack 'habamax/vim-man', { 'local': true }
@@ -81,6 +77,7 @@ else
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Pack 'chrisbra/vim_faq'
   # Enhance [[[2
+  Pack 'bootleq/vim-cycle'
   Pack 'LunarWatcher/auto-pairs'
   Pack 'Konfekt/vim-alias'
   # Pack 'andymass/vim-matchup'
@@ -123,13 +120,16 @@ else
   Pack 'bennyyip/miniterm.vim'
   # Motion and Edit [[[2
   Pack 'machakann/vim-swap' # g, g. gs gS
-  Pack 'yegappan/taglist'
   Pack 'bennyyip/vim-debugstring' # <leader>ds
   Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
   # Pack 'svermeulen/vim-yoink' # :Yanks
   Pack 'tommcdo/vim-exchange', { 'on': ['<Plug>(Exchange)', '<Plug>(ExchangeLine)'] } # gx gxx gxg
   Pack 'tpope/vim-abolish'
-  Pack 'tpope/vim-apathy' # 'path'
+
+  if !is_win # system() is slow
+    Pack 'tpope/vim-apathy' # 'path'
+    Pack 'yegappan/taglist'
+  endif
 
   # Pack 'michaeljsmith/vim-indent-object'
 
@@ -138,7 +138,6 @@ else
   # Pack 'monkoose/vim9-stargate'
   # VCS [[[2
   Pack 'Eliot00/git-lens.vim'
-  Pack 'junegunn/gv.vim', { 'on': 'GV' }
   Pack 'rhysd/conflict-marker.vim' # [x ]x
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tpope/vim-fugitive'

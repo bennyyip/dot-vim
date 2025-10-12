@@ -274,7 +274,7 @@ nnoremap <silent> ]D :lnfile<CR>
 def EditFileByOffset(num: number, first_or_last: number = 0)
   var file = expand('%:p')
 
-  const sep = has('win32') ? '\' : '/'
+  const sep = has('win32') && !&shellslash ? '\' : '/'
 
   if empty(file)
     file = getcwd() .. sep

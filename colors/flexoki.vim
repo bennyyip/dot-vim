@@ -51,9 +51,10 @@ if &background == 'dark'
   hi Character guifg=#8b7ec8 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi ColorColumn guifg=NONE guibg=#403e3c guisp=NONE gui=NONE cterm=NONE
   hi Comment guifg=#878580 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-  hi Conceal guifg=NONE guibg=NONE guisp=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
+  hi Conceal guifg=#1c1b1a guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Conditional guifg=#d14d41 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Constant guifg=#8b7ec8 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+  hi Cursor guifg=#100f0f guibg=#cecdc3 guisp=NONE gui=NONE cterm=NONE
   hi CursorIM guifg=#100f0f guibg=#cecdc3 guisp=NONE gui=NONE cterm=NONE
   hi CursorLine guifg=NONE guibg=#282726 guisp=NONE gui=NONE cterm=NONE
   hi CursorLineNr guifg=#d0a215 guibg=#100f0f guisp=NONE gui=bold cterm=bold
@@ -83,19 +84,20 @@ if &background == 'dark'
   hi LineNr guifg=#575653 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Macro guifg=#3aa99f guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi MatchParen guifg=NONE guibg=#1c1b1a guisp=NONE gui=bold,underline cterm=bold,underline
+  hi ModeMsg guifg=#d0a215 guibg=NONE guisp=NONE gui=bold cterm=bold
   hi MoreMsg guifg=#d0a215 guibg=NONE guisp=NONE gui=bold cterm=bold
   hi NonText guifg=#282726 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Number guifg=#8b7ec8 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Operator guifg=#3aa99f guibg=NONE guisp=NONE gui=NONE cterm=NONE
-  hi Pmenu guifg=#cecdc3 guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
-  hi PmenuBorder guifg=#878580 guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
-  hi PmenuExtra guifg=#878580 guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
+  hi Pmenu guifg=#cecdc3 guibg=#1c1b1a guisp=NONE gui=NONE cterm=NONE
+  hi PmenuBorder guifg=#878580 guibg=#1c1b1a guisp=NONE gui=NONE cterm=NONE
+  hi PmenuExtra guifg=#878580 guibg=#1c1b1a guisp=NONE gui=NONE cterm=NONE
   hi PmenuExtraSel guifg=#878580 guibg=#403e3c guisp=NONE gui=NONE cterm=NONE
-  hi PmenuKind guifg=#d14d41 guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
+  hi PmenuKind guifg=#d14d41 guibg=#1c1b1a guisp=NONE gui=NONE cterm=NONE
   hi PmenuKindSel guifg=#d14d41 guibg=#403e3c guisp=NONE gui=NONE cterm=NONE
-  hi PmenuMatch guifg=#8b7ec8 guibg=#100f0f guisp=NONE gui=bold cterm=bold
+  hi PmenuMatch guifg=#8b7ec8 guibg=#1c1b1a guisp=NONE gui=bold cterm=bold
   hi PmenuMatchSel guifg=#8b7ec8 guibg=#403e3c guisp=NONE gui=bold cterm=bold
-  hi PmenuSbar guifg=NONE guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
+  hi PmenuSbar guifg=NONE guibg=#1c1b1a guisp=NONE gui=NONE cterm=NONE
   hi PmenuSel guifg=NONE guibg=#403e3c guisp=NONE gui=NONE cterm=NONE
   hi PmenuThumb guifg=NONE guibg=#282726 guisp=NONE gui=NONE cterm=NONE
   hi PreCondit guifg=#3aa99f guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -123,7 +125,7 @@ if &background == 'dark'
   hi TabLine guifg=#878580 guibg=#282726 guisp=NONE gui=NONE cterm=NONE
   hi TabLineFill guifg=#878580 guibg=#1c1b1a guisp=NONE gui=NONE cterm=NONE
   hi TabLineSel guifg=#cecdc3 guibg=#100f0f guisp=NONE gui=bold cterm=bold
-  hi Title guifg=#4385be guibg=NONE guisp=NONE gui=bold cterm=bold
+  hi Title guifg=#879a39 guibg=NONE guisp=NONE gui=bold cterm=bold
   hi Todo guifg=#cecdc3 guibg=#100f0f guisp=NONE gui=bold cterm=bold
   hi ToolbarButton guifg=#cecdc3 guibg=#343331 guisp=NONE gui=bold cterm=bold
   hi ToolbarLine guifg=NONE guibg=NONE guisp=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
@@ -132,7 +134,7 @@ if &background == 'dark'
   hi Underlined guifg=#4385be guibg=NONE guisp=NONE gui=underline cterm=underline
   hi VertSplit guifg=#1c1b1a guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
   hi Visual guifg=NONE guibg=#2a405a guisp=NONE gui=NONE cterm=NONE
-  hi WarningMsg guifg=#d14d41 guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
+  hi WarningMsg guifg=#d14d41 guibg=NONE guisp=NONE gui=bold cterm=bold
   hi WildMenu guifg=#4385be guibg=#1c1b1a guisp=NONE gui=bold cterm=bold
 
   finish
@@ -161,9 +163,10 @@ if &background == 'light'
   hi Character guifg=#5e409d guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi ColorColumn guifg=NONE guibg=#cecdc3 guisp=NONE gui=NONE cterm=NONE
   hi Comment guifg=#6f6e69 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-  hi Conceal guifg=NONE guibg=NONE guisp=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
+  hi Conceal guifg=#f2f0e5 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Conditional guifg=#af3029 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Constant guifg=#5e409d guibg=NONE guisp=NONE gui=NONE cterm=NONE
+  hi Cursor guifg=#fffcf0 guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
   hi CursorIM guifg=#fffcf0 guibg=#100f0f guisp=NONE gui=NONE cterm=NONE
   hi CursorLine guifg=NONE guibg=#e6e4d9 guisp=NONE gui=NONE cterm=NONE
   hi CursorLineNr guifg=#ad8301 guibg=#fffcf0 guisp=NONE gui=bold cterm=bold
@@ -193,19 +196,20 @@ if &background == 'light'
   hi LineNr guifg=#b7b5ac guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Macro guifg=#24837b guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi MatchParen guifg=NONE guibg=#f2f0e5 guisp=NONE gui=bold,underline cterm=bold,underline
+  hi ModeMsg guifg=#ad8301 guibg=NONE guisp=NONE gui=bold cterm=bold
   hi MoreMsg guifg=#ad8301 guibg=NONE guisp=NONE gui=bold cterm=bold
   hi NonText guifg=#e6e4d9 guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Number guifg=#5e409d guibg=NONE guisp=NONE gui=NONE cterm=NONE
   hi Operator guifg=#24837b guibg=NONE guisp=NONE gui=NONE cterm=NONE
-  hi Pmenu guifg=#100f0f guibg=#fffcf0 guisp=NONE gui=NONE cterm=NONE
-  hi PmenuBorder guifg=#6f6e69 guibg=#fffcf0 guisp=NONE gui=NONE cterm=NONE
-  hi PmenuExtra guifg=#6f6e69 guibg=#fffcf0 guisp=NONE gui=NONE cterm=NONE
+  hi Pmenu guifg=#100f0f guibg=#f2f0e5 guisp=NONE gui=NONE cterm=NONE
+  hi PmenuBorder guifg=#6f6e69 guibg=#f2f0e5 guisp=NONE gui=NONE cterm=NONE
+  hi PmenuExtra guifg=#6f6e69 guibg=#f2f0e5 guisp=NONE gui=NONE cterm=NONE
   hi PmenuExtraSel guifg=#6f6e69 guibg=#cecdc3 guisp=NONE gui=NONE cterm=NONE
-  hi PmenuKind guifg=#af3029 guibg=#fffcf0 guisp=NONE gui=NONE cterm=NONE
+  hi PmenuKind guifg=#af3029 guibg=#f2f0e5 guisp=NONE gui=NONE cterm=NONE
   hi PmenuKindSel guifg=#af3029 guibg=#cecdc3 guisp=NONE gui=NONE cterm=NONE
-  hi PmenuMatch guifg=#5e409d guibg=#fffcf0 guisp=NONE gui=bold cterm=bold
+  hi PmenuMatch guifg=#5e409d guibg=#f2f0e5 guisp=NONE gui=bold cterm=bold
   hi PmenuMatchSel guifg=#5e409d guibg=#cecdc3 guisp=NONE gui=bold cterm=bold
-  hi PmenuSbar guifg=NONE guibg=#fffcf0 guisp=NONE gui=NONE cterm=NONE
+  hi PmenuSbar guifg=NONE guibg=#f2f0e5 guisp=NONE gui=NONE cterm=NONE
   hi PmenuSel guifg=NONE guibg=#cecdc3 guisp=NONE gui=NONE cterm=NONE
   hi PmenuThumb guifg=NONE guibg=#e6e4d9 guisp=NONE gui=NONE cterm=NONE
   hi PreCondit guifg=#24837b guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -233,7 +237,7 @@ if &background == 'light'
   hi TabLine guifg=#6f6e69 guibg=#e6e4d9 guisp=NONE gui=NONE cterm=NONE
   hi TabLineFill guifg=#6f6e69 guibg=#f2f0e5 guisp=NONE gui=NONE cterm=NONE
   hi TabLineSel guifg=#100f0f guibg=#fffcf0 guisp=NONE gui=bold cterm=bold
-  hi Title guifg=#205ea6 guibg=NONE guisp=NONE gui=bold cterm=bold
+  hi Title guifg=#66800b guibg=NONE guisp=NONE gui=bold cterm=bold
   hi Todo guifg=#100f0f guibg=#fffcf0 guisp=NONE gui=bold cterm=bold
   hi ToolbarButton guifg=#100f0f guibg=#dad8ce guisp=NONE gui=bold cterm=bold
   hi ToolbarLine guifg=NONE guibg=NONE guisp=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
@@ -242,7 +246,7 @@ if &background == 'light'
   hi Underlined guifg=#205ea6 guibg=NONE guisp=NONE gui=underline cterm=underline
   hi VertSplit guifg=#f2f0e5 guibg=#fffcf0 guisp=NONE gui=NONE cterm=NONE
   hi Visual guifg=NONE guibg=#b0d0d0 guisp=NONE gui=NONE cterm=NONE
-  hi WarningMsg guifg=#af3029 guibg=#fffcf0 guisp=NONE gui=NONE cterm=NONE
+  hi WarningMsg guifg=#af3029 guibg=NONE guisp=NONE gui=bold cterm=bold
   hi WildMenu guifg=#205ea6 guibg=#f2f0e5 guisp=NONE gui=bold cterm=bold
 
 endif
