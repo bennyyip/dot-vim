@@ -362,10 +362,6 @@ enddef
 nnoremap <silent> <expr> yr SourceVim()
 nnoremap <silent> <expr> yrr SourceVim() .. '_'
 xnoremap <silent> <expr> <leader>v SourceVim()
-# redirect shell command, use :il /foo to filter lines
-nnoremap <leader>vR :new \| exec "nn <buffer> q :bd!\<cr\>" \| r !
-# redirect vim cmd, use <leader>fi to filter
-nnoremap <leader>vr :enew \| exec "nn <buffer> q :bd!\<cr\>" \| put = execute('')<left><left>
 # external [[[1
 nnoremap <silent> gX  :call os#Gx()<CR>
 xnoremap gX <scriptcmd>os#Open(utils#GetVisualSelection()[0])<CR>

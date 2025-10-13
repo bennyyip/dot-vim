@@ -106,7 +106,8 @@ def LinePluginStatus(): string
   const jobs = get(g:, 'async_jobs', {})
   const async_status = jobs->len() > 0 ? 'Running' : ''
 
-  const tagname = exists('*taglist#Tlist_Get_Tagname_By_Line') ? taglist#Tlist_Get_Tagname_By_Line() : ''
+  # const tagname = exists('*taglist#Tlist_Get_Tagname_By_Line') ? taglist#Tlist_Get_Tagname_By_Line() : ''
+  const tagname = get(b:, 'vista_nearest_method_or_function', '')
   return [tagname, async_status]->FilterAndJoin(' | ')
 enddef
 

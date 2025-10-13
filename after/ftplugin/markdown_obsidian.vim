@@ -4,7 +4,6 @@ if expand('%:p')->stridx(g:obsidian_vault->expand()) != 0
   finish
 endif
 
-setbufvar('', '&path', g:obsidian_vault .. '/**')
 
 def GotoObsidian()
   const pos = getpos('.')
@@ -13,20 +12,21 @@ def GotoObsidian()
 enddef
 nnoremap <buffer> <localleader>o <scriptcmd>GotoObsidian()<CR>
 
+# setbufvar('', '&path', g:obsidian_vault .. '/**')
 # [[url]] or [[url|description]]
-def IncludeExpr(): string
-  const cur = getpos('.')
-  const head = searchpos("[[", 'bn')
-  const tail = searchpos("]\\||", 'n')
-  if cur[1] == head[0] && head[0] == tail[0] && head[1] < tail[1] && head[1] <= cur[2]
-    const len = tail[1] - head[1] - 2
-    const line = getline('.')
-    const ret = strpart(line, head[1] + 1, len) .. '.md'
-    return ret
-  else
-    return v:fname
-  endif
-enddef
-setlocal includeexpr=IncludeExpr()
+# def IncludeExpr(): string
+#   const cur = getpos('.')
+#   const head = searchpos("[[", 'bn')
+#   const tail = searchpos("]\\||", 'n')
+#   if cur[1] == head[0] && head[0] == tail[0] && head[1] < tail[1] && head[1] <= cur[2]
+#     const len = tail[1] - head[1] - 2
+#     const line = getline('.')
+#     const ret = strpart(line, head[1] + 1, len) .. '.md'
+#     return ret
+#   else
+#     return v:fname
+#   endif
+# enddef
+# setlocal includeexpr=IncludeExpr()
 
 SetHardTabWidth4

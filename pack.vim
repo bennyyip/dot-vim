@@ -128,8 +128,8 @@ else
 
   if !is_win # system() is slow
     Pack 'tpope/vim-apathy' # 'path'
-    Pack 'yegappan/taglist'
   endif
+  Pack 'liuchengxu/vista.vim'
 
   # Pack 'michaeljsmith/vim-indent-object'
 

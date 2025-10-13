@@ -1,4 +1,4 @@
-;;; vim: ft=colortemplate fdm=marker cc=22,40,58 et ts=2 sw=2 vsts=21,18,18,2
+;;; vim: ft=colortemplate fdm=marker cc=24,40,58 et ts=2 sw=2 vsts=23,16,18,2
 
 Full name:   Flexoki
 Short name:  flexoki
@@ -10,266 +10,280 @@ Options:     backend=vim
 Environments: gui
 
 Background: dark
-Color: bg_1          #100F0F           ~
-Color: bg_2          #1C1B1A           ~
-Color: ui            #282726           ~
-Color: ui_2          #343331           ~
-Color: ui_3          #403E3C           ~
-Color: tx_3          #575653           ~
-; Color: base_600      #6F6E69           ~
-Color: tx_2          #878580           ~
-; Color: base_300      #B7B5AC           ~
-Color: tx            #CECDC3           ~
-; Color: base_150      #DAD8CE           ~
-; Color: base_100      #E6E4D9           ~
-; Color: base_50       #F2F0E5           ~
-; Color: paper         #FFFCF0           ~
+Color: bg_1            #100F0F         ~
+Color: bg_2            #1C1B1A         ~
+Color: ui              #282726         ~
+Color: ui_2            #343331         ~
+Color: ui_3            #403E3C         ~
+Color: tx_3            #575653         ~
+Color: tx_2            #878580         ~
+Color: tx              #CECDC3         ~
 
 
-Color: re_2          #AF3029           ~
-Color: or_2          #BC5215           ~
-Color: ye_2          #AD8301           ~
-Color: gr_2          #66800B           ~
-Color: cy_2          #24837B           ~
-Color: bl_2          #205EA6           ~
-Color: pu_2          #5E409D           ~
-Color: ma_2          #A02F6F           ~
+Color: re_2            #AF3029         ~
+Color: or_2            #BC5215         ~
+Color: ye_2            #AD8301         ~
+Color: gr_2            #66800B         ~
+Color: cy_2            #24837B         ~
+Color: bl_2            #205EA6         ~
+Color: pu_2            #5E409D         ~
+Color: ma_2            #A02F6F         ~
 
 
-Color: re            #D14D41           ~
-Color: or            #DA702C           ~
-Color: ye            #D0A215           ~
-Color: gr            #879A39           ~
-Color: cy            #3AA99F           ~
-Color: bl            #4385BE           ~
-Color: pu            #8B7EC8           ~
-Color: ma            #CE5D97           ~
-Color: aqua          #3AA99F           ~
+Color: re              #D14D41         ~
+Color: or              #DA702C         ~
+Color: ye              #D0A215         ~
+Color: gr              #879A39         ~
+Color: cy              #3AA99F         ~
+Color: bl              #4385BE         ~
+Color: pu              #8B7EC8         ~
+Color: ma              #CE5D97         ~
+Color: aqua            #3AA99F         ~
 
 
-Color: colorSrch     #3a4a3a           100               DarkGreen
-Color: colorInc      #5f431f           208               yellow
-Color: colorV        #2a405a           109               Blue
-Color: colorQF       #4f2f4f           53                magenta
+Color: colorSrch       #3a4a3a         100               DarkGreen
+Color: colorInc        #5f431f         208               yellow
+Color: colorV          #2a405a         109               Blue
+Color: colorQF         #4f2f4f         53                magenta
+
+
+; Diff colors
+Color: diffAdd         #252D09         ~
+Color: diffDelete      #3E1715         ~
+Color: diffChange      #343331         ~
+Color: diffText        #164F4A         ~
 
 
 Background: light
-Color: tx            #100F0F           ~
-; Color: base_950      #1C1B1A           ~
-; Color: base_900      #282726           ~
-; Color: base_850      #343331           ~
-; Color: base_800      #403E3C           ~
-; Color: base_700      #575653           ~
-Color: tx_2          #6F6E69           ~
-; Color: base_500      #878580           ~
-Color: tx_3          #B7B5AC           ~
-Color: ui_3          #CECDC3           ~
-Color: ui_2          #DAD8CE           ~
-Color: ui            #E6E4D9           ~
-Color: bg_2          #F2F0E5           ~
-Color: bg_1          #FFFCF0           ~
+Color: tx              #100F0F         ~
+Color: tx_2            #6F6E69         ~
+Color: tx_3            #B7B5AC         ~
+Color: ui_3            #CECDC3         ~
+Color: ui_2            #DAD8CE         ~
+Color: ui              #E6E4D9         ~
+Color: bg_2            #F2F0E5         ~
+Color: bg_1            #FFFCF0         ~
 
 
-Color: re            #AF3029           ~
-Color: or            #BC5215           ~
-Color: ye            #AD8301           ~
-Color: gr            #66800B           ~
-Color: cy            #24837B           ~
-Color: bl            #205EA6           ~
-Color: pu            #5E409D           ~
-Color: ma            #A02F6F           ~
-Color: aqua          #24837B           ~
+Color: re              #AF3029         ~
+Color: or              #BC5215         ~
+Color: ye              #AD8301         ~
+Color: gr              #66800B         ~
+Color: cy              #24837B         ~
+Color: bl              #205EA6         ~
+Color: pu              #5E409D         ~
+Color: ma              #A02F6F         ~
+Color: aqua            #24837B         ~
 
 
-Color: re_2          #D14D41           ~
-Color: or_2          #DA702C           ~
-Color: ye_2          #D0A215           ~
-Color: gr_2          #879A39           ~
-Color: cy_2          #3AA99F           ~
-Color: bl_2          #4385BE           ~
-Color: pu_2          #8B7EC8           ~
-Color: ma_2          #CE5D97           ~
+Color: re_2            #D14D41         ~
+Color: or_2            #DA702C         ~
+Color: ye_2            #D0A215         ~
+Color: gr_2            #879A39         ~
+Color: cy_2            #3AA99F         ~
+Color: bl_2            #4385BE         ~
+Color: pu_2            #8B7EC8         ~
+Color: ma_2            #CE5D97         ~
 
-Color: colorSrch     #dbebb2           100               DarkGreen
-Color: colorInc      #f7c7a7           202               Magenta
-Color: colorQF       #e7cfd7           182               magenta
-Color: colorV        #b0d0d0           23                Blue
+Color: colorSrch       #dbebb2         100               DarkGreen
+Color: colorInc        #f7c7a7         202               Magenta
+Color: colorQF         #e7cfd7         182               magenta
+Color: colorV          #b0d0d0         23                Blue
+
+Color: diffAdd         #d7d7a7         ~
+Color: diffDelete      #e7b7a7         ~
+Color: diffChange      #e7d7a7         ~
+Color: diffText        #a7d7a7         ~
+
 
 Background: any
 
-Color: black         #100F0F           ~
-Color: base_950      #1C1B1A           ~
-Color: base_900      #282726           ~
-Color: base_850      #343331           ~
-Color: base_800      #403E3C           ~
-Color: base_700      #575653           ~
-Color: base_600      #6F6E69           ~
-Color: base_500      #878580           ~
-Color: base_300      #B7B5AC           ~
-Color: base_200      #CECDC3           ~
-Color: base_150      #DAD8CE           ~
-Color: base_100      #E6E4D9           ~
-Color: base_50       #F2F0E5           ~
-Color: paper         #FFFCF0           ~
+Color: obsidian        #8A5CF5         ~
+
+Color: black           #100F0F         ~
+Color: base_950        #1C1B1A         ~
+Color: base_900        #282726         ~
+Color: base_850        #343331         ~
+Color: base_800        #403E3C         ~
+Color: base_700        #575653         ~
+Color: base_600        #6F6E69         ~
+Color: base_500        #878580         ~
+Color: base_300        #B7B5AC         ~
+Color: base_200        #CECDC3         ~
+Color: base_150        #DAD8CE         ~
+Color: base_100        #E6E4D9         ~
+Color: base_50         #F2F0E5         ~
+Color: paper           #FFFCF0         ~
 
 
-Color: red_600       #AF3029           ~
-Color: orange_600    #BC5215           ~
-Color: yellow_600    #AD8301           ~
-Color: green_600     #66800B           ~
-Color: cyan_600      #24837B           ~
-Color: blue_600      #205EA6           ~
-Color: purple_600    #5E409D           ~
-Color: magenta_600   #A02F6F           ~
+Color: red_600         #AF3029         ~
+Color: orange_600      #BC5215         ~
+Color: yellow_600      #AD8301         ~
+Color: green_600       #66800B         ~
+Color: cyan_600        #24837B         ~
+Color: blue_600        #205EA6         ~
+Color: purple_600      #5E409D         ~
+Color: magenta_600     #A02F6F         ~
 
 
-Color: red_400       #D14D41           ~
-Color: orange_400    #DA702C           ~
-Color: yellow_400    #D0A215           ~
-Color: green_400     #879A39           ~
-Color: cyan_400      #3AA99F           ~
-Color: blue_400      #4385BE           ~
-Color: purple_400    #8B7EC8           ~
-Color: magenta_400   #CE5D97           ~
+Color: red_400         #D14D41         ~
+Color: orange_400      #DA702C         ~
+Color: yellow_400      #D0A215         ~
+Color: green_400       #879A39         ~
+Color: cyan_400        #3AA99F         ~
+Color: blue_400        #4385BE         ~
+Color: purple_400      #8B7EC8         ~
+Color: magenta_400     #CE5D97         ~
 
-debugBreakpoint      -> ErrorMsg
-debugPC              -> QuickFixLine
+debugBreakpoint        -> ErrorMsg
+debugPC                -> QuickFixLine
 
-CursorColumn         -> CursorLine
-StatusLineTerm       -> StatusLine
-StatusLineTermNC     -> StatusLineNC
-VisualNOS            -> Visual
-Tag                  -> Special
-lCursor              -> Cursor
-MessageWindow        -> PMenu
-PopupNotification    -> Todo
-CurSearch            -> IncSearch
-Terminal             -> Normal
-LineNrAbove          -> LineNr
-LineNrBelow          -> LineNr
-CursorLineFold       -> FoldColumn
-CursorLineSign       -> FoldColumn
-PreInsert            -> LineNr
+CursorColumn           -> CursorLine
+StatusLineTerm         -> StatusLine
+StatusLineTermNC       -> StatusLineNC
+VisualNOS              -> Visual
+Tag                    -> Special
+lCursor                -> Cursor
+MessageWindow          -> PMenu
+PopupNotification      -> Todo
+CurSearch              -> IncSearch
+Terminal               -> Normal
+LineNrAbove            -> LineNr
+LineNrBelow            -> LineNr
+CursorLineFold         -> FoldColumn
+CursorLineSign         -> FoldColumn
+PreInsert              -> LineNr
 
-Normal               tx                bg_1
-Bold                 none              none              bold
-Italic               none              none              italic
+Normal                 tx              bg_1
+Bold                   none            none              bold
+Italic                 none            none              italic
 
-Added                gr                none
-Changed              or                none
-DiffAdd              bg_1              gr
-DiffChange           bg_2              pu
-DiffDelete           bg_2              re
-DiffText             bg_1              bl_2
-Removed              re                none
+Added                  gr              none
+Changed                or              none
+Removed                re              none
 
-Cursor               bg_1              tx
-Conceal              bg_2              none
-
-Title                gr                none              bold
-WarningMsg           re                none              bold
-
-SpellBad             omit              omit              s=re undercurl
-SpellCap             omit              omit              s=bl undercurl
-SpellLocal           omit              omit              s=aqua undercurl
-SpellRare            omit              omit              s=pu undercurl
-
-SpecialKey           tx_2                none
-StatusLine           ui                tx_2              bold,reverse
-StatusLineNC         bg_2              ui_3              reverse
-TabLine              tx_2              ui
-TabLineFill          tx_2              bg_2
-TabLineSel           tx                bg_1              bold
-ToolbarButton        tx                ui_2              bold
-ToolbarLine          none              none
-Visual               none              colorV
-EndOfBuffer          ui                none
-
-VertSplit            bg_2              bg_1
-CursorLine           none              ui
-CursorLineNr         ye                bg_1              bold
-FoldColumn           tx_2              bg_1
-SignColumn           tx_2              bg_1
-ColorColumn          none              ui_3
-Error                re                bg_1              bold,reverse
-ErrorMsg             bg_1              re                bold
-Folded               tx_2              bg_2
-LineNr               tx_3              none
-MatchParen           none              bg_2              bold,underline
-NonText              ui                none
+DiffAdd                none            diffAdd
+DiffChange             none            diffChange
+DiffText               none            diffText
+DiffDelete             tx_3            diffDelete
 
 
-; Other conventional group names (see `:help group-name`)
-Boolean              pu                none
-Character            pu                none
-Comment              tx_2              none
-Conditional          re                none
-Constant             pu                none
-CursorIM             bg_1              tx
-Debug                re                none
-Define               aqua                none
-Delimiter            or                none
-Exception            re                none
-Float                pu                none
-Function             gr                none              bold
-Identifier           bl                none
-Ignore               tx                none
-Include              aqua                none
-Keyword              re                none
-Label                re                none
-Macro                aqua                none
-Number               pu                none
-Operator             aqua                none
-PreCondit            aqua                none
-PreProc              aqua                none
-Repeat               re                none
-Special              or                none
-SpecialChar          re                none
-SpecialComment       re                none
-Statement            re                none
-StorageClass         or                none
-String               gr                none
-Structure            aqua                none
-Todo                 tx                bg_1              bold
-Type                 ye                none
-Typedef              ye                none
-Underlined           bl                none              underline
+Cursor                 bg_1            tx
+Conceal                bg_2            none
 
-Directory            gr                none              bold
-ModeMsg              ye                none              bold
-MoreMsg              ye                none              bold
-Question             or                none              bold
-Search               none              colorSrch
-IncSearch            none              colorInc
-QuickFixLine         none              colorQF
+Title                  gr              none              bold
+WarningMsg             re              none              bold
+
+SpellBad               omit            omit              s=re undercurl
+SpellCap               omit            omit              s=bl undercurl
+SpellLocal             omit            omit              s=aqua undercurl
+SpellRare              omit            omit              s=pu undercurl
+
+SpecialKey             tx_2              none
+StatusLine             ui              tx_2              bold,reverse
+StatusLineNC           bg_2            ui_3              reverse
+TabLine                tx_2            ui
+TabLineFill            tx_2            bg_2
+TabLineSel             tx              bg_1              bold
+ToolbarButton          tx              ui_2              bold
+ToolbarLine            none            none
+Visual                 none            colorV
+EndOfBuffer            ui              none
+
+VertSplit              bg_2            bg_1
+CursorLine             none            ui
+CursorLineNr           ye              bg_1              bold
+FoldColumn             tx_2            bg_1
+SignColumn             tx_2            bg_1
+ColorColumn            none            ui_3
+Error                  re              bg_1              bold,reverse
+ErrorMsg               bg_1            re                bold
+Folded                 tx_2            bg_2
+LineNr                 tx_3            none
+MatchParen             none            bg_2              bold,underline
+NonText                ui              none
 
 
-Pmenu                tx                bg_2
-PmenuBorder          tx_2              bg_2
-PmenuSbar            none              bg_2
-PmenuSel             none              ui_3
-PmenuThumb           none              ui
-PmenuKind            re                bg_2
-PmenuKindSel         re                ui_3
-PmenuExtra           tx_2              bg_2
-PmenuExtraSel        tx_2              ui_3
-PmenuMatch           pu                bg_2              bold
-PmenuMatchSel        pu                ui_3              bold
-WildMenu             bl                bg_2              bold
+Boolean                pu              none
+Character              pu              none
+Comment                tx_2            none
+Conditional            re              none
+Constant               pu              none
+CursorIM               bg_1            tx
+Debug                  re              none
+Define                 aqua              none
+Delimiter              or              none
+Exception              re              none
+Float                  pu              none
+Function               gr              none              bold
+Identifier             bl              none
+Ignore                 tx              none
+Include                aqua              none
+Keyword                re              none
+Label                  re              none
+Macro                  aqua              none
+Number                 pu              none
+Operator               aqua              none
+PreCondit              aqua              none
+PreProc                aqua              none
+Repeat                 re              none
+Special                or              none
+SpecialChar            re              none
+SpecialComment         re              none
+Statement              re              none
+StorageClass           or              none
+String                 gr              none
+Structure              aqua              none
+Todo                   tx              bg_1              bold
+Type                   ye              none
+Typedef                ye              none
+Underlined             bl              none              underline
 
-BenStl_left0         bg_1              tx                bold
-BenStl_left1         tx                ui_2              bold
-BenStl_left2         tx_2              bg_2
-BenStl_middle        bg_2              bg_2
-BenStl_right0        bg_1              tx
-BenStl_right1        tx                ui_2
-BenStl_right2        -> BenStl_left2
-BenTabLine           tx_2              ui_2
-BenTabLineFill       bg_1              bg_1
-BenTabLineRight      bg_1              or
-BenTabLineSel        bg_1              tx_2
+Directory              gr              none              bold
+ModeMsg                ye              none              bold
+MoreMsg                ye              none              bold
+Question               or              none              bold
+Search                 none            colorSrch
+IncSearch              none            colorInc
+QuickFixLine           none            colorQF
 
-BenStl_insert        bg_1              pu                bold
-BenStl_normal        bg_1              tx                bold
-BenStl_replace       bg_1              re                bold
-BenStl_visual        bg_1              ye                bold
+
+Pmenu                  tx              bg_2
+PmenuBorder            tx_2            bg_2
+PmenuSbar              none            bg_2
+PmenuSel               none            ui
+PmenuThumb             none            ui
+PmenuKind              re              bg_2
+PmenuKindSel           re              ui
+PmenuExtra             tx_2            bg_2
+PmenuExtraSel          tx_2            ui
+PmenuMatch             pu              bg_2              bold
+PmenuMatchSel          pu              ui                bold
+WildMenu               bl              bg_2              bold
+
+; my stl
+BenStl_left0           bg_1            tx                bold
+BenStl_left1           tx              ui_2              bold
+BenStl_left2           tx_2            bg_2
+BenStl_middle          tx_2            bg_2
+BenStl_right0          bg_1            tx
+BenStl_right1          tx              ui_2
+BenStl_right2          -> BenStl_left2
+BenTabLine             tx_2            ui_2
+BenTabLineFill         bg_1            bg_1
+BenTabLineRight        bg_1            or
+BenTabLineSel          bg_1            tx_2
+BenStl_insert          bg_1            pu                bold
+BenStl_normal          bg_1            tx                bold
+BenStl_replace         bg_1            re                bold
+BenStl_visual          bg_1            ye                bold
+
+; Vimsidian
+
+VimsidianLink          obsidian        none              underline
+VimsidianLinkMedia     or              none
+VimsidianLinkHeader    obsidian        none              underline
+VimsidianLinkBlock     ye              none
+VimsidianLinkBlockFlag ye              none
+VimsidianTag           obsidian        none
+VimsidianCallout       tx_2            none
