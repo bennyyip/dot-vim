@@ -54,7 +54,11 @@ augroup END
 
 set background=dark
 
-const fallback = get(g:, 'colorscheme_fallback', ['flexoki', 'retrobox', 'gruvbox8_hard', 'elflord'])
+var fallback = ['retrobox', 'gruvbox8_hard', 'elflord']
+if has('gui_running')
+  fallback = ['flexoki', 'retrobox', 'gruvbox8_hard', 'elflord']
+endif
+fallback = get(g:, 'colorscheme_fallback', fallback)
 
 for c in fallback
   if !getcompletion(c, 'color')->empty()

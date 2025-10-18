@@ -52,6 +52,8 @@ noremap! <Plug>(meta-p) <Up>
 
 # text object [[[1
 xnoremap <silent> ae gg0oG$
+nnoremap dae mzggdG
+nnoremap cae mzggcG
 onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 # 26 simple text objects
 # ----------------------
@@ -332,8 +334,8 @@ nnoremap <leader><space> za
 nnoremap <silent><leader>di :windo diffthis<CR>
 nnoremap <silent><leader>du :windo diffupdate<CR>
 nnoremap <silent><leader>do :windo diffoff<cr>
-nnoremap <silent> [w <cmd>set diffopt-=iwhiteall,iblank<BAR>echo &diffopt<CR>
-nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall,iblank<BAR>echo &diffopt<CR>
+nnoremap <silent> [w <cmd>set diffopt-=iwhiteall<BAR>echo &diffopt<CR>
+nnoremap <silent> ]w <cmd>set diffopt+=iwhiteall<BAR>echo &diffopt<CR>
 # resolve conflict. left and right
 nnoremap <silent>gh <cmd>diffget //2<CR>
 nnoremap <silent>gH <cmd>diffget //3<CR>

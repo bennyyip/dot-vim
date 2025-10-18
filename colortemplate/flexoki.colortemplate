@@ -2,12 +2,12 @@
 
 Full name:   Flexoki
 Short name:  flexoki
-Description: An inky color scheme for prose and code.
+Description: An inky color scheme for prose and code. https://stephango.com/flexoki
 Author:      Ben Yip <yebenmy@gmail.com>, ported from flexoki of Steph Ango
-URL:         https://www.github.com/vim/colorschemes
+URL:         https://www.github.com/bennyyip/dot-vim
 Options:     backend=vim
 
-Environments: gui
+Environments: gui 256
 
 Background: dark
 Color: bg_1            #100F0F         ~
@@ -19,7 +19,6 @@ Color: tx_3            #575653         ~
 Color: tx_2            #878580         ~
 Color: tx              #CECDC3         ~
 
-
 Color: re_2            #AF3029         ~
 Color: or_2            #BC5215         ~
 Color: ye_2            #AD8301         ~
@@ -28,7 +27,6 @@ Color: cy_2            #24837B         ~
 Color: bl_2            #205EA6         ~
 Color: pu_2            #5E409D         ~
 Color: ma_2            #A02F6F         ~
-
 
 Color: re              #D14D41         ~
 Color: or              #DA702C         ~
@@ -40,18 +38,10 @@ Color: pu              #8B7EC8         ~
 Color: ma              #CE5D97         ~
 Color: aqua            #3AA99F         ~
 
-
-Color: colorSrch       #3a4a3a         100               DarkGreen
-Color: colorInc        #5f431f         208               yellow
-Color: colorV          #2a405a         109               Blue
-Color: colorQF         #4f2f4f         53                magenta
-
-
-; Diff colors
-Color: diffAdd         #252D09         ~
-Color: diffDelete      #3E1715         ~
-Color: diffChange      #343331         ~
-Color: diffText        #164F4A         ~
+Color: colorSrch       #3a4a3a         ~
+Color: colorInc        #5f431f         ~
+Color: colorV          #2a405a         ~
+Color: colorQF         #4f2f4f         ~
 
 
 Background: light
@@ -64,7 +54,6 @@ Color: ui              #E6E4D9         ~
 Color: bg_2            #F2F0E5         ~
 Color: bg_1            #FFFCF0         ~
 
-
 Color: re              #AF3029         ~
 Color: or              #BC5215         ~
 Color: ye              #AD8301         ~
@@ -75,7 +64,6 @@ Color: pu              #5E409D         ~
 Color: ma              #A02F6F         ~
 Color: aqua            #24837B         ~
 
-
 Color: re_2            #D14D41         ~
 Color: or_2            #DA702C         ~
 Color: ye_2            #D0A215         ~
@@ -85,16 +73,10 @@ Color: bl_2            #4385BE         ~
 Color: pu_2            #8B7EC8         ~
 Color: ma_2            #CE5D97         ~
 
-Color: colorSrch       #dbebb2         100               DarkGreen
-Color: colorInc        #f7c7a7         202               Magenta
-Color: colorQF         #e7cfd7         182               magenta
-Color: colorV          #b0d0d0         23                Blue
-
-Color: diffAdd         #d7d7a7         ~
-Color: diffDelete      #e7b7a7         ~
-Color: diffChange      #e7d7a7         ~
-Color: diffText        #a7d7a7         ~
-
+Color: colorSrch       #dbebb2         ~
+Color: colorInc        #f7c7a7         ~
+Color: colorQF         #e7cfd7         ~
+Color: colorV          #b0d0d0         ~
 
 Background: any
 
@@ -115,7 +97,6 @@ Color: base_100        #E6E4D9         ~
 Color: base_50         #F2F0E5         ~
 Color: paper           #FFFCF0         ~
 
-
 Color: red_600         #AF3029         ~
 Color: orange_600      #BC5215         ~
 Color: yellow_600      #AD8301         ~
@@ -125,7 +106,6 @@ Color: blue_600        #205EA6         ~
 Color: purple_600      #5E409D         ~
 Color: magenta_600     #A02F6F         ~
 
-
 Color: red_400         #D14D41         ~
 Color: orange_400      #DA702C         ~
 Color: yellow_400      #D0A215         ~
@@ -134,6 +114,13 @@ Color: cyan_400        #3AA99F         ~
 Color: blue_400        #4385BE         ~
 Color: purple_400      #8B7EC8         ~
 Color: magenta_400     #CE5D97         ~
+
+; Diff colors
+Color: diffAdd         #3D4C07         ~
+Color: diffDelete      #942822         ~
+Color: diffChange      #343331         ~
+Color: diffText        #164F4A         ~
+
 
 debugBreakpoint        -> ErrorMsg
 debugPC                -> QuickFixLine
@@ -155,8 +142,6 @@ CursorLineSign         -> FoldColumn
 PreInsert              -> LineNr
 
 Normal                 tx              bg_1
-Bold                   none            none              bold
-Italic                 none            none              italic
 
 Added                  gr              none
 Changed                or              none
@@ -179,7 +164,7 @@ SpellCap               omit            omit              s=bl undercurl
 SpellLocal             omit            omit              s=aqua undercurl
 SpellRare              omit            omit              s=pu undercurl
 
-SpecialKey             tx_2              none
+SpecialKey             tx_2            none
 StatusLine             ui              tx_2              bold,reverse
 StatusLineNC           bg_2            ui_3              reverse
 TabLine                tx_2            ui
@@ -211,21 +196,21 @@ Conditional            re              none
 Constant               pu              none
 CursorIM               bg_1            tx
 Debug                  re              none
-Define                 aqua              none
+Define                 aqua            none
 Delimiter              or              none
 Exception              re              none
 Float                  pu              none
 Function               gr              none              bold
 Identifier             bl              none
 Ignore                 tx              none
-Include                aqua              none
+Include                aqua            none
 Keyword                re              none
 Label                  re              none
-Macro                  aqua              none
+Macro                  aqua            none
 Number                 pu              none
-Operator               aqua              none
-PreCondit              aqua              none
-PreProc                aqua              none
+Operator               aqua            none
+PreCondit              aqua            none
+PreProc                aqua            none
 Repeat                 re              none
 Special                or              none
 SpecialChar            re              none
@@ -233,7 +218,7 @@ SpecialComment         re              none
 Statement              re              none
 StorageClass           or              none
 String                 gr              none
-Structure              aqua              none
+Structure              aqua            none
 Todo                   tx              bg_1              bold
 Type                   ye              none
 Typedef                ye              none
