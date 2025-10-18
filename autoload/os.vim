@@ -114,7 +114,7 @@ enddef
 export def Open(url: string)
   echom url
   if $SSH_CONNECTION != ""
-    g:OSCYank(url)
+    silent! g:OSCYank(url)
     return
   endif
 
@@ -185,7 +185,6 @@ export def Gx()
   # endif
 enddef
 
-# Pack 'ojroques/vim-oscyank'
 export def Yank(s: string)
   if $SSH_CONNECTION != ""
     silent! g:OSCYank(s)

@@ -1,5 +1,9 @@
 vim9script
 
+if !has("patch-9.1.1230")
+  finish
+endif
+
 var files_cache: list<string> = []
 var saved_cwd: string = ''
 

@@ -1,7 +1,6 @@
 vim9script
 
 const minimal_plugins = get(g:, 'minimal_plugins', false)
-const is_ssh = $SSH_CONNECTION != ""
 const is_win = has('win32')
 
 const package_name = minimal_plugins ? 'minimal' : 'minpac'
@@ -12,8 +11,8 @@ endif
 
 g:plugpac_plugin_conf_path = $MYVIMDIR .. '/rc'
 g:plugpac_default_type = 'delay'
-# plugins [[[1
-# Builtin [[[2
+#
+# Builtin [[[1
 if !getcompletion('helptoc', 'packadd')->empty()
   packadd! helptoc
 endif
@@ -44,9 +43,6 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 if getcompletion('retrobox', 'color')->empty()
   Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
 endif
-if is_ssh
-  Pack 'ojroques/vim-oscyank', { 'type': 'delay', 'rev': 'main' } # <leader>c <leader>cc <A-w>
-endif
 
 if !getcompletion('comment', 'packadd')->empty()
   packadd! comment
@@ -69,14 +65,11 @@ if minimal_plugins
   g:loaded_netrw       = 0
   g:loaded_netrwPlugin = 0
 else
-  # Lab [[[2
-  Pack 'junegunn/goyo.vim', { on: 'Goyo' }
-  # Pack 'rhysd/vim-gfm-syntax', { type: 'opt' }
+  # Lab [[[1
   # Pack 'mg979/vim-visual-multi'
-  Pack 'ubaldot/vim9-conversion-aid'
+  # Enhance [[[1
   Pack 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
-  Pack 'chrisbra/vim_faq'
-  # Enhance [[[2
+  Pack 'junegunn/goyo.vim', { on: 'Goyo' }
   Pack 'bootleq/vim-cycle'
   Pack 'LunarWatcher/auto-pairs'
   Pack 'Konfekt/vim-alias'
@@ -118,7 +111,7 @@ else
   endif
   # Pack 'girishji/scope.vim', { type: 'opt' }
   Pack 'bennyyip/miniterm.vim'
-  # Motion and Edit [[[2
+  # Motion and Edit [[[1
   Pack 'machakann/vim-swap' # g, g. gs gS
   Pack 'bennyyip/vim-debugstring' # <leader>ds
   Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
@@ -136,14 +129,14 @@ else
   Pack 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_S', '<Plug>Sneak_s', '<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t'] }
   Pack 'markonm/traces.vim'
   # Pack 'monkoose/vim9-stargate'
-  # VCS [[[2
+  # VCS [[[1
   Pack 'Eliot00/git-lens.vim'
   Pack 'rhysd/conflict-marker.vim' # [x ]x
   Pack 'tommcdo/vim-fugitive-blame-ext'
   Pack 'tpope/vim-fugitive'
   # Pack 'tpope/vim-rhubarb'
   # Pack 'errael/splice9', { type: 'start', frozen: true }
-  # Language [[[2
+  # Language [[[1
   Pack 'yegappan/lsp', { branch: 'main' }
 
   Pack 'Konfekt/vim-compilers'
