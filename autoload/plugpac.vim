@@ -1,9 +1,9 @@
 vim9script
 # Author:  Ben Yip (yebenmy@gmail.com)
 # URL:     https://github.com/bennyyip/plugpac.vim
-# Version: 2.3
+# Version: 2.4
 #
-# Copyright (c) 2024 Ben Yip
+# Copyright (c) 2025 Ben Yip
 #
 # MIT License
 #
@@ -27,9 +27,9 @@ vim9script
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ---------------------------------------------------------------------
 
-var lazy = { 'ft': {}, 'map': {}, 'cmd': {}, 'delay': {} }
 var repos = {}
 
+var lazy_plugins = []
 var cached_installed_plugins = {}
 var local_plugins = []
 
@@ -41,7 +41,6 @@ var quiet = v:false
 const plugpac_plugin_conf_path = get(g:, 'plugpac_plugin_conf_path', '')
 
 export def Begin(opts: dict<any> = {})
-  lazy = { 'ft': {}, 'map': {}, 'cmd': {}, 'delay': {} }
   repos = {}
 
   minpac_init_opts = opts
@@ -61,51 +60,62 @@ enddef
 
 
 export def End()
-  for [name, cmds] in items(lazy.cmd)
-    for cmd in cmds
-      execute printf("command! -nargs=* -range -bang %s call DoCmd('%s', '%s', \"<bang>\", <line1>, <line2>, <q-args>)", cmd, name, cmd)
-    endfor
-  endfor
+  autocmd_add([{
+    event: 'VimEnter',
+    pattern: '*',
+    group: 'PlugPac',
+    once: true,
+    cmd: "call DelayLoadAll()",
+  }])
+enddef
 
-  for [name, maps] in items(lazy.map)
-    for map_ in maps
-      for [mode_, map_prefix, key_prefix] in
-        [['i', '<C-\><C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
-        execute printf(
-          '%snoremap <silent> %s %s:<C-U>call <SID>DoMap("%s", %s, v:%s, "%s")<CR>',
-          mode_, map_, map_prefix, name, string(map_), mode_ != 'i', key_prefix)
-      endfor
-    endfor
-  endfor
+export def Add(repo: string, opts: dict<any> = {})
+  const name = get(opts, 'name', substitute(repo, '^.*/', '', ''))
+  opts['name'] = name
+  const default_type = get(g:, 'plugpac_default_type', 'start')
+  var type = get(opts, 'type', default_type)
 
-  runtime! OPT ftdetect/**/*.vim
-  runtime! OPT after/ftdetect/**/*.vim
+  # if !opts->has_key('local')
+  #   opts['local'] = false
+  # endif
+  # if opts['local']
+  #   local_plugins->add(name)
+  # endif
 
-  for [name, fts] in items(lazy.ft)
-    autocmd_add([{
-      event: 'FileType',
-      pattern: fts,
-      group: 'PlugPac',
-      once: true,
-      cmd: $'packadd {name}',
-    }])
-  endfor
+  if type == 'delay'
+    opts['type'] = 'opt'
+  endif
 
-  for name in keys(lazy.delay)
-    autocmd_add([{
-      event: 'VimEnter',
-      pattern: '*',
-      group: 'PlugPac',
-      once: true,
-      cmd: $'timer_start(lazy.delay["{name}"].delay, (_) => lazy.delay["{name}"].load())',
-    }])
-  endfor
+  repos[repo] = opts
 
-  timer_start(10, (timer) => {
-    for [k, v] in items(lazy.delay)
-      if !v.done
-        return
+  if !HasPlugin(name)
+    # timer_start(20, (_) => {
+    if !quiet
+      echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
+    endif
+    # })
+    return
+  endif
+
+  if type == 'delay'
+    lazy_plugins->add(name)
+  else
+    const pre_rc_path = GetRcPath(name, true)
+    if filereadable(pre_rc_path)
+      execute $'source {pre_rc_path}'
+    endif
+  endif
+enddef
+
+def DelayLoadAll()
+  timer_start(0, (_) => {
+    # load by Add() order
+    for name in lazy_plugins
+      const pre_rc_path = GetRcPath(name, true)
+      if filereadable(pre_rc_path)
+        execute $'source {pre_rc_path}'
       endif
+      execute $"packadd {name}"
     endfor
 
     for [repo, opts] in items(repos)
@@ -120,88 +130,7 @@ export def End()
     endif
 
     doautocmd VimEnter
-
-    timer_stop(timer)
-  }, { repeat: -1 })
-
-enddef
-
-export def Add(repo: string, opts: dict<any> = {})
-  const name = get(opts, 'name', substitute(repo, '^.*/', '', ''))
-  opts['name'] = name
-  const default_type = get(g:, 'plugpac_default_type', 'start')
-  var type = get(opts, 'type', default_type)
-  if opts->has_key('delay')
-    type = 'delay'
-  endif
-
-  if !opts->has_key('local')
-    opts['local'] = false
-  endif
-
-  # `for` and `on` implies optional and override delay
-  if has_key(opts, 'for') || has_key(opts, 'on')
-    type = 'opt'
-    opts['type'] = 'opt'
-  endif
-
-  if type == 'delay'
-    opts['type'] = 'opt'
-  endif
-
-  if opts['local']
-    local_plugins->add(name)
-  endif
-
-  repos[repo] = opts
-
-  if !HasPlugin(name)
-    timer_start(20, (_) => {
-      if !quiet
-        echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
-      endif
-    })
-    return
-  endif
-
-  if has_key(opts, 'for')
-    const ft = type(opts.for) == v:t_list ? join(opts.for, ',') : opts.for
-    lazy.ft[name] = ft
-  endif
-
-  if has_key(opts, 'on')
-    for cmd in ToArray(opts.on)
-      if cmd =~? '^<Plug>.\+'
-        if empty(mapcheck(cmd)) && empty(mapcheck(cmd, 'i'))
-          Assoc(lazy.map, name, cmd)
-        endif
-      elseif cmd =~# '^[A-Z]'
-        if exists(":" .. cmd) != 2
-          Assoc(lazy.cmd, name, cmd)
-        endif
-      else
-        Err('Invalid `on` option: ' .. cmd ..
-          '. Should start with an uppercase letter or `<Plug>`.')
-      endif
-    endfor
-  endif
-
-  const pre_rc_path = GetRcPath(name, true)
-  if filereadable(pre_rc_path)
-    execute $'source {pre_rc_path}'
-  endif
-
-  if type == 'delay'
-    lazy.delay[name] = {
-      delay: opts->get('delay', 0),
-      done: false,
-      load: () => {
-        execute $'packadd {name}'
-        lazy.delay[name].done = true
-      }
-    }
-  endif
-
+  })
 enddef
 
 def GetRcPath(plugin: string, is_pre: bool = false): string
@@ -229,53 +158,6 @@ def Err(msg: any)
   echohl ErrorMsg
   echom '[plugpac] ' .. msg
   echohl None
-enddef
-
-
-def DoCmd(plugin: string, cmd: any, bang: any, start_: number, end_: number, args_: any)
-  execute $'delcommand {cmd}'
-  execute $'packadd {plugin}'
-
-  const rc_path = GetRcPath(plugin)
-  if filereadable(rc_path)
-    execute $'source {rc_path}'
-  endif
-
-  execute printf('%s%s%s %s', (start_ == end_ ? '' : $":{start_},{end_}"), cmd, bang, args_)
-enddef
-
-def DoMap(plugin: string, map_: any, with_prefix: any, prefix_: any)
-  execute $'unmap {map_}'
-  execute $'iunmap {map_}'
-  execute $'packadd {plugin}'
-
-  const rc_path = GetRcPath(plugin)
-  if filereadable(rc_path)
-    execute $'source {rc_path}'
-  endif
-
-  var extra = ''
-  while 1
-    const c = getchar(0)
-    if c == 0
-      break
-    endif
-    extra = extra .. nr2char(c)
-  endwhile
-
-
-  if with_prefix
-    var prefix = v:count > 0 ? v:count : ''
-    prefix ..= '"' .. v:register .. prefix_
-    if mode(1) == 'no'
-      if v:operator == 'c'
-        prefix = "\<esc>" .. prefix
-      endif
-      prefix ..= v:operator
-    endif
-    feedkeys(prefix, 'n')
-  endif
-  feedkeys(substitute(map_, '^<Plug>', "\<Plug>", '') .. extra)
 enddef
 
 def SetupCommands()

@@ -24,6 +24,12 @@ let s:keepcpo         = &cpo
 set cpo&vim
 " ------------------------------------------------------------------------------
 
+" MY CONFIG
+let g:scratchpad_path = $HOME .. '/.local/state/vim/' .. ".scratchpads"
+nmap <silent> <leader>x <Plug>(ToggleScratchPad)
+command -nargs=1 Scratchpad call scratchpad#ToggleScratchPad(<q-args>)
+" MY CONFIG ENDS
+
 nnoremap <silent> <Plug>(ToggleScratchPad)
       \ :<c-u>call scratchpad#ToggleScratchPad(g:scratchpad_ftype)<CR>
 
