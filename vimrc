@@ -150,4 +150,4 @@ if filereadable($HOME .. '/local.vim')
 endif
 
 source $MYVIMDIR/pack.vim
-## vim:fdm=marker:fmr=[[[,]]]:ft=vim:fdl=0
+# vim:fdm=marker:fmr=[[[,]]]:ft=vim:fdl=0

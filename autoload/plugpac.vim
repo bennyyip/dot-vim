@@ -31,7 +31,6 @@ var repos = {}
 
 var lazy_plugins = []
 var cached_installed_plugins = {}
-var local_plugins = []
 
 var minpac_init_opts = {}
 
@@ -74,13 +73,6 @@ export def Add(repo: string, opts: dict<any> = {})
   opts['name'] = name
   const default_type = get(g:, 'plugpac_default_type', 'start')
   var type = get(opts, 'type', default_type)
-
-  # if !opts->has_key('local')
-  #   opts['local'] = false
-  # endif
-  # if opts['local']
-  #   local_plugins->add(name)
-  # endif
 
   if type == 'delay'
     opts['type'] = 'opt'
@@ -143,7 +135,7 @@ def GetRcPath(plugin: string, is_pre: bool = false): string
 enddef
 
 export def HasPlugin(plugin: string): bool
-  return has_key(GetInstalledPlugins(), plugin) || index(local_plugins, plugin) >= 0
+  return has_key(GetInstalledPlugins(), plugin)
 enddef
 
 def Assoc(dict: dict<any>, key: string, val: any)
@@ -181,9 +173,7 @@ export def Init()
 
   minpac#init(minpac_init_opts)
   for [repo, opts] in items(repos)
-    if !opts['local']
-      minpac#add(repo, opts)
-    endif
+    minpac#add(repo, opts)
   endfor
 
   cached_installed_plugins = {}
