@@ -101,4 +101,82 @@ exe s:Map('n', ']e', '<Plug>(unimpaired-move-down)')
 exe s:Map('x', '[e', '<Plug>(unimpaired-move-selection-up)')
 exe s:Map('x', ']e', '<Plug>(unimpaired-move-selection-down)')
 
+" From: https://github.com/dstein64/dotfiles/blob/master/packages/vim/.vimrc
+
+" Move to a line based on indentation relative to the current indent.
+" 'direction' can be -1 or 1 and indicates whether to move backward or
+" forward. 'mode' can be -1, 0, 1, and indicates whether the relative indent
+" should be less than, the same, or greater than the current indent. 'skip'
+" specifies whether empty lines should be skipped.
+function! s:MoveRelativeToIndent(direction, mode, skip) abort
+  let l:line = line('.')
+  let l:indent = indent(l:line)
+  let l:last = line('$')
+  let l:direction = min([max([a:direction, -1]), 1])
+  while 1
+    let l:line += l:direction
+    if &wrapscan
+      if l:line <=# 0
+        let l:line = l:last
+      elseif l:line >=# l:last + 1
+        let l:line = 1
+      endif
+    endif
+    if l:line ==# line('.')
+      break
+    endif
+    if l:line <# 1 || l:line ># l:last
+      break
+    endif
+    let l:indent2 = indent(l:line)
+    if a:skip && virtcol([l:line, '$']) - 1 - l:indent2 <=# 0
+      continue
+    endif
+    let l:diff_sign = min([max([l:indent2 - l:indent, -1]), 1])
+    let l:match = (a:mode == -1 && l:diff_sign ==# a:mode)
+          \ || (a:mode == 1 && l:diff_sign ==# a:mode)
+          \ || (a:mode == 0 && l:diff_sign ==# a:mode)
+    if l:match
+      execute 'normal! ' .. l:line .. 'gg^'
+      break
+    endif
+  endwhile
+endfunction
+
+" Go to git conflict or diff/patch hunk.
+function! s:GotoConflictOrDiff(reverse) abort
+  let l:flags = 'W'
+  if a:reverse | let l:flags .= 'b' | endif
+  call search('^\(@@ .* @@\|[<=>]\{7\}\)', l:flags)
+endfunction
+
+function! s:GotoComment(reverse) abort
+  let l:flags = 'W'
+  if a:reverse | let l:flags .= 'b' | endif
+  let l:pattern = '\V' . substitute(&commentstring, '%s', '\\.\\*', '')
+  call search(l:pattern, l:flags)
+endfunction
+
+function! s:GotoLongLine(reverse) abort
+  if &textwidth ==# 0 | return | endif
+  let l:flags = 'W'
+  if a:reverse | let l:flags .= 'b' | endif
+  let l:pattern = printf('^.\{%d\}', &textwidth + 1)
+  call search(l:pattern, l:flags)
+endfunction
+
+
+noremap <silent> [< <cmd>call <sid>MoveRelativeToIndent(-1, -1, !v:count)<cr>
+noremap <silent> ]< <cmd>call <sid>MoveRelativeToIndent(1, -1, !v:count)<cr>
+noremap <silent> [= <cmd>call <sid>MoveRelativeToIndent(-1, 0, !v:count)<cr>
+noremap <silent> ]= <cmd>call <sid>MoveRelativeToIndent(1, 0, !v:count)<cr>
+noremap <silent> [> <cmd>call <sid>MoveRelativeToIndent(-1, 1, !v:count)<cr>
+noremap <silent> ]> <cmd>call <sid>MoveRelativeToIndent(1, 1, !v:count)<cr>
+noremap <silent> [n :<c-u>call <sid>GotoConflictOrDiff(1)<cr>
+noremap <silent> ]n :<c-u>call <sid>GotoConflictOrDiff(0)<cr>
+noremap <silent> [, :<c-u>call <sid>GotoComment(1)<cr>
+noremap <silent> ], :<c-u>call <sid>GotoComment(0)<cr>
+noremap <silent> [t :<c-u>call <sid>GotoLongLine(1)<cr>
+noremap <silent> ]t :<c-u>call <sid>GotoLongLine(0)<cr>
+
 " vim:set sw=2 sts=2:

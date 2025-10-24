@@ -23,8 +23,12 @@ nnoremap L <cmd>tag<CR>
 # edit [[[1
 # open q:
 set cedit=<C-Y>
-inoremap <Plug>(meta-j) <C-O>o
-inoremap <Plug>(meta-k) <C-O>O
+# Enable alt+k to delete the text until the end of line in insert mode.
+inoremap <expr> <silent> <m-k> col('.') ==# col('$') ? "\<del>" : "\<c-o>D"
+# Insert and edit a line above.
+inoremap <m-,> <c-o>O
+# Insert and edit a line below.
+inoremap <m-.> <c-o>o
 # get output from python
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
@@ -45,10 +49,11 @@ inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? 
 
 noremap! <Plug>(meta-b) <S-Left>
 noremap! <Plug>(meta-f) <S-Right>
-inoremap <Plug>(meta-d) <C-O>dw
 cnoremap <Plug>(meta-d) <S-Right><C-W>
 noremap! <Plug>(meta-n) <Down>
 noremap! <Plug>(meta-p) <Up>
+
+inoremap <m-d> <C-O>dw
 
 # text object [[[1
 xnoremap <silent> ae gg0oG$
@@ -156,10 +161,10 @@ enddef
 nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
 nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
 # quick substitute
-xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
-nnoremap qs :%s`<C-R><C-W>``g<left><left>
-xnoremap qS "zy:%S`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
-nnoremap qS :%S`<C-R><C-W>``g<left><left>
+xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``gc<left><left><left>
+nnoremap qs :%s`<C-R><C-W>``gc<left><left><left>
+xnoremap qS "zy:%S`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``gc<left><left><left>
+nnoremap qS :%S`<C-R><C-W>``gc<left><left><left>
 nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 # mark position before search
@@ -217,8 +222,8 @@ nnoremap gb :b<space>
 nnoremap <C-G><C-G> <C-G>
 # tab [[[1
 nmap     T :tabnew<cr>
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
+# nnoremap ]t :tabn<cr>
+# nnoremap [t :tabp<cr>
 def SwitchTab(i: number)
     if tabpagenr() == i
         tabprev
