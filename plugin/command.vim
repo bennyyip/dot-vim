@@ -1,7 +1,6 @@
 vim9script
 
 import autoload "../autoload/utils.vim"
-import autoload "../autoload/term.vim"
 
 # Reverse {{{1
 command! -bar -range=% Reverse :<line1>,<line2>global/^/m <line1>-1<bar>nohl
@@ -106,8 +105,6 @@ command! -nargs=+ -complete=command F5 F5(<q-args>)
 nnoremap <silent> <F5> <cmd>execute getreg('c')<CR>
 inoremap <silent> <F5> <ESC><cmd>execute getreg('c')<CR>
 nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
-# Term: send comamnd to terminal
-command! -nargs=+ -complete=shellcmdline Term term.SendLine(<q-args>)
 
 #   设置成 Linux 下适用的格式
 command Lin setl ff=unix fenc=utf8 nobomb eol

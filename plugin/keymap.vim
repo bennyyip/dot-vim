@@ -320,16 +320,6 @@ nnoremap <silent> ]F <scriptcmd>EditFileByOffset(0, 1)<CR>
 # move lines
 xnoremap <tab> :sil! m '>+1<CR>gv
 xnoremap <s-tab> :sil! m '<-2<CR>gv
-# terminal [[[1
-set termwinkey=<C-F>
-import autoload 'term.vim'
-xnoremap <expr> <c-q> term.Send()
-nnoremap <expr> <c-q> term.Send()
-nnoremap <expr> <c-q><c-q> term.Send() .. '_'
-# imap <c-q> <ESC><c-q><c-q>a
-tnoremap <F1> <C-W>N
-# repeat
-nnoremap <localleader>t <cmd>update<BAR>Term<UP><CR>
 # misc [[[1
 # fold
 nmap z] zo]z

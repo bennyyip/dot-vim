@@ -112,7 +112,6 @@ Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 if !is_win && exists('$DISPLAY')
   Pack 'lilydjwg/fcitx.vim'
 endif
-Pack 'bennyyip/miniterm.vim'
 # Motion and Edit [[[1
 Pack 'machakann/vim-swap' # g, g. gs gS
 Pack 'bennyyip/vim-debugstring' # <leader>ds
