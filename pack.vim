@@ -14,7 +14,7 @@ command MinpacInstall {
 }
 
 # Builtin [[[1
-timer_start(10, (_) => {
+timer_start(0, (_) => {
   if !getcompletion('helptoc', 'packadd')->empty()
     packadd helptoc
   endif
