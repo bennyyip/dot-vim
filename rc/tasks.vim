@@ -12,13 +12,17 @@ def Rg(txt: string, bang: string)
     s = expand("<cword>")
   endif
 
+  # to prevent # and % expanding, prefix \\
+  s = substitute(s, '#', '\\#', 'g')
+  s = substitute(s, '%', '\\%', 'g')
+
   async#qfix(s, {'grep': 1, 'nojump': bang == '!' ? 1 : 0 })
 enddef
 
-command! -nargs=* -bang -complete=file Rg call Rg(<q-args>, "<bang>")
+command! -nargs=* -bang -complete=file Rg call Rg(<q-args>, <q-bang>)
 command! -nargs=* -bang -complete=file Rgr {
   chdir(g:FindRootDirectory(), 'window')
-  Rg(<q-args>, "<bang>")
+  Rg(<q-args>, <q-bang>)
 }
 
 command! -nargs=* Locate async#qfix(<q-args>, {'grepformat': "%f", "grepprg": "locate", "grep": 1})
