@@ -108,9 +108,17 @@ def DelayLoadAll()
         execute $'source {pre_rc_path}'
       endif
       execute $"packadd {name}"
+
+      const rc_path = GetRcPath(name, false)
+      if filereadable(rc_path)
+        execute $'source {rc_path}'
+      endif
     endfor
 
     for [repo, opts] in items(repos)
+      if opts['type'] != 'start'
+        continue
+      endif
       const rc_path = GetRcPath(opts['name'], false)
       if filereadable(rc_path)
         execute $'source {rc_path}'
