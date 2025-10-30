@@ -9,14 +9,8 @@ command! TermDelete       term.DeleteTerminal()
 command! -nargs=+ -complete=shellcmdline Term term.SendLine(<q-args>)
 command! TermCD term.SendLine("cd", getcwd())
 
-def TerminalMap(map: string, com: string)
-  execute $"inoremap <silent> {map} <Esc>{com}"
-  execute $"nnoremap <silent> {map} {com}"
-  execute $"tnoremap <silent> {map} <C-\\><C-n>{com}"
-enddef
-
-TerminalMap("<F12>", ":TermToggle<CR>")
-TerminalMap("<F11>", ":TermToggle!<CR>")
+term.TerminalMap("<F12>", ":TermToggle<CR>")
+term.TerminalMap("<F11>", ":TermToggle!<CR>")
 
 set termwinkey=<C-F>
 tnoremap <F1> <C-F>N

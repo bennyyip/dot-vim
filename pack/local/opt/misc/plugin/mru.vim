@@ -240,6 +240,9 @@ func! s:MRU_AddFile(acmd_bufnr) abort
     endif
   endif
 
+  " resolve symlink
+  let fname = resolve(fname)
+
   " If the filename is not already present in the MRU list and is not
   " readable then ignore it
   let idx = index(s:MRU_files, fname)

@@ -161,3 +161,10 @@ export def SendLine(...args: list<any>): string
   SendText([args->join(' ')])
   return ""
 enddef
+
+export def TerminalMap(map: string, com: string)
+  execute $"inoremap <silent> {map} <Esc>{com}"
+  execute $"nnoremap <silent> {map} {com}"
+  execute $"tnoremap <silent> {map} <C-\\><C-n>{com}"
+enddef
+

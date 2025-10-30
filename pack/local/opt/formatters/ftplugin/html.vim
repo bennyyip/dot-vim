@@ -7,7 +7,9 @@ augroup formatprgsHTML
   endif
 augroup END
 
-if executable('tidy')
+if executable('dprint')
+  let &l:formatprg = 'dprint fmt --stdin html'
+elseif executable('tidy')
   " See https://stackoverflow.com/questions/7151180/use-html-tidy-to-just-indent-html-code
   autocmd formatprgsHTML BufWinEnter <buffer> ++once let &l:formatprg = 'tidy -xml -quiet ' .
         \ ' --show-errors 0 -bare --show-body-only auto -wrap 0 '.

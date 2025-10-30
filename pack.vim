@@ -98,7 +98,6 @@ Pack 'bootleq/vim-cycle'
 Pack 'LunarWatcher/auto-pairs'
 Pack 'Konfekt/vim-alias'
 Pack 'nickspoons/vim-movefast'
-Pack 'airblade/vim-rooter' # <leader>r
 Pack 'bennyyip/tasks.vim'
 Pack 'tpope/vim-eunuch'
 Pack 'AndrewRadev/linediff.vim'

@@ -121,6 +121,7 @@ Color: diffDelete      #942822         ~
 Color: diffChange      #343331         ~
 Color: diffText        #164F4A         ~
 
+Color: colorShadow     #121212         ~
 
 debugBreakpoint        -> ErrorMsg
 debugPC                -> QuickFixLine
@@ -234,7 +235,6 @@ QuickFixLine           none            colorQF
 
 
 Pmenu                  tx              bg_2
-PmenuBorder            tx_2            bg_2
 PmenuSbar              none            bg_2
 PmenuSel               none            ui
 PmenuThumb             none            ui
@@ -245,6 +245,7 @@ PmenuExtraSel          tx_2            ui
 PmenuMatch             pu              bg_2              bold
 PmenuMatchSel          pu              ui                bold
 WildMenu               bl              bg_2              bold
+PmenuBorder            tx_2            bg_2
 
 ; my stl
 BenStl_left0           bg_1            tx                bold

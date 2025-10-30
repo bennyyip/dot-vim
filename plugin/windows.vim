@@ -20,4 +20,3 @@ g:netrw_cygwin = 0
 g:netrw_silent = 1
 
 set cryptmethod=xchacha20v2
-
