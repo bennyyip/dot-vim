@@ -21,7 +21,7 @@ enddef
 
 command! -nargs=* -bang -complete=file Rg call Rg(<q-args>, <q-bang>)
 command! -nargs=* -bang -complete=file Rgr {
-  chdir(g:FindRootDirectory(), 'window')
+  chdir(rooter.FindRootDirectory(), 'window')
   Rg(<q-args>, <q-bang>)
 }
 

@@ -1,8 +1,10 @@
 vim9script
-import autoload 'utils.vim'
-import autoload 'text.vim'
-import autoload 'buf.vim'
-import autoload 'os.vim'
+import autoload '../autoload/utils.vim'
+import autoload '../autoload/text.vim'
+import autoload '../autoload/buf.vim'
+import autoload '../autoload/os.vim'
+import autoload '../autoload/rooter.vim'
+import autoload '../autoload/zoom.vim'
 const is_gvim = has('gui_running')
 
 # move [[[1
@@ -202,7 +204,6 @@ nnoremap <silent> <C-Down> :resize -2<cr>
 nnoremap <silent> <C-Right> :vertical resize -2<cr>
 nnoremap <silent> <C-Left> :vertical resize +2<cr>
 # toogle window zoom
-import autoload 'zoom.vim'
 nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
 nmap <C-w>o <C-w><C-o>
 nmap 'o <C-w><C-o>
@@ -215,7 +216,7 @@ nnoremap <silent> <leader>dy :call os#Yank(expand("%:p:h"))<CR>:echo $"{expand('
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cD :cd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
-
+nmap <silent> <leader>r <scriptcmd>rooter.Rooter()<CR>
 
 nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>

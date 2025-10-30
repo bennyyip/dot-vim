@@ -4,6 +4,8 @@ if !has("patch-9.1.1230")
   finish
 endif
 
+import autoload '../autoload/rooter.vim'
+
 var files_cache: list<string> = []
 var saved_cwd: string = ''
 
@@ -80,7 +82,7 @@ def BufDir(): string
 enddef
 
 def SearchProject()
-  const root = g:FindRootDirectory()
+  const root = rooter.FindRootDirectory()
   if root == ''
     Fd(BufDir())
   else

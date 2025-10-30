@@ -8,7 +8,7 @@ var rootMarkers = {
   files: ['configure', 'Cargo.toml', 'go.mod', 'package.json', '.project.vim']
 }
 
-def CurDir(): string
+export def CurDir(): string
   var curdir = expand("%:p")
     ->substitute('^dir://', '', '')
     ->substitute('^fugitive:[/\\]\{2}\(.*\)[/\\]\.git', '\1', '')
@@ -26,7 +26,7 @@ def CurDir(): string
   return curdir
 enddef
 
-def g:FindRootDirectory(): string
+export def FindRootDirectory(): string
   var curdir = CurDir()
   if curdir->empty()
     return ''
@@ -52,12 +52,12 @@ def g:FindRootDirectory(): string
   return ''
 enddef
 
-def g:Rooter(cdcmd: string = 'lcd')
+export def Rooter(cdcmd: string = 'lcd')
   if &buftype != '' && ['dir', 'fugitive']->index(&ft) == -1
     return
   endif
 
-  const rootdir = g:FindRootDirectory()
+  const rootdir = FindRootDirectory()
 
   if !rootdir->empty()
     exe cdcmd .. ' ' rootdir
@@ -70,9 +70,3 @@ def g:Rooter(cdcmd: string = 'lcd')
   endif
 enddef
 
-
-augroup rooter | au!
-  au BufEnter * g:Rooter()
-augroup END
-
-nmap <silent> <leader>r <scriptcmd>g:Rooter()<CR>

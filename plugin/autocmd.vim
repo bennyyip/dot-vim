@@ -1,5 +1,6 @@
 vim9script
 import autoload "../autoload/utils.vim"
+import autoload '../autoload/rooter.vim'
 
 # Functions [[[1
 def JumpToLastPosition() # [[[2
@@ -75,6 +76,7 @@ augroup vimrc
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   # autocmd ModeChanged *:nt setlocal relativenumber
   autocmd BufEnter * {
+    rooter.Rooter()
     if &buftype == 'terminal'
       silent! wall
       if mode() == 'n'

@@ -1,4 +1,5 @@
 vim9script
+import autoload 'rooter.vim'
 
 def Root(): string
   var dir = getbufvar('%', 'projectRoot')
@@ -6,34 +7,26 @@ def Root(): string
     return dir
   endif
 
-  const buf = '%'
-  dir = expand('%:p:h', 1)
-  dir = dir->substitute("^dir://", "", "")
-  dir = resolve(dir)
-  var prev = ''
+  const curdir = rooter.CurDir()
+  if curdir->empty()
+    return ''
+  endif
 
-  while true
-    const projectvimrc = $'{dir}/.project.vim'
-    if filereadable(projectvimrc)
-      return dir
-    endif
-
-    prev = dir
-    dir = fnamemodify(dir, ':h')
-    if prev == dir
-      break
-    endif
-  endwhile
-
-  setbufvar('%', 'projectRoot', dir)
-  return dir
+  var rootdir = findfile('.project.vim', curdir .. ';')
+  if !rootdir->empty()
+    rootdir = rootdir->fnamemodify(':h')
+    setbufvar('%', 'projectRoot', rootdir)
+    return rootdir
+  else
+    return ''
+  endif
 enddef
 
 def SourceProjectVimrc()
+  defer setbufvar('%', 'sourcedProjectVimrc', true)
   if getbufvar('%', 'sourcedProjectVimrc', false)
     return
   endif
-  defer setbufvar('%', 'sourcedProjectVimrc', true)
 
   const root = Root()
   if empty(root)
