@@ -12,7 +12,6 @@ command MinpacInstall {
     :qall
   endif
 }
-
 # Builtin [[[1
 timer_start(0, (_) => {
   if !getcompletion('helptoc', 'packadd')->empty()
@@ -31,6 +30,7 @@ timer_start(0, (_) => {
     packadd editorconfig
   endif
   if !getcompletion('termdebug', 'packadd')->empty()
+    source $MYVIMDIR/rc/pre-termdebug.vim
     packadd termdebug
   endif
   if !getcompletion('hlyank', 'packadd')->empty()
@@ -53,14 +53,16 @@ timer_start(0, (_) => {
 
   utils.MapMeta()
 })
+# ]]]
 silent! packadd minpac
 if !exists('g:loaded_minpac')
   finish
 endif
-# ]]]
 
 g:plugpac_plugin_conf_path = $MYVIMDIR .. '/rc'
 g:plugpac_default_type = 'delay'
+
+plugpac_helper#SetupCommands()
 
 au User PlugpacPost {
   utils.MapMeta()
@@ -89,7 +91,6 @@ endif
 if getcompletion('hlyank', 'packadd')->empty()
   Pack 'ubaldot/vim-highlight-yanked'
 endif
-
 # Lab [[[1
 # Enhance [[[1
 Pack 'dstein64/vim-startuptime'
@@ -158,14 +159,5 @@ endif
 Pack 'SirVer/ultisnips'
 Pack 'honza/vim-snippets', { 'type': 'opt' }
 plugpac#End()
-# plugpac helpers [[[1
-import autoload "plugpac_helper.vim" as P
-command! PackSummary P.PackSummary()
-const PackList = P.PackList
-command! -nargs=1 -complete=customlist,PackList PackUrl   P.PackUrl(<q-args>)
-command! -nargs=1 -complete=customlist,PackList PackDir   P.PackDir(<q-args>)
-command! -nargs=1 -complete=customlist,PackList PackRc    P.PackRc(<q-args>)
-command! -nargs=1 -complete=customlist,PackList PackRcPre P.PackRcPre(<q-args>)
-command! PackUnusedRC cexpr P.PackUnusedRC()->map((_, x) => $"{x}:1:1: Unused")
-# ]]]
+
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim

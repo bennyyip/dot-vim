@@ -172,8 +172,6 @@ def SetupCommands()
   command! -bar PackUpdate  call Init() | call minpac#update('', {'do': 'call minpac#status()'})
   command! -bar PackClean   call Init() | call minpac#clean()
   command! -bar PackStatus  call Init() | call minpac#status()
-  command! -bar -nargs=1 -complete=customlist,StartPluginComplete PackDisable call DisableEnablePlugin(<q-args>, v:true)
-  command! -bar -nargs=1 -complete=customlist,OptPluginComplete PackEnable call DisableEnablePlugin(<q-args>, v:false)
 enddef
 
 export def Init()
@@ -185,49 +183,6 @@ export def Init()
   endfor
 
   cached_installed_plugins = {}
-enddef
-
-def DisableEnablePlugin(plugin: string, disable: bool)
-  var src_ = 'opt'
-  var dst = 'start'
-
-  if disable
-    src_ = 'start'
-    dst = 'opt'
-  endif
-
-  const plugins = GetInstalledPlugins(src_)
-  if !has_key(plugins, plugin)
-    Err(plugin .. ' does not exists.')
-    return
-  endif
-
-  const plugin_dir = plugins[plugin]
-
-  const dst_dir = substitute(plugin_dir, '[/\\]' .. src_ .. '[/\\]\ze[^/]\+$', '/' .. dst .. '/', '')
-  if isdirectory(dst_dir)
-    Err(dst_dir .. 'exists.')
-    return
-  endif
-  rename(plugin_dir, dst_dir)
-enddef
-
-def Matchfuzzy(l: list<string>, str: string): list<string>
-  if str == ''
-    return l
-  else
-    return matchfuzzy(l, str)
-  endif
-enddef
-
-def StartPluginComplete(A: string, L: string, P: number): list<string>
-  const plugins = GetInstalledPlugins('start')->keys()
-  return plugins->Matchfuzzy(A)
-enddef
-
-def OptPluginComplete(A: string, L: string, P: number): list<string>
-  const plugins = GetInstalledPlugins('opt')->keys()
-  return plugins->Matchfuzzy(A)
 enddef
 
 def GetInstalledPlugins(type_: string = 'all'): dict<string>

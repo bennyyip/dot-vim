@@ -1,5 +1,7 @@
 vim9script
 
+import autoload '../autoload/rooter.vim'
+
 call extend(g:async_default_opts, {'openqf': 1, 'nojump': 1})
 
 command! -nargs=1 -bang -complete=shellcmdline AsyncCmd call async#cmd(<q-args>, 'cmdline',  {'writelogs': <bang>0})
