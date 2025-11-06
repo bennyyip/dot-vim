@@ -40,7 +40,10 @@ set spelllang=en_us,cjk spellcapcheck= spellfile=$MYVIMDIR/spell/en.utf-8.add
 # set spelloptions=camel
 inoremap <C-b> <c-g>u<Esc>[s1z=`]a<c-g>u
 set nospell
-set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:histogram,inline:char,linematch:50
+set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:histogram,linematch:50
+if has("patch-9.1.1753")
+  set diffopt+=inline:char
+endif
 set number relativenumber cursorline cursorlineopt=number signcolumn=number
 set conceallevel=0 concealcursor=n
 
