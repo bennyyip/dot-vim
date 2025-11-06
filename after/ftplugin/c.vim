@@ -27,7 +27,7 @@ nmap <buffer> <localleader>C <scriptcmd>g:LspFindLocations('ccls', false, "$ccls
 # member
 nmap <buffer> <localleader>m <scriptcmd>g:LspFindLocations('ccls', false, "$ccls/member")<cr>
 
-command -buffer Run {
+command -buffer RunBuffer {
   :lcd %:p:h
   :MinitermShow
   :Term make -e %< && ./%<

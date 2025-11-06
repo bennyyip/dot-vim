@@ -341,8 +341,8 @@ xnoremap <c-p> :diffput<cr>
 xnoremap <c-o> :diffget<cr>
 # tags
 nnoremap <silent>'] <cmd>execute $"vertical ptjump {expand('<cword>')}"<BAR>wincmd =<CR>
-nnoremap <silent><Plug>(meta-j) :wincmd p<BAR>normal! 10jzz<CR>:wincmd p<CR>
-nnoremap <silent><Plug>(meta-k) :wincmd p<BAR>normal! 10kzz<CR>:wincmd p<CR>
+# nnoremap <silent><Plug>(meta-j) :wincmd p<BAR>normal! 10jzz<CR>:wincmd p<CR>
+# nnoremap <silent><Plug>(meta-k) :wincmd p<BAR>normal! 10kzz<CR>:wincmd p<CR>
 # vimrc
 nnoremap <silent><leader>fed :e $MYVIMRC<CR>
 # source vimscript (operator)

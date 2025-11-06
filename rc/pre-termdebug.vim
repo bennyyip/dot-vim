@@ -9,13 +9,14 @@ g:termdebug_config = {
 }
 
 var saved_mappings = {}
-const n_keys = ['<F5>', '<F9>', '<F10>', '<F11>', '<F12>', '<PageUp>', '<PageDown>']
+const n_keys = ['<S-F5>', '<F5>', '<F9>', '<F10>', '<F11>', '<F12>', '<PageUp>', '<PageDown>']
 
 au User TermdebugStartPost {
   for k in n_keys
     saved_mappings[k] = maparg(k, 'n', false, true)
   endfor
 
+  nnoremap <S-F5>           <CMD>bd! gdb<CR>
   nnoremap <F5>             <CMD>RunOrContinue<CR>
   nnoremap <F9>             <CMD>ToggleBreak<CR>
   nnoremap <F10>            <CMD>Over<CR>
@@ -35,4 +36,3 @@ au User TermdebugStopPost {
     endif
   endfor
 }
-

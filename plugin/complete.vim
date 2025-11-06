@@ -23,8 +23,8 @@ set wildmenu wildmode=full:lastused wildoptions=pum,fuzzy pumheight=20
 set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,tags,*.cmx,*.cmi,*~,*.py[co],__pycache__
 
 # swap <c-n> and <c-x><c-n> and <c-o>
-# inoremap <expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
-# inoremap <C-X><C-N> <C-N>
+inoremap <expr> <C-N> pumvisible() ?  "\<C-N>" : "\<C-X>\<C-N>"
+inoremap <C-X><C-N> <C-N>
 # inoremap <C-O> <C-N>
 inoremap <silent><expr> <C-O> pumvisible() ? "\<C-N>" : "\<C-X>\<C-O>"
 
