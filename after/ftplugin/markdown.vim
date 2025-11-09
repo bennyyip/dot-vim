@@ -30,3 +30,18 @@ def QF_TOC(info: dict<any>): list<string>
     endfor
     return l
 enddef
+
+def MarkdownCR(): string
+  const line = getline('.')
+  if line =~# '^\d*\. .*'
+    return "\<CR>1. "
+  elseif line =~# '^- [.\] .*'
+    return "\<CR>- [ ] "
+  elseif line =~# '^- .*'
+    return "\<CR>- "
+  else
+    return "\<CR>"
+  endif
+enddef
+
+inoremap <expr> <buffer> <CR> MarkdownCR()

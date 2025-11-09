@@ -17,7 +17,7 @@ endfunction
 
 augroup XXD
   au!
-  autocmd CursorMoved <buffer> call s:highlight()
+  autocmd CursorMoved <buffer> silent! call s:highlight()
 augroup END
 highlight link XXDCursorGroup WildMenu
 

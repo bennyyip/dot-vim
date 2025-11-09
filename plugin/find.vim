@@ -96,5 +96,6 @@ nnoremap <leader>fF :<C-U>find<space>
 nnoremap <leader>fp <scriptcmd>Fd(expand("$MYVIMDIR"))<cr>
 nnoremap <leader>fd <scriptcmd>Fd($HOME .. "/dotfiles")<cr>
 nnoremap <leader>fR <scriptcmd>Fd(expand("$VIMRUNTIME"))<cr>
+nnoremap <leader>fo <scriptcmd>Fd(g:obsidian_vault)<cr>
 
 command -bang -nargs=1 -complete=dir Fd Fd(<f-args>, <q-bang> == '!')

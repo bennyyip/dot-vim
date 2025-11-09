@@ -22,6 +22,9 @@ moving over folds~
 ==============================================================================
 2. 插入模式
 
+|insert-index|
+|i_CTRL-X_index|
+
 completion~
 							      |ins-completion|
 

@@ -252,8 +252,8 @@ BenStl_left0           bg_1            tx                bold
 BenStl_left1           tx              ui_2              bold
 BenStl_left2           tx_2            bg_2
 BenStl_middle          tx_2            bg_2
-BenStl_right0          bg_1            tx
-BenStl_right1          tx              ui_2
+BenStl_right0          -> BenStl_left0
+BenStl_right1          -> BenStl_left1
 BenStl_right2          -> BenStl_left2
 BenTabLine             tx_2            ui_2
 BenTabLineFill         bg_1            bg_1

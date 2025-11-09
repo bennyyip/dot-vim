@@ -8,6 +8,7 @@ endif
 
 $SHELL = 'bash'
 # set shell=$SHELL
+set shell=C:\WINDOWS\system32\cmd.exe
 
 set shellslash
 set completeslash=slash
@@ -20,3 +21,4 @@ g:netrw_cygwin = 0
 g:netrw_silent = 1
 
 set cryptmethod=xchacha20v2
+

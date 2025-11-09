@@ -185,7 +185,7 @@ export def Init()
   cached_installed_plugins = {}
 enddef
 
-def GetInstalledPlugins(type_: string = 'all'): dict<string>
+export def GetInstalledPlugins(type_: string = 'all'): dict<string>
   if has_key(cached_installed_plugins, type_)
     return cached_installed_plugins[type_]
   endif

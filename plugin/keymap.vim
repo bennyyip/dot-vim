@@ -370,7 +370,7 @@ nnoremap <silent> got :call os#Terminal()<CR>
 def DailyNote()
   const filename = expand(g:obsidian_vault .. "/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')
   if !filereadable(filename)
-    echom "Create daily note in obsidian first."
+    echom $"Create daily note `{filename}` in obsidian first."
     return
   endif
   # const daily_note_dir = fnamemodify(filename, ':h')
