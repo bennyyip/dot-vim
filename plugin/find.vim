@@ -51,7 +51,7 @@ augroup END
 set findfunc=Find
 
 def RestoreCwd()
-  chdir(saved_cwd, 'window')
+  chdir(saved_cwd)
   saved_cwd = ''
 enddef
 
@@ -73,7 +73,7 @@ def Fd(dir: string, keepcwd: bool = true)
     }
   endif
 
-  chdir(dir, 'window')
+  chdir(dir)
   feedkeys(':find ')
 enddef
 

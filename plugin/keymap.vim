@@ -58,10 +58,20 @@ noremap! <Plug>(meta-p) <Up>
 inoremap <m-d> <C-O>dw
 
 # text object [[[1
+def TextObjectAll()
+  w:restore_position = winsaveview()
+  keepjumps normal! ggVG
+  # For delete/change, we don't wish to restore cursor position.
+  if index(['c', 'd'], v:operator) == -1
+    feedkeys("\<Plug>(RestoreView)")
+  endif
+enddef
 xnoremap <silent> ae gg0oG$
-nnoremap dae mzggdG
-nnoremap cae mzggcG
-onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
+nnoremap <silent> <Plug>(RestoreView) <scriptcmd>winrestview(w:restore_position)<CR>
+onoremap <silent> ae                  <cmd>keepjumps call <SID>TextObjectAll()<CR>
+# nnoremap dae mzggdG
+# nnoremap cae mzggcG
+# onoremap <silent> ae :<C-U>execute "normal! m`"<Bar>keepjumps normal! ggVG<CR>g``zz
 # 26 simple text objects
 # ----------------------
 # i_ i. i: i, i; i| i/ i\ i* i+ i- i# i<tab>

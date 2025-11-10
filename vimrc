@@ -95,18 +95,18 @@ set efm^=%-G%f%l:\ note:%m
 $RIPGREP_CONFIG_PATH = $HOME .. '/.ripgreprc'
 if $W64DEVKIT != ""
   # set sh=sh shcf=-c sxq=\" sxe=
-    $CFLAGS = "-g -gcodeview -Wall -Wextra -Wdouble-promotion -Wconversion
-                \ -Wno-sign-conversion -Wno-unused-parameter
-                \ -Wno-unused-function -Wno-unknown-pragmas
-                \ -fsanitize=undefined
-                \ -fsanitize-trap"
-    # $LDFLAGS = "-nostartfiles"
+  $CFLAGS = "-g -gcodeview -Wall -Wextra -Wdouble-promotion -Wconversion
+        \ -Wno-sign-conversion -Wno-unused-parameter
+        \ -Wno-unused-function -Wno-unknown-pragmas
+        \ -fsanitize=undefined
+        \ -fsanitize-trap"
+# $LDFLAGS = "-nostartfiles"
 else
-    $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
-                \ -Wno-sign-conversion -Wno-unused-parameter
-                \ -Wno-unused-function -Wno-unknown-pragmas
-                \ -fsanitize=undefined,address
-                \ -fsanitize-undefined-trap-on-error"
+  $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
+        \ -Wno-sign-conversion -Wno-unused-parameter
+        \ -Wno-unused-function -Wno-unknown-pragmas
+        \ -fsanitize=undefined,address
+        \ -fsanitize-undefined-trap-on-error"
   $LDFLAGS = " "
 endif
 $CXXFLAGS = $CFLAGS .. ' -std=c++23'
