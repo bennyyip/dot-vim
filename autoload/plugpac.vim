@@ -83,7 +83,7 @@ export def Add(repo: string, opts: dict<any> = {})
   if !HasPlugin(name)
     # timer_start(20, (_) => {
     if !quiet
-      echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
+      Err($'Missing plugin `{repo}`. Run :PackInstall to install it.')
     endif
     # })
     return

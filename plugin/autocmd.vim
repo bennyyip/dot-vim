@@ -31,10 +31,10 @@ def Format()
     utils.RemoveSpaces()
     return
   endif
-  if plugpac#HasPlugin('lsp') && lsp#buffer#CurbufGetServers()->len() > 0
-    execute "LspFormat"
-    return
-  endif
+  # if plugpac#HasPlugin('lsp') && lsp#buffer#CurbufGetServers()->len() > 0
+  #   execute "LspFormat"
+  #   return
+  # endif
   const save_view = winsaveview()
   :keepj normal! gggqG
   # execute 'write'

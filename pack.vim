@@ -92,6 +92,8 @@ if getcompletion('hlyank', 'packadd')->empty()
   Pack 'ubaldot/vim-highlight-yanked'
 endif
 # Lab [[[1
+Pack 'noscript/elevator.vim'
+Pack 'junegunn/vim-easy-align'
 # Enhance [[[1
 Pack 'dstein64/vim-startuptime'
 Pack 'junegunn/goyo.vim'
@@ -115,7 +117,6 @@ endif
 # Motion and Edit [[[1
 Pack 'machakann/vim-swap' # g, g. gs gS
 Pack 'bennyyip/vim-debugstring' # <leader>ds
-Pack 'tommcdo/vim-lion' # <count>gl<motion><char>
 Pack 'tommcdo/vim-exchange' # gx gxx gxg
 Pack 'tpope/vim-abolish'
 

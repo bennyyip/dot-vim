@@ -27,4 +27,4 @@ Alias zlr  ZellijRun
 Alias zlrf ZellijRunFloat
 Alias fmt  Fmt
 Alias zen  Goyo
-Alias tdb  Termdebug\ %<
+Alias gdb  Termdebug
