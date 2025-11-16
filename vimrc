@@ -98,16 +98,14 @@ if $W64DEVKIT != ""
   $CFLAGS = "-g -gcodeview -Wall -Wextra -Wdouble-promotion -Wconversion
         \ -Wno-sign-conversion -Wno-unused-parameter
         \ -Wno-unused-function -Wno-unknown-pragmas
-        \ -fsanitize=undefined
-        \ -fsanitize-trap"
-# $LDFLAGS = "-nostartfiles"
+        \ -fsanitize=undefined"
+# $LDFLAGS="-nostartfiles"
 else
   $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
         \ -Wno-sign-conversion -Wno-unused-parameter
         \ -Wno-unused-function -Wno-unknown-pragmas
-        \ -fsanitize=undefined,address
-        \ -fsanitize-undefined-trap-on-error"
-  $LDFLAGS = " "
+        \ -fsanitize=address,undefined -fsanitize-trap"
+  $LDFLAGS = "-fsanitize=address"
 endif
 $CXXFLAGS = $CFLAGS .. ' -std=c++23'
 # ]]]

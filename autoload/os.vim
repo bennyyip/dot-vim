@@ -102,7 +102,7 @@ export def Terminal()
   endif
 
   if executable("wt.exe")
-    job_start(['wt.exe', '-d', path])
+    job_start(['wt.exe', '-d', path], { cwd: path })
   elseif istmux
     job_start(["tmux", "split-window", "-h", "-c", path])
   elseif iszellij

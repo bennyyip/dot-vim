@@ -167,4 +167,3 @@ export def TerminalMap(map: string, com: string)
   execute $"nnoremap <silent> {map} {com}"
   execute $"tnoremap <silent> {map} <C-\\><C-n>{com}"
 enddef
-

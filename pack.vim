@@ -146,6 +146,9 @@ Pack 'tridactyl/vim-tridactyl'
 Pack 'bfrg/vim-jq'
 Pack 'bfrg/vim-jqplay'
 Pack 'lervag/vimtex'
+if executable('nim')
+  Pack 'zah/nim.vim'
+endif
 # Web [[[3
 Pack 'MaxMEllon/vim-jsx-pretty'
 Pack 'BourgeoisBear/clrzr'
