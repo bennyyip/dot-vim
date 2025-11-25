@@ -3,7 +3,7 @@ setlocal commentstring=//\ %s
 
 # set makeprg=make\ -e\ %:r
 
-set foldnestmax=1
+setlocal foldnestmax=1
 
 # not call
 nmap <buffer> <localleader>f <scriptcmd>g:LspFindLocations('ccls', false, "textDocument/references", {"excludeRole": 32})<cr>

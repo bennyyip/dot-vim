@@ -184,7 +184,7 @@ SignColumn             tx_2            bg_1
 ColorColumn            none            ui_3
 Error                  re              bg_1              bold,reverse
 ErrorMsg               bg_1            re                bold
-Folded                 tx_2            bg_2
+Folded                 tx              bg_2
 LineNr                 tx_3            none
 MatchParen             none            bg_2              bold,underline
 NonText                ui              none
