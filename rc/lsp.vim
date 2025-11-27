@@ -42,6 +42,15 @@ if executable('ocamllsp')
   })
 endif
 
+if executable('zls')
+  lsp_servers->add({
+    filetype: ["zig"],
+    name: 'zig',
+    path: 'zls',
+  })
+endif
+
+
 # if executable('pyright-langserver')
 #   lsp_servers->add({
 #     name: 'pyright',

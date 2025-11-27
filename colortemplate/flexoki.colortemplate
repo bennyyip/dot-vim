@@ -115,6 +115,8 @@ Color: blue_400        #4385BE         ~
 Color: purple_400      #8B7EC8         ~
 Color: magenta_400     #CE5D97         ~
 
+Color: purple_900      #261C39         ~
+
 ; Diff colors
 Color: diffAdd         #3D4C07         ~
 Color: diffDelete      #942822         ~
@@ -166,11 +168,6 @@ SpellLocal             omit            omit              s=aqua undercurl
 SpellRare              omit            omit              s=pu undercurl
 
 SpecialKey             tx_2            none
-StatusLine             ui              tx_2              bold,reverse
-StatusLineNC           bg_2            ui_3              reverse
-TabLine                tx_2            ui
-TabLineFill            tx_2            bg_2
-TabLineSel             tx              bg_1              bold
 ToolbarButton          tx              ui_2              bold
 ToolbarLine            none            none
 Visual                 none            colorV
@@ -184,7 +181,7 @@ SignColumn             tx_2            bg_1
 ColorColumn            none            ui_3
 Error                  re              bg_1              bold,reverse
 ErrorMsg               bg_1            re                bold
-Folded                 tx              bg_2
+Folded                 bg_1            tx_2
 LineNr                 tx_3            none
 MatchParen             none            bg_2              bold,underline
 NonText                ui              none
@@ -248,21 +245,19 @@ WildMenu               bl              bg_2              bold
 PmenuBorder            tx_2            bg_2
 
 ; my stl
-BenStl_left0           bg_1            tx                bold
-BenStl_left1           tx              ui_2              bold
-BenStl_left2           tx_2            bg_2
-BenStl_middle          tx_2            bg_2
-BenStl_right0          -> BenStl_left0
-BenStl_right1          -> BenStl_left1
-BenStl_right2          -> BenStl_left2
-BenTabLine             tx_2            ui_2
-BenTabLineFill         bg_1            bg_1
-BenTabLineRight        bg_1            or
-BenTabLineSel          bg_1            tx_2
-BenStl_insert          bg_1            pu                bold
-BenStl_normal          bg_1            tx                bold
-BenStl_replace         bg_1            re                bold
-BenStl_visual          bg_1            ye                bold
+
+TabLine                tx_2            ui_2
+TabLineFill            none            none
+TabLineSel             bg_1            tx                bold
+TabLineRight           bg_1            or
+
+StatusLine             tx              purple_900
+StatusLineNC           tx_2            bg_2
+StatusLineBold         tx              purple_900        bold
+StatusLineNormal       -> StatusLineBold
+StatusLineInsert       bg_1            pu                bold
+StatusLineVisual       none            colorV            bold
+StatusLineReplace      bg_1            re                bold
 
 ; Vimsidian
 

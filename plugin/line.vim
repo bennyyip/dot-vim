@@ -15,9 +15,10 @@ def TabLabel(n: number): string
 
   const modified = gettabwinvar(n, winnr, '&modified') ? '+' : gettabwinvar(n, winnr, '&modifiable') ? '' : '-'
 
-  const hl = n == tabpagenr() ? '%#BenTabLineSel#' :  '%#BenTabLine#'
+  const hl = n == tabpagenr() ? '%#TabLineSel#' :  '%#TabLine#'
 
-  const sep = (n == tabpagenr() || n + 1 == tabpagenr() || n == tabpagenr('$')) ? '' : '|'
+  # const sep = (n == tabpagenr() || n + 1 == tabpagenr() || n == tabpagenr('$')) ? '' : '|'
+  const sep = ''
 
   var parts = [
     $"%{n}T", # mouse click
@@ -37,11 +38,11 @@ def g:Tabline(): string
   endfor
 
   # after the last tab page fill with TabLineFill and reset tab page nr
-  s ..= '%#BenTabLineFill#%T'
+  s ..= '%#TabLineFill#%T'
 
   # right-align the label to close the current tab page
   if tabpagenr('$') > 1
-    s ..= '%=%#BenTabLineRight#%999X X '
+    s ..= '%=%#TabLineRight#%999X X '
   endif
 
   return s
@@ -54,16 +55,19 @@ def LineMode(): string
     'c': 'C', 's': 'S', 'S': 'L', "\<C-s>": 'B', 't': 'T'
   }
   const m = get(mode_map, mode(), '')
+  var s = ''
 
   if ['B', 'V', 'L', 'S']->index(m) >= 0
-    return $"%#BenStl_visual# {m}"
+    s = "Visual"
   elseif ['I', 'T']->index(m) >= 0
-    return $"%#BenStl_insert# {m}"
+    s = "Insert"
   elseif ['R']->index(m) >= 0
-    return $"%#BenStl_replace# {m}"
+    s = "Replace"
   else # ['C', 'N']->index(m) >= 0
-    return $"%#BenStl_normal# {m}"
+    s = "Normal"
   endif
+
+  return $"%#StatusLine{s}# {m} %#StatusLine#"
 enddef
 
 def LineFilename(): string
@@ -85,13 +89,15 @@ def LineFilename(): string
 
   if &ft =~? 'dir\|fugitive\|undotree'
     return fname
+  elseif &ft =~? 'yat'
+    return 'YAT'
   else
     return [readonly, fname, modified]->FilterAndJoin()
   endif
 enddef
 
 def LineFugitive(): string
-  if !exists('*g:FugitiveHead')
+  if !exists('*g:FugitiveHead') || &ft == 'yat'
     return ''
   endif
   const mark = (is_tty ? '' : "\ue0a0")
@@ -104,11 +110,23 @@ enddef
 
 def LinePluginStatus(): string
   const jobs = get(g:, 'async_jobs', {})
-  const async_status = jobs->len() > 0 ? 'Running' : ''
+  const njobs = jobs->len()
+
+  var async_status = ''
+  if njobs > 0
+    async_status = 'Running'
+    if njobs > 1
+      async_status ..= $'({njobs})'
+    endif
+  endif
 
   # const tagname = exists('*taglist#Tlist_Get_Tagname_By_Line') ? taglist#Tlist_Get_Tagname_By_Line() : ''
   const tagname = get(b:, 'vista_nearest_method_or_function', '')
   return [tagname, async_status]->FilterAndJoin(' | ')
+enddef
+
+def Bold(s: string): string
+  return $"%#StatusLineBold#{s}%#StatusLine#"
 enddef
 
 def LineFileInfo(): string
@@ -116,21 +134,23 @@ def LineFileInfo(): string
     return ""
   endif
 
-  const fileencoding = &fenc !=# "" ? &fenc : &enc
-  const fileformat = &ff
-  const filetype = &ft !=# "" ? &ft : "no ft"
+  const ffdict = {'dos': 'CRLF', 'mac': 'CR', 'unix': 'LF'}
 
-  return [fileformat, fileencoding, filetype]->FilterAndJoin(' | ')
+  const fileencoding = toupper(&fenc !=# "" ? &fenc : &enc)
+  const fileformat = ffdict->get(&ff, '')
+  const filetype = &ft !=# "" ? &ft : "Fundamental"
+
+  return [fileformat, fileencoding, filetype->Bold()]->FilterAndJoin('  ')
 enddef
 
 def g:StatusLine(): string
   const inactive = get(g:, 'statusline_winid', win_getid(winnr())) != win_getid(winnr())
   if inactive
-    return '%#BenStl_middle#' .. [
+    return [
       '%f', # filename
       '%=', # middle
-      '%p%%', # percent
-      '%l:%c', # lineinfo
+      '%l,%c', # lineinfo
+      '%P', # percent
     ]->FilterAndJoin()
   endif
 
@@ -139,91 +159,59 @@ def g:StatusLine(): string
   var left = [
     [
       LineMode(), # mode
+    ],
+    [
+      LineFilename()->Bold(), # filename
       &paste ? "PASTE" : "", # paste
     ],
-    [
-      LineFugitive(), # fugitive
-      LineFilename(), # filename
-    ],
-    [
-      LinePluginStatus(), # plugin
-    ]
   ]
+
+  var mid = LinePluginStatus()
 
   var right = [
     [
-      '%3l:%-2c', # lineinfo
-    ],
-    [
-      '%3p%%', # percent
-    ],
-    [
+      LineFugitive(), # fugitive
       LineFileInfo() # fileinfo
-    ]
+    ],
+    [
+      '%P', # percent
+    ],
+    [
+      '%3l,%-3c', # lineinfo
+    ],
   ]
 
   for [i, part] in left->items()
     if i == 0
-      parts->add($"{part->FilterAndJoin(' | ')}")
+      parts->add(part->FilterAndJoin(' | '))
       continue
     endif
-    parts->add($"%#BenStl_left{i}#{' ' .. part->FilterAndJoin(' | ')}")
+    parts->add(part->FilterAndJoin(' | '))
   endfor
-  parts->add('%#BenStl_middle#%=')
+
+  const filetype = &ft !=# "" ? &ft : "Fundamental"
+
+  parts->add($'%={mid}%=')
 
   var right_parts = []
   for [i, part] in right->items()
-    right_parts->add($"%#BenStl_right{i}#{' ' .. part->FilterAndJoin(' | ') .. ' '}")
+    right_parts->add(' ' .. part->FilterAndJoin('  ') .. ' ')
   endfor
   parts->extend(right_parts->reverse())
 
   return parts->FilterAndJoin()
 enddef
 
-def HiStyle(p: list<any>): string
-  return get(p, 4, '') != '' ? $"term={p[4]} cterm={p[4]} gui={p[4]}" : ''
-enddef
-
-def Highlight()
-  # const palette = g:lightline#colorscheme#gruvbox9#palette
-  const palette = g:lightline#colorscheme#retrobox#palette
-
-  for [key, group] in items({'tabsel': 'Sel', 'left': '', 'middle': 'Fill', 'right': 'Right'})
-    var r = palette.tabline[key]->flattennew()
-    exec $'hi BenTabLine{group} guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
-  endfor
-
-  for part in ['left', 'right']
-    var p = palette.normal[part]
-    var r = p[0]
-    exec $'hi BenStl_{part}{0} guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
-    exec $'hi BenStl_{part}{1} guifg={r[1]} guibg={p[1][1]} ctermfg={r[3]} ctermbg={p[1][2]} {HiStyle(r)}'
-    r = palette.normal['middle'][0]
-    exec $'hi BenStl_{part}{2} guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
-  endfor
-
-  for m in ['normal', 'insert', 'visual', 'replace']
-    var r = palette[m]['left'][0]
-    exec $'hi BenStl_{m} guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
-  endfor
-
-
-  var r = palette.normal['middle'][0]
-  exec $'hi BenStl_middle guifg={r[0]} guibg={r[1]} ctermfg={r[2]} ctermbg={r[3]} {HiStyle(r)}'
-  exec $'hi StatusLine guifg={r[1]} guibg={r[0]} ctermfg={r[3]} ctermbg={r[2]} {HiStyle(r)}'
-  exec $'hi StatusLineNC guifg={r[1]} guibg={r[0]} ctermfg={r[3]} ctermbg={r[2]} {HiStyle(r)}'
-
-enddef
+hi default link StatusLineBold    StatusLine
+hi default link StatusLineInsert  StatusLineBold
+hi default link StatusLineNormal  StatusLineBold
+hi default link StatusLineReplace StatusLineBold
+hi default link StatusLineVisual  StatusLineBold
+hi default link TabLineRight      TabLineSel
 
 augroup vimrc
   autocmd VimEnter * {
     set tabline=%!g:Tabline()
     set statusline=%!g:StatusLine()
-    # Highlight()
-  }
-  autocmd Syntax,ColorScheme * {
-    # Highlight()
-
   }
 augroup END
-

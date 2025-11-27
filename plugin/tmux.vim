@@ -57,14 +57,22 @@ tnoremap <C-j> <scriptcmd>Navigate("j")<CR>
 tnoremap <C-k> <scriptcmd>Navigate("k")<CR>
 tnoremap <C-l> <scriptcmd>Navigate("l")<CR>
 
-# if !empty($ZELLIJ)
-  # noremap <Plug>(meta-m) <scriptcmd>ZelljAction("toggle-floating-panes")<CR>
-# endif
-
 command! -nargs=1 -complete=shellcmdline ZellijRun {
-   job_start("zellij run -- " .. <q-args>)
+  job_start("zellij run -- " .. <q-args>)
 }
 
 command! -nargs=1 -complete=shellcmdline ZellijRunFloat {
-   job_start("zellij run -f -- " .. <q-args>)
+  job_start("zellij run -f -- " .. <q-args>)
 }
+
+if !empty($ZELLIJ)
+  augroup vimrc
+    autocmd BufRead * {
+      job_start($"zellij action rename-tab {expand("%:t")}")
+    }
+  augroup END
+endif
+
+if !empty($TMUX)
+  command VimDebug system("tmux splitp -h 'while true; do vim ; done'")
+endif

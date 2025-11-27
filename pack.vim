@@ -66,7 +66,8 @@ plugpac_helper#SetupCommands()
 
 au User PlugpacPost {
   utils.MapMeta()
-  doautocmd BufEnter
+  # doautocmd BufEnter
+  silent! edit
   normal! <C-L>
 }
 
@@ -92,7 +93,7 @@ if getcompletion('hlyank', 'packadd')->empty()
   Pack 'ubaldot/vim-highlight-yanked'
 endif
 # Lab [[[1
-Pack 'noscript/elevator.vim'
+# Pack 'noscript/elevator.vim'
 Pack 'junegunn/vim-easy-align'
 # Enhance [[[1
 Pack 'dstein64/vim-startuptime'
@@ -162,6 +163,7 @@ endif
 # ]]]
 Pack 'SirVer/ultisnips'
 Pack 'honza/vim-snippets', { 'type': 'opt' }
+#]]]
 plugpac#End()
 
 #  vim:fdm=marker:fmr=[[[,]]]:ft=vim

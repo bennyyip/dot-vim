@@ -28,12 +28,15 @@ enddef
 
 export def FindRootDirectory(): string
   var curdir = CurDir()
+
   if curdir->empty()
     return ''
   endif
 
-  var rootdir = ''
+  # :help 'path'
+  curdir = curdir->escape(' ')
 
+  var rootdir = ''
   for dir in rootMarkers.dirs
     rootdir = finddir(dir, $"{curdir};")
     if !rootdir->empty()

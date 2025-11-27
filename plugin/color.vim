@@ -33,22 +33,19 @@ augroup colorscheme_override
     hi! link debugBreakpoint ErrorMsg
     hi! link debugPC QuickFixLine
 
-    hi BenStl_insert   term=bold   cterm=bold  ctermfg=234   ctermbg=109 gui=bold guifg=#1c1c1c guibg=#82a598
-    hi BenStl_left0    term=bold   cterm=bold  ctermfg=234   ctermbg=187 gui=bold guifg=#1c1c1c guibg=#ebdbb2
-    hi BenStl_left1    term=bold   cterm=bold  ctermfg=187   ctermbg=137 gui=bold guifg=#ebdbb2 guibg=#504945
-    hi BenStl_left2    ctermfg=137 ctermbg=237 guifg=#a89984 guibg=#3c3836
-    hi BenStl_middle   ctermfg=137 ctermbg=237 guifg=#a89984 guibg=#3c3836
-    hi BenStl_normal   term=bold   cterm=bold  ctermfg=234   ctermbg=187 gui=bold guifg=#1c1c1c guibg=#ebdbb2
-    hi BenStl_replace  term=bold   cterm=bold  ctermfg=234   ctermbg=203 gui=bold guifg=#1c1c1c guibg=#fb4934
-    hi BenStl_right0   ctermfg=234 ctermbg=187 guifg=#1c1c1c guibg=#ebdbb2
-    hi BenStl_right1   ctermfg=187 ctermbg=137 guifg=#ebdbb2 guibg=#504945
-    hi BenStl_right2   ctermfg=137 ctermbg=237 guifg=#a89984 guibg=#3c3836
-    hi BenStl_visual   term=bold   cterm=bold  ctermfg=234   ctermbg=214 gui=bold guifg=#1c1c1c guibg=#fabd2f
-    hi BenTabLine      ctermfg=137 ctermbg=239 guifg=#a89984 guibg=#504945
-    hi BenTabLineFill  ctermfg=234 ctermbg=234 guifg=#1c1c1c guibg=#1c1c1c
-    hi BenTabLineRight ctermfg=234 ctermbg=208 guifg=#1c1c1c guibg=#fe8019
-    hi BenTabLineSel   term=bold   cterm=bold  ctermfg=234   ctermbg=137 gui=bold guifg=#1c1c1c guibg=#a89984
+    hi StatusLine guifg=#ebdbb2 guibg=#12253b guisp=NONE gui=NONE ctermfg=187 ctermbg=235 cterm=NONE term=bold,reverse
+    hi StatusLineBold guifg=#ebdbb2 guibg=#12253b guisp=NONE gui=bold ctermfg=187 ctermbg=235 cterm=bold term=bold
+    hi StatusLineInsert   term=bold   cterm=bold  ctermfg=234   ctermbg=109 gui=bold guifg=#1c1c1c guibg=#82a598
+    hi StatusLineVisual   term=bold   cterm=bold  ctermfg=234   ctermbg=214 gui=bold guifg=#1c1c1c guibg=#fabd2f
+    hi! link StatusLineNormal StatusLineBold
+    hi StatusLineReplace  term=bold   cterm=bold  ctermfg=234   ctermbg=203 gui=bold guifg=#1c1c1c guibg=#fb4934
 
+    hi TabLine      ctermfg=137 ctermbg=239 guifg=#a89984 guibg=#504945
+    hi TabLineSel   term=bold   cterm=bold  ctermfg=234   ctermbg=137 gui=bold guifg=#1c1c1c guibg=#a89984
+    hi TabLineFill none
+    hi! TabLineRight ctermfg=234 ctermbg=208 guifg=#1c1c1c guibg=#fe8019
+
+    hi Folded guibg=#d5c4a1 guifg=#3c3836
   }
 augroup END
 
