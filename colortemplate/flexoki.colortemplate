@@ -38,10 +38,11 @@ Color: pu              #8B7EC8         ~
 Color: ma              #CE5D97         ~
 Color: aqua            #3AA99F         ~
 
-Color: colorSrch       #3a4a3a         ~
-Color: colorInc        #5f431f         ~
+Color: colorSearch     #3a4a3a         ~
+Color: colorCurSearch  #5f431f         ~
+Color: colorQF         #3C2A62         ~
 Color: colorV          #2a405a         ~
-Color: colorQF         #4f2f4f         ~
+Color: colorStatus     #261C39         ~
 
 
 Background: light
@@ -73,10 +74,11 @@ Color: bl_2            #4385BE         ~
 Color: pu_2            #8B7EC8         ~
 Color: ma_2            #CE5D97         ~
 
-Color: colorSrch       #dbebb2         ~
-Color: colorInc        #f7c7a7         ~
+Color: colorSearch     #dbebb2         ~
+Color: colorCurSearch  #f7c7a7         ~
 Color: colorQF         #e7cfd7         ~
 Color: colorV          #b0d0d0         ~
+Color: colorStatus     #E2D9E9         ~
 
 Background: any
 
@@ -115,8 +117,6 @@ Color: blue_400        #4385BE         ~
 Color: purple_400      #8B7EC8         ~
 Color: magenta_400     #CE5D97         ~
 
-Color: purple_900      #261C39         ~
-
 ; Diff colors
 Color: diffAdd         #3D4C07         ~
 Color: diffDelete      #942822         ~
@@ -136,7 +136,6 @@ Tag                    -> Special
 lCursor                -> Cursor
 MessageWindow          -> PMenu
 PopupNotification      -> Todo
-CurSearch              -> IncSearch
 Terminal               -> Normal
 LineNrAbove            -> LineNr
 LineNrBelow            -> LineNr
@@ -226,8 +225,9 @@ Directory              gr              none              bold
 ModeMsg                ye              none              bold
 MoreMsg                ye              none              bold
 Question               or              none              bold
-Search                 none            colorSrch
-IncSearch              none            colorInc
+Search                 none            colorSearch
+CurSearch              none            colorCurSearch
+IncSearch              none            none              reverse
 QuickFixLine           none            colorQF
 
 
@@ -251,9 +251,9 @@ TabLineFill            none            none
 TabLineSel             bg_1            tx                bold
 TabLineRight           bg_1            or
 
-StatusLine             tx              purple_900
+StatusLine             tx              colorStatus
 StatusLineNC           tx_2            bg_2
-StatusLineBold         tx              purple_900        bold
+StatusLineBold         tx              colorStatus       bold
 StatusLineNormal       -> StatusLineBold
 StatusLineInsert       bg_1            pu                bold
 StatusLineVisual       none            colorV            bold

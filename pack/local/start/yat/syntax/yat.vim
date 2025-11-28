@@ -41,25 +41,27 @@ if exists('b:yat_section_header_lines')
 endif
 
 highlight default link YatBracket Delimiter
-highlight default link YatFile    Identifier
-highlight default link YatFooter  Title
-highlight default link YatHeader  Title
+highlight default link YatFile    Normal
+highlight default link YatFooter  Type
+highlight default link YatHeader  Type
 highlight default link YatNumber  Number
-highlight default link YatPath    Directory
+highlight default link YatPath    Comment
 highlight default link YatSection Statement
-highlight default link YatSelect  Title
-highlight default link YatSlash   Delimiter
+highlight default link YatSelect  Type
+highlight default link YatSlash   Comment
 highlight default link YatSpecial Comment
 highlight default link YatVar     YatPath
 
-hi YatBracket guifg=#bdae93 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatFile guifg=#ebdbb2 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatFooter guifg=#504945 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatHeader guifg=#fabd2f guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatNumber guifg=#83a598 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatPath guifg=#928374 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatSection guifg=#fabd2f guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatSlash guifg=#928374 guibg=NONE guisp=NONE gui=NONE cterm=NONE
-hi YatSpecial guifg=#504945 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+" if &background == 'dark'
+"   hi YatBracket guifg=#bdae93 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatFile guifg=#ebdbb2 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatFooter guifg=#504945 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatHeader guifg=#fabd2f guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatNumber guifg=#83a598 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatPath guifg=#928374 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatSection guifg=#fabd2f guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatSlash guifg=#928374 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+"   hi YatSpecial guifg=#504945 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+" endif
 
 let b:current_syntax = 'yat'

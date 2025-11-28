@@ -9,7 +9,6 @@
 hi clear
 let g:colors_name = 'flexoki'
 
-hi! link CurSearch IncSearch
 hi! link CursorColumn CursorLine
 hi! link CursorLineFold FoldColumn
 hi! link CursorLineSign FoldColumn
@@ -39,6 +38,7 @@ if &background == 'dark'
   hi Conceal guifg=#1c1b1a guibg=NONE guisp=NONE gui=NONE ctermfg=234 ctermbg=NONE cterm=NONE
   hi Conditional guifg=#d14d41 guibg=NONE guisp=NONE gui=NONE ctermfg=167 ctermbg=NONE cterm=NONE
   hi Constant guifg=#8b7ec8 guibg=NONE guisp=NONE gui=NONE ctermfg=104 ctermbg=NONE cterm=NONE
+  hi CurSearch guifg=NONE guibg=#5f431f guisp=NONE gui=NONE ctermfg=NONE ctermbg=94 cterm=NONE
   hi Cursor guifg=#100f0f guibg=#cecdc3 guisp=NONE gui=NONE ctermfg=233 ctermbg=252 cterm=NONE
   hi CursorIM guifg=#100f0f guibg=#cecdc3 guisp=NONE gui=NONE ctermfg=233 ctermbg=252 cterm=NONE
   hi CursorLine guifg=NONE guibg=#282726 guisp=NONE gui=NONE ctermfg=NONE ctermbg=235 cterm=NONE
@@ -61,7 +61,7 @@ if &background == 'dark'
   hi Function guifg=#879a39 guibg=NONE guisp=NONE gui=bold ctermfg=106 ctermbg=NONE cterm=bold
   hi Identifier guifg=#4385be guibg=NONE guisp=NONE gui=NONE ctermfg=32 ctermbg=NONE cterm=NONE
   hi Ignore guifg=#cecdc3 guibg=NONE guisp=NONE gui=NONE ctermfg=252 ctermbg=NONE cterm=NONE
-  hi IncSearch guifg=NONE guibg=#5f431f guisp=NONE gui=NONE ctermfg=NONE ctermbg=94 cterm=NONE
+  hi IncSearch guifg=NONE guibg=NONE guisp=NONE gui=reverse ctermfg=NONE ctermbg=NONE cterm=reverse
   hi Include guifg=#3aa99f guibg=NONE guisp=NONE gui=NONE ctermfg=37 ctermbg=NONE cterm=NONE
   hi Keyword guifg=#d14d41 guibg=NONE guisp=NONE gui=NONE ctermfg=167 ctermbg=NONE cterm=NONE
   hi Label guifg=#d14d41 guibg=NONE guisp=NONE gui=NONE ctermfg=167 ctermbg=NONE cterm=NONE
@@ -87,7 +87,7 @@ if &background == 'dark'
   hi PreCondit guifg=#3aa99f guibg=NONE guisp=NONE gui=NONE ctermfg=37 ctermbg=NONE cterm=NONE
   hi PreProc guifg=#3aa99f guibg=NONE guisp=NONE gui=NONE ctermfg=37 ctermbg=NONE cterm=NONE
   hi Question guifg=#da702c guibg=NONE guisp=NONE gui=bold ctermfg=166 ctermbg=NONE cterm=bold
-  hi QuickFixLine guifg=NONE guibg=#4f2f4f guisp=NONE gui=NONE ctermfg=NONE ctermbg=53 cterm=NONE
+  hi QuickFixLine guifg=NONE guibg=#3c2a62 guisp=NONE gui=NONE ctermfg=NONE ctermbg=54 cterm=NONE
   hi Removed guifg=#d14d41 guibg=NONE guisp=NONE gui=NONE ctermfg=167 ctermbg=NONE cterm=NONE
   hi Repeat guifg=#d14d41 guibg=NONE guisp=NONE gui=NONE ctermfg=167 ctermbg=NONE cterm=NONE
   hi Search guifg=NONE guibg=#3a4a3a guisp=NONE gui=NONE ctermfg=NONE ctermbg=238 cterm=NONE
@@ -147,6 +147,7 @@ if &background == 'light'
   hi Conceal guifg=#f2f0e5 guibg=NONE guisp=NONE gui=NONE ctermfg=255 ctermbg=NONE cterm=NONE
   hi Conditional guifg=#af3029 guibg=NONE guisp=NONE gui=NONE ctermfg=124 ctermbg=NONE cterm=NONE
   hi Constant guifg=#5e409d guibg=NONE guisp=NONE gui=NONE ctermfg=55 ctermbg=NONE cterm=NONE
+  hi CurSearch guifg=NONE guibg=#f7c7a7 guisp=NONE gui=NONE ctermfg=NONE ctermbg=223 cterm=NONE
   hi Cursor guifg=#fffcf0 guibg=#100f0f guisp=NONE gui=NONE ctermfg=231 ctermbg=233 cterm=NONE
   hi CursorIM guifg=#fffcf0 guibg=#100f0f guisp=NONE gui=NONE ctermfg=231 ctermbg=233 cterm=NONE
   hi CursorLine guifg=NONE guibg=#e6e4d9 guisp=NONE gui=NONE ctermfg=NONE ctermbg=254 cterm=NONE
@@ -169,7 +170,7 @@ if &background == 'light'
   hi Function guifg=#66800b guibg=NONE guisp=NONE gui=bold ctermfg=64 ctermbg=NONE cterm=bold
   hi Identifier guifg=#205ea6 guibg=NONE guisp=NONE gui=NONE ctermfg=25 ctermbg=NONE cterm=NONE
   hi Ignore guifg=#100f0f guibg=NONE guisp=NONE gui=NONE ctermfg=233 ctermbg=NONE cterm=NONE
-  hi IncSearch guifg=NONE guibg=#f7c7a7 guisp=NONE gui=NONE ctermfg=NONE ctermbg=223 cterm=NONE
+  hi IncSearch guifg=NONE guibg=NONE guisp=NONE gui=reverse ctermfg=NONE ctermbg=NONE cterm=reverse
   hi Include guifg=#24837b guibg=NONE guisp=NONE gui=NONE ctermfg=30 ctermbg=NONE cterm=NONE
   hi Keyword guifg=#af3029 guibg=NONE guisp=NONE gui=NONE ctermfg=124 ctermbg=NONE cterm=NONE
   hi Label guifg=#af3029 guibg=NONE guisp=NONE gui=NONE ctermfg=124 ctermbg=NONE cterm=NONE
@@ -209,8 +210,8 @@ if &background == 'light'
   hi SpellLocal guisp=#24837b gui=undercurl cterm=undercurl ctermul=30
   hi SpellRare guisp=#5e409d gui=undercurl cterm=undercurl ctermul=55
   hi Statement guifg=#af3029 guibg=NONE guisp=NONE gui=NONE ctermfg=124 ctermbg=NONE cterm=NONE
-  hi StatusLine guifg=#100f0f guibg=#261c39 guisp=NONE gui=NONE ctermfg=233 ctermbg=17 cterm=NONE
-  hi StatusLineBold guifg=#100f0f guibg=#261c39 guisp=NONE gui=bold ctermfg=233 ctermbg=17 cterm=bold
+  hi StatusLine guifg=#100f0f guibg=#e2d9e9 guisp=NONE gui=NONE ctermfg=233 ctermbg=189 cterm=NONE
+  hi StatusLineBold guifg=#100f0f guibg=#e2d9e9 guisp=NONE gui=bold ctermfg=233 ctermbg=189 cterm=bold
   hi StatusLineInsert guifg=#fffcf0 guibg=#5e409d guisp=NONE gui=bold ctermfg=231 ctermbg=55 cterm=bold
   hi StatusLineNC guifg=#6f6e69 guibg=#f2f0e5 guisp=NONE gui=NONE ctermfg=242 ctermbg=255 cterm=NONE
   hi StatusLineReplace guifg=#fffcf0 guibg=#af3029 guisp=NONE gui=bold ctermfg=231 ctermbg=124 cterm=bold
