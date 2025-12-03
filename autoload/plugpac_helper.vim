@@ -108,10 +108,7 @@ export def SetupCommands()
   command! -nargs=1 -complete=customlist,PackList PackDir   PackDir(<q-args>)
   command! -nargs=1 -complete=customlist,PackList PackRc    PackRc(<q-args>)
   command! -nargs=1 -complete=customlist,PackList PackRcPre PackRcPre(<q-args>)
-  command! -bang PackUnusedRC {
-    cexpr PackUnusedRC(<q-bang> == '!')->map((_, x) => $"{x}:1:1: Unused")
-    copen
-  }
+  command! -bang PackUnusedRC cexpr PackUnusedRC(<q-bang> == '!')->map((_, x) => $"{x}:1:1: Unused")<BAR>copen
   command! -bar -nargs=1 -complete=customlist,StartPluginComplete PackOpt call DisableEnablePlugin(<q-args>, true)
   command! -bar -nargs=1 -complete=customlist,OptPluginComplete PackStart call DisableEnablePlugin(<q-args>, false)
 enddef

@@ -88,10 +88,6 @@ onoremap <silent>ai <scriptcmd>text.ObjIndent(v:false)<CR>
 xnoremap <silent>ii <esc><scriptcmd>text.ObjIndent(v:true)<CR>
 xnoremap <silent>ai <esc><scriptcmd>text.ObjIndent(v:false)<CR>
 
-# onoremap <silent>ic <scriptcmd>text.ObjComment(v:true)<CR>
-# onoremap <silent>ac <scriptcmd>text.ObjComment(v:false)<CR>
-# xnoremap <silent>ic <esc><scriptcmd>text.ObjComment(v:true)<CR>
-# xnoremap <silent>ac <esc><scriptcmd>text.ObjComment(v:false)<CR>
 xnoremap <silent> in <esc><scriptcmd>text.ObjNumber()<CR>
 onoremap <silent> in :<C-u>normal vin<CR>
 
@@ -173,10 +169,10 @@ enddef
 nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
 nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
 # quick substitute
-xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``gc<left><left><left>
-nnoremap qs :%s`<C-R><C-W>``gc<left><left><left>
-xnoremap qS "zy:%S`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``gc<left><left><left>
-nnoremap qS :%S`<C-R><C-W>``gc<left><left><left>
+xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
+nnoremap qs :%s`<C-R><C-W>``g<left><left>
+xnoremap qS "zy:%S`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
+nnoremap qS :%S`<C-R><C-W>``g<left><left>
 nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 # mark position before search

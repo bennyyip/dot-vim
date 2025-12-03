@@ -7,6 +7,11 @@ g:sandwich#recipes = g:sandwich#default_recipes->extendnew([
   {'buns': ['“', '”'], 'input': ['Q']},
 ])
 
+omap ib <Plug>(textobj-sandwich-query-i)
+xmap ib <Plug>(textobj-sandwich-query-i)
+omap ab <Plug>(textobj-sandwich-query-a)
+xmap ab <Plug>(textobj-sandwich-query-a)
+
 omap ik <Plug>(textobj-sandwich-auto-i)
 xmap ik <Plug>(textobj-sandwich-auto-i)
 omap ak <Plug>(textobj-sandwich-auto-a)

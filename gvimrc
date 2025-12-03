@@ -28,3 +28,5 @@ endif
 nnoremap <silent> <C-=> <scriptcmd>guifont_size#Change('inc', v:count1)<CR>
 nnoremap <silent> <C-_> <scriptcmd>guifont_size#Change('dec', v:count1)<CR>
 nnoremap <silent> <C-0> <scriptcmd>guifont_size#Change('restore')<CR>
+
+set guicursor+=a:blinkoff0
