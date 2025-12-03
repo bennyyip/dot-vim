@@ -3,6 +3,11 @@ setlocal commentstring=//\ %s
 
 # set makeprg=make\ -e\ %:r
 
+g:c_no_comment_fold = 1
+g:c_comment_strings = 1
+g:c_no_curly_error = 1
+g:c_gnu = 1
+
 setlocal foldnestmax=1
 
 # not call

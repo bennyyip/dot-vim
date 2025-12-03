@@ -37,15 +37,15 @@ export def FindRootDirectory(): string
   curdir = curdir->escape(' ')
 
   var rootdir = ''
-  for dir in rootMarkers.dirs
-    rootdir = finddir(dir, $"{curdir};")
+  for file in rootMarkers.files
+    rootdir = findfile(file, $"{curdir};")
     if !rootdir->empty()
       return rootdir->fnamemodify(':h')
     endif
   endfor
   if rootdir->empty()
-    for file in rootMarkers.files
-      rootdir = findfile(file, $"{curdir};")
+    for dir in rootMarkers.dirs
+      rootdir = finddir(dir, $"{curdir};")
       if !rootdir->empty()
         return rootdir->fnamemodify(':h')
       endif

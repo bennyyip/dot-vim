@@ -75,6 +75,36 @@ export def Prev()
     endtry
 enddef
 
+export def NextFile()
+    try
+        if IsLocationList()
+            lnfile
+        else
+            cnfile
+        endif
+        if exists(":BlinkLine") == 2
+            BlinkLine
+        endif
+        wincmd p
+    catch
+    endtry
+enddef
+
+export def PrevFile()
+    try
+        if IsLocationList()
+            lNfile
+        else
+            cNfile
+        endif
+        if exists(":BlinkLine") == 2
+            BlinkLine
+        endif
+        wincmd p
+    catch
+    endtry
+enddef
+
 # Toggle quickfix and loclist
 export def ToggleQF()
     if getwininfo()->filter('v:val.quickfix')->len() > 0

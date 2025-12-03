@@ -167,7 +167,7 @@ def Refresh(hard: bool)
     normal! <C-L>
 enddef
 nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
-nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
+# nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
 # quick substitute
 xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>

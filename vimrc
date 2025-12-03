@@ -131,10 +131,6 @@ g:vimsyn_folding = 'f'
 g:load_black = 1
 g:loaded_fzf = 1
 
-g:c_no_comment_fold = 1
-g:c_comment_strings = 1
-g:c_no_curly_error = 1
-
 # this makes sure that shell scripts are highlighted
 # as bash scripts and not sh scripts
 g:is_posix = 1

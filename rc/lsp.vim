@@ -50,6 +50,16 @@ if executable('zls')
   })
 endif
 
+if executable('lua-language-server')
+  lsp_servers->add({
+    filetype: ["lua"],
+    name: 'luals',
+    path: 'lua-language-server',
+  })
+endif
+
+
+
 
 # if executable('pyright-langserver')
 #   lsp_servers->add({
