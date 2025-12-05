@@ -201,7 +201,14 @@ var lsp_options = {
   semanticHighlight: false,
   condensedCompletionMenu: true,
   useQuickfixForLocations: true,
-  ignoreCompleteItemsIsIncomplete: ['rustanalyzer']
+  ignoreCompleteItemsIsIncomplete: ['rustanalyzer'],
+
+  popupBorder: true,
+  popupBorderChars: ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+  popupBorderHighlight: 'Identifier',
+  popupHighlight: 'Normal',
+  popupBorderSignatureHelp: false,
+  popupHighlightSignatureHelp: 'Pmenu',
 }
 g:LspOptionsSet(lsp_options)
 silent! DisableDiag()

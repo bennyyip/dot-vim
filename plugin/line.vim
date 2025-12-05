@@ -148,6 +148,7 @@ def g:StatusLine(): string
   if inactive
     return [
       '%f', # filename
+      '%m', # modified
       '%=', # middle
       '%l,%c', # lineinfo
       '%P', # percent

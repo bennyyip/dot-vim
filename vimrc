@@ -3,6 +3,12 @@ set nocompatible
 filetype plugin indent on
 syntax on
 
+g:DebugVim = 0
+
+if g:DebugVim
+    call ch_logfile($HOME .. "/.log/vim-" .. strftime("%FT%T") .. ".txt", "ao")
+endif
+
 g:mapleader   = "\<Space>"
 g:localleader = "\\"
 
@@ -18,7 +24,9 @@ endif
 # set confirm
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
+set cindent
 set cinoptions=(0,t0,l1,:0,L0,g0,N-s cinkeys-=0#
+set cinoptions+=k4,m1,W4,j1
 set ttyfast
 set ttimeout ttimeoutlen=25
 set belloff=all shortmess=aoOTIc
@@ -28,7 +36,7 @@ set suffixes+=.a,.1,.class,.mkv,.mp4
 set isfname-== isfname+=@-@
 set cpoptions=aABcfFqsZ # -e
 # set breakindentopt=min:40
-set wrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
+set nowrap breakindent breakindentopt=sbr,list:-1 linebreak nojoinspaces
 set formatoptions=tcqlnjromB1/
 set fillchars=fold:\ ,vert:│
 set virtualedit=block
@@ -63,7 +71,7 @@ set matchtime=0
 
 set fileformat=unix fileformats=unix,dos
 set fileencodings=ucs-bom,utf-8,utf-16le,gbk,big5,gb18030,gb2312,cp936,usc-bom,euc-jp
-set encoding=utf-8
+set encoding=utf-8 termencoding=utf-8
 scriptencoding utf-8
 
 set list listchars=tab:▸\ ,nbsp:␣,trail:⣿,extends:…,precedes:… showbreak=↪
@@ -83,7 +91,7 @@ set autoread autowrite
 set report=0 # Always report changed lines.
 # set synmaxcol=99999 # Only highlight the first 500 columns.
 set splitbelow splitright
-set titlestring=VIM
+set title titlestring=VIM
 set switchbuf=uselast
 set tabpagemax=50
 set nolangremap

@@ -106,6 +106,30 @@ nnoremap <silent> <F5> <cmd>execute getreg('c')<CR>
 inoremap <silent> <F5> <ESC><cmd>execute getreg('c')<CR>
 nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
 
+command! -nargs=0 CopyLastCommand let @+ = @:
+command! -nargs=+ -complete=command CopyCommandOutput redir @+ | <args> | redir END
+
+command! StartProfile {
+    profile start profile.log
+    profile func *
+    profile file *
+}
+command! StopProfile {
+    profile pause
+    noautocmd qall!
+}
+
+
+command! ToggleVerbose {
+  if !&verbose
+    set verbosefile=~/.log/vim/verbose.log
+    set verbose=15
+  else
+    set verbose=0
+    set verbosefile=
+  endif
+}
+
 #   设置成 Linux 下适用的格式
 command Lin setl ff=unix fenc=utf8 nobomb eol
 # }}}

@@ -46,6 +46,7 @@ cnoremap <C-B> <Left>
 inoremap <C-U> <C-G>u<C-U>
 # spell correction for the first suggested
 # inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
+cnoremap <C-G> <C-C>
 
 inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
 
@@ -109,6 +110,8 @@ if $SSH_CONNECTION == ""
 endif
 nnoremap Y   y$
 xnoremap x  "_d
+noremap <leader>pp "0p
+noremap <leader>P "0P
 # do not overwrite register. see :help v_P
 xnoremap p P
 xnoremap P p
@@ -241,7 +244,7 @@ def SwitchTab(i: number)
 enddef
 def MapSwitchTab()
     for i in range(1, 9)
-        execute $"nnoremap <Plug>(meta-{i}) <scriptcmd>SwitchTab({i})<CR>"
+        # execute $"nnoremap <Plug>(meta-{i}) <scriptcmd>SwitchTab({i})<CR>"
         execute $"nnoremap <silent> <leader>{i} <scriptcmd>SwitchTab({i})<CR>"
     endfor
 enddef

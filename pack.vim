@@ -127,7 +127,7 @@ endif
 Pack 'liuchengxu/vista.vim'
 
 Pack 'justinmk/vim-sneak'
-Pack 'markonm/traces.vim'
+Pack 'LunarWatcher/traces.vim'
 # VCS [[[1
 Pack 'Eliot00/git-lens.vim'
 Pack 'rhysd/conflict-marker.vim' # [x ]x

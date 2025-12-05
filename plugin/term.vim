@@ -13,7 +13,7 @@ term.TerminalMap("<F12>", ":TermToggle<CR>")
 term.TerminalMap("<F11>", ":TermToggle!<CR>")
 
 set termwinkey=<C-F>
-tnoremap <F1> <C-F>N
+tnoremap <C-n> <C-F>N
 xnoremap <expr> <c-q> term.Send()
 nnoremap <expr> <c-q> term.Send()
 nnoremap <expr> <c-q><c-q> term.Send() .. '_'
