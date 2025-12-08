@@ -82,7 +82,11 @@ export def FileManager()
       path = escape(WslToWindowsPath(path), '\')
       job_opts.cwd = "/mnt/c"
     endif
-    job_start('cmd.exe /c start "" explorer.exe /select,' .. path, job_opts)
+    if executable('yazi')
+      job_start(['wt.exe', 'yazi', path])
+    else
+      job_start('cmd.exe /c start "" explorer.exe /select,' .. path, job_opts)
+    endif
   elseif istmux && executable("yazi")
     job_start(["tmux", "split-window", "-v", "yazi", path])
   elseif iszellij
@@ -240,6 +244,7 @@ export def RenameInteractive(rename_to: string)
   endif
 
   try
+    mkdir(fnamemodify(new_name, ':h'), 'p')
     rename(name, new_name)
     const oldbuf = bufnr()
     execute($"edit {new_name}")
