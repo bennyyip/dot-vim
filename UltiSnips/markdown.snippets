@@ -1,2 +1,60 @@
 extends tex
 
+snippet [
+[${1:text}](${0:${VISUAL}})
+endsnippet
+snippet [c
+[${1:link}](${2:`!v @+`})
+endsnippet
+
+snippet [:
+[${1:id}]: ${0:${VISUAL}}
+endsnippet
+snippet [:c
+[${1:id}]: ${2:`!v @+`}
+endsnippet
+
+snippet ![
+![${1:alt}](${0:${VISUAL}})
+endsnippet
+snippet ![c
+![${1:alt}](${2:`!v @+`})
+endsnippet
+
+snippet ===
+`!v repeat('=', strlen(getline(line('.') - 3)))`
+
+${0}
+endsnippet
+snippet ---
+`!v repeat('-', strlen(getline(line('.') - 3)))`
+
+${0}
+endsnippet
+
+snippet `c
+\`\`\`${1}
+${2:`!v @+`}
+\`\`\`
+endsnippet
+
+
+snippet co
+> [!${1:note}] ${2}
+> ${0:${VISUAL}}
+endsnippet
+snippet coh
+> [!${1:hide}]- ${2}
+> ${0:${VISUAL}}
+endsnippet
+snippet >c
+> [!${1:quote}] ${2:title}
+> ${0:`!v substitute(getreg('+', 0), "\0", "\0> ", 'gm')`}
+endsnippet
+snippet >ic
+> [!${1:info}] ${2:title}
+> ${0:`!v substitute(getreg('+', 0), "\0", "\0> ", 'gm')`}
+endsnippet
+snippet m
+<mark class="${1:yellow}">${0:${VISUAL}}</mark>
+endsnippet
