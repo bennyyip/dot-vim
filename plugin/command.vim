@@ -1,6 +1,7 @@
 vim9script
 
 import autoload "../autoload/utils.vim"
+import autoload "../autoload/os.vim"
 
 # Reverse {{{1
 command! -bar -range=% Reverse :<line1>,<line2>global/^/m <line1>-1<bar>nohl
@@ -130,7 +131,7 @@ command! ToggleVerbose {
   endif
 }
 
-#   设置成 Linux 下适用的格式
+# 设置成 Linux 下适用的格式
 command Lin setl ff=unix fenc=utf8 nobomb eol
 # }}}
 
@@ -138,4 +139,11 @@ import autoload 'hlblink.vim'
 command BlinkLine hlblink.Line()
 
 command! Ctags utils.GenCtags()
+
+command! -nargs=? Rename os.RenameInteractive(<q-args>)
+command! -bang Delete os.Delete(<q-bang> == '!')
+if executable('sudo')
+    command! SudoWrite w !sudo tee "%" >/dev/null
+endif
+
 # vim:fdm=marker:ft=vim

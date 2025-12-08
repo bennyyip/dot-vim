@@ -9,6 +9,14 @@ var shell = &shell
 var shellslash = &shellslash
 var shellcmdflag = &shellcmdflag
 
+export def Sep(escape: bool = false): string
+  if escape
+    return has("win32") ? '\\' : '/'
+  else
+    return has("win32") ? '\' : '/'
+  endif
+enddef
+
 # Return true if vim is in WSL environment
 export def IsWsl(): bool
   return exists("$WSLENV")
@@ -191,4 +199,54 @@ export def Yank(s: string)
   else
     setreg('+', s)
   endif
+enddef
+
+export def Delete(bang: bool)
+  if !bang && !(line('$') == 1 && empty(getline(1)) || getftype(expand('%')) !=# 'file')
+    echoerr "File not empty (add ! to override)"
+    return
+  endif
+
+  try
+    const oldbuf = bufnr()
+    delete(expand('%'))
+    execute($"bdelete {oldbuf}")
+  catch
+    echohl ErrorMsg
+    echom v:exception
+    echohl None
+  endtry
+enddef
+
+export def RenameInteractive(rename_to: string)
+  var name = expand('%')
+  var old_dir = expand("%:h")
+  var old_name = expand("%:t")
+  var new_name = rename_to
+  if new_name == ''
+    new_name = input($'Rename "{old_name}" to: ', old_name, "file")
+  endif
+  if empty(new_name) | return | endif
+  if new_name == old_name | return | endif
+
+  if !isabsolutepath(new_name)
+    new_name = simplify($'{old_dir}{Sep()}{new_name}')
+  endif
+  if isdirectory(new_name) || filereadable(new_name)
+    echohl ErrorMsg
+    echo "Can't rename to existing file or directory!"
+    echohl None
+    return
+  endif
+
+  try
+    rename(name, new_name)
+    const oldbuf = bufnr()
+    execute($"edit {new_name}")
+    execute($"bdelete {oldbuf}")
+  catch
+    echohl ErrorMsg
+    echom v:exception
+    echohl None
+  endtry
 enddef

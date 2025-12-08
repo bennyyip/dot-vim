@@ -1,0 +1,99 @@
+global !p
+def printf_expand_args(snip):
+	"""
+	This will look how many placeholders printf has and adds the separated commas
+	at the end.
+	"""
+
+	# now add so many "," as much as the amount of placeholders
+	amount_placeholders = snip.tabstops[1].current_text.count("%")
+
+	output = ""
+
+	# Add the amount of tabstops
+	for placeholder_index in range(3, amount_placeholders + 3):
+		output += f", ${placeholder_index}"
+
+	# convert them into tabstops
+	snip.expand_anon(output)
+
+endglobal
+
+snippet main "main() (main)"
+int main(void)
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet Inc
+#include <${1:stdio}.h>
+endsnippet
+
+snippet inc
+#include "${1:`!v vim_snippets#Filename("$1.h")`}"
+endsnippet
+
+snippet ndef
+#ifndef $1
+#define ${1:SYMBOL} ${2:value}
+#endif // ifndef $1
+endsnippet
+
+snippet ifdef
+#ifdef ${1:FOO}
+$0
+#endif
+endsnippet
+
+snippet nocxx "Disable C++ name mangling in C headers"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+$0
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
+endsnippet
+
+snippet for "for loop"
+for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet switch
+switch ($1) {
+	case $2: {
+		$3
+	} break;
+	default: {
+		$4
+	}
+}
+endsnippet
+snippet case
+case $1: {
+	$2
+} break;$3
+endsnippet
+
+snippet once
+#ifndef ${1:`!v toupper(vim_snippets#Filename('_$1_H', 'UNTITLED_H'))`}
+#define $1
+
+${0}
+
+#endif // $1
+endsnippet
+
+# snippet fprintf "fprintf ..."
+# fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+# endsnippet
+
+post_jump "printf_expand_args(snip)"
+snippet "printf" "printf with auto-expand args" wr
+printf("$1\n"$2);
+endsnippet

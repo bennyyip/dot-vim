@@ -44,7 +44,7 @@ timer_start(0, (_) => {
   endif
   packadd formatters
   packadd misc
-  packadd ocaml
+  packadd polygot
   source $MYVIMDIR/rc/pre-vim-sandwich.vim
   packadd vim-sandwich
   source $MYVIMDIR/rc/vim-sandwich.vim
@@ -103,7 +103,6 @@ Pack 'LunarWatcher/auto-pairs'
 Pack 'Konfekt/vim-alias'
 Pack 'nickspoons/vim-movefast'
 Pack 'bennyyip/tasks.vim'
-Pack 'tpope/vim-eunuch'
 Pack 'AndrewRadev/linediff.vim'
 Pack 'itchyny/vim-cursorword'
 Pack 'lfv89/vim-interestingwords'

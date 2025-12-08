@@ -22,7 +22,7 @@ Alias F    find
 Alias t    Term
 Alias T    Term
 Alias f5   F5
-Alias mv   RenameI
+Alias mv   Rename
 Alias zlr  ZellijRun
 Alias zlrf ZellijRunFloat
 Alias fmt  Fmt

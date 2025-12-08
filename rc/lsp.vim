@@ -181,8 +181,30 @@ def LspSetup()
 
   nnoremap <silent><buffer> yod <scriptcmd>ToggoleDiag()<CR>
 
-	setlocal tagfunc=lsp#lsp#TagFunc
+  setlocal tagfunc=lsp#lsp#TagFunc
   setlocal keywordprg=:LspHover
+
+  command -buffer LspStop {
+    setlocal tagfunc=
+    setlocal keywordprg=:Man
+
+    :silent! LspServer stop
+    :silent! nunmap <buffer> gd
+    :silent! nunmap <buffer> 'd
+    :silent! # nunmap <buffer> gi
+    :silent! nunmap <buffer> gt
+    :silent! nunmap <buffer> gr
+    :silent! nunmap <buffer> <F2>
+
+    :silent! nunmap <buffer> <LocalLeader>s
+    :silent! nunmap <buffer> <localleader>h
+    :silent! nunmap <buffer> <localleader>H
+    :silent! nunmap <buffer> <LocalLeader>a
+    :silent! xunmap <buffer> <LocalLeader>e
+    :silent! xunmap <buffer> <LocalLeader>s
+    :silent! iunmap <buffer> <C-G>s
+    :silent! nunmap <buffer> yod
+  }
 enddef
 
 augroup vimrc

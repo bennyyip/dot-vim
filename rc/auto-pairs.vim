@@ -27,7 +27,8 @@ g:AutoPairs = autopairs#AutoPairsDefine([
   {"open": '\v(enum|class|struct).{-} (: (.{-}[ ,])+)? ?\{', 'close': '};', 'mapopen': '{', 'filetype': ['cpp', 'c'], 'regex': 1},
   {"open": "*", "close": "*", "filetype": "help"},
   {"open": "|", "close": "|", "filetype": "help"},
-  {"open": '\W\zsdo', "close": "end", "filetype": "lua", 'regex': 1},
+  # {"open": '\W\zsdo', "close": "end", "filetype": "lua", 'regex': 1},
+  # {"open": '\W\zsthen', "close": "end", "filetype": "lua", 'regex': 1},
 ])
 
 if has_key(g:AutoPairsLanguagePairs["html"], "<")
