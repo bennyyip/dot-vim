@@ -5,7 +5,6 @@ set completepopup=highlight:Pmenu,border:off
 # set completeopt=menu,longest,menuone,popup,noselect
 set completeopt=menu,popup,preview,fuzzy
 # set completeopt=menuone,popup,preview,preinsert
-set completefuzzycollect=keyword
 set complete=.,w,b,u,t
 if has("patch-9.1.1409")
   set complete=.^7,w^5,b^5,u^3,t
@@ -31,3 +30,13 @@ inoremap <silent><expr> <C-O> pumvisible() ? "\<C-N>" : "\<C-X>\<C-O>"
 
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-N>" : "\<Tab>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-P>" : "\<C-H>"
+
+def ToggleFuzzy()
+  if &completeopt->stridx('fuzzy') == -1
+    set completeopt+=fuzzy
+  else
+    set completeopt-=fuzzy
+  endif
+  echo "completeopt=" .. &completeopt
+enddef
+nnoremap yof <scriptcmd>ToggleFuzzy()<CR>

@@ -46,7 +46,6 @@ set sidescroll=1 sidescrolloff=3 scrolloff=4
 set nrformats=bin,hex,unsigned
 set spelllang=en_us,cjk spellcapcheck= spellfile=$MYVIMDIR/spell/en.utf-8.add
 # set spelloptions=camel
-inoremap <C-b> <c-g>u<Esc>[s1z=`]a<c-g>u
 set nospell
 set diffopt=vertical,internal,filler,closeoff,indent-heuristic,hiddenoff,algorithm:histogram,linematch:50
 if has("patch-9.1.1753")

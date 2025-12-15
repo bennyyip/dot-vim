@@ -42,10 +42,10 @@ cnoremap      <C-A> <Home>
 cnoremap <C-X><C-A> <C-A>
 cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
+# spell correction at [s
+inoremap <C-b> <c-g>u<Esc>[s1z=`]a<c-g>u
 # C-U sets a new undo point before deleting.
 inoremap <C-U> <C-G>u<C-U>
-# spell correction for the first suggested
-# inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
 cnoremap <C-G> <C-C>
 
 inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
