@@ -174,6 +174,7 @@ def LspSetup()
   nnoremap <silent><buffer> <localleader>h <Cmd>LspHighlight<CR>
   nnoremap <silent><buffer> <localleader>H <Cmd>LspHighlightClear<CR>
   nnoremap <silent><buffer> <LocalLeader>a <Cmd>LspCodeAction<CR>
+  nnoremap <silent><buffer> <LocalLeader>= <Cmd>LspFormat<CR>
   xnoremap <silent><buffer> <LocalLeader>e <Cmd>LspSelectionExpand<CR>
   xnoremap <silent><buffer> <LocalLeader>s <Cmd>LspSelectionShrink<CR>
 
@@ -200,6 +201,7 @@ def LspSetup()
     :silent! nunmap <buffer> <localleader>h
     :silent! nunmap <buffer> <localleader>H
     :silent! nunmap <buffer> <LocalLeader>a
+    :silent! nunmap <buffer> <LocalLeader>=
     :silent! xunmap <buffer> <LocalLeader>e
     :silent! xunmap <buffer> <LocalLeader>s
     :silent! iunmap <buffer> <C-G>s

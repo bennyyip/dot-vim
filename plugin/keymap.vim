@@ -172,10 +172,14 @@ enddef
 nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
 # nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
 # quick substitute
+def QuickSubZs(): string
+  const word = expand('<cword>')
+  const i = col('.') - searchpos('\<', 'bcn', line('.'))[1]
+  return ':%s`' .. word->slice(0, i) .. '\zs' .. word->slice(i) .. "``g\<left>\<left>"
+enddef
 xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
-xnoremap qS "zy:%S`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
-nnoremap qS :%S`<C-R><C-W>``g<left><left>
+nnoremap <expr> qS QuickSubZs()
 nnoremap & n:&&<CR>
 xnoremap & n:&&<CR>
 # mark position before search
