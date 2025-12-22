@@ -29,7 +29,6 @@ command! -nargs=* -bang -complete=file Rgr {
 
 command! -nargs=* Locate async#qfix(<q-args>, {'grepformat': "%f", "grepprg": "locate", "grep": 1})
 
-noremap <leader>; :AsyncCmd<space>
 noremap <leader>: :StopJobs<CR>
 
 command! -bang -bar -nargs=* Gpush  {

@@ -192,19 +192,15 @@ xnoremap g/ /
 # insert group quickly
 cnoremap <F2> \(.\{-}\)
 
-# Emacs C-s C-w like solution: hightlight in visual mode and then type * or #
-# `cgn` to replace text
-# https://vonheikemen.github.io/devlog/tools/how-to-survive-without-multiple-cursors-in-vim/
-xnoremap * :<c-u> call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<c-u> call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+# * and #
 xmap     <leader>* ms*<cmd>lvimgrep //j %<BAR>:lopen<CR>
 nnoremap <leader>* ms*<cmd>lvimgrep //j %<BAR>:lopen<CR>
-# SID means script local function; 'call' is optional in vim9script.
+
+xnoremap * <scriptcmd>VSetSearch('/')<CR><ESC>ms/<C-R>=@/<CR><CR>
+xnoremap # <scriptcmd>VSetSearch('?')<CR><ESC>ms?<C-R>=@/<CR><CR>
 def VSetSearch(cmdtype: string)
-    var temp = getreg('s')
-    defer setreg('s', temp)
-    norm! gv"sy
-    setreg('/', '\V' .. substitute(escape(@s, cmdtype .. '\'), '\n', '\\n', 'g'))
+    var vtext = getregion(getpos('v'), getpos('.'), { type: mode() })->join("\n")
+    setreg('/', '\V' .. substitute(escape(vtext, cmdtype .. '\'), '\n', '\\n', 'g'))
 enddef
 
 nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>

@@ -167,3 +167,37 @@ export def TerminalMap(map: string, com: string)
   execute $"nnoremap <silent> {map} {com}"
   execute $"tnoremap <silent> {map} <C-\\><C-n>{com}"
 enddef
+
+export def Run(cmd: string, mods: string)
+  var cwd = getcwd()
+  var term_name = $'!{cmd}'
+  var termbuf = term_list()->filter((_, v) => term_getstatus(v) != 'running')
+  var bufnr = !empty(termbuf) ? termbuf[0] : -1
+  defer () => {
+    if bufnr != -1
+      silent! exe "bw!" bufnr
+    endif
+  }()
+  if !win_gotoid(bufwinid(bufnr)) && bufnr != -1
+    exe $"{mods} sbuffer {bufnr}"
+  elseif bufnr == -1
+    var counter = 1
+    while !empty(term_list()->filter((_, v) => bufname(v) == term_name))
+      term_name = term_name->substitute('\( (\d\+)\)\?$', $' ({counter})', '')
+      counter += 1
+    endwhile
+    exe $"{mods} split"
+  endif
+
+  term_start([&shell, &shellcmdflag, cmd], {
+    term_name: term_name,
+    curwin: true,
+    cwd: cwd,
+  })
+enddef
+
+export def ReRun()
+  if bufnr()->term_getstatus() == 'finished'
+    Run(bufname()[1 : ], '')
+  endif
+enddef

@@ -107,7 +107,7 @@ nnoremap <silent> <F5> <cmd>execute getreg('c')<CR>
 inoremap <silent> <F5> <ESC><cmd>execute getreg('c')<CR>
 nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
 
-command! -nargs=0 CopyLastCommand let @+ = @:
+command! -nargs=0 CopyLastCommand legacy let @+ = @:
 command! -nargs=+ -complete=command CopyCommandOutput redir @+ | <args> | redir END
 
 command! StartProfile {

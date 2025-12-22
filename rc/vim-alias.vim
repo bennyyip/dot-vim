@@ -28,3 +28,4 @@ Alias zlrf ZellijRunFloat
 Alias fmt  Fmt
 Alias zen  Goyo
 Alias gdb  Termdebug
+Alias cbuf Cbuffer

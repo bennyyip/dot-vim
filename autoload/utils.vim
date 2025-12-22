@@ -15,25 +15,6 @@ export def GetCurorLines() # [[[1
         \ : [line('.')]
 enddef
 
-export def GetVisualSelection(): list<string> # [[[1
-  return getregion(getpos('v'), getpos('.'), { type: mode() })
-enddef
-
-export def Debounce(Fn: func, timeout: number = 200): func # [[[1
-  var timer = -1
-  return (...args: list<any>) => {
-    if timer != -1
-      timer_stop(timer)
-    endif
-    timer = timer_start(timeout, (t) => {
-      timer = -1
-      # TODO args
-      # Fn(...args)
-      Fn()
-    })
-  }
-enddef
-
 export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [[[1
   execute $'setlocal shiftwidth={n} tabstop={n} softtabstop={softtabstop}'
   if expandtab

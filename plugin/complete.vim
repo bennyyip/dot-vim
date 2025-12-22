@@ -8,9 +8,6 @@ set completeopt=menu,popup,preview,fuzzy
 set complete=.,w,b,u,t
 if has("patch-9.1.1409")
   set complete=.^7,w^5,b^5,u^3,t
-  # set complete+=Fcompletor#Abbrev^3
-  # set complete+=Fcompletor#Register^5
-  # set complete^=Fcompletor#Lsp^10
 endif
 
 if exists('+autocompletedelay')
