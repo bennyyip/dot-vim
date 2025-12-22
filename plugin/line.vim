@@ -71,28 +71,17 @@ def LineMode(): string
 enddef
 
 def LineFilename(): string
-  const modified =  &modified ? '+' : &modifiable ? '' : '-'
+  const flags = '%h%w'
   const readonly = &readonly ? (is_tty ? 'RO' : "\ue0a2") : ''
 
-  if &filetype ==# 'qf'
-    const wininfo = filter(getwininfo(), (i, v) => v.winnr == winnr())[0]
-    if wininfo.loclist
-      return "[Location List]"
-    else
-      return "[Quickfix List]"
-    endif
-  endif
-
-  var fname = winwidth(0) < 70 ? expand('%:t') : expand('%:.')
-  fname = fname->substitute('\\', '/', 'g')
-  fname = '' !=# fname ? fname : '[No Name]'
+  const fname = '%f'
 
   if &ft =~? 'dir\|fugitive\|undotree'
     return fname
   elseif &ft =~? 'yat'
     return 'YAT'
   else
-    return [readonly, fname, modified]->FilterAndJoin()
+    return [readonly, fname, '%M', flags]->FilterAndJoin()
   endif
 enddef
 
@@ -138,7 +127,7 @@ def LineFileInfo(): string
 
   const fileencoding = toupper(&fenc !=# "" ? &fenc : &enc)
   const fileformat = ffdict->get(&ff, '')
-  const filetype = &ft !=# "" ? &ft : "Fundamental"
+  const filetype = &ft !=# "" ? &ft : &buftype != '' ? &buftype : "Fundamental"
 
   return [fileformat, fileencoding, filetype->Bold()]->FilterAndJoin('  ')
 enddef
@@ -148,7 +137,8 @@ def g:StatusLine(): string
   if inactive
     return [
       '%f', # filename
-      '%m', # modified
+      '%M', # modified
+      '%h%w', # help,preview
       '%=', # middle
       '%l,%c', # lineinfo
       '%P', # percent
