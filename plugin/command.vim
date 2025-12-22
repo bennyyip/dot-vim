@@ -110,6 +110,7 @@ nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
 command! -nargs=0 CopyLastCommand legacy let @+ = @:
 command! -nargs=+ -complete=command CopyCommandOutput redir @+ | <args> | redir END
 
+
 command! StartProfile {
     profile start profile.log
     profile func *
@@ -145,5 +146,17 @@ command! -bang Delete os.Delete(<q-bang> == '!')
 if executable('sudo')
     command! SudoWrite w !sudo tee "%" >/dev/null
 endif
+
+command! -range=% LLM {
+  const f = g:scratchpad_path .. '/llm.md'
+
+  var lines = ['```' .. &ft]
+  lines->extend(getline(<line1>, <line2>))
+  lines->add('```')
+
+  writefile(lines, f)
+  execute $":split + {f}"
+  feedkeys('o')
+}
 
 # vim:fdm=marker:ft=vim

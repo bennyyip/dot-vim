@@ -20,7 +20,7 @@ let loaded_mru=1
 " MY CONFIG
 noremap <leader>fr :MRU<space>
 let g:MRU_File = $HOME . '/.vim_mru_files'
-let g:MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*'
+let g:MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*|^.*/AppData/Local/Temp/.*'
 let g:MRU_Max_Entries = 500
 let g:MRU_FuzzyMatch = 0
 augroup vimrc
