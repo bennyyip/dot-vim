@@ -25,6 +25,9 @@ nnoremap <expr> <c-q><c-q> term.Send() .. '_'
 # repeat
 # nnoremap <localleader>t <cmd>update<BAR>Term<UP><CR>
 
+tnoremap <m-b> <c-left>
+tnoremap <m-f> <c-right>
+
 def TermMappings()
     nnoremap <buffer> <C-r> <scriptcmd>term.ReRun()<CR>
     nnoremap <buffer> <F5> <scriptcmd>term.ReRun()<CR>

@@ -44,6 +44,12 @@ Color: colorQF         #3C2A62         ~
 Color: colorV          #2a405a         ~
 Color: colorStatus     #261C39         ~
 
+; Diff colors
+Color: diffAdd         #3D4C07         ~
+Color: diffDelete      #942822         ~
+Color: diffChange      #343331         ~
+Color: diffText        #164F4A         ~
+
 
 Background: light
 Color: tx              #100F0F         ~
@@ -79,6 +85,13 @@ Color: colorCurSearch  #f7c7a7         ~
 Color: colorQF         #e7cfd7         ~
 Color: colorV          #b0d0d0         ~
 Color: colorStatus     #E2D9E9         ~
+
+; Diff colors
+Color: diffAdd         #BEC97E         ~
+Color: diffDelete      #E8705F         ~
+Color: diffChange      #DAD8CE         ~
+Color: diffText        #87D3C3         ~
+
 
 Background: any
 
@@ -116,12 +129,6 @@ Color: cyan_400        #3AA99F         ~
 Color: blue_400        #4385BE         ~
 Color: purple_400      #8B7EC8         ~
 Color: magenta_400     #CE5D97         ~
-
-; Diff colors
-Color: diffAdd         #3D4C07         ~
-Color: diffDelete      #942822         ~
-Color: diffChange      #343331         ~
-Color: diffText        #164F4A         ~
 
 Color: colorShadow     #121212         ~
 
@@ -181,14 +188,14 @@ ColorColumn            none            ui_3
 Error                  re              bg_1              bold,reverse
 ErrorMsg               bg_1            re                bold
 Folded                 bg_1            tx_2
-LineNr                 tx_3            none
+LineNr                 tx_2            none
 MatchParen             none            bg_2              bold,underline
 NonText                ui              none
 
 
 Boolean                pu              none
 Character              pu              none
-Comment                tx_2            none
+Comment                tx_3            none
 Conditional            re              none
 Constant               pu              none
 CursorIM               bg_1            tx

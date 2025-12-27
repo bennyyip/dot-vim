@@ -17,9 +17,6 @@ def TabLabel(n: number): string
 
   const hl = n == tabpagenr() ? '%#TabLineSel#' :  '%#TabLine#'
 
-  # const sep = (n == tabpagenr() || n + 1 == tabpagenr() || n == tabpagenr('$')) ? '' : '|'
-  const sep = ''
-
   var parts = [
     $"%{n}T", # mouse click
     $"{n}",
@@ -27,7 +24,7 @@ def TabLabel(n: number): string
     modified,
   ]
 
-  return  $"{hl}{parts->FilterAndJoin()} {sep}"
+  return  $"{hl}{parts->FilterAndJoin()} "
 enddef
 
 def g:Tabline(): string
