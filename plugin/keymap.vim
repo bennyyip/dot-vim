@@ -98,9 +98,8 @@ onoremap <silent> il :<C-u>normal vil<CR>
 xnoremap <silent> al <esc><scriptcmd>text.ObjLine(0)<CR>
 onoremap <silent> al :<C-u>normal val<CR>
 # yank [[[1
-# inoremap <silent><C-v> <C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>
 inoremap <silent><C-z> <ESC>u
-if $SSH_CONNECTION == ""
+if has('clipboard') || has('clipboard_provider')
     xnoremap <silent><C-c> "+y
     xnoremap <silent><M-v> "+p
     cnoremap <C-v>         <C-R>+

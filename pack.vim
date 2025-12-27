@@ -93,7 +93,6 @@ if getcompletion('hlyank', 'packadd')->empty()
   Pack 'ubaldot/vim-highlight-yanked'
 endif
 # Lab [[[1
-# Pack 'noscript/elevator.vim'
 Pack 'junegunn/vim-easy-align'
 # Enhance [[[1
 Pack 'dstein64/vim-startuptime'

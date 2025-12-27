@@ -33,7 +33,6 @@ def Format()
   endif
   const save_view = winsaveview()
   :keepj normal! gggqG
-  # execute 'write'
   winrestview(save_view)
 enddef
 

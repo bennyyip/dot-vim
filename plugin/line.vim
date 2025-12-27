@@ -68,10 +68,14 @@ def LineMode(): string
 enddef
 
 def LineFilename(): string
-  const flags = '%h%w'
   const readonly = &readonly ? (is_tty ? 'RO' : "\ue0a2") : ''
 
   const fname = '%f'
+
+  var flags = '%h%w'
+  if &paste
+    flags ..= '[Paste]'
+  endif
 
   if &ft =~? 'dir\|fugitive\|undotree'
     return fname
@@ -150,7 +154,6 @@ def g:StatusLine(): string
     ],
     [
       LineFilename()->Bold(), # filename
-      &paste ? "PASTE" : "", # paste
     ],
   ]
 
