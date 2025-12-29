@@ -101,7 +101,7 @@ set efm^=%-G%f%l:\ note:%m
 
 $RIPGREP_CONFIG_PATH = $HOME .. '/.ripgreprc'
 if $W64DEVKIT != ""
-  # set sh=sh shcf=-c sxq=\" sxe=
+  set sh=sh shcf=-c sxq=\" sxe=
   $CFLAGS = "-g -gcodeview -Wall -Wextra -Wdouble-promotion -Wconversion
         \ -Wno-sign-conversion -Wno-unused-parameter
         \ -Wno-unused-function -Wno-unknown-pragmas

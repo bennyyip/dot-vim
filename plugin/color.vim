@@ -49,7 +49,12 @@ augroup colorscheme_override
   }
 augroup END
 
-set background=dark
+const hour = strftime('%H')->str2nr()
+if get(g:, 'colorscheme_light', false) && hour > 8 && hour < 18
+  set background=light
+else
+  set background=dark
+endif
 
 var fallback = ['retrobox', 'gruvbox8_hard', 'elflord']
 if has('gui_running')

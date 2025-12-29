@@ -94,7 +94,7 @@ command! -nargs=? Search {
 # Bonly {{{1
 command! Bonly :%bd<BAR>:e %%
 # DiffOrig {{{1
-command DiffOrig vert new | set bt=nofile | r ++edit %%
+command! DiffOrig vert new | set bt=nofile | r ++edit %%
       \ | :0d _ | diffthis | wincmd p | diffthis
 # Lab {{{1
 # F5: Execute command and save to register `c`. Press F5 to repeat.

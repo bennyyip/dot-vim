@@ -5,11 +5,16 @@ class Terminal
 
   def new(cmd: string = '')
     var shcmd = get(g:, 'term_shell', $SHELL)
+    var cwd: string
+    if &ft =~? 'dir\|fugitive\|undotree'
+      cwd = getcwd()
+    else
+      cwd =  expand('%:p:h')
+    endif
     var opts = {
       hidden: 1,
       term_kill: 'hup',
-      # TODO: add option to open in cwd
-      cwd: expand('%:p:h')
+      cwd: cwd
     }
     opts->extend(get(g:, 'term_opts', {}))
     this.bufnr = term_start(shcmd, opts)

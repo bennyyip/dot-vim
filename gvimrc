@@ -12,7 +12,8 @@ if has("win32")
   # I can eat glasses, it doesn't hurt me
   # 1liLIoO0
   # <= >=
-  &guifont = "Sarasa Fixed CL:h16"
+  # &guifont = "Sarasa Fixed CL:h16"
+  &guifont = "Sarasa Fixed CL Nerd:h16"
 
   # :h w32-experimental-keycode-trans-strategy
   # Should fix CTRL-=

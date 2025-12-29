@@ -1,14 +1,5 @@
 vim9script
 
-for r in 'abcdefghijklmnopqrstuvwxyz'
-    sign_define($"mark_'{r}", {text: $"'{r}", culhl: "CursorLineNr", texthl: "Identifier"})
-    exe $"nnoremap m{r} m{r}<scriptcmd>UpdateMarks()<CR>"
-endfor
-for r in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    sign_define($"mark_'{r}", {text: $"'{r}", culhl: "CursorLineNr", texthl: "Identifier"})
-    exe $"nnoremap m{r} m{r}<scriptcmd>UpdateVisibleBuffersMarks()<CR>"
-endfor
-
 def UpdateMarks(bufnr: number = bufnr())
     sign_unplace("marks", {buffer: bufnr})
     var local_marks = getmarklist(bufnr)->filter((_, v) => v.mark =~ '[[:alpha:]]')
@@ -21,7 +12,7 @@ def UpdateMarks(bufnr: number = bufnr())
     })
 enddef
 
-def UpdateVisibleBuffersMarks()
+def UpdateVisibleBuffersMarks(..._args: list<any>)
     var visible_buffers = getbufinfo({buflisted: 1, bufloaded: 1})
     visible_buffers->foreach((_, v) => {
         if !empty(v.windows)
@@ -33,5 +24,15 @@ enddef
 augroup mark_signs
     au!
     au BufEnter,TextChanged * UpdateMarks()
-    au CmdlineLeave :,/,? timer_start(0, (_) => UpdateVisibleBuffersMarks())
+    au CmdlineLeave :,/,? timer_start(0, UpdateVisibleBuffersMarks)
 augroup END
+
+for r in 'abcdefghijklmnopqrstuvwxyz'
+    sign_define($"mark_'{r}", {text: $"'{r}", culhl: "CursorLineNr", texthl: "Identifier"})
+    exe $"nnoremap m{r} m{r}<scriptcmd>UpdateMarks()<CR>"
+endfor
+for r in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    sign_define($"mark_'{r}", {text: $"'{r}", culhl: "CursorLineNr", texthl: "Identifier"})
+    exe $"nnoremap m{r} m{r}<scriptcmd>UpdateVisibleBuffersMarks()<CR>"
+endfor
+

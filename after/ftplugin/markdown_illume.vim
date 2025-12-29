@@ -60,3 +60,5 @@ nnoremap <localleader>a <scriptcmd>Illume()<cr>
 nnoremap <localleader>f <scriptcmd>IllumeInfill()<cr>
 nnoremap <localleader>s <scriptcmd>IllumeStop()<cr>
 nnoremap <localleader>u Go<cr>!user<cr><cr>
+
+nnoremap <buffer> <F5> :<c-u>update<BAR>Term illume < %<CR><C-\><C-N>:set ft=markdown<BAR>set conceallevel=3<CR>i

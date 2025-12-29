@@ -122,7 +122,7 @@ Pack 'tpope/vim-abolish'
 if !is_win # system() is slow
   Pack 'tpope/vim-apathy' # 'path'
 endif
-Pack 'liuchengxu/vista.vim'
+Pack 'bennyyip/vista.vim'
 
 Pack 'justinmk/vim-sneak'
 Pack 'LunarWatcher/traces.vim'

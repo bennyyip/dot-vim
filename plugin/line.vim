@@ -110,9 +110,14 @@ def LinePluginStatus(): string
     endif
   endif
 
+  var illume_status = ''
+  if exists('b:illume_job')
+    illume_status = job_status(b:illume_job)
+  endif
+
   # const tagname = exists('*taglist#Tlist_Get_Tagname_By_Line') ? taglist#Tlist_Get_Tagname_By_Line() : ''
   const tagname = get(b:, 'vista_nearest_method_or_function', '')
-  return [tagname, async_status]->FilterAndJoin(' | ')
+  return [tagname, async_status, illume_status]->FilterAndJoin(' | ')
 enddef
 
 def Bold(s: string): string

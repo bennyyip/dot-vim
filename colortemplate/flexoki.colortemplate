@@ -5,7 +5,7 @@ Short name:  flexoki
 Description: An inky color scheme for prose and code. https://stephango.com/flexoki
 Author:      Ben Yip <yebenmy@gmail.com>, ported from flexoki of Steph Ango
 URL:         https://www.github.com/bennyyip/dot-vim
-Options:     backend=vim
+Options:     backend=vim9
 
 Environments: gui 256
 
@@ -111,6 +111,7 @@ Color: base_150        #DAD8CE         ~
 Color: base_100        #E6E4D9         ~
 Color: base_50         #F2F0E5         ~
 Color: paper           #FFFCF0         ~
+Color: white           #FFFCF0         ~
 
 Color: red_600         #AF3029         ~
 Color: orange_600      #BC5215         ~
@@ -131,6 +132,10 @@ Color: purple_400      #8B7EC8         ~
 Color: magenta_400     #CE5D97         ~
 
 Color: colorShadow     #121212         ~
+
+
+Term Colors: bg_1 re_2 gr_2 ye_2 bl_2 ma_2 cy_2 tx_2
+             tx_3 re gr ye bl ma cy tx
 
 debugBreakpoint        -> ErrorMsg
 debugPC                -> QuickFixLine
@@ -195,7 +200,7 @@ NonText                ui              none
 
 Boolean                pu              none
 Character              pu              none
-Comment                tx_3            none
+Comment                tx_2           none
 Conditional            re              none
 Constant               pu              none
 CursorIM               bg_1            tx
