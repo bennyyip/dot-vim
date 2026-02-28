@@ -67,7 +67,7 @@ plugpac_helper#SetupCommands()
 au User PlugpacPost {
   utils.MapMeta()
   doautocmd BufEnter
-  silent! edit
+  # silent! edit
   normal! <C-L>
 }
 

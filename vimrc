@@ -43,7 +43,7 @@ set virtualedit=block
 set backspace=indent,eol,start
 set nostartofline
 set sidescroll=1 sidescrolloff=3 scrolloff=4
-set nrformats=bin,hex,unsigned
+set nrformats=bin,hex #,unsigned
 set spelllang=en_us,cjk spellcapcheck= spellfile=$MYVIMDIR/spell/en.utf-8.add
 # set spelloptions=camel
 set nospell

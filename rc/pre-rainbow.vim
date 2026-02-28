@@ -11,7 +11,8 @@ if get(g:, "colors_name", "") != 'gruvbox8'
         'parentheses': ['start=/(\*\@!/ end=/)/ fold'],
       },
       'pascal': 0,
-      'html': 0
+      'html': 0,
+      'markdown': 0,
     }
   }
 endif

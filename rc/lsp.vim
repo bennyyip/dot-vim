@@ -185,7 +185,7 @@ def LspSetup()
   setlocal tagfunc=lsp#lsp#TagFunc
   setlocal keywordprg=:LspHover
 
-  command -buffer LspStop {
+  command! -buffer LspStop {
     setlocal tagfunc=
     setlocal keywordprg=:Man
 

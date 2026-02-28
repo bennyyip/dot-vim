@@ -38,6 +38,8 @@ Color: pu              #8B7EC8         ~
 Color: ma              #CE5D97         ~
 Color: aqua            #3AA99F         ~
 
+Color: pu_3            #C4B9E0         ~
+
 Color: colorSearch     #3a4a3a         ~
 Color: colorCurSearch  #5f431f         ~
 Color: colorQF         #3C2A62         ~
@@ -79,6 +81,8 @@ Color: cy_2            #3AA99F         ~
 Color: bl_2            #4385BE         ~
 Color: pu_2            #8B7EC8         ~
 Color: ma_2            #CE5D97         ~
+
+Color: pu_3            #735EB5         ~
 
 Color: colorSearch     #dbebb2         ~
 Color: colorCurSearch  #f7c7a7         ~
@@ -280,3 +284,7 @@ VimsidianLinkBlock     ye              none
 VimsidianLinkBlockFlag ye              none
 VimsidianTag           obsidian        none
 VimsidianCallout       tx_2            none
+
+markdownCode           pu_3            none
+markdownCodeDelimiter  -> markdownCode
+markdownCodeBlock      -> markdownCode

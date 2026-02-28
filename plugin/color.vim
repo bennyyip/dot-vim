@@ -50,7 +50,7 @@ augroup colorscheme_override
 augroup END
 
 const hour = strftime('%H')->str2nr()
-if get(g:, 'colorscheme_light', false) && hour > 8 && hour < 18
+if get(g:, 'colorscheme_light', false) && hour >= 8 && hour <= 18
   set background=light
 else
   set background=dark
