@@ -20,3 +20,8 @@
 if exists(':LspHover')
   setlocal keywordprg=:LspHover
 endif
+
+if exists(':LspFormat')
+  nnoremap <buffer> g= <cmd>LspFormat<CR>
+endif
+

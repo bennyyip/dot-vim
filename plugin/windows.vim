@@ -1,10 +1,5 @@
 vim9script
 if !has('win32') | finish | endif
-const is_gvim = has('gui_running')
-
-if has('directx')
-  set renderoptions=type:directx
-endif
 
 $SHELL = 'sh'
 # set shell=$SHELL

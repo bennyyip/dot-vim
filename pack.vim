@@ -95,6 +95,7 @@ endif
 # Lab [[[1
 Pack 'junegunn/vim-easy-align'
 # Enhance [[[1
+Pack 'BourgeoisBear/clrzr'
 Pack 'dstein64/vim-startuptime'
 Pack 'junegunn/goyo.vim'
 Pack 'bootleq/vim-cycle'
@@ -150,7 +151,6 @@ if executable('nim')
 endif
 # Web [[[3
 Pack 'MaxMEllon/vim-jsx-pretty'
-Pack 'BourgeoisBear/clrzr'
 # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
 # Markup [[[3
 if is_win
