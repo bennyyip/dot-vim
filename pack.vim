@@ -12,7 +12,7 @@ command MinpacInstall {
     :qall
   endif
 }
-# Builtin [[[1
+# Builtin {{{1
 timer_start(0, (_) => {
   if !getcompletion('helptoc', 'packadd')->empty()
     packadd helptoc
@@ -53,7 +53,7 @@ timer_start(0, (_) => {
 
   utils.MapMeta()
 })
-# ]]]
+# }}}
 silent! packadd minpac
 if !exists('g:loaded_minpac')
   finish
@@ -92,9 +92,9 @@ endif
 if getcompletion('hlyank', 'packadd')->empty()
   Pack 'ubaldot/vim-highlight-yanked'
 endif
-# Lab [[[1
+# Lab {{{1
 Pack 'junegunn/vim-easy-align'
-# Enhance [[[1
+# Enhance {{{1
 Pack 'BourgeoisBear/clrzr'
 Pack 'dstein64/vim-startuptime'
 Pack 'junegunn/goyo.vim'
@@ -114,7 +114,7 @@ Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 if !is_win && exists('$DISPLAY')
   Pack 'lilydjwg/fcitx.vim'
 endif
-# Motion and Edit [[[1
+# Motion and Edit {{{1
 Pack 'machakann/vim-swap' # g, g. gs gS
 Pack 'bennyyip/vim-debugstring' # <leader>ds
 Pack 'tommcdo/vim-exchange' # gx gxx gxg
@@ -127,12 +127,12 @@ Pack 'bennyyip/vista.vim'
 
 Pack 'justinmk/vim-sneak'
 Pack 'LunarWatcher/traces.vim'
-# VCS [[[1
+# VCS {{{1
 Pack 'Eliot00/git-lens.vim'
 Pack 'rhysd/conflict-marker.vim' # [x ]x
 Pack 'tommcdo/vim-fugitive-blame-ext'
 Pack 'tpope/vim-fugitive'
-# Language [[[1
+# Language {{{1
 Pack 'yegappan/lsp', { branch: 'main', 'type': 'delay' }
 Pack 'Konfekt/vim-compilers'
 Pack 'girishji/devdocs.vim'
@@ -149,19 +149,19 @@ Pack 'lervag/vimtex'
 if executable('nim')
   Pack 'zah/nim.vim'
 endif
-# Web [[[3
+# Web {{{3
 Pack 'MaxMEllon/vim-jsx-pretty'
 # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
-# Markup [[[3
+# Markup {{{3
 if is_win
   # Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
   Pack 'iamcco/markdown-preview.nvim'
 endif
-# ]]]
-# ]]]
+# }}}
+# }}}
 Pack 'SirVer/ultisnips'
 Pack 'honza/vim-snippets', { 'type': 'opt' }
-#]]]
+#}}}
 plugpac#End()
 
-#  vim:fdm=marker:fmr=[[[,]]]:ft=vim
+# vim:fdm=marker:ft=vim

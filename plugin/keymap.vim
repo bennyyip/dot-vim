@@ -7,7 +7,7 @@ import autoload '../autoload/rooter.vim'
 import autoload '../autoload/zoom.vim'
 const is_gvim = has('gui_running')
 
-# move [[[1
+# move {{{1
 inoremap <silent> <Down> <C-R>=pumvisible() ? "\<lt>Down>" : "\<lt>C-O>gj"<CR>
 inoremap <silent> <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
 # inoremap <C-j> <Down>
@@ -22,7 +22,7 @@ nnoremap J mzJ`z
 # tag stack
 nnoremap H <cmd>pop<CR>
 nnoremap L <cmd>tag<CR>
-# edit [[[1
+# edit {{{1
 # open q:
 set cedit=<C-Y>
 # Enable alt+k to delete the text until the end of line in insert mode.
@@ -35,7 +35,7 @@ inoremap <m-.> <c-o>o
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S", "%Y-%m-%d", '%FT%T%z', "%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
-# rsi [[[1
+# rsi {{{1
 inoremap      <C-A> <C-O>^
 inoremap <C-X><C-A> <C-A>
 cnoremap      <C-A> <Home>
@@ -58,7 +58,7 @@ noremap! <Plug>(meta-p) <Up>
 
 inoremap <m-d> <C-O>dw
 
-# text object [[[1
+# text object {{{1
 def TextObjectAll()
   w:restore_position = winsaveview()
   keepjumps normal! ggVG
@@ -97,7 +97,7 @@ xnoremap <silent> il <esc><scriptcmd>text.ObjLine(1)<CR>
 onoremap <silent> il :<C-u>normal vil<CR>
 xnoremap <silent> al <esc><scriptcmd>text.ObjLine(0)<CR>
 onoremap <silent> al :<C-u>normal val<CR>
-# yank [[[1
+# yank {{{1
 inoremap <silent><C-z> <ESC>u
 if has('clipboard') || has('clipboard_provider')
     xnoremap <silent><C-c> "+y
@@ -121,7 +121,7 @@ nnoremap yY <scriptcmd>os.Yank(getline(1, '$')->join("\n"))<CR>
 # duplicate line retaining the column position:
 nnoremap <C-G><C-j> <cmd>copy.<CR>
 nnoremap <C-G><C-k> <cmd>copy-1<CR>
-# visual [[[1
+# visual {{{1
 # keep selection when indent line in visual mode
 xnoremap <expr> > v:count > 0 ? ">" : ">gv"
 xnoremap <expr> < v:count > 0 ? "<" : "<gv"
@@ -149,14 +149,14 @@ def VisualBlockPara(cmd: string)
 enddef
 xnoremap { <scriptcmd>VisualBlockPara("{")<CR>
 xnoremap } <scriptcmd>VisualBlockPara("}")<CR>
-# macro [[[1
+# macro {{{1
 # quick edit macro  | ["register]<c-g>m
 nnoremap <c-g>m  :<c-u><c-r><c-r>='let @' .. v:register .. ' = ' .. string(getreg(v:register))<cr><c-f><left>
 nnoremap Q @q
 xnoremap Q :normal! @q<CR>
 # repeat last command for each line of a visual selection
 xnoremap . :normal .<CR>
-# search and substitute [[[1
+# search and substitute {{{1
 # nohl
 def Refresh(hard: bool)
     if hard
@@ -203,7 +203,7 @@ def VSetSearch(cmdtype: string)
 enddef
 
 nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>
-# window [[[1
+# window {{{1
 # quick <C-w>
 nnoremap ' <C-w>
 nnoremap '' <C-w>w
@@ -215,7 +215,7 @@ nnoremap <silent> <C-Left> :vertical resize +2<cr>
 nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
 nmap <C-w>o <C-w><C-o>
 nmap 'o <C-w><C-o>
-# file, buffer [[[1
+# file, buffer {{{1
 nnoremap <leader>fs <scriptcmd>utils.KeepChangeMarksExec('update')<CR>
 nnoremap <silent> <leader>fY :call os#Yank(expand("%:p:t"))<CR>:echo $"{(expand('%:p:t'))} copied"<CR>
 nnoremap <silent> <leader>fy :call os#Yank(expand("%:p"))<CR>:echo $"{expand('%:p')} copied"<CR>
@@ -230,7 +230,7 @@ nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
 nnoremap <C-G><C-G> <C-G>
-# tab [[[1
+# tab {{{1
 nmap     T :tabnew<cr>
 # nnoremap ]t :tabn<cr>
 # nnoremap [t :tabp<cr>
@@ -248,7 +248,7 @@ def MapSwitchTab()
     endfor
 enddef
 MapSwitchTab()
-# unimpared [[[1
+# unimpared {{{1
 # toogle line number and relative line number
 def NumberOptions(): string
     return &number && &relativenumber ? 'nonumber norelativenumber' : 'number relativenumber'
@@ -330,7 +330,7 @@ nnoremap <silent> ]F <scriptcmd>EditFileByOffset(0, 1)<CR>
 # move lines
 xnoremap <tab> :sil! m '>+1<CR>gv
 xnoremap <s-tab> :sil! m '<-2<CR>gv
-# misc [[[1
+# misc {{{1
 # fold
 nmap z] zo]z
 nmap z[ zo[z
@@ -369,12 +369,12 @@ enddef
 nnoremap <silent> <expr> yr SourceVim()
 nnoremap <silent> <expr> yrr SourceVim() .. '_'
 xnoremap <silent> <expr> <leader>v SourceVim()
-# external [[[1
+# external {{{1
 nnoremap <silent> gX  :call os#Gx()<CR>
 xnoremap gX <scriptcmd>os#Open(getregion(getpos('v'), getpos('.'), { type: mode() })[0])<CR>
 nnoremap <silent> gof :call os#FileManager()<CR>
 nnoremap <silent> got :call os#Terminal()<CR>
-# obsidian [[[1
+# obsidian {{{1
 def DailyNote()
   const filename = expand(g:obsidian_vault .. "/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')
   if !filereadable(filename)
@@ -388,7 +388,7 @@ def DailyNote()
   fnameescape(filename)->buf.EditInTab()
 enddef
 nnoremap <leader>o :call <SID>DailyNote()<CR>
-# popup [[[1
+# popup {{{1
 def ScrollPopup(nlines: number)
   const winids = popup_list()
   if len(winids) == 0
@@ -413,5 +413,5 @@ def ScrollPopup(nlines: number)
 enddef
 nnoremap <DOWN> <scriptcmd>ScrollPopup(3)<CR>
 nnoremap <UP>   <scriptcmd>ScrollPopup(-3)<CR>
-#]]]
-# vim:fdm=marker:fmr=[[[,]]]:ft=vim
+#}}}
+# vim:fdm=marker:ft=vim

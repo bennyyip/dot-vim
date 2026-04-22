@@ -20,7 +20,7 @@ if exists('#vimrc')
   augroup END
   augroup! vimrc
 endif
-# settings [[[1
+# settings {{{1
 # set confirm
 set hidden
 set autoindent shiftwidth=4 softtabstop=-1 expandtab # smarttab
@@ -115,8 +115,8 @@ else
   $LDFLAGS = "-fsanitize=address"
 endif
 $CXXFLAGS = $CFLAGS .. ' -std=c++23'
-# ]]]
-# opts [[[1
+# }}}
+# opts {{{1
 g:loaded_2html_plugin     = 1
 g:loaded_getscriptPlugin  = 1
 g:loaded_gzip             = 1
@@ -148,10 +148,10 @@ g:python_highlight_all = 1
 g:snips_author = 'Ben Yip'
 g:obsidian_vault = $HOME .. '/Obsidian-Vault'
 
-# ]]]
+# }}}
 if filereadable($HOME .. '/local.vim')
   source $HOME/local.vim
 endif
 
 source $MYVIMDIR/pack.vim
-# vim:fdm=marker:fmr=[[[,]]]:ft=vim:fdl=0
+# vim:fdm=marker:ft=vim:fdl=0

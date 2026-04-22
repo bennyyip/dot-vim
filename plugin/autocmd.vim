@@ -2,8 +2,8 @@ vim9script
 import autoload "../autoload/utils.vim"
 import autoload '../autoload/rooter.vim'
 
-# Functions [[[1
-def JumpToLastPosition() # [[[2
+# Functions {{{1
+def JumpToLastPosition() # {{{2
   const last_pos = getpos("'\"")
   if last_pos[1] >= 1 && last_pos[1] <= line('$')
       && &filetype !~# 'commit'
@@ -14,7 +14,7 @@ def JumpToLastPosition() # [[[2
 enddef
 
 g:format_on_save = v:false
-def FormatOnSave() # [[[2
+def FormatOnSave() # {{{2
   const enalbe_ft = { c: 1, cpp: 1, ocaml: 1 }
   if get(enalbe_ft, &filetype, 0) == 0
     return
@@ -39,7 +39,7 @@ enddef
 command! -nargs=0 Fmt Format()
 nnoremap g= <scriptcmd>Format()<CR>
 
-# Autocmd [[[1
+# Autocmd {{{1
 augroup vimrc
   autocmd FocusLost * :silent! wa
   autocmd FocusGained * silent! checktime
@@ -62,7 +62,7 @@ augroup vimrc
   }
 
   # turn on spell checker for commit messages
-  autocmd FileType gitcommit,hgcommit setlocal spell
+  autocmd FileType gitcommit,hgcommit setlocal spell | hi link gitcommitBlank Normal
   # and emails and plain text files
   autocmd FileType mail,text setlocal spell | setlocal wrap
   # except 'help' files
@@ -133,5 +133,5 @@ augroup Binary
 augroup END
 
 
-# ]]]
-# vim:fdm=marker:fmr=[[[,]]]:ft=vim
+# }}}
+# vim:fdm=marker:ft=vim

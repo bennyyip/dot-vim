@@ -1,6 +1,6 @@
 vim9script
 
-export def Matchfuzzy(l: list<string>, str: string): list<string> # [[[1
+export def Matchfuzzy(l: list<string>, str: string): list<string> # {{{1
   if str == ''
     return l
   else
@@ -8,14 +8,14 @@ export def Matchfuzzy(l: list<string>, str: string): list<string> # [[[1
   endif
 enddef
 
-export def GetCurorLines() # [[[1
+export def GetCurorLines() # {{{1
   const in_visual_mode = (mode() ==? 'v')
   const lnums = in_visual_mode
         \ ? range(line('''<'), line('''>'))
         \ : [line('.')]
 enddef
 
-export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [[[1
+export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # {{{1
   execute $'setlocal shiftwidth={n} tabstop={n} softtabstop={softtabstop}'
   if expandtab
     setlocal expandtab
@@ -24,7 +24,7 @@ export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # [
   endif
 enddef
 
-export def RemoveSpaces() # [[[1
+export def RemoveSpaces() # {{{1
   if &binary || &filetype == 'diff'
     return
   endif
@@ -38,13 +38,13 @@ export def RemoveSpaces() # [[[1
   keepj silent! keeppatterns :%s#\($\n\s*\)\+\%$##e
 enddef
 
-export def StrArray(line1: number, line2: number) # [[[1
+export def StrArray(line1: number, line2: number) # {{{1
   execute printf(":%s,%sQuote", line1, line2)
   execute printf(":%s,%sJoin ,", line1, line2)
   execute printf("normal kyss]")
 enddef
 
-export def Quote(quote: string, bang: string) # [[[1
+export def Quote(quote: string, bang: string) # {{{1
   const q = quote == '' ? '"' : quote
   const l = getline('.')
   if l != '' || bang != '!'
@@ -52,7 +52,7 @@ export def Quote(quote: string, bang: string) # [[[1
   endif
 enddef
 
-export function Lilydjwg_join(sep, bang) range " [[[1
+export function Lilydjwg_join(sep, bang) range " {{{1
   if a:sep[0] == '\'
     let sep = strpart(a:sep, 1)
   else
@@ -74,11 +74,11 @@ export function Lilydjwg_join(sep, bang) range " [[[1
   endif
 endfunction
 
-export def SessionComplete(_, _, _): string # [[[1
+export def SessionComplete(_, _, _): string # {{{1
   return globpath($'{$VIMSTATE}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")
 enddef
 
-export def FollowLink() # [[[1
+export def FollowLink() # {{{1
   const filepath = expand('%')
   if !filereadable(filepath)
     return
@@ -95,8 +95,8 @@ export def FollowLink() # [[[1
   execute 'edit ' .. fnameescape(resolved)
   redraw
 enddef
-# ]]]
-export def A(cmd: string) # Switch between .cc and .h [[[1
+# }}}
+export def A(cmd: string) # Switch between .cc and .h {{{1
   const name = expand('%:r')
   const ext = tolower(expand('%:e'))
   const sources = ['c', 'cc', 'cpp', 'cxx', 'mli']
@@ -118,7 +118,7 @@ export def A(cmd: string) # Switch between .cc and .h [[[1
 enddef
 
 const is_gvim = has('gui_running')
-export def MapMeta() #[[[1
+export def MapMeta() #{{{1
   for i in range(33, 122)
     const x = nr2char(i)
     for m in ["n", "c"]
@@ -137,7 +137,7 @@ export def MapMeta() #[[[1
     endif
   endfor
 enddef
-export def KeepChangeMarksExec(cmd: string) # [[[1
+export def KeepChangeMarksExec(cmd: string) # {{{1
   # do not clobber '[ '] on :write
   SaveChangeMarks()
   defer RestoreChangeMarks()
@@ -151,17 +151,17 @@ def RestoreChangeMarks()
   setpos("'[", change_marks[0])
   setpos("']", change_marks[1])
 enddef
-#]]]
-export def In_mkdMath(): bool # [[[1
+#}}}
+export def In_mkdMath(): bool # {{{1
   const in_mkdmath = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')->index('mkdMath') >= 0
   return in_mkdmath
 enddef
-#]]]
-export def Eatchar(pat: string): string # [[[1
+#}}}
+export def Eatchar(pat: string): string # {{{1
   var c = nr2char(getchar(0))
   return (c =~ pat) ? '' : c
 enddef
-export def GenCtags() # [[[1
+export def GenCtags() # {{{1
   var cmd = ["ctags", '-R']
   job_start(cmd, {
     exit_cb: (job, rcode) => {
@@ -176,5 +176,5 @@ export def GenCtags() # [[[1
     }
   })
 enddef
-#]]]
-# vim:fdm=marker:fmr=[[[,]]]:ft=vim
+#}}}
+# vim:fdm=marker:ft=vim
