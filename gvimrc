@@ -19,7 +19,11 @@ if has("win32")
   if has('directx')
     set renderoptions=type:directx
     # &guifont = "Sarasa Fixed CL Nerd:h16:fcalt=0:fss20=1"
-    &guifont = "Iosevka Fixed Curly:h16:fcalt=0:fss20=1"
+
+    # &guifont = "Consolas:h24,Symbols Nerd Font Mono,Chiron Hei HK"
+
+    &guifont = "Sarasa Fixed CL:h16"
+    # &guifont = "Iosevka Fixed Curly:h16,Symbols Nerd Font:h16,Chiron Hei HK:h16"
   endif
 
   # :h w32-experimental-keycode-trans-strategy

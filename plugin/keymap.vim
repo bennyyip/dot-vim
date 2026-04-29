@@ -370,8 +370,8 @@ nnoremap <silent> <expr> yr SourceVim()
 nnoremap <silent> <expr> yrr SourceVim() .. '_'
 xnoremap <silent> <expr> <leader>v SourceVim()
 # external {{{1
-nnoremap <silent> gX  :call os#Gx()<CR>
-xnoremap gX <scriptcmd>os#Open(getregion(getpos('v'), getpos('.'), { type: mode() })[0])<CR>
+nnoremap <silent> gX  <scriptcmd>os.Gx()<CR>
+xnoremap gX <scriptcmd>os.Open(getregion(getpos('v'), getpos('.'), { type: mode() })[0])<CR>
 nnoremap <silent> gof :call os#FileManager()<CR>
 nnoremap <silent> got :call os#Terminal()<CR>
 # obsidian {{{1

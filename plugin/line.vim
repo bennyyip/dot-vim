@@ -70,7 +70,21 @@ enddef
 def LineFilename(): string
   const readonly = &readonly ? (is_tty ? 'RO' : "\ue0a2") : ''
 
-  const fname = '%f'
+  var fname = '%f'
+
+  # if there is a window with the same name, show full path
+  const curr_buf = bufnr()
+  const curr_tab = tabpagenr()
+  const tail_name = bufname()->fnamemodify(':t')
+  for window in  getwininfo()
+    if  window.tabnr != curr_tab || window.bufnr == curr_buf
+      continue
+    endif
+    if bufname(window.bufnr)->fnamemodify(':t') == tail_name
+      fname = bufname()->fnamemodify(':p')
+      break
+    endif
+  endfor
 
   var flags = '%h%w'
   if &paste
@@ -139,7 +153,7 @@ def LineFileInfo(): string
 enddef
 
 def g:StatusLine(): string
-  const inactive = get(g:, 'statusline_winid', win_getid(winnr())) != win_getid(winnr())
+  const inactive = get(g:, 'statusline_winid', win_getid()) != win_getid()
   if inactive
     return [
       '%f', # filename
