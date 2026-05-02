@@ -161,6 +161,7 @@ PreInsert              -> LineNr
 
 Normal                 tx              bg_1
 
+
 Added                  gr              none
 Changed                or              none
 Removed                re              none
@@ -188,7 +189,12 @@ ToolbarLine            none            none
 Visual                 none            colorV
 EndOfBuffer            ui              none
 
-VertSplit              bg_2            bg_1
+; VertSplit              tx            bg_1
+; VertSplitNC            bg_2          bg_1
+
+VertSplit              colorStatus     colorStatus
+VertSplitNC            bg_2            bg_2
+
 CursorLine             none            ui
 CursorLineNr           ye              bg_1              bold
 FoldColumn             tx_2            bg_1
@@ -255,8 +261,8 @@ PmenuKind              re              bg_2
 PmenuKindSel           re              ui
 PmenuExtra             tx_2            bg_2
 PmenuExtraSel          tx_2            ui
-PmenuMatch             pu              bg_2              bold
-PmenuMatchSel          pu              ui                bold
+PmenuMatch             pu              none              bold
+PmenuMatchSel          pu              none              bold
 WildMenu               bl              bg_2              bold
 PmenuBorder            tx_2            bg_2
 

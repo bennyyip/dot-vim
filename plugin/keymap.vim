@@ -104,8 +104,8 @@ if has('clipboard') || has('clipboard_provider')
     xnoremap <silent><M-v> "+p
     cnoremap <C-v>         <C-R>+
     inoremap <silent><C-v> <C-R><C-o>+
-    cnoremap <C-S-V> <C-R><C-o>+
-    tnoremap <C-S-v> <C-F>"+
+    # cnoremap <C-S-V> <C-R><C-o>+
+    # tnoremap <C-S-v> <C-F>"+
 endif
 nnoremap Y   y$
 xnoremap x  "_d

@@ -24,7 +24,8 @@ let g:MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*|^.*/AppData/Local/Temp/.*'
 let g:MRU_Max_Entries = 500
 let g:MRU_FuzzyMatch = 0
 augroup vimrc
-au VimLeavePre * :MruRefresh
+  au VimLeavePre * :MruRefresh
+augroup END
 " MY CONFIG ENDS
 
 if v:version < 700
@@ -1136,8 +1137,9 @@ func s:MRU_FZF_Run(bang) abort
       call fzf#run(fzf#wrap(dict, a:bang))
    endif
 endfunc
-command! -bang -nargs=0 FZFMru call s:MRU_FZF_Run(<bang>0)
+" command! -bang -nargs=0 FZFMru call s:MRU_FZF_Run(<bang>0)
 
+command -nargs=0 FzyMru      call s:MRU_LoadList() | call fzy#OpenFile(s:MRU_files, 'MRU')
 " }}}
 
 " restore 'cpoptions'

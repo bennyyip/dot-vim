@@ -96,6 +96,44 @@ command! Bonly :%bd<BAR>:e %%
 # DiffOrig {{{1
 command! DiffOrig vert new | set bt=nofile | r ++edit %%
       \ | :0d _ | diffthis | wincmd p | diffthis
+# Bsearch {{{1
+def Bsearch(input: string = "")
+  var target = input
+  if target == ''
+    target = inputdialog("Enter string to search: ")
+    if target == null || target == ""
+      return
+    endif
+  endif
+
+  target = target->trim()
+
+  var left = 1
+  var right = line("$")
+
+  while left <= right
+    const mid = (left + right) / 2
+    const mid_value = getline(mid)->trim()
+
+    if mid_value < target
+      left = mid + 1
+    elseif mid_value > target
+      right = mid - 1
+    else
+      # Exact match found
+      execute $":{mid}"
+      normal! zz
+      return
+    endif
+  endwhile
+
+  execute $":{left}"
+  normal! zz
+enddef
+
+
+command! -nargs=? Bsearch call Bsearch(<q-args>)
+# }}}
 # Lab {{{1
 # F5: Execute command and save to register `c`. Press F5 to repeat.
 def F5(cmd: string)

@@ -93,7 +93,6 @@ if getcompletion('hlyank', 'packadd')->empty()
   Pack 'ubaldot/vim-highlight-yanked'
 endif
 # Lab {{{1
-Pack 'junegunn/vim-easy-align'
 # Enhance {{{1
 Pack 'BourgeoisBear/clrzr'
 Pack 'dstein64/vim-startuptime'
@@ -114,11 +113,13 @@ Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 if !is_win && exists('$DISPLAY')
   Pack 'lilydjwg/fcitx.vim'
 endif
+Pack 'bennyyip/vim-fzy'
 # Motion and Edit {{{1
 Pack 'machakann/vim-swap' # g, g. gs gS
 Pack 'bennyyip/vim-debugstring' # <leader>ds
 Pack 'tommcdo/vim-exchange' # gx gxx gxg
 Pack 'tpope/vim-abolish'
+Pack 'junegunn/vim-easy-align'
 
 if !is_win # system() is slow
   Pack 'tpope/vim-apathy' # 'path'
