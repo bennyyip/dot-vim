@@ -61,7 +61,7 @@ export def WslToWindowsPath(path: string): string
 enddef
 
 # Open explorer/nautilus/dolphin with current file selected (if possible).
-export def FileManager()
+export def FileManager(cmd: list<string> = [])
   if executable("cmd.exe")
     ForceCmdexe()
     defer RestoreShell()
@@ -76,17 +76,18 @@ export def FileManager()
   path = substitute(path, "^dir://", "", "")
   var select = isdirectory(path) ? "" : "--select"
 
+  if !cmd->empty()
+    job_start(cmd->deepcopy()->add(path))
+    return
+  endif
+
   if executable("cmd.exe")
     var job_opts = {}
     if IsWsl()
       path = escape(WslToWindowsPath(path), '\')
       job_opts.cwd = "/mnt/c"
     endif
-    if executable('yazi')
-      job_start(['wt.exe', 'yazi', path])
-    else
-      job_start('cmd.exe /c start "" explorer.exe /select,' .. path, job_opts)
-    endif
+    job_start('cmd.exe /c start "" explorer.exe /select,' .. path, job_opts)
   elseif istmux && executable("yazi")
     job_start(["tmux", "split-window", "-v", "yazi", path])
   elseif iszellij

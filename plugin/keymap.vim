@@ -355,24 +355,30 @@ nnoremap <silent>'] <cmd>execute $"vertical ptjump {expand('<cword>')}"<BAR>winc
 nnoremap <silent><leader>fed :e $MYVIMRC<CR>
 # source vimscript (operator)
 def SourceVim(...args: list<any>): string
-    if len(args) == 0
-        &opfunc = matchstr(expand('<stack>'), '[^. ]*\ze[')
-        return 'g@'
-    endif
-    if getline(1) =~ '^vim9script$'
-        vim9cmd :'[,']source
-    else
-        :'[,']source
-    endif
-    return ''
+  if len(args) == 0
+    &opfunc = matchstr(expand('<stack>'), '[^. ]*\ze[')
+    return 'g@'
+  endif
+  if getline(1) =~ '^vim9script$'
+    vim9cmd :'[,']source
+  else
+    :'[,']source
+  endif
+  return ''
 enddef
 nnoremap <silent> <expr> yr SourceVim()
 nnoremap <silent> <expr> yrr SourceVim() .. '_'
+nnoremap <silent> yR <cmd>source %<CR>
 xnoremap <silent> <expr> <leader>v SourceVim()
 # external {{{1
 nnoremap <silent> gX  <scriptcmd>os.Gx()<CR>
 xnoremap gX <scriptcmd>os.Open(getregion(getpos('v'), getpos('.'), { type: mode() })[0])<CR>
-nnoremap <silent> gof :call os#FileManager()<CR>
+if has('win32')
+  nnoremap <silent> gof :call os#FileManager(['wt.exe', 'yazi'])<CR>
+  nnoremap <silent> goF :call os#FileManager()<CR>
+else
+  nnoremap <silent> gof :call os#FileManager()<CR>
+endif
 nnoremap <silent> got :call os#Terminal()<CR>
 # obsidian {{{1
 def DailyNote()

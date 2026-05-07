@@ -44,6 +44,8 @@ def MarkdownCR(): string
     return "\<CR>- [ ] "
   elseif line =~# '^- .*'
     return "\<CR>- "
+  elseif line =~# '^> '
+    return "\<CR>> "
   else
     return "\<CR>"
   endif

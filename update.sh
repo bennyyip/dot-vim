@@ -9,7 +9,6 @@ if tasklist | grep -q -i vim.exe; then
   exit
 fi
 
-
 REPO="vim/vim-win32-installer"
 DOWNLOAD_DIR=$(mktemp -d)
 trap "rm -rf $DOWNLOAD_DIR" EXIT  # Clean up on exit
