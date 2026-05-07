@@ -9,6 +9,7 @@ Options:     backend=vim9
 
 Environments: gui 256
 
+
 Background: dark
 Color: bg_1            #100F0F         ~
 Color: bg_2            #1C1B1A         ~
@@ -99,6 +100,11 @@ Color: diffText        #87D3C3         ~
 
 Background: any
 
+Color: magenta         #ef0fff         ~
+Color: white           #ffffff         ~
+Color: green           #38d878         ~
+
+
 Color: obsidian        #8A5CF5         ~
 
 Color: black           #100F0F         ~
@@ -115,7 +121,7 @@ Color: base_150        #DAD8CE         ~
 Color: base_100        #E6E4D9         ~
 Color: base_50         #F2F0E5         ~
 Color: paper           #FFFCF0         ~
-Color: white           #FFFCF0         ~
+; Color: white           #FFFCF0         ~
 
 Color: red_600         #AF3029         ~
 Color: orange_600      #BC5215         ~
@@ -187,6 +193,7 @@ SpecialKey             tx_2            none
 ToolbarButton          tx              ui_2              bold
 ToolbarLine            none            none
 Visual                 none            colorV
+; Visual                 none            ui
 EndOfBuffer            ui              none
 
 ; VertSplit              tx            bg_1
@@ -247,9 +254,12 @@ Directory              gr              none              bold
 ModeMsg                ye              none              bold
 MoreMsg                ye              none              bold
 Question               or              none              bold
-Search                 none            colorSearch
-CurSearch              none            colorCurSearch
-IncSearch              none            none              reverse
+; Search                 none            colorSearch
+Search                 white           magenta
+; CurSearch              none            colorCurSearch
+CurSearch              white           green
+; IncSearch              none            none              reverse
+IncSearch -> CurSearch
 QuickFixLine           none            colorQF
 
 
