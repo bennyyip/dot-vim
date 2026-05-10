@@ -35,10 +35,10 @@ enddef
 augroup Terminal
     au!
     au TerminalWinOpen * TermMappings()
-    au TerminalOpen * ++nested {
-        var buf = expand("<afile>")->escape('#%[ ')
-        exe $"au BufWinEnter {buf} ++once TermMappings()"
-    }
+    # au TerminalOpen * ++nested {
+    #     var buf = expand("<afile>")->escape('#%[ ')
+    #     exe $"au BufWinEnter {buf} ++once TermMappings()"
+    # }
 augroup END
 
 

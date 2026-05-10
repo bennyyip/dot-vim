@@ -196,11 +196,11 @@ Visual                 none            colorV
 ; Visual                 none            ui
 EndOfBuffer            ui              none
 
-; VertSplit              tx            bg_1
-; VertSplitNC            bg_2          bg_1
+VertSplit              colorStatus     bg_1
+VertSplitNC            colorStatus     bg_1
 
-VertSplit              colorStatus     colorStatus
-VertSplitNC            bg_2            bg_2
+; VertSplit              colorStatus     colorStatus
+; VertSplitNC            bg_2            bg_2
 
 CursorLine             none            ui
 CursorLineNr           ye              bg_1              bold

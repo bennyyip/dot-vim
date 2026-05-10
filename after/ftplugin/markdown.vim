@@ -4,8 +4,6 @@ setlocal wrap
 b:markdown_yaml_head = 1
 b:pandoc_compiler_args = '--toc --toc-depth=3 -f gfm --wrap=preserve'
 
-compiler markdown_html
-
 import autoload 'qf.vim'
 
 command -buffer TOC {

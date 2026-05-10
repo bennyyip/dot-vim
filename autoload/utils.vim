@@ -177,4 +177,85 @@ export def GenCtags() # {{{1
   })
 enddef
 #}}}
+export def JumpToWikilink() # {{{1
+  # Get the current line
+  var line = getline('.')
+  var col = col('.')
+
+  # Find the wikilink that contains the cursor position
+  var match_start = -1
+  var match_end = -1
+  var wikilink = ''
+
+  # Search for all wikilinks on the current line
+  var pattern = '\[\[.\{-}\]\]'
+  var pos = 1
+
+  while pos > 0
+    var found = matchstrpos(line, pattern, pos - 1)
+    if found[0] == ''
+      break
+    endif
+
+    # Check if cursor is within this wikilink
+    if found[1] < col - 1 && col - 1 <= found[2]
+      wikilink = found[0]
+      match_start = found[1]
+      match_end = found[2]
+      break
+    endif
+
+    pos = found[2] + 1
+  endwhile
+
+  if wikilink == ''
+    echo 'No wikilink found at cursor'
+    return
+  endif
+
+  # Extract the link target (everything between [[ and ]])
+  var target = wikilink->strpart(2, wikilink->len() - 4)
+
+  # Handle custom display text
+  # In tables, the pipe is escaped as \|, so we need to handle both | and \|
+  var pipe_pos = stridx(target, '\|')
+  if pipe_pos < 0
+    pipe_pos = stridx(target, '|')
+  endif
+  if pipe_pos >= 0
+    target = target->strpart(0, pipe_pos)
+  endif
+
+  # Handle section links (text after #)
+  var hash_pos = stridx(target, '#')
+  var section = ''
+  if hash_pos >= 0
+    section = target->strpart(hash_pos + 1)
+    if hash_pos == 0
+      # Starts with #, this is a in-file link.
+      echom section
+      execute $'silent! :/^#.*{section->escape('/')}'
+      return
+    endif
+    target = target->strpart(0, hash_pos)
+  endif
+
+
+  # Build the file path
+  var filepath = fnameescape(target .. '.md')
+
+  # Try to open the file
+  try
+    execute $"edit {g:obsidian_vault}/**/{filepath}"
+
+    # If there's a section, jump to it
+    if section != ''
+      execute $'silent! :/^#.*{section->escape('/')}'
+    endif
+  catch /^Vim\%((\S\+)\)\=:E480:/
+    # Create it on root if not exists
+    execute $"edit {g:obsidian_vault}/{filepath}"
+  endtry
+enddef
+# }}}
 # vim:fdm=marker:ft=vim

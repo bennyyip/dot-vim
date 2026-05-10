@@ -192,8 +192,10 @@ export def Copy()
         var src = $"{mark_dir}{Sep()}{item.name}"
         var dst = $"{dest_dir}{Sep()}{item.name}"
         try
-            if item.type =~ 'dir\|linkd\|junction' && !isdirectory(dst)
-                mkdir(dst, "p")
+            if item.type =~ 'dir\|linkd\|junction'
+                if !isdirectory(dst)
+                    mkdir(dst, "p")
+                endif
             else
                 var file_exists = filereadable(dst)
                 if file_exists && override_all == 0
@@ -228,7 +230,7 @@ export def Copy()
                 endif
             endif
         catch
-            echo v:exception
+            echom v:exception
         endtry
     endfor
     mark.Clear()

@@ -33,8 +33,8 @@ augroup colorscheme_override
     hi! link debugBreakpoint ErrorMsg
     hi! link debugPC QuickFixLine
 
-    hi VertSplit   term=reverse ctermfg=235 ctermbg=235 guifg=#12253b guibg=#12253b
-    hi VertSplitNC   term=reverse ctermfg=234 ctermbg=234 guifg=#1c1b1a guibg=#1c1b1a
+    # hi VertSplit   term=reverse ctermfg=235 ctermbg=235 guifg=#12253b guibg=#12253b
+    # hi VertSplitNC   term=reverse ctermfg=234 ctermbg=234 guifg=#1c1b1a guibg=#1c1b1a
 
     hi StatusLine guifg=#ebdbb2 guibg=#12253b guisp=NONE gui=NONE ctermfg=187 ctermbg=235 cterm=NONE term=bold,reverse
     hi StatusLineBold guifg=#ebdbb2 guibg=#12253b guisp=NONE gui=bold ctermfg=187 ctermbg=235 cterm=bold term=bold
