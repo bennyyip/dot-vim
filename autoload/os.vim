@@ -139,65 +139,6 @@ export def Open(url: string)
 enddef
 
 
-# Better gx to open URLs. https://ya.ru
-# nnoremap <silent> gx :call os#Gx()<CR>
-export def Gx()
-
-  # URL regexes
-  var rx_base = '\%(\%(http\|ftp\|irc\)s\?\|file\)://\S'
-  var rx_bare = rx_base .. '\+'
-  var rx_embd = rx_base .. '\{-}'
-
-  var URL = ""
-
-  var save_view = winsaveview()
-  defer winrestview(save_view)
-
-  # markdown URL [link text](http://ya.ru 'yandex search')
-  if searchpair('\[.\{-}\](', '', ')\zs', 'cbW', '', line('.')) > 0
-    URL = matchstr(getline('.')[col('.') - 1 : ], '\[.\{-}\](\zs' .. rx_embd .. '\ze\(\s\+.\{-}\)\?)')
-  endif
-
-  # asciidoc URL http://yandex.ru[yandex search]
-  if empty(URL)
-    if searchpair(rx_bare .. '\[', '', '\]\zs', 'cbW', '', line('.')) > 0
-      URL = matchstr(getline('.')[col('.') - 1 : ], '\S\{-}\ze[')
-    endif
-  endif
-
-  # HTML URL <a href='http://www.python.org'>Python is here</a>
-  #          <a href="http://www.python.org"/>
-  if empty(URL)
-    if searchpair('<a\s\+href=', '', '\%(</a>\|/>\)\zs', 'cbW', '', line('.')) > 0
-      URL = matchstr(getline('.')[col('.') - 1 : ],
-        'href=["' .. "'" .. ']\?\zs\S\{-}\ze["' .. "'" .. ']\?/\?>')
-    endif
-  endif
-
-  # URL <http://google.com>
-  if empty(URL)
-    URL = matchstr(expand("<cWORD>"), $'^<\zs{rx_bare}\ze>$')
-  endif
-
-  # URL (http://google.com)
-  if empty(URL)
-    URL = matchstr(expand("<cWORD>"), $'^(\zs{rx_bare}\ze)$')
-  endif
-
-  # barebone URL http://google.com
-  if empty(URL)
-    URL = matchstr(expand("<cWORD>"), rx_bare)
-  endif
-
-  if empty(URL)
-    return
-  endif
-
-
-  Open(URL)
-  # endif
-enddef
-
 export def Yank(s: string)
   if $SSH_CONNECTION != ""
     silent! g:OSCYank(s)
@@ -255,4 +196,29 @@ export def RenameInteractive(rename_to: string)
     echom v:exception
     echohl None
   endtry
+enddef
+
+export def Yazi(path: string)
+  const chooser_file = tempname()
+
+  const p = path->expand()->substitute("^dir://", "", "")->shellescape()
+  silent execute $'!yazi --chooser-file {shellescape(chooser_file)} {p}'
+
+  if filereadable(chooser_file)
+    const files = readfile(chooser_file)
+
+    if files->len() > 1
+      # :cfdo tabnew
+      setqflist(files->mapnew((i, f) => {
+        return { filename: f->simplify()->fnamemodify(":~:."), lnum: 1, col: 1, text: $'yazi: {i + 1} of {files->len()}' }
+      }))
+      botright copen
+    else
+      const simplified_path = simplify(files[0])
+      execute $'edit {files[0]->simplify()->fnamemodify(":~:.")}'
+    endif
+    delete(chooser_file)
+  endif
+
+  redraw!
 enddef

@@ -61,7 +61,7 @@ nnoremap <buffer><nowait> S <scriptcmd>action.Do($"{g:dir_invert_split ? '' : 'v
 xnoremap <buffer><nowait> S <nop>
 nnoremap <buffer><nowait> s <scriptcmd>action.Do($"{g:dir_invert_split ? 'vert' : ''} split")<cr>
 xnoremap <buffer><nowait> s <nop>
-nnoremap <buffer><nowait> t <scriptcmd>action.Do("tabe")<cr>
+nnoremap <buffer><nowait> t <scriptcmd>action.TabEdit()<cr>
 nnoremap <buffer><nowait> i <scriptcmd>action.DoInfo()<cr>
 nnoremap <buffer><nowait> <F3> <scriptcmd>action.DoInfo()<cr>
 nnoremap <buffer><nowait> <C-r> <scriptcmd>keepj edit<cr>

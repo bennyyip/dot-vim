@@ -44,6 +44,16 @@ export def Do(mod: string = '')
     endif
 enddef
 
+export def TabEdit()
+    if !mark.IsEmpty()
+        for item in mark.List()
+            execute $"tabe {item.name}"
+        endfor
+    else
+        Do('tabe')
+    endif
+enddef
+
 export def DoUp()
     dir.Open(fnamemodify(b:dir_cwd, ":h"), '', false)
 enddef

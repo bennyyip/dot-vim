@@ -6,3 +6,7 @@ nmap gx <plug>(Exchange)
 nmap gxx <plug>(ExchangeLine)
 nmap gxg <plug>(ExchangeClear)
 vmap gx <plug>(Exchange)
+
+
+nmap gX <Plug>(open-word-under-cursor)
+xmap gX <Plug>(open-word-under-cursor)

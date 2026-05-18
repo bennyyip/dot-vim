@@ -371,8 +371,6 @@ nnoremap <silent> <expr> yrr SourceVim() .. '_'
 nnoremap <silent> yR <cmd>source %<CR>
 xnoremap <silent> <expr> <leader>v SourceVim()
 # external {{{1
-nnoremap <silent> gX  <scriptcmd>os.Gx()<CR>
-xnoremap gX <scriptcmd>os.Open(getregion(getpos('v'), getpos('.'), { type: mode() })[0])<CR>
 if has('win32')
   nnoremap <silent> gof :call os#FileManager(['wt.exe', 'yazi'])<CR>
   nnoremap <silent> goF :call os#FileManager()<CR>

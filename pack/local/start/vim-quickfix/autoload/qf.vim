@@ -1,125 +1,126 @@
 vim9script
 
 export def IsLocationList(): bool
-    return getloclist(winnr(), {'filewinid': 0}).filewinid > 0
+  return getloclist(winnr(), {'filewinid': 0}).filewinid > 0
 enddef
 
 export def QuickFixText(info: dict<any>): list<string>
-    var items = []
-    if info.quickfix == 1
-        items = getqflist({id: info.id, items: 1}).items
+  var items = []
+  if info.quickfix == 1
+    items = getqflist({id: info.id, items: 1}).items
+  else
+    items = getloclist(info.winid, {id: info.id, items: 1}).items
+  endif
+  var l = []
+  for idx in range(info.start_idx - 1, info.end_idx - 1)
+    if items[idx].valid
+      var text = fnamemodify(bufname(items[idx].bufnr), ':p:~:.')
+      if items[idx].lnum != 0
+        text ..= $"|{items[idx].lnum}"
+      endif
+      if items[idx].col != 0
+        text ..= $":{items[idx].col}"
+      endif
+      if !empty(items[idx].text)
+        text ..= $":{items[idx].text}"
+      endif
+      add(l, text)
     else
-        items = getloclist(info.winid, {id: info.id, items: 1}).items
+      add(l, items[idx].text)
     endif
-    var l = []
-    for idx in range(info.start_idx - 1, info.end_idx - 1)
-        if items[idx].valid
-            var text = fnamemodify(bufname(items[idx].bufnr), ':p:~:.')
-            if items[idx].lnum != 0
-                text ..= $"|{items[idx].lnum}"
-            endif
-            if items[idx].col != 0
-                text ..= $":{items[idx].col}"
-            endif
-            if !empty(items[idx].text)
-              text ..= $":{items[idx].text}"
-            endif
-            add(l, text)
-        else
-            add(l, items[idx].text)
-        endif
-    endfor
-    return l
+  endfor
+  return l
 enddef
 
 export def View()
-    var winid = win_getid()
-    exe "normal! \<CR>"
-    if winid == win_getid()
-        return
-    endif
-    normal! zz
-    if exists(":BlinkLine") == 2
-        BlinkLine
-    endif
-    wincmd p
+  var winid = win_getid()
+  exe "normal! \<CR>"
+  if winid == win_getid()
+    return
+  endif
+  normal! zz
+  if exists(":BlinkLine") == 2
+    BlinkLine
+  endif
+  wincmd p
 enddef
 
 export def Next()
-    try
-        if IsLocationList()
-            lnext
-        else
-            cnext
-        endif
-        if exists(":BlinkLine") == 2
-            BlinkLine
-        endif
-        wincmd p
-    catch
-    endtry
+  try
+    if IsLocationList()
+      lnext
+    else
+      cnext
+    endif
+    if exists(":BlinkLine") == 2
+      BlinkLine
+    endif
+    wincmd p
+  catch
+  endtry
 enddef
 
 export def Prev()
-    try
-        if IsLocationList()
-            lprev
-        else
-            cprev
-        endif
-        if exists(":BlinkLine") == 2
-            BlinkLine
-        endif
-        wincmd p
-    catch
-    endtry
+  try
+    if IsLocationList()
+      lprev
+    else
+      cprev
+    endif
+    if exists(":BlinkLine") == 2
+      BlinkLine
+    endif
+    wincmd p
+  catch
+  endtry
 enddef
 
 export def NextFile()
-    try
-        if IsLocationList()
-            lnfile
-        else
-            cnfile
-        endif
-        if exists(":BlinkLine") == 2
-            BlinkLine
-        endif
-        wincmd p
-    catch
-    endtry
+  try
+    if IsLocationList()
+      lnfile
+    else
+      cnfile
+    endif
+    if exists(":BlinkLine") == 2
+      BlinkLine
+    endif
+    wincmd p
+  catch
+  endtry
 enddef
 
 export def PrevFile()
-    try
-        if IsLocationList()
-            lNfile
-        else
-            cNfile
-        endif
-        if exists(":BlinkLine") == 2
-            BlinkLine
-        endif
-        wincmd p
-    catch
-    endtry
+  try
+    if IsLocationList()
+      lNfile
+    else
+      cNfile
+    endif
+    if exists(":BlinkLine") == 2
+      BlinkLine
+    endif
+    wincmd p
+  catch
+  endtry
 enddef
 
 # Toggle quickfix and loclist
 export def ToggleQF()
-    if getwininfo()->filter('v:val.quickfix')->len() > 0
-        cclose
-    else
-        botright copen
-    endif
+  const tabnr = tabpagenr()
+  if getwininfo()->filter((_, v) => v.quickfix == 1 && v.tabnr == tabnr )->len() > 0
+    cclose
+  else
+    botright copen
+  endif
 enddef
 
 export def ToggleLoc()
-    if getwininfo()->filter('v:val.loclist')->len() > 0
-        lclose
-    else
-        botright lopen
-    endif
+  if getwininfo()->filter('v:val.loclist')->len() > 0
+    lclose
+  else
+    botright lopen
+  endif
 enddef
 
 export def Older()

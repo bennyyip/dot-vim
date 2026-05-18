@@ -181,7 +181,7 @@ command! Ctags utils.GenCtags()
 
 command! -nargs=? Rename os.RenameInteractive(<q-args>)
 command! -bang Delete os.Delete(<q-bang> == '!')
-if executable('sudo')
+if !has('win32')
     command! SudoWrite w !sudo tee "%" >/dev/null
 endif
 
@@ -196,5 +196,7 @@ command! -range=% LLM {
   execute $":split + {f}"
   feedkeys('o')
 }
+
+command! -nargs=? -complete=file Yazi os.Yazi(<q-args> == '' ? '%' : <q-args>)
 
 # vim:fdm=marker:ft=vim

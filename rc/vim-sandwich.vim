@@ -18,6 +18,7 @@ omap ak <Plug>(textobj-sandwich-auto-a)
 xmap ak <Plug>(textobj-sandwich-auto-a)
 
 nmap ys <Plug>(sandwich-add)
+nmap yS ys$
 onoremap <SID>line :normal! ^vg_<CR>
 nmap <silent> yss <Plug>(sandwich-add)<SID>line
 nmap ds <Plug>(sandwich-delete)

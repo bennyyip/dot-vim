@@ -132,7 +132,6 @@ g:loaded_netrw            = 1
 g:loaded_netrwPlugin      = 1
 g:loaded_tutor_mode_plugin = 1
 
-g:nogx = true
 g:vimsyn_folding = 'f'
 
 g:load_black = 1
