@@ -101,7 +101,6 @@ Pack 'bootleq/vim-cycle'
 Pack 'LunarWatcher/auto-pairs'
 Pack 'Konfekt/vim-alias'
 Pack 'nickspoons/vim-movefast'
-# Pack 'bennyyip/tasks.vim'
 Pack 'AndrewRadev/linediff.vim'
 Pack 'itchyny/vim-cursorword'
 Pack 'lfv89/vim-interestingwords'
@@ -127,7 +126,7 @@ endif
 Pack 'bennyyip/vista.vim'
 
 Pack 'justinmk/vim-sneak'
-Pack 'LunarWatcher/traces.vim'
+Pack 'markonm/traces.vim'
 # VCS {{{1
 Pack 'Eliot00/git-lens.vim'
 Pack 'rhysd/conflict-marker.vim' # [x ]x
@@ -136,9 +135,7 @@ Pack 'tpope/vim-fugitive'
 # Language {{{1
 Pack 'yegappan/lsp', { branch: 'main', 'type': 'delay' }
 Pack 'Konfekt/vim-compilers'
-Pack 'girishji/devdocs.vim'
 Pack 'Shiracamus/vim-syntax-x86-objdump-d'
-# Pack 'octol/vim-cpp-enhanced-highlight'
 Pack 'bfrg/vim-c-cpp-modern'
 Pack 'chrisbra/csv.vim'
 if !is_win
@@ -152,7 +149,7 @@ if executable('nim')
   Pack 'zah/nim.vim'
 endif
 # Web {{{3
-Pack 'MaxMEllon/vim-jsx-pretty'
+# Pack 'MaxMEllon/vim-jsx-pretty'
 # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
 # Markup {{{3
 if is_win

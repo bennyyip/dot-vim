@@ -137,10 +137,14 @@ command! -nargs=? Bsearch call Bsearch(<q-args>)
 # Lab {{{1
 # F5: Execute command and save to register `c`. Press F5 to repeat.
 def F5(cmd: string)
+  if cmd == ''
+    echo @c
+    return
+  endif
   execute cmd
   setreg('c', cmd)
 enddef
-command! -nargs=+ -complete=command F5 F5(<q-args>)
+command! -nargs=? -complete=command F5 F5(<q-args>)
 nnoremap <silent> <F5> <cmd>execute getreg('c')<CR>
 inoremap <silent> <F5> <ESC><cmd>execute getreg('c')<CR>
 nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
@@ -198,5 +202,7 @@ command! -range=% LLM {
 }
 
 command! -nargs=? -complete=file Yazi os.Yazi(<q-args> == '' ? '%' : <q-args>)
+
+command! -nargs=1 Doc call os.Doc(<q-args>)
 
 # vim:fdm=marker:ft=vim

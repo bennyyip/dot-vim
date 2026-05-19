@@ -222,3 +222,16 @@ export def Yazi(path: string)
 
   redraw!
 enddef
+
+# local docs
+export def Doc(args: string)
+  if args =~? '^c'
+    Open($HOME .. '/cppreference/en/index.html')
+  elseif args =~? '^l'
+    Open($HOME .. '/luadoc/lua53doc-gh-pages/manual.html')
+  elseif args =~? '^p'
+    Open($HOME .. '/python/Doc/html/library/stdtypes.html')
+  elseif args =~? '^m'
+    Open($HOME .. '/mpv/doc/mpv.html')
+  endif
+enddef

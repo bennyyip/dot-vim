@@ -16,6 +16,23 @@ export def Compiler(bang: bool, compiler: string, ...args: list<string>)
   })
 enddef
 
+export def StopJobs(how: string='term')
+  for id in g:async_jobs->keys()
+    g:async_jobs[id].Kill(how)
+    g:async_jobs->remove(id)
+    echom $'kill job {id}'
+  endfor
+enddef
+
+export def Spawn(...args: list<string>)
+  job_start(args, {
+    in_io: 'null',
+    out_io: 'null',
+    err_io: 'null',
+    stoponexit: '',
+  })
+enddef
+
 class Job
   var id: number
 
@@ -35,6 +52,9 @@ class Job
   var kind: string # make | grep | echo | qf
   var efm: string
   var cwd: string
+
+  var _qf: bool
+  var _start_time: number
 
   static var _id_ = 0
 
@@ -79,12 +99,21 @@ class Job
       silent! wall
     endif
 
+    this._qf = this.kind != 'echo'
+    if this._qf
+      this.QfStart()
+    endif
+
+    this._start_time = localtime()
     this.job = job_start([&shell, &shellcmdflag, this.cmd], {
-      exit_cb: function(Exit_cb, [this]),
-      out_cb: function(Out_cb, [this]),
-      err_cb: function(Err_cb, [this]),
+      exit_cb: this.Exit_cb,
 
       in_io: 'null',
+      out_cb: this.Out_cb,
+      err_cb: this.Err_cb,
+
+      out_mode: 'nl',
+      err_mode: 'nl',
 
       cwd: this.cwd,
     })
@@ -98,21 +127,42 @@ class Job
     this.job->job_stop(how)
   enddef
 
-  def OutToQF()
+  def QfStart()
+    # TODO: global local
     const qfkind = this.kind == 'grep' ? 'grep' : 'make'
     exe $'silent doautocmd QuickFixCmdPre {qfkind}'
+    noautocmd setqflist([], ' ', { title: this.cmd })
+  enddef
+
+  def QfEnd()
+    if this.out->len() > 0
+      this.QfAppend(this.out)
+      this.out = []
+    endif
+
+    if this.err->len() > 0
+      this.QfAppend(this.err)
+      this.err = []
+    endif
+
+    const time_spent = localtime() - this._start_time
+    if time_spent > 2
+      this.QfAppend([
+        $"[Finished in {time_spent} seconds]",
+      ])
+    endif
 
     # TODO: local append
-    setqflist([], ' ', {
-      efm: this.efm,
-      lines: this.out + this.err,
-      title: this.cmd
-    })
     execute 'botright copen'
+    # XXX: better way to handle cwd in qf window?
+    execute $'lcd {this.cwd}'
     if this.jump
       execute 'cfirst'
     endif
 
+    noautocmd setqflist([], 'r', {title: $"{this.cmd} [finished]"})
+
+    const qfkind = this.kind == 'grep' ? 'grep' : 'make'
     exe $'silent doautocmd QuickFixCmdPost {qfkind}'
   enddef
 
@@ -135,47 +185,54 @@ class Job
     return ret->trim()
   enddef
 
+
+  def Exit_cb(_: job, status: number)
+    if !has_key(g:async_jobs, this.id)
+      # canceled
+      return
+    endif
+
+    if this.kind == 'grep'
+      if status == 1 && this.err->empty()
+        echo 'No results'
+      elseif status != 0
+        Error([$'Exit status: {status}', $'Command: {this.cmd}'] + this.out + this.err)
+      endif
+    elseif this.kind == 'echo'
+      if status == 0
+        Echo(this.out + this.err)
+      else
+        Error([$'Exit status: {status}', $'Command: {this.cmd}'] + this.out + this.err)
+      endif
+    endif
+
+    if this._qf
+      this.QfEnd()
+    endif
+
+    g:async_jobs->remove(this.id)
+  enddef
+
+  def Out_cb(ch: channel, line: string)
+    this.out->add(line)
+    if this._qf && this.out->len() > 128
+      this.QfAppend(this.out)
+      this.out = []
+    endif
+  enddef
+
+  def Err_cb(ch: channel, line: string)
+    this.err->add(line)
+    if this._qf && this.err->len() > 128
+      this.QfAppend(this.err)
+      this.err = []
+    endif
+  enddef
+
+  def QfAppend(lines: list<string>)
+    noautocmd setqflist([], 'a', { efm: this.efm, lines: lines, })
+  enddef
 endclass
-
-def StopJobs(how: string='term')
-  for id in g:async_jobs->keys()
-    g:async_jobs[id].Kill(how)
-    g:async_jobs->remove(id)
-    echom $'kill job {id}'
-  endfor
-enddef
-
-
-def Err_cb(jo: Job, ch: channel, line: string)
-  jo.err->add(line)
-enddef
-
-def Out_cb(jo: Job, ch: channel, line: string)
-  jo.out->add(line)
-enddef
-
-def Exit_cb(jo: Job, _: job, status: number)
-  if jo.kind == 'grep'
-    if status == 0
-      jo.OutToQF()
-    elseif status == 1 && jo.err->empty()
-      echo 'No results'
-    else
-      Error([$'Exit status: {status}', $'Command: {jo.cmd}'] + jo.out + jo.err)
-    endif
-  elseif jo.kind == 'echo'
-    if status == 0
-      Echo(jo.out + jo.err)
-    else
-      Error([$'Exit status: {status}', $'Command: {jo.cmd}'] + jo.out + jo.err)
-    endif
-  else
-    jo.OutToQF()
-  endif
-
-  g:async_jobs->remove(jo.id)
-enddef
-
 
 def Echo(msgs: list<string>, hl: string = "None")
   var cmd = [$"echohl {hl}"]
