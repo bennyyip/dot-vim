@@ -2,6 +2,7 @@ vim9script
 
 var lsp_servers: list<dict<any>> = []
 
+# C++ {{{1
 if executable('ccls')
   lsp_servers->add({
     filetype: ["c", "cpp", "cuda", "objc", "objcpp"],
@@ -33,7 +34,8 @@ if executable('ccls')
     }
   })
 endif
-
+# }}}
+# ocaml {{{1
 if executable('ocamllsp')
   lsp_servers->add({
     filetype: ["ocaml"],
@@ -41,7 +43,8 @@ if executable('ocamllsp')
     path: 'ocamllsp',
   })
 endif
-
+# }}}
+# zig {{{1
 if executable('zls')
   lsp_servers->add({
     filetype: ["zig"],
@@ -49,7 +52,8 @@ if executable('zls')
     path: 'zls',
   })
 endif
-
+# }}}
+# lua {{{1
 if executable('lua-language-server')
   lsp_servers->add({
     filetype: ["lua"],
@@ -57,39 +61,39 @@ if executable('lua-language-server')
     path: 'lua-language-server',
   })
 endif
+# }}}
+# python {{{1
+const python_workspace_root = [
+  "pyproject.toml",
+]
 
-
-
-
-# if executable('pyright-langserver')
-#   lsp_servers->add({
-#     name: 'pyright',
-#     filetype: 'python',
-#     path: 'pyright-langserver',
-#     args: ['--stdio'],
-#     workspaceConfig: {
-#       python: {
-#         pythonPath: '/usr/bin/python'
-#       },
-#       pyright: {
-#         disableDocumentation: false,
-#       }
-#     }
-#   })
-# endif
-
-if executable('pylsp')
+if executable('basedpyright-langserver')
   lsp_servers->add({
+    name: 'pyright',
     filetype: 'python',
-    name: 'pylsp',
-    path: 'pylsp',
+    path: 'basedpyright-langserver',
+    args: ['--stdio'],
     features: {
       # leave these to ruff
       diagnostics: false,
-      codeAction: false,
+      # codeAction: false,
       documentFormatting: false,
       documentRangeFormatting: false,
       executeCommand: false,
+    },
+
+    rootSearch: python_workspace_root,
+    runIfSearch: python_workspace_root,
+
+    workspaceConfig: {
+      basedpyright: {
+        analysis: {
+          autoSearchPaths: true,
+          autoImportCompletions: false,
+          disableOrganizeImports: true,
+          disableTaggedHints: true,
+        }
+      }
     }
   })
 endif
@@ -100,10 +104,14 @@ if executable('ruff')
     name: 'ruff',
     path: 'ruff',
     # args: ['server', '-v', '--config', $HOME .. '/ruff.toml']
-    args: ['server']
+    args: ['server'],
+
+    rootSearch: python_workspace_root,
+    runIfSearch: python_workspace_root,
   })
 endif
-
+# }}}
+# typescript {{{1
 if executable('typescript-language-server')
   lsp_servers->add({
     filetype: ['javascript', 'typescript'],
@@ -112,7 +120,8 @@ if executable('typescript-language-server')
     args: ['--stdio']
   })
 endif
-
+# }}}
+# rust {{{1
 if executable('rust-analyzer')
   lsp_servers->add({
     name: 'rustanalyzer',
@@ -122,6 +131,7 @@ if executable('rust-analyzer')
     syncInit: true
   })
 endif
+# }}}
 
 def DisableDiag()
   g:LspOptionsSet({
@@ -164,7 +174,7 @@ command! LspEnableDiag EnableDiag()
 
 def LspSetup()
   nnoremap <silent><buffer> gd        <Cmd>execute v:count  .. 'LspGotoDefinition'<CR>
-  nnoremap <silent><buffer> 'd   <Cmd>execute 'vertical '  .. v:count .. 'LspGotoDefinition'<CR>
+  nnoremap <silent><buffer> 'd        <Cmd>execute 'vertical '  .. v:count .. 'LspGotoDefinition'<CR>
   # nnoremap <silent><buffer> gi        <Cmd>LspGotoImpl<CR>
   nnoremap <silent><buffer> gt        <Cmd>LspGotoTypeDef<CR>
   nnoremap <silent><buffer> gr        <Cmd>LspShowReferences<CR>
@@ -237,3 +247,5 @@ var lsp_options = {
 g:LspOptionsSet(lsp_options)
 silent! DisableDiag()
 g:LspAddServer(lsp_servers)
+
+#  vim:fdm=marker

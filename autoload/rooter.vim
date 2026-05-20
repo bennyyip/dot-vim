@@ -63,7 +63,7 @@ export def Rooter(cdcmd: string = 'lcd')
   const rootdir = FindRootDirectory()
 
   if !rootdir->empty()
-    exe cdcmd .. ' ' rootdir
+    silent! exe cdcmd .. ' ' rootdir
     # else
     # const curdir = CurDir()
     # if curdir->empty()

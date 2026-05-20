@@ -258,4 +258,11 @@ export def JumpToWikilink() # {{{1
   endtry
 enddef
 # }}}
+export def MakeComplete(_, _, _): string # {{{1
+    if &shell != 'sh'
+        return ""
+    endif
+    return system("make -npq : 2> /dev/null | awk -v RS= -F: '$1 ~ /^[^#%.]+$/ { print $1 }' | sort -u")
+enddef
+# 1}}}
 # vim:fdm=marker:ft=vim

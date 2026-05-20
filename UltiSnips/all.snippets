@@ -1,11 +1,17 @@
 priority -60
 
+snippet fold
+${1}`!v substitute(&commentstring, '%s', '{{{1', '')`
+${0:${VISUAL}}
+`!v substitute(&commentstring, '%s', '1}}}', '')`
+endsnippet
+
 snippet #!
 #!/usr/bin/env `!v &filetype`
 endsnippet
 
 snippet fdm "vim modeline" b
-`!v substitute(&commentstring, '%s', ' vim:fdm=marker', '')`
+`!v substitute(&commentstring, '%s', 'vim:fdm=marker', '')`
 endsnippet
 
 snippet lorem

@@ -6,7 +6,7 @@ class Terminal
   def new(cmd: string = '')
     var shcmd = get(g:, 'term_shell', $SHELL)
     var cwd: string
-    if &ft =~? 'dir\|fugitive\|undotree'
+    if &ft =~? 'dir\|fugitive\|undotree' || &buftype == 'terminal'
       cwd = getcwd()
     else
       cwd =  expand('%:p:h')

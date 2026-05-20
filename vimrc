@@ -13,6 +13,7 @@ g:mapleader   = "\<Space>"
 g:localleader = "\\"
 
 $VIMSTATE = $HOME .. '/.local/state/vim/'
+$PAGER = 'less'
 
 if exists('#vimrc')
   augroup vimrc

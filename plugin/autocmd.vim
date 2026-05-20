@@ -13,19 +13,6 @@ def JumpToLastPosition() # {{{2
   endif
 enddef
 
-g:format_on_save = v:false
-def FormatOnSave() # {{{2
-  const enalbe_ft = { c: 1, cpp: 1, ocaml: 1 }
-  if get(enalbe_ft, &filetype, 0) == 0
-    return
-  endif
-
-  if !get(b:, 'format_on_save', g:format_on_save)
-    return
-  endif
-  Format()
-enddef
-
 def Format()
   if ['vim']->index(&ft) != -1
     utils.RemoveSpaces()
@@ -36,7 +23,6 @@ def Format()
   winrestview(save_view)
 enddef
 
-command! -nargs=0 Fmt Format()
 nnoremap g= <scriptcmd>Format()<CR>
 
 # Autocmd {{{1
@@ -44,7 +30,6 @@ augroup vimrc
   autocmd FocusLost * :silent! wa
   autocmd FocusGained * silent! checktime
   autocmd BufReadPost * JumpToLastPosition()
-  autocmd BufWritePost * FormatOnSave()
 
   # create non-existent directory before buffer save
   au BufWritePre * {

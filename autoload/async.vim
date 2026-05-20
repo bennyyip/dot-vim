@@ -2,15 +2,23 @@ vim9script
 
 g:async_jobs = {}
 
+var async_last_job = {}
+var qf_running = false
+
 export def Run(args: string, opts: dict<any>)
   Job.new(args, opts)
 enddef
 
-export def Compiler(bang: bool, compiler: string, ...args: list<string>)
+export def ReRun(terminal: bool = false)
+  Job.new(async_last_job['args'], async_last_job['opts']->extendnew({terminal: terminal}))
+enddef
+
+export def Compiler(bang: bool, local: bool, compiler: string, ...args: list<string>)
   exe $"compiler {compiler}"
 
   Run(args->join(' '), {
     kind: 'make',
+    local: local,
     jump: bang,
     wall: true,
   })
@@ -22,6 +30,7 @@ export def StopJobs(how: string='term')
     g:async_jobs->remove(id)
     echom $'kill job {id}'
   endfor
+  qf_running = false
 enddef
 
 export def Spawn(...args: list<string>)
@@ -34,55 +43,49 @@ export def Spawn(...args: list<string>)
 enddef
 
 class Job
-  var id: number
+  # opts begin
+  var local: bool = false
+  var jump: bool = false
+  var append: bool = false
+  var wall: bool = false
+  var expand: bool = false
+  var terminal: bool = false # :Term
+  var kind: string = 'qf' # make | grep | echo | qf
+  var efm: string # &efm
+  var cwd: string # getcwd()
+  # opts end
 
+  var id: number
   var cmd: string
+
   var out: list<string>
   var err: list<string>
   var job: job
 
-  var local: bool
-  var winid: number  = -1
-
-  var jump: bool
-  var append: bool
-  var wall: bool
-  var expand: bool
-
-  var kind: string # make | grep | echo | qf
-  var efm: string
-  var cwd: string
-
-  var _qf: bool
-  var _start_time: number
+  var qf: bool
+  var start_time: number
+  var setqflist: func
 
   static var _id_ = 0
 
-  static final _default_opts = {
-    kind: 'qf',
-    jump: false,
-    local: false,
-    append: false,
-    wall: false,
-    expand: true,
-  }
-
   def new(args: string, opts: dict<any> = {})
+    async_last_job = {
+      args: args,
+      opts: opts,
+    }
+
     this.out = []
     this.err = []
 
-    this.local = opts->get('local', _default_opts['local'])
-    if this.local
-      # TODO
-      # this.winid =
-    endif
-    this.jump = opts->get('jump', _default_opts['jump'])
-    this.append = opts->get('append', _default_opts['append'])
-    this.wall = opts->get('wall', _default_opts['wall'])
-    this.expand = opts->get('expand', _default_opts['expand'])
+    this.local = opts->get('local', this.local)
+    this.jump = opts->get('jump', this.jump)
+    this.append = opts->get('append', this.append)
+    this.wall = opts->get('wall', this.wall)
+    this.expand = opts->get('expand', this.expand)
+    this.terminal = opts->get('terminal', this.terminal)
     this.cwd = opts->get('cwd', getcwd())
 
-    this.kind = opts->get('kind', _default_opts['kind'])
+    this.kind = opts->get('kind', this.kind)
     if this.kind == 'grep'
       this.cmd = this.BuildCmd(&grepprg, args)
       this.efm = opts->get('efm', bufnr()->getbufvar('&gfm'))
@@ -99,12 +102,27 @@ class Job
       silent! wall
     endif
 
-    this._qf = this.kind != 'echo'
-    if this._qf
-      this.QfStart()
+    if this.terminal
+      execute $':Term {this.cmd}'
     endif
 
-    this._start_time = localtime()
+    if this.local
+      this.setqflist = function('setloclist', [0])
+    else
+      this.setqflist = function('setqflist')
+    endif
+
+    this.qf = this.kind != 'echo'
+    if this.qf
+      if qf_running
+        Error(["Another quickfix task is running."])
+        return
+      endif
+      this.QfStart()
+      qf_running = true
+    endif
+
+    this.start_time = localtime()
     this.job = job_start([&shell, &shellcmdflag, this.cmd], {
       exit_cb: this.Exit_cb,
 
@@ -121,6 +139,7 @@ class Job
     this.id = _id_
     g:async_jobs[_id_] = this
     _id_ += 1
+
   enddef
 
   def Kill(how: string='term')
@@ -128,10 +147,9 @@ class Job
   enddef
 
   def QfStart()
-    # TODO: global local
     const qfkind = this.kind == 'grep' ? 'grep' : 'make'
     exe $'silent doautocmd QuickFixCmdPre {qfkind}'
-    noautocmd setqflist([], ' ', { title: this.cmd })
+    noautocmd this.setqflist([], ' ', { title: this.cmd })
   enddef
 
   def QfEnd()
@@ -145,25 +163,28 @@ class Job
       this.err = []
     endif
 
-    const time_spent = localtime() - this._start_time
+    const time_spent = localtime() - this.start_time
     if time_spent > 2
       this.QfAppend([
         $"[Finished in {time_spent} seconds]",
       ])
     endif
 
-    # TODO: local append
-    execute 'botright copen'
+    # TODO: append
+    const cl = this.local ? 'l' : 'c'
+    execute $'botright {cl}open'
     # XXX: better way to handle cwd in qf window?
-    execute $'lcd {this.cwd}'
+    silent! execute $'lcd {this.cwd}'
     if this.jump
-      execute 'cfirst'
+      execute $'{cl}first'
     endif
 
-    noautocmd setqflist([], 'r', {title: $"{this.cmd} [finished]"})
+    noautocmd this.setqflist([], 'r', {title: $"{this.cmd} [finished]"})
 
     const qfkind = this.kind == 'grep' ? 'grep' : 'make'
     exe $'silent doautocmd QuickFixCmdPost {qfkind}'
+
+    qf_running = false
   enddef
 
   def BuildCmd(prg: string, args: string): string
@@ -206,7 +227,7 @@ class Job
       endif
     endif
 
-    if this._qf
+    if this.qf
       this.QfEnd()
     endif
 
@@ -215,7 +236,7 @@ class Job
 
   def Out_cb(ch: channel, line: string)
     this.out->add(line)
-    if this._qf && this.out->len() > 128
+    if this.qf && this.out->len() > 128
       this.QfAppend(this.out)
       this.out = []
     endif
@@ -223,25 +244,35 @@ class Job
 
   def Err_cb(ch: channel, line: string)
     this.err->add(line)
-    if this._qf && this.err->len() > 128
+    if this.qf && this.err->len() > 128
       this.QfAppend(this.err)
       this.err = []
     endif
   enddef
 
   def QfAppend(lines: list<string>)
-    noautocmd setqflist([], 'a', { efm: this.efm, lines: lines, })
+    noautocmd this.setqflist([], 'a', { efm: this.efm, lines: lines, })
   enddef
 endclass
 
 def Echo(msgs: list<string>, hl: string = "None")
-  var cmd = [$"echohl {hl}"]
-  cmd = cmd + msgs->map((_, x) => $"echom {string(x)}")
-  cmd->add('echohl None')
+  if msgs->empty()
+    return
+  endif
+  const cmd = [$"echohl {hl}"] +
+    msgs->map((_, x) => $"echom {string(x)}") +
+    ['echohl None']
   @z = cmd->join('|')
   feedkeys($":exe @z\n", 'n')
 enddef
 
 def Error(msgs: list<string>)
   Echo(msgs, "ErrorMsg")
+enddef
+
+export def MakeComplete(_, _, _): string
+    if &shell != 'sh' || &makeprg !~# '^make'
+        return ""
+    endif
+    return system("make -npq : 2> /dev/null | awk -v RS= -F: '$1 ~ /^[^#%.]+$/ { print $1 }' | sort -u")
 enddef
