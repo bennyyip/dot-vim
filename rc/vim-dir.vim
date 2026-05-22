@@ -5,6 +5,7 @@ import autoload 'dir/mark.vim'
 g:dir_columns = "name"
 g:dir_show_hidden = v:false
 g:dir_invert_split = v:true
+g:dir_change_cwd = true
 
 nmap -  :<C-u>Dir<CR>
 

@@ -13,8 +13,8 @@ command! -nargs=? -complete=shellcmdline Term term.Run(<q-args> ?? &shell, <q-mo
 noremap <leader>; :Term<space>
 command! Cbuffer cbuffer<BAR>copen
 
-term.TerminalMap("<F12>", ":TermToggle<CR>")
-term.TerminalMap("<F11>", ":TermToggle!<CR>")
+term.TerminalMap("<F11>", ":TermToggle<CR>")
+term.TerminalMap("<F12>", ":TermToggle!<CR>")
 
 set termwinkey=<C-F>
 tnoremap <F1> <C-F>N

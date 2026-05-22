@@ -130,7 +130,8 @@ def LinePluginStatus(): string
   endif
 
   # const tagname = exists('*taglist#Tlist_Get_Tagname_By_Line') ? taglist#Tlist_Get_Tagname_By_Line() : ''
-  const tagname = get(b:, 'vista_nearest_method_or_function', '')
+  # const tagname = get(b:, 'vista_nearest_method_or_function', '')
+  const tagname = tagbar#currenttag('%s', '', 's')
   return [tagname, async_status, illume_status]->FilterAndJoin(' | ')
 enddef
 

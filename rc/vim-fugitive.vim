@@ -14,6 +14,7 @@ augroup vimrc
 augroup end
 
 command! Gpull G pull
+command! Gblame G blame
 command! -nargs=* Glog vertical Git log --oneline --decorate --graph <args>
 
 import autoload '../autoload/git.vim'

@@ -2,7 +2,7 @@ vim9script
 import autoload "utils.vim"
 
 
-export def GotoDefComplete(kind: string, A: string, L: string, P: number): list<string>
+export def GotoDefComplete(kind: string, L: string): string
   const cmd = L->split(' ')[0]
   const is_bang = cmd[-1 : ] == '!'
   var l = execute(kind)->split("\n")
@@ -13,7 +13,7 @@ export def GotoDefComplete(kind: string, A: string, L: string, P: number): list<
   if is_bang
     l->filter("v:val =~  '<Plug>'")
   endif
-  return  l->utils.Matchfuzzy(A)
+  return  l->join("\n")
 enddef
 
 export def DoGotoDef(kind: string, item: string)
@@ -34,8 +34,8 @@ export def DoGotoDef(kind: string, item: string)
   echo 'no match!'
 enddef
 
-export const MapComplete = (A: string, L: string, P: number) => GotoDefComplete("map", A, L, P)
-export const NmapComplete = (A: string, L: string, P: number) => GotoDefComplete("imap", A, L, P)
-export const ImapComplete = (A: string, L: string, P: number) => GotoDefComplete("nmap", A, L, P)
-export const CmapComplete = (A: string, L: string, P: number) => GotoDefComplete("cmap", A, L, P)
-export const XmapComplete = (A: string, L: string, P: number) => GotoDefComplete("xmap", A, L, P)
+export const MapComplete = (_, L: string, _) => GotoDefComplete("map", L)
+export const NmapComplete = (_, L: string, _) => GotoDefComplete("imap", L)
+export const ImapComplete = (_, L: string, _) => GotoDefComplete("nmap", L)
+export const CmapComplete = (_, L: string, _) => GotoDefComplete("cmap", L)
+export const XmapComplete = (_, L: string, _) => GotoDefComplete("xmap", L)

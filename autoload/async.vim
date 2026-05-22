@@ -48,7 +48,7 @@ class Job
   var jump: bool = false
   var append: bool = false
   var wall: bool = false
-  var expand: bool = false
+  var expand: bool = true
   var terminal: bool = false # :Term
   var kind: string = 'qf' # make | grep | echo | qf
   var efm: string # &efm

@@ -55,7 +55,7 @@ augroup vimrc
 
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   # autocmd ModeChanged *:nt setlocal relativenumber
-  autocmd BufRead * call rooter.Rooter()
+  # autocmd BufRead * call rooter.Rooter()
 
   autocmd BufEnter * {
     if &buftype == 'terminal'

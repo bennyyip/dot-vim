@@ -40,17 +40,18 @@ command! PX if !empty(expand('%'))
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
 # Join {{{1
 command! -nargs=1 -range=% -bang Join :<line1>,<line2>call utils.Lilydjwg_join(<q-args>, "<bang>")
+command! -nargs=0 Split feedkeys(':%s``\r`g<left><left><left><left><left>')
 # Quote {{{1
 command! -bang -nargs=? -range=% Quote :<line1>,<line2>call utils.Quote(<q-args>, "<bang>")
 
 command! -bang -nargs=? -range=% StrArray utils.StrArray(<line1>, <line2>)
 # Ghq {{{1
-def GhqList(A: string, ...args: list<any>): list<string>
+def GhqComplete(A: string, ...args: list<any>): string
   const projs =  globpath(expand('~/ghq/github.com'), '*/*', 0, 1)
     ->map((k, x) => substitute(x, '^.*[/\\]\ze[^/\\]*[/\\]', '', ''))
-  return projs->utils.Matchfuzzy(A)
+  return projs->join("\n")
 enddef
-command! -nargs=1 -complete=customlist,GhqList Ghq execute 'edit ' .. expand('~/ghq/github.com/') .. <q-args>
+command! -nargs=1 -complete=custom,GhqComplete Ghq execute 'edit ' .. expand('~/ghq/github.com/') .. <q-args>
 # FollowLink {{{1
 command! -nargs=0 FollowLink utils.FollowLink()
 # SetTabWidth {{{1
@@ -68,12 +69,12 @@ command! -nargs=1 -complete=custom,utils.SessionComplete LoadSession :%bd <bar> 
 # GotoDef {{{1
 import autoload 'gotodef.vim'
 command! -bang -nargs=1 -complete=command Command gotodef.DoGotoDef("command", <f-args>)
-command! -bang -nargs=1 -complete=customlist,gotodef.MapComplete  Map  gotodef.DoGotoDef("map", <f-args>)
-command! -bang -nargs=1 -complete=customlist,gotodef.NmapComplete Imap gotodef.DoGotoDef("imap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,gotodef.ImapComplete Nmap gotodef.DoGotoDef("nmap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,gotodef.CmapComplete Cmap gotodef.DoGotoDef("cmap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,gotodef.XmapComplete Xmap gotodef.DoGotoDef("xmap", <f-args>)
-command! -bang -nargs=1 -complete=customlist,gotodef.XmapComplete Vmap gotodef.DoGotoDef("xmap", <f-args>)
+command! -bang -nargs=1 -complete=custom,gotodef.MapComplete  Map  gotodef.DoGotoDef("map", <f-args>)
+command! -bang -nargs=1 -complete=custom,gotodef.NmapComplete Imap gotodef.DoGotoDef("imap", <f-args>)
+command! -bang -nargs=1 -complete=custom,gotodef.ImapComplete Nmap gotodef.DoGotoDef("nmap", <f-args>)
+command! -bang -nargs=1 -complete=custom,gotodef.CmapComplete Cmap gotodef.DoGotoDef("cmap", <f-args>)
+command! -bang -nargs=1 -complete=custom,gotodef.XmapComplete Xmap gotodef.DoGotoDef("xmap", <f-args>)
+command! -bang -nargs=1 -complete=custom,gotodef.XmapComplete Vmap gotodef.DoGotoDef("xmap", <f-args>)
 
 # }}}
 # Zen {{{1

@@ -123,7 +123,8 @@ Pack 'junegunn/vim-easy-align'
 if !is_win # system() is slow
   Pack 'tpope/vim-apathy' # 'path'
 endif
-Pack 'bennyyip/vista.vim'
+# Pack 'bennyyip/vista.vim'
+Pack 'preservim/tagbar'
 
 Pack 'justinmk/vim-sneak'
 Pack 'markonm/traces.vim'

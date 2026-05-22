@@ -1,20 +1,5 @@
 vim9script
 
-export def Matchfuzzy(l: list<string>, str: string): list<string> # {{{1
-  if str == ''
-    return l
-  else
-    return matchfuzzy(l, str)
-  endif
-enddef
-
-export def GetCurorLines() # {{{1
-  const in_visual_mode = (mode() ==? 'v')
-  const lnums = in_visual_mode
-        \ ? range(line('''<'), line('''>'))
-        \ : [line('.')]
-enddef
-
 export def SetTabWidth(n: number, expandtab: bool, softtabstop: number = -1) # {{{1
   execute $'setlocal shiftwidth={n} tabstop={n} softtabstop={softtabstop}'
   if expandtab
