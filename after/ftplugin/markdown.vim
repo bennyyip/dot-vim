@@ -1,10 +1,9 @@
 vim9script
+import autoload 'qf.vim'
+
 setlocal wrap
 
 b:markdown_yaml_head = 1
-b:pandoc_compiler_args = '--toc --toc-depth=3 -f gfm --wrap=preserve'
-
-import autoload 'qf.vim'
 
 command -buffer TOC {
   set quickfixtextfunc=QF_TOC
@@ -50,3 +49,18 @@ def MarkdownCR(): string
 enddef
 
 inoremap <expr> <buffer> <CR> MarkdownCR()
+
+# XXX make css realative to <sfile>?
+b:pandoc_compiler_args = $"-f gfm --wrap=preserve -c file://{expand('~')}/dotfiles/pandoc.css"
+def MarkdownPreview()
+  compiler pandoc
+  make html
+  const ssl = &shellslash
+  set noshellslash
+  :Open %<.html
+  &shellslash = ssl
+enddef
+command -nargs=0 -buffer MarkdownPreview MarkdownPreview()
+command -nargs=0 MarkdownPreviewDelete delete(expand('%<') .. '.html')
+
+

@@ -132,6 +132,26 @@ if executable('rust-analyzer')
   })
 endif
 # }}}
+# odin {{{1
+if executable('odin-ls')
+  lsp_servers->add({
+    name: 'ols',
+    filetype: ['odin'],
+    path: 'odin-ls',
+    rootSearch: ['ols.json'],
+    completionMatcher: 'fuzzy', # case | fuzzy | icase
+  })
+endif
+# }}}
+# zig {{{1
+if executable('zls')
+  lsp_servers->add({
+    name: 'zls',
+    filetype: ['zig'],
+    path: 'zls',
+  })
+endif
+# }}}
 
 def DisableDiag()
   g:LspOptionsSet({
@@ -229,13 +249,13 @@ highlight link LspSigActiveParameter Type
 var lsp_options = {
   autoComplete: false,
   omniComplete: true,
-  # completionMatcher: 'fuzzy',
+  completionMatcher: 'icase', # case | fuzzy | icase
   usePopupInCodeAction: true,
   showSignature: false,
   semanticHighlight: false,
   condensedCompletionMenu: true,
   useQuickfixForLocations: true,
-  ignoreCompleteItemsIsIncomplete: ['rustanalyzer'],
+  ignoreCompleteItemsIsIncomplete: ['rustanalyzer', 'ols'],
 
   popupBorder: true,
   popupBorderChars: ['─', '│', '─', '│', '┌', '┐', '┘', '└'],

@@ -2,7 +2,7 @@ vim9script
 import autoload "./plugpac.vim"
 
 export def PackSummary()
-  plugpac#Init()
+  plugpac.Init()
   const pluglist = minpac#getpluglist()
   const start_cnt = pluglist->mapnew((k, v) => v['type'])->count('start')
   const opt_cnt = pluglist->mapnew((k, v) => v['type'])->count('opt')
@@ -11,23 +11,23 @@ export def PackSummary()
 enddef
 
 export def PackUrl(pack: string)
-  plugpac#Init()
+  plugpac.Init()
   const url = minpac#getpluginfo(pack).url
   os#Open(url)
 enddef
 
 export def PackDir(pack: string)
-  plugpac#Init()
+  plugpac.Init()
   execute 'edit ' .. minpac#getpluginfo(pack).dir
 enddef
 
 export def PackRc(pack: string)
-  call plugpac#Init()
+  call plugpac.Init()
   execute 'edit ' .. RcPath(minpac#getpluginfo(pack).name)
 enddef
 
 export def PackRcPre(pack: string)
-  call plugpac#Init()
+  call plugpac.Init()
   execute 'edit ' .. RcPath(minpac#getpluginfo(pack).name, 'pre-')
 enddef
 
@@ -37,7 +37,7 @@ enddef
 
 
 export def PackUnusedRC(only_minpac: bool = false): list<string>
-  plugpac#Init()
+  plugpac.Init()
   var rcs = []
   if only_minpac
     rcs = minpac#getpluglist()->keys()->mapnew((_, k) => [RcPath(k), RcPath(k, 'pre-')])->flattennew()
@@ -55,15 +55,15 @@ export def PackUnusedRC(only_minpac: bool = false): list<string>
 enddef
 
 def StartPluginComplete(_, _, _): string
-  return plugpac#GetInstalledPlugins('start')->keys()->join("\n")
+  return plugpac.GetInstalledPlugins('start')->keys()->join("\n")
 enddef
 
 export def OptPluginComplete(_, _, _): string
-  return plugpac#GetInstalledPlugins('opt')->keys()->join("\n")
+  return plugpac.GetInstalledPlugins('opt')->keys()->join("\n")
 enddef
 
 def PackComplete(..._args: list<any>): string
-  plugpac#Init()
+  plugpac.Init()
   return minpac#getpluglist()->keys()->sort() ->join("\n")
 enddef
 
@@ -76,7 +76,7 @@ def DisableEnablePlugin(plugin: string, disable: bool)
     dst = 'opt'
   endif
 
-  const plugins = plugpac#GetInstalledPlugins(src_)
+  const plugins = plugpac.GetInstalledPlugins(src_)
   if !has_key(plugins, plugin)
     Err(plugin .. ' does not exists.')
     return

@@ -64,10 +64,10 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m
 endif
 
-set laststatus=2 showcmd showmatch noshowmode
+set laststatus=2 showcmd noshowmode
 set modeline modelines=1
 set matchpairs=(:),{:},[:],《:》,〈:〉,［:］,（:）,「:」,『:』,‘:’,“:”
-set matchtime=0
+# set matchtime=5 showmatch
 
 set fileformat=unix fileformats=unix,dos
 set fileencodings=ucs-bom,utf-8,utf-16le,gbk,big5,gb18030,gb2312,cp936,usc-bom,euc-jp
@@ -99,6 +99,12 @@ set nolangremap
 set makeprg=make\ -e
 set efm^=%-G%f%l:\ note:%m
 
+# always use pipe, no more black window
+set noshelltemp
+
+# no more backslash
+set shellslash
+set completeslash=slash
 
 $RIPGREP_CONFIG_PATH = $HOME .. '/.ripgreprc'
 if $W64DEVKIT != ""

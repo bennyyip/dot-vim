@@ -22,29 +22,29 @@ export def IsWsl(): bool
   return exists("$WSLENV")
 enddef
 
-export def ForceCmdexe()
-  if !executable("cmd.exe")
-    return
-  endif
 
-  if &shell !~? "cmd" || &shellslash
-    shell = &shell
-    shellslash = &shellslash
-    shellcmdflag = &shellcmdflag
+if !executable("cmd.exe")
+  export def RestoreShell()
+  enddef
+  export def ForceCmdexe()
+  enddef
+else
+  export def RestoreShell()
+    &shell = shell
+    &shellslash = shellslash
+    &shellcmdflag = shellcmdflag
+  enddef
+  export def ForceCmdexe()
+    if &shell !~? "cmd" || &shellslash
+      shell = &shell
+      shellslash = &shellslash
+      shellcmdflag = &shellcmdflag
 
-    &shell = $COMSPEC
-    set noshellslash shellcmdflag=/c
-  endif
-enddef
-
-export def RestoreShell()
-  if !executable("cmd.exe")
-    return
-  endif
-  &shell = shell
-  &shellslash = shellslash
-  &shellcmdflag = shellcmdflag
-enddef
+      &shell = $COMSPEC
+      set noshellslash shellcmdflag=/c
+    endif
+  enddef
+endif
 
 # Return Windows path from WSL
 export def WslToWindowsPath(path: string): string
@@ -62,10 +62,8 @@ enddef
 
 # Open explorer/nautilus/dolphin with current file selected (if possible).
 export def FileManager(cmd: list<string> = [])
-  if executable("cmd.exe")
-    ForceCmdexe()
-    defer RestoreShell()
-  endif
+  ForceCmdexe()
+  defer RestoreShell()
 
   var path = ''
   if expand("%:p") == ""
@@ -131,10 +129,8 @@ export def Open(url: string)
     return
   endif
 
-  if executable("cmd.exe")
-    ForceCmdexe()
-    defer RestoreShell()
-  endif
+  ForceCmdexe()
+  defer RestoreShell()
   vim9.Open(url)
 enddef
 

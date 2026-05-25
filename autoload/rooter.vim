@@ -64,12 +64,12 @@ export def Rooter(cdcmd: string = 'lcd')
 
   if !rootdir->empty()
     silent! exe cdcmd .. ' ' rootdir
-    # else
-    # const curdir = CurDir()
-    # if curdir->empty()
-    #   return
-    # endif
-    # exe cdcmd .. " " .. curdir
+  # else
+  #   const curdir = CurDir()
+  #   if curdir->empty()
+  #     return
+  #   endif
+  #   exe cdcmd .. " " .. curdir
   endif
 enddef
 

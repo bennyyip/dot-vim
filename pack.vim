@@ -4,14 +4,17 @@ import autoload "utils.vim"
 const is_win = has('win32')
 
 const package_name = 'minpac'
-const minpac_dir = $'{$MYVIMDIR}/pack/{package_name}/opt/minpac'
+const minpac_dir = $'{expand($MYVIMDIR)}/pack/{package_name}/opt/minpac'
 
-command MinpacInstall {
-  if !isdirectory(minpac_dir)
-    silent! execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
-    :qall
-  endif
-}
+if !isdirectory(minpac_dir)
+  echom $"\"{minpac_dir}\" doesn't exist. Run :MinpacInstall to install."
+  command MinpacInstall {
+    execute printf('!git clone https://github.com/k-takata/minpac.git %s', minpac_dir)
+    qall
+  }
+endif
+
+
 # Builtin {{{1
 timer_start(0, (_) => {
   if !getcompletion('helptoc', 'packadd')->empty()
@@ -98,13 +101,12 @@ Pack 'BourgeoisBear/clrzr'
 Pack 'dstein64/vim-startuptime'
 Pack 'junegunn/goyo.vim'
 Pack 'bootleq/vim-cycle'
-Pack 'LunarWatcher/auto-pairs'
 Pack 'Konfekt/vim-alias'
 Pack 'nickspoons/vim-movefast'
 Pack 'AndrewRadev/linediff.vim'
 Pack 'itchyny/vim-cursorword'
 Pack 'lfv89/vim-interestingwords'
-Pack 'luochen1990/rainbow'
+# Pack 'luochen1990/rainbow'
 Pack 'mbbill/undotree'
 Pack 'tpope/vim-characterize'
 Pack 'tpope/vim-repeat'
@@ -153,10 +155,6 @@ endif
 # Pack 'MaxMEllon/vim-jsx-pretty'
 # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
 # Markup {{{3
-if is_win
-  # Pack 'iamcco/markdown-preview.nvim', { 'do': "packadd markdown-preview.nvim \| call mkdp#util#install()" }
-  Pack 'iamcco/markdown-preview.nvim'
-endif
 # }}}
 # }}}
 Pack 'SirVer/ultisnips'

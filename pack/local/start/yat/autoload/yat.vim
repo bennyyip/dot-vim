@@ -62,6 +62,7 @@ export def Open()
 
   nnoremap <buffer><silent><nowait> <CR> <scriptcmd>execute $"normal {getline('.')[col('.') - 1]}"<CR>
   nnoremap <buffer><silent><nowait> q <cmd>q<CR>
+  nnoremap <buffer><silent><nowait> e <cmd>enew<BAR>set buftype=nofile<CR>
 
   setlocal nomodifiable nomodified readonly
   normal! zb

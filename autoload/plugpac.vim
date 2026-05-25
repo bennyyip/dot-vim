@@ -35,17 +35,19 @@ var cached_installed_plugins = {}
 var minpac_init_opts = {}
 
 var package_name = "minpac"
-var quiet = v:false
+var quiet = false
 
 const plugpac_plugin_conf_path = get(g:, 'plugpac_plugin_conf_path', '')
 
 export def Begin(opts: dict<any> = {})
   repos = {}
+  lazy_plugins = []
+  cached_installed_plugins = {}
 
   minpac_init_opts = opts
 
   package_name = get(opts, 'package_name', 'minpac')
-  quiet = get(opts, 'quiet', v:false)
+  quiet = get(opts, 'quiet', false)
 
   if exists('#PlugPac')
     augroup PlugPac
@@ -81,21 +83,66 @@ export def Add(repo: string, opts: dict<any> = {})
   repos[repo] = opts
 
   if !HasPlugin(name)
-    # timer_start(20, (_) => {
     if !quiet
       Err($'Missing plugin `{repo}`. Run :PackInstall to install it.')
     endif
-    # })
     return
   endif
 
   if type == 'delay'
+    # remeber Add() order
     lazy_plugins->add(name)
   else
     const pre_rc_path = GetRcPath(name, true)
     if filereadable(pre_rc_path)
       execute $'source {pre_rc_path}'
     endif
+  endif
+enddef
+
+
+export def Init()
+  packadd minpac
+
+  minpac#init(minpac_init_opts)
+  for [repo, opts] in items(repos)
+    minpac#add(repo, opts)
+  endfor
+
+  cached_installed_plugins = {}
+enddef
+
+export def HasPlugin(plugin: string): bool
+  return has_key(GetInstalledPlugins(), plugin)
+enddef
+
+export def GetInstalledPlugins(type_: string = 'all'): dict<string>
+  if has_key(cached_installed_plugins, type_)
+    return cached_installed_plugins[type_]
+  endif
+
+  var t = type_
+  if type_ == 'all'
+    t = '*'
+  endif
+
+  const pat = $'pack/{package_name}/{t}/*'
+  final plugin_paths = filter(globpath(&packpath, pat, 0, 1), (k, v) => isdirectory(v))
+  final result = {}
+  for p in plugin_paths
+    result[substitute(p, '^.*[/\\]', '', '')] = p
+  endfor
+
+  cached_installed_plugins[type_] = result
+  return result
+enddef
+
+def GetRcPath(plugin: string, is_pre: bool = false): string
+  if plugpac_plugin_conf_path != '' && HasPlugin(plugin)
+    const prefix = is_pre ? 'pre-' : ''
+    return expand(plugpac_plugin_conf_path .. '/' .. prefix .. substitute(plugin, '\.n\?vim$', '', '') .. '.vim')
+  else
+    return ''
   endif
 enddef
 
@@ -133,27 +180,6 @@ def DelayLoadAll()
   })
 enddef
 
-def GetRcPath(plugin: string, is_pre: bool = false): string
-  if plugpac_plugin_conf_path != '' && HasPlugin(plugin)
-    const prefix = is_pre ? 'pre-' : ''
-    return expand(plugpac_plugin_conf_path .. '/' .. prefix .. substitute(plugin, '\.n\?vim$', '', '') .. '.vim')
-  else
-    return ''
-  endif
-enddef
-
-export def HasPlugin(plugin: string): bool
-  return has_key(GetInstalledPlugins(), plugin)
-enddef
-
-def Assoc(dict: dict<any>, key: string, val: any)
-  dict[key] = add(get(dict, key, []), val)
-enddef
-
-def ToArray(v: any): list<string>
-  return type(v) == v:t_list ? v : [v]
-enddef
-
 def Err(msg: any)
   echohl ErrorMsg
   echom '[plugpac] ' .. msg
@@ -172,36 +198,4 @@ def SetupCommands()
   command! -bar PackUpdate  call Init() | call minpac#update('', {'do': 'call minpac#status()'})
   command! -bar PackClean   call Init() | call minpac#clean()
   command! -bar PackStatus  call Init() | call minpac#status()
-enddef
-
-export def Init()
-  packadd minpac
-
-  minpac#init(minpac_init_opts)
-  for [repo, opts] in items(repos)
-    minpac#add(repo, opts)
-  endfor
-
-  cached_installed_plugins = {}
-enddef
-
-export def GetInstalledPlugins(type_: string = 'all'): dict<string>
-  if has_key(cached_installed_plugins, type_)
-    return cached_installed_plugins[type_]
-  endif
-
-  var t = type_
-  if type_ == 'all'
-    t = '*'
-  endif
-
-  const pat = $'pack/{package_name}/{t}/*'
-  final plugin_paths = filter(globpath(&packpath, pat, 0, 1), (k, v) => isdirectory(v))
-  final result = {}
-  for p in plugin_paths
-    result[substitute(p, '^.*[/\\]', '', '')] = p
-  endfor
-
-  cached_installed_plugins[type_] = result
-  return result
 enddef

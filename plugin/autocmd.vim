@@ -72,6 +72,9 @@ augroup vimrc
   # ftdetect
   autocmd BufNewFile,BufRead *.base setfiletype yaml
   autocmd BufReadPost,BufNewFile *.mly setfiletype menhir
+
+  # highlight brackets
+  autocmd FileType * highlight! link BenBracket Delimiter | syn match BenBracket  /[(){}\[\]]/
 augroup END
 
 # FileType
@@ -83,7 +86,7 @@ for ft in ['python']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, true)' }])
 endfor
 
-for ft in ['go', 'gitconfig']
+for ft in ['go', 'gitconfig', 'odin']
   autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, false)' }])
 endfor
 

@@ -35,6 +35,8 @@ inoremap <m-.> <c-o>o
 imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><left>
 # time
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S", "%Y-%m-%d", '%FT%T%z', "%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
+# Auto insert second part of match pair on <CR>
+inoremap <expr> <CR> utils#PairCR()
 # rsi {{{1
 inoremap      <C-A> <C-O>^
 inoremap <C-X><C-A> <C-A>
@@ -231,7 +233,7 @@ nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
 nnoremap <C-G><C-G> <C-G>
 # tab {{{1
-nmap     T :tabnew<cr>
+nmap     T :$tabnew<cr>
 # nnoremap ]t :tabn<cr>
 # nnoremap [t :tabp<cr>
 def SwitchTab(i: number)

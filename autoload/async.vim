@@ -2,7 +2,7 @@ vim9script
 
 g:async_jobs = {}
 
-var async_last_job = {}
+var async_last_job: any = null
 var qf_running = false
 
 export def Run(args: string, opts: dict<any>)
@@ -10,7 +10,10 @@ export def Run(args: string, opts: dict<any>)
 enddef
 
 export def ReRun(terminal: bool = false)
-  Job.new(async_last_job['args'], async_last_job['opts']->extendnew({terminal: terminal}))
+  if async_last_job != null
+    async_last_job.terminal = terminal
+    async_last_job.Run()
+  endif
 enddef
 
 export def Compiler(bang: bool, local: bool, compiler: string, ...args: list<string>)
@@ -44,39 +47,30 @@ enddef
 
 class Job
   # opts begin
-  var local: bool = false
-  var jump: bool = false
-  var append: bool = false
-  var wall: bool = false
-  var expand: bool = true
-  var terminal: bool = false # :Term
-  var kind: string = 'qf' # make | grep | echo | qf
-  var efm: string # &efm
-  var cwd: string # getcwd()
+  public var local: bool = false
+  public var jump: bool = false
+  public var append: bool = false
+  public var wall: bool = false
+  public var expand: bool = true
+  public var terminal: bool = false # :Term
+  public var kind: string = 'qf' # make | grep | echo | qf
+  public var efm: string # &efm
+  public var cwd: string # getcwd()
   # opts end
 
-  var id: number
   var cmd: string
+  var qf: bool
+  var setqflist: func
 
+  var id: number
+  var start_time: number
   var out: list<string>
   var err: list<string>
   var job: job
 
-  var qf: bool
-  var start_time: number
-  var setqflist: func
-
   static var _id_ = 0
 
   def new(args: string, opts: dict<any> = {})
-    async_last_job = {
-      args: args,
-      opts: opts,
-    }
-
-    this.out = []
-    this.err = []
-
     this.local = opts->get('local', this.local)
     this.jump = opts->get('jump', this.jump)
     this.append = opts->get('append', this.append)
@@ -87,13 +81,13 @@ class Job
 
     this.kind = opts->get('kind', this.kind)
     if this.kind == 'grep'
-      this.cmd = this.BuildCmd(&grepprg, args)
+      this.cmd = opts->get('cmd', this.BuildCmd(&grepprg, args))
       this.efm = opts->get('efm', bufnr()->getbufvar('&gfm'))
     else
       if this.kind == 'make'
-        this.cmd = this.BuildCmd(&makeprg, args)
+        this.cmd = opts->get('cmd', this.BuildCmd(&makeprg, args))
       else
-        this.cmd = this.BuildCmd('', args)
+        this.cmd = opts->get('cmd', this.BuildCmd('', args))
       endif
       this.efm = opts->get('efm', bufnr()->getbufvar('&efm'))
     endif
@@ -112,7 +106,15 @@ class Job
       this.setqflist = function('setqflist')
     endif
 
-    this.qf = this.kind != 'echo'
+    this.qf = this.kind != 'echo' && !this.terminal
+    this.Run()
+  enddef
+
+  def Run()
+    this.out = []
+    this.err = []
+    this.start_time = localtime()
+
     if this.qf
       if qf_running
         Error(["Another quickfix task is running."])
@@ -122,7 +124,6 @@ class Job
       qf_running = true
     endif
 
-    this.start_time = localtime()
     this.job = job_start([&shell, &shellcmdflag, this.cmd], {
       exit_cb: this.Exit_cb,
 
@@ -139,7 +140,6 @@ class Job
     this.id = _id_
     g:async_jobs[_id_] = this
     _id_ += 1
-
   enddef
 
   def Kill(how: string='term')
@@ -176,7 +176,7 @@ class Job
     # XXX: better way to handle cwd in qf window?
     silent! execute $'lcd {this.cwd}'
     if this.jump
-      execute $'{cl}first'
+      execute $'silent! {cl}first'
     endif
 
     noautocmd this.setqflist([], 'r', {title: $"{this.cmd} [finished]"})
@@ -232,6 +232,7 @@ class Job
     endif
 
     g:async_jobs->remove(this.id)
+    async_last_job = this
   enddef
 
   def Out_cb(ch: channel, line: string)

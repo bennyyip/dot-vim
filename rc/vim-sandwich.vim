@@ -1,8 +1,7 @@
 vim9script
 
 # disable animation
-g:operator#sandwich#set('all', 'all', 'highlight', 0)
-
+operator#sandwich#set('all', 'all', 'highlight', 0)
 g:sandwich#recipes = g:sandwich#default_recipes->extendnew([
   {'buns': ['“', '”'], 'input': ['Q']},
 ])
