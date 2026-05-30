@@ -1,5 +1,7 @@
 vim9script
 
+# show marks in `signcolumn'
+
 def UpdateMarks(bufnr: number = bufnr())
     sign_unplace("marks", {buffer: bufnr})
     var local_marks = getmarklist(bufnr)->filter((_, v) => v.mark =~ '[[:alpha:]]')

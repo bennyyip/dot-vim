@@ -252,13 +252,23 @@ enddef
 # 1}}}
 export def PairCR(): string # {{{1
   # make it global so endwise works
-  const char = getline('.')[charcol('.') - 2]
+  const line = getline('.')
+  const line_len = line->strchars()
+  const _col = charcol('.')
+
+  if _col - 1 != line_len
+    # only close when at eol
+    return "\<CR>"
+  endif
+
+  const char = line[_col - 2]
   const pairs = &mps->split(',')->map((_, x) => x->split(':'))
   for [open, close] in pairs
     if char == open
       return $"\<CR>{close}\<ESC>O"
     endif
   endfor
+
   return "\<CR>"
 enddef
 # }}}

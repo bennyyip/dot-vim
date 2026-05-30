@@ -56,9 +56,9 @@ def IllumeInfill()
     setline(line('.') + 1, '')
 enddef
 
-nnoremap <localleader>a <scriptcmd>Illume()<cr>
-nnoremap <localleader>f <scriptcmd>IllumeInfill()<cr>
-nnoremap <localleader>s <scriptcmd>IllumeStop()<cr>
-nnoremap <localleader>u Go<cr>!user<cr><cr>
+nnoremap <buffer> <localleader>a <scriptcmd>Illume()<cr>
+nnoremap <buffer> <localleader>f <scriptcmd>IllumeInfill()<cr>
+nnoremap <buffer> <localleader>s <scriptcmd>IllumeStop()<cr>
+nnoremap <buffer> <localleader>u Go<cr>!user<cr><cr>
 
 nnoremap <buffer> <F5> :<c-u>update<BAR>Term illume < %<CR><C-\><C-N>:set ft=markdown<BAR>set conceallevel=3<CR>i

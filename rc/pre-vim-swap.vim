@@ -9,5 +9,5 @@ xmap aa <Plug>(swap-textobject-a)
 
 nmap g, <Plug>(swap-prev)
 nmap g. <Plug>(swap-next)
-nmap gS <Plug>(swap-interactive)
-xmap gs <Plug>(swap-interactive)
+# nmap gS <Plug>(swap-interactive)
+# xmap gs <Plug>(swap-interactive)

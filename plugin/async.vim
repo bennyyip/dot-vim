@@ -8,6 +8,7 @@ command! -nargs=1 -bang -complete=shellcmdline AsyncQf async.Run(<q-args>, {'kin
 command! -nargs=+ -bang -complete=shellcmdline AsyncSpawn async.Spawn(<f-args>)
 command! -bang AsyncReRun async.ReRun(<bang>0)
 command! -nargs=0 StopJobs async.StopJobs()
+command! -nargs=0 AsyncToggleSound async.ToggleSound()
 
 command! -nargs=+ -bang -complete=compiler Compiler async.Compiler(!<bang>0, false, <f-args>)
 command! -nargs=+ -bang -complete=compiler LCompiler async.Compiler(!<bang>0, true, <f-args>)

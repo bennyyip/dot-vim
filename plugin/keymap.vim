@@ -168,6 +168,7 @@ def Refresh(hard: bool)
     if has('diff')
         diffupdate
     endif
+    sound_clear()
     normal! <C-L>
 enddef
 nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>

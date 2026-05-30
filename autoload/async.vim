@@ -1,9 +1,10 @@
 vim9script
 
 g:async_jobs = {}
+g:async_play_sound = false
 
 var async_last_job: any = null
-var qf_running = false
+var qf_writing = false
 
 export def Run(args: string, opts: dict<any>)
   Job.new(args, opts)
@@ -14,6 +15,11 @@ export def ReRun(terminal: bool = false)
     async_last_job.terminal = terminal
     async_last_job.Run()
   endif
+enddef
+
+export def ToggleSound()
+  g:async_play_sound = !g:async_play_sound
+  echo $"Play Sound: {g:async_play_sound}"
 enddef
 
 export def Compiler(bang: bool, local: bool, compiler: string, ...args: list<string>)
@@ -33,7 +39,7 @@ export def StopJobs(how: string='term')
     g:async_jobs->remove(id)
     echom $'kill job {id}'
   endfor
-  qf_running = false
+  qf_writing = false
 enddef
 
 export def Spawn(...args: list<string>)
@@ -116,12 +122,12 @@ class Job
     this.start_time = localtime()
 
     if this.qf
-      if qf_running
+      if qf_writing
         Error(["Another quickfix task is running."])
         return
       endif
       this.QfStart()
-      qf_running = true
+      qf_writing = true
     endif
 
     this.job = job_start([&shell, &shellcmdflag, this.cmd], {
@@ -184,7 +190,7 @@ class Job
     const qfkind = this.kind == 'grep' ? 'grep' : 'make'
     exe $'silent doautocmd QuickFixCmdPost {qfkind}'
 
-    qf_running = false
+    qf_writing = false
   enddef
 
   def BuildCmd(prg: string, args: string): string
@@ -229,6 +235,10 @@ class Job
 
     if this.qf
       this.QfEnd()
+    endif
+
+    if g:async_play_sound && (localtime() - this.start_time) > 1
+      sound_playfile($HOME .. '/done.wav')
     endif
 
     g:async_jobs->remove(this.id)

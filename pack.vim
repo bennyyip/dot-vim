@@ -115,6 +115,8 @@ if !is_win && exists('$DISPLAY')
   Pack 'lilydjwg/fcitx.vim'
 endif
 Pack 'bennyyip/vim-fzy'
+# Pack 'bennyyip/vista.vim'
+Pack 'preservim/tagbar'
 # Motion and Edit {{{1
 Pack 'machakann/vim-swap' # g, g. gs gS
 Pack 'bennyyip/vim-debugstring' # <leader>ds
@@ -125,8 +127,6 @@ Pack 'junegunn/vim-easy-align'
 if !is_win # system() is slow
   Pack 'tpope/vim-apathy' # 'path'
 endif
-# Pack 'bennyyip/vista.vim'
-Pack 'preservim/tagbar'
 
 Pack 'justinmk/vim-sneak'
 Pack 'markonm/traces.vim'
@@ -151,12 +151,8 @@ Pack 'lervag/vimtex'
 if executable('nim')
   Pack 'zah/nim.vim'
 endif
-# Web {{{3
 # Pack 'MaxMEllon/vim-jsx-pretty'
 # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
-# Markup {{{3
-# }}}
-# }}}
 Pack 'SirVer/ultisnips'
 Pack 'honza/vim-snippets', { 'type': 'opt' }
 #}}}
