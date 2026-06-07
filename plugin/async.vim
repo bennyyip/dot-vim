@@ -10,8 +10,9 @@ command! -bang AsyncReRun async.ReRun(<bang>0)
 command! -nargs=0 StopJobs async.StopJobs()
 command! -nargs=0 AsyncToggleSound async.ToggleSound()
 
-command! -nargs=+ -bang -complete=compiler Compiler async.Compiler(!<bang>0, false, <f-args>)
-command! -nargs=+ -bang -complete=compiler LCompiler async.Compiler(!<bang>0, true, <f-args>)
+command! -nargs=+ -bang -complete=compiler Compiler async.Compiler({jump: !<bang>0}, <f-args>)
+command! -nargs=+ -bang -complete=compiler QCompiler async.Compiler({jump: !<bang>0, copen: false}, <f-args>)
+command! -nargs=+ -bang -complete=compiler LCompiler async.Compiler({jump: !<bang>0, local: true}, <f-args>)
 command! -nargs=? -bang -complete=custom,async.MakeComplete Make async.Run(<q-args>, {'kind': 'make', 'wall': true, 'jump': <bang>0})
 
 command! -bang -bar -nargs=? Gpush execute $'AsyncCmd git -C {fnameescape(g:FugitiveGitDir())} push' <q-args>

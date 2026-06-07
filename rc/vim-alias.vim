@@ -31,4 +31,5 @@ Alias gdb  Termdebug
 Alias cbuf Cbuffer
 Alias rg Rg
 Alias rgr Rgr
+Alias doc Doc
 

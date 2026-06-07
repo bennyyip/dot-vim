@@ -260,19 +260,21 @@ Search                 white           magenta
 CurSearch              white           green
 ; IncSearch              none            none              reverse
 IncSearch -> CurSearch
+
+
 QuickFixLine           none            colorQF
 
 
 Pmenu                  tx              bg_2
 PmenuSbar              none            bg_2
-PmenuSel               none            ui
+PmenuSel               bg_2            pu
 PmenuThumb             none            ui
 PmenuKind              re              bg_2
 PmenuKindSel           re              ui
 PmenuExtra             tx_2            bg_2
 PmenuExtraSel          tx_2            ui
 PmenuMatch             pu              none              bold
-PmenuMatchSel          pu              none              bold
+PmenuMatchSel          none            none              bold
 WildMenu               bl              bg_2              bold
 PmenuBorder            tx_2            bg_2
 

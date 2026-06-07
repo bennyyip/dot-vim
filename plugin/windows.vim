@@ -1,6 +1,7 @@
 vim9script
 if !has('win32') | finish | endif
 
+set sh=sh shcf=-c sxq=\" sxe=
 $SHELL = 'sh'
 # set shell=$SHELL
 # set shell=C:\WINDOWS\system32\cmd.exe

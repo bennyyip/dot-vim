@@ -9,6 +9,7 @@ set complete=.,w,b,u,t
 if has("patch-9.1.1409")
   set complete=.^7,w^5,b^5,u^3,t
 endif
+set complete-=t
 
 if exists('+autocompletedelay')
   # set autocomplete

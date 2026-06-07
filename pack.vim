@@ -84,7 +84,7 @@ call plugpac#Begin({
 Pack 'k-takata/minpac', {'type': 'opt'}
 
 if getcompletion('retrobox', 'color')->empty()
-  Pack 'lifepillar/vim-gruvbox8', { 'type': 'opt' }
+  Pack 'https://codeberg.org/lifepillar/vim-gruvbox8', { 'type': 'opt' }
 endif
 if getcompletion('comment', 'packadd')->empty()
   Pack 'tomtom/tcomment_vim'
@@ -151,6 +151,7 @@ Pack 'lervag/vimtex'
 if executable('nim')
   Pack 'zah/nim.vim'
 endif
+Pack 'rhysd/vim-llvm'
 # Pack 'MaxMEllon/vim-jsx-pretty'
 # Pack 'mattn/emmet-vim', { 'for': ['xml', 'html', 'css', 'javascript', 'typescript', 'typescript.tsx'] }
 Pack 'SirVer/ultisnips'

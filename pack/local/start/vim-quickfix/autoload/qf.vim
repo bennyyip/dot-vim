@@ -105,10 +105,19 @@ export def PrevFile()
   endtry
 enddef
 
+
+export def IsOpen(type: string = 'c'): bool
+  if type == 'l'
+    return getwininfo()->filter('v:val.loclist')->len() > 0
+  else
+    const tabnr = tabpagenr()
+    return getwininfo()->filter((_, v) => v.quickfix == 1 && v.tabnr == tabnr )->len() > 0
+  endif
+enddef
+
 # Toggle quickfix and loclist
 export def ToggleQF()
-  const tabnr = tabpagenr()
-  if getwininfo()->filter((_, v) => v.quickfix == 1 && v.tabnr == tabnr )->len() > 0
+  if IsOpen('c')
     cclose
   else
     botright copen
@@ -116,7 +125,7 @@ export def ToggleQF()
 enddef
 
 export def ToggleLoc()
-  if getwininfo()->filter('v:val.loclist')->len() > 0
+  if IsOpen('l')
     lclose
   else
     botright lopen

@@ -79,7 +79,9 @@ export def FileManager(cmd: list<string> = [])
     return
   endif
 
-  if executable("cmd.exe")
+  if executable("fpilot.exe")
+    job_start(["fpilot.exe", path])
+  elseif executable("cmd.exe")
     var job_opts = {}
     if IsWsl()
       path = escape(WslToWindowsPath(path), '\')

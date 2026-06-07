@@ -139,7 +139,10 @@ if executable('odin-ls')
     filetype: ['odin'],
     path: 'odin-ls',
     rootSearch: ['ols.json'],
-    completionMatcher: 'fuzzy', # case | fuzzy | icase
+
+    initializationOptions: {
+      enable_auto_import: false
+    },
   })
 endif
 # }}}
@@ -200,6 +203,7 @@ def LspSetup()
   nnoremap <silent><buffer> gr        <Cmd>LspShowReferences<CR>
   nnoremap <silent><buffer> <F2>      <Cmd>LspRename<CR>
 
+  nnoremap <silent><buffer> <localleader>\ <cmd>LspDocumentSymbol<CR>
   nnoremap <silent><buffer> <LocalLeader>s <Cmd>LspShowSignature<CR>
   nnoremap <silent><buffer> <localleader>h <Cmd>LspHighlight<CR>
   nnoremap <silent><buffer> <localleader>H <Cmd>LspHighlightClear<CR>
@@ -249,7 +253,7 @@ highlight link LspSigActiveParameter Type
 var lsp_options = {
   autoComplete: false,
   omniComplete: true,
-  completionMatcher: 'icase', # case | fuzzy | icase
+  completionMatcher: 'fuzzy', # case | fuzzy | icase
   usePopupInCodeAction: true,
   showSignature: false,
   semanticHighlight: false,

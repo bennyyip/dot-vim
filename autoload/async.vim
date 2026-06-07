@@ -1,5 +1,7 @@
 vim9script
 
+import autoload 'qf.vim'
+
 g:async_jobs = {}
 g:async_play_sound = false
 
@@ -22,15 +24,14 @@ export def ToggleSound()
   echo $"Play Sound: {g:async_play_sound}"
 enddef
 
-export def Compiler(bang: bool, local: bool, compiler: string, ...args: list<string>)
+export def Compiler(opts: dict<any>, compiler: string, ...args: list<string>)
   exe $"compiler {compiler}"
 
-  Run(args->join(' '), {
+  var default_opts = {
     kind: 'make',
-    local: local,
-    jump: bang,
     wall: true,
-  })
+  }
+  Run(args->join(' '), default_opts->extend(opts))
 enddef
 
 export def StopJobs(how: string='term')
@@ -62,6 +63,7 @@ class Job
   public var kind: string = 'qf' # make | grep | echo | qf
   public var efm: string # &efm
   public var cwd: string # getcwd()
+  public var copen: bool = true
   # opts end
 
   var cmd: string
@@ -84,6 +86,7 @@ class Job
     this.expand = opts->get('expand', this.expand)
     this.terminal = opts->get('terminal', this.terminal)
     this.cwd = opts->get('cwd', getcwd())
+    this.copen = opts->get('copen', this.copen)
 
     this.kind = opts->get('kind', this.kind)
     if this.kind == 'grep'
@@ -102,10 +105,6 @@ class Job
       silent! wall
     endif
 
-    if this.terminal
-      execute $':Term {this.cmd}'
-    endif
-
     if this.local
       this.setqflist = function('setloclist', [0])
     else
@@ -120,6 +119,11 @@ class Job
     this.out = []
     this.err = []
     this.start_time = localtime()
+
+    if this.terminal
+      execute $':Term {this.cmd}'
+      return
+    endif
 
     if this.qf
       if qf_writing
@@ -178,7 +182,9 @@ class Job
 
     # TODO: append
     const cl = this.local ? 'l' : 'c'
-    execute $'botright {cl}open'
+    if this.copen && !qf.IsOpen(cl)
+      execute $'botright {cl}open'
+    endif
     # XXX: better way to handle cwd in qf window?
     silent! execute $'lcd {this.cwd}'
     if this.jump

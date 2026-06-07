@@ -6,8 +6,6 @@ endif
 
 import autoload '../autoload/rooter.vim'
 
-var files_cache: list<string> = []
-var saved_cwd: string = ''
 var ignore: bool = true
 
 def FindCmd(): string
@@ -47,69 +45,66 @@ if executable('fzf')
       borderchars: ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
     }
   }
-endif
 
-def Find(cmd_arg: string, cmd_complete: bool): list<string>
-  if empty(files_cache)
-    var cmd = FindCmd()
-    if empty(cmd)
-      files_cache = globpath('.', '**', 1, 1)
-    else
-      files_cache = systemlist(cmd)
-    endif
-  endif
-  if empty(cmd_arg)
-    return files_cache
-  else
-    return files_cache->matchfuzzy(cmd_arg)
-  endif
-enddef
-
-
-augroup find
-  autocmd CmdlineEnter * {
-    files_cache = []
-  }
-augroup END
-
-set findfunc=Find
-
-def RestoreCwd()
-  chdir(saved_cwd)
-  saved_cwd = ''
-enddef
-
-def Fd(dir: string)
-  if !get(g:, 'fzy', {})->empty()
-    # const popupwin = g:fzy.popupwin
-    # g:fzy.popupwin = true
-    # defer () => {
-    #   g:fzy.popupwin = popupwin
-    # }()
-
+  def Fd(dir: string)
     g:fzy.findcmd = FindCmd()
     fzy#Find(dir)
-    return
-  endif
+  enddef
+else
+  var files_cache: list<string> = []
+  var saved_cwd: string = ''
 
-  saved_cwd = getcwd()->fnamemodify(':p')
 
-  # find is canceled
-  autocmd CmdlineLeave : ++once {
-    if v:char != "\015" # <CR>
-      RestoreCwd()
+  def Fd(dir: string)
+    saved_cwd = getcwd()->fnamemodify(':p')
+
+    # find is canceled
+    autocmd CmdlineLeave : ++once {
+      if v:char != "\015" # <CR>
+        RestoreCwd()
+      endif
+    }
+
+    autocmd BufWinEnter * ++once {
+      if !empty(saved_cwd)
+        RestoreCwd()
+      endif
+    }
+
+    chdir(dir)
+    feedkeys(':find ')
+  enddef
+
+  def RestoreCwd()
+    chdir(saved_cwd)
+    saved_cwd = ''
+  enddef
+
+  augroup find
+    autocmd CmdlineEnter * {
+      files_cache = []
+    }
+  augroup END
+
+  def Find(cmd_arg: string, cmd_complete: bool): list<string>
+    if empty(files_cache)
+      var cmd = FindCmd()
+      if empty(cmd)
+        files_cache = globpath('.', '**', 1, 1)
+      else
+        files_cache = systemlist(cmd)
+      endif
     endif
-  }
-
-  autocmd BufWinEnter * ++once {
-    if !empty(saved_cwd)
-      RestoreCwd()
+    if empty(cmd_arg)
+      return files_cache
+    else
+      return files_cache->matchfuzzy(cmd_arg)
     endif
-  }
+  enddef
 
-  chdir(dir)
-  feedkeys(':find ')
-enddef
+  set findfunc=Find
+endif
+
 
 def BufDir(): string
   return &ft == 'dir' ? expand('%:.')->substitute("^dir://", "", "") : expand('%:.:h')
@@ -127,7 +122,6 @@ def SearchProject(_ignore: bool = true)
   else
     Fd(root)
   endif
-
 enddef
 
 nnoremap <leader>ff <scriptcmd>SearchProject()<cr>

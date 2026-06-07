@@ -184,7 +184,7 @@ command BlinkLine hlblink.Line()
 
 command! Ctags utils.GenCtags()
 
-command! -nargs=? Rename os.RenameInteractive(<q-args>)
+command! -nargs=? -complete=file Rename os.RenameInteractive(<q-args>)
 command! -bang Delete os.Delete(<q-bang> == '!')
 if !has('win32')
     command! SudoWrite w !sudo tee "%" >/dev/null

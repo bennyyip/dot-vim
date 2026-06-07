@@ -98,7 +98,7 @@ set nolangremap
 
 set makeprg=make\ -e
 set efm^=%-G%f%l:\ note:%m
-
+set efm^=%f(%l:%c)\ %m # odin
 # always use pipe, no more black window
 set noshelltemp
 
@@ -107,21 +107,6 @@ set shellslash
 set completeslash=slash
 
 $RIPGREP_CONFIG_PATH = $HOME .. '/.ripgreprc'
-if $W64DEVKIT != ""
-  set sh=sh shcf=-c sxq=\" sxe=
-  $CFLAGS = "-g -gcodeview -Wall -Wextra -Wdouble-promotion -Wconversion
-        \ -Wno-sign-conversion -Wno-unused-parameter
-        \ -Wno-unused-function -Wno-unknown-pragmas
-        \ -fsanitize=undefined"
-# $LDFLAGS="-nostartfiles"
-else
-  $CFLAGS = "-g3 -Wall -Wextra -Wdouble-promotion -Wconversion
-        \ -Wno-sign-conversion -Wno-unused-parameter
-        \ -Wno-unused-function -Wno-unknown-pragmas
-        \ -fsanitize=address,undefined -fsanitize-trap"
-  $LDFLAGS = "-fsanitize=address"
-endif
-$CXXFLAGS = $CFLAGS .. ' -std=c++23'
 # }}}
 # opts {{{1
 g:loaded_2html_plugin     = 1

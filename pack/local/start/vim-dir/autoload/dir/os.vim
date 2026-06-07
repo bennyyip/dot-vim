@@ -54,6 +54,7 @@ enddef
 
 export def Delete(name: string)
     try
+      # TODO: delete() may fail. get its error message
         if isdirectory(name)
             delete(name, "rf")
         else
@@ -151,8 +152,8 @@ export def ListDirTree(name: string): list<dict<any>>
 enddef
 
 def CopyFile(src: string, dst: string)
-    const content = readfile(resolve(src), "b")
-    writefile(content, dst, "b")
+    # TODO: handle error
+    filecopy(src, dst)
 enddef
 
 def CopyDir(src: string, dst: string)

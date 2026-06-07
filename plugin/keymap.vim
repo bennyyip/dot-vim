@@ -3,7 +3,6 @@ import autoload '../autoload/utils.vim'
 import autoload '../autoload/text.vim'
 import autoload '../autoload/buf.vim'
 import autoload '../autoload/os.vim'
-import autoload '../autoload/rooter.vim'
 import autoload '../autoload/zoom.vim'
 const is_gvim = has('gui_running')
 
@@ -48,7 +47,7 @@ cnoremap <C-B> <Left>
 inoremap <C-b> <c-g>u<Esc>[s1z=`]a<c-g>u
 # C-U sets a new undo point before deleting.
 inoremap <C-U> <C-G>u<C-U>
-cnoremap <C-G> <C-C>
+# cnoremap <C-G> <C-C>
 
 inoremap <expr> <C-E> col('.') > strlen(getline('.')) <bar><bar> pumvisible() ? "\<Lt>C-E>" : "\<Lt>End>"
 
@@ -227,7 +226,6 @@ nnoremap <silent> <leader>dy :call os#Yank(expand("%:p:h"))<CR>:echo $"{expand('
 nnoremap cd :lcd %:p:h<bar>pwd<cr>
 nnoremap cD :cd %:p:h<bar>pwd<cr>
 nnoremap cu :lcd ..<bar>pwd<cr>
-nmap <silent> <leader>r <scriptcmd>rooter.Rooter()<CR>
 
 nnoremap <silent><leader><tab> <c-6>
 nnoremap gF :e <cfile><cr>
@@ -375,11 +373,9 @@ nnoremap <silent> yR <cmd>source %<CR>
 xnoremap <silent> <expr> <leader>v SourceVim()
 # external {{{1
 if has('win32')
-  nnoremap <silent> gof :call os#FileManager(['wt.exe', 'yazi'])<CR>
-  nnoremap <silent> goF :call os#FileManager()<CR>
-else
-  nnoremap <silent> gof :call os#FileManager()<CR>
+  nnoremap <silent> goF :call os#FileManager(['wt.exe', 'yazi'])<CR>
 endif
+nnoremap <silent> gof :call os#FileManager()<CR>
 nnoremap <silent> got :call os#Terminal()<CR>
 # obsidian {{{1
 def DailyNote()
