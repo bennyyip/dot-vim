@@ -35,7 +35,3 @@ xnoremap <buffer> ]] <scriptcmd>SearchProc(v:count1)<CR>
 nnoremap <buffer> [[ <scriptcmd>SearchProc(v:count1, 'b')<CR>
 xnoremap <buffer> [[ <scriptcmd>SearchProc(v:count1, 'b')<CR>
 
-command! -buffer OdinRoot {
-  const root = system('odin root')
-  execute $":edit {root}"
-}

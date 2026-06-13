@@ -206,4 +206,10 @@ command! -nargs=? -complete=file Yazi os.Yazi(<q-args> == '' ? '%' : <q-args>)
 
 command! -nargs=1 Doc call os.Doc(<q-args>)
 
+command! Nofile enew|set buftype=nofile
+
+command! OdinRoot {
+  const root = system('odin root')
+  execute $":edit {root}"
+}
 # vim:fdm=marker:ft=vim

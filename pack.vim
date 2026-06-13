@@ -30,6 +30,7 @@ timer_start(0, (_) => {
     packadd comment
   endif
   if !getcompletion('editorconfig', 'packadd')->empty()
+    g:EditorConfig_max_line_indicator = 'none'
     packadd editorconfig
   endif
   if !getcompletion('termdebug', 'packadd')->empty()

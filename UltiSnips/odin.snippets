@@ -10,6 +10,22 @@ if err != nil {
 }
 endsnippet
 
-snippet xx "auto_cast" w
-auto_cast
+snippet xx "jai style auto_cast" w
+auto_cast 
+endsnippet
+
+snippet scratch "hello world" b
+package main
+import "core:fmt"
+
+println :: fmt.println
+printf :: fmt.printf
+
+main :: proc() {
+	$0
+}
+endsnippet
+
+snippet dbg "debug print"
+fmt.printfln("$1 = %v", ${1})
 endsnippet

@@ -35,4 +35,4 @@ curl -L -o "$DOWNLOAD_DIR/$EXE_FILENAME" "$EXE_URL"
 
 echo "✓ Download complete: $DOWNLOAD_DIR/$EXE_FILENAME"
 
-"$DOWNLOAD_DIR/$EXE_FILENAME" /S
+gsudo.exe "${DOWNLOAD_DIR}/${EXE_FILENAME}" /S

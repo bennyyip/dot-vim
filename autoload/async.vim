@@ -64,6 +64,7 @@ class Job
   public var efm: string # &efm
   public var cwd: string # getcwd()
   public var copen: bool = true
+  public var buffer_output: bool = true
   # opts end
 
   var cmd: string
@@ -241,6 +242,9 @@ class Job
 
     if this.qf
       this.QfEnd()
+      if status != 0
+        this.QfAppend([$'[Exit status: {status}]', $'[Command: {this.cmd}]'])
+      endif
     endif
 
     if g:async_play_sound && (localtime() - this.start_time) > 1
@@ -253,7 +257,7 @@ class Job
 
   def Out_cb(ch: channel, line: string)
     this.out->add(line)
-    if this.qf && this.out->len() > 128
+    if this.qf && (this.out->len() > 128  || !this.buffer_output)
       this.QfAppend(this.out)
       this.out = []
     endif
@@ -261,7 +265,7 @@ class Job
 
   def Err_cb(ch: channel, line: string)
     this.err->add(line)
-    if this.qf && this.err->len() > 128
+    if this.qf && (this.err->len() > 128 || !this.buffer_output)
       this.QfAppend(this.err)
       this.err = []
     endif
