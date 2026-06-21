@@ -1,5 +1,6 @@
 vim9script
 g:tlist_ocaml_settings = 'ocaml;c:classes;m:object method;M:module or functor;p:signature;t:type;f:function;C:constructor'
+g:tlist_odin_settings = 'odin;p:packages;f:procedures;c:constants;v:variables;s:structs;e:enums;u:unions;m:struct members;n:enum values;t:type aliases;g:foreign imports;i:import names;L:C code;A:assembly files;C:collection'
 g:Tlist_Show_One_File = 1
 g:Tlist_Process_File_Always = 1
 g:Tlist_Enable_Fold_Column = false

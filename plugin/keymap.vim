@@ -167,7 +167,9 @@ def Refresh(hard: bool)
     if has('diff')
         diffupdate
     endif
-    sound_clear()
+    if has('sound')
+      sound_clear()
+    endif
     normal! <C-L>
 enddef
 nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
@@ -269,8 +271,6 @@ nnoremap <silent> ]b :<C-U><C-R>=v:count1<CR>bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 # quickfix list
-nmap <F6> :cnext<CR>
-nmap <S-F6> :cprevious<CR>
 nnoremap <silent> [q :<C-U><C-R>=v:count1<CR>cprevious<CR>
 nnoremap <silent> ]q :<C-U><C-R>=v:count1<CR>cnext<CR>
 nnoremap <silent> [Q :cNfile<CR>
@@ -417,4 +417,21 @@ enddef
 nnoremap <DOWN> <scriptcmd>ScrollPopup(3)<CR>
 nnoremap <UP>   <scriptcmd>ScrollPopup(-3)<CR>
 #}}}
+# lab {{{1
+def Save_View_After(keys: string)
+  feedkeys(keys, 'n')
+  timer_start(500, (_) => {
+    silent mkview
+  })
+enddef
+
+noremap zf <scriptcmd>Save_View_After('zf')<CR>
+noremap zd <scriptcmd>Save_View_After('zd')<CR>
+
+nnoremap <MiddleMouse> a
+nnoremap <S-MiddleMouse> P
+xnoremap <MiddleMouse> "+P
+xnoremap <RightMouse> "+d
+xnoremap <S-RightMouse> "+y
+# }}}
 # vim:fdm=marker:ft=vim

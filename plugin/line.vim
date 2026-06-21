@@ -1,6 +1,7 @@
 vim9script
 
 const is_tty = !match(&term, 'linux')
+var show_current_tag = true
 
 def FilterAndJoin(l: list<string>, sep: string = " "): string
   return l->filter((_, v) => v != '')->join(sep)
@@ -129,9 +130,11 @@ def LinePluginStatus(): string
     illume_status = job_status(b:illume_job)
   endif
 
-  # const tagname = exists('*taglist#Tlist_Get_Tagname_By_Line') ? taglist#Tlist_Get_Tagname_By_Line() : ''
   # const tagname = get(b:, 'vista_nearest_method_or_function', '')
-  const tagname = exists("*tagbar#currenttag") ? tagbar#currenttag('%s', '', 's') : ''
+  var tagname = ""
+  if show_current_tag && exists(":Tlist") == 2
+    tagname = taglist#Tlist_Get_Tagname_By_Line()
+  endif
   return [tagname, async_status, illume_status]->FilterAndJoin(' | ')
 enddef
 
@@ -226,3 +229,7 @@ augroup vimrc
     set statusline=%!g:StatusLine()
   }
 augroup END
+
+command! ToggleCurrentTag {
+  show_current_tag = !show_current_tag
+}

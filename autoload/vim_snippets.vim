@@ -10,3 +10,9 @@ export def Filename(template: string = '$1', fallback: string = '' ): string
   endif
 enddef
 
+export def IncrCounter(): string
+  var counter = get(b:, 'ben_counter', 0)
+  counter += 1
+  b:ben_counter = counter
+  return string(counter)
+enddef

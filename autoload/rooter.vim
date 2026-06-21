@@ -5,7 +5,7 @@ vim9script
 
 var rootMarkers = {
   dirs: ['.git', '.hg', '.svn'],
-  files: ['configure', 'Cargo.toml', 'go.mod', 'package.json', '.project.vim']
+  files: ['configure', 'Cargo.toml', 'go.mod', 'package.json', '.project.vim', ".root"]
 }
 
 export def CurDir(): string

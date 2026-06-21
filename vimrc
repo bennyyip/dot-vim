@@ -58,6 +58,8 @@ set conceallevel=0 concealcursor=n
 set sessionoptions=buffers,curdir,help,tabpages,winsize,slash,unix,resize
 set viewoptions=cursor,folds,slash,unix
 
+set regexpengine=2
+
 # &errorformat ..= ',%f\|%\s%#%l col%\s%#%c%\s%#\| %m'
 if executable('rg')
   set grepprg=rg\ -H\ --no-heading\ --vimgrep
@@ -75,6 +77,7 @@ set encoding=utf-8 termencoding=utf-8
 scriptencoding utf-8
 
 set list listchars=tab:▸\ ,nbsp:␣,trail:⣿,extends:…,precedes:… showbreak=↪
+# set list listchars=tab:│\ ,nbsp:␣,trail:⣿,extends:…,precedes:… showbreak=↪
 augroup vimrc
   autocmd InsertEnter * set listchars-=trail:⣿
   autocmd InsertLeave * set listchars+=trail:⣿
@@ -91,7 +94,6 @@ set autoread autowrite
 set report=0 # Always report changed lines.
 # set synmaxcol=99999 # Only highlight the first 500 columns.
 set splitbelow splitright
-set title titlestring=VIM
 set switchbuf=uselast
 set tabpagemax=50
 set nolangremap

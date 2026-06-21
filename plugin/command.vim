@@ -22,7 +22,7 @@ function ChineseCount() range
   echo cc
 endfunc
 
-vnoremap <F7> :call <SID>ChineseCount()<cr>
+vnoremap <F2> :call <SID>ChineseCount()<cr>
 # A {{{1
 command! A call utils.A('e')
 command! AV call utils.A('botright vertical split')
@@ -136,19 +136,34 @@ enddef
 command! -nargs=? Bsearch call Bsearch(<q-args>)
 # }}}
 # Lab {{{1
-# F5: Execute command and save to register `c`. Press F5 to repeat.
-def F5(cmd: string)
+# F4 repeat last command
+nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
+# F5 to F8 : Execute command and save to register `a` to `d`. Press F5 to repeat.
+def F(reg: string, cmd: string)
   if cmd == ''
-    echo @c
+    if getreg(reg) == ''
+      echo "slot is empty"
+    else
+      echo getreg(reg)
+    endif
     return
   endif
+
   execute cmd
-  setreg('c', cmd)
+  setreg(reg, cmd)
 enddef
-command! -nargs=? -complete=command F5 F5(<q-args>)
-nnoremap <silent> <F5> <cmd>execute getreg('c')<CR>
-inoremap <silent> <F5> <ESC><cmd>execute getreg('c')<CR>
-nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
+command! -nargs=? -complete=command F5 F('a', <q-args>)
+command! -nargs=? -complete=command F6 F('b', <q-args>)
+command! -nargs=? -complete=command F7 F('c', <q-args>)
+command! -nargs=? -complete=command F8 F('d', <q-args>)
+nnoremap <silent> <F5> <cmd>execute getreg('a')<CR>
+nnoremap <silent> <F6> <cmd>execute getreg('b')<CR>
+nnoremap <silent> <F7> <cmd>execute getreg('c')<CR>
+nnoremap <silent> <F8> <cmd>execute getreg('d')<CR>
+inoremap <silent> <F5> <ESC><cmd>execute getreg('a')<CR>
+inoremap <silent> <F6> <ESC><cmd>execute getreg('b')<CR>
+inoremap <silent> <F7> <ESC><cmd>execute getreg('c')<CR>
+inoremap <silent> <F8> <ESC><cmd>execute getreg('d')<CR>
 
 command! -nargs=0 CopyLastCommand legacy let @+ = @:
 command! -nargs=+ -complete=command CopyCommandOutput redir @+ | <args> | redir END
@@ -212,4 +227,26 @@ command! OdinRoot {
   const root = system('odin root')
   execute $":edit {root}"
 }
+
+def Watch(cmd: string, clear_only: bool)
+  if exists('#ben_watch')
+    augroup ben_watch
+      autocmd!
+    augroup END
+    augroup! ben_watch
+  endif
+
+  if cmd == "" || clear_only
+    return
+  endif
+  autocmd_add([{
+    pattern: expand("%:p"),
+    event: "BufWritePost",
+    cmd: cmd,
+    group: "ben_watch",
+  }])
+  execute cmd
+enddef
+
+command! -bang -nargs=? Watch Watch(<q-args>, <bang>0)
 # vim:fdm=marker:ft=vim

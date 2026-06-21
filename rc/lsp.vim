@@ -141,7 +141,9 @@ if executable('odin-ls')
     rootSearch: ['ols.json'],
 
     initializationOptions: {
-      enable_auto_import: false
+      enable_auto_import: false,
+      enable_fake_methods: true,
+      enable_overload_resolution: true,
     },
   })
 endif
@@ -216,6 +218,9 @@ def LspSetup()
 
   nnoremap <silent><buffer> yod <scriptcmd>ToggoleDiag()<CR>
 
+  nnoremap <silent><buffer> <leader>m <cmd>LspHighlight<CR>
+  nnoremap <silent><buffer> <leader>M <cmd>LspHighlightClear<CR>
+
   setlocal tagfunc=lsp#lsp#TagFunc
   setlocal keywordprg=:LspHover
 
@@ -259,7 +264,7 @@ var lsp_options = {
   semanticHighlight: false,
   condensedCompletionMenu: true,
   useQuickfixForLocations: true,
-  ignoreCompleteItemsIsIncomplete: ['rustanalyzer', 'ols'],
+  ignoreCompleteItemsIsIncomplete: ['rustanalyzer'],
 
   popupBorder: true,
   popupBorderChars: ['─', '│', '─', '│', '┌', '┐', '┘', '└'],

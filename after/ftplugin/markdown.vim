@@ -3,13 +3,18 @@ import autoload 'qf.vim'
 
 setlocal wrap
 
+# somehow indent after <CR> is messed up
+setlocal nocindent
+setlocal nolisp
+
 b:markdown_yaml_head = 1
 
 command -buffer TOC {
   set quickfixtextfunc=QF_TOC
 
   :lvimgrep /^\#/j %
-  :lopen
+  :keepalt leftabove vertical lopen
+  exe 'vertical resize ' .. 40
   set quickfixtextfunc=qf.QuickFixText
 }
 

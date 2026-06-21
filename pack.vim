@@ -116,8 +116,7 @@ if !is_win && exists('$DISPLAY')
   Pack 'lilydjwg/fcitx.vim'
 endif
 Pack 'bennyyip/vim-fzy'
-# Pack 'bennyyip/vista.vim'
-Pack 'preservim/tagbar'
+Pack 'yegappan/taglist'
 # Motion and Edit {{{1
 Pack 'machakann/vim-swap' # g, g. gs gS
 Pack 'bennyyip/vim-debugstring' # <leader>ds
@@ -148,7 +147,7 @@ endif
 Pack 'tridactyl/vim-tridactyl'
 Pack 'bfrg/vim-jq'
 Pack 'bfrg/vim-jqplay'
-Pack 'lervag/vimtex'
+# Pack 'lervag/vimtex'
 if executable('nim')
   Pack 'zah/nim.vim'
 endif

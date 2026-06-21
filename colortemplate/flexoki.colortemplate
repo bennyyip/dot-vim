@@ -11,7 +11,8 @@ Environments: gui 256
 
 
 Background: dark
-Color: bg_1            #100F0F         ~
+; Color: bg_1            #100F0F         ~
+Color: bg_1            #000000         ~
 Color: bg_2            #1C1B1A         ~
 Color: ui              #282726         ~
 Color: ui_2            #343331         ~
@@ -189,7 +190,7 @@ SpellCap               omit            omit              s=bl undercurl
 SpellLocal             omit            omit              s=aqua undercurl
 SpellRare              omit            omit              s=pu undercurl
 
-SpecialKey             tx_2            none
+SpecialKey             tx_3            none
 ToolbarButton          tx              ui_2              bold
 ToolbarLine            none            none
 Visual                 none            colorV

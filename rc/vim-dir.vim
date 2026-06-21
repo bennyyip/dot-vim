@@ -7,7 +7,7 @@ g:dir_show_hidden = v:false
 g:dir_invert_split = v:true
 g:dir_change_cwd = true
 
-nmap -  :<C-u>Dir<CR>
+nmap -  <cmd>Dir<CR>
 
 def CustomizeMappings()
   # Customize key mappings here

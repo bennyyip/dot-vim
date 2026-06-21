@@ -73,6 +73,8 @@ augroup vimrc
   autocmd BufNewFile,BufRead *.base setfiletype yaml
   autocmd BufReadPost,BufNewFile *.mly setfiletype menhir
 
+	au BufReadPost * silent! loadview
+
   # highlight brackets
   # autocmd FileType * highlight! link BenBracket Delimiter | syn match BenBracket  /[(){}\[\]]/
 augroup END
