@@ -54,7 +54,6 @@ enddef
 
 export def Delete(name: string)
     try
-      # TODO: delete() may fail. get its error message
         if isdirectory(name)
             delete(name, "rf")
         else
@@ -151,31 +150,12 @@ export def ListDirTree(name: string): list<dict<any>>
     endtry
 enddef
 
-def CopyFile(src: string, dst: string)
-    # TODO: handle error
-    filecopy(src, dst)
-enddef
-
-def CopyDir(src: string, dst: string)
-    const src_resolved = resolve(src)
-    mkdir(dst, "p")
-    for item in readdirex(src_resolved, '1', {sort: 'none'})
-        const src_path = src_resolved .. Sep() .. item.name
-        const dst_path = dst .. Sep() .. item.name
-
-        if item.type == "dir"
-            CopyDir(src_path, dst_path)
-        else
-            CopyFile(src_path, dst_path)
-        endif
-    endfor
-enddef
-
 # XXX: explore jobs here...
 export def Copy()
     if mark.IsEmpty() | return | endif
     if !isdirectory(get(b:, "dir_cwd", "")) | return | endif
 
+    var copy_cmd = "cp"
     var dest_dir = b:dir_cwd
 
     var override = false
@@ -193,19 +173,17 @@ export def Copy()
         var src = $"{mark_dir}{Sep()}{item.name}"
         var dst = $"{dest_dir}{Sep()}{item.name}"
         try
-            if item.type =~ 'dir\|linkd\|junction'
-                if !isdirectory(dst)
-                    mkdir(dst, "p")
-                endif
+            if item.type =~ 'dir\|linkd\|junction' && !isdirectory(dst)
+                mkdir(dst, "p")
             else
                 var file_exists = filereadable(dst)
                 if file_exists && override_all == 0
                     var res = popup.Confirm(['Override existing', $'"{dst}"?'], [
-                                {text: "&yes", act: 'y'},
-                                {text: "&no", act: 'n'},
-                                {text: "yes to &all", act: 'a'},
-                                {text: "n&o to all", act: 'o'}
-                            ])
+                        {text: "&yes", act: 'y'},
+                        {text: "&no", act: 'n'},
+                        {text: "yes to &all", act: 'a'},
+                        {text: "n&o to all", act: 'o'}
+                    ])
                     if res == 0
                         override = true
                         override_all = 0
@@ -227,11 +205,17 @@ export def Copy()
                     if !isdirectory(fnamemodify(dst, ":h"))
                         mkdir(fnamemodify(dst, ":h"), "p")
                     endif
-                    CopyFile(src, dst)
+                    if !file_exists
+                        if !filecopy(resolve(src), dst)
+                            throw $"failed to copy '{src}' to '{dst}'"
+                        endif
+                    else
+                        system($'{copy_cmd} "{resolve(src)}" "{dst}"')
+                    endif
                 endif
             endif
         catch
-            echom v:exception
+            echo v:exception
         endtry
     endfor
     mark.Clear()
@@ -241,17 +225,23 @@ export def Duplicate()
     if mark.IsEmpty() | return | endif
     if !isdirectory(get(b:, "dir_cwd", "")) | return | endif
 
+    var copy_cmd = "cp -R"
+    var copy_dir_cmd = "cp -R"
+    const sep = Sep()
     const mark_dir = mark.Dir()
     var dest_dir = b:dir_cwd
 
     for item in mark.List()
-        var src = $"{mark_dir}{Sep()}{item.name}"
-        var dst = $"{dest_dir}{Sep()}{GetDuplicateName(item.name)}"
+        var src = $"{mark_dir}{sep}{item.name}"
+        var dst = $"{dest_dir}{sep}{GetDuplicateName(item.name)}"
         try
             if item.type == 'dir'
-                CopyDir(src, dst)
+                system($'{copy_dir_cmd} "{resolve(src)}" "{dst}"')
             else
-                CopyFile(src, dst)
+                if !filecopy(resolve(src), dst)
+                    throw $"failed to copy '{src}' to '{dst}'"
+                endif
+                # system($'{copy_cmd} "{resolve(src)}" "{dst}"')
             endif
         catch
             echo v:exception
@@ -265,6 +255,7 @@ export def Move()
     if mark.IsEmpty() | return | endif
     if !isdirectory(get(b:, "dir_cwd", "")) | return | endif
 
+    var move_cmd = "mv"
 
     var override = false
     # 1 - override all files
@@ -281,7 +272,6 @@ export def Move()
     for item in file_list
         var src = $"{mark_dir}{Sep()}{item.name}"
         var dst = $"{dest_dir}{Sep()}{item.name}"
-
         try
             if item.type =~ 'dir\|linkd\|junction' && !isdirectory(dst)
                 mkdir(dst, "p")
@@ -289,11 +279,11 @@ export def Move()
                 var file_exists = filereadable(dst)
                 if file_exists && override_all == 0
                     var res = popup.Confirm(['Override existing', $'"{dst}"?'], [
-                                {text: "&yes", act: 'y'},
-                                {text: "&no", act: 'n'},
-                                {text: "yes to &all", act: 'a'},
-                                {text: "n&o to all", act: 'o'}
-                            ])
+                        {text: "&yes", act: 'y'},
+                        {text: "&no", act: 'n'},
+                        {text: "yes to &all", act: 'a'},
+                        {text: "n&o to all", act: 'o'}
+                    ])
                     if res == 0
                         override = true
                         override_all = 0
@@ -315,8 +305,7 @@ export def Move()
                     if !isdirectory(fnamemodify(dst, ":h"))
                         mkdir(fnamemodify(dst, ":h"), "p")
                     endif
-                    CopyFile(src, dst)
-                    delete(src)
+                    system($'{move_cmd} "{resolve(src)}" "{dst}"')
                 endif
             endif
         catch
@@ -324,7 +313,7 @@ export def Move()
         endtry
     endfor
     for item_dir in dir_list
-        delete($"{mark_dir}{Sep()}{item_dir.name}", 'rf')
+        Delete($"{mark_dir}{Sep()}{item_dir.name}")
     endfor
     for buf_info in g.OtherDirBuffers()
         setbufvar(buf_info.bufnr, "dir_invalidate", true)
@@ -460,9 +449,7 @@ export def DirInfo(name: string): list<string>
         output = ["Size: " .. system($'du -sh "{resolve(name)}"')->matchstr('^\S\+')]
         output += [""]
     endif
-    if executable('eza')
-        output += systemlist(['eza', '-Tl', resolve(name)])
-    elseif executable('tree')
+    if executable('tree')
         if has("win32")
             output += systemlist($'tree /A "{resolve(name)}"')->mapnew((_, elem) => elem->trim("\r", 2))
         else

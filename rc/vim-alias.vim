@@ -2,6 +2,7 @@ let g:cmdalias_cmdprefixes = g:cmdalias_cmdprefixes->add('F5')
 let g:cmdalias_cmdprefixes = g:cmdalias_cmdprefixes->add('F6')
 let g:cmdalias_cmdprefixes = g:cmdalias_cmdprefixes->add('F7')
 let g:cmdalias_cmdprefixes = g:cmdalias_cmdprefixes->add('F8')
+let g:cmdalias_cmdprefixes = g:cmdalias_cmdprefixes->add('Watch')
 
 Alias gbl  Git\ blame
 Alias gi   Git

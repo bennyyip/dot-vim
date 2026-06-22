@@ -4,7 +4,7 @@ if expand('%:p')->stridx(g:obsidian_vault->expand()) != 0
   finish
 endif
 
-import autoload '../../autoload/utils.vim'
+import autoload '../../autoload/yb.vim'
 
 SetHardTabWidth4
 
@@ -15,4 +15,4 @@ def GotoObsidian()
 enddef
 nnoremap <buffer> <localleader>o <scriptcmd>GotoObsidian()<CR>
 
-nnoremap <buffer> gf <scriptcmd>utils.JumpToWikilink()<CR>
+nnoremap <buffer> gf <scriptcmd>yb.JumpToWikilink()<CR>

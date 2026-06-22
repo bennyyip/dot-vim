@@ -1,5 +1,5 @@
 vim9script
-import autoload "../autoload/utils.vim"
+import autoload "../autoload/yb.vim"
 import autoload '../autoload/rooter.vim'
 
 # Functions {{{1
@@ -15,7 +15,7 @@ enddef
 
 def Format()
   if ['vim']->index(&ft) != -1
-    utils.RemoveSpaces()
+    yb.RemoveSpaces()
     return
   endif
   const save_view = winsaveview()
@@ -52,6 +52,8 @@ augroup vimrc
   autocmd FileType mail,text setlocal spell | setlocal wrap
   # except 'help' files
   autocmd BufEnter *.txt if &filetype == 'help' | setlocal nospell | endif
+  # always tab in makefile
+  autocmd FileType make b:EditorConfig_disable = 1
 
   autocmd TerminalWinOpen * setlocal nonu nornu nolist signcolumn=no
   # autocmd ModeChanged *:nt setlocal relativenumber
@@ -81,19 +83,19 @@ augroup END
 
 # FileType
 for ft in ['vim', 'sh', 'zsh', 'bash', 'css', 'html', 'javascript', 'typescript', 'ps1', 'lisp', 'json', 'ocaml']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(2, true)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'yb.SetTabWidth(2, true)' }])
 endfor
 
 for ft in ['python']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, true)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'yb.SetTabWidth(4, true)' }])
 endfor
 
 for ft in ['go', 'gitconfig', 'odin']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(4, false)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'yb.SetTabWidth(4, false)' }])
 endfor
 
 for ft in ['make', 'snippets', 'neosnippet']
-  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'utils.SetTabWidth(8, false, 0)' }])
+  autocmd_add([{ event: 'FileType', pattern: ft, group: 'vimrc', cmd: 'yb.SetTabWidth(8, false, 0)' }])
 endfor
 
 # vim -b : edit binary using xxd-format!

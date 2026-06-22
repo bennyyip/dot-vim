@@ -294,6 +294,11 @@ StatusLineInsert       bg_1            pu                bold
 StatusLineVisual       none            colorV            bold
 StatusLineReplace      bg_1            re                bold
 
+TabPanel               -> Normal
+TabPanelSel            -> Normal
+TabPanelFill           -> Normal
+PanelButton         -> StatusLineBold
+
 ; Vimsidian
 
 VimsidianLink          obsidian        none              underline

@@ -272,4 +272,37 @@ export def PairCR(): string # {{{1
   return "\<CR>"
 enddef
 # }}}
+export def F(reg: string, cmd: string = '') # {{{1
+  if cmd == ''
+    if getreg(reg) == ''
+      echo "slot is empty"
+    else
+      echo getreg(reg)
+    endif
+    return
+  endif
+
+  execute cmd
+  setreg(reg, cmd)
+enddef
+export def F5(_: any)
+  execute @a
+enddef
+export def F6(_: any)
+  execute @b
+enddef
+export def F7(_: any)
+  execute @c
+enddef
+export def F8(_: any)
+  execute @d
+enddef
+# }}}
+export def FmtTime(second: number): string # {{{1
+  var hours = second / 3600
+  var minutes = (second % 3600) / 60
+  var secs = second % 60
+  return printf("%02d:%02d:%02d", hours, minutes, secs)
+enddef
+# }}}
 # vim:fdm=marker:ft=vim

@@ -1,5 +1,8 @@
 vim9script
 
+import autoload '../autoload/yb.vim'
+
+
 const is_tty = !match(&term, 'linux')
 var show_current_tag = true
 
@@ -130,6 +133,7 @@ def LinePluginStatus(): string
     illume_status = job_status(b:illume_job)
   endif
 
+
   # const tagname = get(b:, 'vista_nearest_method_or_function', '')
   var tagname = ""
   if show_current_tag && exists(":Tlist") == 2
@@ -155,6 +159,15 @@ def LineFileInfo(): string
 
   return [fileformat, fileencoding, filetype->Bold()]->FilterAndJoin('  ')
 enddef
+
+def g:ToggleTabPanel(ev: dict<any>)
+  if &stpl != 2
+    set showtabpanel=2
+  else
+    set showtabpanel=0
+  endif
+enddef
+const TAB_PANEL_BUTTON = '%[g:ToggleTabPanel]ⓟ%[]'->Bold()
 
 def g:StatusLine(): string
   const inactive = get(g:, 'statusline_winid', win_getid()) != win_getid()
@@ -193,6 +206,9 @@ def g:StatusLine(): string
     [
       '%3l,%-3c', # lineinfo
     ],
+    [
+    TAB_PANEL_BUTTON
+    ]
   ]
 
   for [i, part] in left->items()
@@ -233,3 +249,60 @@ augroup END
 command! ToggleCurrentTag {
   show_current_tag = !show_current_tag
 }
+
+# tabpanel
+const COLUMNS = 12
+
+def Sep(): string
+  return '%@' ..  repeat('─', COLUMNS - 4) .. '%@'
+enddef
+
+var panel_timer = -1
+
+def StopWatch(): string
+  if g:stopwatch_start_time == -1
+    if panel_timer > 0
+      timer_stop(panel_timer)
+      panel_timer = -1
+    endif
+    return ''
+  endif
+
+  if panel_timer < 0
+    panel_timer = timer_start(1000, (_) => execute('redrawtabpanel'), {repeat: -1})
+  endif
+  var res = strftime("%H:%M:%S", g:stopwatch_start_time)
+  res ..= '%@'
+  res ..= yb.FmtTime(localtime() - g:stopwatch_start_time)
+  return res
+enddef
+
+def F_Keys(): string
+  var res = ''
+  const names = ['Run', 'Build', 'Test', 'Lint']
+  for i in range(4)
+    const k = i + 5
+    var cmd = getreg(nr2char(97 + i))
+    cmd = cmd->trim()
+    res ..= $"%#PanelButton#%[yb#F{k}]{names[i]}%[]%#TabPanel#"
+    if i != 3
+      res ..= '%@'
+    endif
+  endfor
+  return res
+enddef
+
+def g:Panel(): string
+  if g:actual_curtabpage != 1
+    return ''
+  endif
+  var parts = [
+    F_Keys(),
+    StopWatch(),
+  ]
+  const sep = Sep()
+  return repeat('%@', 20) .. parts->FilterAndJoin(sep)
+enddef
+
+execute $"set tplo=columns:{COLUMNS},vert"
+set tabpanel=%!g:Panel()

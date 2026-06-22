@@ -11,7 +11,7 @@ fi
 
 REPO="vim/vim-win32-installer"
 DOWNLOAD_DIR=$(mktemp -d)
-trap "rm -rf $DOWNLOAD_DIR" EXIT  # Clean up on exit
+# trap "rm -rf $DOWNLOAD_DIR" EXIT  # Clean up on exit
 
 echo "Fetching latest release information for $REPO..."
 

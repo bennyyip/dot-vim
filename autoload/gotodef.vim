@@ -1,6 +1,4 @@
 vim9script
-import autoload "utils.vim"
-
 
 export def GotoDefComplete(kind: string, L: string): string
   const cmd = L->split(' ')[0]

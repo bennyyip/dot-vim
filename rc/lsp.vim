@@ -116,7 +116,8 @@ if executable('typescript-language-server')
   lsp_servers->add({
     filetype: ['javascript', 'typescript'],
     name: 'typescript-language-server',
-    path: has('win32') ? $HOME .. "/.bun/bin/typescript-language-server.exe" : '/usr/bin/typescript-language-server',
+    path: has('win32') ? $HOME .. '/AppData/Local/pnpm/bin/typescript-language-server.CMD' : '/usr/bin/typescript-language-server',
+    rootSearch: ['node_modules/'],
     args: ['--stdio']
   })
 endif

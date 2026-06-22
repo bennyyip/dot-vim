@@ -1,5 +1,5 @@
 vim9script
-import autoload '../autoload/utils.vim'
+import autoload '../autoload/yb.vim'
 import autoload '../autoload/text.vim'
 import autoload '../autoload/buf.vim'
 import autoload '../autoload/os.vim'
@@ -15,8 +15,8 @@ inoremap <silent> <Up>   <C-R>=pumvisible() ? "\<lt>Up>" : "\<lt>C-O>gk"<CR>
 # inoremap <C-l> <Right>
 nnoremap <c-d> <c-d>zz
 nnoremap <c-u> <c-u>zz
-nnoremap n nzzzv
-nnoremap N Nzzzv
+# nnoremap n nzzzv
+# nnoremap N Nzzzv
 nnoremap J mzJ`z
 # tag stack
 nnoremap H <cmd>pop<CR>
@@ -35,7 +35,7 @@ imap <C-R>c <esc>:let @a=""<CR>:let @a = execute( "py3 print()")<left><left><lef
 # time
 inoremap <silent> <C-G><C-T> <C-R>=repeat(complete(col('.'),map(["%Y-%m-%d %H:%M:%S", "%Y-%m-%d", '%FT%T%z', "%a, %d %b %Y %H:%M:%S %z","%Y %b %d","%d-%b-%y","%a %b %d %T %Z %Y"],'strftime(v:val)')+[localtime()]),0)<CR>
 # Auto insert second part of match pair on <CR>
-inoremap <expr> <CR> utils#PairCR()
+inoremap <expr> <CR> yb#PairCR()
 # rsi {{{1
 inoremap      <C-A> <C-O>^
 inoremap <C-X><C-A> <C-A>
@@ -161,7 +161,7 @@ xnoremap . :normal .<CR>
 # nohl
 def Refresh(hard: bool)
     if hard
-        utils.KeepChangeMarksExec('edit')
+        yb.KeepChangeMarksExec('edit')
         syntax sync fromstart
     endif
     if has('diff')
@@ -173,7 +173,7 @@ def Refresh(hard: bool)
     normal! <C-L>
 enddef
 nnoremap <silent> <backspace> <scriptcmd>nohlsearch<BAR>Refresh(v:count > 0)<CR>
-# nnoremap z. <scriptcmd>call utils.KeepChangeMarksExec('w')<cr>z.
+# nnoremap z. <scriptcmd>call yb.KeepChangeMarksExec('w')<cr>z.
 # quick substitute
 def QuickSubZs(): string
   const word = expand('<cword>')
@@ -206,7 +206,7 @@ def VSetSearch(cmdtype: string)
     setreg('/', '\V' .. substitute(escape(vtext, cmdtype .. '\'), '\n', '\\n', 'g'))
 enddef
 
-nnoremap <silent> <leader>= <scriptcmd>utils.RemoveSpaces()<CR>
+nnoremap <silent> <leader>= <scriptcmd>yb.RemoveSpaces()<CR>
 # window {{{1
 # quick <C-w>
 nnoremap ' <C-w>
@@ -220,7 +220,7 @@ nnoremap <C-w><C-o> <scriptcmd>zoom.Toggle()<CR>
 nmap <C-w>o <C-w><C-o>
 nmap 'o <C-w><C-o>
 # file, buffer {{{1
-nnoremap <leader>fs <scriptcmd>utils.KeepChangeMarksExec('update')<CR>
+nnoremap <leader>fs <scriptcmd>yb.KeepChangeMarksExec('update')<CR>
 nnoremap <silent> <leader>fY :call os#Yank(expand("%:p:t"))<CR>:echo $"{(expand('%:p:t'))} copied"<CR>
 nnoremap <silent> <leader>fy :call os#Yank(expand("%:p"))<CR>:echo $"{expand('%:p')} copied"<CR>
 nnoremap <silent> <leader>dY :call os#Yank(expand("%:p:h:t"))<CR>:echo $"{expand('%:p:h:t')} copied"<CR>
@@ -428,10 +428,17 @@ enddef
 noremap zf <scriptcmd>Save_View_After('zf')<CR>
 noremap zd <scriptcmd>Save_View_After('zd')<CR>
 
-nnoremap <MiddleMouse> a
-nnoremap <S-MiddleMouse> P
+nnoremap <MiddleMouse> i
+inoremap <MiddleMouse> <Esc>
 xnoremap <MiddleMouse> "+P
-xnoremap <RightMouse> "+d
-xnoremap <S-RightMouse> "+y
+nnoremap <S-MiddleMouse> P
+
+nnoremap <RightMouse> <C-]>
+xnoremap <S-RightMouse> "+d
+xnoremap <RightMouse> "+y
+
+nnoremap <X1Mouse> <C-o>
+nnoremap <X2Mouse> <C-i>
+
 # }}}
 # vim:fdm=marker:ft=vim

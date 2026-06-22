@@ -1,6 +1,6 @@
 vim9script
 
-import autoload "../autoload/utils.vim"
+import autoload "../autoload/yb.vim"
 import autoload "../autoload/os.vim"
 
 # Reverse {{{1
@@ -24,8 +24,8 @@ endfunc
 
 vnoremap <F2> :call <SID>ChineseCount()<cr>
 # A {{{1
-command! A call utils.A('e')
-command! AV call utils.A('botright vertical split')
+command! A call yb.A('e')
+command! AV call yb.A('botright vertical split')
 # PX: chmod +x {{{1
 command! PX if !empty(expand('%'))
       \|   write
@@ -39,12 +39,12 @@ command! PX if !empty(expand('%'))
 # RFC {{{1
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
 # Join {{{1
-command! -nargs=1 -range=% -bang Join :<line1>,<line2>call utils.Lilydjwg_join(<q-args>, "<bang>")
+command! -nargs=1 -range=% -bang Join :<line1>,<line2>call yb.Lilydjwg_join(<q-args>, "<bang>")
 command! -nargs=0 Split feedkeys(':%s``\r`g<left><left><left><left><left>')
 # Quote {{{1
-command! -bang -nargs=? -range=% Quote :<line1>,<line2>call utils.Quote(<q-args>, "<bang>")
+command! -bang -nargs=? -range=% Quote :<line1>,<line2>call yb.Quote(<q-args>, "<bang>")
 
-command! -bang -nargs=? -range=% StrArray utils.StrArray(<line1>, <line2>)
+command! -bang -nargs=? -range=% StrArray yb.StrArray(<line1>, <line2>)
 # Ghq {{{1
 def GhqComplete(A: string, ...args: list<any>): string
   const projs =  globpath(expand('~/ghq/github.com'), '*/*', 0, 1)
@@ -53,19 +53,19 @@ def GhqComplete(A: string, ...args: list<any>): string
 enddef
 command! -nargs=1 -complete=custom,GhqComplete Ghq execute 'edit ' .. expand('~/ghq/github.com/') .. <q-args>
 # FollowLink {{{1
-command! -nargs=0 FollowLink utils.FollowLink()
+command! -nargs=0 FollowLink yb.FollowLink()
 # SetTabWidth {{{1
-command! -nargs=0 SetTabWidth2 call utils.SetTabWidth(2, true)
-command! -nargs=0 SetTabWidth4 call utils.SetTabWidth(4, true)
-command! -nargs=0 SetHardTabWidth2 call utils.SetTabWidth(2, false, 0)
-command! -nargs=0 SetHardTabWidth4 call utils.SetTabWidth(4, false, 0)
-command! -nargs=0 SetHardTabWidth8 call utils.SetTabWidth(8, false, 0)
+command! -nargs=0 SetTabWidth2 call yb.SetTabWidth(2, true)
+command! -nargs=0 SetTabWidth4 call yb.SetTabWidth(4, true)
+command! -nargs=0 SetHardTabWidth2 call yb.SetTabWidth(2, false, 0)
+command! -nargs=0 SetHardTabWidth4 call yb.SetTabWidth(4, false, 0)
+command! -nargs=0 SetHardTabWidth8 call yb.SetTabWidth(8, false, 0)
 # SaveSession and LoadSession {{{1
 if !isdirectory($'{$VIMSTATE}/session')
   mkdir($'{$VIMSTATE}/session', "p")
 endif
-command! -nargs=1 -complete=custom,utils.SessionComplete SaveSession :exe $'mksession! {$VIMSTATE}/session/<args>'
-command! -nargs=1 -complete=custom,utils.SessionComplete LoadSession :%bd <bar> exe $'so {$VIMSTATE}/session/<args>'
+command! -nargs=1 -complete=custom,yb.SessionComplete SaveSession :exe $'mksession! {$VIMSTATE}/session/<args>'
+command! -nargs=1 -complete=custom,yb.SessionComplete LoadSession :%bd <bar> exe $'so {$VIMSTATE}/session/<args>'
 # GotoDef {{{1
 import autoload 'gotodef.vim'
 command! -bang -nargs=1 -complete=command Command gotodef.DoGotoDef("command", <f-args>)
@@ -139,23 +139,10 @@ command! -nargs=? Bsearch call Bsearch(<q-args>)
 # F4 repeat last command
 nnoremap <silent> <F4> <cmd>execute getreg(':')<CR>
 # F5 to F8 : Execute command and save to register `a` to `d`. Press F5 to repeat.
-def F(reg: string, cmd: string)
-  if cmd == ''
-    if getreg(reg) == ''
-      echo "slot is empty"
-    else
-      echo getreg(reg)
-    endif
-    return
-  endif
-
-  execute cmd
-  setreg(reg, cmd)
-enddef
-command! -nargs=? -complete=command F5 F('a', <q-args>)
-command! -nargs=? -complete=command F6 F('b', <q-args>)
-command! -nargs=? -complete=command F7 F('c', <q-args>)
-command! -nargs=? -complete=command F8 F('d', <q-args>)
+command! -nargs=? -complete=command F5 yb.F('a', <q-args>)
+command! -nargs=? -complete=command F6 yb.F('b', <q-args>)
+command! -nargs=? -complete=command F7 yb.F('c', <q-args>)
+command! -nargs=? -complete=command F8 yb.F('d', <q-args>)
 nnoremap <silent> <F5> <cmd>execute getreg('a')<CR>
 nnoremap <silent> <F6> <cmd>execute getreg('b')<CR>
 nnoremap <silent> <F7> <cmd>execute getreg('c')<CR>
@@ -197,7 +184,7 @@ command Lin setl ff=unix fenc=utf8 nobomb eol
 import autoload 'hlblink.vim'
 command BlinkLine hlblink.Line()
 
-command! Ctags utils.GenCtags()
+command! Ctags yb.GenCtags()
 
 command! -nargs=? -complete=file Rename os.RenameInteractive(<q-args>)
 command! -bang Delete os.Delete(<q-bang> == '!')
@@ -248,5 +235,5 @@ def Watch(cmd: string, clear_only: bool)
   execute cmd
 enddef
 
-command! -bang -nargs=? Watch Watch(<q-args>, <bang>0)
+command! -bang -nargs=? -complete=command Watch Watch(<q-args>, <bang>0)
 # vim:fdm=marker:ft=vim

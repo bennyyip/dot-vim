@@ -9,5 +9,5 @@ augroup formatprgsTypeScript
         \ '--stdin-file-path=' . expand('%:p:S') . ' ' .
         \ (&textwidth > 0 ? '--line-width=' . &textwidth . ' ' : '') .
         \ '--indent-width=' . 2 . ' ' .
-        \ '--indent-style=' . (&expandtab ? 'space' : 'tab')
+        \ '--semicolons=as-needed'
 augroup END

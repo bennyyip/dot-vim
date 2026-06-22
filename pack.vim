@@ -1,5 +1,5 @@
 vim9script
-import autoload "utils.vim"
+import autoload "yb.vim"
 
 const is_win = has('win32')
 
@@ -55,7 +55,7 @@ timer_start(0, (_) => {
   packadd vim-scratchpad
   source $MYVIMDIR/rc/vim-dir.vim
 
-  utils.MapMeta()
+  yb.MapMeta()
 })
 # }}}
 silent! packadd minpac
@@ -69,7 +69,7 @@ g:plugpac_default_type = 'delay'
 plugpac_helper#SetupCommands()
 
 au User PlugpacPost {
-  utils.MapMeta()
+  yb.MapMeta()
   doautocmd BufEnter
   # silent! edit
   normal! <C-L>
