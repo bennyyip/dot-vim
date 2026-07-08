@@ -34,3 +34,11 @@ snippet dbg "debug print"
 fmt.printfln("$1 = %v", ${1})
 endsnippet
 
+snippet #! "shebang"
+#!/bin/sh
+// 2>/dev/null; exec odin run "\$0" -file -- "$@"
+endsnippet
+
+snippet unimpl "unimplemented"
+assert(false, "unimplemented")
+endsnippet

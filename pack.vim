@@ -49,14 +49,22 @@ timer_start(0, (_) => {
   packadd formatters
   packadd misc
   packadd polygot
-  source $MYVIMDIR/rc/pre-vim-sandwich.vim
-  packadd vim-sandwich
-  source $MYVIMDIR/rc/vim-sandwich.vim
+
+  # source $MYVIMDIR/rc/pre-vim-sandwich.vim
+  # packadd vim-sandwich
+  # source $MYVIMDIR/rc/vim-sandwich.vim
+
+  nmap yS ys$
+  g:surround_pairs = {
+    'c': {pair: ("```\n", '```'), newline: 1}, }
+  packadd vim-surround
+
   packadd vim-scratchpad
   source $MYVIMDIR/rc/vim-dir.vim
 
   yb.MapMeta()
 })
+
 # }}}
 silent! packadd minpac
 if !exists('g:loaded_minpac')

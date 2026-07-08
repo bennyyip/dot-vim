@@ -414,8 +414,8 @@ def ScrollPopup(nlines: number)
 
   call popup_setoptions(winids[0], {'firstline': firstline})
 enddef
-nnoremap <DOWN> <scriptcmd>ScrollPopup(3)<CR>
-nnoremap <UP>   <scriptcmd>ScrollPopup(-3)<CR>
+# nnoremap <DOWN> <scriptcmd>ScrollPopup(3)<CR>
+# nnoremap <UP>   <scriptcmd>ScrollPopup(-3)<CR>
 #}}}
 # lab {{{1
 def Save_View_After(keys: string)
