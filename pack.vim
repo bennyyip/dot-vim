@@ -56,6 +56,8 @@ timer_start(0, (_) => {
 
   nmap yS ys$
   g:surround_pairs = {
+    'f': {probe: "func", input: "Function: ", pair: ("__INPUT__SNAKE__(", ")")},
+    'F': {probe: "func", input: "Function: ", pair: ("__INPUT__SNAKE__( ", " )")},
     'c': {pair: ("```\n", '```'), newline: 1}, }
   packadd vim-surround
 
@@ -118,7 +120,6 @@ Pack 'lfv89/vim-interestingwords'
 # Pack 'luochen1990/rainbow'
 Pack 'mbbill/undotree'
 Pack 'tpope/vim-characterize'
-Pack 'tpope/vim-repeat'
 Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 if !is_win && exists('$DISPLAY')
   Pack 'lilydjwg/fcitx.vim'

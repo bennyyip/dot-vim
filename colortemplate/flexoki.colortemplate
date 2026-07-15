@@ -212,13 +212,13 @@ Error                  re              bg_1              bold,reverse
 ErrorMsg               bg_1            re                bold
 Folded                 bg_1            tx_2
 LineNr                 tx_2            none
-MatchParen             none            bg_2              bold,underline
+MatchParen             none            ui_2              bold,underline
 NonText                ui              none
 
 
 Boolean                pu              none
 Character              pu              none
-Comment                tx_2           none
+Comment                tx_2            none
 Conditional            re              none
 Constant               pu              none
 CursorIM               bg_1            tx
