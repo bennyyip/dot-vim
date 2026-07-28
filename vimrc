@@ -30,7 +30,7 @@ set cinoptions=(0,t0,l1,:0,L0,g0,N-s cinkeys-=0#
 set cinoptions+=k4,m1,W4,j1
 set ttyfast
 set ttimeout ttimeoutlen=25
-set belloff=all shortmess=aoOTIc
+set belloff=all shortmess=aFoOTIc
 set ruler display=lastline smoothscroll
 set hlsearch incsearch ignorecase smartcase
 set suffixes+=.a,.1,.class,.mkv,.mp4

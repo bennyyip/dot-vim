@@ -182,9 +182,9 @@ def QuickSubZs(): string
 enddef
 xnoremap qs "zy:%s`<C-r>=$'\V{escape(getreg("z"), '/\\')}'->split("\n")->join('\n')<CR>``g<left><left>
 nnoremap qs :%s`<C-R><C-W>``g<left><left>
-nnoremap <expr> qS QuickSubZs()
+onoremap <expr> qS QuickSubZs()
 nnoremap & n:&&<CR>
-xnoremap & n:&&<CR>
+xnoremap & <cmd>&&<CR>
 # mark position before search
 nnoremap / ms/
 nnoremap ? ms?

@@ -58,6 +58,7 @@ timer_start(0, (_) => {
   g:surround_pairs = {
     'f': {probe: "func", input: "Function: ", pair: ("__INPUT__SNAKE__(", ")")},
     'F': {probe: "func", input: "Function: ", pair: ("__INPUT__SNAKE__( ", " )")},
+    "\<C-F>": {probe: "func", input: "Lisp Function: ", pair: ("(__INPUT__SNAKE__ ", ")")},
     'c': {pair: ("```\n", '```'), newline: 1}, }
   packadd vim-surround
 
@@ -107,7 +108,8 @@ if getcompletion('hlyank', 'packadd')->empty()
   Pack 'ubaldot/vim-highlight-yanked'
 endif
 # Lab {{{1
-# Enhance {{{1
+# Pack 'tpope/vim-surround', {name: 'tpope-surround'}
+## Enhance {{{1
 Pack 'BourgeoisBear/clrzr'
 Pack 'dstein64/vim-startuptime'
 Pack 'junegunn/goyo.vim'
@@ -141,7 +143,7 @@ Pack 'justinmk/vim-sneak'
 Pack 'markonm/traces.vim'
 # VCS {{{1
 Pack 'Eliot00/git-lens.vim'
-Pack 'rhysd/conflict-marker.vim' # [x ]x
+Pack 'rhysd/conflict-marker.vim' # [x ]x co ct cn
 Pack 'tommcdo/vim-fugitive-blame-ext'
 Pack 'tpope/vim-fugitive'
 # Language {{{1

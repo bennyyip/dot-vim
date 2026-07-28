@@ -7,6 +7,8 @@ endif
 import autoload '../autoload/rooter.vim'
 
 var ignore: bool = true
+var files_cache: list<string> = []
+var saved_cwd: string = ''
 
 def FindCmd(): string
   var cmd = ''
@@ -51,10 +53,6 @@ if executable('fzf')
     fzy#Find(dir)
   enddef
 else
-  var files_cache: list<string> = []
-  var saved_cwd: string = ''
-
-
   def Fd(dir: string)
     saved_cwd = getcwd()->fnamemodify(':p')
 
@@ -80,25 +78,24 @@ else
     saved_cwd = ''
   enddef
 
-  augroup find
-    autocmd CmdlineEnter * {
-      files_cache = []
-    }
-  augroup END
-
-  def Find(cmd_arg: string, cmd_complete: bool): list<string>
+  def Find(arg: string, _): list<string>
     if empty(files_cache)
+      au CmdlineEnter ++once {
+        files_cache = []
+      }
       var cmd = FindCmd()
       if empty(cmd)
-        files_cache = globpath('.', '**', 1, 1)
+        files_cache = expand('**', 1, 1)
+          ->filter((_, v) => !isdirectory(v))
+          ->mapnew((_, v) => v->substitute('^\.[\/]', "", ""))
       else
         files_cache = systemlist(cmd)
       endif
     endif
-    if empty(cmd_arg)
+    if empty(arg)
       return files_cache
     else
-      return files_cache->matchfuzzy(cmd_arg)
+      return files_cache->matchfuzzy(arg)
     endif
   enddef
 

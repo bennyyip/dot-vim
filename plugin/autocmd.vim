@@ -46,12 +46,18 @@ augroup vimrc
     endif
   }
 
-  # turn on spell checker for commit messages
-  autocmd FileType gitcommit,hgcommit setlocal spell | hi link gitcommitBlank Normal
-  # and emails and plain text files
-  autocmd FileType mail,text setlocal spell | setlocal wrap
+  # turn on spell checker for commit messages and emails and plain text files
+  autocmd FileType gitcommit,mail,text {
+    setlocal spell
+    syntax match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
+    syntax match AcronymNoSpell '\<\(\u\|\d\|-\)\{3,}\(s\?\>\|-\)' contains=@NoSpell
+    syntax match EmailNoSpell '\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}' contains=@NoSpell
+  }
+  autocmd FileType mail,text setlocal wrap
+  autocmd FileType gitcommit hi link gitcommitBlank Normal
   # except 'help' files
   autocmd BufEnter *.txt if &filetype == 'help' | setlocal nospell | endif
+
   # always tab in makefile
   autocmd FileType make b:EditorConfig_disable = 1
 
