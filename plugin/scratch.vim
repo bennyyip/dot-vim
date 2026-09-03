@@ -1,2 +1,0 @@
-vim9script
-

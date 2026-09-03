@@ -250,6 +250,7 @@ Todo                   tx              bg_1              bold
 Type                   ye              none
 Typedef                ye              none
 Underlined             bl              none              underline
+vimUsrCmd              -> Macro
 
 Directory              gr              none              bold
 ModeMsg                ye              none              bold
@@ -278,6 +279,7 @@ PmenuMatch             pu              none              bold
 PmenuMatchSel          none            none              bold
 WildMenu               bl              bg_2              bold
 PmenuBorder            tx_2            bg_2
+
 
 ; my stl
 

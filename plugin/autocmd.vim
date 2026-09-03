@@ -38,6 +38,18 @@ augroup vimrc
     endif
   }
 
+  # update Last Change in vim files
+  au BufWritePre *.vim {
+    if &modifiable
+      var view = winsaveview()
+      try
+        undojoin | exe $':1,{min([10, line('$')])}s/\v^[#"]\s+Last\s+(Change|Update):\s*\zs.*/\=strftime("%Y-%m-%d")/ie'
+      catch /E790/
+      endtry
+      winrestview(view)
+    endif
+  }
+
   # save LAST session
   au VimLeavePre * {
     if (!has('win32') || filewritable('C:\Windows\System32') == 0)

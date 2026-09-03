@@ -5,11 +5,10 @@ set completepopup=highlight:Pmenu,border:off
 # set completeopt=menu,longest,menuone,popup,noselect
 set completeopt=menu,popup,preview,fuzzy
 # set completeopt=menuone,popup,preview,preinsert
-set complete=.,w,b,u,t
+set complete=.,w,b,u
 if has("patch-9.1.1409")
-  set complete=.^7,w^5,b^5,u^3,t
+  set complete=.^7,w^5,b^5,u^3
 endif
-set complete-=t
 
 if exists('+autocompletedelay')
   # set autocomplete

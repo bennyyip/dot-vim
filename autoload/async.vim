@@ -211,9 +211,10 @@ class Job
     endif
 
     if this.expand
-      const flags = '<\=\%(:[p8~.htre]\|:g\=s\(.\).\{-\}\1.\{-\}\1\)*\%(:S\)\='
-      const expandable = '\\*\%(<\w\+>\|%\|#\d*\)' .. flags
-      ret = substitute(ret, expandable, '\=expand(submatch(0))', 'g')
+      # const flags = '<\=\%(:[p8~.htre]\|:g\=s\(.\).\{-\}\1.\{-\}\1\)*\%(:S\)\='
+      # const expandable = '\\*\%(<\w\+>\|%\|#\d*\)' .. flags
+      # ret = substitute(ret, expandable, '\=expand(submatch(0))', 'g')
+      ret = expandcmd(ret, {'errmsg': v:true})
     endif
 
     return ret->trim()

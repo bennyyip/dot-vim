@@ -49,6 +49,7 @@ timer_start(0, (_) => {
   packadd formatters
   packadd misc
   packadd polygot
+  packadd vim-fzy
 
   # source $MYVIMDIR/rc/pre-vim-sandwich.vim
   # packadd vim-sandwich
@@ -62,7 +63,6 @@ timer_start(0, (_) => {
     'c': {pair: ("```\n", '```'), newline: 1}, }
   packadd vim-surround
 
-  packadd vim-scratchpad
   source $MYVIMDIR/rc/vim-dir.vim
 
   yb.MapMeta()
@@ -109,7 +109,7 @@ if getcompletion('hlyank', 'packadd')->empty()
 endif
 # Lab {{{1
 # Pack 'tpope/vim-surround', {name: 'tpope-surround'}
-## Enhance {{{1
+# Enhance {{{1
 Pack 'BourgeoisBear/clrzr'
 Pack 'dstein64/vim-startuptime'
 Pack 'junegunn/goyo.vim'
@@ -126,7 +126,6 @@ Pack 'chrisbra/NrrwRgn' # :NR :NW :NRV :WR
 if !is_win && exists('$DISPLAY')
   Pack 'lilydjwg/fcitx.vim'
 endif
-Pack 'bennyyip/vim-fzy'
 Pack 'yegappan/taglist'
 # Motion and Edit {{{1
 Pack 'machakann/vim-swap' # g, g. gs gS

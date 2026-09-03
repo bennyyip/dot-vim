@@ -64,6 +64,7 @@ endif
 # }}}
 # python {{{1
 const python_workspace_root = [
+  ".git",
   "pyproject.toml",
 ]
 

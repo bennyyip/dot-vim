@@ -80,7 +80,7 @@ export def FileManager(cmd: list<string> = [])
   endif
 
   if executable("fpilot.exe")
-    job_start(["fpilot.exe", path])
+    job_start('cmd.exe /c start "" fpilot.exe ' .. path)
   elseif executable("cmd.exe")
     var job_opts = {}
     if IsWsl()

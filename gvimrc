@@ -44,4 +44,9 @@ nnoremap <silent> <C-_> <scriptcmd>guifont_size#Change('dec', v:count1)<CR>
 nnoremap <silent> <C-0> <scriptcmd>guifont_size#Change('restore')<CR>
 imap <C-S> <ESC>:w<CR>
 
+inoremap <C-J> <DOWN>
+inoremap <C-K> <UP>
+inoremap <C-H> <LEFT>
+inoremap <C-L> <RIGHT>
+
 set guicursor+=a:blinkoff0
