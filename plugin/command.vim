@@ -193,7 +193,7 @@ if !has('win32')
 endif
 
 command! -range=% LLM {
-  const f = g:scratchpad_path .. '/llm.md'
+  const f = g:scratchpad_dir .. '/llm.md'
 
   var lines = ['```' .. &ft]
   lines->extend(getline(<line1>, <line2>))

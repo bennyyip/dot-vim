@@ -2,6 +2,7 @@ vim9script
 
 const slash = exists('+shellslash') && !&shellslash ? '\' : '/'
 const scratchpad_dir = $HOME .. '/.local/state/vim/' .. ".scratchpads"
+g:scratchpad_dir = scratchpad_dir
 
 const path_pattern = scratchpad_dir .. slash
 
