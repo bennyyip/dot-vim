@@ -9,35 +9,6 @@ setlocal nolisp
 
 b:markdown_yaml_head = 1
 
-command -buffer TOC {
-  set quickfixtextfunc=QF_TOC
-
-  :lvimgrep /^\#/j %
-  :keepalt leftabove vertical lopen
-  exe 'vertical resize ' .. 40
-  set quickfixtextfunc=qf.QuickFixText
-}
-
-def QF_TOC(info: dict<any>): list<string>
-    var items = []
-    if info.quickfix == 1
-        items = getqflist({id: info.id, items: 1}).items
-    else
-        items = getloclist(info.winid, {id: info.id, items: 1}).items
-    endif
-    var l = []
-    for idx in range(info.start_idx - 1, info.end_idx - 1)
-        if items[idx].valid
-            var text = ''
-            text ..= $"{items[idx].text}"
-            add(l, text)
-        else
-            add(l, items[idx].text)
-        endif
-    endfor
-    return l
-enddef
-
 def MarkdownCR(): string
   const line = getline('.')
   if line =~# '^\d*\. .*'
@@ -67,5 +38,3 @@ def MarkdownPreview()
 enddef
 command -nargs=0 -buffer MarkdownPreview MarkdownPreview()
 command -nargs=0 MarkdownPreviewDelete delete(expand('%<') .. '.html')
-
-

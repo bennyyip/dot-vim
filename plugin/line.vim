@@ -206,9 +206,9 @@ def g:StatusLine(): string
     [
       '%3l,%-3c', # lineinfo
     ],
-    [
-    TAB_PANEL_BUTTON
-    ]
+    # [
+    # TAB_PANEL_BUTTON
+    # ]
   ]
 
   for [i, part] in left->items()
@@ -304,5 +304,5 @@ def g:Panel(): string
   return repeat('%@', 20) .. parts->FilterAndJoin(sep)
 enddef
 
-execute $"set tplo=columns:{COLUMNS},vert"
-set tabpanel=%!g:Panel()
+# execute $"set tplo=columns:{COLUMNS},vert"
+# set tabpanel=%!g:Panel()

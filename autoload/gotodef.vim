@@ -1,5 +1,7 @@
 vim9script
 
+# TODO getscriptinfo and getinfo
+
 export def GotoDefComplete(kind: string, L: string): string
   const cmd = L->split(' ')[0]
   const is_bang = cmd[-1 : ] == '!'

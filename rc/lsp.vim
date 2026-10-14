@@ -83,8 +83,8 @@ if executable('basedpyright-langserver')
       executeCommand: false,
     },
 
-    rootSearch: python_workspace_root,
-    runIfSearch: python_workspace_root,
+    # rootSearch: python_workspace_root,
+    # runIfSearch: python_workspace_root,
 
     workspaceConfig: {
       basedpyright: {
@@ -220,8 +220,8 @@ def LspSetup()
 
   nnoremap <silent><buffer> yod <scriptcmd>ToggoleDiag()<CR>
 
-  nnoremap <silent><buffer> <leader>m <cmd>LspHighlight<CR>
-  nnoremap <silent><buffer> <leader>M <cmd>LspHighlightClear<CR>
+  nnoremap <silent><buffer> <localleader>m <cmd>LspHighlight<CR>
+  nnoremap <silent><buffer> <localleader>M <cmd>LspHighlightClear<CR>
 
   setlocal tagfunc=lsp#lsp#TagFunc
   setlocal keywordprg=:LspHover

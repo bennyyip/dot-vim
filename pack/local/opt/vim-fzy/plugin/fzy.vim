@@ -4,7 +4,7 @@ vim9script
 # File:         plugin/fzy.vim
 # Author:       bfrg <https://github.com/bfrg>
 # Website:      https://github.com/bfrg/vim-fzy
-# Last Change:  Dec 24, 2023
+# Last Change:  2026-10-15
 # License:      Same as Vim itself (see :h license)
 # ==============================================================================
 
@@ -24,5 +24,7 @@ command -bar FzyTag fzy.Tags()
 command -nargs=+ -complete=file FzyGrep      fzy.Grep('buffer', <q-args>)
 
 command -nargs=* BLines fzy.Blines(<q-args>)
+
+command FzyToc fzy.MarkdownOutline()
 
 nnoremap <silent> <localleader>\ <cmd>FzyTag<CR>

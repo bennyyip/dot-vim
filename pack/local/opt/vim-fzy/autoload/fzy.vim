@@ -4,7 +4,7 @@ vim9script
 # File:         autoload/fzy.vim
 # Author:       bfrg <https://github.com/bfrg>
 # Website:      https://github.com/bfrg/vim-fzy
-# Last Change:  Oct 21, 2022
+# Last Change:  2026-10-15
 # License:      Same as Vim itself (see :h license)
 # ==============================================================================
 
@@ -371,5 +371,47 @@ def Grep_cb(efm: string, choice: string, key: string = '')
     const cmd: string = $'{vim_cmd} {items[0].bufnr} | call cursor({items[0].lnum}, {items[0].col})'
     Tryexe(cmd)
 enddef
+
+export def MarkdownOutline()
+  if &filetype !=# 'markdown'
+    echohl WarningMsg | echo 'Not a markdown file' | echohl None | return
+  endif
+
+  var cur_line = line('.')
+  var cur_idx = 0
+  var entries = []
+  var is_fenced = false
+
+
+  for match in matchbufline(bufnr(''), '\v^%(#+ |```)', 1, '$')
+    var text = match.text
+    if text[0] ==# '`'
+      is_fenced = !is_fenced
+    elseif !is_fenced
+      var line = getline(match.lnum)
+      var level = stridx(line, ' ')
+      var title = line[level :]
+      entries->add(match.lnum .. "\t" .. repeat(' ', level - 1) .. title)
+      if match.lnum <= cur_line
+        cur_idx = len(entries)
+      endif
+    endif
+  endfor
+
+  if empty(entries)
+    echohl WarningMsg | echo 'No headings found' | echohl None | return
+  endif
+
+  var opts = Opts('Markdown Outline')
+
+  opts.extra_opts = ['--delimiter', shellescape("\t"), '--with-nth', shellescape('2..'), '--layout', 'reverse']->join(' ')
+
+  Start(entries, funcref(MarkdownOutline_cb), opts)
+enddef
+
+def MarkdownOutline_cb(choice: string, key: string = '')
+  execute(':' .. matchstr(choice, '^\d\+') .. ' | normal! zz')
+enddef
+
 
 # vim:sw=4:ts=4

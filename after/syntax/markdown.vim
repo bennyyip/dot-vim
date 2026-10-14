@@ -10,3 +10,5 @@ syn match VimsidianLinkBlock containedin=VimsidianLink /\v\[\[#\^.{-}\]\]/
 syn match VimsidianLinkBlockFlag /\v\^(\w)+$/
 syn match VimsidianTag /\v\#(\w+)/
 syn match VimsidianCallout /\v^\>(\s)+\[!(\w)+\]-?/
+
+hi link markdownError Normal
