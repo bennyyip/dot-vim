@@ -37,27 +37,24 @@ export def Quote(quote: string, bang: string) # {{{1
   endif
 enddef
 
-export function Lilydjwg_join(sep, bang) range " {{{1
-  if a:sep[0] == '\'
-    let sep = strpart(a:sep, 1)
-  else
-    let sep = a:sep
+export def Lilydjwg_join(sep: string, bang: string, firstline: number, lastline: number): void # {{{ 1
+  var separator = sep[0] == "'" ? strpart(sep, 1) : sep
+  var lines = getline(firstline, lastline)
+  var dellast = firstline == 1 && lastline == line('$') ? 1 : 0
+
+  exe $':{firstline},{lastline}d _'
+
+  if bang != '!'
+    lines->map((_, val) => substitute(val, '^\s\+|\s\+$', '', 'g'))
   endif
-  let lines = getline(a:firstline, a:lastline)
-  if a:firstline == 1 && a:lastline == line('$')
-    let dellast = 1
-  else
-    let dellast = 0
-  endif
-  exe a:firstline .. ',' .. a:lastline .. 'd_'
-  if a:bang != '!'
-    call map(lines, "substitute(v:val, '^\\s\\+\\|\\s\\+$', '', 'g')")
-  endif
-  call append(a:firstline-1, join(lines, sep))
+
+  append(firstline - 1, join(lines, separator))
+
   if dellast
-    $d_
+    exe ':$d _'
   endif
-endfunction
+enddef
+
 
 export def SessionComplete(_, _, _): string # {{{1
   return globpath($'{$VIMSTATE}/session/', "*", 0, 1)->mapnew((_, v) => fnamemodify(v, ":t"))->join("\n")

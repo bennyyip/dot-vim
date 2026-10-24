@@ -39,7 +39,7 @@ command! PX if !empty(expand('%'))
 # RFC {{{1
 command! -bar -count=0 RFC     :e /usr/share/doc/rfc/txt/rfc<count>.txt|setl ro noma
 # Join {{{1
-command! -nargs=1 -range=% -bang Join :<line1>,<line2>call yb.Lilydjwg_join(<q-args>, "<bang>")
+command! -nargs=1 -range=% -bang Join :call yb.Lilydjwg_join(<q-args>, "<bang>", <line1>, <line2>)
 command! -nargs=0 Split feedkeys(':%s``\r`g<left><left><left><left><left>')
 # Quote {{{1
 command! -bang -nargs=? -range=% Quote :<line1>,<line2>call yb.Quote(<q-args>, "<bang>")

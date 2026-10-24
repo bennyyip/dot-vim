@@ -7,14 +7,9 @@ def Root(): string
     return dir
   endif
 
-  const curdir = rooter.CurDir()
-  if curdir->empty()
-    return ''
-  endif
-
-  var rootdir = findfile('.project.vim', curdir .. ';')
+  var rootdir = rooter.FindRootDirectory([ '.project.vim' ])
   if !rootdir->empty()
-    rootdir = rootdir->fnamemodify(':h')
+    rootdir = rootdir->fnamemodify(':p:h')
     setbufvar('%', 'projectRoot', rootdir)
     return rootdir
   else
@@ -30,6 +25,11 @@ def SourceProjectVimrc()
 
   const root = Root()
   if empty(root)
+    return
+  endif
+
+  const trusted_root = get(g:, 'trusted_root', [])
+  if trusted_root->index(root) < 0
     return
   endif
 

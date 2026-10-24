@@ -3,7 +3,7 @@ vim9script
 # Automatically cd to the project root corresponding to the current buffer.
 # Project root is "marked" by specific directories or files.
 
-var rootMarkers = {
+const rootMarkers = {
   dirs: ['.git', '.hg', '.svn'],
   files: ['configure', 'Cargo.toml', 'go.mod', 'package.json', '.project.vim', ".root"]
 }
@@ -26,7 +26,7 @@ export def CurDir(): string
   return curdir
 enddef
 
-export def FindRootDirectory(): string
+export def FindRootDirectory(files: list<string> =  rootMarkers.files, dirs: list<string> = rootMarkers.dirs): string
   var curdir = CurDir()
 
   if curdir->empty()
@@ -37,14 +37,14 @@ export def FindRootDirectory(): string
   curdir = curdir->escape(' ')
 
   var rootdir = ''
-  for file in rootMarkers.files
+  for file in files
     rootdir = findfile(file, $"{curdir};")
     if !rootdir->empty()
       return rootdir->fnamemodify(':h')
     endif
   endfor
   if rootdir->empty()
-    for dir in rootMarkers.dirs
+    for dir in dirs
       rootdir = finddir(dir, $"{curdir};")
       if !rootdir->empty()
         return rootdir->fnamemodify(':h')
