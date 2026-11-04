@@ -211,8 +211,7 @@ command! -nargs=1 Doc call os.Doc(<q-args>)
 command! Nofile enew|set buftype=nofile
 
 command! OdinRoot {
-  const root = system('odin root')
-  execute $":edit {root}"
+  execute $":edit {g:odin_root}"
 }
 
 def Watch(cmd: string, clear_only: bool)

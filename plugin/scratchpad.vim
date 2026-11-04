@@ -38,6 +38,8 @@ def OpenScratchPad(ftype: string)
 
   if ft == 'python'
     ext = 'py'
+  elseif ft == 'rust'
+    ext = 'rs'
   endif
 
   const path = $"{scratchpad_dir}{slash}scratchpad.{ext}"

@@ -140,6 +140,9 @@ g:python_highlight_all = 1
 
 g:snips_author = 'Ben Yip'
 g:obsidian_vault = $HOME .. '/Obsidian-Vault'
+if executable('odin')
+  g:odin_root = system('odin root')
+endif
 
 # }}}
 if filereadable($HOME .. '/local.vim')

@@ -68,36 +68,53 @@ const python_workspace_root = [
   "pyproject.toml",
 ]
 
-if executable('basedpyright-langserver')
+if false
+
+# if executable('basedpyright-langserver')
+#   lsp_servers->add({
+#     name: 'pyright',
+#     filetype: 'python',
+#     path: 'basedpyright-langserver',
+#     args: ['--stdio'],
+#     features: {
+#       # leave these to ruff
+#       diagnostics: false,
+#       # codeAction: false,
+#       documentFormatting: false,
+#       documentRangeFormatting: false,
+#       executeCommand: false,
+#     },
+
+#     # rootSearch: python_workspace_root,
+#     # runIfSearch: python_workspace_root,
+
+#     workspaceConfig: {
+#       basedpyright: {
+#         analysis: {
+#           autoSearchPaths: true,
+#           autoImportCompletions: false,
+#           disableOrganizeImports: true,
+#           disableTaggedHints: true,
+#         }
+#       }
+#     }
+#   })
+# endif
+
+if executable('ty')
   lsp_servers->add({
-    name: 'pyright',
-    filetype: 'python',
-    path: 'basedpyright-langserver',
-    args: ['--stdio'],
-    features: {
-      # leave these to ruff
-      diagnostics: false,
-      # codeAction: false,
-      documentFormatting: false,
-      documentRangeFormatting: false,
-      executeCommand: false,
-    },
-
-    # rootSearch: python_workspace_root,
-    # runIfSearch: python_workspace_root,
-
-    workspaceConfig: {
-      basedpyright: {
-        analysis: {
-          autoSearchPaths: true,
-          autoImportCompletions: false,
-          disableOrganizeImports: true,
-          disableTaggedHints: true,
-        }
+    filetype: ["python"],
+    name: 'ty',
+    path: 'ty',
+    args: ['server'],
+    initializationOptions: {
+      "experimental": {
+        "useUv": "on"
       }
     }
   })
 endif
+
 
 if executable('ruff')
   lsp_servers->add({
@@ -107,9 +124,11 @@ if executable('ruff')
     # args: ['server', '-v', '--config', $HOME .. '/ruff.toml']
     args: ['server'],
 
-    rootSearch: python_workspace_root,
-    runIfSearch: python_workspace_root,
+    # rootSearch: python_workspace_root,
+    # runIfSearch: python_workspace_root,
   })
+endif
+
 endif
 # }}}
 # typescript {{{1

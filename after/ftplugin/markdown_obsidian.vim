@@ -16,3 +16,4 @@ enddef
 nnoremap <buffer> <localleader>o <scriptcmd>GotoObsidian()<CR>
 
 nnoremap <buffer> gf <scriptcmd>yb.JumpToWikilink()<CR>
+nnoremap <buffer> <localleader>c A #card<Esc>

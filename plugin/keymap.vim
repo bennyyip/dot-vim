@@ -234,7 +234,7 @@ nnoremap gF :e <cfile><cr>
 nnoremap gb :b<space>
 nnoremap <C-G><C-G> <C-G>
 # tab {{{1
-nmap     T :$tabnew<cr>
+nmap     T :$tabnew +Nofile<CR>
 # nnoremap ]t :tabn<cr>
 # nnoremap [t :tabp<cr>
 def SwitchTab(i: number)
@@ -297,6 +297,8 @@ if has('win32')
 endif
 nnoremap <silent> gof :call os#FileManager()<CR>
 nnoremap <silent> got :call os#Terminal()<CR>
+nnoremap <silent> goo :call os#Open(expand("%:p"))<CR>
+
 # obsidian {{{1
 def DailyNote()
   const filename = expand(g:obsidian_vault .. "/0003 Journal/" .. strftime('%Y/W%V/%Y-%m-%d') .. '.md')
